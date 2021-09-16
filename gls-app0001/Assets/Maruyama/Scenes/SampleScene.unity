@@ -849,10 +849,12 @@ GameObject:
   - component: {fileID: 1438439119}
   - component: {fileID: 1438439122}
   - component: {fileID: 1438439123}
+  - component: {fileID: 1438439129}
   - component: {fileID: 1438439125}
   - component: {fileID: 1438439127}
   - component: {fileID: 1438439126}
   - component: {fileID: 1438439121}
+  - component: {fileID: 1438439128}
   - component: {fileID: 1438439124}
   m_Layer: 0
   m_Name: Enemy
@@ -1072,6 +1074,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c8cb0928bad6d4abeccaff7d44e67d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1438439128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438439114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 191cba80c27313a488f5fde938d33210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1438439129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438439114}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4f28c7bdb3fdf74ab89f089d9fefea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_maxSpeed: 3
 --- !u!1 &1713968366 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 992227749172933023, guid: 4d38e8bdfa80c0c4b8ce01cc8bcc5593, type: 3}
