@@ -2,60 +2,75 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMover : MonoBehaviour
+namespace Player
 {
-    GameControls m_gameControls;
-
-    /// <summary>
-    /// プレイヤーキャラクターの移動速度
-    /// </summary>
-    [SerializeField]
-    private float m_moveSpeed = 1.0f;
-
-    private void Awake()
+    public class PlayerMover : MonoBehaviour
     {
-        m_gameControls = new GameControls();
-    }
+        [SerializeField]
+        private PlayerAnimationParameters m_playerAnimationParamator;
 
-    private void OnEnable()
-    {
-        m_gameControls.Enable();
-    }
+        GameControls m_gameControls;
 
-    private void OnDisable()
-    {
-        m_gameControls.Disable();
-    }
+        /// <summary>
+        /// プレイヤーキャラクターの移動速度
+        /// </summary>
+        [SerializeField]
+        private float m_moveSpeed = 1.0f;
 
-    private void OnDestroy()
-    {
-        m_gameControls.Disable();
-    }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+        /// <summary>
+        /// 移動入力の値がこれより下だった場合無視する
+        /// </summary>
+        [SerializeField]
+        private float m_moveSpeedDeadZone = 0.01f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        var moveVector2 = m_gameControls.Player.Move.ReadValue<Vector2>();
-
-        moveVector2 *= Time.deltaTime * m_moveSpeed;
-
-        if (moveVector2.sqrMagnitude == 0.0f)
+        private void Awake()
         {
-            return;
+            m_gameControls = new GameControls();
         }
 
+        private void OnEnable()
+        {
+            m_gameControls.Enable();
+        }
 
-        var moveVector3 = new Vector3(moveVector2.x, 0.0f, moveVector2.y);
+        private void OnDisable()
+        {
+            m_gameControls.Disable();
+        }
 
-       transform.rotation = Quaternion.LookRotation(moveVector3);
+        private void OnDestroy()
+        {
+            m_gameControls.Disable();
+        }
 
-        transform.Translate(new Vector3(0.0f, 0.0f, moveVector3.magnitude));
+        // Start is called before the first frame update
+        void Start()
+        {
 
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            var moveVector2 = m_gameControls.Player.Move.ReadValue<Vector2>();
+            var moveVector3 = new Vector3(moveVector2.x, 0.0f, moveVector2.y);
+
+            float moveInput = moveVector3.magnitude;
+
+            if (moveInput <= m_moveSpeedDeadZone)
+            {
+                m_playerAnimationParamator.moveInput = 0.0f;
+                return;
+            }
+
+            m_playerAnimationParamator.moveInput = moveInput;
+
+            moveInput *= m_moveSpeed * Time.deltaTime;
+
+            transform.rotation = Quaternion.LookRotation(moveVector3);
+
+            transform.Translate(new Vector3(0.0f, 0.0f, moveInput));
+
+        }
     }
 }
