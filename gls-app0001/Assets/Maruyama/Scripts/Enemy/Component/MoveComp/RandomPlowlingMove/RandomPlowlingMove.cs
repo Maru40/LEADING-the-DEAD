@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Randomに徘徊するコンポーネント
 /// </summary>
-public class RomdomPlowlingMove : MonoBehaviour
+public class RandomPlowlingMove : MonoBehaviour
 {
     //徘徊する場所を決める半径
     [SerializeField]
@@ -13,7 +13,7 @@ public class RomdomPlowlingMove : MonoBehaviour
 
     //移動スピード
     [SerializeField]
-    float m_speed = 3.0f;
+    float m_speed = 3.0f;                                             
 
     //目的地に着いたと判断される,目的地との相対距離
     //小さすぎると判断できなくなるため注意
@@ -36,6 +36,7 @@ public class RomdomPlowlingMove : MonoBehaviour
     
     void Start()
     {
+        //コンポーネントの取得
         m_ridgid = GetComponent<Rigidbody>();
         m_waitTimer = GetComponent<WaitTimer>();
 
@@ -88,7 +89,6 @@ public class RomdomPlowlingMove : MonoBehaviour
     void RouteEndProcess()
     {
         if (m_waitTimer.IsWait(GetType())){
-            Debug.Log("Wait");
             return;
         }
 
