@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.AI;
+
 public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
 {
 
@@ -11,7 +13,12 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
 
     public override void OnStart()
     {
+        var owner = GetOwner();
 
+        AddChangeComp(owner.GetComponent<ChaseTarget>(), true, false);
+        //AddChangeComp(owner.GetComponent<NavMeshAgent>(), true, false);
+
+        ChangeComps(EnableChangeType.Start);
     }
 
     public override void OnUpdate()
@@ -21,6 +28,6 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
 
     public override void OnExit()
     {
-
+        ChangeComps(EnableChangeType.Exit);
     }
 }
