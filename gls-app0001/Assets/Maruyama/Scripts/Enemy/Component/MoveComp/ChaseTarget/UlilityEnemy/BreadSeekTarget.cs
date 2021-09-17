@@ -44,7 +44,14 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
         m_bread = target.GetComponent<BreadCrumb>();
 
         if (m_bread){
-            m_targetPosition = m_bread.GetNewPosition();
+            //初期ポジションのセット
+            var position = m_bread.GetNewBackPosition(1); //最新の一個前を取得
+            if(position != null){
+                m_targetPosition = (Vector3)position;
+            }
+            else{  //もしなかったら最新を取得
+                m_targetPosition = m_bread.GetNewPosition();
+            }
         }
     }
 
