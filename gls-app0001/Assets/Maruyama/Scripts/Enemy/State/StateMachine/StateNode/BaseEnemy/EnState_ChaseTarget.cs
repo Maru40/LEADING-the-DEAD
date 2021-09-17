@@ -16,7 +16,6 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
         var owner = GetOwner();
 
         AddChangeComp(owner.GetComponent<ChaseTarget>(), true, false);
-        //AddChangeComp(owner.GetComponent<NavMeshAgent>(), true, false);
 
         ChangeComps(EnableChangeType.Start);
     }
