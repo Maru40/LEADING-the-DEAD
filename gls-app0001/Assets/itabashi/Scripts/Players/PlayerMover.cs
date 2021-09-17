@@ -26,9 +26,12 @@ namespace Player
         [SerializeField]
         private float m_moveSpeedDeadZone = 0.01f;
 
+        private Rigidbody m_rigitbody;
+
         private void Awake()
         {
             m_gameControls = new GameControls();
+            m_rigitbody = GetComponent<Rigidbody>();
         }
 
         private void OnEnable()
@@ -64,30 +67,27 @@ namespace Player
             forward = forward.normalized;
 
             // ƒJƒƒ‰‚ª^ã‚©^‰º‚É‚ ‚éê‡
-            if(forward.magnitude == 0.0f)
+            if (forward.magnitude == 0.0f)
             {
                 forward = camera.transform.position.y - transform.position.y > 0 ? camera.transform.up : -camera.transform.up;
             }
-            
+
             var moveVector3 = camera.transform.right * moveVector2.x + forward * moveVector2.y;
 
             float moveInput = moveVector3.magnitude;
 
-            if (moveInput <= m_moveSpeedDeadZone)
-            {
-                m_playerAnimationParamator.moveInput = 0.0f;
-                return;
-            }
-
-
             m_playerAnimationParamator.moveInput = moveInput;
 
-            moveInput *= m_moveSpeed * Time.deltaTime;
+            if (moveInput > m_moveSpeedDeadZone)
+            {
+                transform.rotation = Quaternion.LookRotation(moveVector3);
+            }
+            else
+            {
+                m_playerAnimationParamator.moveInput = 0.0f;
+            }
 
-            transform.rotation = Quaternion.LookRotation(moveVector3);
-
-            transform.Translate(new Vector3(0.0f, 0.0f, moveInput));
-
+            m_rigitbody.velocity = moveVector3 * m_moveSpeed;
         }
     }
 }
