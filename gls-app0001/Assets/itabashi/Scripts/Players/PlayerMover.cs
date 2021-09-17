@@ -9,6 +9,9 @@ namespace Player
         [SerializeField]
         private PlayerAnimationParameters m_playerAnimationParamator;
 
+        /// <summary>
+        /// ゲームの入力
+        /// </summary>
         GameControls m_gameControls;
 
         /// <summary>
@@ -53,7 +56,20 @@ namespace Player
         void Update()
         {
             var moveVector2 = m_gameControls.Player.Move.ReadValue<Vector2>();
-            var moveVector3 = new Vector3(moveVector2.x, 0.0f, moveVector2.y);
+
+            var camera = Camera.main;
+
+            var forward = camera.transform.forward;
+            forward.y = 0;
+            forward = forward.normalized;
+
+            // カメラが真上か真下にある場合
+            if(forward.magnitude == 0.0f)
+            {
+                forward = camera.transform.position.y - transform.position.y > 0 ? camera.transform.up : -camera.transform.up;
+            }
+            
+            var moveVector3 = camera.transform.right * moveVector2.x + forward * moveVector2.y;
 
             float moveInput = moveVector3.magnitude;
 
@@ -62,6 +78,7 @@ namespace Player
                 m_playerAnimationParamator.moveInput = 0.0f;
                 return;
             }
+
 
             m_playerAnimationParamator.moveInput = moveInput;
 
