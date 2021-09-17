@@ -114,6 +114,24 @@ public class BreadCrumb : MonoBehaviour
     }
 
     /// <summary>
+    /// 最新のポジションから引数の分前のポジションを返す。
+    /// </summary>
+    /// <param name="backCount">最新からどれだけ前のポジションか</param>
+    /// <returns></returns>
+    public Vector3? GetNewBackPosition(uint backCount)
+    {
+        backCount++;
+        int index = m_positions.Count - (int)backCount;
+        //インデックスが0より大きかったら返す。
+        if(index >= 0){
+            return m_positions[index];
+        }
+        else{
+            return null;
+        }
+    }
+
+    /// <summary>
     /// 次のポジションを取得する。
     /// </summary>
     /// <param name="beforePosition">前回分のポジション</param>
