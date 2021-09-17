@@ -4,7 +4,7 @@ using UnityEngine;
 
 using UnityEngine.AI;
 
-public class NavSeekTarget : UtilityEnemyBase
+public class NavSeekTarget : NodeBase<EnemyBase>
 {
     //目的地にたどり着いたと判定する範囲
     float m_nearRange = 3.0f;
@@ -13,11 +13,11 @@ public class NavSeekTarget : UtilityEnemyBase
     TargetMgr m_targetMgr;
     NavMeshAgent m_navMesh;
 
-    public NavSeekTarget(GameObject owner)
+    public NavSeekTarget(EnemyBase owner)
         :this(owner, 3.0f, 3.0f)
     { }
 
-    public NavSeekTarget(GameObject owner, float speed, float nearRange)
+    public NavSeekTarget(EnemyBase owner, float speed, float nearRange)
         : base(owner)
     {
         m_nearRange = nearRange;
@@ -27,13 +27,18 @@ public class NavSeekTarget : UtilityEnemyBase
         m_navMesh.speed = speed;
     }
 
-    public void Move()
+    public override void OnStart()
+    {
+    }
+
+    public override void OnUpdate()
     {
         SetNavMeshTargetPosition();
+    }
 
-        //if (IsRouteEnd()){
-            
-        //}
+    public override void OnExit()
+    {
+
     }
 
     //目的地にたどり着いたかどうか
