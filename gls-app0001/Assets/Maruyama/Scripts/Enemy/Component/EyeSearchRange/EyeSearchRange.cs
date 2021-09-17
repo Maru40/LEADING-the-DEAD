@@ -105,7 +105,6 @@ public class EyeSearchRange : MonoBehaviour
 
     void Hit(EyeTargetParam targetParam) {
 		targetParam.isFind = true;
-        Debug.Log("Hit");
 	}
 
 
