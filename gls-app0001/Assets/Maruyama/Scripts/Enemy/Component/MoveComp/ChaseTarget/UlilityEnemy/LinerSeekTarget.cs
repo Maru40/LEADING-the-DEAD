@@ -5,18 +5,18 @@ using UnityEngine;
 /// <summary>
 /// 直線的なターゲット追従
 /// </summary>
-public class LinerSeekTarget : UtilityEnemyBase
+public class LinerSeekTarget : NodeBase<EnemyBase>
 {
     float m_maxSpeed = 3.0f;
 
     TargetMgr m_targetMgr;
     Rigidbody m_rigid;
 
-    public LinerSeekTarget(GameObject owner)
+    public LinerSeekTarget(EnemyBase owner)
         : this(owner,3.0f)
     { }
 
-    public LinerSeekTarget(GameObject owner, float maxSpeed)
+    public LinerSeekTarget(EnemyBase owner, float maxSpeed)
         : base(owner)
     {
         m_maxSpeed = maxSpeed;
@@ -25,7 +25,23 @@ public class LinerSeekTarget : UtilityEnemyBase
         m_rigid = owner.GetComponent<Rigidbody>();
     }
 
-    public void Move()
+    public override void OnStart()
+    {
+
+    }
+
+    public override void OnUpdate()
+    {
+        UpdateMove();
+    }
+
+    public override void OnExit()
+    {
+
+    }
+
+
+    void UpdateMove()
     {
         GameObject target = m_targetMgr.GetNowTarget();
         Vector3 toVec = target.transform.position - GetOwner().transform.position;
@@ -33,5 +49,12 @@ public class LinerSeekTarget : UtilityEnemyBase
         Vector3 force = UtilityVelocity.CalucSeekVec(m_rigid.velocity, toVec, m_maxSpeed);
 
         m_rigid.AddForce(force);
+    }
+
+
+    //アクセッサ-----------------------------------------------------------------------------
+
+    public void SetMaxSpeed(float speed){
+        m_maxSpeed = speed;
     }
 }
