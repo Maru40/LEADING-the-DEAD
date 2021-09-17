@@ -49,6 +49,18 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     }
 
     /// <summary>
+    /// 指定したノードをtemplateで指定した型にキャストしてもらう。
+    /// </summary>
+    /// <typeparam name="T">キャストする型</typeparam>
+    /// <param name="type">ノードのタイプ</param>
+    /// <returns>キャストされたノード</returns>
+    public T GetNode<T>(EnumType type) where T: class
+    {
+        var node = m_stateMachine.GetNode(type) as T;
+        return node;
+    }
+
+    /// <summary>
     /// ノードの追加
     /// </summary>
     /// <param name="type">ノートのタイプ</param>

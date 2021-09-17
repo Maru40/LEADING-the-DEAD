@@ -17,11 +17,11 @@ public abstract class EnemyStateNodeBase<EnemyType> : NodeBase<EnemyType>
 	//コンポーネントの変更関係の情報をまとめた構造体
 	protected struct ChangeCompParam
 	{
-		public MonoBehaviour behaviour;
+		public Behaviour behaviour;
 		public bool isStart;  //スタート時にどっちにするか？
 		public bool isExit;   //終了時にどっちにするか？
 
-		public ChangeCompParam(MonoBehaviour behaviour, bool isStart,bool isExit)
+		public ChangeCompParam(Behaviour behaviour, bool isStart,bool isExit)
 		{
 			this.behaviour = behaviour;
 			this.isStart = isStart;
@@ -46,7 +46,7 @@ public abstract class EnemyStateNodeBase<EnemyType> : NodeBase<EnemyType>
 	/// <param name="behaviour">切り替えるコンポーネントのポインタ</param>
 	/// <param name="isStart">スタート時にどっちに切り替える</param>
 	/// <param name="isExit">終了時にどっちに切り替えるか</param>
-	protected void AddChangeComp(MonoBehaviour behaviour, bool isStart, bool isExit)
+	protected void AddChangeComp(Behaviour behaviour, bool isStart, bool isExit)
 	{
 		if (behaviour == null) {  //nullptrなら追加しない
 			return;
