@@ -14,4 +14,17 @@ public class UtilityCalculation
     {
         return targetTrans.position - selfTrans.position;
     }
+
+    /// <summary>
+    /// 目的地に到達したかどうか
+    /// </summary>
+    /// <param name="nearRange">誤差範囲</param>
+    /// <param name="selfPosition">自分のポジション</param>
+    /// <param name="targetPosition">目的地</param>
+    /// <returns>目的地ならtrue</returns>
+    public static bool IsArrivalPosition(float nearRange, Vector3 selfPosition, Vector3 targetPosition)
+    {
+        var toVec = targetPosition - selfPosition;
+        return toVec.magnitude < nearRange ? true : false;
+    }
 }
