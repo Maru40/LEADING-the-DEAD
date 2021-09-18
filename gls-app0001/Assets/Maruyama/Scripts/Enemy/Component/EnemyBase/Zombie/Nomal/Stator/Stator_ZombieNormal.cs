@@ -11,12 +11,14 @@ enum ZombieNormalState
 {
     RandomPlowling,
     Chase,
+    Attack,
 }
 
 public class ZombieNormalTransitionMember
 {
     public MyTrigger rondomPlowlingTrigger = new MyTrigger();
     public MyTrigger chaseTrigger = new MyTrigger();
+    public MyTrigger attackTrigger = new MyTrigger();
 }
 
 public class Stator_ZombieNormal : StatorBase
@@ -47,6 +49,7 @@ public class Stator_ZombieNormal : StatorBase
 
         m_stateMachine.AddNode(StateType.RandomPlowling, new EnState_RandomPlowling(zombie));
         m_stateMachine.AddNode(StateType.Chase,          new EnState_ChaseTarget(zombie));
+        m_stateMachine.AddNode(StateType.Attack,         new EnState_Attack(zombie));
     }
 
     void CreateEdge()
@@ -56,6 +59,11 @@ public class Stator_ZombieNormal : StatorBase
 
         //追従処理
         m_stateMachine.AddEdge(StateType.Chase, StateType.RandomPlowling, ToRandomPlowling);
+        m_stateMachine.AddEdge(StateType.Chase, StateType.Attack, ToAttackTrigger);
+
+        //攻撃処理
+        m_stateMachine.AddEdge(StateType.Attack, StateType.Chase, ToChaseTrigger);
+        m_stateMachine.AddEdge(StateType.Attack, StateType.RandomPlowling, ToRandomPlowling);
     }
 
 
@@ -69,6 +77,9 @@ public class Stator_ZombieNormal : StatorBase
         return member.rondomPlowlingTrigger.Get();
     }
 
+    bool ToAttackTrigger(TransitionMember member) {
+        return member.attackTrigger.Get();
+    }
 
     //アクセッサ----------------------------------------------------------------
     

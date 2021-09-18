@@ -27,7 +27,7 @@ class EyeTargetParam
 [Serializable]
 public class EyeSearchRangeParam
 {
-    public float lenght; //索敵範囲(同心円状)
+    public float range;  //索敵範囲(同心円状)
     public float height; //索敵範囲(高さ)
     public float rad;    //索敵範囲(角度)
 
@@ -35,9 +35,9 @@ public class EyeSearchRangeParam
         :this(20.0f ,3.0f ,30.0f)
 	{}
 
-	public EyeSearchRangeParam(float lenght, float height, float deg)
+	public EyeSearchRangeParam(float range, float height, float deg)
     {
-        this.lenght = lenght;
+        this.range = range;
         this.height = height;
         this.rad = deg * Mathf.Deg2Rad;
     }
@@ -74,7 +74,7 @@ public class EyeSearchRange : MonoBehaviour
     bool IsRange(GameObject target) {
         var toVec = target.transform.position - transform.position;
 		//長さチェック
-		return toVec.magnitude <= m_param.lenght? true : false;
+		return toVec.magnitude <= m_param.range ? true : false;
 	}
 
     bool IsHeight(GameObject target) {
@@ -120,6 +120,28 @@ public class EyeSearchRange : MonoBehaviour
             return true;
         }
         else{
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// サーチ範囲を一時的に指定して、ターゲットの中に入っているかを判断
+    /// </summary>
+    /// <param name="target">ターゲット</param>
+    /// <param name="range">索敵範囲</param>
+    /// <returns>サーチ範囲ならtrue</returns>
+    public bool IsInEyeRange(GameObject target, float range)
+    {
+        float beforeRange = m_param.range;
+        m_param.range = range;
+
+        //全ての条件がtrueなら視界内に対象がいる。
+        if (IsRange(target) && IsHeight(target) && IsRad(target) && IsRay(target)) {
+            m_param.range = beforeRange;
+            return true;
+        }
+        else {
+            m_param.range = beforeRange;
             return false;
         }
     }
