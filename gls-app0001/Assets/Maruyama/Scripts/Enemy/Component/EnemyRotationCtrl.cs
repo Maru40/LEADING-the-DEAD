@@ -19,6 +19,10 @@ public class EnemyRotationCtrl : MonoBehaviour
     {
         //‰¼‚Å‰ñ“]‚·‚é‚æ‚¤‚É‚µ‚½B
         //«—ˆ“I‚É‚Í‚ä‚Á‚­‚è‰ñ‚é‚æ‚¤‚É’²®
-        transform.forward = m_rigid.velocity;
+        var direct = m_rigid.velocity;
+        direct.y = 0;
+        transform.forward = direct.normalized;
+
+        //Debug.Log("velocityRange" + m_rigid.velocity.magnitude);
     }
 }
