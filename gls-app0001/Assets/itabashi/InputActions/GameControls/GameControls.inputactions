@@ -22,65 +22,9 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "76f28534-4c1a-4ca0-9b86-6a321b827db4",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "Cancel",
                     "type": "Button",
                     "id": "2b84931d-e82d-4922-a112-ff9c12820171",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Reload",
-                    "type": "Button",
-                    "id": "c4cbd2e6-2362-4d76-a81c-a0d39029c958",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Attack",
-                    "type": "Button",
-                    "id": "e8b071a6-e352-4764-8175-7928738b6388",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Guard",
-                    "type": "Button",
-                    "id": "45ed9c2e-f754-4160-bf1d-7c0891c8fafe",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Dodge",
-                    "type": "Button",
-                    "id": "af125856-8bf2-4307-92d5-f221fc0dbbc8",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Aim",
-                    "type": "Button",
-                    "id": "c53fdc7e-8f79-4595-b9c8-55c1b7b55d36",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "SubWeapon",
-                    "type": "Button",
-                    "id": "d400e9e6-d395-4224-b589-a1b50b1f648c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -94,18 +38,34 @@
                     "interactions": ""
                 },
                 {
-                    "name": "WeaponChangeLeft",
+                    "name": "Dash",
                     "type": "Button",
-                    "id": "3e90601a-5270-46e5-b0fd-cca79b6cdc12",
+                    "id": "ed3c762f-f222-4959-9238-939b82ed67ba",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "WeaponChangeRight",
+                    "name": "ThrowingStance",
                     "type": "Button",
-                    "id": "23f221d9-ec84-4f65-a0d3-cf703c94ae64",
+                    "id": "e48ab3eb-3771-4943-b01c-010eb3ffff0c",
                     "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Throw",
+                    "type": "Button",
+                    "id": "c6dc93e5-54d3-43c8-b554-c4d8092af467",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "ThrowAim",
+                    "type": "Value",
+                    "id": "abc3db55-edbb-4c4c-abce-cb9b2db9b274",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
                 }
@@ -135,89 +95,12 @@
                 },
                 {
                     "name": "",
-                    "id": "5803d7a0-d519-4d8c-833f-eac875bdd2e7",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "b4cceafa-6a3a-4cb9-b8ad-8950dd85109b",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Cancel",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "bf3be0df-e421-400c-a7d5-caa28666feda",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Reload",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "12628588-6a8c-48f3-8582-19d289033170",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1cb751fc-0b61-42cc-bdbe-6b33257d9c41",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Guard",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e8346696-7b33-4797-9879-5d9245f49235",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dodge",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b7ef4fcd-3393-428d-b8b0-1c6beb5b0a5b",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Aim",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "156723f3-5aad-483c-8165-2bc6479b404e",
-                    "path": "<Gamepad>/rightStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SubWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -234,25 +117,69 @@
                 },
                 {
                     "name": "",
-                    "id": "c10db78b-92d7-41bd-bcd4-209f6c436e24",
-                    "path": "<Gamepad>/dpad",
+                    "id": "718662aa-22c7-4c45-bc76-602b581835f7",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WeaponChangeLeft",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "aec815ca-542d-4161-90cb-3bf1646d004a",
-                    "path": "<Gamepad>/dpad/right",
+                    "id": "3d54afae-c8c3-4bb7-8a9a-1554b9a55061",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WeaponChangeRight",
+                    "action": "ThrowingStance",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8b107b64-6520-4815-b2c8-a22ca58d41d9",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Throw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Right Stick Vertical",
+                    "id": "561c4ba9-6208-4f57-8c99-64d782e9520c",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThrowAim",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "ce72aff0-c874-48ee-b7c8-10e0a3cd98af",
+                    "path": "<Gamepad>/rightStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThrowAim",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "7b1fef51-bfad-4788-b564-2f3342acbd3a",
+                    "path": "<Gamepad>/rightStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThrowAim",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
