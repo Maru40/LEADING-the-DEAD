@@ -17,11 +17,6 @@ public class InputTester : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(m_gameControls.Player.Guard.IsPressed())
-        {
-            Debug.Log("ÉKÅ[Éh");
-        }
-
         var move = m_gameControls.Player.Move.ReadValue<Vector2>();
 
         transform.Translate(new Vector3(move.x, 0.0f, move.y));

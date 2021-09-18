@@ -35,65 +35,9 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Jump"",
-                    ""type"": ""Button"",
-                    ""id"": ""76f28534-4c1a-4ca0-9b86-6a321b827db4"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""Cancel"",
                     ""type"": ""Button"",
                     ""id"": ""2b84931d-e82d-4922-a112-ff9c12820171"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Reload"",
-                    ""type"": ""Button"",
-                    ""id"": ""c4cbd2e6-2362-4d76-a81c-a0d39029c958"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Attack"",
-                    ""type"": ""Button"",
-                    ""id"": ""e8b071a6-e352-4764-8175-7928738b6388"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Guard"",
-                    ""type"": ""Button"",
-                    ""id"": ""45ed9c2e-f754-4160-bf1d-7c0891c8fafe"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Dodge"",
-                    ""type"": ""Button"",
-                    ""id"": ""af125856-8bf2-4307-92d5-f221fc0dbbc8"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Aim"",
-                    ""type"": ""Button"",
-                    ""id"": ""c53fdc7e-8f79-4595-b9c8-55c1b7b55d36"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""SubWeapon"",
-                    ""type"": ""Button"",
-                    ""id"": ""d400e9e6-d395-4224-b589-a1b50b1f648c"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -107,18 +51,34 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""WeaponChangeLeft"",
+                    ""name"": ""Dash"",
                     ""type"": ""Button"",
-                    ""id"": ""3e90601a-5270-46e5-b0fd-cca79b6cdc12"",
+                    ""id"": ""ed3c762f-f222-4959-9238-939b82ed67ba"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""WeaponChangeRight"",
+                    ""name"": ""ThrowingStance"",
                     ""type"": ""Button"",
-                    ""id"": ""23f221d9-ec84-4f65-a0d3-cf703c94ae64"",
+                    ""id"": ""e48ab3eb-3771-4943-b01c-010eb3ffff0c"",
                     ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Throw"",
+                    ""type"": ""Button"",
+                    ""id"": ""c6dc93e5-54d3-43c8-b554-c4d8092af467"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ThrowAim"",
+                    ""type"": ""Value"",
+                    ""id"": ""abc3db55-edbb-4c4c-abce-cb9b2db9b274"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -148,89 +108,12 @@ public class @GameControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5803d7a0-d519-4d8c-833f-eac875bdd2e7"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""b4cceafa-6a3a-4cb9-b8ad-8950dd85109b"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Cancel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""bf3be0df-e421-400c-a7d5-caa28666feda"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Reload"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""12628588-6a8c-48f3-8582-19d289033170"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1cb751fc-0b61-42cc-bdbe-6b33257d9c41"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Guard"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e8346696-7b33-4797-9879-5d9245f49235"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dodge"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b7ef4fcd-3393-428d-b8b0-1c6beb5b0a5b"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Aim"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""156723f3-5aad-483c-8165-2bc6479b404e"",
-                    ""path"": ""<Gamepad>/rightStickPress"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SubWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -247,25 +130,69 @@ public class @GameControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c10db78b-92d7-41bd-bcd4-209f6c436e24"",
-                    ""path"": ""<Gamepad>/dpad"",
+                    ""id"": ""718662aa-22c7-4c45-bc76-602b581835f7"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""WeaponChangeLeft"",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""aec815ca-542d-4161-90cb-3bf1646d004a"",
-                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""id"": ""3d54afae-c8c3-4bb7-8a9a-1554b9a55061"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""WeaponChangeRight"",
+                    ""action"": ""ThrowingStance"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8b107b64-6520-4815-b2c8-a22ca58d41d9"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Throw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Right Stick Vertical"",
+                    ""id"": ""561c4ba9-6208-4f57-8c99-64d782e9520c"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThrowAim"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""ce72aff0-c874-48ee-b7c8-10e0a3cd98af"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThrowAim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""7b1fef51-bfad-4788-b564-2f3342acbd3a"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThrowAim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -276,17 +203,12 @@ public class @GameControls : IInputActionCollection, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Select = m_Player.FindAction("Select", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Cancel = m_Player.FindAction("Cancel", throwIfNotFound: true);
-        m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
-        m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
-        m_Player_Guard = m_Player.FindAction("Guard", throwIfNotFound: true);
-        m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
-        m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
-        m_Player_SubWeapon = m_Player.FindAction("SubWeapon", throwIfNotFound: true);
         m_Player_RotateViewPoint = m_Player.FindAction("RotateViewPoint", throwIfNotFound: true);
-        m_Player_WeaponChangeLeft = m_Player.FindAction("WeaponChangeLeft", throwIfNotFound: true);
-        m_Player_WeaponChangeRight = m_Player.FindAction("WeaponChangeRight", throwIfNotFound: true);
+        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_ThrowingStance = m_Player.FindAction("ThrowingStance", throwIfNotFound: true);
+        m_Player_Throw = m_Player.FindAction("Throw", throwIfNotFound: true);
+        m_Player_ThrowAim = m_Player.FindAction("ThrowAim", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -338,34 +260,24 @@ public class @GameControls : IInputActionCollection, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Select;
     private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Cancel;
-    private readonly InputAction m_Player_Reload;
-    private readonly InputAction m_Player_Attack;
-    private readonly InputAction m_Player_Guard;
-    private readonly InputAction m_Player_Dodge;
-    private readonly InputAction m_Player_Aim;
-    private readonly InputAction m_Player_SubWeapon;
     private readonly InputAction m_Player_RotateViewPoint;
-    private readonly InputAction m_Player_WeaponChangeLeft;
-    private readonly InputAction m_Player_WeaponChangeRight;
+    private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_ThrowingStance;
+    private readonly InputAction m_Player_Throw;
+    private readonly InputAction m_Player_ThrowAim;
     public struct PlayerActions
     {
         private @GameControls m_Wrapper;
         public PlayerActions(@GameControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Select => m_Wrapper.m_Player_Select;
         public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Cancel => m_Wrapper.m_Player_Cancel;
-        public InputAction @Reload => m_Wrapper.m_Player_Reload;
-        public InputAction @Attack => m_Wrapper.m_Player_Attack;
-        public InputAction @Guard => m_Wrapper.m_Player_Guard;
-        public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
-        public InputAction @Aim => m_Wrapper.m_Player_Aim;
-        public InputAction @SubWeapon => m_Wrapper.m_Player_SubWeapon;
         public InputAction @RotateViewPoint => m_Wrapper.m_Player_RotateViewPoint;
-        public InputAction @WeaponChangeLeft => m_Wrapper.m_Player_WeaponChangeLeft;
-        public InputAction @WeaponChangeRight => m_Wrapper.m_Player_WeaponChangeRight;
+        public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @ThrowingStance => m_Wrapper.m_Player_ThrowingStance;
+        public InputAction @Throw => m_Wrapper.m_Player_Throw;
+        public InputAction @ThrowAim => m_Wrapper.m_Player_ThrowAim;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -381,39 +293,24 @@ public class @GameControls : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Cancel.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCancel;
                 @Cancel.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCancel;
                 @Cancel.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCancel;
-                @Reload.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
-                @Reload.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
-                @Reload.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
-                @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
-                @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
-                @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
-                @Guard.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGuard;
-                @Guard.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGuard;
-                @Guard.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGuard;
-                @Dodge.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
-                @Dodge.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
-                @Dodge.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
-                @Aim.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
-                @Aim.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
-                @Aim.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
-                @SubWeapon.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSubWeapon;
-                @SubWeapon.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSubWeapon;
-                @SubWeapon.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSubWeapon;
                 @RotateViewPoint.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateViewPoint;
                 @RotateViewPoint.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateViewPoint;
                 @RotateViewPoint.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateViewPoint;
-                @WeaponChangeLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeaponChangeLeft;
-                @WeaponChangeLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeaponChangeLeft;
-                @WeaponChangeLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeaponChangeLeft;
-                @WeaponChangeRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeaponChangeRight;
-                @WeaponChangeRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeaponChangeRight;
-                @WeaponChangeRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeaponChangeRight;
+                @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @ThrowingStance.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowingStance;
+                @ThrowingStance.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowingStance;
+                @ThrowingStance.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowingStance;
+                @Throw.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrow;
+                @Throw.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrow;
+                @Throw.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrow;
+                @ThrowAim.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowAim;
+                @ThrowAim.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowAim;
+                @ThrowAim.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowAim;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -424,39 +321,24 @@ public class @GameControls : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @Jump.started += instance.OnJump;
-                @Jump.performed += instance.OnJump;
-                @Jump.canceled += instance.OnJump;
                 @Cancel.started += instance.OnCancel;
                 @Cancel.performed += instance.OnCancel;
                 @Cancel.canceled += instance.OnCancel;
-                @Reload.started += instance.OnReload;
-                @Reload.performed += instance.OnReload;
-                @Reload.canceled += instance.OnReload;
-                @Attack.started += instance.OnAttack;
-                @Attack.performed += instance.OnAttack;
-                @Attack.canceled += instance.OnAttack;
-                @Guard.started += instance.OnGuard;
-                @Guard.performed += instance.OnGuard;
-                @Guard.canceled += instance.OnGuard;
-                @Dodge.started += instance.OnDodge;
-                @Dodge.performed += instance.OnDodge;
-                @Dodge.canceled += instance.OnDodge;
-                @Aim.started += instance.OnAim;
-                @Aim.performed += instance.OnAim;
-                @Aim.canceled += instance.OnAim;
-                @SubWeapon.started += instance.OnSubWeapon;
-                @SubWeapon.performed += instance.OnSubWeapon;
-                @SubWeapon.canceled += instance.OnSubWeapon;
                 @RotateViewPoint.started += instance.OnRotateViewPoint;
                 @RotateViewPoint.performed += instance.OnRotateViewPoint;
                 @RotateViewPoint.canceled += instance.OnRotateViewPoint;
-                @WeaponChangeLeft.started += instance.OnWeaponChangeLeft;
-                @WeaponChangeLeft.performed += instance.OnWeaponChangeLeft;
-                @WeaponChangeLeft.canceled += instance.OnWeaponChangeLeft;
-                @WeaponChangeRight.started += instance.OnWeaponChangeRight;
-                @WeaponChangeRight.performed += instance.OnWeaponChangeRight;
-                @WeaponChangeRight.canceled += instance.OnWeaponChangeRight;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
+                @ThrowingStance.started += instance.OnThrowingStance;
+                @ThrowingStance.performed += instance.OnThrowingStance;
+                @ThrowingStance.canceled += instance.OnThrowingStance;
+                @Throw.started += instance.OnThrow;
+                @Throw.performed += instance.OnThrow;
+                @Throw.canceled += instance.OnThrow;
+                @ThrowAim.started += instance.OnThrowAim;
+                @ThrowAim.performed += instance.OnThrowAim;
+                @ThrowAim.canceled += instance.OnThrowAim;
             }
         }
     }
@@ -465,16 +347,11 @@ public class @GameControls : IInputActionCollection, IDisposable
     {
         void OnSelect(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
-        void OnReload(InputAction.CallbackContext context);
-        void OnAttack(InputAction.CallbackContext context);
-        void OnGuard(InputAction.CallbackContext context);
-        void OnDodge(InputAction.CallbackContext context);
-        void OnAim(InputAction.CallbackContext context);
-        void OnSubWeapon(InputAction.CallbackContext context);
         void OnRotateViewPoint(InputAction.CallbackContext context);
-        void OnWeaponChangeLeft(InputAction.CallbackContext context);
-        void OnWeaponChangeRight(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
+        void OnThrowingStance(InputAction.CallbackContext context);
+        void OnThrow(InputAction.CallbackContext context);
+        void OnThrowAim(InputAction.CallbackContext context);
     }
 }
