@@ -18,13 +18,13 @@ public class EnState_Attack : EnemyStateNodeBase<EnemyBase>
             rigid.velocity = Vector3.zero;
         }
 
+        //攻撃アニメーション再生
+        var animatorCtrl = owner.GetComponent<AnimatorCtrl_ZombieNormal>();
+        animatorCtrl.AttackTriggerFire();
+
         //test
         //回転を一時的test的にoff
         AddChangeComp(owner.GetComponent<EnemyRotationCtrl>(), false, true);
-        //仮で攻撃実装
-        owner.GetComponent<Attack_ZombieNormal>().Attack();
-
-        //アニメーションの再生
 
         ChangeComps(EnableChangeType.Start);
     }

@@ -35,10 +35,6 @@ public class Attack_ZombieNormal : AttackBase
         var target = m_targetMgr.GetNowTarget();
 
         return m_eyeRange.IsInEyeRange(target, range);
-
-        //var toVec = CalcuToTargetVec();
-
-        //return toVec.magnitude < range ? true : false;
     }
 
     /// <summary>
@@ -51,10 +47,6 @@ public class Attack_ZombieNormal : AttackBase
         var target = m_targetMgr.GetNowTarget();
 
         return m_eyeRange.IsInEyeRange(target, range);
-
-        //var toVec = CalcuToTargetVec();
-
-        //return toVec.magnitude < range ? true : false;
     }
 
     Vector3 CalcuToTargetVec()
@@ -72,11 +64,17 @@ public class Attack_ZombieNormal : AttackBase
 
             var target = m_targetMgr.GetNowTarget();
 
-            var damage = target.GetComponent<I_Damaged>();
+            var damage = target.GetComponent<I_TakeDamage>();
             if (damage != null) 
             {
-                damage.Damaged(GetBaseParam().power);
+                var data = new DamageData((int)GetBaseParam().power);
+                damage.TakeDamage(data);
             }
         }
+    }
+
+    public override void EndAnimationEvent()
+    {
+        m_stator.GetTransitionMember().chaseTrigger.Fire();
     }
 }

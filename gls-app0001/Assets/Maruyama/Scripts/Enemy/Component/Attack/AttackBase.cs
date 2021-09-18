@@ -43,4 +43,9 @@ public abstract class AttackBase : MonoBehaviour
     /// 攻撃処理(アニメーションに合わせる)
     /// </summary>
     public abstract void Attack();
+
+    /// <summary>
+    /// アニメーションの終了時に呼び出す関数
+    /// </summary>
+    public abstract void EndAnimationEvent();
 }
