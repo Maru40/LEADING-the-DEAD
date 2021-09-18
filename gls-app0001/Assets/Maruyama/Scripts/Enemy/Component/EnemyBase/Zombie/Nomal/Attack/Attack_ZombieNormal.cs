@@ -72,4 +72,9 @@ public class Attack_ZombieNormal : AttackBase
             }
         }
     }
+
+    public override void EndAnimationEvent()
+    {
+        m_stator.GetTransitionMember().chaseTrigger.Fire();
+    }
 }
