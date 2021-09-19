@@ -31,14 +31,16 @@ public class RandomPlowlingMove : MonoBehaviour
     //目的の場所
     Vector3 m_targetPosition;
 
-    Rigidbody m_ridgid;
+    Rigidbody m_rigid;
     WaitTimer m_waitTimer;
+    ThrongMgr m_throngMgr;
     
     void Start()
     {
         //コンポーネントの取得
-        m_ridgid = GetComponent<Rigidbody>();
+        m_rigid = GetComponent<Rigidbody>();
         m_waitTimer = GetComponent<WaitTimer>();
+        m_throngMgr = GetComponent<ThrongMgr>();
 
         //シード値
         Random.InitState(System.DateTime.Now.Millisecond);
@@ -59,11 +61,14 @@ public class RandomPlowlingMove : MonoBehaviour
         }
 
         //加える力の計算
-        var velocity = m_ridgid.velocity;
+        var velocity = m_rigid.velocity;
         var toVec = m_targetPosition - transform.position;
+        m_throngMgr.AvoidNearThrong(m_rigid, toVec, m_speed);
 
-        var newForce = UtilityVelocity.CalucArriveVec(velocity, toVec, m_speed);
-        m_ridgid.AddForce(newForce);
+        //var newForce = UtilityVelocity.CalucArriveVec(velocity, toVec, m_speed);
+        //m_rigid.AddForce(newForce);
+
+        //test
 
         if (IsRouteEnd())
         {
@@ -93,7 +98,7 @@ public class RandomPlowlingMove : MonoBehaviour
         }
 
         SetRandomTargetPosition();
-        m_ridgid.velocity = Vector3.zero;  //速度のリセット
+        m_rigid.velocity = Vector3.zero;  //速度のリセット
 
         //待機状態の設定
         var waitTime = Random.value * m_maxWaitCalucRouteTime;
@@ -141,12 +146,12 @@ public class RandomPlowlingMove : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        SetRandomTargetPosition();
+        //SetRandomTargetPosition();
     }
 
     private void OnCollisionStay(Collision collision)
     {
-        SetRandomTargetPosition();
+        //SetRandomTargetPosition();
     }
 
 
