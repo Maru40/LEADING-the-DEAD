@@ -10,7 +10,7 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
     float m_maxSpeed = 3.0f;
 
     TargetMgr m_targetMgr;
-    Rigidbody m_rigid;
+    EnemyVelocityMgr m_velocityMgr;
     ThrongMgr m_throngMgr;
 
     public LinerSeekTarget(EnemyBase owner)
@@ -23,7 +23,7 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
         m_maxSpeed = maxSpeed;
 
         m_targetMgr = owner.GetComponent<TargetMgr>();
-        m_rigid = owner.GetComponent<Rigidbody>();
+        m_velocityMgr = owner.GetComponent<EnemyVelocityMgr>();
         m_throngMgr = owner.GetComponent<ThrongMgr>();
     }
 
@@ -47,7 +47,7 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
     {
         GameObject target = m_targetMgr.GetNowTarget();
         Vector3 toVec = target.transform.position - GetOwner().transform.position;
-        m_throngMgr.AvoidNearThrong(m_rigid, toVec, m_maxSpeed);
+        m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_maxSpeed);
         //toVec += m_throngMgr.CalcuThrongVector();
 
         //Vector3 force = UtilityVelocity.CalucSeekVec(m_rigid.velocity, toVec, m_maxSpeed);
