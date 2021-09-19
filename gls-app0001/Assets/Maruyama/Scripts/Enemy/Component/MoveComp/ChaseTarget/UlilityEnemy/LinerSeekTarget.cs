@@ -11,6 +11,7 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
 
     TargetMgr m_targetMgr;
     Rigidbody m_rigid;
+    ThrongMgr m_throngMgr;
 
     public LinerSeekTarget(EnemyBase owner)
         : this(owner,3.0f)
@@ -23,6 +24,7 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
 
         m_targetMgr = owner.GetComponent<TargetMgr>();
         m_rigid = owner.GetComponent<Rigidbody>();
+        m_throngMgr = owner.GetComponent<ThrongMgr>();
     }
 
     public override void OnStart()
@@ -45,10 +47,22 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
     {
         GameObject target = m_targetMgr.GetNowTarget();
         Vector3 toVec = target.transform.position - GetOwner().transform.position;
+        m_throngMgr.AvoidNearThrong(m_rigid, toVec, m_maxSpeed);
+        //toVec += m_throngMgr.CalcuThrongVector();
 
-        Vector3 force = UtilityVelocity.CalucSeekVec(m_rigid.velocity, toVec, m_maxSpeed);
+        //Vector3 force = UtilityVelocity.CalucSeekVec(m_rigid.velocity, toVec, m_maxSpeed);
 
-        m_rigid.AddForce(force);
+        //m_rigid.AddForce(force);
+
+        //test
+        //m_throngMgr.AvoidNearThrong(m_rigid, toVec, m_maxSpeed);
+
+        //var newVector = m_throngMgr.CalcuThrongVector();
+        //if(newVector != Vector3.zero)
+        //{
+        //    force = UtilityVelocity.CalucSeekVec(m_rigid.velocity, m_throngMgr.CalcuThrongVector(), m_maxSpeed);
+        //    m_rigid.AddForce(force);
+        //}
     }
 
 
