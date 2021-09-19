@@ -18,16 +18,16 @@ struct ThrongMgrParametor  //群衆Mgrのパラメータ
 public struct ThrongData
 {
     public GameObject gameObject;
-    public Rigidbody rigid;
+    public EnemyVelocityMgr velocityMgr;
     public TargetMgr targetMgr;  //ターゲット管理
     public ThrongMgr throngMgr;  //群衆管理
     public RandomPlowlingMove randomPlowlingMove;
 
-    public ThrongData(Rigidbody rigid,TargetMgr targetMgr, ThrongMgr throngMgr,
+    public ThrongData(EnemyVelocityMgr velocityMgr, TargetMgr targetMgr, ThrongMgr throngMgr,
         RandomPlowlingMove randomPlowlingMove)
     {
         this.gameObject = targetMgr.gameObject;
-        this.rigid = rigid;
+        this.velocityMgr = velocityMgr;
         this.targetMgr = targetMgr;
         this.throngMgr = throngMgr;
         this.randomPlowlingMove = randomPlowlingMove;
@@ -73,7 +73,7 @@ public class ThrongMgr : MonoBehaviour
     //dataの進行方向
     Vector3 CalcuDirectVector(ThrongData data)
     {
-        return data.rigid.velocity;
+        return data.velocityMgr.velocity;
     }
 
     //オブジェクト同士の回避
@@ -95,22 +95,22 @@ public class ThrongMgr : MonoBehaviour
     /// <param name="rigid">自身のリジッドボディ</param>
     /// <param name="moveDirect">そのオブジェクトが向かいたい方向</param>
     /// /// <param name="maxSpeed">最大スピード</param>
-    public void AvoidNearThrong(Rigidbody selfRigid, Vector3 moveDirect, float maxSpeed)
+    public void AvoidNearThrong(EnemyVelocityMgr velcoityMgr, Vector3 moveDirect, float maxSpeed)
     {
-        var velocity = m_rigid.GetComponent<EnemyVelocityMgr>().GetVelocity();
+        var velocity = velcoityMgr.velocity;
         //var velocity = m_rigid.velocity;
 
         moveDirect += CalcuThrongVector();
         Vector3 force = UtilityVelocity.CalucSeekVec(velocity, moveDirect, maxSpeed);
         //selfRigid.AddForce(force);
-        selfRigid.GetComponent<EnemyVelocityMgr>().AddForce(force);
+        velcoityMgr.AddForce(force);
 
         var avoidVec = CalcuSumAvoidVector();
         if (avoidVec != Vector3.zero) //回避が必要なら
         {
             Vector3 avoidForce = UtilityVelocity.CalucSeekVec(velocity, CalcuSumAvoidVector(), CalcuAverageSpeed());
             //selfRigid.AddForce(avoidForce);
-            selfRigid.GetComponent<EnemyVelocityMgr>().AddForce(force);
+            velcoityMgr.AddForce(avoidForce);
         }
     }
 
@@ -118,7 +118,7 @@ public class ThrongMgr : MonoBehaviour
     /// 集団移動をする処理(まだ未完成)
     /// </summary>
     /// <param name="selfRigid">自分自身のリジッドボディ</param>
-    public void ThrongMove(Rigidbody selfRigid, Vector3 moveDirect, float maxSpeed)
+    public void ThrongMove(EnemyVelocityMgr velcoityMgr, Vector3 moveDirect, float maxSpeed)
     {
         var throngVec = CalcuThrongVector();
         if(throngVec == Vector3.zero)
@@ -126,8 +126,8 @@ public class ThrongMgr : MonoBehaviour
             return;
         }
 
-        var force = UtilityVelocity.CalucSeekVec(selfRigid.velocity, throngVec, CalcuAverageSpeed());
-        selfRigid.AddForce(force);
+        var force = UtilityVelocity.CalucSeekVec(velcoityMgr.velocity, throngVec, CalcuAverageSpeed());
+        velcoityMgr.AddForce(force);
     }
 
     /// <summary>
@@ -178,7 +178,7 @@ public class ThrongMgr : MonoBehaviour
             centerPosition += CalcuCenterVector(data);
             directVec += CalcuDirectVector(data); //群衆の平均方向
             avoidVec += CalcuAvoidVector(data);
-            sumSpeed += data.rigid.velocity.magnitude;
+            sumSpeed += data.velocityMgr.velocity.magnitude;
 
             throngSize++;
         }
@@ -221,7 +221,7 @@ public class ThrongMgr : MonoBehaviour
         {
             if (IsRange(data, m_param.nearObjectRange))
             {
-                sumSpeed += data.rigid.velocity.magnitude;
+                sumSpeed += data.velocityMgr.velocity.magnitude;
                 throngSize++;
             }
         }
