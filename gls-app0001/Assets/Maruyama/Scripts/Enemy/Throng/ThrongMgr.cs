@@ -97,17 +97,20 @@ public class ThrongMgr : MonoBehaviour
     /// /// <param name="maxSpeed">最大スピード</param>
     public void AvoidNearThrong(Rigidbody selfRigid, Vector3 moveDirect, float maxSpeed)
     {
-        var velocity = m_rigid.velocity;
+        var velocity = m_rigid.GetComponent<EnemyVelocityMgr>().GetVelocity();
+        //var velocity = m_rigid.velocity;
 
         moveDirect += CalcuThrongVector();
         Vector3 force = UtilityVelocity.CalucSeekVec(velocity, moveDirect, maxSpeed);
-        selfRigid.AddForce(force);
+        //selfRigid.AddForce(force);
+        selfRigid.GetComponent<EnemyVelocityMgr>().AddForce(force);
 
         var avoidVec = CalcuSumAvoidVector();
         if (avoidVec != Vector3.zero) //回避が必要なら
         {
             Vector3 avoidForce = UtilityVelocity.CalucSeekVec(velocity, CalcuSumAvoidVector(), CalcuAverageSpeed());
-            selfRigid.AddForce(avoidForce);
+            //selfRigid.AddForce(avoidForce);
+            selfRigid.GetComponent<EnemyVelocityMgr>().AddForce(force);
         }
     }
 
