@@ -2346,6 +2346,7 @@ GameObject:
   - component: {fileID: 1444888580945028652}
   - component: {fileID: 1444888580945028653}
   - component: {fileID: 8296172668977832203}
+  - component: {fileID: 1922319841}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -2428,9 +2429,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.35
-  m_Height: 0.36
+  m_Height: 1.8
   m_Direction: 1
-  m_Center: {x: 0, y: 0.8, z: 0}
+  m_Center: {x: 0, y: 0.85, z: 0}
 --- !u!114 &1444888580945028644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2459,6 +2460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 191cba80c27313a488f5fde938d33210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rotationSpeed: 3
 --- !u!114 &1444888580945028646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2589,6 +2591,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 531d07976e17fbc479e2650dc9d62d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1922319841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434505739018704334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 817b5ec0fc7a0ec47a239092e7979daf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_param:
+    inThrongRange: 5
+    outThrongRange: 0
+    nearObjectRange: 1
+  m_generator: {fileID: 0}
 --- !u!1 &7689520723826636210
 GameObject:
   m_ObjectHideFlags: 0
