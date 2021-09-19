@@ -60,4 +60,13 @@ public class TargetMgr : MonoBehaviour
         m_nowTarget = m_targets[type];
         return m_nowTarget;
     }
+
+    /// <summary>
+    /// 現在のターゲット方向のベクトルを返す
+    /// </summary>
+    /// <returns>ターゲット方向のベクトル</returns>
+    public Vector3 GetToNowTargetVector()
+    {
+        return m_nowTarget.transform.position - transform.position;
+    }
 }
