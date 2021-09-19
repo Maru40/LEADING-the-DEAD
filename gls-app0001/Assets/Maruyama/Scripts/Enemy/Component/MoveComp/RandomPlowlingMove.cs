@@ -65,10 +65,11 @@ public class RandomPlowlingMove : MonoBehaviour
         var toVec = m_targetPosition - transform.position;
         m_throngMgr.AvoidNearThrong(m_rigid, toVec, m_speed);
 
+        var newTargetPosition = m_throngMgr.CalcuRandomPlowlingMovePositonIntegrated(this);  //ランダムな方向を集団に合わせる。
+        SetTargetPositon(newTargetPosition);
+
         //var newForce = UtilityVelocity.CalucArriveVec(velocity, toVec, m_speed);
         //m_rigid.AddForce(newForce);
-
-        //test
 
         if (IsRouteEnd())
         {
@@ -146,14 +147,32 @@ public class RandomPlowlingMove : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //SetRandomTargetPosition();
+        if(collision.gameObject.tag == "T_Wall")
+        {
+            SetRandomTargetPosition();
+        }
     }
 
     private void OnCollisionStay(Collision collision)
     {
-        //SetRandomTargetPosition();
+        if (collision.gameObject.tag == "T_Wall")
+        {
+            Debug.Log("rando");
+            SetRandomTargetPosition();
+        }
     }
 
+
+    //アクセッサ-----------------------------------------------------
+
+    public void SetTargetPositon(Vector3 position)
+    {
+        m_targetPosition = position;
+    }
+    public Vector3 GetTargetPosition()
+    {
+        return m_targetPosition;
+    }
 
     //現在使用していない
     //bool IsRayHit(Vector3 position)
