@@ -31,14 +31,16 @@ public class RandomPlowlingMove : MonoBehaviour
     //目的の場所
     Vector3 m_targetPosition;
 
-    Rigidbody m_rigid;
+    //Rigidbody m_rigid;
+    EnemyVelocityMgr m_velocityMgr;
     WaitTimer m_waitTimer;
     ThrongMgr m_throngMgr;
     
     void Start()
     {
         //コンポーネントの取得
-        m_rigid = GetComponent<Rigidbody>();
+        //m_rigid = GetComponent<Rigidbody>();
+        m_velocityMgr = GetComponent<EnemyVelocityMgr>();
         m_waitTimer = GetComponent<WaitTimer>();
         m_throngMgr = GetComponent<ThrongMgr>();
 
@@ -62,7 +64,7 @@ public class RandomPlowlingMove : MonoBehaviour
 
         //加える力の計算
         var toVec = m_targetPosition - transform.position;
-        m_throngMgr.AvoidNearThrong(m_rigid, toVec, m_speed);
+        m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_speed);
 
         var newTargetPosition = m_throngMgr.CalcuRandomPlowlingMovePositonIntegrated(this);  //ランダムな方向を集団に合わせる。
         SetTargetPositon(newTargetPosition);
@@ -98,7 +100,7 @@ public class RandomPlowlingMove : MonoBehaviour
         }
 
         SetRandomTargetPosition();
-        m_rigid.velocity = Vector3.zero;  //速度のリセット
+        m_velocityMgr.ResetVelocity();  //速度のリセット
 
         //待機状態の設定
         var waitTime = Random.value * m_maxWaitCalucRouteTime;
