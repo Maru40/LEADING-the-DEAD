@@ -21,13 +21,16 @@ public struct ThrongData
     public Rigidbody rigid;
     public TargetMgr targetMgr;  //ターゲット管理
     public ThrongMgr throngMgr;  //群衆管理
+    public RandomPlowlingMove randomPlowlingMove;
 
-    public ThrongData(Rigidbody rigid,TargetMgr targetMgr, ThrongMgr throngMgr)
+    public ThrongData(Rigidbody rigid,TargetMgr targetMgr, ThrongMgr throngMgr,
+        RandomPlowlingMove randomPlowlingMove)
     {
         this.gameObject = targetMgr.gameObject;
         this.rigid = rigid;
         this.targetMgr = targetMgr;
         this.throngMgr = throngMgr;
+        this.randomPlowlingMove = randomPlowlingMove;
     }
 }
 
@@ -41,7 +44,7 @@ public class ThrongMgr : MonoBehaviour
     [SerializeField]
     ThrongMgrParametor m_param = new ThrongMgrParametor();
 
-    List<ThrongData> m_throngDatas = new List<ThrongData>();  //グループのオブジェクト一覧
+    //List<ThrongData> m_throngDatas = new List<ThrongData>();  //グループのオブジェクト一覧
 
     //コンポーネント系-----------------
 
@@ -94,14 +97,16 @@ public class ThrongMgr : MonoBehaviour
     /// /// <param name="maxSpeed">最大スピード</param>
     public void AvoidNearThrong(Rigidbody selfRigid, Vector3 moveDirect, float maxSpeed)
     {
+        var velocity = m_rigid.velocity;
+
         moveDirect += CalcuThrongVector();
-        Vector3 force = UtilityVelocity.CalucSeekVec(m_rigid.velocity, moveDirect, maxSpeed);
+        Vector3 force = UtilityVelocity.CalucSeekVec(velocity, moveDirect, maxSpeed);
         selfRigid.AddForce(force);
 
         var avoidVec = CalcuSumAvoidVector();
         if (avoidVec != Vector3.zero) //回避が必要なら
         {
-            Vector3 avoidForce = UtilityVelocity.CalucSeekVec(m_rigid.velocity, CalcuSumAvoidVector(), CalcuAverageSpeed());
+            Vector3 avoidForce = UtilityVelocity.CalucSeekVec(velocity, CalcuSumAvoidVector(), CalcuAverageSpeed());
             selfRigid.AddForce(avoidForce);
         }
     }
@@ -110,7 +115,7 @@ public class ThrongMgr : MonoBehaviour
     /// 集団移動をする処理(まだ未完成)
     /// </summary>
     /// <param name="selfRigid">自分自身のリジッドボディ</param>
-    public void ThrongMove(Rigidbody selfRigid)
+    public void ThrongMove(Rigidbody selfRigid, Vector3 moveDirect, float maxSpeed)
     {
         var throngVec = CalcuThrongVector();
         if(throngVec == Vector3.zero)
@@ -123,12 +128,35 @@ public class ThrongMgr : MonoBehaviour
     }
 
     /// <summary>
+    /// ランダムに移動するゾンビを集団に合わせた方向に統合する。
+    /// </summary>
+    /// <param name="plowlingMove">コンポ―ネントそのもの</param>
+    public Vector3 CalcuRandomPlowlingMovePositonIntegrated(RandomPlowlingMove plowlingMove)
+    {
+        var throngDatas = m_generator.GetThrongDatas();
+
+        int throngSize = 0;
+        Vector3 sumPosition = Vector3.zero;
+        foreach (var data in throngDatas)
+        {
+            if(IsRange(data, m_param.inThrongRange))
+            {
+                sumPosition += data.randomPlowlingMove.GetTargetPosition();
+                throngSize++;
+            }
+        }
+
+        return sumPosition / throngSize;
+    }
+
+    /// <summary>
     /// 群衆行動ベクトルの計算(まだ未完成)
     /// </summary>
     /// <returns></returns>
     Vector3 CalcuThrongVector()
     {
-        m_throngDatas = m_generator.GetThrongDatas();
+        Debug.Log(m_generator);
+        var throngDatas = m_generator.GetThrongDatas();
 
         Vector3 centerPosition = Vector3.zero;
         Vector3 avoidVec = Vector3.zero;
@@ -136,7 +164,7 @@ public class ThrongMgr : MonoBehaviour
         float sumSpeed = 0.0f;
 
         int throngSize = 0;
-        foreach (var data in m_throngDatas)
+        foreach (var data in throngDatas)
         {
             var toVec = data.gameObject.transform.position - transform.position;
             if (toVec.magnitude > m_param.inThrongRange)
@@ -169,9 +197,10 @@ public class ThrongMgr : MonoBehaviour
 
     Vector3 CalcuSumAvoidVector()
     {
+        var throngDatas = m_generator.GetThrongDatas();
         Vector3 avoidVector = Vector3.zero;
 
-        foreach (var data in m_throngDatas)
+        foreach (var data in throngDatas)
         {
             avoidVector += CalcuAvoidVector(data);
         }
@@ -179,12 +208,13 @@ public class ThrongMgr : MonoBehaviour
         return avoidVector;
     }
 
-    public float CalcuAverageSpeed()
+    float CalcuAverageSpeed()
     {
+        var throngDatas = m_generator.GetThrongDatas();
         float sumSpeed = 0.0f;
         int throngSize = 0;
 
-        foreach (var data in m_throngDatas)
+        foreach (var data in throngDatas)
         {
             if (IsRange(data, m_param.nearObjectRange))
             {
@@ -216,7 +246,7 @@ public class ThrongMgr : MonoBehaviour
     /// <returns>群衆データリスト</returns>
     public List<ThrongData> GetThrongDatas()
     {
-        return m_throngDatas;
+        return m_generator.GetThrongDatas();
     }
     
 
@@ -230,11 +260,12 @@ public class ThrongMgr : MonoBehaviour
         }
 
         var generators = FindObjectsOfType<EnemyGenerator>();
+
         foreach (var generator in generators)
         {
             var createObj = generator.GetCreateObject();
             //生成するオブジェクトがこのオブジェクトと同じなら
-            if (createObj.ToString() == gameObject.ToString())
+            if (createObj.GetType() == gameObject.GetType())
             {
                 m_generator = generator;
                 break;
@@ -246,37 +277,37 @@ public class ThrongMgr : MonoBehaviour
     //ボツデータ↓
 
     //群衆として認識するオブジェクトのセット
-    void SetCalcuThrongList()
-    {
-        var datas = m_generator.GetThrongDatas();
-        foreach (var data in datas)
-        {
-            if (this.gameObject == data.gameObject)
-            {  //自分自身ならcontinue
-                continue;
-            }
+    //void SetCalcuThrongList()
+    //{
+    //    var datas = m_generator.GetThrongDatas();
+    //    foreach (var data in datas)
+    //    {
+    //        if (this.gameObject == data.gameObject)
+    //        {  //自分自身ならcontinue
+    //            continue;
+    //        }
 
-            var toVec = data.gameObject.transform.position - transform.position;
-            if (toVec.magnitude < m_param.inThrongRange)  //群衆になる範囲にいたら
-            {
-                if (IsNewData(data))  //新規のデータだったら
-                {
-                    m_throngDatas.Add(data);
-                }
-            }
-        }
-    }
+    //        var toVec = data.gameObject.transform.position - transform.position;
+    //        if (toVec.magnitude < m_param.inThrongRange)  //群衆になる範囲にいたら
+    //        {
+    //            if (IsNewData(data))  //新規のデータだったら
+    //            {
+    //                m_throngDatas.Add(data);
+    //            }
+    //        }
+    //    }
+    //}
 
-    bool IsNewData(ThrongData newData)
-    {
-        foreach (var data in m_throngDatas)
-        {
-            if (data.gameObject == newData.gameObject)
-            {
-                return false;
-            }
-        }
+    //bool IsNewData(ThrongData newData)
+    //{
+    //    foreach (var data in m_throngDatas)
+    //    {
+    //        if (data.gameObject == newData.gameObject)
+    //        {
+    //            return false;
+    //        }
+    //    }
 
-        return true;
-    }
+    //    return true;
+    //}
 }
