@@ -61,7 +61,6 @@ public class RandomPlowlingMove : MonoBehaviour
         }
 
         //‰Á‚¦‚é—Í‚ÌŒvŽZ
-        var velocity = m_rigid.velocity;
         var toVec = m_targetPosition - transform.position;
         m_throngMgr.AvoidNearThrong(m_rigid, toVec, m_speed);
 
