@@ -18,6 +18,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
     Rigidbody m_rigid;
     TargetMgr m_targetMgr;
     BreadCrumb m_bread;
+    ThrongMgr m_throngMgr;
 
     public BreadSeekTarget(EnemyBase owner, float nearRange, float maxSpeed, float lostSeekTime)
         : base(owner)
@@ -53,6 +54,8 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
                 m_targetPosition = m_bread.GetNewPosition();
             }
         }
+
+        m_throngMgr = owner.GetComponent<ThrongMgr>();
     }
 
     public override void OnUpdate()
@@ -72,8 +75,10 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
     void UpdateMove()
     {
         var toVec = m_targetPosition - GetOwner().transform.position;
-        var force = UtilityVelocity.CalucSeekVec(m_rigid.velocity, toVec, m_maxSpeed);
-        m_rigid.AddForce(force);
+        m_throngMgr.AvoidNearThrong(m_rigid, toVec, m_maxSpeed);
+
+        //var force = UtilityVelocity.CalucSeekVec(m_rigid.velocity, toVec, m_maxSpeed);
+        //m_rigid.AddForce(force);
 
         //–Ú“I’n‚É“ž’B‚µ‚½‚ç
         if (UtilCalcu.IsArrivalPosition(m_nearRange, GetOwner().transform.position, m_targetPosition)) {
