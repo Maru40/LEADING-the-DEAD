@@ -18,21 +18,25 @@ public class EnemyVelocityMgr : MonoBehaviour
     {
         m_velocity += m_force * Time.deltaTime;
 
-        m_rigid.velocity = new Vector3(m_velocity.x, m_rigid.velocity.y ,m_velocity.z);
+        m_rigid.velocity = m_velocity;
 
         ResetForce();
+
+        //float dampValue = 0.2f;  //減衰処理
+        //m_force *= dampValue;
+        //if(m_force.magnitude <= 0.1f)
+        //{
+        //    ResetForce();
+        //}
     }
 
 
     //アクセッサ-------------------------------------------------------
 
-    public void SetVelcoity(Vector3 velocity)
+    public Vector3 velocity
     {
-        m_velocity = velocity;
-    }
-    public Vector3 GetVelocity()
-    {
-        return m_velocity;
+        set { m_velocity = value; }
+        get { return m_velocity; }
     }
 
     public void AddForce(Vector3 force)
@@ -44,6 +48,7 @@ public class EnemyVelocityMgr : MonoBehaviour
     public void ResetVelocity()
     {
         m_velocity = Vector3.zero;
+        m_rigid.velocity = Vector3.zero;
     }
 
     public void ResetForce()
