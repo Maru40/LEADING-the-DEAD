@@ -87,7 +87,7 @@ namespace Player
                 m_playerAnimationParamator.moveInput = 0.0f;
             }
 
-            m_rigitbody.velocity = moveVector3 * m_moveSpeed;
+            m_rigitbody.velocity = moveVector3 * m_moveSpeed + new Vector3(0.0f, m_rigitbody.velocity.y, 0.0f);
         }
     }
 }
