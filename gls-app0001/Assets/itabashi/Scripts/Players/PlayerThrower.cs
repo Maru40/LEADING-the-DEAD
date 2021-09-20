@@ -139,7 +139,6 @@ namespace Player
 
             float aimRotateX = m_gameControls.Player.ThrowAim.ReadValue<float>();
 
-            Debug.Log(aimRotateX);
             m_throwRotateX += aimRotateX * 90.0f * Time.deltaTime;
 
             m_throwRotateX = Mathf.Clamp(m_throwRotateX, m_minThrowRotateX, m_maxThrowRotateX);
