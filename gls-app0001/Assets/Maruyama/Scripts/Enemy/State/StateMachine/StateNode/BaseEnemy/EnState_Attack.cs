@@ -13,9 +13,9 @@ public class EnState_Attack : EnemyStateNodeBase<EnemyBase>
         var owner = GetOwner();
 
         //速度を0にする
-        var rigid = owner.GetComponent<Rigidbody>();
-        if (rigid) {
-            rigid.velocity = Vector3.zero;
+        var velocityMgr = owner.GetComponent<EnemyVelocityMgr>();
+        if (velocityMgr) {
+            velocityMgr.ResetVelocity();
         }
 
         //攻撃アニメーション再生

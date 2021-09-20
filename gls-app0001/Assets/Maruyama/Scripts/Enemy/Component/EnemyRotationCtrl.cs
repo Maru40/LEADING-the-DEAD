@@ -7,6 +7,9 @@ using UnityEngine;
 /// </summary>
 public class EnemyRotationCtrl : MonoBehaviour
 {
+    [SerializeField]
+    float m_rotationSpeed = 3.0f;
+
     Rigidbody m_rigid;
 
     void Start()
@@ -21,7 +24,13 @@ public class EnemyRotationCtrl : MonoBehaviour
         //è´óàìIÇ…ÇÕÇ‰Ç¡Ç≠ÇËâÒÇÈÇÊÇ§Ç…í≤êÆ
         var direct = m_rigid.velocity;
         direct.y = 0;
-        transform.forward = direct.normalized;
+        //transform.forward = direct.normalized;
+        if(direct != Vector3.zero)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation,
+                                     Quaternion.LookRotation(direct),
+                                     m_rotationSpeed * Time.deltaTime);
+        }
 
         //Debug.Log("velocityRange" + m_rigid.velocity.magnitude);
     }

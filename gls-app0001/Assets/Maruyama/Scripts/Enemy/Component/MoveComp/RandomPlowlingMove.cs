@@ -31,14 +31,18 @@ public class RandomPlowlingMove : MonoBehaviour
     //目的の場所
     Vector3 m_targetPosition;
 
-    Rigidbody m_ridgid;
+    //Rigidbody m_rigid;
+    EnemyVelocityMgr m_velocityMgr;
     WaitTimer m_waitTimer;
+    ThrongMgr m_throngMgr;
     
     void Start()
     {
         //コンポーネントの取得
-        m_ridgid = GetComponent<Rigidbody>();
+        //m_rigid = GetComponent<Rigidbody>();
+        m_velocityMgr = GetComponent<EnemyVelocityMgr>();
         m_waitTimer = GetComponent<WaitTimer>();
+        m_throngMgr = GetComponent<ThrongMgr>();
 
         //シード値
         Random.InitState(System.DateTime.Now.Millisecond);
@@ -59,11 +63,14 @@ public class RandomPlowlingMove : MonoBehaviour
         }
 
         //加える力の計算
-        var velocity = m_ridgid.velocity;
         var toVec = m_targetPosition - transform.position;
+        m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_speed);
 
-        var newForce = UtilityVelocity.CalucArriveVec(velocity, toVec, m_speed);
-        m_ridgid.AddForce(newForce);
+        var newTargetPosition = m_throngMgr.CalcuRandomPlowlingMovePositonIntegrated(this);  //ランダムな方向を集団に合わせる。
+        SetTargetPositon(newTargetPosition);
+
+        //var newForce = UtilityVelocity.CalucArriveVec(velocity, toVec, m_speed);
+        //m_rigid.AddForce(newForce);
 
         if (IsRouteEnd())
         {
@@ -93,7 +100,7 @@ public class RandomPlowlingMove : MonoBehaviour
         }
 
         SetRandomTargetPosition();
-        m_ridgid.velocity = Vector3.zero;  //速度のリセット
+        m_velocityMgr.ResetVelocity();  //速度のリセット
 
         //待機状態の設定
         var waitTime = Random.value * m_maxWaitCalucRouteTime;
@@ -141,14 +148,32 @@ public class RandomPlowlingMove : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        SetRandomTargetPosition();
+        if(collision.gameObject.tag == "T_Wall")
+        {
+            SetRandomTargetPosition();
+        }
     }
 
     private void OnCollisionStay(Collision collision)
     {
-        SetRandomTargetPosition();
+        if (collision.gameObject.tag == "T_Wall")
+        {
+            Debug.Log("rando");
+            SetRandomTargetPosition();
+        }
     }
 
+
+    //アクセッサ-----------------------------------------------------
+
+    public void SetTargetPositon(Vector3 position)
+    {
+        m_targetPosition = position;
+    }
+    public Vector3 GetTargetPosition()
+    {
+        return m_targetPosition;
+    }
 
     //現在使用していない
     //bool IsRayHit(Vector3 position)
