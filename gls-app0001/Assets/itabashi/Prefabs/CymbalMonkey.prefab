@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 6519281115040739100}
   - component: {fileID: 6519281115040739099}
   - component: {fileID: 6519281115040739098}
-  m_Layer: 0
+  - component: {fileID: 3904213817972291339}
+  m_Layer: 2
   m_Name: CymbalMonkey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_fireTime: 10
-  m_startOnAwake: 1
+  m_startOnAwake: 0
   m_timerEvent:
     m_PersistentCalls:
       m_Calls:
@@ -171,3 +172,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc6f4f0cfbddeb140b77b9871963b22e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3904213817972291339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6520215467471573455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca613d62c731ce428058ca82d0c6df1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_rigidbody: {fileID: 0}

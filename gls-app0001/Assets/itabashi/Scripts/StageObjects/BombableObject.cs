@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectBomber : MonoBehaviour
+public class BombableObject : MonoBehaviour
 {
     /// <summary>
     /// ”š”­‰¹

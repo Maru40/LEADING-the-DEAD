@@ -17,6 +17,17 @@ namespace Player
             get { return m_playerAnimator.GetFloat("moveInput"); }
         }
 
+        public bool isThrowingStance
+        {
+            set { m_playerAnimator.SetBool("isThrowingStance", value); }
+            get { return m_playerAnimator.GetBool("isThrowingStance"); }
+        }
+
+        /// <summary>
+        /// ThrowÉgÉäÉKÅ[
+        /// </summary>
+        public void Throw() { m_playerAnimator.SetTrigger("Throw"); }
+
         // Start is called before the first frame update
         void Start()
         {
