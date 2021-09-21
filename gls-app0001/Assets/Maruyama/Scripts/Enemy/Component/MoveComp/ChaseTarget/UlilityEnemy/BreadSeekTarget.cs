@@ -44,7 +44,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
         m_targetMgr = owner.GetComponent<TargetMgr>();
         var target = m_targetMgr.GetNowTarget();
 
-        m_bread = target.GetComponent<BreadCrumb>();
+        m_bread = target?.GetComponent<BreadCrumb>();
 
         if (m_bread){
             //初期ポジションのセット
@@ -66,6 +66,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
             m_chaseTarget.TargetLost();
         }
 
+        Debug.Log("BreadSeek");
         UpdateMove();
     }
 
