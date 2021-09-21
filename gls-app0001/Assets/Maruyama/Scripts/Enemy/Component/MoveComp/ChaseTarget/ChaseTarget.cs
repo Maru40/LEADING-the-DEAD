@@ -36,10 +36,10 @@ public class ChaseTarget : MonoBehaviour
     float m_lostSeekTime = 10.0f;
 
     /// <summary>
-    /// áŠQ•¨”»’è‚Æ‚·‚éƒŒƒCƒ„[
-    /// </summary> 
+    /// Ray‚ÌáŠQ•¨‚·‚éLayer‚Ì”z—ñ
+    /// </summary>
     [SerializeField]
-    LayerMask m_obstacleLayer = new LayerMask();
+    string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
 
     StateMachine m_stateMachine;
 
@@ -76,7 +76,8 @@ public class ChaseTarget : MonoBehaviour
         var toVec = target.transform.position - transform.position;
 
         //áŠQ•¨‚ª‡‚Á‚½‚ç
-        if (Physics.Raycast(transform.position, toVec, toVec.magnitude, m_obstacleLayer)){
+        int obstacleLayer = LayerMask.GetMask(m_rayObstacleLayerStrings);
+        if (Physics.Raycast(transform.position, toVec, toVec.magnitude, obstacleLayer)){
             m_stateMachine.GetTransitionStructMember().breadTrigger.Fire(); //Bread‚É•ÏX
         }
         else{
