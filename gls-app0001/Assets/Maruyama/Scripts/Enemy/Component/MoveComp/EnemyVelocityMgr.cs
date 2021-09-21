@@ -16,6 +16,9 @@ public class EnemyVelocityMgr : MonoBehaviour
 
     void Update()
     {
+        //m_velocity = m_rigid.velocity;
+        //return;
+
         m_velocity += m_force * Time.deltaTime;
 
         m_rigid.velocity = m_velocity;
@@ -24,7 +27,7 @@ public class EnemyVelocityMgr : MonoBehaviour
 
         //float dampValue = 0.2f;  //å∏êäèàóù
         //m_force *= dampValue;
-        //if(m_force.magnitude <= 0.1f)
+        //if (m_force.magnitude <= 0.1f)
         //{
         //    ResetForce();
         //}
@@ -41,6 +44,7 @@ public class EnemyVelocityMgr : MonoBehaviour
 
     public void AddForce(Vector3 force)
     {
+        //m_rigid.AddForce(force);
         m_force += force;
     }
 
