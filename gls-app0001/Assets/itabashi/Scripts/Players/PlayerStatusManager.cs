@@ -6,16 +6,22 @@ namespace Player
 {
     public class PlayerStatusManager : MonoBehaviour
     {
-        [Range(0.0f, 10.0f)]
+        [SerializeField]
+        private Gauge m_staminaGauge;
+
         [SerializeField]
         private float m_stamina;
+
+        [SerializeField]
+        private float m_maxStamina;
 
         public float stamina
         {
             set
             {
-                m_stamina = Mathf.Clamp(value, 0.0f, 10.0f);
+                m_stamina = Mathf.Clamp(value, 0.0f, m_maxStamina);
                 m_playerParameters.stamina = m_stamina;
+                m_staminaGauge.fillAmount = m_stamina / m_maxStamina;
                 m_updateStaminaEvent.Invoke(m_stamina);
             }
             get { return m_stamina; }
@@ -34,6 +40,12 @@ namespace Player
 
         [SerializeField]
         private UnityEngine.Events.UnityEvent<float> m_updateStaminaEvent;
+
+        private void OnValidate()
+        {
+            m_maxStamina = Mathf.Max(m_maxStamina, 0.0f);
+            m_stamina = Mathf.Clamp(m_stamina, 0.0f, m_maxStamina);
+        }
 
         private void Awake()
         {
