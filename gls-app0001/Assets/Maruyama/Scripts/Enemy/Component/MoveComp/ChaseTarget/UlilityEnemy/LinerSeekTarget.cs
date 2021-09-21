@@ -50,13 +50,11 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
         Debug.Log("LinerTargret");
 
         GameObject target = m_targetMgr.GetNowTarget();
-        if (target) 
-        {
+        if (target) {
             Vector3 toVec = target.transform.position - GetOwner().transform.position;
             m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_maxSpeed);
         }
-        else
-        {
+        else {
             m_chaseTarget.TargetLost();
         }
     }
