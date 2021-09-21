@@ -57,10 +57,10 @@ public class EyeSearchRange : MonoBehaviour
     EyeSearchRangeParam m_param = new EyeSearchRangeParam();
 
     /// <summary>
-    /// áŠQ•¨”»’è‚Æ‚·‚éƒŒƒCƒ„[
+    /// Ray‚ÌáŠQ•¨‚·‚éLayer‚Ì”z—ñ
     /// </summary>
     [SerializeField]
-    LayerMask m_obstacleLayer = new LayerMask();
+    string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
 
     private void Update()
     {
@@ -105,8 +105,9 @@ public class EyeSearchRange : MonoBehaviour
 	}
 
     bool IsRay(GameObject target){
+        int obstacleLayer = LayerMask.GetMask(m_rayObstacleLayerStrings);
         var toVec = target.transform.position - transform.position;
-        return !Physics.Raycast(transform.position, toVec, toVec.magnitude, m_obstacleLayer) ? true : false;
+        return !Physics.Raycast(transform.position, toVec, toVec.magnitude, obstacleLayer) ? true : false;
 	}
 
     void Hit(EyeTargetParam targetParam) {
