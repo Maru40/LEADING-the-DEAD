@@ -2430,7 +2430,7 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 153b9424a114c7e4c8a7ee7f1aea9dc6, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.35
+  m_Radius: 0.3
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.85, z: 0}
@@ -2492,7 +2492,8 @@ MonoBehaviour:
     range: 20
     height: 3
     rad: 0.5235988
-  m_obstacleLayer: 3
+  m_rayObstacleLayerStrings:
+  - L_Obstacle
 --- !u!114 &1444888580945028640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2532,7 +2533,8 @@ MonoBehaviour:
   m_maxSpeed: 3
   m_nearRange: 0.5
   m_lostSeekTime: 10
-  m_obstacleLayer: 3
+  m_rayObstacleLayerStrings:
+  - L_Obstacle
 --- !u!114 &1444888580945028643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2549,6 +2551,8 @@ MonoBehaviour:
   m_speed: 3
   m_targetNearRange: 0.3
   m_maxWaitCalucRouteTime: 3
+  m_rayObstacleLayerStrings:
+  - L_Obstacle
 --- !u!114 &1444888580945028652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2611,6 +2615,8 @@ MonoBehaviour:
     inThrongRange: 5
     outThrongRange: 0
     nearObjectRange: 1
+  m_rayObstacleLayerStrings:
+  - L_Obstacle
   m_generator: {fileID: 0}
 --- !u!114 &9020079064083016498
 MonoBehaviour:
