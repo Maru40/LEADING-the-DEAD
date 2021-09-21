@@ -35,6 +35,12 @@ public class ChaseTarget : MonoBehaviour
     [SerializeField]
     float m_lostSeekTime = 10.0f;
 
+    /// <summary>
+    /// 障害物判定とするレイヤー
+    /// </summary> 
+    [SerializeField]
+    LayerMask m_obstacleLayer = new LayerMask();
+
     StateMachine m_stateMachine;
 
     //コンポーネント系------------------
@@ -61,10 +67,16 @@ public class ChaseTarget : MonoBehaviour
     void StateCheck()
     {
         var target = m_targetMgr.GetNowTarget();
+        if(target == null)  //ターゲットがnullなら
+        {
+            TargetLost();
+            return;
+        }
+
         var toVec = target.transform.position - transform.position;
 
         //障害物が合ったら
-        if (Physics.Raycast(transform.position, toVec, toVec.magnitude)){
+        if (Physics.Raycast(transform.position, toVec, toVec.magnitude, m_obstacleLayer)){
             m_stateMachine.GetTransitionStructMember().breadTrigger.Fire(); //Breadに変更
         }
         else{
