@@ -98,18 +98,15 @@ public class ThrongMgr : MonoBehaviour
     public void AvoidNearThrong(EnemyVelocityMgr velcoityMgr, Vector3 moveDirect, float maxSpeed)
     {
         var velocity = velcoityMgr.velocity;
-        //var velocity = m_rigid.velocity;
 
         moveDirect += CalcuThrongVector();
         Vector3 force = UtilityVelocity.CalucSeekVec(velocity, moveDirect, maxSpeed);
-        //selfRigid.AddForce(force);
         velcoityMgr.AddForce(force);
 
         var avoidVec = CalcuSumAvoidVector();
         if (avoidVec != Vector3.zero) //‰ñ”ð‚ª•K—v‚È‚ç
         {
             Vector3 avoidForce = UtilityVelocity.CalucSeekVec(velocity, CalcuSumAvoidVector(), CalcuAverageSpeed());
-            //selfRigid.AddForce(avoidForce);
             velcoityMgr.AddForce(avoidForce);
         }
     }
@@ -158,7 +155,6 @@ public class ThrongMgr : MonoBehaviour
     /// <returns></returns>
     Vector3 CalcuThrongVector()
     {
-        Debug.Log(m_generator);
         var throngDatas = m_generator.GetThrongDatas();
 
         Vector3 centerPosition = Vector3.zero;
