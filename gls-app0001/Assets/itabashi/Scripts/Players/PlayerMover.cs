@@ -9,6 +9,9 @@ namespace Player
         [SerializeField]
         private PlayerAnimationParameters m_playerAnimationParamator;
 
+        [SerializeField]
+        private PlayerStatusManager m_playerStatusManager;
+
         /// <summary>
         /// ゲームの入力
         /// </summary>
@@ -19,6 +22,18 @@ namespace Player
         /// </summary>
         [SerializeField]
         private float m_moveSpeed = 1.0f;
+
+        /// <summary>
+        /// ダッシュ倍率
+        /// </summary>
+        [SerializeField]
+        private float m_dashSpeedScale = 2.0f;
+
+        /// <summary>
+        /// 一秒間にダッシュで減るスタミナ量
+        /// </summary>
+        [SerializeField]
+        private float m_dashStaminaToOneSecond = 1.0f;
 
         /// <summary>
         /// 移動入力の値がこれより下だった場合無視する
@@ -32,6 +47,7 @@ namespace Player
         {
             m_gameControls = new GameControls();
             m_rigitbody = GetComponent<Rigidbody>();
+            m_playerStatusManager = GetComponent<PlayerStatusManager>();
         }
 
         private void OnEnable()
@@ -72,6 +88,10 @@ namespace Player
                 forward = camera.transform.position.y - transform.position.y > 0 ? camera.transform.up : -camera.transform.up;
             }
 
+            bool isDash = m_gameControls.Player.Dash.IsPressed() && m_playerStatusManager.stamina > 0;
+
+            m_playerAnimationParamator.isDash = isDash;
+
             var moveVector3 = camera.transform.right * moveVector2.x + forward * moveVector2.y;
 
             float moveInput = moveVector3.magnitude;
@@ -87,7 +107,16 @@ namespace Player
                 m_playerAnimationParamator.moveInput = 0.0f;
             }
 
-            m_rigitbody.velocity = moveVector3 * m_moveSpeed + new Vector3(0.0f, m_rigitbody.velocity.y, 0.0f);
+            var moveSpeed = isDash ? m_moveSpeed * m_dashSpeedScale : m_moveSpeed;
+
+            if (isDash && m_playerAnimationParamator.moveInput > 0.0f)
+            {
+                moveVector3 = moveVector3.normalized;
+
+                m_playerStatusManager.stamina -= m_dashStaminaToOneSecond * Time.deltaTime;
+            }
+
+            m_rigitbody.velocity = moveVector3 * moveSpeed + new Vector3(0.0f, m_rigitbody.velocity.y, 0.0f);
         }
     }
 }
