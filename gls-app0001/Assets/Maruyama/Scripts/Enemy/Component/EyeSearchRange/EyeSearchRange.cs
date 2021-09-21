@@ -56,6 +56,12 @@ public class EyeSearchRange : MonoBehaviour
     [SerializeField]
     EyeSearchRangeParam m_param = new EyeSearchRangeParam();
 
+    /// <summary>
+    /// 障害物判定とするレイヤー
+    /// </summary>
+    [SerializeField]
+    LayerMask m_obstacleLayer = new LayerMask();
+
     private void Update()
     {
         foreach(var param in m_targetParams)
@@ -95,12 +101,12 @@ public class EyeSearchRange : MonoBehaviour
 		var newDot = Vector3.Dot(forward.normalized, toVec.normalized);
         var newRad = Mathf.Acos(newDot);
 		//索敵範囲に入っていたら。
-		return newRad <= m_param.rad? true : false;
+		return newRad <= m_param.rad ? true : false;
 	}
 
     bool IsRay(GameObject target){
         var toVec = target.transform.position - transform.position;
-        return !Physics.Raycast(transform.position, toVec, toVec.magnitude) ? true : false;
+        return !Physics.Raycast(transform.position, toVec, toVec.magnitude, m_obstacleLayer) ? true : false;
 	}
 
     void Hit(EyeTargetParam targetParam) {
@@ -115,6 +121,10 @@ public class EyeSearchRange : MonoBehaviour
 /// <returns>視界の中にいるならtrue</returns>
     public bool IsInEyeRange(GameObject target)
     {
+        if (target == null) { 
+            return false; 
+        }
+
         //全ての条件がtrueなら視界内に対象がいる。
         if (IsRange(target) && IsHeight(target) && IsRad(target) && IsRay(target)){
             return true;
@@ -135,15 +145,10 @@ public class EyeSearchRange : MonoBehaviour
         float beforeRange = m_param.range;
         m_param.range = range;
 
-        //全ての条件がtrueなら視界内に対象がいる。
-        if (IsRange(target) && IsHeight(target) && IsRad(target) && IsRay(target)) {
-            m_param.range = beforeRange;
-            return true;
-        }
-        else {
-            m_param.range = beforeRange;
-            return false;
-        }
+        bool isRange = IsInEyeRange(target);
+        m_param.range = beforeRange;
+
+        return isRange;
     }
 
     //アクセッサ-------------------------------------------------------------------------
