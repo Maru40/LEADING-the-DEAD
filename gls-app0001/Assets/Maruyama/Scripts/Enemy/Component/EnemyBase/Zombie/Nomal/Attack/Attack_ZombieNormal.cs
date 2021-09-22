@@ -35,7 +35,7 @@ public class Attack_ZombieNormal : AttackBase
         var target = m_targetMgr.GetNowTarget();
         if (target)
         {
-            return m_eyeRange.IsInEyeRange(target, range);
+            return m_eyeRange.IsInEyeRange(target.gameObject, range);
         }
         else
         {
@@ -54,7 +54,7 @@ public class Attack_ZombieNormal : AttackBase
         var target = m_targetMgr.GetNowTarget();
         if (target)
         {
-            return m_eyeRange.IsInEyeRange(target, range);
+            return m_eyeRange.IsInEyeRange(target.gameObject, range);
         }
         else
         {
