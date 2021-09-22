@@ -93,10 +93,10 @@ public class Attack_ZombieNormal : AttackBase
 
         //var target = m_targetMgr.GetNowTarget();
 
-        var damage = other.GetComponent<I_TakeDamage>();
+        var damage = other.GetComponent<AttributeObject.TakeDamageObject>();
         if (damage != null)
         {
-            var data = new DamageData((int)GetBaseParam().power);
+            var data = new AttributeObject.DamageData((int)GetBaseParam().power);
             damage.TakeDamage(data);
         }
     }
