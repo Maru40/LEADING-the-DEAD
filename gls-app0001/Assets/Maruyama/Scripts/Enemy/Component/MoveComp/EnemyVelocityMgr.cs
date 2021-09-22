@@ -25,6 +25,8 @@ public class EnemyVelocityMgr : MonoBehaviour
 
         ResetForce();
 
+        m_velocity.y = 0.0f;
+
         //float dampValue = 0.2f;  //Œ¸Šˆ—
         //m_force *= dampValue;
         //if (m_force.magnitude <= 0.1f)
