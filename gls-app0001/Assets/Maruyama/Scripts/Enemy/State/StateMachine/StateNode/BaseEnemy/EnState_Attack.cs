@@ -12,12 +12,6 @@ public class EnState_Attack : EnemyStateNodeBase<EnemyBase>
     {
         var owner = GetOwner();
 
-        //速度を0にする
-        var velocityMgr = owner.GetComponent<EnemyVelocityMgr>();
-        if (velocityMgr) {
-            velocityMgr.ResetVelocity();
-        }
-
         //攻撃アニメーション再生
         var animatorCtrl = owner.GetComponent<AnimatorCtrl_ZombieNormal>();
         animatorCtrl.AttackTriggerFire();
@@ -27,6 +21,8 @@ public class EnState_Attack : EnemyStateNodeBase<EnemyBase>
         AddChangeComp(owner.GetComponent<EnemyRotationCtrl>(), false, true);
 
         ChangeComps(EnableChangeType.Start);
+
+        Debug.Log("AttackStart");
     }
 
     public override void OnUpdate()
