@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
 {
-    GameObject m_target = null;
+    FoundObject m_target = null;
 
     EyeSearchRange m_eyeRange;
 
@@ -24,13 +24,8 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
 
         //ターゲットの取得
         m_target = owner.GetComponent<TargetMgr>().GetNowTarget();
-        if(m_target == null)
-        {
-            var target = GameObject.Find("Player");
-            var targetMgr = owner.GetComponent<TargetMgr>();
-            targetMgr?.SetNowTarget(GetType(), target);
-
-            m_target = target;
+        if(m_target == null) {
+            SearchTarget();
         }
     }
 
@@ -38,10 +33,15 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
     {
         Debug.Log("RandomPlowling");
 
+        if(m_target == null) {
+            SearchTarget();
+            return;
+        }
+
         //視界に敵が入ったらステートを切り替える。
         if (m_eyeRange)
         {
-            if (m_eyeRange.IsInEyeRange(m_target))
+            if (m_eyeRange.IsInEyeRange(m_target.gameObject))
             {
                 var owner = GetOwner();
 
@@ -59,8 +59,18 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
 
     public override void OnExit()
     {
-
-
         ChangeComps(EnableChangeType.Exit);
+    }
+
+    private void SearchTarget()
+    {
+        var owner = GetOwner();
+
+        var target = GameObject.Find("Player");
+        var foundObject = target.GetComponent<FoundObject>();
+        var targetMgr = owner.GetComponent<TargetMgr>();
+        targetMgr?.SetNowTarget(GetType(), foundObject);
+
+        m_target = foundObject;
     }
 }
