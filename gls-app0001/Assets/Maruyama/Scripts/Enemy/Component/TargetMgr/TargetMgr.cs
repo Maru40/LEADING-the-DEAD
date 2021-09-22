@@ -7,16 +7,16 @@ using System;
 public class TargetMgr : MonoBehaviour
 {
     //最後に参照されたターゲット
-    GameObject m_nowTarget = null;
+    FoundObject m_nowTarget = null;
 
     //どのコンポーネントのターゲットかを確認する。
-    Dictionary<Type,GameObject> m_targets = new Dictionary<Type, GameObject>();
+    Dictionary<Type,FoundObject> m_targets = new Dictionary<Type, FoundObject>();
 
     private void Start()
     {
         if(m_targets.Count == 0) {
             var target = GameObject.Find("Player");
-            m_nowTarget = target;
+            m_nowTarget = target.GetComponent<FoundObject>();
         }
     }
 
@@ -25,7 +25,7 @@ public class TargetMgr : MonoBehaviour
     /// </summary>
     /// <param name="type">どのコンポーネントのターゲットか</param>
     /// <param name="target">ターゲット</param>
-    public void AddTarget(Type type,GameObject target)
+    public void AddTarget(Type type, FoundObject target)
     {
         m_targets[type] = target;
     }
@@ -35,7 +35,7 @@ public class TargetMgr : MonoBehaviour
     /// </summary>
     /// <param name="type">コンポーネントのタイプ</param>
     /// <param name="target">ターゲット</param>
-    public void SetNowTarget(Type type,GameObject target)
+    public void SetNowTarget(Type type, FoundObject target)
     {
         m_nowTarget = target;
         m_targets[type] = target;
@@ -45,12 +45,17 @@ public class TargetMgr : MonoBehaviour
     /// 最後に参照されたターゲットを取得
     /// </summary>
     /// <returns>ターゲット</returns>
-    public GameObject GetNowTarget()
+    public FoundObject GetNowTarget()
     {
         return m_nowTarget;
     }
 
-    public GameObject GetNowTarget(Type type)
+    public FoundObject.FoundData? GetNowTargetFoundData()
+    {
+        return m_nowTarget?.GetFoundData();
+    }
+
+    public FoundObject GetNowTarget(Type type)
     {
         //keyが存在しなかったら
         if (!m_targets.ContainsKey(type)){
@@ -59,6 +64,18 @@ public class TargetMgr : MonoBehaviour
 
         m_nowTarget = m_targets[type];
         return m_nowTarget;
+    }
+
+    public FoundObject.FoundData? GetNowTargetFoundData(Type type)
+    {
+        //keyが存在しなかったら
+        if (!m_targets.ContainsKey(type))
+        {
+            return null;
+        }
+
+        m_nowTarget = m_targets[type];
+        return m_nowTarget.GetFoundData();
     }
 
     /// <summary>
