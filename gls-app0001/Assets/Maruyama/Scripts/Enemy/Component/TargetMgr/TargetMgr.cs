@@ -14,7 +14,7 @@ public class TargetMgr : MonoBehaviour
 
     private void Start()
     {
-        if(m_targets.Count == 0){
+        if(m_targets.Count == 0) {
             var target = GameObject.Find("Player");
             m_nowTarget = target;
         }
