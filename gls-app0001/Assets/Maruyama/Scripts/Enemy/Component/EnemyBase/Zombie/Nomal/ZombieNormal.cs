@@ -30,7 +30,7 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen
 
     void I_Listen.Listen(FoundObject foundObject) {
         //ターゲットの切替
-        m_targetMgr.SetNowTarget(GetType() ,foundObject.gameObject);
+        m_targetMgr.SetNowTarget(GetType() ,foundObject);
 
         var member = m_stator.GetTransitionMember();
         member.chaseTrigger.Fire();
