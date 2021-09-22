@@ -27,6 +27,9 @@ public class TimingDevice : MonoBehaviour
     [SerializeField]
     private bool m_startOnAwake = false;
 
+    [SerializeField]
+    private bool m_isLoop = false;
+
     /// <summary>
     /// ŽžŠÔ‚É‚È‚é‚Æ”­‰Î‚³‚ê‚éƒCƒxƒ“ƒg
     /// </summary>
@@ -99,6 +102,13 @@ public class TimingDevice : MonoBehaviour
         Debug.Log($"{gameObject.name}‚ÌTimerEvent‚ª”­‰Î‚³‚ê‚Ü‚µ‚½");
 
         m_timerEvent.Invoke();
+
+        if(m_isLoop)
+        {
+            m_nowCountTime -= m_fireTime;
+
+            return;
+        }
 
         TimerStop();
     }
