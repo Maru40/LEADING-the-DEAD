@@ -18,8 +18,8 @@ public class AttackTester : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        var takeDamager = collision.gameObject.GetComponent<I_TakeDamage>();
+        var takeDamager = collision.gameObject.GetComponent<AttributeObject.TakeDamageObject>();
 
-        takeDamager?.TakeDamage(new DamageData(10));
+        takeDamager?.TakeDamage(new AttributeObject.DamageData(10));
     }
 }
