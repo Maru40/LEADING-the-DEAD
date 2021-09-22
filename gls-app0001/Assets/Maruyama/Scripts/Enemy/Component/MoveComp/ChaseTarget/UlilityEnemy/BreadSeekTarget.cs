@@ -6,8 +6,9 @@ using UtilCalcu = UtilityCalculation;
 
 public class BreadSeekTarget : NodeBase<EnemyBase>
 { 
-    float m_maxSpeed = 3.0f;
     float m_nearRange = 3.0f;
+    float m_maxSpeed = 3.0f;
+    float m_turningPower = 1.0f; //ê˘âÒÇ∑ÇÈóÕ
     float m_lostSeekTime = 10.0f;
     Vector3 m_targetPosition = new Vector3();
 
@@ -21,11 +22,12 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
     BreadCrumb m_bread;
     ThrongMgr m_throngMgr;
 
-    public BreadSeekTarget(EnemyBase owner, float nearRange, float maxSpeed, float lostSeekTime)
+    public BreadSeekTarget(EnemyBase owner, float nearRange, float maxSpeed, float turningPower, float lostSeekTime)
         : base(owner)
     {
         m_nearRange = nearRange;
         m_maxSpeed = maxSpeed;
+        m_turningPower = turningPower;
         m_lostSeekTime = lostSeekTime;
     }
 
@@ -78,7 +80,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
     void UpdateMove()
     {
         var toVec = m_targetPosition - GetOwner().transform.position;
-        m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_maxSpeed);
+        m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_maxSpeed, m_turningPower);
 
         //var force = UtilityVelocity.CalucSeekVec(m_rigid.velocity, toVec, m_maxSpeed);
         //m_rigid.AddForce(force);
