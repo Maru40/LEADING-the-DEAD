@@ -16,7 +16,10 @@ public class RandomPlowlingMove : MonoBehaviour
 
     //移動スピード
     [SerializeField]
-    float m_speed = 3.0f;                                             
+    float m_maxSpeed = 3.0f;
+
+    [SerializeField]
+    float m_turningPower = 5.0f;
 
     //目的地に着いたと判断される,目的地との相対距離
     //小さすぎると判断できなくなるため注意
@@ -73,7 +76,7 @@ public class RandomPlowlingMove : MonoBehaviour
 
         //加える力の計算
         var toVec = m_targetPosition - transform.position;
-        m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_speed);
+        m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_maxSpeed, m_turningPower);
 
         var newTargetPosition = m_throngMgr.CalcuRandomPlowlingMovePositonIntegrated(this);  //ランダムな方向を集団に合わせる。
         SetTargetPositon(newTargetPosition);
