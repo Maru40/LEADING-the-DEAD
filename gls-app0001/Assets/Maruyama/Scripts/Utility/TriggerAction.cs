@@ -6,9 +6,9 @@ using System;
 
 public class TriggerAction : MonoBehaviour
 {
-    Action<Collider> m_enterAction = null;
-    Action<Collider> m_stayAction = null;
-    Action<Collider> m_exitAction = null;
+    protected Action<Collider> m_enterAction = null;
+    protected Action<Collider> m_stayAction = null;
+    protected Action<Collider> m_exitAction = null;
 
     //Enter-------------------------------------------------------
 

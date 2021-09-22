@@ -10,11 +10,16 @@ public class Attack_ZombieNormal : AttackBase
     TargetMgr m_targetMgr;
     EyeSearchRange m_eyeRange;
 
+    [SerializeField]
+    EnemyAttackTriggerAction m_hitBox = null;
+
     void Start()
     {
         m_stator = GetComponent<Stator_ZombieNormal>();
         m_targetMgr = GetComponent<TargetMgr>();
         m_eyeRange = GetComponent<EyeSearchRange>();
+
+        m_hitBox.AddEnterAction(SendDamage);
     }
 
     void Update()
@@ -35,7 +40,7 @@ public class Attack_ZombieNormal : AttackBase
         var target = m_targetMgr.GetNowTarget();
         if (target)
         {
-            return m_eyeRange.IsInEyeRange(target, range);
+            return m_eyeRange.IsInEyeRange(target.gameObject, range);
         }
         else
         {
@@ -54,7 +59,7 @@ public class Attack_ZombieNormal : AttackBase
         var target = m_targetMgr.GetNowTarget();
         if (target)
         {
-            return m_eyeRange.IsInEyeRange(target, range);
+            return m_eyeRange.IsInEyeRange(target.gameObject, range);
         }
         else
         {
@@ -66,17 +71,33 @@ public class Attack_ZombieNormal : AttackBase
     override public void Attack(){
         Debug.Log("Attack");
 
-        if (IsAttackDamageRange()){
-            Debug.Log("Attack_Hit");
+        m_hitBox.AttackStart();
+    }
 
-            var target = m_targetMgr.GetNowTarget();
+    public override void AttackHitEnd()
+    {
+        m_hitBox.AttackEnd();
+    }
 
-            var damage = target?.GetComponent<I_TakeDamage>();
-            if (damage != null) 
-            {
-                var data = new DamageData((int)GetBaseParam().power);
-                damage.TakeDamage(data);
-            }
+
+    /// <summary>
+    /// 相手にダメージを与える。
+    /// </summary>
+    private void SendDamage(Collider other)
+    {
+        Debug.Log("Attack_Hit");
+
+        if(other.gameObject == this.gameObject) {
+            return;
+        }
+
+        //var target = m_targetMgr.GetNowTarget();
+
+        var damage = other.GetComponent<I_TakeDamage>();
+        if (damage != null)
+        {
+            var data = new DamageData((int)GetBaseParam().power);
+            damage.TakeDamage(data);
         }
     }
 

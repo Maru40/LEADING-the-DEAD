@@ -64,11 +64,11 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
 
     public override void OnUpdate()
     {
+        Debug.Log("BreadSeek");
         if (!m_bread){
-            m_chaseTarget.TargetLost();
+            return;
         }
 
-        Debug.Log("BreadSeek");
         UpdateMove();
     }
 

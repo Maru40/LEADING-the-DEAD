@@ -16,6 +16,8 @@ public class EnState_Attack : EnemyStateNodeBase<EnemyBase>
         var animatorCtrl = owner.GetComponent<AnimatorCtrl_ZombieNormal>();
         animatorCtrl.AttackTriggerFire();
 
+        AddChangeComp(owner.GetComponent<ObstacleEvasion>(), false, true);
+
         //test
         //‰ñ“]‚ðˆêŽž“Itest“I‚Éoff
         AddChangeComp(owner.GetComponent<EnemyRotationCtrl>(), false, true);

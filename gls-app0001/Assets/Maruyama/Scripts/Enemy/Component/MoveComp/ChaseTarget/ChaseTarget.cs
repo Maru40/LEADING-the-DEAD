@@ -76,9 +76,14 @@ public class ChaseTarget : MonoBehaviour
             return;
         }
 
-        var toVec = target.transform.position - transform.position;
+        var type = target.GetFoundData().type;
+        if(type != FoundObject.FoundType.Player) {  //Playerでなかったら
+            m_stateMachine.GetTransitionStructMember().linerTrigger.Fire(); //Linerに変更
+            return; //処理を終了する。
+        }
 
         //障害物が合ったら
+        var toVec = target.transform.position - transform.position;
         int obstacleLayer = LayerMask.GetMask(m_rayObstacleLayerStrings);
         if (Physics.Raycast(transform.position, toVec, toVec.magnitude, obstacleLayer)){
             m_stateMachine.GetTransitionStructMember().breadTrigger.Fire(); //Breadに変更
@@ -149,5 +154,50 @@ public class ChaseTarget : MonoBehaviour
     }
     public float GetLostSeekTime() { 
         return m_lostSeekTime; 
+    }
+
+
+    //Collision---------------------------------------------------------------------------
+
+    private void WallAttack()
+    {
+        var target = m_targetMgr.GetNowTarget();
+        if(target == null) {
+            return;
+        }
+
+        var data = target.GetFoundData();
+        if(data.type == FoundObject.FoundType.SoundObject) //SoundObjectなら
+        {
+            var stator = GetComponent<Stator_ZombieNormal>(); //壁でも攻撃する。
+            if (stator)
+            {
+                stator.GetTransitionMember().attackTrigger.Fire();
+            }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(enabled == false) {
+            return;
+        }
+
+        if(collision.gameObject.tag == "T_Wall")
+        {
+            WallAttack();
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (enabled == false) {
+            return;
+        }
+
+        if (collision.gameObject.tag == "T_Wall")
+        {
+            WallAttack();
+        }
     }
 }
