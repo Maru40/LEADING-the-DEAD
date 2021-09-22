@@ -7,6 +7,15 @@ namespace Player
     public class PlayerStatusManager : MonoBehaviour
     {
         [SerializeField]
+        private float m_hp;
+
+        public float hp
+        {
+            set { m_hp = Mathf.Max(value, 0.0f); }
+            get { return m_hp; }
+        }
+
+        [SerializeField]
         private Gauge m_staminaGauge;
 
         [SerializeField]
@@ -40,6 +49,9 @@ namespace Player
 
         [SerializeField]
         private UnityEngine.Events.UnityEvent<float> m_updateStaminaEvent;
+
+        [SerializeField]
+        private UnityEngine.Events.UnityEvent m_DeadEvent;
 
         private void OnValidate()
         {
@@ -81,6 +93,18 @@ namespace Player
             }
 
             stamina += m_staminaRecoveryPerSeconds * Time.deltaTime;
+        }
+
+        public void TakeDamage(AttributeObject.DamageData damageData)
+        {
+            m_hp -= damageData.damageValue;
+
+            m_hp = Mathf.Max(m_hp, 0.0f);
+
+            if(m_hp == 0.0f)
+            {
+                m_DeadEvent.Invoke();
+            }
         }
     }
 }
