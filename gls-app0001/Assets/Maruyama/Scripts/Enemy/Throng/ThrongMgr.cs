@@ -75,14 +75,15 @@ public class ThrongMgr : MonoBehaviour
     /// </summary>
     /// <param name="rigid">自身のリジッドボディ</param>
     /// <param name="moveDirect">そのオブジェクトが向かいたい方向</param>
-    /// /// <param name="maxSpeed">最大スピード</param>
-    public void AvoidNearThrong(EnemyVelocityMgr velcoityMgr, Vector3 moveDirect, float maxSpeed)
+    /// <param name="maxSpeed">最大スピード</param>
+    /// <param name="truningPower">旋回パワー</param>
+    public void AvoidNearThrong(EnemyVelocityMgr velcoityMgr, Vector3 moveDirect, float maxSpeed , float truningPower)
     {
         var velocity = velcoityMgr.velocity;
 
         moveDirect += CalcuThrongVector();
         Vector3 force = UtilityVelocity.CalucSeekVec(velocity, moveDirect, maxSpeed);
-        velcoityMgr.AddForce(force);
+        velcoityMgr.AddForce(force * truningPower);
 
         var avoidVec = CalcuSumAvoidVector();
         if (avoidVec != Vector3.zero) //回避が必要なら
@@ -205,6 +206,10 @@ public class ThrongMgr : MonoBehaviour
         return reVec;
     }
 
+    /// <summary>
+    /// 近い距離のゾンビを避けるVector
+    /// </summary>
+    /// <returns>避けるベクトルの合計</returns>
     Vector3 CalcuSumAvoidVector()
     {
         var throngDatas = m_generator.GetThrongDatas();
@@ -222,6 +227,10 @@ public class ThrongMgr : MonoBehaviour
         return avoidVector;
     }
 
+    /// <summary>
+    /// 集団の平均スピードを計算して返す。
+    /// </summary>
+    /// <returns>平均スピード</returns>
     float CalcuAverageSpeed()
     {
         var throngDatas = m_generator.GetThrongDatas();
