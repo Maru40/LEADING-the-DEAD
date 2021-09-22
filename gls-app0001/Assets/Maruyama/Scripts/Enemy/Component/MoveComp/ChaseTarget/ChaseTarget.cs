@@ -24,12 +24,15 @@ public class SeekTransitonMember
 /// </summary>
 public class ChaseTarget : MonoBehaviour
 {
-    [SerializeField]
-    float m_maxSpeed = 3.0f;
-
     //–Ú“I’n‚É‚½‚Ç‚è’…‚¢‚½‚Æ”»’f‚³‚ê‚é‹——£
     [SerializeField]
     float m_nearRange = 0.5f;
+
+    [SerializeField]
+    float m_maxSpeed = 3.0f;
+
+    [SerializeField]
+    float m_turningPower = 5.0f;
 
     //Œ©¸‚Á‚Ä‚©‚ç’Ç]‚·‚éŠÔ
     [SerializeField]
@@ -89,8 +92,8 @@ public class ChaseTarget : MonoBehaviour
     {
         var enemy = GetComponent<EnemyBase>();
 
-        m_stateMachine.AddNode(SeekType.Liner, new LinerSeekTarget(enemy, m_maxSpeed));
-        m_stateMachine.AddNode(SeekType.Bread, new BreadSeekTarget(enemy, m_nearRange, m_maxSpeed, m_lostSeekTime));
+        m_stateMachine.AddNode(SeekType.Liner, new LinerSeekTarget(enemy, m_maxSpeed, m_turningPower));
+        m_stateMachine.AddNode(SeekType.Bread, new BreadSeekTarget(enemy, m_nearRange, m_maxSpeed, m_turningPower, m_lostSeekTime));
     }
 
     void CreateEdge()
