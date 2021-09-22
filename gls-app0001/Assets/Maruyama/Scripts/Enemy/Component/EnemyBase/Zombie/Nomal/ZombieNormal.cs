@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZombieNormal : EnemyBase, I_Chase
+public class ZombieNormal : EnemyBase, I_Chase, I_Listen
 {
     //コンポーネント系
     Stator_ZombieNormal m_stator;
+    TargetMgr m_targetMgr;
 
     void Start()
     {
         m_stator = GetComponent<Stator_ZombieNormal>();
+        m_targetMgr = GetComponent<TargetMgr>();
     }
 
     void Update()
@@ -22,6 +24,14 @@ public class ZombieNormal : EnemyBase, I_Chase
     //インターフェースの実装-------------------------------------------------
 
     void I_Chase.ChangeState(){
+        var member = m_stator.GetTransitionMember();
+        member.chaseTrigger.Fire();
+    }
+
+    void I_Listen.Listen(FoundObject foundObject) {
+        //ターゲットの切替
+        m_targetMgr.SetNowTarget(GetType() ,foundObject.gameObject);
+
         var member = m_stator.GetTransitionMember();
         member.chaseTrigger.Fire();
     }

@@ -10,10 +10,10 @@ using UnityEngine;
 public class BreadCrumb : MonoBehaviour
 {
     [SerializeField]
-    int m_numBread = 30;  //Bread‚ÌÅ‘å”
+    int m_numBread = 60;  //Bread‚ÌÅ‘å”
 
     [SerializeField]
-    float m_addRange = 2.0f;  //’Ç‰Á‚·‚é‹——£
+    float m_addRange = 1.0f;  //’Ç‰Á‚·‚é‹——£
 
     List<Vector3> m_positions = new List<Vector3>();
 

@@ -21,24 +21,6 @@ public class EnemyGenerator : MonoBehaviour
     private void Start()
     {
         CreateObjects();
-
-        return;
-
-        //‰¼
-        var objs = FindObjectsOfType<ThrongMgr>();
-        foreach(var obj in objs)
-        {
-            m_datas.Add(new ThrongData(obj.GetComponent<EnemyVelocityMgr>(),
-                obj.GetComponent<TargetMgr>(),
-                obj.GetComponent<ThrongMgr>(),
-                obj.GetComponent<RandomPlowlingMove>()
-            ));
-        }
-    }
-
-    private void Update()
-    {
-        //Debug.Log(m_datas.Count);
     }
 
     void CreateObjects()
@@ -54,7 +36,7 @@ public class EnemyGenerator : MonoBehaviour
 
     void CreateObject(Vector3 createPosition)
     {
-        var obj = Instantiate(m_createObject, createPosition, Quaternion.identity);
+        var obj = Instantiate(m_createObject, createPosition, Quaternion.identity, transform);
         
         m_datas.Add(new ThrongData(obj.GetComponent<EnemyVelocityMgr>(),
             obj.GetComponent<TargetMgr>(),

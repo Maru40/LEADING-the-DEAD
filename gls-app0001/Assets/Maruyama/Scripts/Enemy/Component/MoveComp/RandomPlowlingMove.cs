@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
+using System;
 
 /// <summary>
 /// Randomに徘徊するコンポーネント
@@ -13,7 +16,10 @@ public class RandomPlowlingMove : MonoBehaviour
 
     //移動スピード
     [SerializeField]
-    float m_speed = 3.0f;                                             
+    float m_maxSpeed = 3.0f;
+
+    [SerializeField]
+    float m_turningPower = 5.0f;
 
     //目的地に着いたと判断される,目的地との相対距離
     //小さすぎると判断できなくなるため注意
@@ -27,6 +33,12 @@ public class RandomPlowlingMove : MonoBehaviour
     //目的地についたとき、立ち止まる最大の時間
     [SerializeField]
     float m_maxWaitCalucRouteTime = 3.0f;
+
+    /// <summary>
+    /// Rayの障害物するLayerの配列
+    /// </summary>
+    [SerializeField]
+    string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
 
     //目的の場所
     Vector3 m_targetPosition;
@@ -45,7 +57,7 @@ public class RandomPlowlingMove : MonoBehaviour
         m_throngMgr = GetComponent<ThrongMgr>();
 
         //シード値
-        Random.InitState(System.DateTime.Now.Millisecond);
+        UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
 
         SetRandomTargetPosition();
     }
@@ -64,7 +76,7 @@ public class RandomPlowlingMove : MonoBehaviour
 
         //加える力の計算
         var toVec = m_targetPosition - transform.position;
-        m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_speed);
+        m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_maxSpeed, m_turningPower);
 
         var newTargetPosition = m_throngMgr.CalcuRandomPlowlingMovePositonIntegrated(this);  //ランダムな方向を集団に合わせる。
         SetTargetPositon(newTargetPosition);
@@ -103,7 +115,7 @@ public class RandomPlowlingMove : MonoBehaviour
         m_velocityMgr.ResetVelocity();  //速度のリセット
 
         //待機状態の設定
-        var waitTime = Random.value * m_maxWaitCalucRouteTime;
+        var waitTime = UnityEngine.Random.value * m_maxWaitCalucRouteTime;
         m_waitTimer.AddWaitTimer(GetType(), waitTime);
     }
 
@@ -112,7 +124,17 @@ public class RandomPlowlingMove : MonoBehaviour
     /// </summary>
     void SetRandomTargetPosition()
     {
-        m_targetPosition = CalucRandomTargetPosition();
+        int numLoop = 100; //無限ループを防ぐため100を限度にする。
+        for(int i = 0; i < numLoop; i++)
+        {
+            m_targetPosition = CalucRandomTargetPosition();
+
+            var toVec = m_targetPosition - transform.position;
+            int obstacleLayer = LayerMask.GetMask(m_rayObstacleLayerStrings);
+            if (!Physics.Raycast(transform.position, toVec, toVec.magnitude, obstacleLayer)) {
+                break;  //障害物がなかったら
+            }
+        }
     }
 
     /// <summary>
@@ -124,9 +146,9 @@ public class RandomPlowlingMove : MonoBehaviour
         float directX = CalucRandomDirect();
         float directZ = CalucRandomDirect();
 
-        float x = Random.value * m_randomPositionRadius * directX;
+        float x = UnityEngine.Random.value * m_randomPositionRadius * directX;
         float y = transform.position.y;
-        float z = Random.value * m_randomPositionRadius * directZ;
+        float z = UnityEngine.Random.value * m_randomPositionRadius * directZ;
 
         var toVec = new Vector3(x,y,z);
         var newPosition = transform.position + toVec;
@@ -158,9 +180,13 @@ public class RandomPlowlingMove : MonoBehaviour
     {
         if (collision.gameObject.tag == "T_Wall")
         {
-            Debug.Log("rando");
             SetRandomTargetPosition();
         }
+    }
+
+    void ReverseTargetPosition()
+    {
+        m_targetPosition = -m_targetPosition;
     }
 
 

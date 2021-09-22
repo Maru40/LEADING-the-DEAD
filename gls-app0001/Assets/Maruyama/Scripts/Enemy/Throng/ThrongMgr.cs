@@ -44,6 +44,12 @@ public class ThrongMgr : MonoBehaviour
     [SerializeField]
     ThrongMgrParametor m_param = new ThrongMgrParametor();
 
+    /// <summary>
+    /// Rayの障害物するLayerの配列
+    /// </summary>
+    [SerializeField]
+    string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
+
     //List<ThrongData> m_throngDatas = new List<ThrongData>();  //グループのオブジェクト一覧
 
     //コンポーネント系-----------------
@@ -63,53 +69,26 @@ public class ThrongMgr : MonoBehaviour
     {
 
     }
-    
-    //群衆の中心のベクトル
-    Vector3 CalcuCenterVector(ThrongData data)
-    {
-        return data.gameObject.transform.position;
-    }
-
-    //dataの進行方向
-    Vector3 CalcuDirectVector(ThrongData data)
-    {
-        return data.velocityMgr.velocity;
-    }
-
-    //オブジェクト同士の回避
-    Vector3 CalcuAvoidVector(ThrongData data)
-    {
-        //相手から自分自身に向かうベクトル
-        var toSelfVec = transform.position - data.gameObject.transform.position;
-
-        if(toSelfVec.magnitude < m_param.nearObjectRange) {  //隣人なら
-            return toSelfVec;
-        }
-
-        return Vector3.zero;
-    }
 
     /// <summary>
     /// 近くの集団を回避する処理
     /// </summary>
     /// <param name="rigid">自身のリジッドボディ</param>
     /// <param name="moveDirect">そのオブジェクトが向かいたい方向</param>
-    /// /// <param name="maxSpeed">最大スピード</param>
-    public void AvoidNearThrong(EnemyVelocityMgr velcoityMgr, Vector3 moveDirect, float maxSpeed)
+    /// <param name="maxSpeed">最大スピード</param>
+    /// <param name="truningPower">旋回パワー</param>
+    public void AvoidNearThrong(EnemyVelocityMgr velcoityMgr, Vector3 moveDirect, float maxSpeed , float truningPower)
     {
         var velocity = velcoityMgr.velocity;
-        //var velocity = m_rigid.velocity;
 
         moveDirect += CalcuThrongVector();
         Vector3 force = UtilityVelocity.CalucSeekVec(velocity, moveDirect, maxSpeed);
-        //selfRigid.AddForce(force);
-        velcoityMgr.AddForce(force);
+        velcoityMgr.AddForce(force * truningPower);
 
         var avoidVec = CalcuSumAvoidVector();
         if (avoidVec != Vector3.zero) //回避が必要なら
         {
-            Vector3 avoidForce = UtilityVelocity.CalucSeekVec(velocity, CalcuSumAvoidVector(), CalcuAverageSpeed());
-            //selfRigid.AddForce(avoidForce);
+            Vector3 avoidForce = UtilityVelocity.CalucSeekVec(velocity, avoidVec, CalcuAverageSpeed());
             velcoityMgr.AddForce(avoidForce);
         }
     }
@@ -121,8 +100,7 @@ public class ThrongMgr : MonoBehaviour
     public void ThrongMove(EnemyVelocityMgr velcoityMgr, Vector3 moveDirect, float maxSpeed)
     {
         var throngVec = CalcuThrongVector();
-        if(throngVec == Vector3.zero)
-        {
+        if (throngVec == Vector3.zero) {
             return;
         }
 
@@ -142,7 +120,7 @@ public class ThrongMgr : MonoBehaviour
         Vector3 sumPosition = Vector3.zero;
         foreach (var data in throngDatas)
         {
-            if(IsRange(data, m_param.inThrongRange))
+            if (IsRange(data, m_param.inThrongRange))
             {
                 sumPosition += data.randomPlowlingMove.GetTargetPosition();
                 throngSize++;
@@ -152,13 +130,41 @@ public class ThrongMgr : MonoBehaviour
         return sumPosition / throngSize;
     }
 
+    //群衆の中心のベクトル
+    Vector3 CalcuCenterVector(ThrongData data)
+    {
+        return data.gameObject.transform.position;
+    }
+
+    //dataの進行方向
+    Vector3 CalcuDirectVector(ThrongData data)
+    {
+        return data.velocityMgr.velocity;
+    }
+
+    //オブジェクト同士の回避
+    Vector3 CalcuAvoidVector(ThrongData data)
+    {
+        if(data.gameObject == gameObject) {  //自分自身なら処理をしない
+            return Vector3.zero;
+        }
+
+        //相手から自分自身に向かうベクトル
+        var toSelfVec = transform.position - data.gameObject.transform.position;
+
+        if(IsRange(data, m_param.nearObjectRange)) {  //隣人なら
+            return toSelfVec;
+        }
+
+        return Vector3.zero;
+    }
+
     /// <summary>
     /// 群衆行動ベクトルの計算(まだ未完成)
     /// </summary>
     /// <returns></returns>
     Vector3 CalcuThrongVector()
     {
-        Debug.Log(m_generator);
         var throngDatas = m_generator.GetThrongDatas();
 
         Vector3 centerPosition = Vector3.zero;
@@ -169,18 +175,20 @@ public class ThrongMgr : MonoBehaviour
         int throngSize = 0;
         foreach (var data in throngDatas)
         {
-            var toVec = data.gameObject.transform.position - transform.position;
-            if (toVec.magnitude > m_param.inThrongRange)
-            {  //距離が遠かったらcontinue
+            if (data.gameObject == gameObject) {  //自分自身なら処理をしない
                 continue;
             }
 
-            centerPosition += CalcuCenterVector(data);
-            directVec += CalcuDirectVector(data); //群衆の平均方向
-            avoidVec += CalcuAvoidVector(data);
-            sumSpeed += data.velocityMgr.velocity.magnitude;
-
-            throngSize++;
+            //集団距離内でかつ、障害物がない場合
+            if (IsRange(data,m_param.inThrongRange) && !IsRayHit(data)) 
+            {
+                centerPosition += CalcuCenterVector(data);
+                directVec += CalcuDirectVector(data); //群衆の平均方向
+                avoidVec += CalcuAvoidVector(data);
+                sumSpeed += data.velocityMgr.velocity.magnitude;
+                
+                throngSize++;
+            }
         }
 
         if (throngSize == 0)
@@ -198,6 +206,10 @@ public class ThrongMgr : MonoBehaviour
         return reVec;
     }
 
+    /// <summary>
+    /// 近い距離のゾンビを避けるVector
+    /// </summary>
+    /// <returns>避けるベクトルの合計</returns>
     Vector3 CalcuSumAvoidVector()
     {
         var throngDatas = m_generator.GetThrongDatas();
@@ -205,12 +217,20 @@ public class ThrongMgr : MonoBehaviour
 
         foreach (var data in throngDatas)
         {
+            if (data.gameObject == gameObject) {  //自分自身なら処理をしない
+                continue;
+            }
+
             avoidVector += CalcuAvoidVector(data);
         }
 
         return avoidVector;
     }
 
+    /// <summary>
+    /// 集団の平均スピードを計算して返す。
+    /// </summary>
+    /// <returns>平均スピード</returns>
     float CalcuAverageSpeed()
     {
         var throngDatas = m_generator.GetThrongDatas();
@@ -234,11 +254,29 @@ public class ThrongMgr : MonoBehaviour
         return sumSpeed / throngSize;
     }
 
+    /// <summary>
+    /// 指定した距離より短かったらtrue
+    /// </summary>
+    /// <param name="data">対象のデータ</param>
+    /// <param name="range">距離</param>
+    /// <returns>短かったらtrue</returns>
     bool IsRange(ThrongData data ,float range)
     {
         var toVec = data.gameObject.transform.position - transform.position;
 
         return toVec.magnitude < range ? true : false;
+    }
+
+    /// <summary>
+    /// 障害物がヒットしたらtrue
+    /// </summary>
+    /// <param name="data">相手のデータ</param>
+    /// <returns>ヒットしたらtrue</returns>
+    bool IsRayHit(ThrongData data)
+    {
+        int obstacleLayer = LayerMask.GetMask(m_rayObstacleLayerStrings);
+        var toVec = data.gameObject.transform.position - transform.position;
+        return Physics.Raycast(transform.position, toVec, toVec.magnitude, obstacleLayer);
     }
 
     //アクセッサ-----------------------------------------------
@@ -251,8 +289,6 @@ public class ThrongMgr : MonoBehaviour
     {
         return m_generator.GetThrongDatas();
     }
-    
-
 
     //null回避--------------------------
 

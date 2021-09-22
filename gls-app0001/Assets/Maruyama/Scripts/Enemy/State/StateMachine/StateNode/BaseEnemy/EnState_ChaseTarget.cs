@@ -22,7 +22,7 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
 
     public override void OnUpdate()
     {
-        Debug.Log("ChaseTarget");
+        //Debug.Log("ChaseTarget");
     }
 
     public override void OnExit()

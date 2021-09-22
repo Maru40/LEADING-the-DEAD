@@ -24,16 +24,25 @@ public class SeekTransitonMember
 /// </summary>
 public class ChaseTarget : MonoBehaviour
 {
-    [SerializeField]
-    float m_maxSpeed = 3.0f;
-
     //–Ú“I’n‚É‚½‚Ç‚è’…‚¢‚½‚Æ”»’f‚³‚ê‚é‹——£
     [SerializeField]
     float m_nearRange = 0.5f;
 
+    [SerializeField]
+    float m_maxSpeed = 3.0f;
+
+    [SerializeField]
+    float m_turningPower = 5.0f;
+
     //Œ©¸‚Á‚Ä‚©‚ç’Ç]‚·‚éŠÔ
     [SerializeField]
     float m_lostSeekTime = 10.0f;
+
+    /// <summary>
+    /// Ray‚ÌáŠQ•¨‚·‚éLayer‚Ì”z—ñ
+    /// </summary>
+    [SerializeField]
+    string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
 
     StateMachine m_stateMachine;
 
@@ -61,10 +70,17 @@ public class ChaseTarget : MonoBehaviour
     void StateCheck()
     {
         var target = m_targetMgr.GetNowTarget();
+        if(target == null)  //ƒ^[ƒQƒbƒg‚ªnull‚È‚ç
+        {
+            TargetLost();
+            return;
+        }
+
         var toVec = target.transform.position - transform.position;
 
         //áŠQ•¨‚ª‡‚Á‚½‚ç
-        if (Physics.Raycast(transform.position, toVec, toVec.magnitude)){
+        int obstacleLayer = LayerMask.GetMask(m_rayObstacleLayerStrings);
+        if (Physics.Raycast(transform.position, toVec, toVec.magnitude, obstacleLayer)){
             m_stateMachine.GetTransitionStructMember().breadTrigger.Fire(); //Bread‚É•ÏX
         }
         else{
@@ -76,8 +92,8 @@ public class ChaseTarget : MonoBehaviour
     {
         var enemy = GetComponent<EnemyBase>();
 
-        m_stateMachine.AddNode(SeekType.Liner, new LinerSeekTarget(enemy, m_maxSpeed));
-        m_stateMachine.AddNode(SeekType.Bread, new BreadSeekTarget(enemy, m_nearRange, m_maxSpeed, m_lostSeekTime));
+        m_stateMachine.AddNode(SeekType.Liner, new LinerSeekTarget(enemy, m_maxSpeed, m_turningPower));
+        m_stateMachine.AddNode(SeekType.Bread, new BreadSeekTarget(enemy, m_nearRange, m_maxSpeed, m_turningPower, m_lostSeekTime));
     }
 
     void CreateEdge()

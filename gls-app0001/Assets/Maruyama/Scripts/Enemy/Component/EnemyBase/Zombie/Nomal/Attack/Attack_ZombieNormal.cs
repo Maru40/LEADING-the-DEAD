@@ -33,8 +33,15 @@ public class Attack_ZombieNormal : AttackBase
     {
         float range = GetBaseParam().startRange;
         var target = m_targetMgr.GetNowTarget();
-
-        return m_eyeRange.IsInEyeRange(target, range);
+        if (target)
+        {
+            return m_eyeRange.IsInEyeRange(target, range);
+        }
+        else
+        {
+            return false;
+        }
+        
     }
 
     /// <summary>
@@ -45,15 +52,15 @@ public class Attack_ZombieNormal : AttackBase
     {
         float range = GetBaseParam().damageRange;
         var target = m_targetMgr.GetNowTarget();
-
-        return m_eyeRange.IsInEyeRange(target, range);
-    }
-
-    Vector3 CalcuToTargetVec()
-    {
-        var target = m_targetMgr.GetNowTarget();
-        var toVec = target.transform.position - transform.position;
-        return toVec;
+        if (target)
+        {
+            return m_eyeRange.IsInEyeRange(target, range);
+        }
+        else
+        {
+            return false;
+        }
+        
     }
 
     override public void Attack(){
@@ -64,7 +71,7 @@ public class Attack_ZombieNormal : AttackBase
 
             var target = m_targetMgr.GetNowTarget();
 
-            var damage = target.GetComponent<I_TakeDamage>();
+            var damage = target?.GetComponent<I_TakeDamage>();
             if (damage != null) 
             {
                 var data = new DamageData((int)GetBaseParam().power);
