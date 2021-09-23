@@ -41,7 +41,7 @@ public class EnemyGenerator : MonoBehaviour
         
         m_datas.Add(new ThrongData(obj.GetComponent<EnemyVelocityMgr>(),
             obj.GetComponent<TargetManager>(),
-            obj.GetComponent<ThrongMgr>(),
+            obj.GetComponent<ThrongManager>(),
             obj.GetComponent<RandomPlowlingMove>()
         ));
     }

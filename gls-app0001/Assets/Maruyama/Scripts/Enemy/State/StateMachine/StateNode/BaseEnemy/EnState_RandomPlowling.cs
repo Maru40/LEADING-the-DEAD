@@ -31,7 +31,7 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
         }
 
         //W’c”ÍˆÍ‚Ìİ’è
-        var throngMgr = owner.GetComponent<ThrongMgr>();
+        var throngMgr = owner.GetComponent<ThrongManager>();
         if(randomPlowling && throngMgr)
         {
             float range = randomPlowling.GetInThrongRange();

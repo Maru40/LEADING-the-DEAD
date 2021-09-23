@@ -45,14 +45,14 @@ public class RandomPlowlingMove : MonoBehaviour
     //Rigidbody m_rigid;
     EnemyVelocityMgr m_velocityMgr;
     WaitTimer m_waitTimer;
-    ThrongMgr m_throngMgr;
+    ThrongManager m_throngMgr;
     
     void Start()
     {
         //コンポーネントの取得
         m_velocityMgr = GetComponent<EnemyVelocityMgr>();
         m_waitTimer = GetComponent<WaitTimer>();
-        m_throngMgr = GetComponent<ThrongMgr>();
+        m_throngMgr = GetComponent<ThrongManager>();
 
         //シード値
         Random.InitState(System.DateTime.Now.Millisecond);

@@ -5,7 +5,7 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public struct ThrongMgrParametor  //ŒQOMgr‚Ìƒpƒ‰ƒ[ƒ^
+public struct ThrongManagerParametor  //ŒQOMgr‚Ìƒpƒ‰ƒ[ƒ^p
 {
     public float inThrongRange;   //ŒQO‚Æ”»’f‚·‚é”ÍˆÍ
     //public float outThrongRange;  //ŒQO‚©‚çŠO‚ê‚½‚Æ”»’f‚·‚é‹——£
@@ -20,10 +20,10 @@ public struct ThrongData
     public GameObject gameObject;
     public EnemyVelocityMgr velocityMgr;
     public TargetManager targetMgr;  //ƒ^[ƒQƒbƒgŠÇ—
-    public ThrongMgr throngMgr;  //ŒQOŠÇ—
+    public ThrongManager throngMgr;  //ŒQOŠÇ—
     public RandomPlowlingMove randomPlowlingMove;
 
-    public ThrongData(EnemyVelocityMgr velocityMgr, TargetManager targetMgr, ThrongMgr throngMgr,
+    public ThrongData(EnemyVelocityMgr velocityMgr, TargetManager targetMgr, ThrongManager throngMgr,
         RandomPlowlingMove randomPlowlingMove)
     {
         this.gameObject = targetMgr.gameObject;
@@ -38,11 +38,11 @@ public struct ThrongData
 /// <summary>
 /// ŒQOs“®ƒ}ƒl[ƒWƒƒ\
 /// </summary>
-public class ThrongMgr : MonoBehaviour
+public class ThrongManager : MonoBehaviour
 {
 
     [SerializeField]
-    ThrongMgrParametor m_param = new ThrongMgrParametor();
+    ThrongManagerParametor m_param = new ThrongManagerParametor();
 
     /// <summary>
     /// Ray‚ÌáŠQ•¨‚·‚éLayer‚Ì”z—ñ
@@ -303,7 +303,7 @@ public class ThrongMgr : MonoBehaviour
         return m_param.nearObjectRange;
     }
 
-    public ThrongMgrParametor GetParametor()
+    public ThrongManagerParametor GetParametor()
     {
         return m_param;
     }

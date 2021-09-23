@@ -20,7 +20,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
     EnemyVelocityMgr m_velocityMgr;
     TargetManager m_targetMgr;
     BreadCrumb m_bread;
-    ThrongMgr m_throngMgr;
+    ThrongManager m_throngMgr;
 
     public BreadSeekTarget(EnemyBase owner, float nearRange, float maxSpeed, float turningPower, float lostSeekTime)
         : base(owner)
@@ -59,7 +59,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
             }
         }
 
-        m_throngMgr = owner.GetComponent<ThrongMgr>();
+        m_throngMgr = owner.GetComponent<ThrongManager>();
     }
 
     public override void OnUpdate()

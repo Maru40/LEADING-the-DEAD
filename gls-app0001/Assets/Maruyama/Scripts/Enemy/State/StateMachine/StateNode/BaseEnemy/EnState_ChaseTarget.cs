@@ -21,7 +21,7 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
         ChangeComps(EnableChangeType.Start);
 
         //W’cs“®İ’è
-        var throngMgr = owner.GetComponent<ThrongMgr>();
+        var throngMgr = owner.GetComponent<ThrongManager>();
         if (chaseTarget && throngMgr)
         {
             float range = chaseTarget.GetInThrongRange();
