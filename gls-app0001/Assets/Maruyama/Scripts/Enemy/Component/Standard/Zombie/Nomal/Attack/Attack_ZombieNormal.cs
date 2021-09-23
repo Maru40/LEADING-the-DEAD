@@ -46,26 +46,6 @@ public class Attack_ZombieNormal : AttackBase
         {
             return false;
         }
-        
-    }
-
-    /// <summary>
-    /// UŒ‚‚Ìƒ_ƒ[ƒW”ÍˆÍ‚É‚¢‚é‚©‚Ç‚¤‚©
-    /// </summary>
-    /// <returns></returns>
-    bool IsAttackDamageRange()
-    {
-        float range = GetBaseParam().damageRange;
-        var target = m_targetMgr.GetNowTarget();
-        if (target)
-        {
-            return m_eyeRange.IsInEyeRange(target.gameObject, range);
-        }
-        else
-        {
-            return false;
-        }
-        
     }
 
     override public void Attack(){
