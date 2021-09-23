@@ -146,9 +146,9 @@ public class RandomPlowlingMove : MonoBehaviour
         float directX = CalucRandomDirect();
         float directZ = CalucRandomDirect();
 
-        float x = UnityEngine.Random.value * m_randomPositionRadius * directX;
+        float x = Random.value * m_randomPositionRadius * directX;
         float y = transform.position.y;
-        float z = UnityEngine.Random.value * m_randomPositionRadius * directZ;
+        float z = Random.value * m_randomPositionRadius * directZ;
 
         var toVec = new Vector3(x,y,z);
         var newPosition = transform.position + toVec;
@@ -170,7 +170,7 @@ public class RandomPlowlingMove : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "T_Wall")
+        if (IsObstract(collision.gameObject))
         {
             SetRandomTargetPosition();
         }
@@ -178,10 +178,23 @@ public class RandomPlowlingMove : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.tag == "T_Wall")
+        if (IsObstract(collision.gameObject))
         {
             SetRandomTargetPosition();
         }
+    }
+
+    bool IsObstract(GameObject gameObj)
+    {
+        foreach(var str in m_rayObstacleLayerStrings)
+        {
+            int obstacleLayer = LayerMask.NameToLayer(str);
+            if(gameObj.layer == obstacleLayer) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     void ReverseTargetPosition()
