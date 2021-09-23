@@ -21,17 +21,19 @@ public class SeekTransitonMember
 [Serializable]
 public struct ChaseTargetParametor
 {
-    public float nearRange;    //–Ú“I’n‚É‚½‚Ç‚è’…‚¢‚½‚Æ”»’f‚³‚ê‚é‹——£
+    public float nearRange;      //–Ú“I’n‚É‚½‚Ç‚è’…‚¢‚½‚Æ”»’f‚³‚ê‚é‹——£
     public float maxSpeed;
     public float turningPower;
-    public float lostSeekTime; //Œ©¸‚Á‚Ä‚©‚ç’Ç]‚·‚éŠÔ
+    public float lostSeekTime;   //Œ©¸‚Á‚Ä‚©‚ç’Ç]‚·‚éŠÔ
+    public float inThrongRange;  //W’cs“®‚ğ‚·‚é”ÍˆÍ
 
-    public ChaseTargetParametor(float nearRange, float maxSpeed, float turningPower, float lostSeekTime)
+    public ChaseTargetParametor(float nearRange, float maxSpeed, float turningPower, float lostSeekTime, float inThrongRange)
     {
         this.nearRange = nearRange;
         this.maxSpeed = maxSpeed;
         this.turningPower = turningPower;
         this.lostSeekTime = lostSeekTime;
+        this.inThrongRange = inThrongRange;
     }
 }
 
@@ -41,7 +43,7 @@ public struct ChaseTargetParametor
 public class ChaseTarget : MonoBehaviour
 {
     [SerializeField]
-    ChaseTargetParametor m_param = new ChaseTargetParametor(0.75f, 3.0f, 3.0f, 10.0f);
+    ChaseTargetParametor m_param = new ChaseTargetParametor(0.75f, 3.0f, 3.0f, 10.0f, 3.0f);
 
     /// <summary>
     /// Ray‚ÌáŠQ•¨‚·‚éLayer‚Ì”z—ñ
@@ -55,7 +57,7 @@ public class ChaseTarget : MonoBehaviour
 
     TargetMgr m_targetMgr;
 
-    void Start()
+    void Awake()
     {
         m_targetMgr = GetComponent<TargetMgr>();
 
@@ -141,8 +143,8 @@ public class ChaseTarget : MonoBehaviour
     public void SetMaxSpeed(float speed){
         m_param.maxSpeed = speed;
 
-        m_stateMachine.GetNode<BreadSeekTarget>(SeekType.Bread)?.SetMaxSpeed(speed);
-        m_stateMachine.GetNode<LinerSeekTarget>(SeekType.Liner)?.SetMaxSpeed(speed);
+        m_stateMachine?.GetNode<BreadSeekTarget>(SeekType.Bread)?.SetMaxSpeed(speed);
+        m_stateMachine?.GetNode<LinerSeekTarget>(SeekType.Liner)?.SetMaxSpeed(speed);
     }
     public float GetMaxSpeed() { 
         return m_param.maxSpeed;
@@ -151,21 +153,43 @@ public class ChaseTarget : MonoBehaviour
     public void SetNearRange(float range){
         m_param.nearRange = range;
 
-        m_stateMachine.GetNode<BreadSeekTarget>(SeekType.Bread)?.SetNearRange(range);
+        m_stateMachine?.GetNode<BreadSeekTarget>(SeekType.Bread)?.SetNearRange(range);
     }
     public float GetNearRange(float rage) { 
         return m_param.nearRange;
     }
 
+    public void SetTurningPower(float power) {
+        m_param.turningPower = power;
+    }
+    public float GetTurningPower() {
+        return m_param.turningPower;
+    }
+
     public void SetLostSeekTime(float seekTime){
         m_param.lostSeekTime = seekTime;
 
-        m_stateMachine.GetNode<BreadSeekTarget>(SeekType.Bread)?.SetLostSeekTime(seekTime);
+        m_stateMachine?.GetNode<BreadSeekTarget>(SeekType.Bread)?.SetLostSeekTime(seekTime);
     }
     public float GetLostSeekTime() { 
         return m_param.lostSeekTime; 
     }
 
+    public void SetInThrongRange(float range) {
+        m_param.inThrongRange = range;
+    }
+    public float GetInThrongRange() {
+        return m_param.inThrongRange;
+    }
+
+    public void SetPamametor(ChaseTargetParametor param)
+    {
+        SetNearRange(param.nearRange);
+        SetMaxSpeed(param.maxSpeed);
+        SetTurningPower(param.turningPower);
+        SetLostSeekTime(param.lostSeekTime);
+        SetInThrongRange(param.inThrongRange);
+    }
 
     //Collision---------------------------------------------------------------------------
 
