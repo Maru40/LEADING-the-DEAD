@@ -37,7 +37,7 @@ class WaitTimerParam
 
 public class WaitTimer : MonoBehaviour
 {
-    Dictionary<Type,WaitTimerParam> m_params;
+    Dictionary<Type,WaitTimerParam> m_params = new Dictionary<Type, WaitTimerParam>();
 
     void Start()
     {
@@ -105,6 +105,5 @@ public class WaitTimer : MonoBehaviour
         {
             m_params[type].EndTimer(isEndAction);  //ë“ã@èÛë‘ã≠êßèIóπ
         }
-
     }
 }

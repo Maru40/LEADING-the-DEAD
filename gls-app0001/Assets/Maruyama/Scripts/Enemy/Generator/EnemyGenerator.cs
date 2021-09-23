@@ -45,7 +45,7 @@ public class EnemyGenerator : MonoBehaviour
         ));
     }
 
-    Vector3 CalcuRandomPosition(System.Random random)
+    public Vector3 CalcuRandomPosition(System.Random random)
     {
         Vector3 minVec = -m_maxRandomRange;
         Vector3 maxVec =  m_maxRandomRange;
@@ -59,6 +59,16 @@ public class EnemyGenerator : MonoBehaviour
 
     //アクセッサ---------------------------------------
 
+    /// <summary>
+    /// 生成するオブジェクトと渡されたオブジェクトが同じprefabなら
+    /// </summary>
+    /// <param name="gameObj">比較対象のオブジェクト</param>
+    /// <returns>同じならtrue</returns>
+    public bool IsEqualCreateObject(GameObject gameObj)
+    {
+        return m_createObject.GetType() == gameObj.GetType() ? true : false;
+    }
+
     public List<ThrongData> GetThrongDatas()
     {
         return m_datas;
@@ -67,5 +77,19 @@ public class EnemyGenerator : MonoBehaviour
     public GameObject GetCreateObject()
     {
         return m_createObject;
+    }
+
+    /// <summary>
+    /// ランダムに生成するときの最大距離
+    /// </summary>
+    /// <returns>最大距離</returns>
+    public Vector3 GetMaxRandomRange()
+    {
+        return m_maxRandomRange;
+    }
+
+    public Vector3 GetCenterPosition()
+    {
+        return m_centerPosition;
     }
 }

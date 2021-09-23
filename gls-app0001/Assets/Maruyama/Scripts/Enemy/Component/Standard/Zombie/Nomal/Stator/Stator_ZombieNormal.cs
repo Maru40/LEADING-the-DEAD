@@ -7,7 +7,7 @@ using TransitionMember = ZombieNormalTransitionMember;
 using StateMachine = EnemyMainStateMachine<EnemyBase, ZombieNormalState, ZombieNormalTransitionMember>;
 
 
-enum ZombieNormalState
+public enum ZombieNormalState
 {
     RandomPlowling,
     Chase,
@@ -92,4 +92,8 @@ public class Stator_ZombieNormal : StatorBase
         return m_stateMachine.GetTransitionStructMember();
     }
 
+    public override void Reset()
+    {
+        m_stateMachine.Reset();
+    }
 }

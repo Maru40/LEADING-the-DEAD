@@ -100,6 +100,14 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     }
 
     /// <summary>
+    /// リセット関数(最初のステートに変更)
+    /// </summary>
+    public void Reset()
+    {
+        m_stateMachine.Reset();
+    }
+
+    /// <summary>
     /// 遷移に利用する構造体を取得する。
     /// </summary>
     /// <returns>構造体の参照を渡す</returns>

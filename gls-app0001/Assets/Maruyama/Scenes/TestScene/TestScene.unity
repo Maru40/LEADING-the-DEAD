@@ -570,7 +570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_createObject: {fileID: 7434505739018704334, guid: 67a643b874b307f46a417e4170a2dd67, type: 3}
-  m_numCreate: 1
+  m_numCreate: 100
   m_centerPosition: {x: 0, y: 0, z: 0}
   m_maxRandomRange: {x: 30, y: 0, z: 30}
 --- !u!1001 &485955231
@@ -1319,6 +1319,10 @@ PrefabInstance:
     - target: {fileID: 9092544322285478649, guid: e432145282e468144b7db27683b786b9, type: 3}
       propertyPath: m_Name
       value: RotatingBlade
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092544322285478649, guid: e432145282e468144b7db27683b786b9, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e432145282e468144b7db27683b786b9, type: 3}
