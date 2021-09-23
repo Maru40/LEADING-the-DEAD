@@ -99,6 +99,11 @@ namespace Player
 
         void ThrowingStanceStart()
         {
+            if (m_countCoolTime < m_coolTime)
+            {
+                return;
+            }
+
             m_isThrowingStance = true;
             m_playerParameters.isThrowingStance = true;
 
@@ -119,7 +124,7 @@ namespace Player
 
         void Throwing()
         {
-            if (!m_isThrowingStance || m_countCoolTime < m_coolTime)
+            if (!m_isThrowingStance)
             {
                 return;
             }
