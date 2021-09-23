@@ -7,7 +7,7 @@ using System;
 public class Attack_ZombieNormal : AttackBase
 {
     Stator_ZombieNormal m_stator;
-    TargetMgr m_targetMgr;
+    TargetManager m_targetMgr;
     EyeSearchRange m_eyeRange;
 
     [SerializeField]
@@ -16,7 +16,7 @@ public class Attack_ZombieNormal : AttackBase
     void Start()
     {
         m_stator = GetComponent<Stator_ZombieNormal>();
-        m_targetMgr = GetComponent<TargetMgr>();
+        m_targetMgr = GetComponent<TargetManager>();
         m_eyeRange = GetComponent<EyeSearchRange>();
 
         m_hitBox.AddEnterAction(SendDamage);
@@ -46,26 +46,6 @@ public class Attack_ZombieNormal : AttackBase
         {
             return false;
         }
-        
-    }
-
-    /// <summary>
-    /// çUåÇÇÃÉ_ÉÅÅ[ÉWîÕàÕÇ…Ç¢ÇÈÇ©Ç«Ç§Ç©
-    /// </summary>
-    /// <returns></returns>
-    bool IsAttackDamageRange()
-    {
-        float range = GetBaseParam().damageRange;
-        var target = m_targetMgr.GetNowTarget();
-        if (target)
-        {
-            return m_eyeRange.IsInEyeRange(target.gameObject, range);
-        }
-        else
-        {
-            return false;
-        }
-        
     }
 
     override public void Attack(){

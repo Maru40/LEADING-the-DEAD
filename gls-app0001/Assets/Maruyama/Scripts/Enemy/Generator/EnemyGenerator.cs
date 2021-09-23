@@ -15,11 +15,21 @@ public class EnemyGenerator : MonoBehaviour
     [SerializeField]
     protected Vector3 m_maxRandomRange = new Vector3();  //ランダムに生成する時の最大距離
 
+    [SerializeField]
+    protected GameObject m_target = null;
+    [SerializeField]
+    protected float m_outRange = 15.0f;
+
     //生成したゾンビを持つ
     protected List<ThrongData> m_datas = new List<ThrongData>();
 
-    private void Start()
+    protected virtual void Start()
     {
+        if(m_target == null)
+        {
+            m_target = GameObject.Find("Player");
+        }
+
         CreateObjects();
     }
 
@@ -29,7 +39,7 @@ public class EnemyGenerator : MonoBehaviour
 
         for (int i = 0; i < m_numCreate; i++)
         {
-            var createPosition = CalcuRandomPosition(random);
+            var createPosition = CalcuRandomPosition();
             CreateObject(createPosition);
         }
     }
@@ -37,24 +47,30 @@ public class EnemyGenerator : MonoBehaviour
     void CreateObject(Vector3 createPosition)
     {
         var obj = Instantiate(m_createObject, createPosition, Quaternion.identity, transform);
+        CreateObjectAdjust(obj);  //調整
         
         m_datas.Add(new ThrongData(obj.GetComponent<EnemyVelocityMgr>(),
-            obj.GetComponent<TargetMgr>(),
-            obj.GetComponent<ThrongMgr>(),
+            obj.GetComponent<TargetManager>(),
+            obj.GetComponent<ThrongManager>(),
             obj.GetComponent<RandomPlowlingMove>()
         ));
     }
 
-    public Vector3 CalcuRandomPosition(System.Random random)
-    {
-        Vector3 minVec = -m_maxRandomRange;
-        Vector3 maxVec =  m_maxRandomRange;
-        Vector3 randomPosition = Vector3.zero;
+    /// <summary>
+    /// 調整が必要なオブジェクトを渡して、調整
+    /// </summary>
+    /// <param name="obj">調整したいオブジェクト</param>
+    protected virtual void CreateObjectAdjust(GameObject obj) { }
 
-        randomPosition.x = random.Next((int)minVec.x, (int)maxVec.x);
-        randomPosition.y = random.Next((int)minVec.y, (int)maxVec.y);
-        randomPosition.z = random.Next((int)minVec.z, (int)maxVec.z);
-        return m_centerPosition + randomPosition;
+
+    /// <summary>
+    /// ターゲットから離れた場所を、ランダムに返す。
+    /// </summary>
+    /// <param name="target">ターゲット</param>
+    /// <returns>ランダムな位置</returns>
+    public Vector3 CalcuRandomPosition()
+    {
+        return UtilityRandomPosition.OutRangeOfTarget(m_target, m_outRange, m_maxRandomRange, m_centerPosition);
     }
 
     //アクセッサ---------------------------------------

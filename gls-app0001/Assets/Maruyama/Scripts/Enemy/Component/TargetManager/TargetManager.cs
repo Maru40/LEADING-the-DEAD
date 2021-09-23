@@ -4,7 +4,7 @@ using UnityEngine;
 
 using System;
 
-public class TargetMgr : MonoBehaviour
+public class TargetManager : MonoBehaviour
 {
     //最後に参照されたターゲット
     FoundObject m_nowTarget = null;

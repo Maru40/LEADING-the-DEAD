@@ -5,10 +5,10 @@ using UnityEngine;
 using System;
 
 [Serializable]
-struct ThrongMgrParametor  //ŒQOMgr‚Ìƒpƒ‰ƒ[ƒ^
+public struct ThrongManagerParametor  //ŒQOMgr‚Ìƒpƒ‰ƒ[ƒ^p
 {
     public float inThrongRange;   //ŒQO‚Æ”»’f‚·‚é”ÍˆÍ
-    public float outThrongRange;  //ŒQO‚©‚çŠO‚ê‚½‚Æ”»’f‚·‚é‹——£
+    //public float outThrongRange;  //ŒQO‚©‚çŠO‚ê‚½‚Æ”»’f‚·‚é‹——£
 
     public float nearObjectRange; //—×l‚Æ”»’f‚³‚ê‚é‹——£
 }
@@ -19,11 +19,11 @@ public struct ThrongData
 {
     public GameObject gameObject;
     public EnemyVelocityMgr velocityMgr;
-    public TargetMgr targetMgr;  //ƒ^[ƒQƒbƒgŠÇ—
-    public ThrongMgr throngMgr;  //ŒQOŠÇ—
+    public TargetManager targetMgr;  //ƒ^[ƒQƒbƒgŠÇ—
+    public ThrongManager throngMgr;  //ŒQOŠÇ—
     public RandomPlowlingMove randomPlowlingMove;
 
-    public ThrongData(EnemyVelocityMgr velocityMgr, TargetMgr targetMgr, ThrongMgr throngMgr,
+    public ThrongData(EnemyVelocityMgr velocityMgr, TargetManager targetMgr, ThrongManager throngMgr,
         RandomPlowlingMove randomPlowlingMove)
     {
         this.gameObject = targetMgr.gameObject;
@@ -38,11 +38,11 @@ public struct ThrongData
 /// <summary>
 /// ŒQOs“®ƒ}ƒl[ƒWƒƒ\
 /// </summary>
-public class ThrongMgr : MonoBehaviour
+public class ThrongManager : MonoBehaviour
 {
 
     [SerializeField]
-    ThrongMgrParametor m_param = new ThrongMgrParametor();
+    ThrongManagerParametor m_param = new ThrongManagerParametor();
 
     /// <summary>
     /// Ray‚ÌáŠQ•¨‚·‚éLayer‚Ì”z—ñ
@@ -63,11 +63,6 @@ public class ThrongMgr : MonoBehaviour
     {
         SetSearchGenerator();
         m_rigid = GetComponent<Rigidbody>();
-    }
-
-    void Update()
-    {
-
     }
 
     /// <summary>
@@ -288,6 +283,29 @@ public class ThrongMgr : MonoBehaviour
     public List<ThrongData> GetThrongDatas()
     {
         return m_generator.GetThrongDatas();
+    }
+
+    public void SetInThrongRange(float range)
+    {
+        m_param.inThrongRange = range;
+    }
+    public float GetInThrongRange()
+    {
+        return m_param.inThrongRange;
+    }
+
+    public void SetNearObjectRange(float range)
+    {
+        m_param.nearObjectRange = range;
+    }
+    public float GetNearObjectRange()
+    {
+        return m_param.nearObjectRange;
+    }
+
+    public ThrongManagerParametor GetParametor()
+    {
+        return m_param;
     }
 
     //null‰ñ”ğ--------------------------

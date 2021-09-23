@@ -15,7 +15,9 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
     public override void OnStart()
     {
         var owner = GetOwner();
-        AddChangeComp(owner.GetComponent<RandomPlowlingMove>(), true, false);
+        var randomPlowling = owner.GetComponent<RandomPlowlingMove>();
+
+        AddChangeComp(randomPlowling, true, false);
 
         ChangeComps(EnableChangeType.Start);
 
@@ -23,9 +25,17 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
         m_eyeRange = owner.GetComponent<EyeSearchRange>();
 
         //ターゲットの取得
-        m_target = owner.GetComponent<TargetMgr>().GetNowTarget();
+        m_target = owner.GetComponent<TargetManager>().GetNowTarget();
         if(m_target == null) {
             SearchTarget();
+        }
+
+        //集団範囲の設定
+        var throngMgr = owner.GetComponent<ThrongManager>();
+        if(randomPlowling && throngMgr)
+        {
+            float range = randomPlowling.GetInThrongRange();
+            throngMgr.SetInThrongRange(range);
         }
     }
 
@@ -68,7 +78,7 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
 
         var target = GameObject.Find("Player");
         var foundObject = target.GetComponent<FoundObject>();
-        var targetMgr = owner.GetComponent<TargetMgr>();
+        var targetMgr = owner.GetComponent<TargetManager>();
         targetMgr?.SetNowTarget(GetType(), foundObject);
 
         m_target = foundObject;

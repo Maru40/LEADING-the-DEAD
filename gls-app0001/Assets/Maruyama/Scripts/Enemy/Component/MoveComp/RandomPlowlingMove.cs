@@ -10,29 +10,33 @@ using System;
 /// </summary>
 public class RandomPlowlingMove : MonoBehaviour
 {
-    //徘徊する場所を決める半径
-    [SerializeField]
-    float m_randomPositionRadius = 15.0f;
+    [Serializable]
+    public struct Parametor 
+    {
+        public float randomPositionRadius;  //徘徊する場所を決める半径
+        public float maxSpeed;              //最大スピード
+        public float turningPower;          //旋回する力
+        public float targetNearRange;       //目的地に着いたと判断される,目的地との相対距離(小さすぎると判断できなくなるため注意)
+        public float maxWaitCalcuRouteTime; //目的地についたとき、立ち止まる最大の時間
+        public float inThrongRange;         //集団と認識する範囲
 
-    //移動スピード
-    [SerializeField]
-    float m_maxSpeed = 3.0f;
+        public Parametor(float randomPositionRadius, float maxSpeed, float turningPower,
+            float targetNearRange, float maxWaitCalcuRouteTime, float inThrongRange)
+        {
+            this.randomPositionRadius = randomPositionRadius;
+            this.maxSpeed = maxSpeed;
+            this.turningPower = turningPower;
+            this.targetNearRange = targetNearRange;
+            this.maxWaitCalcuRouteTime = maxWaitCalcuRouteTime;
+            this.inThrongRange = inThrongRange;
+        }
+    }
+
+
+    //member変数-------------------------------------------------------------------------------------------
 
     [SerializeField]
-    float m_turningPower = 5.0f;
-
-    //目的地に着いたと判断される,目的地との相対距離
-    //小さすぎると判断できなくなるため注意
-    [SerializeField]
-    float m_targetNearRange = 0.3f;
-
-    //目的地にたどり着いたときのスピード
-    //[SerializeField]
-    //float m_arrivalSpeed = 0.3f;
-
-    //目的地についたとき、立ち止まる最大の時間
-    [SerializeField]
-    float m_maxWaitCalucRouteTime = 3.0f;
+    Parametor m_param = new Parametor(15.0f, 2.5f, 2.0f, 0.3f, 3.0f, 1.0f);
 
     /// <summary>
     /// Rayの障害物するLayerの配列
@@ -40,24 +44,21 @@ public class RandomPlowlingMove : MonoBehaviour
     [SerializeField]
     string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
 
-    //目的の場所
-    Vector3 m_targetPosition;
+    Vector3 m_targetPosition;    //目的の場所
 
-    //Rigidbody m_rigid;
     EnemyVelocityMgr m_velocityMgr;
     WaitTimer m_waitTimer;
-    ThrongMgr m_throngMgr;
+    ThrongManager m_throngMgr;
     
     void Start()
     {
         //コンポーネントの取得
-        //m_rigid = GetComponent<Rigidbody>();
         m_velocityMgr = GetComponent<EnemyVelocityMgr>();
         m_waitTimer = GetComponent<WaitTimer>();
-        m_throngMgr = GetComponent<ThrongMgr>();
+        m_throngMgr = GetComponent<ThrongManager>();
 
         //シード値
-        UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
+        Random.InitState(System.DateTime.Now.Millisecond);
 
         SetRandomTargetPosition();
     }
@@ -76,7 +77,7 @@ public class RandomPlowlingMove : MonoBehaviour
 
         //加える力の計算
         var toVec = m_targetPosition - transform.position;
-        m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_maxSpeed, m_turningPower);
+        m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_param.maxSpeed, m_param.turningPower);
 
         var newTargetPosition = m_throngMgr.CalcuRandomPlowlingMovePositonIntegrated(this);  //ランダムな方向を集団に合わせる。
         SetTargetPositon(newTargetPosition);
@@ -99,7 +100,7 @@ public class RandomPlowlingMove : MonoBehaviour
         var toVec = m_targetPosition - transform.position;
         float range = toVec.magnitude;
 
-        return range <= m_targetNearRange ? true : false;
+        return range <= m_param.targetNearRange ? true : false;
     }
 
     /// <summary>
@@ -115,7 +116,7 @@ public class RandomPlowlingMove : MonoBehaviour
         m_velocityMgr.ResetVelocity();  //速度のリセット
 
         //待機状態の設定
-        var waitTime = UnityEngine.Random.value * m_maxWaitCalucRouteTime;
+        var waitTime = UnityEngine.Random.value * m_param.maxWaitCalcuRouteTime;
         m_waitTimer.AddWaitTimer(GetType(), waitTime);
     }
 
@@ -146,9 +147,9 @@ public class RandomPlowlingMove : MonoBehaviour
         float directX = CalucRandomDirect();
         float directZ = CalucRandomDirect();
 
-        float x = Random.value * m_randomPositionRadius * directX;
+        float x = Random.value * m_param.randomPositionRadius * directX;
         float y = transform.position.y;
-        float z = Random.value * m_randomPositionRadius * directZ;
+        float z = Random.value * m_param.randomPositionRadius * directZ;
 
         var toVec = new Vector3(x,y,z);
         var newPosition = transform.position + toVec;
@@ -197,11 +198,6 @@ public class RandomPlowlingMove : MonoBehaviour
         return false;
     }
 
-    void ReverseTargetPosition()
-    {
-        m_targetPosition = -m_targetPosition;
-    }
-
 
     //アクセッサ-----------------------------------------------------
 
@@ -212,6 +208,20 @@ public class RandomPlowlingMove : MonoBehaviour
     public Vector3 GetTargetPosition()
     {
         return m_targetPosition;
+    }
+
+    public void SetInThrongRange(float range)
+    {
+        m_param.inThrongRange = range;
+    }
+    public  float GetInThrongRange()
+    {
+        return m_param.inThrongRange;
+    }
+
+    public void SetParametor(Parametor parametor)
+    {
+        m_param = parametor;
     }
 
     //現在使用していない

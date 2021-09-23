@@ -6,12 +6,12 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen
 {
     //コンポーネント系
     Stator_ZombieNormal m_stator;
-    TargetMgr m_targetMgr;
+    TargetManager m_targetMgr;
 
     void Start()
     {
         m_stator = GetComponent<Stator_ZombieNormal>();
-        m_targetMgr = GetComponent<TargetMgr>();
+        m_targetMgr = GetComponent<TargetManager>();
     }
 
     void Update()

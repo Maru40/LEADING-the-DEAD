@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2834631260142655912
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2834631260142655915}
+  - component: {fileID: 2834631260142655917}
+  m_Layer: 0
+  m_Name: ZombieNormalGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2834631260142655915
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2834631260142655912}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2834631260142655917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2834631260142655912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3474c5959050d041a7b1d231d30c86a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_createObject: {fileID: 7434505739018704334, guid: 67a643b874b307f46a417e4170a2dd67, type: 3}
+  m_numCreate: 100
+  m_centerPosition: {x: 0, y: 0, z: 0}
+  m_maxRandomRange: {x: 30, y: 0, z: 30}
+  m_target: {fileID: 0}
+  m_outRange: 15
+  m_chaseParametor:
+    nearRange: 0.75
+    maxSpeed: 3
+    turningPower: 3
+    lostSeekTime: 10
+    inThrongRange: 3
+  m_randomPlowlingParametor:
+    randomPositionRadius: 15
+    maxSpeed: 2.5
+    turningPower: 2
+    targetNearRange: 0.3
+    maxWaitCalcuRouteTime: 3
+    inThrongRange: 1
+  m_status:
+    hp: 1
+    damageIntervalTime: 3
+  m_attackParametor:
+    power: 1
+    startRange: 1

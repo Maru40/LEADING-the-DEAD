@@ -10,7 +10,7 @@ public class NavSeekTarget : NodeBase<EnemyBase>
     float m_nearRange = 3.0f;
     Vector3 m_targetPosition = new Vector3();
 
-    TargetMgr m_targetMgr;
+    TargetManager m_targetMgr;
     NavMeshAgent m_navMesh;
 
     public NavSeekTarget(EnemyBase owner)
@@ -22,7 +22,7 @@ public class NavSeekTarget : NodeBase<EnemyBase>
     {
         m_nearRange = nearRange;
 
-        m_targetMgr = owner.GetComponent<TargetMgr>();
+        m_targetMgr = owner.GetComponent<TargetManager>();
         m_navMesh = owner.GetComponent<NavMeshAgent>();
         m_navMesh.speed = speed;
     }

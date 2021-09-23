@@ -18,9 +18,9 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
     WaitTimer m_waitTimer;
     Rigidbody m_rigid;
     EnemyVelocityMgr m_velocityMgr;
-    TargetMgr m_targetMgr;
+    TargetManager m_targetMgr;
     BreadCrumb m_bread;
-    ThrongMgr m_throngMgr;
+    ThrongManager m_throngMgr;
 
     public BreadSeekTarget(EnemyBase owner, float nearRange, float maxSpeed, float turningPower, float lostSeekTime)
         : base(owner)
@@ -43,7 +43,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
         m_rigid = owner.GetComponent<Rigidbody>();
         m_velocityMgr = owner.GetComponent<EnemyVelocityMgr>();
 
-        m_targetMgr = owner.GetComponent<TargetMgr>();
+        m_targetMgr = owner.GetComponent<TargetManager>();
         var target = m_targetMgr.GetNowTarget();
 
         m_bread = target?.GetComponent<BreadCrumb>();
@@ -59,7 +59,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
             }
         }
 
-        m_throngMgr = owner.GetComponent<ThrongMgr>();
+        m_throngMgr = owner.GetComponent<ThrongManager>();
     }
 
     public override void OnUpdate()

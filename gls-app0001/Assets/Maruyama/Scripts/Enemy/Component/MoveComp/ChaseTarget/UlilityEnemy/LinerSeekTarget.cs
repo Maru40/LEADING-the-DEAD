@@ -11,9 +11,9 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
     float m_turningPower = 1.0f; //ê˘âÒÇ∑ÇÈóÕ
 
     ChaseTarget m_chaseTarget;
-    TargetMgr m_targetMgr;
+    TargetManager m_targetMgr;
     EnemyVelocityMgr m_velocityMgr;
-    ThrongMgr m_throngMgr;
+    ThrongManager m_throngMgr;
 
     public LinerSeekTarget(EnemyBase owner)
         : this(owner,3.0f, 1.0f)
@@ -26,9 +26,9 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
         m_turningPower = turningPower;
 
         m_chaseTarget = owner.GetComponent<ChaseTarget>();
-        m_targetMgr = owner.GetComponent<TargetMgr>();
+        m_targetMgr = owner.GetComponent<TargetManager>();
         m_velocityMgr = owner.GetComponent<EnemyVelocityMgr>();
-        m_throngMgr = owner.GetComponent<ThrongMgr>();
+        m_throngMgr = owner.GetComponent<ThrongManager>();
     }
 
     public override void OnStart()

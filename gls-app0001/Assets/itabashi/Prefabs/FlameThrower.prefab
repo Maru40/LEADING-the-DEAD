@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8155939365520465223}
   - component: {fileID: 8155939365520465222}
   - component: {fileID: 8155939365520465221}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FlameThrower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,9 +182,25 @@ PrefabInstance:
       propertyPath: InitialModule.startRotationY.minMaxState
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2231448126578905920, guid: c13e6b134d2c19a4b86e35cb2a179906, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2231448126578905922, guid: c13e6b134d2c19a4b86e35cb2a179906, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2231448126578905924, guid: c13e6b134d2c19a4b86e35cb2a179906, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2231448126578905926, guid: c13e6b134d2c19a4b86e35cb2a179906, type: 3}
       propertyPath: m_Name
       value: Flame
+      objectReference: {fileID: 0}
+    - target: {fileID: 2231448126578905926, guid: c13e6b134d2c19a4b86e35cb2a179906, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2231448126579134310, guid: c13e6b134d2c19a4b86e35cb2a179906, type: 3}
       propertyPath: m_RootOrder

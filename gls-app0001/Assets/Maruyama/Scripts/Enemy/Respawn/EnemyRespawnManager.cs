@@ -7,14 +7,10 @@ using UnityEngine;
 /// <summary>
 /// ターゲットの範囲外にリスポーンする処理
 /// </summary>
-public class RespawnRandom_OutRangeOfTarget : EnemyRespawnBase
+public class EnemyRespawnManager : EnemyRespawnBase
 {
-    [SerializeField]
-    GameObject m_target = null;
-
-    //ターゲットからどれだけ離すか
-    [SerializeField]
-    float m_outRangeOfTarget = 10.0f;
+    //[SerializeField]
+    //GameObject m_target = null;  //現在使っていない。
 
     [SerializeField]
     EnemyGenerator m_generator = null;
@@ -23,7 +19,7 @@ public class RespawnRandom_OutRangeOfTarget : EnemyRespawnBase
 
     void Start()
     {
-        StartTargetNullCheck();
+        //StartTargetNullCheck();
         StartGeneratorNullCheck();
 
         m_stator = GetComponent<StatorBase>();
@@ -31,8 +27,9 @@ public class RespawnRandom_OutRangeOfTarget : EnemyRespawnBase
 
     public void Respawn()
     {
-        if(m_target == null || m_generator == null) {
-            StartTargetNullCheck();
+        //if(m_target == null || m_generator == null) {
+        if (m_generator == null) { 
+            //StartTargetNullCheck();
             StartGeneratorNullCheck();
         }
 
@@ -48,31 +45,17 @@ public class RespawnRandom_OutRangeOfTarget : EnemyRespawnBase
     /// <returns>リスポーンする場所</returns>
     Vector3 CalcuRespawnRandomPosition()
     {
-        const int numLoop = 100;
-        var random = new System.Random(System.DateTime.Now.Millisecond);
-        Vector3 respawnPosition = Vector3.zero;
-        for (int i = 0; i < numLoop; i++)
-        {
-            var position = m_generator.CalcuRandomPosition(random);
-
-            var toVec = m_target.transform.position - position;
-            if (toVec.magnitude > m_outRangeOfTarget)
-            {  //targetより遠かったら
-                respawnPosition = position;
-                break;
-            }
-        }
-
-        return respawnPosition;
+        return m_generator.CalcuRandomPosition();
     }
+
 
     //StartNullCheck----------------------------------------------------
 
     void StartTargetNullCheck()
     {
-        if(m_target == null) {
-            m_target = GameObject.Find("Player");
-        }
+        //if(m_target == null) {
+        //    m_target = GameObject.Find("Player");
+        //}
     }
 
     void StartGeneratorNullCheck()
