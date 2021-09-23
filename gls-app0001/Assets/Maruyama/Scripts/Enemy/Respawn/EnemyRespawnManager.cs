@@ -9,8 +9,8 @@ using UnityEngine;
 /// </summary>
 public class EnemyRespawnManager : EnemyRespawnBase
 {
-    [SerializeField]
-    GameObject m_target = null;
+    //[SerializeField]
+    //GameObject m_target = null;  //現在使っていない。
 
     [SerializeField]
     EnemyGenerator m_generator = null;
@@ -19,7 +19,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
 
     void Start()
     {
-        StartTargetNullCheck();
+        //StartTargetNullCheck();
         StartGeneratorNullCheck();
 
         m_stator = GetComponent<StatorBase>();
@@ -27,8 +27,9 @@ public class EnemyRespawnManager : EnemyRespawnBase
 
     public void Respawn()
     {
-        if(m_target == null || m_generator == null) {
-            StartTargetNullCheck();
+        //if(m_target == null || m_generator == null) {
+        if (m_generator == null) { 
+            //StartTargetNullCheck();
             StartGeneratorNullCheck();
         }
 
@@ -44,7 +45,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
     /// <returns>リスポーンする場所</returns>
     Vector3 CalcuRespawnRandomPosition()
     {
-        return m_generator.CalcuRandomPosition(m_target);
+        return m_generator.CalcuRandomPosition();
     }
 
 
@@ -52,9 +53,9 @@ public class EnemyRespawnManager : EnemyRespawnBase
 
     void StartTargetNullCheck()
     {
-        if(m_target == null) {
-            m_target = GameObject.Find("Player");
-        }
+        //if(m_target == null) {
+        //    m_target = GameObject.Find("Player");
+        //}
     }
 
     void StartGeneratorNullCheck()

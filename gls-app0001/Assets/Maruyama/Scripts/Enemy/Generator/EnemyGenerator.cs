@@ -39,7 +39,7 @@ public class EnemyGenerator : MonoBehaviour
 
         for (int i = 0; i < m_numCreate; i++)
         {
-            var createPosition = CalcuRandomPosition(m_target);
+            var createPosition = CalcuRandomPosition();
             CreateObject(createPosition);
         }
     }
@@ -68,9 +68,9 @@ public class EnemyGenerator : MonoBehaviour
     /// </summary>
     /// <param name="target">ターゲット</param>
     /// <returns>ランダムな位置</returns>
-    public Vector3 CalcuRandomPosition(GameObject target)
+    public Vector3 CalcuRandomPosition()
     {
-        return UtilityRandomPosition.OutRangeOfTarget(target, m_outRange, m_maxRandomRange, m_centerPosition);
+        return UtilityRandomPosition.OutRangeOfTarget(m_target, m_outRange, m_maxRandomRange, m_centerPosition);
     }
 
     //アクセッサ---------------------------------------
