@@ -15,7 +15,9 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
     public override void OnStart()
     {
         var owner = GetOwner();
-        AddChangeComp(owner.GetComponent<RandomPlowlingMove>(), true, false);
+        var randomPlowling = owner.GetComponent<RandomPlowlingMove>();
+
+        AddChangeComp(randomPlowling, true, false);
 
         ChangeComps(EnableChangeType.Start);
 
@@ -26,6 +28,14 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
         m_target = owner.GetComponent<TargetMgr>().GetNowTarget();
         if(m_target == null) {
             SearchTarget();
+        }
+
+        //èWícîÕàÕÇÃê›íË
+        var throngMgr = owner.GetComponent<ThrongMgr>();
+        if(randomPlowling && throngMgr)
+        {
+            float range = randomPlowling.GetInThrongRange();
+            throngMgr.SetInThrongRange(range);
         }
     }
 
