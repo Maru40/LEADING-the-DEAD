@@ -15,11 +15,21 @@ public class EnemyGenerator : MonoBehaviour
     [SerializeField]
     protected Vector3 m_maxRandomRange = new Vector3();  //ランダムに生成する時の最大距離
 
+    [SerializeField]
+    protected GameObject m_target = null;
+    [SerializeField]
+    protected float m_outRange = 15.0f;
+
     //生成したゾンビを持つ
     protected List<ThrongData> m_datas = new List<ThrongData>();
 
     protected virtual void Start()
     {
+        if(m_target == null)
+        {
+            m_target = GameObject.Find("Player");
+        }
+
         CreateObjects();
     }
 
@@ -29,7 +39,7 @@ public class EnemyGenerator : MonoBehaviour
 
         for (int i = 0; i < m_numCreate; i++)
         {
-            var createPosition = CalcuRandomPosition(random);
+            var createPosition = CalcuRandomPosition(m_target);
             CreateObject(createPosition);
         }
     }
@@ -50,26 +60,17 @@ public class EnemyGenerator : MonoBehaviour
     /// 調整が必要なオブジェクトを渡して、調整
     /// </summary>
     /// <param name="obj">調整したいオブジェクト</param>
-    protected virtual void CreateObjectAdjust(GameObject obj)
-    {
+    protected virtual void CreateObjectAdjust(GameObject obj) { }
 
-    }
 
     /// <summary>
-    /// ランダムに生成する場所を決めて返す。
+    /// ターゲットから離れた場所を、ランダムに返す。
     /// </summary>
-    /// <param name="random">ランダムクラス</param>
+    /// <param name="target">ターゲット</param>
     /// <returns>ランダムな位置</returns>
-    public Vector3 CalcuRandomPosition(System.Random random)
+    public Vector3 CalcuRandomPosition(GameObject target)
     {
-        Vector3 minVec = -m_maxRandomRange;
-        Vector3 maxVec =  m_maxRandomRange;
-        Vector3 randomPosition = Vector3.zero;
-
-        randomPosition.x = random.Next((int)minVec.x, (int)maxVec.x);
-        randomPosition.y = random.Next((int)minVec.y, (int)maxVec.y);
-        randomPosition.z = random.Next((int)minVec.z, (int)maxVec.z);
-        return m_centerPosition + randomPosition;
+        return UtilityRandomPosition.OutRangeOfTarget(target, m_outRange, m_maxRandomRange, m_centerPosition);
     }
 
     //アクセッサ---------------------------------------
