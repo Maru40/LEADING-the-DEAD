@@ -14,10 +14,19 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
     public override void OnStart()
     {
         var owner = GetOwner();
+        var chaseTarget = owner.GetComponent<ChaseTarget>();
 
-        AddChangeComp(owner.GetComponent<ChaseTarget>(), true, false);
+        AddChangeComp(chaseTarget, true, false);
 
         ChangeComps(EnableChangeType.Start);
+
+        //èWícçsìÆê›íË
+        var throngMgr = owner.GetComponent<ThrongMgr>();
+        if (chaseTarget && throngMgr)
+        {
+            float range = chaseTarget.GetInThrongRange();
+            throngMgr.SetInThrongRange(range);
+        }
     }
 
     public override void OnUpdate()
