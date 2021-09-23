@@ -133,6 +133,8 @@ namespace Player
 
             m_objectLauncher.Fire(m_throwableObjectPrefab, m_takingObject.transform.rotation);
             m_takingObject.gameObject.SetActive(false);
+
+            ThrowingStanceEnd();
         }
 
         void ThrowAngleControl()
