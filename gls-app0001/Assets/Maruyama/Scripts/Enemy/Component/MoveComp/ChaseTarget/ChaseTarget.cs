@@ -18,25 +18,30 @@ public class SeekTransitonMember
     public MyTrigger breadTrigger;
 }
 
+[Serializable]
+public struct ChaseTargetParametor
+{
+    public float nearRange;    //–Ú“I’n‚É‚½‚Ç‚è’…‚¢‚½‚Æ”»’f‚³‚ê‚é‹——£
+    public float maxSpeed;
+    public float turningPower;
+    public float lostSeekTime; //Œ©¸‚Á‚Ä‚©‚ç’Ç]‚·‚éŠÔ
+
+    public ChaseTargetParametor(float nearRange, float maxSpeed, float turningPower, float lostSeekTime)
+    {
+        this.nearRange = nearRange;
+        this.maxSpeed = maxSpeed;
+        this.turningPower = turningPower;
+        this.lostSeekTime = lostSeekTime;
+    }
+}
 
 /// <summary>
 /// ƒ^[ƒQƒbƒg‚Ì’Ç]
 /// </summary>
 public class ChaseTarget : MonoBehaviour
 {
-    //–Ú“I’n‚É‚½‚Ç‚è’…‚¢‚½‚Æ”»’f‚³‚ê‚é‹——£
     [SerializeField]
-    float m_nearRange = 0.5f;
-
-    [SerializeField]
-    float m_maxSpeed = 3.0f;
-
-    [SerializeField]
-    float m_turningPower = 5.0f;
-
-    //Œ©¸‚Á‚Ä‚©‚ç’Ç]‚·‚éŠÔ
-    [SerializeField]
-    float m_lostSeekTime = 10.0f;
+    ChaseTargetParametor m_param = new ChaseTargetParametor(0.75f, 3.0f, 3.0f, 10.0f);
 
     /// <summary>
     /// Ray‚ÌáŠQ•¨‚·‚éLayer‚Ì”z—ñ
@@ -97,8 +102,13 @@ public class ChaseTarget : MonoBehaviour
     {
         var enemy = GetComponent<EnemyBase>();
 
-        m_stateMachine.AddNode(SeekType.Liner, new LinerSeekTarget(enemy, m_maxSpeed, m_turningPower));
-        m_stateMachine.AddNode(SeekType.Bread, new BreadSeekTarget(enemy, m_nearRange, m_maxSpeed, m_turningPower, m_lostSeekTime));
+        float nearRange = m_param.nearRange;
+        float maxSpeed = m_param.maxSpeed;
+        float turningPower = m_param.turningPower;
+        float lostSeekTime = m_param.lostSeekTime;
+
+        m_stateMachine.AddNode(SeekType.Liner, new LinerSeekTarget(enemy, maxSpeed, turningPower));
+        m_stateMachine.AddNode(SeekType.Bread, new BreadSeekTarget(enemy, nearRange, maxSpeed, turningPower, lostSeekTime));
     }
 
     void CreateEdge()
@@ -129,31 +139,31 @@ public class ChaseTarget : MonoBehaviour
     }
 
     public void SetMaxSpeed(float speed){
-        m_maxSpeed = speed;
+        m_param.maxSpeed = speed;
 
         m_stateMachine.GetNode<BreadSeekTarget>(SeekType.Bread)?.SetMaxSpeed(speed);
         m_stateMachine.GetNode<LinerSeekTarget>(SeekType.Liner)?.SetMaxSpeed(speed);
     }
     public float GetMaxSpeed() { 
-        return m_maxSpeed;
+        return m_param.maxSpeed;
     }
 
     public void SetNearRange(float range){
-        m_nearRange = range;
+        m_param.nearRange = range;
 
         m_stateMachine.GetNode<BreadSeekTarget>(SeekType.Bread)?.SetNearRange(range);
     }
     public float GetNearRange(float rage) { 
-        return m_nearRange;
+        return m_param.nearRange;
     }
 
     public void SetLostSeekTime(float seekTime){
-        m_lostSeekTime = seekTime;
+        m_param.lostSeekTime = seekTime;
 
         m_stateMachine.GetNode<BreadSeekTarget>(SeekType.Bread)?.SetLostSeekTime(seekTime);
     }
     public float GetLostSeekTime() { 
-        return m_lostSeekTime; 
+        return m_param.lostSeekTime; 
     }
 
 
