@@ -18,7 +18,7 @@ public class EnemyGenerator : MonoBehaviour
     //生成したゾンビを持つ
     protected List<ThrongData> m_datas = new List<ThrongData>();
 
-    private void Start()
+    protected virtual void Start()
     {
         CreateObjects();
     }
@@ -37,6 +37,7 @@ public class EnemyGenerator : MonoBehaviour
     void CreateObject(Vector3 createPosition)
     {
         var obj = Instantiate(m_createObject, createPosition, Quaternion.identity, transform);
+        CreateObjectAdjust(obj);  //調整
         
         m_datas.Add(new ThrongData(obj.GetComponent<EnemyVelocityMgr>(),
             obj.GetComponent<TargetMgr>(),
@@ -45,6 +46,20 @@ public class EnemyGenerator : MonoBehaviour
         ));
     }
 
+    /// <summary>
+    /// 調整が必要なオブジェクトを渡して、調整
+    /// </summary>
+    /// <param name="obj">調整したいオブジェクト</param>
+    protected virtual void CreateObjectAdjust(GameObject obj)
+    {
+
+    }
+
+    /// <summary>
+    /// ランダムに生成する場所を決めて返す。
+    /// </summary>
+    /// <param name="random">ランダムクラス</param>
+    /// <returns>ランダムな位置</returns>
     public Vector3 CalcuRandomPosition(System.Random random)
     {
         Vector3 minVec = -m_maxRandomRange;
