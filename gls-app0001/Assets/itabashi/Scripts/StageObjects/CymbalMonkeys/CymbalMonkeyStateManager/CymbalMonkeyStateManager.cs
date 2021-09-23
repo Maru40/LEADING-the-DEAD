@@ -10,6 +10,9 @@ public class CymbalMonkeyStateManager : MonoBehaviour
         ExplosionPreparation
     }
 
+    [SerializeField]
+    private string[] m_groundTags;
+
     public CymbalMonkeyState nowState { private set; get; } = CymbalMonkeyState.Normal;
 
     private Rigidbody m_rigidbody;
@@ -30,16 +33,26 @@ public class CymbalMonkeyStateManager : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(nowState == CymbalMonkeyState.ExplosionPreparation)
+        if (nowState == CymbalMonkeyState.ExplosionPreparation)
         {
             return;
         }
 
-        var groundObject = collision.gameObject.GetComponent<GroundObject>();
+        bool isCompare = false;
 
-        if(!groundObject)
+        foreach (var groundTag in m_groundTags)
+        {
+            isCompare = other.gameObject.CompareTag(groundTag);
+
+            if (isCompare)
+            {
+                break;
+            }
+        }
+
+        if (!isCompare)
         {
             return;
         }
