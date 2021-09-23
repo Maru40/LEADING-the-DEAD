@@ -23,12 +23,12 @@ public class StatusManager_ZombieNormal : StatusManagerBase
     Status m_status = new Status(1.0f, 3.0f);
 
     WaitTimer m_waitTimer = null;
-    RespawnRandom_OutRangeOfTarget m_respawn = null;
+    EnemyRespawnManager m_respawn = null;
 
     void Start()
     {
         m_waitTimer = GetComponent<WaitTimer>();
-        m_respawn = GetComponent<RespawnRandom_OutRangeOfTarget>();
+        m_respawn = GetComponent<EnemyRespawnManager>();
     }
 
     public void Damage(AttributeObject.DamageData data)
