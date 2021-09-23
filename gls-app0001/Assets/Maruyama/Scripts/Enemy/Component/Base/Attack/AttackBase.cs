@@ -9,26 +9,37 @@ public struct AttackParametorBase
 {
     public float power;
     public float startRange;  //攻撃開始範囲
-    public float damageRange; //攻撃ダメージ範囲
 
-    public AttackParametorBase(float power, float startRange, float damageRange)
+    public AttackParametorBase(float power, float startRange)
     {
         this.power = power;
         this.startRange = startRange;
-        this.damageRange = damageRange;
     }
 }
 
 public abstract class AttackBase : MonoBehaviour
 {
     [SerializeField]
-    private AttackParametorBase m_baseParam = new AttackParametorBase(1.0f, 2.0f, 1.0f);
+    private AttackParametorBase m_baseParam = new AttackParametorBase(10.0f, 1.0f);
 
+
+    public void SetBaseParam(AttackParametorBase param)
+    {
+        m_baseParam = param;
+    }
     public AttackParametorBase GetBaseParam()
     {
         return m_baseParam; 
     }
 
+    /// <summary>
+    /// 攻撃力
+    /// </summary>
+    /// <returns>攻撃力</returns>
+    public float GetPower()
+    {
+        return m_baseParam.power;
+    }
 
     /// <summary>
     /// 攻撃モーション開始の距離
