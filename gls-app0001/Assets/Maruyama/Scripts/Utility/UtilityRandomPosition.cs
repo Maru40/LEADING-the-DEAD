@@ -12,7 +12,7 @@ public class UtilityRandomPosition
     /// <param name="maxRange">ランダムにする範囲</param>
     /// <param name="centerPosition">基準となる中心のポジション</param>
     /// <returns>ランダムなポジション</returns>
-    public static Vector3 CalcuRandom(System.Random random, Vector3 maxRange , Vector3 centerPosition)
+    public static Vector3 RandomPosition(System.Random random, Vector3 maxRange , Vector3 centerPosition)
     {
         Vector3 minVec = -maxRange;
         Vector3 maxVec =  maxRange;
@@ -32,14 +32,14 @@ public class UtilityRandomPosition
     /// <param name="maxRange">ランダムにする範囲</param>
     /// <param name="centerPosition">基準となる中心のポジション</param>
     /// <returns>ランダムなポジション</returns>
-    public static Vector3 CalcuOutRangeOfTarget(GameObject target, float outRange, Vector3 maxRange, Vector3 centerPosition = new Vector3())
+    public static Vector3 OutRangeOfTarget(GameObject target, float outRange, Vector3 maxRange, Vector3 centerPosition = new Vector3())
     {
         const int numLoop = 100;
         var random = new System.Random(System.DateTime.Now.Millisecond);
         Vector3 returnPosition = Vector3.zero;
         for (int i = 0; i < numLoop; i++)
         {
-            var position = CalcuRandom(random, maxRange, centerPosition);
+            var position = RandomPosition(random, maxRange, centerPosition);
 
             var toVec = target.transform.position - position;
             if (toVec.magnitude > outRange)
