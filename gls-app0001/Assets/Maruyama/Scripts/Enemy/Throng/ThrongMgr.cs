@@ -19,11 +19,11 @@ public struct ThrongData
 {
     public GameObject gameObject;
     public EnemyVelocityMgr velocityMgr;
-    public TargetMgr targetMgr;  //ターゲット管理
+    public TargetManager targetMgr;  //ターゲット管理
     public ThrongMgr throngMgr;  //群衆管理
     public RandomPlowlingMove randomPlowlingMove;
 
-    public ThrongData(EnemyVelocityMgr velocityMgr, TargetMgr targetMgr, ThrongMgr throngMgr,
+    public ThrongData(EnemyVelocityMgr velocityMgr, TargetManager targetMgr, ThrongMgr throngMgr,
         RandomPlowlingMove randomPlowlingMove)
     {
         this.gameObject = targetMgr.gameObject;

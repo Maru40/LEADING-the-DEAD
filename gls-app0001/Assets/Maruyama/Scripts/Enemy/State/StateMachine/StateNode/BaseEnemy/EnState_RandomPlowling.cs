@@ -25,7 +25,7 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
         m_eyeRange = owner.GetComponent<EyeSearchRange>();
 
         //ターゲットの取得
-        m_target = owner.GetComponent<TargetMgr>().GetNowTarget();
+        m_target = owner.GetComponent<TargetManager>().GetNowTarget();
         if(m_target == null) {
             SearchTarget();
         }
@@ -78,7 +78,7 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
 
         var target = GameObject.Find("Player");
         var foundObject = target.GetComponent<FoundObject>();
-        var targetMgr = owner.GetComponent<TargetMgr>();
+        var targetMgr = owner.GetComponent<TargetManager>();
         targetMgr?.SetNowTarget(GetType(), foundObject);
 
         m_target = foundObject;

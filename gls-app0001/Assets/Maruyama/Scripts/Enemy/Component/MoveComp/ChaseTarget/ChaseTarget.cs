@@ -55,11 +55,11 @@ public class ChaseTarget : MonoBehaviour
 
     //コンポーネント系------------------
 
-    TargetMgr m_targetMgr;
+    TargetManager m_targetMgr;
 
     void Awake()
     {
-        m_targetMgr = GetComponent<TargetMgr>();
+        m_targetMgr = GetComponent<TargetManager>();
 
         m_stateMachine = new StateMachine();
 
