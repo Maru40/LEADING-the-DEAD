@@ -7,14 +7,10 @@ using UnityEngine;
 /// <summary>
 /// ターゲットの範囲外にリスポーンする処理
 /// </summary>
-public class RespawnRandom_OutRangeOfTarget : EnemyRespawnBase
+public class EnemyRespawnManager : EnemyRespawnBase
 {
     [SerializeField]
     GameObject m_target = null;
-
-    //ターゲットからどれだけ離すか
-    [SerializeField]
-    float m_outRangeOfTarget = 10.0f;
 
     [SerializeField]
     EnemyGenerator m_generator = null;
@@ -48,23 +44,9 @@ public class RespawnRandom_OutRangeOfTarget : EnemyRespawnBase
     /// <returns>リスポーンする場所</returns>
     Vector3 CalcuRespawnRandomPosition()
     {
-        const int numLoop = 100;
-        var random = new System.Random(System.DateTime.Now.Millisecond);
-        Vector3 respawnPosition = Vector3.zero;
-        for (int i = 0; i < numLoop; i++)
-        {
-            var position = m_generator.CalcuRandomPosition(random);
-
-            var toVec = m_target.transform.position - position;
-            if (toVec.magnitude > m_outRangeOfTarget)
-            {  //targetより遠かったら
-                respawnPosition = position;
-                break;
-            }
-        }
-
-        return respawnPosition;
+        return m_generator.CalcuRandomPosition(m_target);
     }
+
 
     //StartNullCheck----------------------------------------------------
 
