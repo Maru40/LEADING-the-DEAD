@@ -46,7 +46,7 @@ public class StatusManager_ZombieNormal : StatusManagerBase
         if (m_status.hp <= 0)
         {
             m_status.hp = 0;
-            m_respawn.Respawn();
+            m_respawn?.Respawn();
         }
 
         //ダメージインターバル開始
