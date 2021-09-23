@@ -41,6 +41,7 @@ public class StatusManager_ZombieNormal : StatusManagerBase
         {
             m_status.hp = 0;
             Debug.Log("Ž€–S");
+            gameObject.SetActive(false);
         }
 
         float time = m_status.damageIntervalTime;
