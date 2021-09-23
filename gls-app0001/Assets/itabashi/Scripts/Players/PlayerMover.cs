@@ -58,6 +58,10 @@ namespace Player
         private void OnDisable()
         {
             m_gameControls.Disable();
+
+            m_playerAnimationParamator.moveInput = 0.0f;
+
+            m_rigitbody.velocity = new Vector3(0.0f, m_rigitbody.velocity.y, 0.0f);
         }
 
         private void OnDestroy()
