@@ -26,13 +26,12 @@ public class RandomPlowlingMove : MonoBehaviour
     [SerializeField]
     float m_targetNearRange = 0.3f;
 
-    //目的地にたどり着いたときのスピード
-    //[SerializeField]
-    //float m_arrivalSpeed = 0.3f;
-
     //目的地についたとき、立ち止まる最大の時間
     [SerializeField]
     float m_maxWaitCalucRouteTime = 3.0f;
+
+    [SerializeField]
+    float m_inThrongRange = 1.0f; //集団と認識する範囲
 
     /// <summary>
     /// Rayの障害物するLayerの配列
@@ -51,13 +50,12 @@ public class RandomPlowlingMove : MonoBehaviour
     void Start()
     {
         //コンポーネントの取得
-        //m_rigid = GetComponent<Rigidbody>();
         m_velocityMgr = GetComponent<EnemyVelocityMgr>();
         m_waitTimer = GetComponent<WaitTimer>();
         m_throngMgr = GetComponent<ThrongMgr>();
 
         //シード値
-        UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
+        Random.InitState(System.DateTime.Now.Millisecond);
 
         SetRandomTargetPosition();
     }
@@ -212,6 +210,15 @@ public class RandomPlowlingMove : MonoBehaviour
     public Vector3 GetTargetPosition()
     {
         return m_targetPosition;
+    }
+
+    public void SetInThrongRange(float range)
+    {
+        m_inThrongRange = range;
+    }
+    public  float GetInThrongRange()
+    {
+        return m_inThrongRange;
     }
 
     //現在使用していない
