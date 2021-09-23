@@ -478,7 +478,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 392338570}
-  - component: {fileID: 392338571}
   - component: {fileID: 392338572}
   m_Layer: 0
   m_Name: ZombieNormalGenerator
@@ -501,22 +500,6 @@ Transform:
   m_Father: {fileID: 218923992}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &392338571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 392338569}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f185a6be6d7d6047a408ea4d559ee39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_createObject: {fileID: 7434505739018704334, guid: 67a643b874b307f46a417e4170a2dd67, type: 3}
-  m_numCreate: 100
-  m_centerPosition: {x: 0, y: 0, z: 0}
-  m_maxRandomRange: {x: 30, y: 0, z: 30}
 --- !u!114 &392338572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -538,6 +521,7 @@ MonoBehaviour:
     maxSpeed: 3
     turningPower: 3
     lostSeekTime: 10
+    inThrongRange: 3
 --- !u!1001 &485955231
 PrefabInstance:
   m_ObjectHideFlags: 0
