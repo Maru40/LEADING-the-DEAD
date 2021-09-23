@@ -9,6 +9,9 @@ public class GraphBase<NodeType, EnumType, TransitionType>
 	where EnumType : Enum
 	where TransitionType : class
 {
+	//最初のノード(リセット行為に使う)
+	EnumType m_firstType;
+
 	//現在のノード
 	EnumType m_nowNodeType;
 
@@ -125,6 +128,7 @@ public class GraphBase<NodeType, EnumType, TransitionType>
 	{
 		if (IsEmpty())
 		{
+			m_firstType = type;
 			m_nowNodeType = type;
 			node.OnStart();
 		}
@@ -167,6 +171,14 @@ public class GraphBase<NodeType, EnumType, TransitionType>
 	{
 		return m_nodes.Count == 0 ? true : false;
 	}
+
+	/// <summary>
+	/// リセット関数(最初のステートに変更)
+	/// </summary>
+	public void Reset()
+    {
+		ChangeState(m_firstType);
+    }
 
 	/// <summary>
 	/// ステートの変更
