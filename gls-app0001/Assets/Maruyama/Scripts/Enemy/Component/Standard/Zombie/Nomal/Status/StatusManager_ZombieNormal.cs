@@ -7,12 +7,12 @@ using System;
 public class StatusManager_ZombieNormal : StatusManagerBase
 {
     [Serializable]
-    struct Status_ZombieNormal
+    public struct Status
     {
         public float hp;
         public float damageIntervalTime;  //ダメージを受けた後の無敵時間
 
-        public Status_ZombieNormal(float hp, float damageIntervalTime)
+        public Status(float hp, float damageIntervalTime)
         {
             this.hp = hp;
             this.damageIntervalTime = damageIntervalTime;
@@ -20,7 +20,7 @@ public class StatusManager_ZombieNormal : StatusManagerBase
     }
 
     [SerializeField]
-    Status_ZombieNormal m_status = new Status_ZombieNormal(1.0f, 3.0f);
+    Status m_status = new Status(1.0f, 3.0f);
 
     WaitTimer m_waitTimer = null;
     RespawnRandom_OutRangeOfTarget m_respawn = null;
@@ -55,4 +55,14 @@ public class StatusManager_ZombieNormal : StatusManagerBase
     }
 
 
+    //アクセッサ------------------------------------------------------------
+
+    public void SetStatus(Status status)
+    {
+        m_status = status;
+    }
+    public Status GetStatus()
+    {
+        return m_status;
+    }
 }
