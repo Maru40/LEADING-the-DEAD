@@ -32,7 +32,22 @@ namespace MaruUtility
 
         public static bool IsRange(GameObject selfObj, GameObject targetObj, float range)
         {
-            var toVec = targetObj.transform.position - selfObj.transform.position;
+            return IsRange(selfObj.transform.position, targetObj.transform.position, range);
+        }
+
+        public static bool IsRange(Vector3 selfPosition, GameObject targetObj, float range)
+        {
+            return IsRange(selfPosition, targetObj.transform.position, range);
+        }
+
+        public static bool IsRange(GameObject selfObj, Vector3 targetPosition, float range)
+        {
+            return IsRange(selfObj.transform.position, targetPosition, range);
+        }
+
+        public static bool IsRange(Vector3 selfPosition, Vector3 targetPosition, float range)
+        {
+            var toVec = targetPosition - selfPosition;
             return toVec.magnitude < range ? true : false;
         }
     }
