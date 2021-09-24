@@ -7,6 +7,11 @@ using MaruUtility;
 public class EnemyGenerator : MonoBehaviour
 {
     [SerializeField]
+    GameObject m_target = null;
+    [SerializeField]
+    float m_targetOutRange = 15.0f;
+
+    [SerializeField]
     protected GameObject m_createObject = null;
 
     [SerializeField]
@@ -22,6 +27,11 @@ public class EnemyGenerator : MonoBehaviour
 
     protected virtual void Start()
     {
+        if(m_target == null)
+        {
+            m_target = GameObject.Find("Barricade");
+        }
+
         CreateObjects();
     }
 
@@ -62,7 +72,10 @@ public class EnemyGenerator : MonoBehaviour
     /// <returns>ƒ‰ƒ“ƒ_ƒ€‚ÈˆÊ’u</returns>
     public Vector3 CalcuRandomPosition()
     {
-        return RandomPosition.OutCameraOfTarget(Camera.main, m_maxRandomRange, m_centerPosition);
+        return RandomPosition.OutCameraAndOutRangeOfTarget(
+            m_target, m_targetOutRange,
+            Camera.main, m_maxRandomRange, m_centerPosition);
+        //return RandomPosition.OutCamera(Camera.main, m_maxRandomRange, m_centerPosition);
         //return UtilityRandomPosition.OutRangeOfTarget(m_target, m_outRange, m_maxRandomRange, m_centerPosition);
     }
 
