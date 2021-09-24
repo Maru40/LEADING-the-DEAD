@@ -104,7 +104,6 @@ namespace Player
         {
             if(m_gameControls.Player.Dash.IsPressed() && m_playerParameters.moveInput > 0)
             {
-                Debug.Log("gaga");
                 return;
             }
 
