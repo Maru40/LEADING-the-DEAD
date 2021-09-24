@@ -120,20 +120,41 @@ namespace MaruUtility
         /// <returns>ランダムな位置</returns>
         public static Vector3 OutCameraAndOutRangeOfTargets(List<GameObject> targets, float outRange,
             Camera camera, Vector3 maxRange, Vector3 centerPosition = new Vector3())
-        { 
+        {
+            List<OutOfTargetData> datas = new List<OutOfTargetData>();
+
+            foreach(var target in targets)
+            {
+                datas.Add(new OutOfTargetData(target, outRange));
+            }
+
+            return OutCameraAndOutRangeOfTargets(datas, camera, maxRange, centerPosition);
+        }
+
+        /// <summary>
+        /// カメラの外で複数のターゲットから離れた距離をランダムに返す。
+        /// </summary>
+        /// <param name="datas">ターゲットと話したい距離のデータ</param>
+        /// <param name="camera">カメラ</param>
+        /// <param name="maxRange">ランダムに生成する範囲</param>
+        /// <param name="centerPosition">ランダムに生成する中心位置</param>
+        /// <returns>ランダムな位置</returns>
+        public static Vector3 OutCameraAndOutRangeOfTargets(List<OutOfTargetData> datas,
+            Camera camera, Vector3 maxRange, Vector3 centerPosition = new Vector3())
+        {
             const int numLoop = 100;
             for (int i = 0; i < numLoop; i++)
             {
                 var position = CalcuPosition(maxRange, centerPosition);
 
                 //カメラと比較
-                if(CalcuCamera.IsInCamera(position, camera))  //カメラ内なら処理を飛ばす。
+                if (CalcuCamera.IsInCamera(position, camera))  //カメラ内なら処理を飛ばす。
                 {
                     continue;
                 }
 
                 //ターゲットの全てと比較して、離れていたら
-                if(IsOutRangeOfTargets(position, targets, outRange))
+                if (IsOutRangeOfTargets(position, datas))
                 {
                     return position;  //全ての条件をクリアしたら、positionを返す。
                 }
@@ -154,6 +175,19 @@ namespace MaruUtility
             foreach (var target in targets)
             {
                 if (Calculation.IsRange(selfPosition, target, range))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public static bool IsOutRangeOfTargets(Vector3 selfPosition, List<OutOfTargetData> datas)
+        {
+            foreach (var data in datas)
+            {
+                if (Calculation.IsRange(selfPosition, data.target, data.range))
                 {
                     return false;
                 }
