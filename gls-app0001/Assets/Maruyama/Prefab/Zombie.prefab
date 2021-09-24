@@ -2511,7 +2511,6 @@ MonoBehaviour:
   m_baseParam:
     power: 10
     startRange: 1
-    damageRange: 1.5
   m_hitBox: {fileID: 632433336}
 --- !u!114 &1444888580945028645
 MonoBehaviour:
@@ -2593,10 +2592,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4f28c7bdb3fdf74ab89f089d9fefea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_nearRange: 0.75
-  m_maxSpeed: 3
-  m_turningPower: 3
-  m_lostSeekTime: 10
+  m_param:
+    nearRange: 0.75
+    maxSpeed: 3
+    turningPower: 3
+    lostSeekTime: 10
+    inThrongRange: 3
   m_rayObstacleLayerStrings:
   - L_Obstacle
 --- !u!114 &1444888580945028643
@@ -2611,11 +2612,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e4dfe2378a3b8443ba09efb79c7a24e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_randomPositionRadius: 15
-  m_maxSpeed: 2.5
-  m_turningPower: 2
-  m_targetNearRange: 0.3
-  m_maxWaitCalucRouteTime: 3
+  m_param:
+    randomPositionRadius: 15
+    maxSpeed: 2.5
+    turningPower: 2
+    targetNearRange: 0.3
+    maxWaitCalcuRouteTime: 3
+    inThrongRange: 1
   m_rayObstacleLayerStrings:
   - L_Obstacle
 --- !u!114 &1444888580945028652
@@ -2678,7 +2681,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_param:
     inThrongRange: 1
-    outThrongRange: 0
     nearObjectRange: 1
   m_rayObstacleLayerStrings:
   - L_Obstacle
@@ -2780,8 +2782,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86ed402316f222748be3c4d5f0b331f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_target: {fileID: 0}
-  m_outRangeOfTarget: 15
   m_generator: {fileID: 0}
 --- !u!1 &7689520723826636210
 GameObject:
