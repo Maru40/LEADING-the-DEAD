@@ -6,10 +6,12 @@ using MaruUtility;
 
 public class EnemyGenerator : MonoBehaviour
 {
+    //近くに生成したくないオブジェクトの配列
     [SerializeField]
-    GameObject m_target = null;
+    List<GameObject> m_outOfTargets = new List<GameObject>();
+    //生成したくない範囲
     [SerializeField]
-    float m_targetOutRange = 15.0f;
+    float m_outRange = 15.0f;
 
     [SerializeField]
     protected GameObject m_createObject = null;
@@ -27,9 +29,9 @@ public class EnemyGenerator : MonoBehaviour
 
     protected virtual void Start()
     {
-        if(m_target == null)
+        if(m_outOfTargets.Count == 0)
         {
-            m_target = GameObject.Find("Barricade");
+            m_outOfTargets.Add(GameObject.Find("Barricade"));
         }
 
         CreateObjects();
@@ -72,8 +74,8 @@ public class EnemyGenerator : MonoBehaviour
     /// <returns>ランダムな位置</returns>
     public Vector3 CalcuRandomPosition()
     {
-        return RandomPosition.OutCameraAndOutRangeOfTarget(
-            m_target, m_targetOutRange,
+        return RandomPosition.OutCameraAndOutRangeOfTargets(
+            m_outOfTargets, m_outRange,
             Camera.main, m_maxRandomRange, m_centerPosition);
         //return RandomPosition.OutCamera(Camera.main, m_maxRandomRange, m_centerPosition);
         //return UtilityRandomPosition.OutRangeOfTarget(m_target, m_outRange, m_maxRandomRange, m_centerPosition);
