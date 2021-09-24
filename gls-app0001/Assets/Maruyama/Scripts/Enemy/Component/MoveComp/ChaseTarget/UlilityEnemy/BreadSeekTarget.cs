@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using UtilCalcu = UtilityCalculation;
+using MaruUtility;
 
 public class BreadSeekTarget : NodeBase<EnemyBase>
 { 
@@ -86,7 +86,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
         //m_rigid.AddForce(force);
 
         //–Ú“I’n‚É“ž’B‚µ‚½‚ç
-        if (UtilCalcu.IsArrivalPosition(m_nearRange, GetOwner().transform.position, m_targetPosition)) {
+        if (Calculation.IsArrivalPosition(m_nearRange, GetOwner().transform.position, m_targetPosition)) {
             NextRoute();
         }
     }
