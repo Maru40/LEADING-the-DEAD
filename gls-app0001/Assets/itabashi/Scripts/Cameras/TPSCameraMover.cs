@@ -65,6 +65,7 @@ public class TPSCameraMover : MonoBehaviour
     private void Awake()
     {
         m_gameControls = new GameControls();
+        UpdatePosition();
     }
 
     private void OnEnable()
