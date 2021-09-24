@@ -183,6 +183,12 @@ namespace MaruUtility
             return true;
         }
 
+        /// <summary>
+        /// 全てのターゲットから離れているかどうか
+        /// </summary>
+        /// <param name="selfPosition">自分自身のポジション</param>
+        /// <param name="datas">ターゲットと話したい距離のデータ</param>
+        /// <returns>ランダムなポジション</returns>
         public static bool IsOutRangeOfTargets(Vector3 selfPosition, List<OutOfTargetData> datas)
         {
             foreach (var data in datas)
