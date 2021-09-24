@@ -318,8 +318,7 @@ GameObject:
   - component: {fileID: 1106717132}
   - component: {fileID: 1106717134}
   - component: {fileID: 1106717139}
-  - component: {fileID: 1432969027}
-  - component: {fileID: 1432969028}
+  - component: {fileID: -7198779985173900630}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -489,18 +488,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1106717134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,7 +533,7 @@ MonoBehaviour:
   m_coolTime: 10
   m_minThrowRotateX: -80
   m_maxThrowRotateX: 0
---- !u!114 &1432969027
+--- !u!114 &-7198779985173900630
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -555,25 +542,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 992227749172933023}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e1e6a39de9d68b4b8b9e4c22c6bafec, type: 3}
+  m_Script: {fileID: 11500000, guid: 21988b6c073e5bd4b9d6c53f09d34d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_priority: 0
-  m_type: 0
---- !u!114 &1432969028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 992227749172933023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a70b13cf867ec5540bfe02d83dfee163, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_numBread: 60
-  m_addRange: 1
+  m_mapController: {fileID: 0}
+  m_markerData:
+    sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 10
+  m_isForwardToUp: 1
+  m_drawOutOfRange: 0
+  m_outOfRangeMarkerData:
+    sprite: {fileID: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 10
 --- !u!1 &1039565061206277564
 GameObject:
   m_ObjectHideFlags: 0
