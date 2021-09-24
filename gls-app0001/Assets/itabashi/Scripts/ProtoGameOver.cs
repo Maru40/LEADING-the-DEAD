@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ProtoGameOver : MonoBehaviour
 {
+    [CustomLabel("ゲームオーバーテキスト")]
     [SerializeField]
     private Text m_gameOverText;
 
