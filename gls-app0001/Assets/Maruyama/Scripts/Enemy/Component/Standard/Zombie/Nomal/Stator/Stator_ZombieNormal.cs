@@ -25,7 +25,7 @@ public class Stator_ZombieNormal : StatorBase
 {
     StateMachine m_stateMachine;
 
-    void Start()
+    void Awake()
     {
         m_stateMachine = new StateMachine();
 
