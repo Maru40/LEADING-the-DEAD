@@ -2,16 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System;
 using MaruUtility;
+
+/// <summary>
+/// 一定距離離れた場所に生成したいデータ構造体
+/// </summary>
+[Serializable]
+public struct OutOfTargetData
+{
+    public GameObject target;  //ターゲット
+    public float range;  //どれだけ離れた距離か
+
+    public OutOfTargetData(GameObject target)
+        :this(target, 15.0f)
+    {}
+
+    public OutOfTargetData(GameObject target, float range)
+    {
+        this.target = target;
+        this.range = range;
+    }
+}
+
 
 public class EnemyGenerator : MonoBehaviour
 {
-    //近くに生成したくないオブジェクトの配列
+    //近くに生成したくないオブジェクト群
     [SerializeField]
-    List<GameObject> m_outOfTargets = new List<GameObject>();
-    //生成したくない範囲
-    [SerializeField]
-    float m_outRange = 15.0f;
+    List<OutOfTargetData> m_outOfTargteDatas =  new List<OutOfTargetData>();
 
     [SerializeField]
     protected GameObject m_createObject = null;
@@ -29,9 +48,10 @@ public class EnemyGenerator : MonoBehaviour
 
     protected virtual void Start()
     {
-        if(m_outOfTargets.Count == 0)
+        if(m_outOfTargteDatas.Count == 0)
         {
-            m_outOfTargets.Add(GameObject.Find("Barricade"));
+            var barricade = GameObject.Find("Barricade");
+            m_outOfTargteDatas.Add(new OutOfTargetData(barricade));
         }
 
         CreateObjects();
@@ -39,8 +59,6 @@ public class EnemyGenerator : MonoBehaviour
 
     void CreateObjects()
     {
-        var random = new System.Random(System.DateTime.Now.Millisecond);
-
         for (int i = 0; i < m_numCreate; i++)
         {
             var createPosition = CalcuRandomPosition();
@@ -75,10 +93,8 @@ public class EnemyGenerator : MonoBehaviour
     public Vector3 CalcuRandomPosition()
     {
         return RandomPosition.OutCameraAndOutRangeOfTargets(
-            m_outOfTargets, m_outRange,
+            m_outOfTargteDatas,
             Camera.main, m_maxRandomRange, m_centerPosition);
-        //return RandomPosition.OutCamera(Camera.main, m_maxRandomRange, m_centerPosition);
-        //return UtilityRandomPosition.OutRangeOfTarget(m_target, m_outRange, m_maxRandomRange, m_centerPosition);
     }
 
     //アクセッサ---------------------------------------
