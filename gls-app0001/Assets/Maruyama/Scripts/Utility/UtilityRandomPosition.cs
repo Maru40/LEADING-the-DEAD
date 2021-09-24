@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using MaruUtility;
 public class UtilityRandomPosition
 {
     //Random‚Ì
@@ -66,7 +67,7 @@ public class UtilityRandomPosition
         for(int i = 0; i < numLoop; i++)
         {
             var positon = RandomPosition(maxRange, centerPosition);
-            if (!UtilityCamera.IsInCamera(positon, camera))
+            if (!CalcuCamera.IsInCamera(positon, camera))
             {
                 return positon;
             }

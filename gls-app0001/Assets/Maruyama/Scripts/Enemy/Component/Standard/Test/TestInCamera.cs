@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using MaruUtility;
+
 public class TestInCamera : MonoBehaviour
 {
 
@@ -14,7 +16,7 @@ public class TestInCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(UtilityCamera.IsInCamera(transform.position,Camera.main))
+        if(CalcuCamera.IsInCamera(transform.position,Camera.main))
         {
             Debug.Log("CameraIn");
         }
