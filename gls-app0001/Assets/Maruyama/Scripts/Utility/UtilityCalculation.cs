@@ -27,4 +27,10 @@ public class UtilityCalculation
         var toVec = targetPosition - selfPosition;
         return toVec.magnitude < nearRange ? true : false;
     }
+
+    public static bool IsRange(GameObject selfObj, GameObject targetObj, float range)
+    {
+        var toVec = targetObj.transform.position - selfObj.transform.position;
+        return toVec.magnitude < range ? true : false;
+    }
 }
