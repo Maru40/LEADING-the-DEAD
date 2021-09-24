@@ -97,16 +97,69 @@ namespace MaruUtility
             const int numLoop = 100;
             for (int i = 0; i < numLoop; i++)
             {
-                var positon = CalcuPosition(maxRange, centerPosition);
+                var position = CalcuPosition(maxRange, centerPosition);
                 var targetPosition = target.transform.position;
                 //カメラの範囲外、且つ、ターゲットの範囲外なら
-                if(!CalcuCamera.IsInCamera(positon, camera) && !Calculation.IsRange(positon, targetPosition, outRange))
+                if(!CalcuCamera.IsInCamera(position, camera) && !Calculation.IsRange(position, targetPosition, outRange))
                 {
-                    return positon;
+                    return position;
                 }
             }
 
             return Vector3.zero;
+        }
+
+        /// <summary>
+        /// カメラの外で複数のターゲットから離れた距離をランダムに返す。
+        /// </summary>
+        /// <param name="targets">ターゲット達</param>
+        /// <param name="outRange">離す距離</param>
+        /// <param name="camera">カメラ</param>
+        /// <param name="maxRange">ランダムに生成する範囲</param>
+        /// <param name="centerPosition">ランダムに生成する中心位置</param>
+        /// <returns>ランダムな位置</returns>
+        public static Vector3 OutCameraAndOutRangeOfTargets(List<GameObject> targets, float outRange,
+            Camera camera, Vector3 maxRange, Vector3 centerPosition = new Vector3())
+        { 
+            const int numLoop = 100;
+            for (int i = 0; i < numLoop; i++)
+            {
+                var position = CalcuPosition(maxRange, centerPosition);
+
+                //カメラと比較
+                if(CalcuCamera.IsInCamera(position, camera))  //カメラ内なら処理を飛ばす。
+                {
+                    continue;
+                }
+
+                //ターゲットの全てと比較して、離れていたら
+                if(IsOutRangeOfTargets(position, targets, outRange))
+                {
+                    return position;  //全ての条件をクリアしたら、positionを返す。
+                }
+            }
+
+            return Vector3.zero;
+        }
+
+        /// <summary>
+        /// 全てのターゲットから離れているかどうか
+        /// </summary>
+        /// <param name="selfPosition">自分のポジション</param>
+        /// <param name="targets">ターゲット群</param>
+        /// <param name="range">離れてほしい距離</param>
+        /// <returns>離れていたらtrue</returns>
+        public static bool IsOutRangeOfTargets(Vector3 selfPosition, List<GameObject> targets, float range)
+        {
+            foreach (var target in targets)
+            {
+                if (Calculation.IsRange(selfPosition, target, range))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
