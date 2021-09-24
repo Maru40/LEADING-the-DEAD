@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using MaruUtility;
+
 public class EnemyGenerator : MonoBehaviour
 {
     [SerializeField]
@@ -60,7 +62,7 @@ public class EnemyGenerator : MonoBehaviour
     /// <returns>ƒ‰ƒ“ƒ_ƒ€‚ÈˆÊ’u</returns>
     public Vector3 CalcuRandomPosition()
     {
-        return UtilityRandomPosition.OutCameraOfTarget(Camera.main, m_maxRandomRange, m_centerPosition);
+        return RandomPosition.OutCameraOfTarget(Camera.main, m_maxRandomRange, m_centerPosition);
         //return UtilityRandomPosition.OutRangeOfTarget(m_target, m_outRange, m_maxRandomRange, m_centerPosition);
     }
 
