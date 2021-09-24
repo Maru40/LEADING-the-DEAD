@@ -17,7 +17,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
 
     StatorBase m_stator;
 
-    void Start()
+    void Awake()
     {
         //StartTargetNullCheck();
         StartGeneratorNullCheck();

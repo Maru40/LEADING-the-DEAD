@@ -62,13 +62,6 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0
-        functionName: ResetVelocity
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 89192b373fd03314ba536c852f42894d, type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
       - time: 0.2556791
         functionName: Attack
         data: 
@@ -80,6 +73,13 @@ ModelImporter:
         functionName: AttackHitEnd
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: c9427b8032a16694bb241ee432883b36, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.97333336
+        functionName: ResetVelocity
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 89192b373fd03314ba536c852f42894d, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

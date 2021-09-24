@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System;
+using MaruUtility;
 
 [Serializable]
 public struct ThrongManagerParametor  //群衆Mgrのパラメータp
@@ -77,13 +78,13 @@ public class ThrongManager : MonoBehaviour
         var velocity = velcoityMgr.velocity;
 
         moveDirect += CalcuThrongVector();
-        Vector3 force = UtilityVelocity.CalucSeekVec(velocity, moveDirect, maxSpeed);
+        Vector3 force = CalcuVelocity.CalucSeekVec(velocity, moveDirect, maxSpeed);
         velcoityMgr.AddForce(force * truningPower);
 
         var avoidVec = CalcuSumAvoidVector();
         if (avoidVec != Vector3.zero) //回避が必要なら
         {
-            Vector3 avoidForce = UtilityVelocity.CalucSeekVec(velocity, avoidVec, CalcuAverageSpeed());
+            Vector3 avoidForce = CalcuVelocity.CalucSeekVec(velocity, avoidVec, CalcuAverageSpeed());
             velcoityMgr.AddForce(avoidForce);
         }
     }
@@ -99,7 +100,7 @@ public class ThrongManager : MonoBehaviour
             return;
         }
 
-        var force = UtilityVelocity.CalucSeekVec(velcoityMgr.velocity, throngVec, CalcuAverageSpeed());
+        var force = CalcuVelocity.CalucSeekVec(velcoityMgr.velocity, throngVec, CalcuAverageSpeed());
         velcoityMgr.AddForce(force);
     }
 

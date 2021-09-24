@@ -13,7 +13,7 @@ public class Attack_ZombieNormal : AttackBase
     [SerializeField]
     EnemyAttackTriggerAction m_hitBox = null;
 
-    void Start()
+    void Awake()
     {
         m_stator = GetComponent<Stator_ZombieNormal>();
         m_targetMgr = GetComponent<TargetManager>();
@@ -37,9 +37,10 @@ public class Attack_ZombieNormal : AttackBase
     bool IsAttackStartRange()
     {
         float range = GetBaseParam().startRange;
-        var target = m_targetMgr.GetNowTarget();
+        FoundObject target = m_targetMgr.GetNowTarget();
         if (target)
         {
+            //return UtilityCalculation.IsRange(gameObject, target.gameObject, range);
             return m_eyeRange.IsInEyeRange(target.gameObject, range);
         }
         else

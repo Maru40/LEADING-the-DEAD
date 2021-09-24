@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using MaruUtility;
+
 public class EnemyGenerator : MonoBehaviour
 {
     [SerializeField]
@@ -15,21 +17,11 @@ public class EnemyGenerator : MonoBehaviour
     [SerializeField]
     protected Vector3 m_maxRandomRange = new Vector3();  //ランダムに生成する時の最大距離
 
-    [SerializeField]
-    protected GameObject m_target = null;
-    [SerializeField]
-    protected float m_outRange = 15.0f;
-
     //生成したゾンビを持つ
     protected List<ThrongData> m_datas = new List<ThrongData>();
 
     protected virtual void Start()
     {
-        if(m_target == null)
-        {
-            m_target = GameObject.Find("Player");
-        }
-
         CreateObjects();
     }
 
@@ -70,7 +62,8 @@ public class EnemyGenerator : MonoBehaviour
     /// <returns>ランダムな位置</returns>
     public Vector3 CalcuRandomPosition()
     {
-        return UtilityRandomPosition.OutRangeOfTarget(m_target, m_outRange, m_maxRandomRange, m_centerPosition);
+        return RandomPosition.OutCameraOfTarget(Camera.main, m_maxRandomRange, m_centerPosition);
+        //return UtilityRandomPosition.OutRangeOfTarget(m_target, m_outRange, m_maxRandomRange, m_centerPosition);
     }
 
     //アクセッサ---------------------------------------
