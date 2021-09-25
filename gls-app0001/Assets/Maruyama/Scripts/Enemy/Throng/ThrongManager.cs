@@ -9,9 +9,16 @@ using MaruUtility;
 public struct ThrongManagerParametor  //ŒQOMgr‚Ìƒpƒ‰ƒ[ƒ^p
 {
     public float inThrongRange;   //ŒQO‚Æ”»’f‚·‚é”ÍˆÍ
-    //public float outThrongRange;  //ŒQO‚©‚çŠO‚ê‚½‚Æ”»’f‚·‚é‹——£
 
     public float nearObjectRange; //—×l‚Æ”»’f‚³‚ê‚é‹——£
+    public float maxAvoidPower;   //‰ñ”ğ‚·‚éÅ‘å—Í
+
+    public ThrongManagerParametor(float inThrongRange, float nearObjectRange, float maxAvoidPower)
+    {
+        this.inThrongRange = inThrongRange;
+        this.nearObjectRange = nearObjectRange;
+        this.maxAvoidPower = maxAvoidPower;
+    }
 }
 
 //‘¼‚ÌŒQO‚ğg‚¤‚½‚ß‚Ìƒf[ƒ^
@@ -58,12 +65,9 @@ public class ThrongManager : MonoBehaviour
     [SerializeField]
     EnemyGenerator m_generator = null;
 
-    Rigidbody m_rigid;
-
     void Start()
     {
         SetSearchGenerator();
-        m_rigid = GetComponent<Rigidbody>();
     }
 
     /// <summary>
@@ -149,7 +153,10 @@ public class ThrongManager : MonoBehaviour
         var toSelfVec = transform.position - data.gameObject.transform.position;
 
         if(IsRange(data, m_param.nearObjectRange)) {  //—×l‚È‚ç
-            return toSelfVec;
+            var power =@m_param.maxAvoidPower - toSelfVec.magnitude;
+            var avoidVec = toSelfVec.normalized * power;
+
+            return avoidVec;
         }
 
         return Vector3.zero;
