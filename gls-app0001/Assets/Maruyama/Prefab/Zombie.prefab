@@ -2510,7 +2510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_baseParam:
     power: 10
-    startRange: 1
+    startRange: 2
   m_hitBox: {fileID: 632433336}
 --- !u!114 &1444888580945028645
 MonoBehaviour:
@@ -2682,6 +2682,7 @@ MonoBehaviour:
   m_param:
     inThrongRange: 1
     nearObjectRange: 1
+    maxAvoidPower: 2
   m_rayObstacleLayerStrings:
   - L_Obstacle
   m_generator: {fileID: 0}
