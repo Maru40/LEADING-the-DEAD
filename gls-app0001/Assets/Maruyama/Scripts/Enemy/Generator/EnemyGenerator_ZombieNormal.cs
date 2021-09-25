@@ -14,7 +14,7 @@ public class EnemyGenerator_ZombieNormal : EnemyGenerator
     StatusManager_ZombieNormal.Status m_status = new StatusManager_ZombieNormal.Status(1.0f, 3.0f);
 
     [SerializeField]
-    AttackParametorBase m_attackParametor = new AttackParametorBase(10.0f, 1.0f);
+    AttackParametorBase m_attackParametor = new AttackParametorBase(10.0f, 1.0f, 3.0f);
 
     protected override void Start()
     {
