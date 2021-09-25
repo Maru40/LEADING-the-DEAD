@@ -3,20 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System;
+using MaruUtility;
 
 public class Attack_ZombieNormal : AttackBase
 {
     Stator_ZombieNormal m_stator;
     TargetManager m_targetMgr;
+    EnemyVelocityMgr m_velocityMgr;
+    EnemyRotationCtrl m_rotationCtrl;
     EyeSearchRange m_eyeRange;
 
     [SerializeField]
     EnemyAttackTriggerAction m_hitBox = null;
 
+    bool m_isTargetChase = true;  //çUåÇÇÃìríÜÇ‹Ç≈ÇÕÉ^Å[ÉQÉbÉgÇí«Ç§ÇÊÇ§Ç…Ç∑ÇÈÇΩÇﬂÅB
+
     void Awake()
     {
         m_stator = GetComponent<Stator_ZombieNormal>();
         m_targetMgr = GetComponent<TargetManager>();
+        m_velocityMgr = GetComponent<EnemyVelocityMgr>();
+        m_rotationCtrl = GetComponent<EnemyRotationCtrl>();
         m_eyeRange = GetComponent<EyeSearchRange>();
 
         m_hitBox.AddEnterAction(SendDamage);
@@ -24,24 +31,45 @@ public class Attack_ZombieNormal : AttackBase
 
     void Update()
     {
-        if (IsAttackStartRange())
+        Debug.Log(m_isTargetChase);
+
+        if (m_isTargetChase) 
         {
-            m_stator.GetTransitionMember().attackTrigger.Fire();
+            TargetChase();
         }
+    }
+
+    /// <summary>
+    /// çUåÇÇÃìríÜÇ‹Ç≈ÇÕìGÇí«è]Ç∑ÇÈÇΩÇﬂÅB
+    /// </summary>
+    void TargetChase()
+    {
+        var target = m_targetMgr.GetNowTarget();
+        if (target == null) {
+            return;
+        }
+
+        var velocity = m_velocityMgr.velocity;
+        var toVec = target.transform.position - transform.position;
+        var force = CalcuVelocity.CalucSeekVec(velocity, toVec, GetBaseParam().moveSpeed);
+
+        //m_velocityMgr.AddForce(force);
+        m_velocityMgr.velocity = toVec.normalized * GetBaseParam().moveSpeed;
+        m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
     }
 
     /// <summary>
     /// çUåÇÇäJénÇ∑ÇÈãóó£Ç©Ç«Ç§Ç©
     /// </summary>
     /// <returns>äJénÇ∑ÇÈÇ»ÇÁtrue</returns>
-    bool IsAttackStartRange()
+    override public bool IsAttackStartRange()
     {
         float range = GetBaseParam().startRange;
         FoundObject target = m_targetMgr.GetNowTarget();
         if (target)
         {
-            //return UtilityCalculation.IsRange(gameObject, target.gameObject, range);
-            return m_eyeRange.IsInEyeRange(target.gameObject, range);
+            return Calculation.IsRange(gameObject, target.gameObject, range);
+            //return m_eyeRange.IsInEyeRange(target.gameObject, range);
         }
         else
         {
@@ -50,8 +78,9 @@ public class Attack_ZombieNormal : AttackBase
     }
 
     override public void Attack(){
-        Debug.Log("Attack");
+        //Debug.Log("Attack");
 
+        m_isTargetChase = false;
         m_hitBox.AttackStart();
     }
 
@@ -66,13 +95,11 @@ public class Attack_ZombieNormal : AttackBase
     /// </summary>
     private void SendDamage(Collider other)
     {
-        Debug.Log("Attack_Hit");
+        //Debug.Log("Attack_Hit");
 
         if(other.gameObject == this.gameObject) {
             return;
         }
-
-        //var target = m_targetMgr.GetNowTarget();
 
         var damage = other.GetComponent<AttributeObject.TakeDamageObject>();
         if (damage != null)
@@ -85,5 +112,6 @@ public class Attack_ZombieNormal : AttackBase
     public override void EndAnimationEvent()
     {
         m_stator.GetTransitionMember().chaseTrigger.Fire();
+        m_isTargetChase = true;
     }
 }
