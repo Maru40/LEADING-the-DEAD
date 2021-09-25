@@ -24,5 +24,6 @@ public class ProtoGameOver : MonoBehaviour
     public void GameOver()
     {
         m_gameOverText.enabled = true;
+        m_gameOverText.text = "GAME OVER";
     }
 }
