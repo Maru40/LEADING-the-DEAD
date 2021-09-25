@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AttributeObject;
+using UnityEngine.Events;
 
 public class BarricadeDurability : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class BarricadeDurability : MonoBehaviour
     /// </summary>
     [SerializeField]
     private float m_durability = 100;
+
+    [SerializeField]
+    private UnityEvent m_breakEvent;
 
     public void TakeDamage(AttributeObject.DamageData damageData)
     {
@@ -22,6 +26,8 @@ public class BarricadeDurability : MonoBehaviour
         {
             return;
         }
+
+        m_breakEvent?.Invoke();
 
         Debug.Log("”j‰ó‚³‚ê‚Ü‚µ‚½");
 

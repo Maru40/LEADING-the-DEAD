@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ProtoGameOver : MonoBehaviour
+public class ProtoGameClear : MonoBehaviour
 {
-    [CustomLabel("ゲームオーバーテキスト")]
     [SerializeField]
-    private Text m_gameOverText;
+    private Text m_clearText;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_gameOverText.enabled = false;
+        m_clearText.enabled = false;
     }
 
     // Update is called once per frame
@@ -21,9 +20,9 @@ public class ProtoGameOver : MonoBehaviour
         
     }
 
-    public void GameOver()
+    public void GameClear()
     {
-        m_gameOverText.enabled = true;
-        m_gameOverText.text = "GAME OVER";
+        m_clearText.enabled = true;
+        m_clearText.text = "CLEAR";
     }
 }
