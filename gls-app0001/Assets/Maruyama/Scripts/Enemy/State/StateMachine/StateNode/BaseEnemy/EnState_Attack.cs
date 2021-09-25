@@ -17,12 +17,17 @@ public class EnState_Attack : EnemyStateNodeBase<EnemyBase>
         animatorCtrl.AttackTriggerFire();
 
         AddChangeComp(owner.GetComponent<ObstacleEvasion>(), false, true);
+        AddChangeComp(owner.GetComponent<Attack_ZombieNormal>(), true, false);
 
         //test
         //‰ñ“]‚ðˆêŽž“Itest“I‚Éoff
-        AddChangeComp(owner.GetComponent<EnemyRotationCtrl>(), false, true);
+        //AddChangeComp(owner.GetComponent<EnemyRotationCtrl>(), false, true);
 
         ChangeComps(EnableChangeType.Start);
+
+        //‘¬“x‚ðŽE‚·
+        //var velocityMgr = owner.GetComponent<EnemyVelocityMgr>();
+        //velocityMgr.ResetVelocity();
 
         Debug.Log("AttackStart");
     }

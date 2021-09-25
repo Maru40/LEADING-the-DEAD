@@ -9,18 +9,20 @@ public struct AttackParametorBase
 {
     public float power;
     public float startRange;  //攻撃開始範囲
+    public float moveSpeed;   //攻撃時の移動スピード
 
-    public AttackParametorBase(float power, float startRange)
+    public AttackParametorBase(float power, float startRange, float moveSpeed)
     {
         this.power = power;
         this.startRange = startRange;
+        this.moveSpeed = moveSpeed;
     }
 }
 
 public abstract class AttackBase : MonoBehaviour
 {
     [SerializeField]
-    private AttackParametorBase m_baseParam = new AttackParametorBase(10.0f, 1.0f);
+    private AttackParametorBase m_baseParam = new AttackParametorBase(10.0f, 1.0f, 3.0f);
 
 
     public void SetBaseParam(AttackParametorBase param)
@@ -49,6 +51,12 @@ public abstract class AttackBase : MonoBehaviour
     {
         return m_baseParam.startRange;
     }
+
+    /// <summary>
+    /// 攻撃を開始する距離かどうか
+    /// </summary>
+    /// <returns>開始するならtrue</returns>
+    public abstract bool IsAttackStartRange();
 
     /// <summary>
     /// 攻撃処理(アニメーションに合わせる)

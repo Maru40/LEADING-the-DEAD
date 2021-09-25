@@ -9,9 +9,16 @@ using MaruUtility;
 public struct ThrongManagerParametor  //群衆Mgrのパラメータp
 {
     public float inThrongRange;   //群衆と判断する範囲
-    //public float outThrongRange;  //群衆から外れたと判断する距離
 
     public float nearObjectRange; //隣人と判断される距離
+    public float maxAvoidPower;   //回避する最大力
+
+    public ThrongManagerParametor(float inThrongRange, float nearObjectRange, float maxAvoidPower)
+    {
+        this.inThrongRange = inThrongRange;
+        this.nearObjectRange = nearObjectRange;
+        this.maxAvoidPower = maxAvoidPower;
+    }
 }
 
 //他の群衆を使うためのデータ
@@ -58,12 +65,16 @@ public class ThrongManager : MonoBehaviour
     [SerializeField]
     EnemyGenerator m_generator = null;
 
-    Rigidbody m_rigid;
+    EnemyRotationCtrl m_rotationCtrl;
+
+    private void Awake()
+    {
+        m_rotationCtrl = GetComponent<EnemyRotationCtrl>();
+    }
 
     void Start()
     {
         SetSearchGenerator();
-        m_rigid = GetComponent<Rigidbody>();
     }
 
     /// <summary>
@@ -73,20 +84,22 @@ public class ThrongManager : MonoBehaviour
     /// <param name="moveDirect">そのオブジェクトが向かいたい方向</param>
     /// <param name="maxSpeed">最大スピード</param>
     /// <param name="truningPower">旋回パワー</param>
-    public void AvoidNearThrong(EnemyVelocityMgr velcoityMgr, Vector3 moveDirect, float maxSpeed , float truningPower)
+    public void AvoidNearThrong(EnemyVelocityMgr velocityMgr, Vector3 moveDirect, float maxSpeed , float truningPower)
     {
-        var velocity = velcoityMgr.velocity;
+        var velocity = velocityMgr.velocity;
 
         moveDirect += CalcuThrongVector();
         Vector3 force = CalcuVelocity.CalucSeekVec(velocity, moveDirect, maxSpeed);
-        velcoityMgr.AddForce(force * truningPower);
+        velocityMgr.AddForce(force * truningPower);
 
         var avoidVec = CalcuSumAvoidVector();
         if (avoidVec != Vector3.zero) //回避が必要なら
         {
             Vector3 avoidForce = CalcuVelocity.CalucSeekVec(velocity, avoidVec, CalcuAverageSpeed());
-            velcoityMgr.AddForce(avoidForce);
+            velocityMgr.AddForce(avoidForce);
         }
+
+        m_rotationCtrl.SetDirect(velocityMgr.velocity);
     }
 
     /// <summary>
@@ -149,7 +162,10 @@ public class ThrongManager : MonoBehaviour
         var toSelfVec = transform.position - data.gameObject.transform.position;
 
         if(IsRange(data, m_param.nearObjectRange)) {  //隣人なら
-            return toSelfVec;
+            var power =　m_param.maxAvoidPower - toSelfVec.magnitude;
+            var avoidVec = toSelfVec.normalized * power;
+
+            return avoidVec;
         }
 
         return Vector3.zero;
