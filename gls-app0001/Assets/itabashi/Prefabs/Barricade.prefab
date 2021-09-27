@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 1182914468706121655}
   - component: {fileID: 8419132738376911341}
   - component: {fileID: 403600040743058501}
-  - component: {fileID: 56816489}
+  - component: {fileID: 1950226218}
   m_Layer: 3
   m_Name: Barricade
   m_TagString: Untagged
@@ -474,6 +474,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_durability: 100
+  m_maxDurability: 100
+  m_gauge: {fileID: 0}
   m_breakEvent:
     m_PersistentCalls:
       m_Calls:
@@ -489,7 +491,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &56816489
+--- !u!114 &1950226218
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -498,9 +500,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1182914468150856143}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81acca88645c29548b90670eba4033e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 60d5cf2f39af1f141a4acc07a91b4804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_recoveryCoolTime: 0.01
+  m_recoveryValue: 0.1
+  m_recoveryEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 403600040743058501}
+        m_TargetAssemblyTypeName: BarricadeDurability, Assembly-CSharp
+        m_MethodName: Recovery
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1182914468150856145
 GameObject:
   m_ObjectHideFlags: 0
