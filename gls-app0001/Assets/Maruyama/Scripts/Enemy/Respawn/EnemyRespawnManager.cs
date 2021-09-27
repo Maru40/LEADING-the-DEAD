@@ -2,7 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System;
 
+[Serializable]
+public struct RespawnManagerParametor
+{
+    public bool isRespawn;
+    public float time;
+
+    public RespawnManagerParametor(bool isRespawn, float time)
+    {
+        this.isRespawn = isRespawn;
+        this.time = time;
+    }
+}
 
 /// <summary>
 /// ターゲットの範囲外にリスポーンする処理
@@ -13,9 +26,19 @@ public class EnemyRespawnManager : EnemyRespawnBase
     //GameObject m_target = null;  //現在使っていない。
 
     [SerializeField]
+    RespawnManagerParametor m_param = new RespawnManagerParametor(true, 0.0f);
+
+    //[SerializeField]
+    //bool m_isRespawn = true;
+
+    //[SerializeField]
+    //float m_time = 10.0f;
+
+    [SerializeField]
     EnemyGenerator m_generator = null;
 
     StatorBase m_stator;
+    WaitTimer m_waitTimer;
 
     void Awake()
     {
@@ -23,9 +46,23 @@ public class EnemyRespawnManager : EnemyRespawnBase
         StartGeneratorNullCheck();
 
         m_stator = GetComponent<StatorBase>();
+        m_waitTimer = GetComponent<WaitTimer>();
     }
 
-    public void Respawn()
+    //リスポーン準備
+    public void RespawnReserve()
+    {
+        //リスポーンするなら準備をする。
+        if (m_param.isRespawn)
+        {
+            //使いまわすため、削除せずにリスポーンポイントに設定する。
+            gameObject.transform.position = new Vector3(0.0f, -100.0f, 0.0f);
+
+            m_waitTimer.AddWaitTimer(GetType(), m_param.time, Respawn);
+        }
+    }
+
+    void Respawn()
     {
         //if(m_target == null || m_generator == null) {
         if (m_generator == null) { 
@@ -39,6 +76,8 @@ public class EnemyRespawnManager : EnemyRespawnBase
         m_stator.Reset();  //ステートのリセット
     }
 
+    
+
     /// <summary>
     /// リスポーンする場所の計算
     /// </summary>
@@ -48,6 +87,30 @@ public class EnemyRespawnManager : EnemyRespawnBase
         return m_generator.CalcuRandomPosition();
     }
 
+    //アクセッサ-------------------------------------------------------
+
+    public void SetRespawnTime(float time)
+    {
+        m_param.time = time;
+    }
+    public float GetRespawnTime(float time)
+    {
+        return m_param.time;
+    }
+
+    public void SetIsRespawn(bool isRespawn)
+    {
+        m_param.isRespawn = isRespawn;
+    }
+    public bool GetIsRespawn()
+    {
+        return m_param.isRespawn;
+    }
+
+    public void SetParametor(RespawnManagerParametor parametor)
+    {
+        m_param = parametor;
+    }
 
     //StartNullCheck----------------------------------------------------
 
