@@ -5,6 +5,9 @@ using UnityEngine;
 public class EnemyGenerator_ZombieNormal : EnemyGenerator
 {
     [SerializeField]
+    RespawnManagerParametor m_respawnParametor = new RespawnManagerParametor(true, 0.0f);
+
+    [SerializeField]
     ChaseTargetParametor m_chaseParametor = new ChaseTargetParametor(0.75f, 3.0f, 3.0f, 10.0f, 3.0f);
 
     [SerializeField]
@@ -23,6 +26,12 @@ public class EnemyGenerator_ZombieNormal : EnemyGenerator
 
     protected override void CreateObjectAdjust(GameObject obj)
     {
+        var respawn = obj.GetComponent<EnemyRespawnManager>();
+        if (respawn)
+        {
+            respawn.SetParametor(m_respawnParametor);
+        }
+
         var chase = obj.GetComponent<ChaseTarget>();
         if (chase)
         {
