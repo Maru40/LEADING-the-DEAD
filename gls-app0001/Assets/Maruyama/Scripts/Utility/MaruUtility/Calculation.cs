@@ -37,6 +37,10 @@ namespace MaruUtility
 
         public static bool IsRange(Vector3 selfPosition, GameObject targetObj, float range)
         {
+            if(targetObj == null) {
+                return false;
+            }
+
             return IsRange(selfPosition, targetObj.transform.position, range);
         }
 
