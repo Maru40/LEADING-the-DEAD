@@ -13,6 +13,12 @@ public class BarricadeDurability : MonoBehaviour
     private float m_durability = 100;
 
     [SerializeField]
+    private float m_maxDurability = 100;
+
+    [SerializeField]
+    private Gauge m_gauge;
+
+    [SerializeField]
     private UnityEvent m_breakEvent;
 
     public void TakeDamage(AttributeObject.DamageData damageData)
@@ -20,7 +26,9 @@ public class BarricadeDurability : MonoBehaviour
         Debug.Log($"{damageData.damageValue}ƒ_ƒ[ƒWŽó‚¯‚Ü‚µ‚½");
         m_durability -= damageData.damageValue;
 
-        m_durability = Mathf.Max(m_durability, 0);
+        m_durability = Mathf.Clamp(m_durability, 0.0f, m_maxDurability);
+
+        m_gauge.fillAmount = m_durability / m_maxDurability;
 
         if (m_durability > 0)
         {
@@ -32,5 +40,12 @@ public class BarricadeDurability : MonoBehaviour
         Debug.Log("”j‰ó‚³‚ê‚Ü‚µ‚½");
 
         Destroy(gameObject);
+    }
+
+    public void Recovery(float recoveryValue)
+    {
+        m_durability = Mathf.Clamp(m_durability + recoveryValue, 0.0f, m_maxDurability);
+
+        m_gauge.fillAmount = m_durability / m_maxDurability;
     }
 }
