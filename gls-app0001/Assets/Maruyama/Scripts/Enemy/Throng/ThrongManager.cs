@@ -222,7 +222,7 @@ public class ThrongManager : MonoBehaviour
     /// 近い距離のゾンビを避けるVector
     /// </summary>
     /// <returns>避けるベクトルの合計</returns>
-    Vector3 CalcuSumAvoidVector()
+    public Vector3 CalcuSumAvoidVector()
     {
         var throngDatas = m_generator.GetThrongDatas();
         Vector3 avoidVector = Vector3.zero;
