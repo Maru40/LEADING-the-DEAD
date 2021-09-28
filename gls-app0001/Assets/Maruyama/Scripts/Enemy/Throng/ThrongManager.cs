@@ -175,7 +175,7 @@ public class ThrongManager : MonoBehaviour
     /// 群衆行動ベクトルの計算(まだ未完成)
     /// </summary>
     /// <returns></returns>
-    Vector3 CalcuThrongVector()
+    public Vector3 CalcuThrongVector()
     {
         var throngDatas = m_generator.GetThrongDatas();
 
