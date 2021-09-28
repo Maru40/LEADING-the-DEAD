@@ -12,6 +12,7 @@ public class Attack_ZombieNormal : AttackBase
     EnemyVelocityMgr m_velocityMgr;
     EnemyRotationCtrl m_rotationCtrl;
     EyeSearchRange m_eyeRange;
+    ThrongManager m_throngManager;
 
     [SerializeField]
     EnemyAttackTriggerAction m_hitBox = null;
@@ -25,6 +26,7 @@ public class Attack_ZombieNormal : AttackBase
         m_velocityMgr = GetComponent<EnemyVelocityMgr>();
         m_rotationCtrl = GetComponent<EnemyRotationCtrl>();
         m_eyeRange = GetComponent<EyeSearchRange>();
+        m_throngManager = GetComponent<ThrongManager>();
 
         m_hitBox.AddEnterAction(SendDamage);
     }
@@ -51,10 +53,15 @@ public class Attack_ZombieNormal : AttackBase
 
         var velocity = m_velocityMgr.velocity;
         var toVec = target.transform.position - transform.position;
-        var force = CalcuVelocity.CalucSeekVec(velocity, toVec, GetBaseParam().moveSpeed);
+        //var throngVec = m_throngManager.CalcuThrongVector();
+        var avoidVec = m_throngManager.CalcuSumAvoidVector();
+        toVec += avoidVec;
+        toVec.y = 0.0f;  //(yのベクトルを殺す。)
+        //var force = CalcuVelocity.CalucSeekVec(velocity, toVec, GetBaseParam().moveSpeed);
 
         //m_velocityMgr.AddForce(force);
         m_velocityMgr.velocity = toVec.normalized * GetBaseParam().moveSpeed;
+        //m_velocityMgr.AddForce(force);
         m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
     }
 
