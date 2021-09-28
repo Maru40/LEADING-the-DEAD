@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 161422854}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -1633,8 +1633,8 @@ MonoBehaviour:
   m_targetObject: {fileID: 1432969026}
   m_maxRange: 12
   m_rotateSpeed: 1
-  m_minRotateX: 60
-  m_maxRotateX: 60
+  m_minRotateX: 40
+  m_maxRotateX: 40
 --- !u!1 &1240398310
 GameObject:
   m_ObjectHideFlags: 0
@@ -1832,6 +1832,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 56816489, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1182914468150695407, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1884,7 +1888,8 @@ PrefabInstance:
       propertyPath: m_TagString
       value: T_Wall
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 56816489, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
 --- !u!1 &1432969026 stripped
 GameObject:
@@ -2738,6 +2743,14 @@ PrefabInstance:
     - target: {fileID: 2834631260142655915, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_numCreate
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_respawnParametor.isRespawn
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
