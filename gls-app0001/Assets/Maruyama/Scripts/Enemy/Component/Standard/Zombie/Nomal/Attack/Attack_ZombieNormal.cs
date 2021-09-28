@@ -59,7 +59,6 @@ public class Attack_ZombieNormal : AttackBase
         toVec.y = 0.0f;  //(yのベクトルを殺す。)
         //var force = CalcuVelocity.CalucSeekVec(velocity, toVec, GetBaseParam().moveSpeed);
 
-        //m_velocityMgr.AddForce(force);
         m_velocityMgr.velocity = toVec.normalized * GetBaseParam().moveSpeed;
         //m_velocityMgr.AddForce(force);
         m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
