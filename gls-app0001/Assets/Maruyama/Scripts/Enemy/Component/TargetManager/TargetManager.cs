@@ -14,6 +14,7 @@ public class TargetManager : MonoBehaviour
 
     private void Start()
     {
+        //nullCheck
         if(m_targets.Count == 0) {
             var target = GameObject.Find("Player");
             m_nowTarget = target.GetComponent<FoundObject>();
@@ -37,8 +38,56 @@ public class TargetManager : MonoBehaviour
     /// <param name="target">ターゲット</param>
     public void SetNowTarget(Type type, FoundObject target)
     {
+        //nowTargetがnullでなかったら
+        if(m_nowTarget != null) {
+            if (!IsTargetUpdate(target)) {  //更新が必要ないなら
+                return;  //更新せずに処理を飛ばす。
+            }
+        }
+
+        //更新
         m_nowTarget = target;
         m_targets[type] = target;
+    }
+
+    /// <summary>
+    /// 更新が必要かどうかを返す。
+    /// </summary>
+    /// <param name="target">ターゲット</param>
+    /// <returns>更新が必要ならtrue</returns>
+    bool IsTargetUpdate(FoundObject target)
+    {
+        var newPriority = target.GetFoundData().priority;
+        var nowPriority = m_nowTarget.GetFoundData().priority;
+
+        if (nowPriority < newPriority) //新しい方が優先度が高かったら更新
+        {
+            return true;
+        }
+
+        if(nowPriority == newPriority) //新しい方と優先度が同じなら。
+        {
+            return IsNearNewTarget(target);  //新しいターゲットが近いなら更新あり。
+        }
+
+        return false;  //どちらでも無かったら更新しない。
+    }
+
+    /// <summary>
+    /// 新しいターゲットの方が近いかどうか
+    /// </summary>
+    /// <param name="target"></param>
+    /// <returns>新しいターゲットが近いならtrue</returns>
+    bool IsNearNewTarget(FoundObject newTarget)
+    {
+        var nowTargetPosition = m_nowTarget.gameObject.transform.position;
+        var newTargetPosition = newTarget.gameObject.transform.position;
+
+        var toNowTarget = nowTargetPosition - transform.position;
+        var toNewTarget = newTargetPosition - transform.position;
+
+        //現在の方が近いならfalse
+        return (toNowTarget.magnitude < toNewTarget.magnitude) ? false : true;
     }
 
     /// <summary>
