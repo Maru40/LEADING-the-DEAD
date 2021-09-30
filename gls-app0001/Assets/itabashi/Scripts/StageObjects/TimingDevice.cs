@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,23 +6,23 @@ using UnityEngine.Events;
 public class TimingDevice : MonoBehaviour
 {
     /// <summary>
-    /// ƒCƒxƒ“ƒg”­‰Î‚Ü‚Å‚ÌŠÔ
+    /// ã‚¤ãƒ™ãƒ³ãƒˆç™ºç«ã¾ã§ã®æ™‚é–“
     /// </summary>
     [SerializeField]
     private float m_fireTime = 1.0f;
 
     /// <summary>
-    /// ƒCƒxƒ“ƒg”­‰Î‚Ü‚Å‚ÌƒJƒEƒ“ƒgŠÔ
+    /// ã‚¤ãƒ™ãƒ³ãƒˆç™ºç«ã¾ã§ã®ã‚«ã‚¦ãƒ³ãƒˆæ™‚é–“
     /// </summary>
     private float m_nowCountTime = 0.0f;
 
     /// <summary>
-    /// ƒ^ƒCƒ}[‚ªŒ»İ“®‚¢‚Ä‚¢‚é‚©
+    /// ã‚¿ã‚¤ãƒãƒ¼ãŒç¾åœ¨å‹•ã„ã¦ã„ã‚‹ã‹
     /// </summary>
     private bool m_isTimerActive = false;
 
     /// <summary>
-    /// ƒV[ƒ“ŠJn‚Éƒ^ƒCƒ}[‚ğŠJn‚·‚é‚©
+    /// ã‚·ãƒ¼ãƒ³é–‹å§‹æ™‚ã«ã‚¿ã‚¤ãƒãƒ¼ã‚’é–‹å§‹ã™ã‚‹ã‹
     /// </summary>
     [SerializeField]
     private bool m_startOnAwake = false;
@@ -31,13 +31,13 @@ public class TimingDevice : MonoBehaviour
     private bool m_isLoop = false;
 
     /// <summary>
-    /// ŠÔ‚É‚È‚é‚Æ”­‰Î‚³‚ê‚éƒCƒxƒ“ƒg
+    /// æ™‚é–“ã«ãªã‚‹ã¨ç™ºç«ã•ã‚Œã‚‹ã‚¤ãƒ™ãƒ³ãƒˆ
     /// </summary>
     [SerializeField]
     private UnityEvent m_timerEvent = new UnityEvent();
 
     /// <summary>
-    /// ƒ^ƒCƒ}[‚ğŠJn‚·‚é(‰‚ß‚©‚ç)
+    /// ã‚¿ã‚¤ãƒãƒ¼ã‚’é–‹å§‹ã™ã‚‹(åˆã‚ã‹ã‚‰)
     /// </summary>
     public void TimerStart()
     {
@@ -46,7 +46,7 @@ public class TimingDevice : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒ^ƒCƒ}[‚ğ’â~‚·‚é(I—¹)
+    /// ã‚¿ã‚¤ãƒãƒ¼ã‚’åœæ­¢ã™ã‚‹(çµ‚äº†)
     /// </summary>
     public void TimerStop()
     {
@@ -55,7 +55,7 @@ public class TimingDevice : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒ^ƒCƒ}[‚ğˆê’â~‚·‚é
+    /// ã‚¿ã‚¤ãƒãƒ¼ã‚’ä¸€æ™‚åœæ­¢ã™ã‚‹
     /// </summary>
     public void TimerPause()
     {
@@ -63,7 +63,7 @@ public class TimingDevice : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒ^ƒCƒ}[‚ğŠJn‚·‚é(“r’†‚©‚ç)
+    /// ã‚¿ã‚¤ãƒãƒ¼ã‚’é–‹å§‹ã™ã‚‹(é€”ä¸­ã‹ã‚‰)
     /// </summary>
     public void TimerUnPause()
     {
@@ -99,7 +99,7 @@ public class TimingDevice : MonoBehaviour
             return;
         }
 
-        Debug.Log($"{gameObject.name}‚ÌTimerEvent‚ª”­‰Î‚³‚ê‚Ü‚µ‚½");
+        Debug.Log($"{gameObject.name}ã®TimerEventãŒç™ºç«ã•ã‚Œã¾ã—ãŸ");
 
         m_timerEvent.Invoke();
 

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,24 +7,24 @@ namespace Player
     public class PlayerThrower : MonoBehaviour
     {
         /// <summary>
-        /// ƒQ[ƒ€‚Ì“ü—Í
+        /// ã‚²ãƒ¼ãƒ ã®å…¥åŠ›
         /// </summary>
         GameControls m_gameControls;
 
         /// <summary>
-        /// ƒvƒŒƒCƒ„[ƒLƒƒƒ‰ƒNƒ^[‚ÌƒAƒjƒ[ƒVƒ‡ƒ“ƒpƒ‰ƒ[ƒ^[
+        /// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼
         /// </summary>
         [SerializeField]
         PlayerAnimationParameters m_playerParameters;
 
         /// <summary>
-        /// “Š‚°‚é‘ÎÛ‚ÌƒIƒuƒWƒFƒNƒg
+        /// æŠ•ã’ã‚‹å¯¾è±¡ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
         /// </summary>
         [SerializeField]
         ThrowableObject m_throwableObjectPrefab;
 
         /// <summary>
-        /// ƒIƒuƒWƒFƒNƒg‘Å‚¿o‚µ‘•’u
+        /// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆæ‰“ã¡å‡ºã—è£…ç½®
         /// </summary>
         [SerializeField]
         ObjectLauncher m_objectLauncher;

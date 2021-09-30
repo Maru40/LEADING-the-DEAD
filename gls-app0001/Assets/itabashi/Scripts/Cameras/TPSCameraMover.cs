@@ -1,57 +1,57 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// TPSƒJƒƒ‰‚ÌˆÚ“®ŠÇ—ƒRƒ“ƒ|[ƒlƒ“ƒg
+/// TPSã‚«ãƒ¡ãƒ©ã®ç§»å‹•ç®¡ç†ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 /// </summary>
 public class TPSCameraMover : MonoBehaviour
 {
     /// <summary>
-    /// ’†S‚É•\¦‚·‚éƒ^[ƒQƒbƒg
+    /// ä¸­å¿ƒã«è¡¨ç¤ºã™ã‚‹ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
     /// </summary>
     [SerializeField]
     private GameObject m_targetObject;
 
     /// <summary>
-    /// ƒ^[ƒQƒbƒg‚©‚ç‚ÌƒJƒƒ‰‚ÌÅ‘å‹——£
+    /// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‹ã‚‰ã®ã‚«ãƒ¡ãƒ©ã®æœ€å¤§è·é›¢
     /// </summary>
     [SerializeField]
     private float m_maxRange = 2.0f;
 
     /// <summary>
-    /// ‰ñ“]ƒXƒs[ƒh
+    /// å›è»¢ã‚¹ãƒ”ãƒ¼ãƒ‰
     /// </summary>
     [SerializeField]
     private float m_rotateSpeed = 1.0f;
 
     /// <summary>
-    /// X²‰ñ“]‚ÌÅ¬’l
+    /// Xè»¸å›è»¢ã®æœ€å°å€¤
     /// </summary>
     [SerializeField]
     private float m_minRotateX = -90;
     /// <summary>
-    /// X²‰ñ“]‚ÌÅ‘å’l
+    /// Xè»¸å›è»¢ã®æœ€å¤§å€¤
     /// </summary>
     [SerializeField]
     private float m_maxRotateX = 90;
 
     /// <summary>
-    /// ˆê•b‚É‘Î‚µ‚Ä‚Ì‰ñ“]—Ê
+    /// ä¸€ç§’ã«å¯¾ã—ã¦ã®å›è»¢é‡
     /// </summary>
     private const float ROTATE_EULER = 45;
 
     /// <summary>
-    /// X²‚É‘Î‚·‚é‰ñ“]
+    /// Xè»¸ã«å¯¾ã™ã‚‹å›è»¢
     /// </summary>
     private float m_rotateX;
     /// <summary>
-    /// Y²‚É‘Î‚·‚é‰ñ“]
+    /// Yè»¸ã«å¯¾ã™ã‚‹å›è»¢
     /// </summary>
     private float m_rotateY;
 
     /// <summary>
-    /// ƒQ[ƒ€‚Ì“ü—Í
+    /// ã‚²ãƒ¼ãƒ ã®å…¥åŠ›
     /// </summary>
     private GameControls m_gameControls;
 
@@ -87,7 +87,7 @@ public class TPSCameraMover : MonoBehaviour
     {
         if(!m_targetObject)
         {
-            Debug.LogError("ƒ^[ƒQƒbƒg‚Éw’è‚³‚ê‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg‚ª‘¶İ‚µ‚Ü‚¹‚ñB\n" + gameObject.name + " TargetObject");
+            Debug.LogError("ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã«æŒ‡å®šã•ã‚Œã¦ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒå­˜åœ¨ã—ã¾ã›ã‚“ã€‚\n" + gameObject.name + " TargetObject");
             return;
         }
 

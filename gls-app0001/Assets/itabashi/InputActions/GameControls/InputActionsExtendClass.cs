@@ -1,18 +1,18 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// InputActionŠg’£ƒƒ\ƒbƒh—pƒNƒ‰ƒX
+/// InputActionæ‹¡å¼µãƒ¡ã‚½ãƒƒãƒ‰ç”¨ã‚¯ãƒ©ã‚¹
 /// </summary>
 public static class InputActionsExtendClass
 {
     /// <summary>
-    /// ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
+    /// ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
     /// </summary>
-    /// <param name="inputAction">”»’è—pƒf[ƒ^</param>
-    /// <returns>‰Ÿ‚³‚ê‚Ä‚¢‚é‚È‚çtrue</returns>
+    /// <param name="inputAction">åˆ¤å®šç”¨ãƒ‡ãƒ¼ã‚¿</param>
+    /// <returns>æŠ¼ã•ã‚Œã¦ã„ã‚‹ãªã‚‰true</returns>
     public static bool IsPressed(this InputAction inputAction)
     {
         try

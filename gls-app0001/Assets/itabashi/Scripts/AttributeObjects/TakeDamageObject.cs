@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,19 +6,19 @@ using UnityEngine.Events;
 namespace AttributeObject
 {
     /// <summary>
-    /// ƒ_ƒ[ƒWƒf[ƒ^\‘¢‘Ì
+    /// ãƒ€ãƒ¡ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“
     /// </summary>
     public readonly struct DamageData
     {
         /// <summary>
-        /// ƒ_ƒ[ƒW—Ê
+        /// ãƒ€ãƒ¡ãƒ¼ã‚¸é‡
         /// </summary>
         public readonly float damageValue;
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
-        /// <param name="damageValue">ƒ_ƒ[ƒW—Ê</param>
+        /// <param name="damageValue">ãƒ€ãƒ¡ãƒ¼ã‚¸é‡</param>
         public DamageData(float damageValue)
         {
             this.damageValue = damageValue;
@@ -26,20 +26,20 @@ namespace AttributeObject
     }
 
     /// <summary>
-    /// ƒ_ƒ[ƒW‚ğó‚¯‚ç‚ê‚é‹@”\‚ğ‚Â‚¯‚éƒRƒ“ƒ|[ƒlƒ“ƒg
+    /// ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã‚‰ã‚Œã‚‹æ©Ÿèƒ½ã‚’ã¤ã‘ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
     /// </summary>
     public class TakeDamageObject : MonoBehaviour
     {
         /// <summary>
-        /// ƒ_ƒ[ƒW‚ğó‚¯‚½Û‚ÉŒÄ‚Î‚ê‚éƒCƒxƒ“ƒg
+        /// ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ãŸéš›ã«å‘¼ã°ã‚Œã‚‹ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         [SerializeField]
         private UnityEvent<DamageData> m_takeDamageEvent;
 
         /// <summary>
-        /// ƒ_ƒ[ƒW‚ğó‚¯‚éƒƒ\ƒbƒh
+        /// ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
         /// </summary>
-        /// <param name="damageData">ƒ_ƒ[ƒWƒf[ƒ^</param>
+        /// <param name="damageData">ãƒ€ãƒ¡ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿</param>
         public void TakeDamage(in DamageData damageData)
         {
             m_takeDamageEvent.Invoke(damageData);

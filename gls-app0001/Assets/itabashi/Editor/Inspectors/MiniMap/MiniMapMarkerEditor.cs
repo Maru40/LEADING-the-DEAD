@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -15,22 +15,22 @@ namespace MiniMap
             var markerData = serializedObject.FindProperty("m_markerData");
             var isForwardToUp = serializedObject.FindProperty("m_isForwardToUp");
 
-            EditorGUILayout.PropertyField(markerData, new GUIContent("ƒ}[ƒJ[î•ñ"));
-            EditorGUILayout.PropertyField(isForwardToUp, new GUIContent("forward‚Æ“¯Šú‚·‚é"));
+            EditorGUILayout.PropertyField(markerData, new GUIContent("ãƒãƒ¼ã‚«ãƒ¼æƒ…å ±"));
+            EditorGUILayout.PropertyField(isForwardToUp, new GUIContent("forwardã¨åŒæœŸã™ã‚‹"));
 
             var drawOutOfRange = serializedObject.FindProperty("m_drawOutOfRange");
 
             EditorGUILayout.Space();
 
-            EditorGUILayout.PropertyField(drawOutOfRange, new GUIContent("”ÍˆÍŠO‚Å‚à•\¦‚·‚é"));
+            EditorGUILayout.PropertyField(drawOutOfRange, new GUIContent("ç¯„å›²å¤–ã§ã‚‚è¡¨ç¤ºã™ã‚‹"));
 
             if(drawOutOfRange.boolValue)
             {
                 var outOfRangeMarkerData = serializedObject.FindProperty("m_outOfRangeMarkerData");
                 var isOutwardToUp = serializedObject.FindProperty("m_isOutwardToUp");
 
-                EditorGUILayout.PropertyField(outOfRangeMarkerData, new GUIContent("”ÍˆÍŠOƒ}[ƒJ[î•ñ"));
-                EditorGUILayout.PropertyField(isOutwardToUp, new GUIContent("ŠOŒü‚«‚ÉŒü‚¯‚é"));
+                EditorGUILayout.PropertyField(outOfRangeMarkerData, new GUIContent("ç¯„å›²å¤–ãƒãƒ¼ã‚«ãƒ¼æƒ…å ±"));
+                EditorGUILayout.PropertyField(isOutwardToUp, new GUIContent("å¤–å‘ãã«å‘ã‘ã‚‹"));
             }
 
             serializedObject.ApplyModifiedProperties();

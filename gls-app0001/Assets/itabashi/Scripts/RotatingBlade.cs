@@ -1,17 +1,17 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RotatingBlade : MonoBehaviour
 {
     /// <summary>
-    /// ÚGƒ_ƒ[ƒW
+    /// æ¥è§¦ãƒ€ãƒ¡ãƒ¼ã‚¸
     /// </summary>
     [SerializeField]
     private float m_touchDamage = 10.0f;
 
     /// <summary>
-    /// ˆê•bŠÔ‚É‰ñ“]‚·‚éŠp“x
+    /// ä¸€ç§’é–“ã«å›è»¢ã™ã‚‹è§’åº¦
     /// </summary>
     [SerializeField]
     private float m_rotateEulerPerSecond = 45.0f;

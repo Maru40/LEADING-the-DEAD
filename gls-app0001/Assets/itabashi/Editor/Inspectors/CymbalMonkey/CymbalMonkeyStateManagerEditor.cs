@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -17,7 +17,7 @@ public class CymbalMonkeyStateManagerEditor : Editor
 
         EditorGUILayout.BeginHorizontal();
 
-        m_groundTagsFoldout = EditorGUILayout.Foldout(m_groundTagsFoldout, "ê⁄ínÉ^ÉO");
+        m_groundTagsFoldout = EditorGUILayout.Foldout(m_groundTagsFoldout, "Êé•Âú∞„Çø„Ç∞");
 
         var groundTags = serializedObject.FindProperty("m_groundTags");
 
@@ -36,7 +36,7 @@ public class CymbalMonkeyStateManagerEditor : Editor
             for (int i = 0; i < m_arraySize; i++)
             {
                 var tag = groundTags.GetArrayElementAtIndex(i);
-                tag.stringValue = EditorGUILayout.TagField($"    É^ÉO {i}", tag.stringValue);
+                tag.stringValue = EditorGUILayout.TagField($"    „Çø„Ç∞ {i}", tag.stringValue);
             }
         }
 

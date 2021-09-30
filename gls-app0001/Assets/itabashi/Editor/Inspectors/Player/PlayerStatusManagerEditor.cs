@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -9,11 +9,11 @@ namespace Player
     public class PlayerStatusManagerEditor : Editor
     {
         /// <summary>
-        /// HPŠÖŒW‚ÌÜ‚èô‚İ
+        /// HPé–¢ä¿‚ã®æŠ˜ã‚Šç•³ã¿
         /// </summary>
         private bool m_hpFoldout = true;
         /// <summary>
-        /// ƒXƒ^ƒ~ƒiŠÖŒW‚ÌÜ‚èô‚İ
+        /// ã‚¹ã‚¿ãƒŸãƒŠé–¢ä¿‚ã®æŠ˜ã‚Šç•³ã¿
         /// </summary>
         private bool m_stamitaFoldout = true;
         public override void OnInspectorGUI()
@@ -30,15 +30,15 @@ namespace Player
                 var maxHp = serializedObject.FindProperty("m_maxHp");
                 var hpGauge = serializedObject.FindProperty("m_hpGauge");
 
-                EditorGUILayout.PropertyField(hpGauge, new GUIContent("    HPƒQ[ƒW"));
-                EditorGUILayout.PropertyField(maxHp, new GUIContent("    ‘Ì—Í‚ÌÅ‘å’l"));
+                EditorGUILayout.PropertyField(hpGauge, new GUIContent("    HPã‚²ãƒ¼ã‚¸"));
+                EditorGUILayout.PropertyField(maxHp, new GUIContent("    ä½“åŠ›ã®æœ€å¤§å€¤"));
 
                 hp.floatValue = Mathf.Min(hp.floatValue, maxHp.floatValue);
 
-                EditorGUILayout.Slider(hp, 0.0f, maxHp.floatValue,new GUIContent("    Œ»İ‚Ì‘Ì—Í"));
+                EditorGUILayout.Slider(hp, 0.0f, maxHp.floatValue,new GUIContent("    ç¾åœ¨ã®ä½“åŠ›"));
             }
 
-            m_stamitaFoldout = EditorGUILayout.Foldout(m_stamitaFoldout, "ƒXƒ^ƒ~ƒi");
+            m_stamitaFoldout = EditorGUILayout.Foldout(m_stamitaFoldout, "ã‚¹ã‚¿ãƒŸãƒŠ");
 
             if (m_stamitaFoldout)
             {
@@ -48,23 +48,23 @@ namespace Player
                 var staminaRecoveryPerSeconds = serializedObject.FindProperty("m_staminaRecoveryPerSeconds");
                 var updateStaminaEvent = serializedObject.FindProperty("m_updateStaminaEvent");
 
-                EditorGUILayout.PropertyField(staminaGauge, new GUIContent("    ƒXƒ^ƒ~ƒiƒQ[ƒW"));
-                EditorGUILayout.PropertyField(maxStamina, new GUIContent("    ƒXƒ^ƒ~ƒi‚ÌÅ‘å’l"));
+                EditorGUILayout.PropertyField(staminaGauge, new GUIContent("    ã‚¹ã‚¿ãƒŸãƒŠã‚²ãƒ¼ã‚¸"));
+                EditorGUILayout.PropertyField(maxStamina, new GUIContent("    ã‚¹ã‚¿ãƒŸãƒŠã®æœ€å¤§å€¤"));
 
                 stamina.floatValue = Mathf.Min(stamina.floatValue, maxStamina.floatValue);
 
-                EditorGUILayout.Slider(stamina, 0.0f, maxStamina.floatValue, new GUIContent("    Œ»İ‚ÌƒXƒ^ƒ~ƒi"));
+                EditorGUILayout.Slider(stamina, 0.0f, maxStamina.floatValue, new GUIContent("    ç¾åœ¨ã®ã‚¹ã‚¿ãƒŸãƒŠ"));
 
-                EditorGUILayout.PropertyField(staminaRecoveryPerSeconds, new GUIContent("    ‰ñ•œƒXƒ^ƒ~ƒi—Ê/•b"));
+                EditorGUILayout.PropertyField(staminaRecoveryPerSeconds, new GUIContent("    å›å¾©ã‚¹ã‚¿ãƒŸãƒŠé‡/ç§’"));
 
                 EditorGUILayout.Space();
-                EditorGUILayout.PropertyField(updateStaminaEvent, new GUIContent("ƒXƒ^ƒ~ƒiXVƒCƒxƒ“ƒg"));
+                EditorGUILayout.PropertyField(updateStaminaEvent, new GUIContent("ã‚¹ã‚¿ãƒŸãƒŠæ›´æ–°ã‚¤ãƒ™ãƒ³ãƒˆ"));
             }
 
             EditorGUILayout.Space();
 
             var deadEvent = serializedObject.FindProperty("m_deadEvent");
-            EditorGUILayout.PropertyField(deadEvent, new GUIContent("€–SƒCƒxƒ“ƒg"));
+            EditorGUILayout.PropertyField(deadEvent, new GUIContent("æ­»äº¡ã‚¤ãƒ™ãƒ³ãƒˆ"));
 
             serializedObject.ApplyModifiedProperties();
         }

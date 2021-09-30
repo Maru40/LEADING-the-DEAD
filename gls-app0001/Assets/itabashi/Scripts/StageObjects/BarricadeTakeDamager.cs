@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BarricadeTakeDamager : MonoBehaviour, I_TakeDamage
 {
     /// <summary>
-    /// ƒoƒŠƒP[ƒh‚Ì‘Ï‹v“x
+    /// ãƒãƒªã‚±ãƒ¼ãƒ‰ã®è€ä¹…åº¦
     /// </summary>
     [SerializeField]
     private int m_durability = 100;
@@ -24,7 +24,7 @@ public class BarricadeTakeDamager : MonoBehaviour, I_TakeDamage
 
     public void TakeDamage(DamageData damageData)
     {
-        Debug.Log($"{damageData.damage}ƒ_ƒ[ƒWó‚¯‚Ü‚µ‚½");
+        Debug.Log($"{damageData.damage}ãƒ€ãƒ¡ãƒ¼ã‚¸å—ã‘ã¾ã—ãŸ");
         m_durability -= damageData.damage;
 
         m_durability = Mathf.Max(m_durability, 0);
@@ -34,7 +34,7 @@ public class BarricadeTakeDamager : MonoBehaviour, I_TakeDamage
             return;
         }
 
-        Debug.Log("”j‰ó‚³‚ê‚Ü‚µ‚½");
+        Debug.Log("ç ´å£Šã•ã‚Œã¾ã—ãŸ");
 
         Destroy(gameObject);
     }

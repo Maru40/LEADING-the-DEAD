@@ -1,17 +1,17 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BombableObject : MonoBehaviour
 {
     /// <summary>
-    /// ”š”­‰¹
+    /// çˆ†ç™ºéŸ³
     /// </summary>
     [SerializeField]
     private AudioClip m_explosionSound;
 
     /// <summary>
-    /// ”š”­ƒGƒtƒFƒNƒg
+    /// çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
     /// </summary>
     [SerializeField]
     private ParticleSystem m_explosionEfectPrefab;
@@ -27,7 +27,7 @@ public class BombableObject : MonoBehaviour
     }
 
     /// <summary>
-    /// ŒÄ‚Ô‚Æ”š”­‚µ‚ÄÁ–Å‚·‚é
+    /// å‘¼ã¶ã¨çˆ†ç™ºã—ã¦æ¶ˆæ»…ã™ã‚‹
     /// </summary>
     public void Explosion()
     {
@@ -45,7 +45,7 @@ public class BombableObject : MonoBehaviour
             particleSystem.Play();
         }
 
-        Debug.Log($"{gameObject.name}‚ª”š”­‚µ‚Ü‚µ‚½");
+        Debug.Log($"{gameObject.name}ãŒçˆ†ç™ºã—ã¾ã—ãŸ");
 
         Destroy(gameObject);
     }

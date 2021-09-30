@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,7 +35,7 @@ namespace Player
         }
 
         /// <summary>
-        /// ThrowƒgƒŠƒK[
+        /// Throwãƒˆãƒªã‚¬ãƒ¼
         /// </summary>
         public void Throw() { m_playerAnimator.SetTrigger("Throw"); }
 

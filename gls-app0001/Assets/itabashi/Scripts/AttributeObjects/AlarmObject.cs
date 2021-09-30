@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,13 +7,13 @@ using UnityEngine;
 public class AlarmObject : MonoBehaviour
 {
     /// <summary>
-    /// ƒAƒ‰[ƒ€‚É‚È‚é‰¹
+    /// ã‚¢ãƒ©ãƒ¼ãƒ æ™‚ã«ãªã‚‹éŸ³
     /// </summary>
     [SerializeField]
     private AudioClip m_alarmSound;
 
     /// <summary>
-    /// ƒAƒ‰[ƒ€‚É‚È‚é‰¹‚Ì”ÍˆÍ
+    /// ã‚¢ãƒ©ãƒ¼ãƒ æ™‚ã«ãªã‚‹éŸ³ã®ç¯„å›²
     /// </summary>
     [SerializeField]
     private Collider m_soundRange;

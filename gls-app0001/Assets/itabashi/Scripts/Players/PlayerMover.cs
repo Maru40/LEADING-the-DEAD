@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,30 +13,30 @@ namespace Player
         private PlayerStatusManager m_playerStatusManager;
 
         /// <summary>
-        /// ƒQ[ƒ€‚Ì“ü—Í
+        /// ã‚²ãƒ¼ãƒ ã®å…¥åŠ›
         /// </summary>
         GameControls m_gameControls;
 
         /// <summary>
-        /// ƒvƒŒƒCƒ„[ƒLƒƒƒ‰ƒNƒ^[‚ÌˆÚ“®‘¬“x
+        /// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®ç§»å‹•é€Ÿåº¦
         /// </summary>
         [SerializeField]
         private float m_moveSpeed = 1.0f;
 
         /// <summary>
-        /// ƒ_ƒbƒVƒ…”{—¦
+        /// ãƒ€ãƒƒã‚·ãƒ¥å€ç‡
         /// </summary>
         [SerializeField]
         private float m_dashSpeedScale = 2.0f;
 
         /// <summary>
-        /// ˆê•bŠÔ‚Éƒ_ƒbƒVƒ…‚ÅŒ¸‚éƒXƒ^ƒ~ƒi—Ê
+        /// ä¸€ç§’é–“ã«ãƒ€ãƒƒã‚·ãƒ¥ã§æ¸›ã‚‹ã‚¹ã‚¿ãƒŸãƒŠé‡
         /// </summary>
         [SerializeField]
         private float m_dashStaminaToOneSecond = 1.0f;
 
         /// <summary>
-        /// ˆÚ“®“ü—Í‚Ì’l‚ª‚±‚ê‚æ‚è‰º‚¾‚Á‚½ê‡–³‹‚·‚é
+        /// ç§»å‹•å…¥åŠ›ã®å€¤ãŒã“ã‚Œã‚ˆã‚Šä¸‹ã ã£ãŸå ´åˆç„¡è¦–ã™ã‚‹
         /// </summary>
         [SerializeField]
         private float m_moveSpeedDeadZone = 0.01f;
@@ -86,7 +86,7 @@ namespace Player
             forward.y = 0;
             forward = forward.normalized;
 
-            // ƒJƒƒ‰‚ª^ã‚©^‰º‚É‚ ‚éê‡
+            // ã‚«ãƒ¡ãƒ©ãŒçœŸä¸Šã‹çœŸä¸‹ã«ã‚ã‚‹å ´åˆ
             if (forward.magnitude == 0.0f)
             {
                 forward = camera.transform.position.y - transform.position.y > 0 ? camera.transform.up : -camera.transform.up;
