@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ public struct MyTrigger
     bool m_isTrigger;
 
     /// <summary>
-    /// Trigger‚ğtrue‚É‚·‚éB
+    /// Triggerã‚’trueã«ã™ã‚‹ã€‚
     /// </summary>
     public void Fire()
     {
@@ -15,9 +15,9 @@ public struct MyTrigger
     }
 
     /// <summary>
-    /// Œ»İ‚ÌƒgƒŠƒK[‚ğæ“¾‚µAƒgƒŠƒK[‚ğoff‚É‚·‚éB
+    /// ç¾åœ¨ã®ãƒˆãƒªã‚¬ãƒ¼ã‚’å–å¾—ã—ã€ãƒˆãƒªã‚¬ãƒ¼ã‚’offã«ã™ã‚‹ã€‚
     /// </summary>
-    /// <returns>ƒgƒŠƒK[‚Ì’l(boolŒ^)</returns>
+    /// <returns>ãƒˆãƒªã‚¬ãƒ¼ã®å€¤(boolå‹)</returns>
     public bool Get()
     {
         bool isTrigger = m_isTrigger;

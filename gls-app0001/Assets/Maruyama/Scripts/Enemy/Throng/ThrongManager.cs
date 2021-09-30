@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,12 +6,12 @@ using System;
 using MaruUtility;
 
 [Serializable]
-public struct ThrongManagerParametor  //ŒQOMgr‚Ìƒpƒ‰ƒ[ƒ^p
+public struct ThrongManagerParametor  //ç¾¤è¡†Mgrã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿p
 {
-    public float inThrongRange;   //ŒQO‚Æ”»’f‚·‚é”ÍˆÍ
+    public float inThrongRange;   //ç¾¤è¡†ã¨åˆ¤æ–­ã™ã‚‹ç¯„å›²
 
-    public float nearObjectRange; //—×l‚Æ”»’f‚³‚ê‚é‹——£
-    public float maxAvoidPower;   //‰ñ”ğ‚·‚éÅ‘å—Í
+    public float nearObjectRange; //éš£äººã¨åˆ¤æ–­ã•ã‚Œã‚‹è·é›¢
+    public float maxAvoidPower;   //å›é¿ã™ã‚‹æœ€å¤§åŠ›
 
     public ThrongManagerParametor(float inThrongRange, float nearObjectRange, float maxAvoidPower)
     {
@@ -21,14 +21,14 @@ public struct ThrongManagerParametor  //ŒQOMgr‚Ìƒpƒ‰ƒ[ƒ^p
     }
 }
 
-//‘¼‚ÌŒQO‚ğg‚¤‚½‚ß‚Ìƒf[ƒ^
+//ä»–ã®ç¾¤è¡†ã‚’ä½¿ã†ãŸã‚ã®ãƒ‡ãƒ¼ã‚¿
 [Serializable]
 public struct ThrongData
 {
     public GameObject gameObject;
     public EnemyVelocityMgr velocityMgr;
-    public TargetManager targetMgr;  //ƒ^[ƒQƒbƒgŠÇ—
-    public ThrongManager throngMgr;  //ŒQOŠÇ—
+    public TargetManager targetMgr;  //ã‚¿ãƒ¼ã‚²ãƒƒãƒˆç®¡ç†
+    public ThrongManager throngMgr;  //ç¾¤è¡†ç®¡ç†
     public RandomPlowlingMove randomPlowlingMove;
 
     public ThrongData(EnemyVelocityMgr velocityMgr, TargetManager targetMgr, ThrongManager throngMgr,
@@ -44,7 +44,7 @@ public struct ThrongData
 
 
 /// <summary>
-/// ŒQOs“®ƒ}ƒl[ƒWƒƒ\
+/// ç¾¤è¡†è¡Œå‹•ãƒãƒãƒ¼ã‚¸ãƒ£â€•
 /// </summary>
 public class ThrongManager : MonoBehaviour
 {
@@ -53,14 +53,14 @@ public class ThrongManager : MonoBehaviour
     ThrongManagerParametor m_param = new ThrongManagerParametor();
 
     /// <summary>
-    /// Ray‚ÌáŠQ•¨‚·‚éLayer‚Ì”z—ñ
+    /// Rayã®éšœå®³ç‰©ã™ã‚‹Layerã®é…åˆ—
     /// </summary>
     [SerializeField]
     string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
 
-    //List<ThrongData> m_throngDatas = new List<ThrongData>();  //ƒOƒ‹[ƒv‚ÌƒIƒuƒWƒFƒNƒgˆê——
+    //List<ThrongData> m_throngDatas = new List<ThrongData>();  //ã‚°ãƒ«ãƒ¼ãƒ—ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆä¸€è¦§
 
-    //ƒRƒ“ƒ|[ƒlƒ“ƒgŒn-----------------
+    //ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆç³»-----------------
 
     [SerializeField]
     EnemyGenerator m_generator = null;
@@ -78,12 +78,12 @@ public class ThrongManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ‹ß‚­‚ÌW’c‚ğ‰ñ”ğ‚·‚éˆ—
+    /// è¿‘ãã®é›†å›£ã‚’å›é¿ã™ã‚‹å‡¦ç†
     /// </summary>
-    /// <param name="rigid">©g‚ÌƒŠƒWƒbƒhƒ{ƒfƒB</param>
-    /// <param name="moveDirect">‚»‚ÌƒIƒuƒWƒFƒNƒg‚ªŒü‚©‚¢‚½‚¢•ûŒü</param>
-    /// <param name="maxSpeed">Å‘åƒXƒs[ƒh</param>
-    /// <param name="truningPower">ù‰ñƒpƒ[</param>
+    /// <param name="rigid">è‡ªèº«ã®ãƒªã‚¸ãƒƒãƒ‰ãƒœãƒ‡ã‚£</param>
+    /// <param name="moveDirect">ãã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒå‘ã‹ã„ãŸã„æ–¹å‘</param>
+    /// <param name="maxSpeed">æœ€å¤§ã‚¹ãƒ”ãƒ¼ãƒ‰</param>
+    /// <param name="truningPower">æ—‹å›ãƒ‘ãƒ¯ãƒ¼</param>
     public void AvoidNearThrong(EnemyVelocityMgr velocityMgr, Vector3 moveDirect, float maxSpeed , float truningPower)
     {
         var velocity = velocityMgr.velocity;
@@ -93,7 +93,7 @@ public class ThrongManager : MonoBehaviour
         velocityMgr.AddForce(force * truningPower);
 
         var avoidVec = CalcuSumAvoidVector();
-        if (avoidVec != Vector3.zero) //‰ñ”ğ‚ª•K—v‚È‚ç
+        if (avoidVec != Vector3.zero) //å›é¿ãŒå¿…è¦ãªã‚‰
         {
             Vector3 avoidForce = CalcuVelocity.CalucSeekVec(velocity, avoidVec, CalcuAverageSpeed());
             velocityMgr.AddForce(avoidForce);
@@ -103,9 +103,9 @@ public class ThrongManager : MonoBehaviour
     }
 
     /// <summary>
-    /// W’cˆÚ“®‚ğ‚·‚éˆ—(‚Ü‚¾–¢Š®¬)
+    /// é›†å›£ç§»å‹•ã‚’ã™ã‚‹å‡¦ç†(ã¾ã æœªå®Œæˆ)
     /// </summary>
-    /// <param name="selfRigid">©•ª©g‚ÌƒŠƒWƒbƒhƒ{ƒfƒB</param>
+    /// <param name="selfRigid">è‡ªåˆ†è‡ªèº«ã®ãƒªã‚¸ãƒƒãƒ‰ãƒœãƒ‡ã‚£</param>
     public void ThrongMove(EnemyVelocityMgr velcoityMgr, Vector3 moveDirect, float maxSpeed)
     {
         var throngVec = CalcuThrongVector();
@@ -118,9 +118,9 @@ public class ThrongManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒ‰ƒ“ƒ_ƒ€‚ÉˆÚ“®‚·‚éƒ]ƒ“ƒr‚ğW’c‚É‡‚í‚¹‚½•ûŒü‚É“‡‚·‚éB
+    /// ãƒ©ãƒ³ãƒ€ãƒ ã«ç§»å‹•ã™ã‚‹ã‚¾ãƒ³ãƒ“ã‚’é›†å›£ã«åˆã‚ã›ãŸæ–¹å‘ã«çµ±åˆã™ã‚‹ã€‚
     /// </summary>
-    /// <param name="plowlingMove">ƒRƒ“ƒ|\ƒlƒ“ƒg‚»‚Ì‚à‚Ì</param>
+    /// <param name="plowlingMove">ã‚³ãƒ³ãƒâ€•ãƒãƒ³ãƒˆãã®ã‚‚ã®</param>
     public Vector3 CalcuRandomPlowlingMovePositonIntegrated(RandomPlowlingMove plowlingMove)
     {
         var throngDatas = m_generator.GetThrongDatas();
@@ -139,30 +139,30 @@ public class ThrongManager : MonoBehaviour
         return sumPosition / throngSize;
     }
 
-    //ŒQO‚Ì’†S‚ÌƒxƒNƒgƒ‹
+    //ç¾¤è¡†ã®ä¸­å¿ƒã®ãƒ™ã‚¯ãƒˆãƒ«
     Vector3 CalcuCenterVector(ThrongData data)
     {
         return data.gameObject.transform.position;
     }
 
-    //data‚Ìis•ûŒü
+    //dataã®é€²è¡Œæ–¹å‘
     Vector3 CalcuDirectVector(ThrongData data)
     {
         return data.velocityMgr.velocity;
     }
 
-    //ƒIƒuƒWƒFƒNƒg“¯m‚Ì‰ñ”ğ
+    //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåŒå£«ã®å›é¿
     Vector3 CalcuAvoidVector(ThrongData data)
     {
-        if(data.gameObject == gameObject) {  //©•ª©g‚È‚çˆ—‚ğ‚µ‚È‚¢
+        if(data.gameObject == gameObject) {  //è‡ªåˆ†è‡ªèº«ãªã‚‰å‡¦ç†ã‚’ã—ãªã„
             return Vector3.zero;
         }
 
-        //‘Šè‚©‚ç©•ª©g‚ÉŒü‚©‚¤ƒxƒNƒgƒ‹
+        //ç›¸æ‰‹ã‹ã‚‰è‡ªåˆ†è‡ªèº«ã«å‘ã‹ã†ãƒ™ã‚¯ãƒˆãƒ«
         var toSelfVec = transform.position - data.gameObject.transform.position;
 
-        if(IsRange(data, m_param.nearObjectRange)) {  //—×l‚È‚ç
-            var power =@m_param.maxAvoidPower - toSelfVec.magnitude;
+        if(IsRange(data, m_param.nearObjectRange)) {  //éš£äººãªã‚‰
+            var power =ã€€m_param.maxAvoidPower - toSelfVec.magnitude;
             var avoidVec = toSelfVec.normalized * power;
 
             return avoidVec;
@@ -172,7 +172,7 @@ public class ThrongManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ŒQOs“®ƒxƒNƒgƒ‹‚ÌŒvZ(‚Ü‚¾–¢Š®¬)
+    /// ç¾¤è¡†è¡Œå‹•ãƒ™ã‚¯ãƒˆãƒ«ã®è¨ˆç®—(ã¾ã æœªå®Œæˆ)
     /// </summary>
     /// <returns></returns>
     public Vector3 CalcuThrongVector()
@@ -187,15 +187,15 @@ public class ThrongManager : MonoBehaviour
         int throngSize = 0;
         foreach (var data in throngDatas)
         {
-            if (data.gameObject == gameObject) {  //©•ª©g‚È‚çˆ—‚ğ‚µ‚È‚¢
+            if (data.gameObject == gameObject) {  //è‡ªåˆ†è‡ªèº«ãªã‚‰å‡¦ç†ã‚’ã—ãªã„
                 continue;
             }
 
-            //W’c‹——£“à‚Å‚©‚ÂAáŠQ•¨‚ª‚È‚¢ê‡
+            //é›†å›£è·é›¢å†…ã§ã‹ã¤ã€éšœå®³ç‰©ãŒãªã„å ´åˆ
             if (IsRange(data,m_param.inThrongRange) && !IsRayHit(data)) 
             {
                 centerPosition += CalcuCenterVector(data);
-                directVec += CalcuDirectVector(data); //ŒQO‚Ì•½‹Ï•ûŒü
+                directVec += CalcuDirectVector(data); //ç¾¤è¡†ã®å¹³å‡æ–¹å‘
                 avoidVec += CalcuAvoidVector(data);
                 sumSpeed += data.velocityMgr.velocity.magnitude;
                 
@@ -204,7 +204,7 @@ public class ThrongManager : MonoBehaviour
         }
 
         if (throngSize == 0)
-        {  //‘¶İ‚µ‚È‚©‚Á‚½‚çzero‚ğ•Ô‚·B
+        {  //å­˜åœ¨ã—ãªã‹ã£ãŸã‚‰zeroã‚’è¿”ã™ã€‚
             return Vector3.zero;
         }
 
@@ -219,9 +219,9 @@ public class ThrongManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ‹ß‚¢‹——£‚Ìƒ]ƒ“ƒr‚ğ”ğ‚¯‚éVector
+    /// è¿‘ã„è·é›¢ã®ã‚¾ãƒ³ãƒ“ã‚’é¿ã‘ã‚‹Vector
     /// </summary>
-    /// <returns>”ğ‚¯‚éƒxƒNƒgƒ‹‚Ì‡Œv</returns>
+    /// <returns>é¿ã‘ã‚‹ãƒ™ã‚¯ãƒˆãƒ«ã®åˆè¨ˆ</returns>
     public Vector3 CalcuSumAvoidVector()
     {
         var throngDatas = m_generator.GetThrongDatas();
@@ -229,7 +229,7 @@ public class ThrongManager : MonoBehaviour
 
         foreach (var data in throngDatas)
         {
-            if (data.gameObject == gameObject) {  //©•ª©g‚È‚çˆ—‚ğ‚µ‚È‚¢
+            if (data.gameObject == gameObject) {  //è‡ªåˆ†è‡ªèº«ãªã‚‰å‡¦ç†ã‚’ã—ãªã„
                 continue;
             }
 
@@ -240,9 +240,9 @@ public class ThrongManager : MonoBehaviour
     }
 
     /// <summary>
-    /// W’c‚Ì•½‹ÏƒXƒs[ƒh‚ğŒvZ‚µ‚Ä•Ô‚·B
+    /// é›†å›£ã®å¹³å‡ã‚¹ãƒ”ãƒ¼ãƒ‰ã‚’è¨ˆç®—ã—ã¦è¿”ã™ã€‚
     /// </summary>
-    /// <returns>•½‹ÏƒXƒs[ƒh</returns>
+    /// <returns>å¹³å‡ã‚¹ãƒ”ãƒ¼ãƒ‰</returns>
     float CalcuAverageSpeed()
     {
         var throngDatas = m_generator.GetThrongDatas();
@@ -267,11 +267,11 @@ public class ThrongManager : MonoBehaviour
     }
 
     /// <summary>
-    /// w’è‚µ‚½‹——£‚æ‚è’Z‚©‚Á‚½‚çtrue
+    /// æŒ‡å®šã—ãŸè·é›¢ã‚ˆã‚ŠçŸ­ã‹ã£ãŸã‚‰true
     /// </summary>
-    /// <param name="data">‘ÎÛ‚Ìƒf[ƒ^</param>
-    /// <param name="range">‹——£</param>
-    /// <returns>’Z‚©‚Á‚½‚çtrue</returns>
+    /// <param name="data">å¯¾è±¡ã®ãƒ‡ãƒ¼ã‚¿</param>
+    /// <param name="range">è·é›¢</param>
+    /// <returns>çŸ­ã‹ã£ãŸã‚‰true</returns>
     bool IsRange(ThrongData data ,float range)
     {
         var toVec = data.gameObject.transform.position - transform.position;
@@ -280,10 +280,10 @@ public class ThrongManager : MonoBehaviour
     }
 
     /// <summary>
-    /// áŠQ•¨‚ªƒqƒbƒg‚µ‚½‚çtrue
+    /// éšœå®³ç‰©ãŒãƒ’ãƒƒãƒˆã—ãŸã‚‰true
     /// </summary>
-    /// <param name="data">‘Šè‚Ìƒf[ƒ^</param>
-    /// <returns>ƒqƒbƒg‚µ‚½‚çtrue</returns>
+    /// <param name="data">ç›¸æ‰‹ã®ãƒ‡ãƒ¼ã‚¿</param>
+    /// <returns>ãƒ’ãƒƒãƒˆã—ãŸã‚‰true</returns>
     bool IsRayHit(ThrongData data)
     {
         int obstacleLayer = LayerMask.GetMask(m_rayObstacleLayerStrings);
@@ -291,12 +291,12 @@ public class ThrongManager : MonoBehaviour
         return Physics.Raycast(transform.position, toVec, toVec.magnitude, obstacleLayer);
     }
 
-    //ƒAƒNƒZƒbƒT-----------------------------------------------
+    //ã‚¢ã‚¯ã‚»ãƒƒã‚µ-----------------------------------------------
 
     /// <summary>
-    /// ŒQOƒf[ƒ^ƒŠƒXƒg‚ğ“n‚·B
+    /// ç¾¤è¡†ãƒ‡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆã‚’æ¸¡ã™ã€‚
     /// </summary>
-    /// <returns>ŒQOƒf[ƒ^ƒŠƒXƒg</returns>
+    /// <returns>ç¾¤è¡†ãƒ‡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆ</returns>
     public List<ThrongData> GetThrongDatas()
     {
         return m_generator.GetThrongDatas();
@@ -325,11 +325,11 @@ public class ThrongManager : MonoBehaviour
         return m_param;
     }
 
-    //null‰ñ”ğ--------------------------
+    //nullå›é¿--------------------------
 
     void SetSearchGenerator()
     {
-        if(m_generator != null) {  //nullo‚È‚©‚Á‚½‚çˆ—‚ğ‚µ‚È‚¢B
+        if(m_generator != null) {  //nullå‡ºãªã‹ã£ãŸã‚‰å‡¦ç†ã‚’ã—ãªã„ã€‚
             return;
         }
 
@@ -338,7 +338,7 @@ public class ThrongManager : MonoBehaviour
         foreach (var generator in generators)
         {
             var createObj = generator.GetCreateObject();
-            //¶¬‚·‚éƒIƒuƒWƒFƒNƒg‚ª‚±‚ÌƒIƒuƒWƒFƒNƒg‚Æ“¯‚¶‚È‚ç
+            //ç”Ÿæˆã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨åŒã˜ãªã‚‰
             if (createObj.GetType() == gameObject.GetType())
             {
                 m_generator = generator;
@@ -348,23 +348,23 @@ public class ThrongManager : MonoBehaviour
     }
 
 
-    //ƒ{ƒcƒf[ƒ^«
+    //ãƒœãƒ„ãƒ‡ãƒ¼ã‚¿â†“
 
-    //ŒQO‚Æ‚µ‚Ä”F¯‚·‚éƒIƒuƒWƒFƒNƒg‚ÌƒZƒbƒg
+    //ç¾¤è¡†ã¨ã—ã¦èªè­˜ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚»ãƒƒãƒˆ
     //void SetCalcuThrongList()
     //{
     //    var datas = m_generator.GetThrongDatas();
     //    foreach (var data in datas)
     //    {
     //        if (this.gameObject == data.gameObject)
-    //        {  //©•ª©g‚È‚çcontinue
+    //        {  //è‡ªåˆ†è‡ªèº«ãªã‚‰continue
     //            continue;
     //        }
 
     //        var toVec = data.gameObject.transform.position - transform.position;
-    //        if (toVec.magnitude < m_param.inThrongRange)  //ŒQO‚É‚È‚é”ÍˆÍ‚É‚¢‚½‚ç
+    //        if (toVec.magnitude < m_param.inThrongRange)  //ç¾¤è¡†ã«ãªã‚‹ç¯„å›²ã«ã„ãŸã‚‰
     //        {
-    //            if (IsNewData(data))  //V‹K‚Ìƒf[ƒ^‚¾‚Á‚½‚ç
+    //            if (IsNewData(data))  //æ–°è¦ã®ãƒ‡ãƒ¼ã‚¿ã ã£ãŸã‚‰
     //            {
     //                m_throngDatas.Add(data);
     //            }

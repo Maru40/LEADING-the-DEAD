@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,7 +26,7 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
 
         ChangeComps(EnableChangeType.Start);
 
-        //W’cs“®İ’è
+        //é›†å›£è¡Œå‹•è¨­å®š
         var throngMgr = owner.GetComponent<ThrongManager>();
         if (chaseTarget && throngMgr)
         {

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -6,19 +6,19 @@ using Random = UnityEngine.Random;
 using System;
 
 /// <summary>
-/// Random‚Éœpœj‚·‚éƒRƒ“ƒ|[ƒlƒ“ƒg
+/// Randomã«å¾˜å¾Šã™ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 /// </summary>
 public class RandomPlowlingMove : MonoBehaviour
 {
     [Serializable]
     public struct Parametor 
     {
-        public float randomPositionRadius;  //œpœj‚·‚éêŠ‚ğŒˆ‚ß‚é”¼Œa
-        public float maxSpeed;              //Å‘åƒXƒs[ƒh
-        public float turningPower;          //ù‰ñ‚·‚é—Í
-        public float targetNearRange;       //–Ú“I’n‚É’…‚¢‚½‚Æ”»’f‚³‚ê‚é,–Ú“I’n‚Æ‚Ì‘Š‘Î‹——£(¬‚³‚·‚¬‚é‚Æ”»’f‚Å‚«‚È‚­‚È‚é‚½‚ß’ˆÓ)
-        public float maxWaitCalcuRouteTime; //–Ú“I’n‚É‚Â‚¢‚½‚Æ‚«A—§‚¿~‚Ü‚éÅ‘å‚ÌŠÔ
-        public float inThrongRange;         //W’c‚Æ”F¯‚·‚é”ÍˆÍ
+        public float randomPositionRadius;  //å¾˜å¾Šã™ã‚‹å ´æ‰€ã‚’æ±ºã‚ã‚‹åŠå¾„
+        public float maxSpeed;              //æœ€å¤§ã‚¹ãƒ”ãƒ¼ãƒ‰
+        public float turningPower;          //æ—‹å›ã™ã‚‹åŠ›
+        public float targetNearRange;       //ç›®çš„åœ°ã«ç€ã„ãŸã¨åˆ¤æ–­ã•ã‚Œã‚‹,ç›®çš„åœ°ã¨ã®ç›¸å¯¾è·é›¢(å°ã•ã™ãã‚‹ã¨åˆ¤æ–­ã§ããªããªã‚‹ãŸã‚æ³¨æ„)
+        public float maxWaitCalcuRouteTime; //ç›®çš„åœ°ã«ã¤ã„ãŸã¨ãã€ç«‹ã¡æ­¢ã¾ã‚‹æœ€å¤§ã®æ™‚é–“
+        public float inThrongRange;         //é›†å›£ã¨èªè­˜ã™ã‚‹ç¯„å›²
 
         public Parametor(float randomPositionRadius, float maxSpeed, float turningPower,
             float targetNearRange, float maxWaitCalcuRouteTime, float inThrongRange)
@@ -33,18 +33,18 @@ public class RandomPlowlingMove : MonoBehaviour
     }
 
 
-    //member•Ï”-------------------------------------------------------------------------------------------
+    //memberå¤‰æ•°-------------------------------------------------------------------------------------------
 
     [SerializeField]
     Parametor m_param = new Parametor(15.0f, 2.5f, 2.0f, 0.3f, 3.0f, 1.0f);
 
     /// <summary>
-    /// Ray‚ÌáŠQ•¨‚·‚éLayer‚Ì”z—ñ
+    /// Rayã®éšœå®³ç‰©ã™ã‚‹Layerã®é…åˆ—
     /// </summary>
     [SerializeField]
     string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
 
-    Vector3 m_targetPosition;    //–Ú“I‚ÌêŠ
+    Vector3 m_targetPosition;    //ç›®çš„ã®å ´æ‰€
 
     EnemyVelocityMgr m_velocityMgr;
     WaitTimer m_waitTimer;
@@ -52,12 +52,12 @@ public class RandomPlowlingMove : MonoBehaviour
     
     void Start()
     {
-        //ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìæ“¾
+        //ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®å–å¾—
         m_velocityMgr = GetComponent<EnemyVelocityMgr>();
         m_waitTimer = GetComponent<WaitTimer>();
         m_throngMgr = GetComponent<ThrongManager>();
 
-        //ƒV[ƒh’l
+        //ã‚·ãƒ¼ãƒ‰å€¤
         Random.InitState(System.DateTime.Now.Millisecond);
 
         SetRandomTargetPosition();
@@ -70,16 +70,16 @@ public class RandomPlowlingMove : MonoBehaviour
 
     void MoveProcess()
     {
-        //‘Ò‹@ó‘Ô‚È‚çˆ—‚ğ‚µ‚È‚¢B
+        //å¾…æ©ŸçŠ¶æ…‹ãªã‚‰å‡¦ç†ã‚’ã—ãªã„ã€‚
         if (m_waitTimer.IsWait(GetType())){
             return;
         }
 
-        //‰Á‚¦‚é—Í‚ÌŒvZ
+        //åŠ ãˆã‚‹åŠ›ã®è¨ˆç®—
         var toVec = m_targetPosition - transform.position;
         m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_param.maxSpeed, m_param.turningPower);
 
-        var newTargetPosition = m_throngMgr.CalcuRandomPlowlingMovePositonIntegrated(this);  //ƒ‰ƒ“ƒ_ƒ€‚È•ûŒü‚ğW’c‚É‡‚í‚¹‚éB
+        var newTargetPosition = m_throngMgr.CalcuRandomPlowlingMovePositonIntegrated(this);  //ãƒ©ãƒ³ãƒ€ãƒ ãªæ–¹å‘ã‚’é›†å›£ã«åˆã‚ã›ã‚‹ã€‚
         SetTargetPositon(newTargetPosition);
 
         //var newForce = UtilityVelocity.CalucArriveVec(velocity, toVec, m_speed);
@@ -92,9 +92,9 @@ public class RandomPlowlingMove : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒ‹[ƒg‚ÌI—¹‚ğ”»’fB
+    /// ãƒ«ãƒ¼ãƒˆã®çµ‚äº†ã‚’åˆ¤æ–­ã€‚
     /// </summary>
-    /// <returns>–Ú“I’n‚É‚Â‚¢‚½‚çtrue</returns>
+    /// <returns>ç›®çš„åœ°ã«ã¤ã„ãŸã‚‰true</returns>
     bool IsRouteEnd()
     {
         var toVec = m_targetPosition - transform.position;
@@ -104,7 +104,7 @@ public class RandomPlowlingMove : MonoBehaviour
     }
 
     /// <summary>
-    /// –Ú“I’n‚É‚½‚Ç‚è’…‚¢‚½‚És‚¤ˆ—
+    /// ç›®çš„åœ°ã«ãŸã©ã‚Šç€ã„ãŸæ™‚ã«è¡Œã†å‡¦ç†
     /// </summary>
     void RouteEndProcess()
     {
@@ -113,19 +113,19 @@ public class RandomPlowlingMove : MonoBehaviour
         }
 
         SetRandomTargetPosition();
-        m_velocityMgr.ResetVelocity();  //‘¬“x‚ÌƒŠƒZƒbƒg
+        m_velocityMgr.ResetVelocity();  //é€Ÿåº¦ã®ãƒªã‚»ãƒƒãƒˆ
 
-        //‘Ò‹@ó‘Ô‚Ìİ’è
+        //å¾…æ©ŸçŠ¶æ…‹ã®è¨­å®š
         var waitTime = UnityEngine.Random.value * m_param.maxWaitCalcuRouteTime;
         m_waitTimer.AddWaitTimer(GetType(), waitTime);
     }
 
     /// <summary>
-    /// ƒ‰ƒ“ƒ_ƒ€‚È–Ú“I’n‚ğİ’è
+    /// ãƒ©ãƒ³ãƒ€ãƒ ãªç›®çš„åœ°ã‚’è¨­å®š
     /// </summary>
     void SetRandomTargetPosition()
     {
-        int numLoop = 100; //–³ŒÀƒ‹[ƒv‚ğ–h‚®‚½‚ß100‚ğŒÀ“x‚É‚·‚éB
+        int numLoop = 100; //ç„¡é™ãƒ«ãƒ¼ãƒ—ã‚’é˜²ããŸã‚100ã‚’é™åº¦ã«ã™ã‚‹ã€‚
         for(int i = 0; i < numLoop; i++)
         {
             m_targetPosition = CalucRandomTargetPosition();
@@ -133,15 +133,15 @@ public class RandomPlowlingMove : MonoBehaviour
             var toVec = m_targetPosition - transform.position;
             int obstacleLayer = LayerMask.GetMask(m_rayObstacleLayerStrings);
             if (!Physics.Raycast(transform.position, toVec, toVec.magnitude, obstacleLayer)) {
-                break;  //áŠQ•¨‚ª‚È‚©‚Á‚½‚ç
+                break;  //éšœå®³ç‰©ãŒãªã‹ã£ãŸã‚‰
             }
         }
     }
 
     /// <summary>
-    /// ƒ‰ƒ“ƒ_ƒ€‚È•ûŒü‚ğŒvZ‚µ‚Ä•Ô‚·B
+    /// ãƒ©ãƒ³ãƒ€ãƒ ãªæ–¹å‘ã‚’è¨ˆç®—ã—ã¦è¿”ã™ã€‚
     /// </summary>
-    /// <returns>ƒ‰ƒ“ƒ_ƒ€‚È•ûŒü</returns>
+    /// <returns>ãƒ©ãƒ³ãƒ€ãƒ ãªæ–¹å‘</returns>
     Vector3 CalucRandomTargetPosition()
     {
         float directX = CalucRandomDirect();
@@ -158,9 +158,9 @@ public class RandomPlowlingMove : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒ‰ƒ“ƒ_ƒ€‚É1‚©-1‚É‚µ‚Ä•Ô‚·B
+    /// ãƒ©ãƒ³ãƒ€ãƒ ã«1ã‹-1ã«ã—ã¦è¿”ã™ã€‚
     /// </summary>
-    /// <returns>1,-1‚Ì‚Ç‚¿‚ç‚©</returns>
+    /// <returns>1,-1ã®ã©ã¡ã‚‰ã‹</returns>
     int CalucRandomDirect()
     {
         float halfValue = 0.5f;
@@ -199,7 +199,7 @@ public class RandomPlowlingMove : MonoBehaviour
     }
 
 
-    //ƒAƒNƒZƒbƒT-----------------------------------------------------
+    //ã‚¢ã‚¯ã‚»ãƒƒã‚µ-----------------------------------------------------
 
     public void SetTargetPositon(Vector3 position)
     {
@@ -224,7 +224,7 @@ public class RandomPlowlingMove : MonoBehaviour
         m_param = parametor;
     }
 
-    //Œ»İg—p‚µ‚Ä‚¢‚È‚¢
+    //ç¾åœ¨ä½¿ç”¨ã—ã¦ã„ãªã„
     //bool IsRayHit(Vector3 position)
     //{
     //    RaycastHit hitData;

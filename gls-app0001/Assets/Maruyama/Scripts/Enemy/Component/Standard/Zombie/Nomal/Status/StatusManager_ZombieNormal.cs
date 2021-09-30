@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ public class StatusManager_ZombieNormal : StatusManagerBase
     public struct Status
     {
         public float hp;
-        public float damageIntervalTime;  //ƒ_ƒ[ƒW‚ğó‚¯‚½Œã‚Ì–³“GŠÔ
+        public float damageIntervalTime;  //ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ãŸå¾Œã®ç„¡æ•µæ™‚é–“
 
         public Status(float hp, float damageIntervalTime)
         {
@@ -49,13 +49,13 @@ public class StatusManager_ZombieNormal : StatusManagerBase
             m_respawn?.RespawnReserve();
         }
 
-        //ƒ_ƒ[ƒWƒCƒ“ƒ^[ƒoƒ‹ŠJn
+        //ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒ«é–‹å§‹
         float time = m_status.damageIntervalTime;
         m_waitTimer.AddWaitTimer(GetType(), time);
     }
 
 
-    //ƒAƒNƒZƒbƒT------------------------------------------------------------
+    //ã‚¢ã‚¯ã‚»ãƒƒã‚µ------------------------------------------------------------
 
     public void SetStatus(Status status)
     {

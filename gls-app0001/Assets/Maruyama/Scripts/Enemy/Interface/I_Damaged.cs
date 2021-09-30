@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ƒ_ƒ[ƒW‚ğó‚¯‚éƒCƒ“ƒ^[ƒtƒF[ƒX
+/// ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã‚‹ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
 /// </summary>
 public interface I_Damaged
 {

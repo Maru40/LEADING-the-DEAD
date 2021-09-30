@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +27,7 @@ public class EnemyVelocityMgr : MonoBehaviour
 
         m_velocity.y = 0.0f;
 
-        //float dampValue = 0.2f;  //Œ¸Šˆ—
+        //float dampValue = 0.2f;  //æ¸›è¡°å‡¦ç†
         //m_force *= dampValue;
         //if (m_force.magnitude <= 0.1f)
         //{
@@ -36,7 +36,7 @@ public class EnemyVelocityMgr : MonoBehaviour
     }
 
 
-    //ƒAƒNƒZƒbƒT-------------------------------------------------------
+    //ã‚¢ã‚¯ã‚»ãƒƒã‚µ-------------------------------------------------------
 
     public Vector3 velocity
     {

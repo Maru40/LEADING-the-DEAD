@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -60,35 +60,35 @@ public class TestEnemyStateMgr : MonoBehaviour
 
     void CreateEdge()
     {
-        //ƒƒ“ƒoŠÖ”‚É“ü‚ê‚éê‡
+        //ãƒ¡ãƒ³ãƒé–¢æ•°ã«å…¥ã‚Œã‚‹å ´åˆ
         m_stateMachine.AddEdge(TestEnemyState.From, TestEnemyState.To , ToTransitionTrigger);
 
-        //ƒ‰ƒ€ƒ_‚ğg—p‚·‚éê‡
+        //ãƒ©ãƒ ãƒ€ã‚’ä½¿ç”¨ã™ã‚‹å ´åˆ
         m_stateMachine.AddEdge(TestEnemyState.To, TestEnemyState.From,  (TestEnemyTransitionMember member) => { return member.fromTrigger.Get(); });
     }
 
-    //ƒAƒNƒZƒbƒT-----------------------------------------------------------------------------
+    //ã‚¢ã‚¯ã‚»ãƒƒã‚µ-----------------------------------------------------------------------------
 
     /// <summary>
-    /// ƒXƒe[ƒgƒ}ƒVƒ“‚Ìæ“¾
+    /// ã‚¹ãƒ†ãƒ¼ãƒˆãƒã‚·ãƒ³ã®å–å¾—
     /// </summary>
-    /// <returns>ƒXƒe[ƒgƒ}ƒVƒ“</returns>
+    /// <returns>ã‚¹ãƒ†ãƒ¼ãƒˆãƒã‚·ãƒ³</returns>
     public TEStateMachine GetStateMachine()
     {
         return m_stateMachine;
     }
 
     /// <summary>
-    /// To‚É‘JˆÚ‚·‚éğŒ
+    /// Toã«é·ç§»ã™ã‚‹æ¡ä»¶
     /// </summary>
-    /// <param name="member">‘JˆÚğŒ‚Ìƒƒ“ƒo</param>
-    /// <returns>Trigger‚ªOn‚È‚çtrue</returns>
+    /// <param name="member">é·ç§»æ¡ä»¶ã®ãƒ¡ãƒ³ãƒ</param>
+    /// <returns>TriggerãŒOnãªã‚‰true</returns>
     bool ToTransitionTrigger(TestEnemyTransitionMember member) { return member.toTrigger.Get(); }
 
     /// <summary>
-    /// From‚É‘JˆÚ‚·‚éğŒ
+    /// Fromã«é·ç§»ã™ã‚‹æ¡ä»¶
     /// </summary>
-    /// <param name="member">‘JˆÚğŒ‚Ìƒƒ“ƒo</param>
-    /// <returns>Trigger‚ªOn‚È‚çtrue</returns>
+    /// <param name="member">é·ç§»æ¡ä»¶ã®ãƒ¡ãƒ³ãƒ</param>
+    /// <returns>TriggerãŒOnãªã‚‰true</returns>
     bool FromTransitionTrigger(TestEnemyTransitionMember member) { return member.fromTrigger.Get(); }
 }

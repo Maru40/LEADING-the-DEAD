@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,12 +18,12 @@ public struct RespawnManagerParametor
 }
 
 /// <summary>
-/// ƒ^[ƒQƒbƒg‚Ì”ÍˆÍŠO‚ÉƒŠƒXƒ|[ƒ“‚·‚éˆ—
+/// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ç¯„å›²å¤–ã«ãƒªã‚¹ãƒãƒ¼ãƒ³ã™ã‚‹å‡¦ç†
 /// </summary>
 public class EnemyRespawnManager : EnemyRespawnBase
 {
     //[SerializeField]
-    //GameObject m_target = null;  //Œ»İg‚Á‚Ä‚¢‚È‚¢B
+    //GameObject m_target = null;  //ç¾åœ¨ä½¿ã£ã¦ã„ãªã„ã€‚
 
     [SerializeField]
     RespawnManagerParametor m_param = new RespawnManagerParametor(true, 0.0f);
@@ -49,13 +49,13 @@ public class EnemyRespawnManager : EnemyRespawnBase
         m_waitTimer = GetComponent<WaitTimer>();
     }
 
-    //ƒŠƒXƒ|[ƒ“€”õ
+    //ãƒªã‚¹ãƒãƒ¼ãƒ³æº–å‚™
     public void RespawnReserve()
     {
-        //ƒŠƒXƒ|[ƒ“‚·‚é‚È‚ç€”õ‚ğ‚·‚éB
+        //ãƒªã‚¹ãƒãƒ¼ãƒ³ã™ã‚‹ãªã‚‰æº–å‚™ã‚’ã™ã‚‹ã€‚
         if (m_param.isRespawn)
         {
-            //g‚¢‚Ü‚í‚·‚½‚ßAíœ‚¹‚¸‚ÉƒŠƒXƒ|[ƒ“ƒ|ƒCƒ“ƒg‚Éİ’è‚·‚éB
+            //ä½¿ã„ã¾ã‚ã™ãŸã‚ã€å‰Šé™¤ã›ãšã«ãƒªã‚¹ãƒãƒ¼ãƒ³ãƒã‚¤ãƒ³ãƒˆã«è¨­å®šã™ã‚‹ã€‚
             gameObject.transform.position = new Vector3(0.0f, -100.0f, 0.0f);
 
             m_waitTimer.AddWaitTimer(GetType(), m_param.time, Respawn);
@@ -73,21 +73,21 @@ public class EnemyRespawnManager : EnemyRespawnBase
         var respawnPosition = CalcuRespawnRandomPosition();
         transform.position = respawnPosition;
 
-        m_stator.Reset();  //ƒXƒe[ƒg‚ÌƒŠƒZƒbƒg
+        m_stator.Reset();  //ã‚¹ãƒ†ãƒ¼ãƒˆã®ãƒªã‚»ãƒƒãƒˆ
     }
 
     
 
     /// <summary>
-    /// ƒŠƒXƒ|[ƒ“‚·‚éêŠ‚ÌŒvZ
+    /// ãƒªã‚¹ãƒãƒ¼ãƒ³ã™ã‚‹å ´æ‰€ã®è¨ˆç®—
     /// </summary>
-    /// <returns>ƒŠƒXƒ|[ƒ“‚·‚éêŠ</returns>
+    /// <returns>ãƒªã‚¹ãƒãƒ¼ãƒ³ã™ã‚‹å ´æ‰€</returns>
     Vector3 CalcuRespawnRandomPosition()
     {
         return m_generator.CalcuRandomPosition();
     }
 
-    //ƒAƒNƒZƒbƒT-------------------------------------------------------
+    //ã‚¢ã‚¯ã‚»ãƒƒã‚µ-------------------------------------------------------
 
     public void SetRespawnTime(float time)
     {
@@ -123,7 +123,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
 
     void StartGeneratorNullCheck()
     {
-        if(m_generator != null) { //nullo‚È‚¢‚È‚çˆ—‚ğ‚µ‚È‚¢
+        if(m_generator != null) { //nullå‡ºãªã„ãªã‚‰å‡¦ç†ã‚’ã—ãªã„
             return;
         }
 

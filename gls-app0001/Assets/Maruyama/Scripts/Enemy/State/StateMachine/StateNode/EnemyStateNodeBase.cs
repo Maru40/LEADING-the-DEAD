@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Enemy—p‚ÌŠî’êStateNodeƒNƒ‰ƒX
+/// Enemyç”¨ã®åŸºåº•StateNodeã‚¯ãƒ©ã‚¹
 /// </summary>
-/// <typeparam name="EnemyType">BaseEnemy‚ÌqƒNƒ‰ƒX</typeparam>
+/// <typeparam name="EnemyType">BaseEnemyã®å­ã‚¯ãƒ©ã‚¹</typeparam>
 public abstract class EnemyStateNodeBase<EnemyType> : NodeBase<EnemyType>
     where EnemyType : class
 {
@@ -14,12 +14,12 @@ public abstract class EnemyStateNodeBase<EnemyType> : NodeBase<EnemyType>
 		Exit,
 	}
 
-	//ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì•ÏXŠÖŒW‚Ìî•ñ‚ğ‚Ü‚Æ‚ß‚½\‘¢‘Ì
+	//ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®å¤‰æ›´é–¢ä¿‚ã®æƒ…å ±ã‚’ã¾ã¨ã‚ãŸæ§‹é€ ä½“
 	protected struct ChangeCompParam
 	{
 		public Behaviour behaviour;
-		public bool isStart;  //ƒXƒ^[ƒg‚É‚Ç‚Á‚¿‚É‚·‚é‚©H
-		public bool isExit;   //I—¹‚É‚Ç‚Á‚¿‚É‚·‚é‚©H
+		public bool isStart;  //ã‚¹ã‚¿ãƒ¼ãƒˆæ™‚ã«ã©ã£ã¡ã«ã™ã‚‹ã‹ï¼Ÿ
+		public bool isExit;   //çµ‚äº†æ™‚ã«ã©ã£ã¡ã«ã™ã‚‹ã‹ï¼Ÿ
 
 		public ChangeCompParam(Behaviour behaviour, bool isStart,bool isExit)
 		{
@@ -41,14 +41,14 @@ public abstract class EnemyStateNodeBase<EnemyType> : NodeBase<EnemyType>
 	//protected---------------------------------------------------------
 
 	/// <summary>
-	/// ŠJn‚ÆI—¹‚ÉØ‚è‘Ö‚¦‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì’Ç‰Á
+	/// é–‹å§‹ã¨çµ‚äº†æ™‚ã«åˆ‡ã‚Šæ›¿ãˆã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®è¿½åŠ 
 	/// </summary>
-	/// <param name="behaviour">Ø‚è‘Ö‚¦‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìƒ|ƒCƒ“ƒ^</param>
-	/// <param name="isStart">ƒXƒ^[ƒg‚É‚Ç‚Á‚¿‚ÉØ‚è‘Ö‚¦‚é</param>
-	/// <param name="isExit">I—¹‚É‚Ç‚Á‚¿‚ÉØ‚è‘Ö‚¦‚é‚©</param>
+	/// <param name="behaviour">åˆ‡ã‚Šæ›¿ãˆã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®ãƒã‚¤ãƒ³ã‚¿</param>
+	/// <param name="isStart">ã‚¹ã‚¿ãƒ¼ãƒˆæ™‚ã«ã©ã£ã¡ã«åˆ‡ã‚Šæ›¿ãˆã‚‹</param>
+	/// <param name="isExit">çµ‚äº†æ™‚ã«ã©ã£ã¡ã«åˆ‡ã‚Šæ›¿ãˆã‚‹ã‹</param>
 	protected void AddChangeComp(Behaviour behaviour, bool isStart, bool isExit)
 	{
-		if (behaviour == null) {  //nullptr‚È‚ç’Ç‰Á‚µ‚È‚¢
+		if (behaviour == null) {  //nullptrãªã‚‰è¿½åŠ ã—ãªã„
 			return;
 		}
 
@@ -57,9 +57,9 @@ public abstract class EnemyStateNodeBase<EnemyType> : NodeBase<EnemyType>
 	}
 
 	/// <summary>
-	/// “o˜^‚³‚ê‚½ƒRƒ“ƒ|[ƒlƒ“ƒg‚ÌØ‚è‘Ö‚¦‚ğs‚¤
+	/// ç™»éŒ²ã•ã‚ŒãŸã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®åˆ‡ã‚Šæ›¿ãˆã‚’è¡Œã†
 	/// </summary>
-	/// <param name="type">Start‚©Exit‚ÌØ‘Öƒ^ƒCƒv</param>
+	/// <param name="type">Startã‹Exitã®åˆ‡æ›¿ã‚¿ã‚¤ãƒ—</param>
 	protected void ChangeComps(EnableChangeType type)
 	{
 		foreach(var param in m_changeParams)

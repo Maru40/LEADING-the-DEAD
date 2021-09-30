@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -54,20 +54,20 @@ public class Stator_ZombieNormal : StatorBase
 
     void CreateEdge()
     {
-        //ƒ‰ƒ“ƒ_ƒ€œpœj
+        //ãƒ©ãƒ³ãƒ€ãƒ å¾˜å¾Š
         m_stateMachine.AddEdge(StateType.RandomPlowling, StateType.Chase, ToChaseTrigger);
 
-        //’Ç]ˆ—
+        //è¿½å¾“å‡¦ç†
         m_stateMachine.AddEdge(StateType.Chase, StateType.RandomPlowling, ToRandomPlowling);
         m_stateMachine.AddEdge(StateType.Chase, StateType.Attack, ToAttackTrigger);
 
-        //UŒ‚ˆ—
+        //æ”»æ’ƒå‡¦ç†
         m_stateMachine.AddEdge(StateType.Attack, StateType.Chase, ToChaseTrigger);
         m_stateMachine.AddEdge(StateType.Attack, StateType.RandomPlowling, ToRandomPlowling);
     }
 
 
-    //‘JˆÚğŒŒn---------------------------------------------------------------
+    //é·ç§»æ¡ä»¶ç³»---------------------------------------------------------------
 
     bool ToChaseTrigger(TransitionMember member) {
         return member.chaseTrigger.Get();
@@ -81,12 +81,12 @@ public class Stator_ZombieNormal : StatorBase
         return member.attackTrigger.Get();
     }
 
-    //ƒAƒNƒZƒbƒT----------------------------------------------------------------
+    //ã‚¢ã‚¯ã‚»ãƒƒã‚µ----------------------------------------------------------------
     
     /// <summary>
-    /// ‘JˆÚ‚É—˜—p‚·‚éƒƒ“ƒo[‚Ìæ“¾
+    /// é·ç§»ã«åˆ©ç”¨ã™ã‚‹ãƒ¡ãƒ³ãƒãƒ¼ã®å–å¾—
     /// </summary>
-    /// <returns>‘JˆÚğŒƒƒ“ƒo[</returns>
+    /// <returns>é·ç§»æ¡ä»¶ãƒ¡ãƒ³ãƒãƒ¼</returns>
     public TransitionMember GetTransitionMember()
     {
         return m_stateMachine.GetTransitionStructMember();

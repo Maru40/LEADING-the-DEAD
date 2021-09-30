@@ -1,14 +1,14 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// •·‚­‚ğ‚·‚éƒCƒ“ƒ^[ƒtƒF[ƒX
+/// èãã‚’ã™ã‚‹ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
 /// </summary>
 public interface I_Listen
 {
     /// <summary>
-    /// ‰¹‚ğ•·‚­
+    /// éŸ³ã‚’èã
     /// </summary>
     public void Listen(FoundObject foundObject);
 }

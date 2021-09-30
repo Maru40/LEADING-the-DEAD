@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +11,7 @@ public class EdgeBase<EnumType, TransitionType>
 	EnumType m_fromType;
     EnumType m_toType;
 
-	Func<TransitionType,bool> m_isTransitionFunc = null; //‘JˆÚ‚·‚éğŒ
+	Func<TransitionType,bool> m_isTransitionFunc = null; //é·ç§»ã™ã‚‹æ¡ä»¶
 
 	public EdgeBase(EnumType from, EnumType to,
 			Func<TransitionType,bool> isTransitionFunc) 
@@ -22,21 +22,21 @@ public class EdgeBase<EnumType, TransitionType>
 	}
 
 
-	//ƒAƒNƒZƒbƒT----------------------------------------------------------
+	//ã‚¢ã‚¯ã‚»ãƒƒã‚µ----------------------------------------------------------
 
 	/// <summary>
-	/// ‘JˆÚğŒ‚ğİ’è
+	/// é·ç§»æ¡ä»¶ã‚’è¨­å®š
 	/// </summary>
-	/// <param name="func">‘JˆÚğŒ‚Ìƒtƒ@ƒ“ƒNƒVƒ‡ƒ“</param>
+	/// <param name="func">é·ç§»æ¡ä»¶ã®ãƒ•ã‚¡ãƒ³ã‚¯ã‚·ãƒ§ãƒ³</param>
 	public void SetIsTransitionFunc(Func<TransitionType, bool> func){
 		m_isTransitionFunc = func;
     }
 
 	/// <summary>
-	/// ‘JˆÚ‚Å‚«‚é‚©”»’f
+	/// é·ç§»ã§ãã‚‹ã‹åˆ¤æ–­
 	/// </summary>
-	/// <param name="member">‘JˆÚ—p‚Ìƒƒ“ƒo[</param>
-	/// <returns>‘JˆÚ‚Å‚«‚é‚È‚çtrue</returns>
+	/// <param name="member">é·ç§»ç”¨ã®ãƒ¡ãƒ³ãƒãƒ¼</param>
+	/// <returns>é·ç§»ã§ãã‚‹ãªã‚‰true</returns>
 	public bool IsTransition(TransitionType member) {
 		return m_isTransitionFunc(member);
 	}

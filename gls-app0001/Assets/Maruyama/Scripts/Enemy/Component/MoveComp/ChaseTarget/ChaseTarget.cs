@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,11 +21,11 @@ public class SeekTransitonMember
 [Serializable]
 public struct ChaseTargetParametor
 {
-    public float nearRange;      //–Ú“I’n‚É‚½‚Ç‚è’…‚¢‚½‚Æ”»’f‚³‚ê‚é‹——£
+    public float nearRange;      //ç›®çš„åœ°ã«ãŸã©ã‚Šç€ã„ãŸã¨åˆ¤æ–­ã•ã‚Œã‚‹è·é›¢
     public float maxSpeed;
     public float turningPower;
-    public float lostSeekTime;   //Œ©¸‚Á‚Ä‚©‚ç’Ç]‚·‚éŠÔ
-    public float inThrongRange;  //W’cs“®‚ğ‚·‚é”ÍˆÍ
+    public float lostSeekTime;   //è¦‹å¤±ã£ã¦ã‹ã‚‰è¿½å¾“ã™ã‚‹æ™‚é–“
+    public float inThrongRange;  //é›†å›£è¡Œå‹•ã‚’ã™ã‚‹ç¯„å›²
 
     public ChaseTargetParametor(float nearRange, float maxSpeed, float turningPower, float lostSeekTime, float inThrongRange)
     {
@@ -38,7 +38,7 @@ public struct ChaseTargetParametor
 }
 
 /// <summary>
-/// ƒ^[ƒQƒbƒg‚Ì’Ç]
+/// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®è¿½å¾“
 /// </summary>
 public class ChaseTarget : MonoBehaviour
 {
@@ -46,14 +46,14 @@ public class ChaseTarget : MonoBehaviour
     ChaseTargetParametor m_param = new ChaseTargetParametor(0.75f, 3.0f, 3.0f, 10.0f, 3.0f);
 
     /// <summary>
-    /// Ray‚ÌáŠQ•¨‚·‚éLayer‚Ì”z—ñ
+    /// Rayã®éšœå®³ç‰©ã™ã‚‹Layerã®é…åˆ—
     /// </summary>
     [SerializeField]
     string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
 
     StateMachine m_stateMachine;
 
-    //ƒRƒ“ƒ|[ƒlƒ“ƒgŒn------------------
+    //ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆç³»------------------
 
     TargetManager m_targetMgr;
 
@@ -71,32 +71,32 @@ public class ChaseTarget : MonoBehaviour
     {
         m_stateMachine.OnUpdate();
 
-        StateCheck();  //ƒXƒe[ƒg‚ÌŠÇ—
+        StateCheck();  //ã‚¹ãƒ†ãƒ¼ãƒˆã®ç®¡ç†
     }
 
     void StateCheck()
     {
         var target = m_targetMgr.GetNowTarget();
-        if(target == null)  //ƒ^[ƒQƒbƒg‚ªnull‚È‚ç
+        if(target == null)  //ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãŒnullãªã‚‰
         {
             TargetLost();
             return;
         }
 
         var type = target.GetFoundData().type;
-        if(type != FoundObject.FoundType.Player) {  //Player‚Å‚È‚©‚Á‚½‚ç
-            m_stateMachine.GetTransitionStructMember().linerTrigger.Fire(); //Liner‚É•ÏX
-            return; //ˆ—‚ğI—¹‚·‚éB
+        if(type != FoundObject.FoundType.Player) {  //Playerã§ãªã‹ã£ãŸã‚‰
+            m_stateMachine.GetTransitionStructMember().linerTrigger.Fire(); //Linerã«å¤‰æ›´
+            return; //å‡¦ç†ã‚’çµ‚äº†ã™ã‚‹ã€‚
         }
 
-        //áŠQ•¨‚ª‡‚Á‚½‚ç
+        //éšœå®³ç‰©ãŒåˆã£ãŸã‚‰
         var toVec = target.transform.position - transform.position;
         int obstacleLayer = LayerMask.GetMask(m_rayObstacleLayerStrings);
         if (Physics.Raycast(transform.position, toVec, toVec.magnitude, obstacleLayer)){
-            m_stateMachine.GetTransitionStructMember().breadTrigger.Fire(); //Bread‚É•ÏX
+            m_stateMachine.GetTransitionStructMember().breadTrigger.Fire(); //Breadã«å¤‰æ›´
         }
         else{
-            m_stateMachine.GetTransitionStructMember().linerTrigger.Fire(); //Liner‚É•ÏX
+            m_stateMachine.GetTransitionStructMember().linerTrigger.Fire(); //Linerã«å¤‰æ›´
         }
     }
 
@@ -120,7 +120,7 @@ public class ChaseTarget : MonoBehaviour
         m_stateMachine.AddEdge(SeekType.Bread, SeekType.Liner, ToLinerTrigger);
     }
 
-    //‘JˆÚğŒ------------------------------------------------------------
+    //é·ç§»æ¡ä»¶------------------------------------------------------------
 
     bool ToBreadTrigger(SeekTransitonMember member)
     {
@@ -132,7 +132,7 @@ public class ChaseTarget : MonoBehaviour
     }
 
     
-    //ƒAƒNƒZƒbƒT------------------------------------------------------------
+    //ã‚¢ã‚¯ã‚»ãƒƒã‚µ------------------------------------------------------------
 
     public void TargetLost()
     {
@@ -201,9 +201,9 @@ public class ChaseTarget : MonoBehaviour
         }
 
         var data = target.GetFoundData();
-        if(data.type == FoundObject.FoundType.SoundObject) //SoundObject‚È‚ç
+        if(data.type == FoundObject.FoundType.SoundObject) //SoundObjectãªã‚‰
         {
-            var stator = GetComponent<Stator_ZombieNormal>(); //•Ç‚Å‚àUŒ‚‚·‚éB
+            var stator = GetComponent<Stator_ZombieNormal>(); //å£ã§ã‚‚æ”»æ’ƒã™ã‚‹ã€‚
             if (stator)
             {
                 stator.GetTransitionMember().attackTrigger.Fire();

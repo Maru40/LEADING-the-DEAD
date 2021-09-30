@@ -1,14 +1,14 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ’¼ü“I‚Èƒ^[ƒQƒbƒg’Ç]
+/// ç›´ç·šçš„ãªã‚¿ãƒ¼ã‚²ãƒƒãƒˆè¿½å¾“
 /// </summary>
 public class LinerSeekTarget : NodeBase<EnemyBase>
 {
     float m_maxSpeed = 3.0f;
-    float m_turningPower = 1.0f; //ù‰ñ‚·‚é—Í
+    float m_turningPower = 1.0f; //æ—‹å›ã™ã‚‹åŠ›
 
     ChaseTarget m_chaseTarget;
     TargetManager m_targetMgr;
@@ -62,7 +62,7 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
     }
 
 
-    //ƒAƒNƒZƒbƒT-----------------------------------------------------------------------------
+    //ã‚¢ã‚¯ã‚»ãƒƒã‚µ-----------------------------------------------------------------------------
 
     public void SetMaxSpeed(float speed){
         m_maxSpeed = speed;

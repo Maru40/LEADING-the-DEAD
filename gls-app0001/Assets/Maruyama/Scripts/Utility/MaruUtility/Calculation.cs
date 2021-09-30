@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,23 +7,23 @@ namespace MaruUtility
     public class Calculation
     {
         /// <summary>
-        /// ƒ^[ƒQƒbƒg‚ÉŒü‚©‚Á‚½ƒxƒNƒgƒ‹‚ğ•Ô‚·
+        /// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã«å‘ã‹ã£ãŸãƒ™ã‚¯ãƒˆãƒ«ã‚’è¿”ã™
         /// </summary>
-        /// <param name="selfTrans">©•ª©g‚ÌTransform</param>
-        /// <param name="targetTrans">ƒ^[ƒQƒbƒg‚Ìƒgƒ‰ƒ“ƒXƒtƒH[ƒ€</param>
-        /// <returns>ƒ^[ƒQƒbƒg•ûŒü‚ÌƒxƒNƒgƒ‹</returns>
+        /// <param name="selfTrans">è‡ªåˆ†è‡ªèº«ã®Transform</param>
+        /// <param name="targetTrans">ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ </param>
+        /// <returns>ã‚¿ãƒ¼ã‚²ãƒƒãƒˆæ–¹å‘ã®ãƒ™ã‚¯ãƒˆãƒ«</returns>
         public static Vector3 CalcuToTargetVec(Transform selfTrans, Transform targetTrans)
         {
             return targetTrans.position - selfTrans.position;
         }
 
         /// <summary>
-        /// –Ú“I’n‚É“’B‚µ‚½‚©‚Ç‚¤‚©
+        /// ç›®çš„åœ°ã«åˆ°é”ã—ãŸã‹ã©ã†ã‹
         /// </summary>
-        /// <param name="nearRange">Œë·”ÍˆÍ</param>
-        /// <param name="selfPosition">©•ª‚Ìƒ|ƒWƒVƒ‡ƒ“</param>
-        /// <param name="targetPosition">–Ú“I’n</param>
-        /// <returns>–Ú“I’n‚È‚çtrue</returns>
+        /// <param name="nearRange">èª¤å·®ç¯„å›²</param>
+        /// <param name="selfPosition">è‡ªåˆ†ã®ãƒã‚¸ã‚·ãƒ§ãƒ³</param>
+        /// <param name="targetPosition">ç›®çš„åœ°</param>
+        /// <returns>ç›®çš„åœ°ãªã‚‰true</returns>
         public static bool IsArrivalPosition(float nearRange, Vector3 selfPosition, Vector3 targetPosition)
         {
             var toVec = targetPosition - selfPosition;

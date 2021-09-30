@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,10 +6,10 @@ using System;
 
 public class TargetManager : MonoBehaviour
 {
-    //ÅŒã‚ÉQÆ‚³‚ê‚½ƒ^[ƒQƒbƒg
+    //æœ€å¾Œã«å‚ç…§ã•ã‚ŒãŸã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
     FoundObject m_nowTarget = null;
 
-    //‚Ç‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìƒ^[ƒQƒbƒg‚©‚ğŠm”F‚·‚éB
+    //ã©ã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‹ã‚’ç¢ºèªã™ã‚‹ã€‚
     Dictionary<Type,FoundObject> m_targets = new Dictionary<Type, FoundObject>();
 
     private void Start()
@@ -22,62 +22,62 @@ public class TargetManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒ^[ƒQƒbƒg‚Ì’Ç‰Á
+    /// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®è¿½åŠ 
     /// </summary>
-    /// <param name="type">‚Ç‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìƒ^[ƒQƒbƒg‚©</param>
-    /// <param name="target">ƒ^[ƒQƒbƒg</param>
+    /// <param name="type">ã©ã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‹</param>
+    /// <param name="target">ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ</param>
     public void AddTarget(Type type, FoundObject target)
     {
         m_targets[type] = target;
     }
 
     /// <summary>
-    /// Œ»İ’Ç]‚·‚éƒ^[ƒQƒbƒg‚ÌƒZƒbƒg
+    /// ç¾åœ¨è¿½å¾“ã™ã‚‹ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ã‚»ãƒƒãƒˆ
     /// </summary>
-    /// <param name="type">ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìƒ^ƒCƒv</param>
-    /// <param name="target">ƒ^[ƒQƒbƒg</param>
+    /// <param name="type">ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®ã‚¿ã‚¤ãƒ—</param>
+    /// <param name="target">ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ</param>
     public void SetNowTarget(Type type, FoundObject target)
     {
-        //nowTarget‚ªnull‚Å‚È‚©‚Á‚½‚ç
+        //nowTargetãŒnullã§ãªã‹ã£ãŸã‚‰
         if(m_nowTarget != null) {
-            if (!IsTargetUpdate(target)) {  //XV‚ª•K—v‚È‚¢‚È‚ç
-                return;  //XV‚¹‚¸‚Éˆ—‚ğ”ò‚Î‚·B
+            if (!IsTargetUpdate(target)) {  //æ›´æ–°ãŒå¿…è¦ãªã„ãªã‚‰
+                return;  //æ›´æ–°ã›ãšã«å‡¦ç†ã‚’é£›ã°ã™ã€‚
             }
         }
 
-        //XV
+        //æ›´æ–°
         m_nowTarget = target;
         m_targets[type] = target;
     }
 
     /// <summary>
-    /// XV‚ª•K—v‚©‚Ç‚¤‚©‚ğ•Ô‚·B
+    /// æ›´æ–°ãŒå¿…è¦ã‹ã©ã†ã‹ã‚’è¿”ã™ã€‚
     /// </summary>
-    /// <param name="target">ƒ^[ƒQƒbƒg</param>
-    /// <returns>XV‚ª•K—v‚È‚çtrue</returns>
+    /// <param name="target">ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ</param>
+    /// <returns>æ›´æ–°ãŒå¿…è¦ãªã‚‰true</returns>
     bool IsTargetUpdate(FoundObject target)
     {
         var newPriority = target.GetFoundData().priority;
         var nowPriority = m_nowTarget.GetFoundData().priority;
 
-        if (nowPriority < newPriority) //V‚µ‚¢•û‚ª—Dæ“x‚ª‚‚©‚Á‚½‚çXV
+        if (nowPriority < newPriority) //æ–°ã—ã„æ–¹ãŒå„ªå…ˆåº¦ãŒé«˜ã‹ã£ãŸã‚‰æ›´æ–°
         {
             return true;
         }
 
-        if(nowPriority == newPriority) //V‚µ‚¢•û‚Æ—Dæ“x‚ª“¯‚¶‚È‚çB
+        if(nowPriority == newPriority) //æ–°ã—ã„æ–¹ã¨å„ªå…ˆåº¦ãŒåŒã˜ãªã‚‰ã€‚
         {
-            return IsNearNewTarget(target);  //V‚µ‚¢ƒ^[ƒQƒbƒg‚ª‹ß‚¢‚È‚çXV‚ ‚èB
+            return IsNearNewTarget(target);  //æ–°ã—ã„ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãŒè¿‘ã„ãªã‚‰æ›´æ–°ã‚ã‚Šã€‚
         }
 
-        return false;  //‚Ç‚¿‚ç‚Å‚à–³‚©‚Á‚½‚çXV‚µ‚È‚¢B
+        return false;  //ã©ã¡ã‚‰ã§ã‚‚ç„¡ã‹ã£ãŸã‚‰æ›´æ–°ã—ãªã„ã€‚
     }
 
     /// <summary>
-    /// V‚µ‚¢ƒ^[ƒQƒbƒg‚Ì•û‚ª‹ß‚¢‚©‚Ç‚¤‚©
+    /// æ–°ã—ã„ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®æ–¹ãŒè¿‘ã„ã‹ã©ã†ã‹
     /// </summary>
     /// <param name="target"></param>
-    /// <returns>V‚µ‚¢ƒ^[ƒQƒbƒg‚ª‹ß‚¢‚È‚çtrue</returns>
+    /// <returns>æ–°ã—ã„ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãŒè¿‘ã„ãªã‚‰true</returns>
     bool IsNearNewTarget(FoundObject newTarget)
     {
         var nowTargetPosition = m_nowTarget.gameObject.transform.position;
@@ -86,14 +86,14 @@ public class TargetManager : MonoBehaviour
         var toNowTarget = nowTargetPosition - transform.position;
         var toNewTarget = newTargetPosition - transform.position;
 
-        //Œ»İ‚Ì•û‚ª‹ß‚¢‚È‚çfalse
+        //ç¾åœ¨ã®æ–¹ãŒè¿‘ã„ãªã‚‰false
         return (toNowTarget.magnitude < toNewTarget.magnitude) ? false : true;
     }
 
     /// <summary>
-    /// ÅŒã‚ÉQÆ‚³‚ê‚½ƒ^[ƒQƒbƒg‚ğæ“¾
+    /// æœ€å¾Œã«å‚ç…§ã•ã‚ŒãŸã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’å–å¾—
     /// </summary>
-    /// <returns>ƒ^[ƒQƒbƒg</returns>
+    /// <returns>ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ</returns>
     public FoundObject GetNowTarget()
     {
         return m_nowTarget;
@@ -106,7 +106,7 @@ public class TargetManager : MonoBehaviour
 
     public FoundObject GetNowTarget(Type type)
     {
-        //key‚ª‘¶İ‚µ‚È‚©‚Á‚½‚ç
+        //keyãŒå­˜åœ¨ã—ãªã‹ã£ãŸã‚‰
         if (!m_targets.ContainsKey(type)){
             return null;
         }
@@ -117,7 +117,7 @@ public class TargetManager : MonoBehaviour
 
     public FoundObject.FoundData? GetNowTargetFoundData(Type type)
     {
-        //key‚ª‘¶İ‚µ‚È‚©‚Á‚½‚ç
+        //keyãŒå­˜åœ¨ã—ãªã‹ã£ãŸã‚‰
         if (!m_targets.ContainsKey(type))
         {
             return null;
@@ -128,9 +128,9 @@ public class TargetManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Œ»İ‚Ìƒ^[ƒQƒbƒg•ûŒü‚ÌƒxƒNƒgƒ‹‚ğ•Ô‚·
+    /// ç¾åœ¨ã®ã‚¿ãƒ¼ã‚²ãƒƒãƒˆæ–¹å‘ã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¿”ã™
     /// </summary>
-    /// <returns>ƒ^[ƒQƒbƒg•ûŒü‚ÌƒxƒNƒgƒ‹</returns>
+    /// <returns>ã‚¿ãƒ¼ã‚²ãƒƒãƒˆæ–¹å‘ã®ãƒ™ã‚¯ãƒˆãƒ«</returns>
     public Vector3 GetToNowTargetVector()
     {
         return m_nowTarget.transform.position - transform.position;

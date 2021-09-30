@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,7 +17,7 @@ public class Attack_ZombieNormal : AttackBase
     [SerializeField]
     EnemyAttackTriggerAction m_hitBox = null;
 
-    bool m_isTargetChase = true;  //UŒ‚‚Ì“r’†‚Ü‚Å‚Íƒ^[ƒQƒbƒg‚ğ’Ç‚¤‚æ‚¤‚É‚·‚é‚½‚ßB
+    bool m_isTargetChase = true;  //æ”»æ’ƒã®é€”ä¸­ã¾ã§ã¯ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’è¿½ã†ã‚ˆã†ã«ã™ã‚‹ãŸã‚ã€‚
 
     void Awake()
     {
@@ -42,7 +42,7 @@ public class Attack_ZombieNormal : AttackBase
     }
 
     /// <summary>
-    /// UŒ‚‚Ì“r’†‚Ü‚Å‚Í“G‚ğ’Ç]‚·‚é‚½‚ßB
+    /// æ”»æ’ƒã®é€”ä¸­ã¾ã§ã¯æ•µã‚’è¿½å¾“ã™ã‚‹ãŸã‚ã€‚
     /// </summary>
     void TargetChase()
     {
@@ -56,7 +56,7 @@ public class Attack_ZombieNormal : AttackBase
         //var throngVec = m_throngManager.CalcuThrongVector();
         var avoidVec = m_throngManager.CalcuSumAvoidVector();
         toVec += avoidVec;
-        toVec.y = 0.0f;  //(y‚ÌƒxƒNƒgƒ‹‚ğE‚·B)
+        toVec.y = 0.0f;  //(yã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ®ºã™ã€‚)
         //var force = CalcuVelocity.CalucSeekVec(velocity, toVec, GetBaseParam().moveSpeed);
 
         m_velocityMgr.velocity = toVec.normalized * GetBaseParam().moveSpeed;
@@ -65,9 +65,9 @@ public class Attack_ZombieNormal : AttackBase
     }
 
     /// <summary>
-    /// UŒ‚‚ğŠJn‚·‚é‹——£‚©‚Ç‚¤‚©
+    /// æ”»æ’ƒã‚’é–‹å§‹ã™ã‚‹è·é›¢ã‹ã©ã†ã‹
     /// </summary>
-    /// <returns>ŠJn‚·‚é‚È‚çtrue</returns>
+    /// <returns>é–‹å§‹ã™ã‚‹ãªã‚‰true</returns>
     override public bool IsAttackStartRange()
     {
         float range = GetBaseParam().startRange;
@@ -97,7 +97,7 @@ public class Attack_ZombieNormal : AttackBase
 
 
     /// <summary>
-    /// ‘Šè‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚éB
+    /// ç›¸æ‰‹ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹ã€‚
     /// </summary>
     private void SendDamage(Collider other)
     {

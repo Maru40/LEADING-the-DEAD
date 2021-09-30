@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,11 +8,11 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
 { 
     float m_nearRange = 3.0f;
     float m_maxSpeed = 3.0f;
-    float m_turningPower = 1.0f; //ù‰ñ‚·‚é—Í
+    float m_turningPower = 1.0f; //æ—‹å›ã™ã‚‹åŠ›
     float m_lostSeekTime = 10.0f;
     Vector3 m_targetPosition = new Vector3();
 
-    //ƒRƒ“ƒ|\ƒlƒ“ƒgŒn----------------------------------
+    //ã‚³ãƒ³ãƒâ€•ãƒãƒ³ãƒˆç³»----------------------------------
 
     ChaseTarget m_chaseTarget;
     WaitTimer m_waitTimer;
@@ -36,7 +36,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
         var owner = GetOwner();
 
         m_chaseTarget = owner.GetComponent<ChaseTarget>();
-        //WaitTimer‚Åˆê’èŠÔŒ©¸‚Á‚½‚ç‘Ò‹@ó‘Ô‚ÉˆÚs‚·‚é‚±‚Æ‚É‚·‚éB
+        //WaitTimerã§ä¸€å®šæ™‚é–“è¦‹å¤±ã£ãŸã‚‰å¾…æ©ŸçŠ¶æ…‹ã«ç§»è¡Œã™ã‚‹ã“ã¨ã«ã™ã‚‹ã€‚
         m_waitTimer = owner.GetComponent<WaitTimer>();
         m_waitTimer.AddWaitTimer(GetType(), m_lostSeekTime, m_chaseTarget.TargetLost);
 
@@ -49,12 +49,12 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
         m_bread = target?.GetComponent<BreadCrumb>();
 
         if (m_bread){
-            //‰Šúƒ|ƒWƒVƒ‡ƒ“‚ÌƒZƒbƒg
-            var position = m_bread.GetNewBackPosition(1); //ÅV‚ÌˆêŒÂ‘O‚ğæ“¾
+            //åˆæœŸãƒã‚¸ã‚·ãƒ§ãƒ³ã®ã‚»ãƒƒãƒˆ
+            var position = m_bread.GetNewBackPosition(1); //æœ€æ–°ã®ä¸€å€‹å‰ã‚’å–å¾—
             if(position != null){
                 m_targetPosition = (Vector3)position;
             }
-            else{  //‚à‚µ‚È‚©‚Á‚½‚çÅV‚ğæ“¾
+            else{  //ã‚‚ã—ãªã‹ã£ãŸã‚‰æœ€æ–°ã‚’å–å¾—
                 m_targetPosition = m_bread.GetNewPosition();
             }
         }
@@ -85,7 +85,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
         //var force = UtilityVelocity.CalucSeekVec(m_rigid.velocity, toVec, m_maxSpeed);
         //m_rigid.AddForce(force);
 
-        //–Ú“I’n‚É“’B‚µ‚½‚ç
+        //ç›®çš„åœ°ã«åˆ°é”ã—ãŸã‚‰
         if (Calculation.IsArrivalPosition(m_nearRange, GetOwner().transform.position, m_targetPosition)) {
             NextRoute();
         }
@@ -104,7 +104,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
     }
 
 
-    //ƒAƒNƒZƒbƒT------------------------------------------------------
+    //ã‚¢ã‚¯ã‚»ãƒƒã‚µ------------------------------------------------------
 
     public void SetMaxSpeed(float maxSpeed)
     {

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,10 +6,10 @@ using System;
 
 public class ObstacleEvasion : MonoBehaviour
 {
-    //Ray‚Ì’·‚³
+    //Rayã®é•·ã•
     [SerializeField]
     float m_rayRange = 3.0f;
-    //Ray‚ÌŠp“x(”z—ñ‚Ì”‚¾‚¯¶¬)
+    //Rayã®è§’åº¦(é…åˆ—ã®æ•°ã ã‘ç”Ÿæˆ)
     [SerializeField]
     float[] m_rayDegs = new float[] { +45.0f, -45.0f }; 
 
@@ -19,7 +19,7 @@ public class ObstacleEvasion : MonoBehaviour
     EnemyVelocityMgr m_velocityMgr;
 
     /// <summary>
-    /// Ray‚ÌáŠQ•¨‚·‚éLayer‚Ì”z—ñ
+    /// Rayã®éšœå®³ç‰©ã™ã‚‹Layerã®é…åˆ—
     /// </summary>
     [SerializeField]
     string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
@@ -41,9 +41,9 @@ public class ObstacleEvasion : MonoBehaviour
         foreach (var deg in m_rayDegs)
         {
             var forward = transform.forward;
-            var direct = Quaternion.AngleAxis(deg, Vector3.up) * forward; //ƒtƒHƒ[ƒh‚ğ‰ñ“]
+            var direct = Quaternion.AngleAxis(deg, Vector3.up) * forward; //ãƒ•ã‚©ãƒ¯ãƒ¼ãƒ‰ã‚’å›è»¢
 
-            var hitPoint = CalcuRayHitPoint(direct);  //ƒqƒbƒg‚µ‚½êŠ‚Ìæ“¾
+            var hitPoint = CalcuRayHitPoint(direct);  //ãƒ’ãƒƒãƒˆã—ãŸå ´æ‰€ã®å–å¾—
             if (hitPoint == null) {
                 continue;
             }
@@ -59,16 +59,16 @@ public class ObstacleEvasion : MonoBehaviour
     }
 
     /// <summary>
-    /// Ray‚ª‚ ‚½‚Á‚½êŠ‚Ìæ“¾
+    /// RayãŒã‚ãŸã£ãŸå ´æ‰€ã®å–å¾—
     /// </summary>
-    /// <param name="direct">Ray‚ğ”ò‚Î‚·•ûŒü</param>
-    /// <returns>“–‚½‚Á‚½êŠ</returns>
+    /// <param name="direct">Rayã‚’é£›ã°ã™æ–¹å‘</param>
+    /// <returns>å½“ãŸã£ãŸå ´æ‰€</returns>
     Vector3? CalcuRayHitPoint(Vector3 direct)
     {
         var hit = new RaycastHit();
 
         int obstacleLayer = LayerMask.GetMask(m_rayObstacleLayerStrings);
-        if(Physics.Raycast(transform.position, direct,out hit, m_rayRange, obstacleLayer)) //áŠQ•¨‚Éƒqƒbƒg‚µ‚½‚ç
+        if(Physics.Raycast(transform.position, direct,out hit, m_rayRange, obstacleLayer)) //éšœå®³ç‰©ã«ãƒ’ãƒƒãƒˆã—ãŸã‚‰
         {
             return hit.point;
         }

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,13 +6,13 @@ using System;
 using MaruUtility;
 
 /// <summary>
-/// ˆê’è‹——£—£‚ê‚½êŠ‚É¶¬‚µ‚½‚¢ƒf[ƒ^\‘¢‘Ì
+/// ä¸€å®šè·é›¢é›¢ã‚ŒãŸå ´æ‰€ã«ç”Ÿæˆã—ãŸã„ãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“
 /// </summary>
 [Serializable]
 public struct OutOfTargetData
 {
-    public GameObject target;  //ƒ^[ƒQƒbƒg
-    public float range;  //‚Ç‚ê‚¾‚¯—£‚ê‚½‹——£‚©
+    public GameObject target;  //ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
+    public float range;  //ã©ã‚Œã ã‘é›¢ã‚ŒãŸè·é›¢ã‹
 
     public OutOfTargetData(GameObject target)
         :this(target, 15.0f)
@@ -28,7 +28,7 @@ public struct OutOfTargetData
 
 public class EnemyGenerator : MonoBehaviour
 {
-    //‹ß‚­‚É¶¬‚µ‚½‚­‚È‚¢ƒIƒuƒWƒFƒNƒgŒQ
+    //è¿‘ãã«ç”Ÿæˆã—ãŸããªã„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç¾¤
     [SerializeField]
     List<OutOfTargetData> m_outOfTargteDatas =  new List<OutOfTargetData>();
 
@@ -39,11 +39,11 @@ public class EnemyGenerator : MonoBehaviour
     protected int m_numCreate = 30;
 
     [SerializeField]
-    protected Vector3 m_centerPosition = new Vector3();  //¶¬‚·‚é‚Æ‚«‚Ì’†S“_
+    protected Vector3 m_centerPosition = new Vector3();  //ç”Ÿæˆã™ã‚‹ã¨ãã®ä¸­å¿ƒç‚¹
     [SerializeField]
-    protected Vector3 m_maxRandomRange = new Vector3();  //ƒ‰ƒ“ƒ_ƒ€‚É¶¬‚·‚é‚ÌÅ‘å‹——£
+    protected Vector3 m_maxRandomRange = new Vector3();  //ãƒ©ãƒ³ãƒ€ãƒ ã«ç”Ÿæˆã™ã‚‹æ™‚ã®æœ€å¤§è·é›¢
 
-    //¶¬‚µ‚½ƒ]ƒ“ƒr‚ğ‚Â
+    //ç”Ÿæˆã—ãŸã‚¾ãƒ³ãƒ“ã‚’æŒã¤
     protected List<ThrongData> m_datas = new List<ThrongData>();
 
     protected virtual void Start()
@@ -69,7 +69,7 @@ public class EnemyGenerator : MonoBehaviour
     void CreateObject(Vector3 createPosition)
     {
         var obj = Instantiate(m_createObject, createPosition, Quaternion.identity, transform);
-        CreateObjectAdjust(obj);  //’²®
+        CreateObjectAdjust(obj);  //èª¿æ•´
         
         m_datas.Add(new ThrongData(obj.GetComponent<EnemyVelocityMgr>(),
             obj.GetComponent<TargetManager>(),
@@ -79,17 +79,17 @@ public class EnemyGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// ’²®‚ª•K—v‚ÈƒIƒuƒWƒFƒNƒg‚ğ“n‚µ‚ÄA’²®
+    /// èª¿æ•´ãŒå¿…è¦ãªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ¸¡ã—ã¦ã€èª¿æ•´
     /// </summary>
-    /// <param name="obj">’²®‚µ‚½‚¢ƒIƒuƒWƒFƒNƒg</param>
+    /// <param name="obj">èª¿æ•´ã—ãŸã„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
     protected virtual void CreateObjectAdjust(GameObject obj) { }
 
 
     /// <summary>
-    /// ƒ^[ƒQƒbƒg‚©‚ç—£‚ê‚½êŠ‚ğAƒ‰ƒ“ƒ_ƒ€‚É•Ô‚·B
+    /// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‹ã‚‰é›¢ã‚ŒãŸå ´æ‰€ã‚’ã€ãƒ©ãƒ³ãƒ€ãƒ ã«è¿”ã™ã€‚
     /// </summary>
-    /// <param name="target">ƒ^[ƒQƒbƒg</param>
-    /// <returns>ƒ‰ƒ“ƒ_ƒ€‚ÈˆÊ’u</returns>
+    /// <param name="target">ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ</param>
+    /// <returns>ãƒ©ãƒ³ãƒ€ãƒ ãªä½ç½®</returns>
     public Vector3 CalcuRandomPosition()
     {
         return RandomPosition.OutCameraAndOutRangeOfTargets(
@@ -97,13 +97,13 @@ public class EnemyGenerator : MonoBehaviour
             Camera.main, m_maxRandomRange, m_centerPosition);
     }
 
-    //ƒAƒNƒZƒbƒT---------------------------------------
+    //ã‚¢ã‚¯ã‚»ãƒƒã‚µ---------------------------------------
 
     /// <summary>
-    /// ¶¬‚·‚éƒIƒuƒWƒFƒNƒg‚Æ“n‚³‚ê‚½ƒIƒuƒWƒFƒNƒg‚ª“¯‚¶prefab‚È‚ç
+    /// ç”Ÿæˆã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨æ¸¡ã•ã‚ŒãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒåŒã˜prefabãªã‚‰
     /// </summary>
-    /// <param name="gameObj">”äŠr‘ÎÛ‚ÌƒIƒuƒWƒFƒNƒg</param>
-    /// <returns>“¯‚¶‚È‚çtrue</returns>
+    /// <param name="gameObj">æ¯”è¼ƒå¯¾è±¡ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+    /// <returns>åŒã˜ãªã‚‰true</returns>
     public bool IsEqualCreateObject(GameObject gameObj)
     {
         return m_createObject.GetType() == gameObj.GetType() ? true : false;
@@ -120,9 +120,9 @@ public class EnemyGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒ‰ƒ“ƒ_ƒ€‚É¶¬‚·‚é‚Æ‚«‚ÌÅ‘å‹——£
+    /// ãƒ©ãƒ³ãƒ€ãƒ ã«ç”Ÿæˆã™ã‚‹ã¨ãã®æœ€å¤§è·é›¢
     /// </summary>
-    /// <returns>Å‘å‹——£</returns>
+    /// <returns>æœ€å¤§è·é›¢</returns>
     public Vector3 GetMaxRandomRange()
     {
         return m_maxRandomRange;
