@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,9 +20,9 @@ class WaitTimerParam
     }
 
     /// <summary>
-    /// ƒ^ƒCƒ€I—¹‚É‚·‚éˆ—
+    /// ã‚¿ã‚¤ãƒ çµ‚äº†æ™‚ã«ã™ã‚‹å‡¦ç†
     /// </summary>
-    /// <param name="isEndAction">I—¹ŠÖ”‚ğŒÄ‚Ño‚·‚©‚Ç‚¤‚©</param>
+    /// <param name="isEndAction">çµ‚äº†é–¢æ•°ã‚’å‘¼ã³å‡ºã™ã‹ã©ã†ã‹</param>
     public void EndTimer(bool isEndAction = true)
     {
         timeElapsed = time;
@@ -46,12 +46,12 @@ public class WaitTimer : MonoBehaviour
     
     void Update()
     {
-        //ƒpƒ‰ƒ[ƒ^‚ÌUpdate
+        //ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®Update
         foreach (var keyValuePair in m_params)
         {
             var param = keyValuePair.Value;
 
-            if (param.isEnd){  //I—¹‚µ‚Ä‚¢‚½‚çÁ‹Œó•â‚É“ü‚ê‚éB
+            if (param.isEnd){  //çµ‚äº†ã—ã¦ã„ãŸã‚‰æ¶ˆå»å€™è£œã«å…¥ã‚Œã‚‹ã€‚
                 continue;
             }
 
@@ -65,12 +65,12 @@ public class WaitTimer : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒ^ƒCƒ}[‚Ìİ’u
+    /// ã‚¿ã‚¤ãƒãƒ¼ã®è¨­ç½®
     /// </summary>
-    /// <param name="type">’Ç‰Á‚µ‚½ƒNƒ‰ƒX‚Ìƒ^ƒCƒv</param>
-    /// <param name="time">‘Ò‚ÂŠÔ</param>
-    /// <param name="endAction">I—¹‚ÉŒÄ‚ÔƒAƒNƒVƒ‡ƒ“</param>
-    /// <param name="countSpeed">ƒJƒEƒ“ƒgƒXƒs[ƒh</param>
+    /// <param name="type">è¿½åŠ ã—ãŸã‚¯ãƒ©ã‚¹ã®ã‚¿ã‚¤ãƒ—</param>
+    /// <param name="time">å¾…ã¤æ™‚é–“</param>
+    /// <param name="endAction">çµ‚äº†æ™‚ã«å‘¼ã¶ã‚¢ã‚¯ã‚·ãƒ§ãƒ³</param>
+    /// <param name="countSpeed">ã‚«ã‚¦ãƒ³ãƒˆã‚¹ãƒ”ãƒ¼ãƒ‰</param>
     public void AddWaitTimer(Type type ,float time, Action endAction = null, float countSpeed = 1.0f)
     {
         var newParam = new WaitTimerParam(time, countSpeed, endAction);
@@ -78,15 +78,15 @@ public class WaitTimer : MonoBehaviour
     }
 
     /// <summary>
-    /// ‘Ò‹@ó‘Ô‚©‚Ç‚¤‚©
+    /// å¾…æ©ŸçŠ¶æ…‹ã‹ã©ã†ã‹
     /// </summary>
-    /// <param name="type">ƒIƒuƒWƒFƒNƒg‚Ìƒ^ƒCƒv</param>
-    /// <returns>‘Ò‹@ó‘Ô‚È‚çtrue</returns>
+    /// <param name="type">ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¿ã‚¤ãƒ—</param>
+    /// <returns>å¾…æ©ŸçŠ¶æ…‹ãªã‚‰true</returns>
     public bool IsWait(Type type)
     {
-        //ƒL[‚ª‘¶İ‚·‚é‚È‚ç
+        //ã‚­ãƒ¼ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
         if (m_params.ContainsKey(type)) {
-            return !m_params[type].isEnd;  //I—¹ó‘Ô‚Å‚È‚¢‚È‚çtrue(‘Ò‹@ó‘Ô)
+            return !m_params[type].isEnd;  //çµ‚äº†çŠ¶æ…‹ã§ãªã„ãªã‚‰true(å¾…æ©ŸçŠ¶æ…‹)
         }
         else{
             return false;
@@ -94,16 +94,16 @@ public class WaitTimer : MonoBehaviour
     }
 
     /// <summary>
-    /// ‹­§“I‚É‘Ò‹@ó‘Ô‚ğ‰ğœ
+    /// å¼·åˆ¶çš„ã«å¾…æ©ŸçŠ¶æ…‹ã‚’è§£é™¤
     /// </summary>
-    /// <param name="type">ƒIƒuƒWƒFƒNƒgƒ^ƒCƒv</param>
-    /// <param name="isEndAction">I—¹‚ÉŒÄ‚Ño‚·ŠÖ”‚ğŒÄ‚Ô‚©‚Ç‚¤‚©</param>
+    /// <param name="type">ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚¿ã‚¤ãƒ—</param>
+    /// <param name="isEndAction">çµ‚äº†æ™‚ã«å‘¼ã³å‡ºã™é–¢æ•°ã‚’å‘¼ã¶ã‹ã©ã†ã‹</param>
     public void AbsoluteEndTimer(Type type, bool isEndAction)
     {        
-        //ƒL[‚ª‘¶İ‚·‚é‚È‚ç
+        //ã‚­ãƒ¼ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
         if (m_params.ContainsKey(type))
         {
-            m_params[type].EndTimer(isEndAction);  //‘Ò‹@ó‘Ô‹­§I—¹
+            m_params[type].EndTimer(isEndAction);  //å¾…æ©ŸçŠ¶æ…‹å¼·åˆ¶çµ‚äº†
         }
     }
 }

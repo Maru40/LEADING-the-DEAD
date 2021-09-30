@@ -1,23 +1,23 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public interface I_Attack
 {
     /// <summary>
-    /// UŒ‚ˆ—(å‚ÉƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg)
+    /// æ”»æ’ƒå‡¦ç†(ä¸»ã«ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆ)
     /// </summary>
     public void Attack();
 
     /// <summary>
-    /// UŒ‚ŠJn‚·‚é‚©‚Ç‚¤‚©
+    /// æ”»æ’ƒé–‹å§‹ã™ã‚‹ã‹ã©ã†ã‹
     /// </summary>
-    /// <returns>UŒ‚‚ğŠJn‚·‚é‚È‚çtrue</returns>
+    /// <returns>æ”»æ’ƒã‚’é–‹å§‹ã™ã‚‹ãªã‚‰true</returns>
     public bool IsAttackStart();
 
     /// <summary>
-    /// ‘ÎÛ‚É“–‚½‚Á‚½‚©‚Ç‚¤‚©
+    /// å¯¾è±¡ã«å½“ãŸã£ãŸã‹ã©ã†ã‹
     /// </summary>
-    /// <returns>“–‚½‚Á‚½‚È‚çtrue</returns>
+    /// <returns>å½“ãŸã£ãŸãªã‚‰true</returns>
     public bool IsHit();
 }

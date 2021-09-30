@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 using System;
 
 /// <summary>
-/// StatorBase(Œ»İ‚ÍŒp³‚¾‚¯(‹@”\‚ÍŒãXl‚¦‚éB))
+/// StatorBase(ç¾åœ¨ã¯ç¶™æ‰¿ã ã‘(æ©Ÿèƒ½ã¯å¾Œã€…è€ƒãˆã‚‹ã€‚))
 /// </summary>
 public abstract class StatorBase : MonoBehaviour
 {

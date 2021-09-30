@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/itabashi/InputActions/GameControls/GameControls.inputactions'
+﻿// GENERATED AUTOMATICALLY FROM 'Assets/itabashi/InputActions/GameControls/GameControls.inputactions'
 
 using System;
 using System.Collections;

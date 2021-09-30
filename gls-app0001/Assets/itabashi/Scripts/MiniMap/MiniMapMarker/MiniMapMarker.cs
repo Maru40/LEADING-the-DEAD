@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,20 +6,20 @@ using UnityEngine.UI;
 namespace MiniMap
 {
     /// <summary>
-    /// ƒ~ƒjƒ}ƒbƒv‚Ìƒ}[ƒJ[ƒNƒ‰ƒX
+    /// ãƒŸãƒ‹ãƒãƒƒãƒ—ã®ãƒãƒ¼ã‚«ãƒ¼ã‚¯ãƒ©ã‚¹
     /// </summary>
     public class MiniMapMarker : MonoBehaviour
     {
         [System.Serializable]
         public struct MarkerData
         {
-            [SerializeField, CustomLabel("•\¦ƒXƒvƒ‰ƒCƒg")]
+            [SerializeField, CustomLabel("è¡¨ç¤ºã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ")]
             public Sprite sprite;
 
-            [SerializeField, CustomLabel("F")]
+            [SerializeField, CustomLabel("è‰²")]
             public Color color;
 
-            [SerializeField, CustomLabel("ƒTƒCƒY"), Min(0.0f)]
+            [SerializeField, CustomLabel("ã‚µã‚¤ã‚º"), Min(0.0f)]
             public float size;
 
             public MarkerData(Sprite sprite, Color color, float size)
@@ -78,7 +78,7 @@ namespace MiniMap
 
             if (!m_mapController)
             {
-                Debug.LogError("MiniMapController‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ");
+                Debug.LogError("MiniMapControllerãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“");
                 return;
             }
 

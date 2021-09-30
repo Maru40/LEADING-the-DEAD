@@ -1,17 +1,17 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// GameObjectƒNƒ‰ƒX‚ÌŠg’£ƒNƒ‰ƒX
+/// GameObjectã‚¯ãƒ©ã‚¹ã®æ‹¡å¼µã‚¯ãƒ©ã‚¹
 /// </summary>
 public static class GameObjectExtension
 {
     /// <summary>
-    /// ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ìe‚©‚çq‚Ü‚Å‚·‚×‚Ä‚©‚çGetComponent‚µ‚Ä•Ô‚·
+    /// ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®è¦ªã‹ã‚‰å­ã¾ã§ã™ã¹ã¦ã‹ã‚‰GetComponentã—ã¦è¿”ã™
     /// </summary>
-    /// <typeparam name="T">Component‚ÌŒ^</typeparam>
-    /// <param name="gameObject">ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg</param>
+    /// <typeparam name="T">Componentã®å‹</typeparam>
+    /// <param name="gameObject">ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
     /// <returns></returns>
     public static T GetComponentInParentAndChildren<T>(this GameObject gameObject) where T : Component
     {

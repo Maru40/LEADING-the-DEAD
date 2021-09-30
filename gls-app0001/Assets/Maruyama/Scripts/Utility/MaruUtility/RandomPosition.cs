@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,16 +7,16 @@ namespace MaruUtility
 
     public class RandomPosition
     {
-        //Random‚É‚·‚é‚½‚ß‚Éstatic‰»
+        //Randomã«ã™ã‚‹ãŸã‚ã«staticåŒ–
         static System.Random sm_random = new System.Random(System.DateTime.Now.Millisecond);
 
         /// <summary>
-        /// ƒ‰ƒ“ƒ_ƒ€‚Èƒ|ƒWƒVƒ‡ƒ“‚ğ•Ô‚·
+        /// ãƒ©ãƒ³ãƒ€ãƒ ãªãƒã‚¸ã‚·ãƒ§ãƒ³ã‚’è¿”ã™
         /// </summary>
-        /// <param name="random">ƒ‰ƒ“ƒ_ƒ€ƒNƒ‰ƒX</param>
-        /// <param name="maxRange">ƒ‰ƒ“ƒ_ƒ€‚É‚·‚é”ÍˆÍ</param>
-        /// <param name="centerPosition">Šî€‚Æ‚È‚é’†S‚Ìƒ|ƒWƒVƒ‡ƒ“</param>
-        /// <returns>ƒ‰ƒ“ƒ_ƒ€‚Èƒ|ƒWƒVƒ‡ƒ“</returns>
+        /// <param name="random">ãƒ©ãƒ³ãƒ€ãƒ ã‚¯ãƒ©ã‚¹</param>
+        /// <param name="maxRange">ãƒ©ãƒ³ãƒ€ãƒ ã«ã™ã‚‹ç¯„å›²</param>
+        /// <param name="centerPosition">åŸºæº–ã¨ãªã‚‹ä¸­å¿ƒã®ãƒã‚¸ã‚·ãƒ§ãƒ³</param>
+        /// <returns>ãƒ©ãƒ³ãƒ€ãƒ ãªãƒã‚¸ã‚·ãƒ§ãƒ³</returns>
         public static Vector3 CalcuPosition(Vector3 maxRange, Vector3 centerPosition)
         {
             Vector3 minVec = -maxRange;
@@ -30,13 +30,13 @@ namespace MaruUtility
         }
 
         /// <summary>
-        /// ƒ^[ƒQƒbƒg‚©‚çˆê’è”ÍˆÍŠO‚Ìƒ|ƒWƒVƒ‡ƒ“‚ğ•Ô‚·B
+        /// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‹ã‚‰ä¸€å®šç¯„å›²å¤–ã®ãƒã‚¸ã‚·ãƒ§ãƒ³ã‚’è¿”ã™ã€‚
         /// </summary>
-        /// <param name="target">ƒ^[ƒQƒbƒg</param>
-        /// <param name="outRange">ƒ^[ƒQƒbƒg‚©‚ç—£‚µ‚Ä—~‚µ‚¢‹——£</param>
-        /// <param name="maxRange">ƒ‰ƒ“ƒ_ƒ€‚É‚·‚é”ÍˆÍ</param>
-        /// <param name="centerPosition">Šî€‚Æ‚È‚é’†S‚Ìƒ|ƒWƒVƒ‡ƒ“</param>
-        /// <returns>ƒ‰ƒ“ƒ_ƒ€‚Èƒ|ƒWƒVƒ‡ƒ“</returns>
+        /// <param name="target">ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ</param>
+        /// <param name="outRange">ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‹ã‚‰é›¢ã—ã¦æ¬²ã—ã„è·é›¢</param>
+        /// <param name="maxRange">ãƒ©ãƒ³ãƒ€ãƒ ã«ã™ã‚‹ç¯„å›²</param>
+        /// <param name="centerPosition">åŸºæº–ã¨ãªã‚‹ä¸­å¿ƒã®ãƒã‚¸ã‚·ãƒ§ãƒ³</param>
+        /// <returns>ãƒ©ãƒ³ãƒ€ãƒ ãªãƒã‚¸ã‚·ãƒ§ãƒ³</returns>
         public static Vector3 OutRangeOfTarget(GameObject target, float outRange, Vector3 maxRange, Vector3 centerPosition = new Vector3())
         {
             const int numLoop = 100;
@@ -47,7 +47,7 @@ namespace MaruUtility
 
                 var toVec = target.transform.position - position;
                 if (toVec.magnitude > outRange)
-                {  //target‚æ‚è‰“‚©‚Á‚½‚ç
+                {  //targetã‚ˆã‚Šé ã‹ã£ãŸã‚‰
                     returnPosition = position;
                     break;
                 }
@@ -57,12 +57,12 @@ namespace MaruUtility
         }
 
         /// <summary>
-        /// ƒJƒƒ‰‚ÌŠO‚Ìƒ|ƒWƒVƒ‡ƒ“‚ğƒ‰ƒ“ƒ_ƒ€‚É•Ô‚·
+        /// ã‚«ãƒ¡ãƒ©ã®å¤–ã®ãƒã‚¸ã‚·ãƒ§ãƒ³ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«è¿”ã™
         /// </summary>
-        /// <param name="camera">ƒJƒƒ‰</param>
-        /// <param name="maxRange">ƒ‰ƒ“ƒ_ƒ€‚É‚·‚é”ÍˆÍ</param>
-        /// <param name="centerPosition">Šî€‚Æ‚È‚é’†S‚Ìƒ|ƒWƒVƒ‡ƒ“</param>
-        /// <returns>ƒ‰ƒ“ƒ_ƒ€‚Èƒ|ƒWƒVƒ‡ƒ“</returns>
+        /// <param name="camera">ã‚«ãƒ¡ãƒ©</param>
+        /// <param name="maxRange">ãƒ©ãƒ³ãƒ€ãƒ ã«ã™ã‚‹ç¯„å›²</param>
+        /// <param name="centerPosition">åŸºæº–ã¨ãªã‚‹ä¸­å¿ƒã®ãƒã‚¸ã‚·ãƒ§ãƒ³</param>
+        /// <returns>ãƒ©ãƒ³ãƒ€ãƒ ãªãƒã‚¸ã‚·ãƒ§ãƒ³</returns>
         public static Vector3 OutCamera(Camera camera, Vector3 maxRange, Vector3 centerPosition = new Vector3())
         {
             const int numLoop = 100;
@@ -79,14 +79,14 @@ namespace MaruUtility
         }
 
         /// <summary>
-        /// ƒJƒƒ‰‚ÌŠO‚ÅAƒ^[ƒQƒbƒg‚Ì”ÍˆÍŠO‚Ì
+        /// ã‚«ãƒ¡ãƒ©ã®å¤–ã§ã€ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ç¯„å›²å¤–ã®æ™‚
         /// </summary>
-        /// <param name="target">ƒ^[ƒQƒbƒg</param>
-        /// <param name="outRange">”ÍˆÍŠO”»’è‹——£</param>
-        /// <param name="camera">ƒJƒƒ‰</param>
-        /// <param name="maxRange">ƒ‰ƒ“ƒ_ƒ€‚ÈÅ‘å‹——£</param>
-        /// <param name="centerPosition">Šî€‚Ì’†SˆÊ’u</param>
-        /// <returns>ƒ‰ƒ“ƒ_ƒ€‚ÈˆÊ’u</returns>
+        /// <param name="target">ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ</param>
+        /// <param name="outRange">ç¯„å›²å¤–åˆ¤å®šè·é›¢</param>
+        /// <param name="camera">ã‚«ãƒ¡ãƒ©</param>
+        /// <param name="maxRange">ãƒ©ãƒ³ãƒ€ãƒ ãªæœ€å¤§è·é›¢</param>
+        /// <param name="centerPosition">åŸºæº–ã®ä¸­å¿ƒä½ç½®</param>
+        /// <returns>ãƒ©ãƒ³ãƒ€ãƒ ãªä½ç½®</returns>
         public static Vector3 OutCameraAndOutRangeOfTarget(GameObject target, float outRange,
             Camera camera, Vector3 maxRange, Vector3 centerPosition = new Vector3())
         {
@@ -99,7 +99,7 @@ namespace MaruUtility
             {
                 var position = CalcuPosition(maxRange, centerPosition);
                 var targetPosition = target.transform.position;
-                //ƒJƒƒ‰‚Ì”ÍˆÍŠOAŠ‚ÂAƒ^[ƒQƒbƒg‚Ì”ÍˆÍŠO‚È‚ç
+                //ã‚«ãƒ¡ãƒ©ã®ç¯„å›²å¤–ã€ä¸”ã¤ã€ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ç¯„å›²å¤–ãªã‚‰
                 if(!CalcuCamera.IsInCamera(position, camera) && !Calculation.IsRange(position, targetPosition, outRange))
                 {
                     return position;
@@ -110,14 +110,14 @@ namespace MaruUtility
         }
 
         /// <summary>
-        /// ƒJƒƒ‰‚ÌŠO‚Å•¡”‚Ìƒ^[ƒQƒbƒg‚©‚ç—£‚ê‚½‹——£‚ğƒ‰ƒ“ƒ_ƒ€‚É•Ô‚·B
+        /// ã‚«ãƒ¡ãƒ©ã®å¤–ã§è¤‡æ•°ã®ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‹ã‚‰é›¢ã‚ŒãŸè·é›¢ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«è¿”ã™ã€‚
         /// </summary>
-        /// <param name="targets">ƒ^[ƒQƒbƒg’B</param>
-        /// <param name="outRange">—£‚·‹——£</param>
-        /// <param name="camera">ƒJƒƒ‰</param>
-        /// <param name="maxRange">ƒ‰ƒ“ƒ_ƒ€‚É¶¬‚·‚é”ÍˆÍ</param>
-        /// <param name="centerPosition">ƒ‰ƒ“ƒ_ƒ€‚É¶¬‚·‚é’†SˆÊ’u</param>
-        /// <returns>ƒ‰ƒ“ƒ_ƒ€‚ÈˆÊ’u</returns>
+        /// <param name="targets">ã‚¿ãƒ¼ã‚²ãƒƒãƒˆé”</param>
+        /// <param name="outRange">é›¢ã™è·é›¢</param>
+        /// <param name="camera">ã‚«ãƒ¡ãƒ©</param>
+        /// <param name="maxRange">ãƒ©ãƒ³ãƒ€ãƒ ã«ç”Ÿæˆã™ã‚‹ç¯„å›²</param>
+        /// <param name="centerPosition">ãƒ©ãƒ³ãƒ€ãƒ ã«ç”Ÿæˆã™ã‚‹ä¸­å¿ƒä½ç½®</param>
+        /// <returns>ãƒ©ãƒ³ãƒ€ãƒ ãªä½ç½®</returns>
         public static Vector3 OutCameraAndOutRangeOfTargets(List<GameObject> targets, float outRange,
             Camera camera, Vector3 maxRange, Vector3 centerPosition = new Vector3())
         {
@@ -132,13 +132,13 @@ namespace MaruUtility
         }
 
         /// <summary>
-        /// ƒJƒƒ‰‚ÌŠO‚Å•¡”‚Ìƒ^[ƒQƒbƒg‚©‚ç—£‚ê‚½‹——£‚ğƒ‰ƒ“ƒ_ƒ€‚É•Ô‚·B
+        /// ã‚«ãƒ¡ãƒ©ã®å¤–ã§è¤‡æ•°ã®ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‹ã‚‰é›¢ã‚ŒãŸè·é›¢ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«è¿”ã™ã€‚
         /// </summary>
-        /// <param name="datas">ƒ^[ƒQƒbƒg‚Æ˜b‚µ‚½‚¢‹——£‚Ìƒf[ƒ^</param>
-        /// <param name="camera">ƒJƒƒ‰</param>
-        /// <param name="maxRange">ƒ‰ƒ“ƒ_ƒ€‚É¶¬‚·‚é”ÍˆÍ</param>
-        /// <param name="centerPosition">ƒ‰ƒ“ƒ_ƒ€‚É¶¬‚·‚é’†SˆÊ’u</param>
-        /// <returns>ƒ‰ƒ“ƒ_ƒ€‚ÈˆÊ’u</returns>
+        /// <param name="datas">ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨è©±ã—ãŸã„è·é›¢ã®ãƒ‡ãƒ¼ã‚¿</param>
+        /// <param name="camera">ã‚«ãƒ¡ãƒ©</param>
+        /// <param name="maxRange">ãƒ©ãƒ³ãƒ€ãƒ ã«ç”Ÿæˆã™ã‚‹ç¯„å›²</param>
+        /// <param name="centerPosition">ãƒ©ãƒ³ãƒ€ãƒ ã«ç”Ÿæˆã™ã‚‹ä¸­å¿ƒä½ç½®</param>
+        /// <returns>ãƒ©ãƒ³ãƒ€ãƒ ãªä½ç½®</returns>
         public static Vector3 OutCameraAndOutRangeOfTargets(List<OutOfTargetData> datas,
             Camera camera, Vector3 maxRange, Vector3 centerPosition = new Vector3())
         {
@@ -147,16 +147,16 @@ namespace MaruUtility
             {
                 var position = CalcuPosition(maxRange, centerPosition);
 
-                //ƒJƒƒ‰‚Æ”äŠr
-                if (CalcuCamera.IsInCamera(position, camera))  //ƒJƒƒ‰“à‚È‚çˆ—‚ğ”ò‚Î‚·B
+                //ã‚«ãƒ¡ãƒ©ã¨æ¯”è¼ƒ
+                if (CalcuCamera.IsInCamera(position, camera))  //ã‚«ãƒ¡ãƒ©å†…ãªã‚‰å‡¦ç†ã‚’é£›ã°ã™ã€‚
                 {
                     continue;
                 }
 
-                //ƒ^[ƒQƒbƒg‚Ì‘S‚Ä‚Æ”äŠr‚µ‚ÄA—£‚ê‚Ä‚¢‚½‚ç
+                //ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®å…¨ã¦ã¨æ¯”è¼ƒã—ã¦ã€é›¢ã‚Œã¦ã„ãŸã‚‰
                 if (IsOutRangeOfTargets(position, datas))
                 {
-                    return position;  //‘S‚Ä‚ÌğŒ‚ğƒNƒŠƒA‚µ‚½‚çAposition‚ğ•Ô‚·B
+                    return position;  //å…¨ã¦ã®æ¡ä»¶ã‚’ã‚¯ãƒªã‚¢ã—ãŸã‚‰ã€positionã‚’è¿”ã™ã€‚
                 }
             }
 
@@ -164,12 +164,12 @@ namespace MaruUtility
         }
 
         /// <summary>
-        /// ‘S‚Ä‚Ìƒ^[ƒQƒbƒg‚©‚ç—£‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
+        /// å…¨ã¦ã®ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‹ã‚‰é›¢ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹
         /// </summary>
-        /// <param name="selfPosition">©•ª‚Ìƒ|ƒWƒVƒ‡ƒ“</param>
-        /// <param name="targets">ƒ^[ƒQƒbƒgŒQ</param>
-        /// <param name="range">—£‚ê‚Ä‚Ù‚µ‚¢‹——£</param>
-        /// <returns>—£‚ê‚Ä‚¢‚½‚çtrue</returns>
+        /// <param name="selfPosition">è‡ªåˆ†ã®ãƒã‚¸ã‚·ãƒ§ãƒ³</param>
+        /// <param name="targets">ã‚¿ãƒ¼ã‚²ãƒƒãƒˆç¾¤</param>
+        /// <param name="range">é›¢ã‚Œã¦ã»ã—ã„è·é›¢</param>
+        /// <returns>é›¢ã‚Œã¦ã„ãŸã‚‰true</returns>
         public static bool IsOutRangeOfTargets(Vector3 selfPosition, List<GameObject> targets, float range)
         {
             foreach (var target in targets)
@@ -184,11 +184,11 @@ namespace MaruUtility
         }
 
         /// <summary>
-        /// ‘S‚Ä‚Ìƒ^[ƒQƒbƒg‚©‚ç—£‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
+        /// å…¨ã¦ã®ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‹ã‚‰é›¢ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹
         /// </summary>
-        /// <param name="selfPosition">©•ª©g‚Ìƒ|ƒWƒVƒ‡ƒ“</param>
-        /// <param name="datas">ƒ^[ƒQƒbƒg‚Æ˜b‚µ‚½‚¢‹——£‚Ìƒf[ƒ^</param>
-        /// <returns>ƒ‰ƒ“ƒ_ƒ€‚Èƒ|ƒWƒVƒ‡ƒ“</returns>
+        /// <param name="selfPosition">è‡ªåˆ†è‡ªèº«ã®ãƒã‚¸ã‚·ãƒ§ãƒ³</param>
+        /// <param name="datas">ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨è©±ã—ãŸã„è·é›¢ã®ãƒ‡ãƒ¼ã‚¿</param>
+        /// <returns>ãƒ©ãƒ³ãƒ€ãƒ ãªãƒã‚¸ã‚·ãƒ§ãƒ³</returns>
         public static bool IsOutRangeOfTargets(Vector3 selfPosition, List<OutOfTargetData> datas)
         {
             foreach (var data in datas)

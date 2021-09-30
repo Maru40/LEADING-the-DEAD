@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,13 +7,13 @@ using UnityEngine;
 public class ObjectLauncher : MonoBehaviour
 {
     /// <summary>
-    /// ”­Ë‘¬“x
+    /// ç™ºå°„é€Ÿåº¦
     /// </summary>
     [SerializeField]
     private float m_firingSpeed = 10.0f;
 
     /// <summary>
-    /// ”­Ë‘¬“x
+    /// ç™ºå°„é€Ÿåº¦
     /// </summary>
     [SerializeField]
     public float firingSpeed
@@ -23,7 +23,7 @@ public class ObjectLauncher : MonoBehaviour
     }
 
     /// <summary>
-    /// ‰ñ“]‚ğw’è‚µ‚È‚©‚Á‚½is•ûŒü‚Éforward‚ğŒü‚¯‚é‚©‚Ç‚¤‚©
+    /// å›è»¢ã‚’æŒ‡å®šã—ãªã‹ã£ãŸæ™‚é€²è¡Œæ–¹å‘ã«forwardã‚’å‘ã‘ã‚‹ã‹ã©ã†ã‹
     /// </summary>
     [SerializeField]
     private bool m_rotationForward = true;
@@ -69,9 +69,9 @@ public class ObjectLauncher : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒIƒuƒWƒFƒNƒg‚ğ”­Ë‚·‚é
+    /// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç™ºå°„ã™ã‚‹
     /// </summary>
-    /// <param name="throwableObjectPrefab">ƒIƒuƒWƒFƒNƒg‚ÌƒvƒŒƒnƒu</param>
+    /// <param name="throwableObjectPrefab">ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ—ãƒ¬ãƒãƒ–</param>
     public void Fire(ThrowableObject throwableObjectPrefab)
     {
         var rotation = m_rotationForward ? transform.rotation : Quaternion.identity;
@@ -79,10 +79,10 @@ public class ObjectLauncher : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒIƒuƒWƒFƒNƒg‚ğ”­Ë‚·‚é
+    /// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç™ºå°„ã™ã‚‹
     /// </summary>
-    /// <param name="throwableObjectPrefab">ƒIƒuƒWƒFƒNƒg‚ÌƒvƒŒƒnƒu</param>
-    /// <param name="rotation">ƒIƒuƒWƒFƒNƒg‚Ì‰ñ“]î•ñ</param>
+    /// <param name="throwableObjectPrefab">ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ—ãƒ¬ãƒãƒ–</param>
+    /// <param name="rotation">ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å›è»¢æƒ…å ±</param>
     public void Fire(ThrowableObject throwableObjectPrefab, Quaternion rotation)
     {
         var throwableObject = Instantiate(throwableObjectPrefab, transform.position, rotation);
@@ -132,7 +132,7 @@ public class ObjectLauncher : MonoBehaviour
             beforePosition = position;
             count++;
         }
-        Debug.Log($"ŠO‚Éo‚½ {isDrawPredictionLine}");
+        Debug.Log($"å¤–ã«å‡ºãŸ {isDrawPredictionLine}");
 
         m_lineRenderer.positionCount = m_linePositions.Count;
         m_lineRenderer.SetPositions(m_linePositions.ToArray());

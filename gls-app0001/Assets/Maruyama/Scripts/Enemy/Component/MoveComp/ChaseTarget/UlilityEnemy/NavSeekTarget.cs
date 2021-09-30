@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class NavSeekTarget : NodeBase<EnemyBase>
 {
-    //–Ú“I’n‚É‚½‚Ç‚è’…‚¢‚½‚Æ”»’è‚·‚é”ÍˆÍ
+    //ç›®çš„åœ°ã«ãŸã©ã‚Šç€ã„ãŸã¨åˆ¤å®šã™ã‚‹ç¯„å›²
     float m_nearRange = 3.0f;
     Vector3 m_targetPosition = new Vector3();
 
@@ -41,7 +41,7 @@ public class NavSeekTarget : NodeBase<EnemyBase>
 
     }
 
-    //–Ú“I’n‚É‚½‚Ç‚è’…‚¢‚½‚©‚Ç‚¤‚©
+    //ç›®çš„åœ°ã«ãŸã©ã‚Šç€ã„ãŸã‹ã©ã†ã‹
     bool IsRouteEnd()
     {
         var toVec = m_targetPosition - GetOwner().transform.localPosition;
@@ -50,16 +50,16 @@ public class NavSeekTarget : NodeBase<EnemyBase>
         return nowRange <= m_nearRange ? true : false;
     }
 
-    //NavMesh‚ğ—˜—p‚µ‚Ä–Ú“I’n‚Ü‚Å‚Ìƒ‹[ƒg‚ğŒvZ
+    //NavMeshã‚’åˆ©ç”¨ã—ã¦ç›®çš„åœ°ã¾ã§ã®ãƒ«ãƒ¼ãƒˆã‚’è¨ˆç®—
     void SetNavMeshTargetPosition()
     {
-        //NavMesh‚Ì€”õ‚ª‚Å‚«‚Ä‚¢‚é‚È‚çB
+        //NavMeshã®æº–å‚™ãŒã§ãã¦ã„ã‚‹ãªã‚‰ã€‚
         if (m_navMesh.pathStatus != NavMeshPathStatus.PathPartial)
         {
             var target = m_targetMgr.GetNowTarget();
 
             m_targetPosition = target.transform.localPosition;
-            m_targetPosition.y = GetOwner().transform.position.y;  //‚‚³‚Ì’²®
+            m_targetPosition.y = GetOwner().transform.position.y;  //é«˜ã•ã®èª¿æ•´
 
             m_navMesh.SetDestination(m_targetPosition);
         }

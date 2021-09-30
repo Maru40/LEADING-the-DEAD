@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,11 +8,11 @@ namespace MaruUtility
 	{
 
 		/// <summary>
-		/// Å‘å‘¬“x§ŒÀ
+		/// æœ€å¤§é€Ÿåº¦åˆ¶é™
 		/// </summary>
-		/// <param name="velocity">§ŒÀ‚µ‚½‚¢ƒxƒNƒgƒ‹</param>
-		/// <param name="maxSpeed">§ŒÀ‘¬“x</param>
-		/// <returns>§ŒÀ‚³‚ê‚½”ÍˆÍ‚ÌƒxƒNƒgƒ‹‚ğ•Ô‚·B</returns>
+		/// <param name="velocity">åˆ¶é™ã—ãŸã„ãƒ™ã‚¯ãƒˆãƒ«</param>
+		/// <param name="maxSpeed">åˆ¶é™é€Ÿåº¦</param>
+		/// <returns>åˆ¶é™ã•ã‚ŒãŸç¯„å›²ã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¿”ã™ã€‚</returns>
 		static public Vector3 MaxSpeedVecCheck(Vector3 velocity, float maxSpeed)
 		{
 			var speed = velocity.magnitude;
@@ -22,38 +22,38 @@ namespace MaruUtility
 		}
 
 		/// <summary>
-		/// ’¼ü“I‚É’Ç‚¢‚©‚¯‚é‚½‚ß‚ÌƒxƒNƒgƒ‹‚ğŒvZ‚µ‚Ä•Ô‚·ŠÖ”
+		/// ç›´ç·šçš„ã«è¿½ã„ã‹ã‘ã‚‹ãŸã‚ã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨ˆç®—ã—ã¦è¿”ã™é–¢æ•°
 		/// </summary>
-		/// <param name="velocity">Œ»İ‚Ì‘¬“x</param>
-		/// <param name="toVec">ƒ^[ƒQƒbƒg•ûŒü‚ÌƒxƒNƒgƒ‹</param>
-		/// <param name="maxSpeed">Å‘å‘¬“x</param>
-		/// <returns>uƒ^[ƒQƒbƒg‚Ì•ûŒü‚ÌƒxƒNƒgƒ‹v- uŒ»İ‚Ì‘¬“xv</returns>
+		/// <param name="velocity">ç¾åœ¨ã®é€Ÿåº¦</param>
+		/// <param name="toVec">ã‚¿ãƒ¼ã‚²ãƒƒãƒˆæ–¹å‘ã®ãƒ™ã‚¯ãƒˆãƒ«</param>
+		/// <param name="maxSpeed">æœ€å¤§é€Ÿåº¦</param>
+		/// <returns>ã€Œã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®æ–¹å‘ã®ãƒ™ã‚¯ãƒˆãƒ«ã€- ã€Œç¾åœ¨ã®é€Ÿåº¦ã€</returns>
 		static public Vector3 CalucSeekVec(Vector3 velocity, Vector3 toVec, float maxSpeed)
 		{
-			Vector3 desiredVelocity = toVec.normalized * maxSpeed;  //Šó–]‚ÌƒxƒNƒgƒ‹
+			Vector3 desiredVelocity = toVec.normalized * maxSpeed;  //å¸Œæœ›ã®ãƒ™ã‚¯ãƒˆãƒ«
 			return (desiredVelocity - velocity);
 		}
 
 		/// <summary>
-		/// “’…ƒxƒNƒgƒ‹‚ğ•Ô‚·(‹ß‚Ã‚­‚Æ¬‚³‚­‚È‚éƒxƒNƒgƒ‹)
+		/// åˆ°ç€ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¿”ã™(è¿‘ã¥ãã¨å°ã•ããªã‚‹ãƒ™ã‚¯ãƒˆãƒ«)
 		/// </summary>
-		/// <param name="velocity">Œ»İ‚Ì‘¬“x</param>
-		/// <param name="toVec">ƒ^[ƒQƒbƒg•ûŒü‚ÌƒxƒNƒgƒ‹</param>
-		/// <param name="maxSpeed">Å‘å‘¬“x</param>
+		/// <param name="velocity">ç¾åœ¨ã®é€Ÿåº¦</param>
+		/// <param name="toVec">ã‚¿ãƒ¼ã‚²ãƒƒãƒˆæ–¹å‘ã®ãƒ™ã‚¯ãƒˆãƒ«</param>
+		/// <param name="maxSpeed">æœ€å¤§é€Ÿåº¦</param>
 		/// <param name="decl"></param>
-		/// <returns>“’…ƒxƒNƒgƒ‹‚ğ•Ô‚·(‹ß‚Ã‚­‚Æ¬‚³‚­‚È‚éƒxƒNƒgƒ‹)‚ğ•Ô‚·</returns>
+		/// <returns>åˆ°ç€ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¿”ã™(è¿‘ã¥ãã¨å°ã•ããªã‚‹ãƒ™ã‚¯ãƒˆãƒ«)ã‚’è¿”ã™</returns>
 		static public Vector3 CalucArriveVec(Vector3 velocity, Vector3 toVec, float maxSpeed, float decl = 3.0f)
 		{
 			float dist = toVec.magnitude;
 			if (dist > 0)
 			{
-				const float DecelerationTweaker = 0.3f;  //Œ¸‘¬’l
+				const float DecelerationTweaker = 0.3f;  //æ¸›é€Ÿå€¤
 
-				//w’è‚³‚ê‚½Œ¸‘¬‚Å–Ú•W‚É“’B‚·‚é®
+				//æŒ‡å®šã•ã‚ŒãŸæ¸›é€Ÿã§ç›®æ¨™ã«åˆ°é”ã™ã‚‹å¼
 				float speed = dist / (decl * DecelerationTweaker);
 				speed = Mathf.Min(speed, maxSpeed);
-				Vector3 desiredVelocity = toVec * speed / dist; //Šó–]‚ÌƒxƒNƒgƒ‹
-				Vector3 steerVec = desiredVelocity - velocity;  //ƒXƒeƒAƒŠƒ“ƒOƒxƒNƒgƒ‹
+				Vector3 desiredVelocity = toVec * speed / dist; //å¸Œæœ›ã®ãƒ™ã‚¯ãƒˆãƒ«
+				Vector3 steerVec = desiredVelocity - velocity;  //ã‚¹ãƒ†ã‚¢ãƒªãƒ³ã‚°ãƒ™ã‚¯ãƒˆãƒ«
 
 				return steerVec;
 			}
@@ -62,24 +62,24 @@ namespace MaruUtility
 		}
 
 		/// <summary>
-		/// ‹ß‚­‚É‚¢‚é‚Æ‚«‚ÍArrive‚Å,‰“‚­‚É‚¢‚é‚Æ‚«‚ÍSeek‚Å’Ç‚¢‚©‚¯‚éŠÖ”
+		/// è¿‘ãã«ã„ã‚‹ã¨ãã¯Arriveã§,é ãã«ã„ã‚‹ã¨ãã¯Seekã§è¿½ã„ã‹ã‘ã‚‹é–¢æ•°
 		/// </summary>
-		/// <param name="velocity">Œ»İ‚Ì‘¬“x</param>
-		/// <param name="toVec">ƒ^[ƒQƒbƒg•ûŒü‚ÌƒxƒNƒgƒ‹</param>
-		/// <param name="maxSpeed">Å‘å‘¬“x</param>
-		/// <param name="nearRange">ŒvZ‚ğØ‚è‘Ö‚¦‚é‹——£</param>
+		/// <param name="velocity">ç¾åœ¨ã®é€Ÿåº¦</param>
+		/// <param name="toVec">ã‚¿ãƒ¼ã‚²ãƒƒãƒˆæ–¹å‘ã®ãƒ™ã‚¯ãƒˆãƒ«</param>
+		/// <param name="maxSpeed">æœ€å¤§é€Ÿåº¦</param>
+		/// <param name="nearRange">è¨ˆç®—ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹è·é›¢</param>
 		/// <param name="decl"></param>
-		/// <returns>ŒvZ‚³‚ê‚½ƒxƒNƒgƒ‹</returns>
+		/// <returns>è¨ˆç®—ã•ã‚ŒãŸãƒ™ã‚¯ãƒˆãƒ«</returns>
 		static public Vector3 CalucNearArriveFarSeek(Vector3 velocity, Vector3 toVec,
 			float maxSpeed, float nearRange, float decl = 3.0f)
 		{
 			float range = toVec.magnitude;
 			if (range <= nearRange)
-			{  //‹ß‚­‚É‚¢‚½‚ç
+			{  //è¿‘ãã«ã„ãŸã‚‰
 				return CalucArriveVec(velocity, toVec, maxSpeed, decl);
 			}
 			else
-			{  //‰“‚­‚É‚¢‚½‚ç
+			{  //é ãã«ã„ãŸã‚‰
 				return CalucSeekVec(velocity, toVec, maxSpeed);
 			}
 		}

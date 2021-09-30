@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -53,7 +53,7 @@ namespace Player
         }
 
         /// <summary>
-        /// ˆê•b‚ ‚½‚è‚ÌƒXƒ^ƒ~ƒi‰ñ•œ—Ê
+        /// ä¸€ç§’ã‚ãŸã‚Šã®ã‚¹ã‚¿ãƒŸãƒŠå›å¾©é‡
         /// </summary>
         [SerializeField]
         private float m_staminaRecoveryPerSeconds = 0.0f;

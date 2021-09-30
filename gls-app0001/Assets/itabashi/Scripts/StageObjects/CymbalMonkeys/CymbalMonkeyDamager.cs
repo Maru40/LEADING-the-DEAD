@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +18,6 @@ public class CymbalMonkeyDamager : MonoBehaviour, I_TakeDamage
 
     public void TakeDamage(DamageData damageData)
     {
-        Debug.Log("‰‚ÉG‚ê‚Ü‚µ‚½");
+        Debug.Log("çŒ¿ã«è§¦ã‚Œã¾ã—ãŸ");
     }
 }

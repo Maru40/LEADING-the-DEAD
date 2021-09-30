@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,10 +9,10 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     where EnumType : Enum  
     where TransitionType : class, new()
 {
-    //ƒXƒe[ƒgƒ}ƒVƒ“
+    //ã‚¹ãƒ†ãƒ¼ãƒˆãƒã‚·ãƒ³
     GraphBase<NodeType, EnumType, TransitionType> m_stateMachine;
 
-    //‘JˆÚğŒ—p‚Ìƒƒ“ƒo[
+    //é·ç§»æ¡ä»¶ç”¨ã®ãƒ¡ãƒ³ãƒãƒ¼
     TransitionType m_transitionStruct = new TransitionType();
 
     public EnemyMainStateMachine()
@@ -21,39 +21,39 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     }
 
     /// <summary>
-    /// Œ»İg‚¤ƒm[ƒh‚Ìƒ^ƒCƒv‚Ìæ“¾
+    /// ç¾åœ¨ä½¿ã†ãƒãƒ¼ãƒ‰ã®ã‚¿ã‚¤ãƒ—ã®å–å¾—
     /// </summary>
-    /// <returns>ƒm[ƒh‚Ìƒ^ƒCƒv</returns>
+    /// <returns>ãƒãƒ¼ãƒ‰ã®ã‚¿ã‚¤ãƒ—</returns>
     public EnumType GetNowType()
     {
         return m_stateMachine.GetNowType();
     }
 
     /// <summary>
-	/// Œ»İg‚¤ƒm[ƒh‚Ìæ“¾
+	/// ç¾åœ¨ä½¿ã†ãƒãƒ¼ãƒ‰ã®å–å¾—
 	/// </summary>
-	/// <returns>ƒm[ƒh</returns>
+	/// <returns>ãƒãƒ¼ãƒ‰</returns>
     public NodeBase<NodeType> GetNowNode()
     {
         return m_stateMachine.GetNowNode();
     }
 
     /// <summary>
-	/// w’è‚µ‚½ƒm[ƒh‚Ìæ“¾
+	/// æŒ‡å®šã—ãŸãƒãƒ¼ãƒ‰ã®å–å¾—
 	/// </summary>
-	/// <param name="type">w’è‚µ‚½ƒm[ƒh‚Ìƒ^ƒCƒv</param>
-	/// <returns>ƒm[ƒh</returns>
+	/// <param name="type">æŒ‡å®šã—ãŸãƒãƒ¼ãƒ‰ã®ã‚¿ã‚¤ãƒ—</param>
+	/// <returns>ãƒãƒ¼ãƒ‰</returns>
     public NodeBase<NodeType> GetNode(EnumType type)
     {
         return m_stateMachine.GetNode(type);
     }
 
     /// <summary>
-    /// w’è‚µ‚½ƒm[ƒh‚ğtemplate‚Åw’è‚µ‚½Œ^‚ÉƒLƒƒƒXƒg‚µ‚Ä‚à‚ç‚¤B
+    /// æŒ‡å®šã—ãŸãƒãƒ¼ãƒ‰ã‚’templateã§æŒ‡å®šã—ãŸå‹ã«ã‚­ãƒ£ã‚¹ãƒˆã—ã¦ã‚‚ã‚‰ã†ã€‚
     /// </summary>
-    /// <typeparam name="T">ƒLƒƒƒXƒg‚·‚éŒ^</typeparam>
-    /// <param name="type">ƒm[ƒh‚Ìƒ^ƒCƒv</param>
-    /// <returns>ƒLƒƒƒXƒg‚³‚ê‚½ƒm[ƒh</returns>
+    /// <typeparam name="T">ã‚­ãƒ£ã‚¹ãƒˆã™ã‚‹å‹</typeparam>
+    /// <param name="type">ãƒãƒ¼ãƒ‰ã®ã‚¿ã‚¤ãƒ—</param>
+    /// <returns>ã‚­ãƒ£ã‚¹ãƒˆã•ã‚ŒãŸãƒãƒ¼ãƒ‰</returns>
     public T GetNode<T>(EnumType type) where T: class
     {
         var node = m_stateMachine.GetNode(type) as T;
@@ -61,30 +61,30 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     }
 
     /// <summary>
-    /// ƒm[ƒh‚Ì’Ç‰Á
+    /// ãƒãƒ¼ãƒ‰ã®è¿½åŠ 
     /// </summary>
-    /// <param name="type">ƒm[ƒg‚Ìƒ^ƒCƒv</param>
-    /// <param name="node">ƒm[ƒh‚Ì–{‘Ì</param>
+    /// <param name="type">ãƒãƒ¼ãƒˆã®ã‚¿ã‚¤ãƒ—</param>
+    /// <param name="node">ãƒãƒ¼ãƒ‰ã®æœ¬ä½“</param>
     public void AddNode(EnumType type, NodeBase<NodeType> node)
     {
         m_stateMachine.AddNode(type, node);
     }
 
     /// <summary>
-    /// ƒGƒbƒW‚Ì’Ç‰Á
+    /// ã‚¨ãƒƒã‚¸ã®è¿½åŠ 
     /// </summary>
-    /// <param name="edge">’Ç‰Á‚µ‚½‚¢ƒGƒbƒW</param>
+    /// <param name="edge">è¿½åŠ ã—ãŸã„ã‚¨ãƒƒã‚¸</param>
     public void AddEdge(EdgeBase<EnumType, TransitionType> edge)
     {
         m_stateMachine.AddEdge(edge);
     }
 
     /// <summary>
-    /// ƒGƒbƒW‚Ì’Ç‰Á
+    /// ã‚¨ãƒƒã‚¸ã®è¿½åŠ 
     /// </summary>
-    /// <param name="from">Œ³‚Ìƒ^ƒCƒv</param>
-    /// <param name="to">‘JˆÚæ‚Ìƒ^ƒCƒv</param>
-    /// <param name="isTransitionFunc">‘JˆÚğŒ</param>
+    /// <param name="from">å…ƒã®ã‚¿ã‚¤ãƒ—</param>
+    /// <param name="to">é·ç§»å…ˆã®ã‚¿ã‚¤ãƒ—</param>
+    /// <param name="isTransitionFunc">é·ç§»æ¡ä»¶</param>
     public void AddEdge(EnumType from, EnumType to, Func<TransitionType, bool> isTransitionFunc)
     {
         m_stateMachine.AddEdge(from, to, isTransitionFunc);
@@ -92,15 +92,15 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
 
 
     /// <summary>
-    /// ƒm[ƒh‚ª‹ó‚©‚Ç‚¤‚©‚ğ”»’f
+    /// ãƒãƒ¼ãƒ‰ãŒç©ºã‹ã©ã†ã‹ã‚’åˆ¤æ–­
     /// </summary>
-    /// <returns>ƒm[ƒh‚Ì‹ó‚È‚çtrue</returns>
+    /// <returns>ãƒãƒ¼ãƒ‰ã®ç©ºãªã‚‰true</returns>
     public bool IsEmpty() {
 	    return m_stateMachine.IsEmpty();
     }
 
     /// <summary>
-    /// ƒŠƒZƒbƒgŠÖ”(Å‰‚ÌƒXƒe[ƒg‚É•ÏX)
+    /// ãƒªã‚»ãƒƒãƒˆé–¢æ•°(æœ€åˆã®ã‚¹ãƒ†ãƒ¼ãƒˆã«å¤‰æ›´)
     /// </summary>
     public void Reset()
     {
@@ -108,16 +108,16 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     }
 
     /// <summary>
-    /// ‘JˆÚ‚É—˜—p‚·‚é\‘¢‘Ì‚ğæ“¾‚·‚éB
+    /// é·ç§»ã«åˆ©ç”¨ã™ã‚‹æ§‹é€ ä½“ã‚’å–å¾—ã™ã‚‹ã€‚
     /// </summary>
-    /// <returns>\‘¢‘Ì‚ÌQÆ‚ğ“n‚·</returns>
+    /// <returns>æ§‹é€ ä½“ã®å‚ç…§ã‚’æ¸¡ã™</returns>
     public TransitionType GetTransitionStructMember()
     {
         return m_transitionStruct;
     }
 
     /// <summary>
-    /// ŠO•”‚©‚çUpdate‚ğ‚·‚éB(å‚É‚±‚ê‚ğ—˜—p‚·‚éStateManagerƒNƒ‰ƒX)
+    /// å¤–éƒ¨ã‹ã‚‰Updateã‚’ã™ã‚‹ã€‚(ä¸»ã«ã“ã‚Œã‚’åˆ©ç”¨ã™ã‚‹StateManagerã‚¯ãƒ©ã‚¹)
     /// </summary>
     public void OnUpdate()
     {
@@ -125,18 +125,18 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
             return;
         }
 
-        //Node‚ÌUpdate
+        //Nodeã®Update
         NodeUpdate();
 
-        //‘JˆÚƒ`ƒFƒbƒN
+        //é·ç§»ãƒã‚§ãƒƒã‚¯
         TransitionCheck();
 
-        //ƒgƒŠƒK[‚ÌƒŠƒZƒbƒg
+        //ãƒˆãƒªã‚¬ãƒ¼ã®ãƒªã‚»ãƒƒãƒˆ
         TriggerReset();
     }
 
     /// <summary>
-    /// Œ»İ‚Ìƒm[ƒh‚ÌUpdate
+    /// ç¾åœ¨ã®ãƒãƒ¼ãƒ‰ã®Update
     /// </summary>
     void NodeUpdate()
     {
@@ -145,7 +145,7 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     }
 
     /// <summary>
-    /// ‘JˆÚ‚·‚é‚©ƒ`ƒFƒbƒN
+    /// é·ç§»ã™ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
     /// </summary>
     void TransitionCheck()
     {
@@ -161,7 +161,7 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     }
 
     /// <summary>
-    /// ƒgƒŠƒK[‚ÌƒŠƒZƒbƒg
+    /// ãƒˆãƒªã‚¬ãƒ¼ã®ãƒªã‚»ãƒƒãƒˆ
     /// </summary>
     void TriggerReset()
     {

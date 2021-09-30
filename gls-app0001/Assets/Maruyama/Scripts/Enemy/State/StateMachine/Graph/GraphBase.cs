@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,16 +9,16 @@ public class GraphBase<NodeType, EnumType, TransitionType>
 	where EnumType : Enum
 	where TransitionType : class
 {
-	//Å‰‚Ìƒm[ƒh(ƒŠƒZƒbƒgsˆ×‚Ég‚¤)
+	//æœ€åˆã®ãƒãƒ¼ãƒ‰(ãƒªã‚»ãƒƒãƒˆè¡Œç‚ºã«ä½¿ã†)
 	EnumType m_firstType;
 
-	//Œ»İ‚Ìƒm[ƒh
+	//ç¾åœ¨ã®ãƒãƒ¼ãƒ‰
 	EnumType m_nowNodeType;
 
-	//ƒm[ƒh‚Ì˜A‘z”z—ñ
+	//ãƒãƒ¼ãƒ‰ã®é€£æƒ³é…åˆ—
 	Dictionary<EnumType, NodeBase<NodeType>> m_nodes;
 
-	//ƒGƒbƒW‚Ì˜A‘z”z—ñƒŠƒXƒg
+	//ã‚¨ãƒƒã‚¸ã®é€£æƒ³é…åˆ—ãƒªã‚¹ãƒˆ
 	Dictionary<EnumType, List<EdgeBase<EnumType, TransitionType>>> m_edgesDictionary;
 
     public GraphBase()
@@ -29,51 +29,51 @@ public class GraphBase<NodeType, EnumType, TransitionType>
 
 
 	/// <summary>
-	/// Œ»İg‚¤ƒm[ƒh‚Ìƒ^ƒCƒv‚Ìæ“¾
+	/// ç¾åœ¨ä½¿ã†ãƒãƒ¼ãƒ‰ã®ã‚¿ã‚¤ãƒ—ã®å–å¾—
 	/// </summary>
-	/// <returns>ƒm[ƒh‚Ìƒ^ƒCƒv</returns>
+	/// <returns>ãƒãƒ¼ãƒ‰ã®ã‚¿ã‚¤ãƒ—</returns>
 	public EnumType GetNowType()
 	{
 		return m_nowNodeType;
 	}
 
 	/// <summary>
-	/// Œ»İg‚¤ƒm[ƒh‚Ìæ“¾
+	/// ç¾åœ¨ä½¿ã†ãƒãƒ¼ãƒ‰ã®å–å¾—
 	/// </summary>
-	/// <returns>ƒm[ƒh</returns>
+	/// <returns>ãƒãƒ¼ãƒ‰</returns>
 	public NodeBase<NodeType> GetNowNode()
 	{
 		return m_nodes[m_nowNodeType];
 	}
 
 	/// <summary>
-	/// w’è‚µ‚½ƒm[ƒh‚Ìæ“¾
+	/// æŒ‡å®šã—ãŸãƒãƒ¼ãƒ‰ã®å–å¾—
 	/// </summary>
-	/// <param name="type">w’è‚µ‚½ƒm[ƒh‚Ìƒ^ƒCƒv</param>
-	/// <returns>ƒm[ƒh</returns>
+	/// <param name="type">æŒ‡å®šã—ãŸãƒãƒ¼ãƒ‰ã®ã‚¿ã‚¤ãƒ—</param>
+	/// <returns>ãƒãƒ¼ãƒ‰</returns>
 	public NodeBase<NodeType> GetNode(EnumType type)
 	{
 		return m_nodes[type];
 	}
 
 	/// <summary>
-	/// ƒm[ƒh‚Ì”z—ñ‚ğæ“¾
+	/// ãƒãƒ¼ãƒ‰ã®é…åˆ—ã‚’å–å¾—
 	/// </summary>
-	/// <returns>ƒm[ƒh‚Ì”z—ñ</returns>
+	/// <returns>ãƒãƒ¼ãƒ‰ã®é…åˆ—</returns>
 	public Dictionary<EnumType, NodeBase<NodeType>> GetNodes()
 	{
 		return m_nodes;
 	}
 
 	/// <summary>
-	/// “Á’è‚ÌƒGƒbƒW‚ğæ“¾
+	/// ç‰¹å®šã®ã‚¨ãƒƒã‚¸ã‚’å–å¾—
 	/// </summary>
-	/// <param name="from">ŠJnƒm[ƒhƒ^ƒCƒv</param>
-	/// <param name="to">‘JˆÚæƒm[ƒhƒ^ƒCƒv</param>
-	/// <returns>ƒGƒbƒW</returns>
+	/// <param name="from">é–‹å§‹ãƒãƒ¼ãƒ‰ã‚¿ã‚¤ãƒ—</param>
+	/// <param name="to">é·ç§»å…ˆãƒãƒ¼ãƒ‰ã‚¿ã‚¤ãƒ—</param>
+	/// <returns>ã‚¨ãƒƒã‚¸</returns>
 	public EdgeBase<EnumType, TransitionType> GetEdge(EnumType from, EnumType to)
 	{
-		//‘¶İ‚µ‚È‚©‚Á‚½‚çnullptr‚ğ•Ô‚·B
+		//å­˜åœ¨ã—ãªã‹ã£ãŸã‚‰nullptrã‚’è¿”ã™ã€‚
 		if (m_edgesDictionary.ContainsKey(from))
 		{
 			return null;
@@ -92,38 +92,38 @@ public class GraphBase<NodeType, EnumType, TransitionType>
 	}
 
 	/// <summary>
-	/// w’è‚µ‚½ƒm[ƒh‚©‚çL‚Ñ‚éƒGƒbƒW‚Ìæ“¾
+	/// æŒ‡å®šã—ãŸãƒãƒ¼ãƒ‰ã‹ã‚‰ä¼¸ã³ã‚‹ã‚¨ãƒƒã‚¸ã®å–å¾—
 	/// </summary>
-	/// <param name="from">w’è‚µ‚½ƒm[ƒh‚Ìƒ^ƒCƒv</param>
-	/// <returns>ƒGƒbƒW”z—ñ</returns>
+	/// <param name="from">æŒ‡å®šã—ãŸãƒãƒ¼ãƒ‰ã®ã‚¿ã‚¤ãƒ—</param>
+	/// <returns>ã‚¨ãƒƒã‚¸é…åˆ—</returns>
 	public List<EdgeBase<EnumType, TransitionType>> GetEdges(EnumType from)
 	{
 		return m_edgesDictionary[from];
 	}
 
 	/// <summary>
-	/// ƒGƒbƒW‚Ì˜A‘z”z—ñ‘S‚Ä‚ğæ“¾
+	/// ã‚¨ãƒƒã‚¸ã®é€£æƒ³é…åˆ—å…¨ã¦ã‚’å–å¾—
 	/// </summary>
-	/// <returns>ƒGƒbƒW‚Ì˜A‘z”z—ñ‘S‚Ä</returns>
+	/// <returns>ã‚¨ãƒƒã‚¸ã®é€£æƒ³é…åˆ—å…¨ã¦</returns>
 	public Dictionary<EnumType, List<EdgeBase<EnumType, TransitionType>>> GetEdgesDictionary()
     {
 		return m_edgesDictionary;
     }
 
 	/// <summary>
-	/// Œ»İ‚ÌƒXƒe[ƒg‚ÌƒGƒbƒW‚ÌƒŠƒXƒgæ“¾
+	/// ç¾åœ¨ã®ã‚¹ãƒ†ãƒ¼ãƒˆã®ã‚¨ãƒƒã‚¸ã®ãƒªã‚¹ãƒˆå–å¾—
 	/// </summary>
-	/// <returns>ƒGƒbƒW‚ÌƒŠƒXƒgæ“¾</returns>
+	/// <returns>ã‚¨ãƒƒã‚¸ã®ãƒªã‚¹ãƒˆå–å¾—</returns>
 	public List<EdgeBase<EnumType, TransitionType>> GetNowNodeEdges()
 	{
 		return m_edgesDictionary[m_nowNodeType];
 	}
 
 	/// <summary>
-	/// ƒm[ƒh‚Ì’Ç‰Á
+	/// ãƒãƒ¼ãƒ‰ã®è¿½åŠ 
 	/// </summary>
-	/// <param name="type">’Ç‰Á‚·‚éƒm[ƒh‚Ìƒ^ƒCƒv</param>
-	/// <param name="node">’Ç‰Á‚·‚éƒm[ƒh</param>
+	/// <param name="type">è¿½åŠ ã™ã‚‹ãƒãƒ¼ãƒ‰ã®ã‚¿ã‚¤ãƒ—</param>
+	/// <param name="node">è¿½åŠ ã™ã‚‹ãƒãƒ¼ãƒ‰</param>
 	public void AddNode(EnumType type, NodeBase<NodeType> node)
 	{
 		if (IsEmpty())
@@ -137,12 +137,12 @@ public class GraphBase<NodeType, EnumType, TransitionType>
 	}
 
 	/// <summary>
-	/// ƒGƒbƒW‚Ì’Ç‰Á
+	/// ã‚¨ãƒƒã‚¸ã®è¿½åŠ 
 	/// </summary>
-	/// <param name="edge">’Ç‰Á‚µ‚½‚¢ƒGƒbƒW</param>
+	/// <param name="edge">è¿½åŠ ã—ãŸã„ã‚¨ãƒƒã‚¸</param>
 	public void AddEdge(EdgeBase<EnumType, TransitionType> edge)
 	{
-		//Key‚ª‘¶İ‚µ‚È‚¢‚È‚çƒCƒ“ƒXƒ^ƒ“ƒX¶¬
+		//KeyãŒå­˜åœ¨ã—ãªã„ãªã‚‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ç”Ÿæˆ
 		if (!m_edgesDictionary.ContainsKey(edge.GetFromType())) 
         {
 			m_edgesDictionary[edge.GetFromType()] = new List<EdgeBase<EnumType, TransitionType>>();
@@ -152,11 +152,11 @@ public class GraphBase<NodeType, EnumType, TransitionType>
 	}
 
 	/// <summary>
-	/// ƒGƒbƒW‚Ì’Ç‰Á
+	/// ã‚¨ãƒƒã‚¸ã®è¿½åŠ 
 	/// </summary>
-	/// <param name="from">Œ³‚Ìƒ^ƒCƒv</param>
-	/// <param name="to">‘JˆÚæ‚Ìƒ^ƒCƒv</param>
-	/// <param name="isTransitionFunc">‘JˆÚğŒ</param>
+	/// <param name="from">å…ƒã®ã‚¿ã‚¤ãƒ—</param>
+	/// <param name="to">é·ç§»å…ˆã®ã‚¿ã‚¤ãƒ—</param>
+	/// <param name="isTransitionFunc">é·ç§»æ¡ä»¶</param>
 	public void AddEdge(EnumType from, EnumType to, Func<TransitionType, bool> isTransitionFunc)
 	{
 		var newEdge = new EdgeBase<EnumType, TransitionType>(from, to, isTransitionFunc);
@@ -164,16 +164,16 @@ public class GraphBase<NodeType, EnumType, TransitionType>
 	}
 
 	/// <summary>
-	/// ƒm[ƒh‚ª‹ó‚©‚Ç‚¤‚©
+	/// ãƒãƒ¼ãƒ‰ãŒç©ºã‹ã©ã†ã‹
 	/// </summary>
-	/// <returns>‹ó‚È‚çture</returns>
+	/// <returns>ç©ºãªã‚‰ture</returns>
 	public bool IsEmpty()
 	{
 		return m_nodes.Count == 0 ? true : false;
 	}
 
 	/// <summary>
-	/// ƒŠƒZƒbƒgŠÖ”(Å‰‚ÌƒXƒe[ƒg‚É•ÏX)
+	/// ãƒªã‚»ãƒƒãƒˆé–¢æ•°(æœ€åˆã®ã‚¹ãƒ†ãƒ¼ãƒˆã«å¤‰æ›´)
 	/// </summary>
 	public void Reset()
     {
@@ -181,9 +181,9 @@ public class GraphBase<NodeType, EnumType, TransitionType>
     }
 
 	/// <summary>
-	/// ƒXƒe[ƒg‚Ì•ÏX
+	/// ã‚¹ãƒ†ãƒ¼ãƒˆã®å¤‰æ›´
 	/// </summary>
-	/// <param name="type">•ÏX‚µ‚½‚¢ƒXƒe[ƒg‚Ìƒ^ƒCƒv</param>
+	/// <param name="type">å¤‰æ›´ã—ãŸã„ã‚¹ãƒ†ãƒ¼ãƒˆã®ã‚¿ã‚¤ãƒ—</param>
 	public void ChangeState(EnumType type)
 	{
 		m_nodes[m_nowNodeType].OnExit();

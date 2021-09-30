@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,8 +8,8 @@ using System;
 public struct AttackParametorBase
 {
     public float power;
-    public float startRange;  //UŒ‚ŠJn”ÍˆÍ
-    public float moveSpeed;   //UŒ‚‚ÌˆÚ“®ƒXƒs[ƒh
+    public float startRange;  //æ”»æ’ƒé–‹å§‹ç¯„å›²
+    public float moveSpeed;   //æ”»æ’ƒæ™‚ã®ç§»å‹•ã‚¹ãƒ”ãƒ¼ãƒ‰
 
     public AttackParametorBase(float power, float startRange, float moveSpeed)
     {
@@ -35,41 +35,41 @@ public abstract class AttackBase : MonoBehaviour
     }
 
     /// <summary>
-    /// UŒ‚—Í
+    /// æ”»æ’ƒåŠ›
     /// </summary>
-    /// <returns>UŒ‚—Í</returns>
+    /// <returns>æ”»æ’ƒåŠ›</returns>
     public float GetPower()
     {
         return m_baseParam.power;
     }
 
     /// <summary>
-    /// UŒ‚ƒ‚[ƒVƒ‡ƒ“ŠJn‚Ì‹——£
+    /// æ”»æ’ƒãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³é–‹å§‹ã®è·é›¢
     /// </summary>
-    /// <returns>‹——£</returns>
+    /// <returns>è·é›¢</returns>
     public float GetAttackStartRange()
     {
         return m_baseParam.startRange;
     }
 
     /// <summary>
-    /// UŒ‚‚ğŠJn‚·‚é‹——£‚©‚Ç‚¤‚©
+    /// æ”»æ’ƒã‚’é–‹å§‹ã™ã‚‹è·é›¢ã‹ã©ã†ã‹
     /// </summary>
-    /// <returns>ŠJn‚·‚é‚È‚çtrue</returns>
+    /// <returns>é–‹å§‹ã™ã‚‹ãªã‚‰true</returns>
     public abstract bool IsAttackStartRange();
 
     /// <summary>
-    /// UŒ‚ˆ—(ƒAƒjƒ[ƒVƒ‡ƒ“‚É‡‚í‚¹‚é)
+    /// æ”»æ’ƒå‡¦ç†(ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã«åˆã‚ã›ã‚‹)
     /// </summary>
     public abstract void Attack();
 
     /// <summary>
-    /// UŒ‚”»’è‚ÌI—¹‚ğŒÄ‚Ôˆ—
+    /// æ”»æ’ƒåˆ¤å®šã®çµ‚äº†ã‚’å‘¼ã¶å‡¦ç†
     /// </summary>
     public abstract void AttackHitEnd();
 
     /// <summary>
-    /// ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌI—¹‚ÉŒÄ‚Ño‚·ŠÖ”
+    /// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®çµ‚äº†æ™‚ã«å‘¼ã³å‡ºã™é–¢æ•°
     /// </summary>
     public abstract void EndAnimationEvent();
 }

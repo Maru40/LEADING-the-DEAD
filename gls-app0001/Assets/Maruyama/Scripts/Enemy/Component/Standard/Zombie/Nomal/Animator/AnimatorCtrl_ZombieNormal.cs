@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,11 +16,11 @@ public class AnimatorCtrl_ZombieNormal : MonoBehaviour
 
     void Update()
     {
-        //‰¼•à‚«“¯Šú
+        //ä»®æ­©ãåŒæœŸ
         moveSpeed = m_rigid.velocity.magnitude;
     }
 
-    //ƒAƒNƒZƒbƒT---------------------------------------------------
+    //ã‚¢ã‚¯ã‚»ãƒƒã‚µ---------------------------------------------------
 
     public float moveSpeed
     {

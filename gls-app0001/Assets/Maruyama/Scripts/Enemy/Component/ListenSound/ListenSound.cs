@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,15 +17,15 @@ public class ListenSound : MonoBehaviour
     }
 
     /// <summary>
-    /// ‰¹‚ğ•·‚­ˆ—
+    /// éŸ³ã‚’èãå‡¦ç†
     /// </summary>
-    /// <param name="foundObject">•·‚¢‚½‰¹‚ÌƒIƒuƒWƒFƒNƒg</param>
+    /// <param name="foundObject">èã„ãŸéŸ³ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
     public void Listen(FoundObject foundObject)
     {
         m_listen?.Listen(foundObject);
     }
 
-    //ƒgƒŠƒK[‚Å”ÍˆÍ‚ğw’è‚·‚éê‡‚ª‚ ‚é‚©‚ç
+    //ãƒˆãƒªã‚¬ãƒ¼ã§ç¯„å›²ã‚’æŒ‡å®šã™ã‚‹å ´åˆãŒã‚ã‚‹ã‹ã‚‰
     private void OnTriggerEnter(Collider other)
     {
         var foundObject = other.gameObject.GetComponentInParentAndChildren<FoundObject>();

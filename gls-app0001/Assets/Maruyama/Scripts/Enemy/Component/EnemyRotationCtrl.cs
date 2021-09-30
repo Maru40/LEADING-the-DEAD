@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Enemy‚Ì‰ñ“]‚ğƒRƒ“ƒgƒ[ƒ‹‚·‚é
+/// Enemyã®å›è»¢ã‚’ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã™ã‚‹
 /// </summary>
 public class EnemyRotationCtrl : MonoBehaviour
 {
@@ -22,8 +22,8 @@ public class EnemyRotationCtrl : MonoBehaviour
 
     void Update()
     {
-        //‰¼‚Å‰ñ“]‚·‚é‚æ‚¤‚É‚µ‚½B
-        //«—ˆ“I‚É‚Í‚ä‚Á‚­‚è‰ñ‚é‚æ‚¤‚É’²®
+        //ä»®ã§å›è»¢ã™ã‚‹ã‚ˆã†ã«ã—ãŸã€‚
+        //å°†æ¥çš„ã«ã¯ã‚†ã£ãã‚Šå›ã‚‹ã‚ˆã†ã«èª¿æ•´
         //var direct = m_rigid.velocity;
         var direct = m_direct;
         direct.y = 0;
@@ -38,7 +38,7 @@ public class EnemyRotationCtrl : MonoBehaviour
         //Debug.Log("velocityRange" + m_rigid.velocity.magnitude);
     }
 
-    //ƒAƒNƒZƒbƒT------------------------------------------------------------
+    //ã‚¢ã‚¯ã‚»ãƒƒã‚µ------------------------------------------------------------
 
     public void SetDirect(Vector3 direct)
     {

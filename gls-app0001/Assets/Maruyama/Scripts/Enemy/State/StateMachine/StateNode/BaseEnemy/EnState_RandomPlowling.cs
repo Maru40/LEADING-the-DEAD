@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,16 +21,16 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
 
         ChangeComps(EnableChangeType.Start);
 
-        //‚»‚Ì‘¼ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìæ“¾
+        //ãã®ä»–ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®å–å¾—
         m_eyeRange = owner.GetComponent<EyeSearchRange>();
 
-        //ƒ^[ƒQƒbƒg‚Ìæ“¾
+        //ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®å–å¾—
         m_target = owner.GetComponent<TargetManager>().GetNowTarget();
         if(m_target == null) {
             SearchTarget();
         }
 
-        //W’c”ÍˆÍ‚Ìİ’è
+        //é›†å›£ç¯„å›²ã®è¨­å®š
         var throngMgr = owner.GetComponent<ThrongManager>();
         if(randomPlowling && throngMgr)
         {
@@ -48,7 +48,7 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
             return;
         }
 
-        //‹ŠE‚É“G‚ª“ü‚Á‚½‚çƒXƒe[ƒg‚ğØ‚è‘Ö‚¦‚éB
+        //è¦–ç•Œã«æ•µãŒå…¥ã£ãŸã‚‰ã‚¹ãƒ†ãƒ¼ãƒˆã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹ã€‚
         if (m_eyeRange)
         {
             if (m_eyeRange.IsInEyeRange(m_target.gameObject))
@@ -63,7 +63,7 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
         }
         else
         {
-            Debug.Log("EnState_RomdomPlowling :: " + " Update :" + "EyeSearchRangeƒRƒ“ƒ|[ƒlƒ“ƒg‚ª‘¶İ‚µ‚Ü‚¹‚ñ ");
+            Debug.Log("EnState_RomdomPlowling :: " + " Update :" + "EyeSearchRangeã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒå­˜åœ¨ã—ã¾ã›ã‚“ ");
         }
     }
 

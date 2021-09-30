@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,9 +15,9 @@ public class EnemyAttackTriggerAction : TriggerAction
 
 
     /// <summary>
-    /// UŒ‚ŠJn
+    /// æ”»æ’ƒé–‹å§‹
     /// </summary>
-    /// <param name="hitTime">ƒqƒbƒgŠÔ</param>
+    /// <param name="hitTime">ãƒ’ãƒƒãƒˆæ™‚é–“</param>
     public void AttackStart()
     {
         //m_waitTimer.AddWaitTimer(GetType(), hitTime, AttackEnd);

@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Enemy—p‚ÌUtility‚Ìì¬ƒx[ƒX
+/// Enemyç”¨ã®Utilityã®ä½œæˆãƒ™ãƒ¼ã‚¹
 /// </summary>
 public abstract class UtilityEnemyBase
 {
@@ -14,7 +14,7 @@ public abstract class UtilityEnemyBase
         m_owner = owner;
     }
 
-    //ƒAƒNƒZƒbƒT-----------------------------------------------
+    //ã‚¢ã‚¯ã‚»ãƒƒã‚µ-----------------------------------------------
 
     protected GameObject GetOwner()
     {

@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ZombieNormal : EnemyBase, I_Chase, I_Listen
 {
-    //ƒRƒ“ƒ|[ƒlƒ“ƒgŒn
+    //ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆç³»
     Stator_ZombieNormal m_stator;
     TargetManager m_targetMgr;
 
@@ -21,7 +21,7 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen
 
 
 
-    //ƒCƒ“ƒ^[ƒtƒF[ƒX‚ÌÀ‘•-------------------------------------------------
+    //ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã®å®Ÿè£…-------------------------------------------------
 
     void I_Chase.ChangeState(){
         var member = m_stator.GetTransitionMember();
@@ -29,7 +29,7 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen
     }
 
     void I_Listen.Listen(FoundObject foundObject) {
-        //ƒ^[ƒQƒbƒg‚ÌØ‘Ö
+        //ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®åˆ‡æ›¿
         m_targetMgr.SetNowTarget(GetType() ,foundObject);
 
         var member = m_stator.GetTransitionMember();

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +12,7 @@ public class EnState_Attack : EnemyStateNodeBase<EnemyBase>
     {
         var owner = GetOwner();
 
-        //UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“Ä¶
+        //æ”»æ’ƒã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å†ç”Ÿ
         var animatorCtrl = owner.GetComponent<AnimatorCtrl_ZombieNormal>();
         animatorCtrl.AttackTriggerFire();
 
@@ -20,12 +20,12 @@ public class EnState_Attack : EnemyStateNodeBase<EnemyBase>
         AddChangeComp(owner.GetComponent<Attack_ZombieNormal>(), true, false);
 
         //test
-        //‰ñ“]‚ğˆê“Itest“I‚Éoff
+        //å›è»¢ã‚’ä¸€æ™‚çš„testçš„ã«off
         //AddChangeComp(owner.GetComponent<EnemyRotationCtrl>(), false, true);
 
         ChangeComps(EnableChangeType.Start);
 
-        //‘¬“x‚ğE‚·
+        //é€Ÿåº¦ã‚’æ®ºã™
         //var velocityMgr = owner.GetComponent<EnemyVelocityMgr>();
         //velocityMgr.ResetVelocity();
 

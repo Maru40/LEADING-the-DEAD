@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,13 +6,13 @@ using System;
 
 
 /// <summary>
-/// ƒ^[ƒQƒbƒg‚ÌŠÇ——p‚Ìƒpƒ‰ƒ[ƒ^
+/// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ç®¡ç†ç”¨ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 /// </summary>
 [Serializable]
 class EyeTargetParam
 {
     public GameObject target;
-    public bool isFind;  //Œ©‚Â‚¯‚½ó‘Ô‚©‚Ç‚¤‚©‚ğ•Ô‚·
+    public bool isFind;  //è¦‹ã¤ã‘ãŸçŠ¶æ…‹ã‹ã©ã†ã‹ã‚’è¿”ã™
 
     public EyeTargetParam(GameObject target)
     {
@@ -22,14 +22,14 @@ class EyeTargetParam
 }
 
 /// <summary>
-/// ‹ŠE‚Ìƒpƒ‰ƒ[ƒ^‚Ì\‘¢‘Ì
+/// è¦–ç•Œã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®æ§‹é€ ä½“
 /// </summary>
 [Serializable]
 public class EyeSearchRangeParam
 {
-    public float range;  //õ“G”ÍˆÍ(“¯S‰~ó)
-    public float height; //õ“G”ÍˆÍ(‚‚³)
-    public float rad;    //õ“G”ÍˆÍ(Šp“x)
+    public float range;  //ç´¢æ•µç¯„å›²(åŒå¿ƒå††çŠ¶)
+    public float height; //ç´¢æ•µç¯„å›²(é«˜ã•)
+    public float rad;    //ç´¢æ•µç¯„å›²(è§’åº¦)
 
     public EyeSearchRangeParam()
         :this(20.0f ,3.0f ,30.0f)
@@ -45,11 +45,11 @@ public class EyeSearchRangeParam
 
 
 /// <summary>
-/// ‹ŠE‚ÌŠÇ—
+/// è¦–ç•Œã®ç®¡ç†
 /// </summary>
 public class EyeSearchRange : MonoBehaviour
 {
-    //”ÍˆÍ‚É“ü‚Á‚Ä‚¢‚é‚©‚Ì‘ÎÛ‚É‚È‚éƒIƒuƒWƒFƒNƒg
+    //ç¯„å›²ã«å…¥ã£ã¦ã„ã‚‹ã‹ã®å¯¾è±¡ã«ãªã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     [SerializeField]
     List<EyeTargetParam> m_targetParams = new List<EyeTargetParam>();
 
@@ -57,7 +57,7 @@ public class EyeSearchRange : MonoBehaviour
     EyeSearchRangeParam m_param = new EyeSearchRangeParam();
 
     /// <summary>
-    /// Ray‚ÌáŠQ•¨‚·‚éLayer‚Ì”z—ñ
+    /// Rayã®éšœå®³ç‰©ã™ã‚‹Layerã®é…åˆ—
     /// </summary>
     [SerializeField]
     string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
@@ -67,7 +67,7 @@ public class EyeSearchRange : MonoBehaviour
         foreach(var param in m_targetParams)
         {
             if (IsInEyeRange(param.target))
-            {  //ƒ^[ƒQƒbƒg‚ª‹ŠE‚É“ü‚Á‚Ä‚¢‚½‚çB
+            {  //ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãŒè¦–ç•Œã«å…¥ã£ã¦ã„ãŸã‚‰ã€‚
                 Hit(param);
             }
             else
@@ -79,7 +79,7 @@ public class EyeSearchRange : MonoBehaviour
 
     bool IsRange(GameObject target) {
         var toVec = target.transform.position - transform.position;
-		//’·‚³ƒ`ƒFƒbƒN
+		//é•·ã•ãƒã‚§ãƒƒã‚¯
 		return toVec.magnitude <= m_param.range ? true : false;
 	}
 
@@ -87,8 +87,8 @@ public class EyeSearchRange : MonoBehaviour
 		var selfPos = transform.position;
         var targetPos = target.transform.position;
 
-        var subHeight = targetPos.y - selfPos.y;  //‚‚³‚Ì·‚ğ‹‚ß‚éB
-		//‚‚³‚ª¬‚³‚©‚Á‚½‚çB
+        var subHeight = targetPos.y - selfPos.y;  //é«˜ã•ã®å·®ã‚’æ±‚ã‚ã‚‹ã€‚
+		//é«˜ã•ãŒå°ã•ã‹ã£ãŸã‚‰ã€‚
 		return Mathf.Abs(subHeight) <= m_param.height? true : false;
 	}
 
@@ -100,7 +100,7 @@ public class EyeSearchRange : MonoBehaviour
 
 		var newDot = Vector3.Dot(forward.normalized, toVec.normalized);
         var newRad = Mathf.Acos(newDot);
-		//õ“G”ÍˆÍ‚É“ü‚Á‚Ä‚¢‚½‚çB
+		//ç´¢æ•µç¯„å›²ã«å…¥ã£ã¦ã„ãŸã‚‰ã€‚
 		return newRad <= m_param.rad ? true : false;
 	}
 
@@ -116,17 +116,17 @@ public class EyeSearchRange : MonoBehaviour
 
 
     /// <summary>
-/// ‹ŠE“à‚É‚¢‚é‚È‚çtrue‚ğ•Ô‚·
+/// è¦–ç•Œå†…ã«ã„ã‚‹ãªã‚‰trueã‚’è¿”ã™
 /// </summary>
-/// <param name="target">ƒ^[ƒQƒbƒg</param>
-/// <returns>‹ŠE‚Ì’†‚É‚¢‚é‚È‚çtrue</returns>
+/// <param name="target">ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ</param>
+/// <returns>è¦–ç•Œã®ä¸­ã«ã„ã‚‹ãªã‚‰true</returns>
     public bool IsInEyeRange(GameObject target)
     {
         if (target == null) { 
             return false; 
         }
 
-        //‘S‚Ä‚ÌğŒ‚ªtrue‚È‚ç‹ŠE“à‚É‘ÎÛ‚ª‚¢‚éB
+        //å…¨ã¦ã®æ¡ä»¶ãŒtrueãªã‚‰è¦–ç•Œå†…ã«å¯¾è±¡ãŒã„ã‚‹ã€‚
         if (IsRange(target) && IsHeight(target) && IsRad(target) && IsRay(target)){
             return true;
         }
@@ -136,11 +136,11 @@ public class EyeSearchRange : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒT[ƒ`”ÍˆÍ‚ğˆê“I‚Éw’è‚µ‚ÄAƒ^[ƒQƒbƒg‚Ì’†‚É“ü‚Á‚Ä‚¢‚é‚©‚ğ”»’f
+    /// ã‚µãƒ¼ãƒç¯„å›²ã‚’ä¸€æ™‚çš„ã«æŒ‡å®šã—ã¦ã€ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ä¸­ã«å…¥ã£ã¦ã„ã‚‹ã‹ã‚’åˆ¤æ–­
     /// </summary>
-    /// <param name="target">ƒ^[ƒQƒbƒg</param>
-    /// <param name="range">õ“G”ÍˆÍ</param>
-    /// <returns>ƒT[ƒ`”ÍˆÍ‚È‚çtrue</returns>
+    /// <param name="target">ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ</param>
+    /// <param name="range">ç´¢æ•µç¯„å›²</param>
+    /// <returns>ã‚µãƒ¼ãƒç¯„å›²ãªã‚‰true</returns>
     public bool IsInEyeRange(GameObject target, float range)
     {
         float beforeRange = m_param.range;
@@ -152,7 +152,7 @@ public class EyeSearchRange : MonoBehaviour
         return isRange;
     }
 
-    //ƒAƒNƒZƒbƒT-------------------------------------------------------------------------
+    //ã‚¢ã‚¯ã‚»ãƒƒã‚µ-------------------------------------------------------------------------
 
     public void AddTarget(GameObject target) {
 		m_targetParams.Add(new EyeTargetParam(target));

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CustomLabelAttribute : PropertyAttribute
 {

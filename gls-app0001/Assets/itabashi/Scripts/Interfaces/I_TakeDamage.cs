@@ -1,14 +1,14 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ƒ_ƒ[ƒW‚Ìƒf[ƒ^
+/// ãƒ€ãƒ¡ãƒ¼ã‚¸ã®ãƒ‡ãƒ¼ã‚¿
 /// </summary>
 public struct DamageData
 {
     /// <summary>
-    /// ƒ_ƒ[ƒW—Ê
+    /// ãƒ€ãƒ¡ãƒ¼ã‚¸é‡
     /// </summary>
     public int damage;
 
@@ -19,13 +19,13 @@ public struct DamageData
 }
 
 /// <summary>
-/// ƒ_ƒ[ƒW‚ªó‚¯‚ç‚ê‚éƒCƒ“ƒ^[ƒtƒF[ƒX
+/// ãƒ€ãƒ¡ãƒ¼ã‚¸ãŒå—ã‘ã‚‰ã‚Œã‚‹ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
 /// </summary>
 public interface I_TakeDamage
 {
     /// <summary>
-    /// ƒ_ƒ[ƒW‚ğó‚¯‚é
+    /// ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã‚‹
     /// </summary>
-    /// <param name="damageData">ó‚¯‚éƒ_ƒ[ƒWƒf[ƒ^</param>
+    /// <param name="damageData">å—ã‘ã‚‹ãƒ€ãƒ¡ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿</param>
     void TakeDamage(DamageData damageData);
 }

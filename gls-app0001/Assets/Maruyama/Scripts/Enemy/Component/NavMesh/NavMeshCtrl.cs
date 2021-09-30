@@ -1,21 +1,21 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class NavMeshCtrl : MonoBehaviour
 {
-    //ƒIƒuƒWƒFƒNƒg‚ÌQÆ
+    //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å‚ç…§
     [SerializeField]
     GameObject m_target;
 
-    //ƒRƒ“ƒ|[ƒlƒ“ƒg‚ÌQÆ
+    //ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®å‚ç…§
     NavMeshAgent m_navMesh;
 
-    //Œ»İ–Ø—j‚É‚µ‚Ä‚¢‚éƒ|ƒWƒVƒ‡ƒ“
+    //ç¾åœ¨æœ¨æ›œã«ã—ã¦ã„ã‚‹ãƒã‚¸ã‚·ãƒ§ãƒ³
     Vector3 m_targetPosition;
 
-    //–Ú“I’n‚É‚Â‚¢‚½‚Æ”»’f‚³‚ê‚é‹——£
+    //ç›®çš„åœ°ã«ã¤ã„ãŸã¨åˆ¤æ–­ã•ã‚Œã‚‹è·é›¢
     [SerializeField]
     float m_nearRange = 3.0f;
 
@@ -38,7 +38,7 @@ public class NavMeshCtrl : MonoBehaviour
         }
     }
 
-    //–Ú“I’n‚É‚½‚Ç‚è’…‚¢‚½‚©‚Ç‚¤‚©
+    //ç›®çš„åœ°ã«ãŸã©ã‚Šç€ã„ãŸã‹ã©ã†ã‹
     bool IsRouteEnd()
     { 
         var toVec = m_targetPosition - transform.localPosition;
@@ -47,14 +47,14 @@ public class NavMeshCtrl : MonoBehaviour
         return nowRange <= m_nearRange ? true : false;
     }
 
-    //NavMesh‚ğ—˜—p‚µ‚Ä–Ú“I’n‚Ü‚Å‚Ìƒ‹[ƒg‚ğŒvZ
+    //NavMeshã‚’åˆ©ç”¨ã—ã¦ç›®çš„åœ°ã¾ã§ã®ãƒ«ãƒ¼ãƒˆã‚’è¨ˆç®—
     void SetNavMeshTargetPosition()
     {
-        //NavMesh‚Ì€”õ‚ª‚Å‚«‚Ä‚¢‚é‚È‚çB
+        //NavMeshã®æº–å‚™ãŒã§ãã¦ã„ã‚‹ãªã‚‰ã€‚
         if(m_navMesh.pathStatus != NavMeshPathStatus.PathPartial)
         {
             m_targetPosition = m_target.transform.localPosition;
-            m_targetPosition.y = transform.position.y;  //‚‚³‚Ì’²®
+            m_targetPosition.y = transform.position.y;  //é«˜ã•ã®èª¿æ•´
 
             m_navMesh.SetDestination(m_targetPosition);
         }

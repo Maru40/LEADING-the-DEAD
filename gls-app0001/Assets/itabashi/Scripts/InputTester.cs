@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +11,7 @@ public class InputTester : MonoBehaviour
     {
         m_gameControls = new GameControls();
         m_gameControls.Enable();
-        m_gameControls.Player.Select.performed += context => Debug.Log("ƒZƒŒƒNƒg");
+        m_gameControls.Player.Select.performed += context => Debug.Log("ã‚»ãƒ¬ã‚¯ãƒˆ");
     }
 
     // Update is called once per frame

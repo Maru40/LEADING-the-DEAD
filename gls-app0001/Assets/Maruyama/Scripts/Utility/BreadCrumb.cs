@@ -1,19 +1,19 @@
-using System;
+ï»¿using System;
 using System.Diagnostics.CodeAnalysis;
 
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// BreadCrumb—p‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg
+/// BreadCrumbç”¨ã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 /// </summary>
 public class BreadCrumb : MonoBehaviour
 {
     [SerializeField]
-    int m_numBread = 60;  //Bread‚ÌÅ‘å”
+    int m_numBread = 60;  //Breadã®æœ€å¤§æ•°
 
     [SerializeField]
-    float m_addRange = 1.0f;  //’Ç‰Á‚·‚é‹——£
+    float m_addRange = 1.0f;  //è¿½åŠ ã™ã‚‹è·é›¢
 
     List<Vector3> m_positions = new List<Vector3>();
 
@@ -24,7 +24,7 @@ public class BreadCrumb : MonoBehaviour
 
     void Update()
     {
-        //‘O‰ñ•ª‚æ‚èˆê’è‹——£‚Í‚È‚ê‚½‚ç
+        //å‰å›åˆ†ã‚ˆã‚Šä¸€å®šè·é›¢ã¯ãªã‚ŒãŸã‚‰
         if (IsAddRange())
         {
             AddPosition();
@@ -57,7 +57,7 @@ public class BreadCrumb : MonoBehaviour
     }
 
     /// <summary>
-    /// ŒÃ‚¢ƒ|ƒWƒVƒ‡ƒ“‚Ìíœ
+    /// å¤ã„ãƒã‚¸ã‚·ãƒ§ãƒ³ã®å‰Šé™¤
     /// </summary>
     void RemoveOldPosition()
     {
@@ -65,46 +65,46 @@ public class BreadCrumb : MonoBehaviour
     }
 
 
-    //ƒAƒNƒZƒbƒT---------------------------------------------------------------------
+    //ã‚¢ã‚¯ã‚»ãƒƒã‚µ---------------------------------------------------------------------
 
     /// <summary>
-    /// ”z—ñ‚Ì’l‚ğQÆ“n‚µ
+    /// é…åˆ—ã®å€¤ã‚’å‚ç…§æ¸¡ã—
     /// </summary>
-    /// <returns>”z—ñ‚ÌQÆ</returns>
+    /// <returns>é…åˆ—ã®å‚ç…§</returns>
     public List<Vector3> GetPosisions()
     {
         return m_positions;
     }
 
     /// <summary>
-    /// ”z—ñ‚Ì’l‚ğƒRƒs[‚µ‚ÄAæ“¾
+    /// é…åˆ—ã®å€¤ã‚’ã‚³ãƒ”ãƒ¼ã—ã¦ã€å–å¾—
     /// </summary>
-    /// <returns>”z—ñ‚ğ’l“n‚µ</returns>
+    /// <returns>é…åˆ—ã‚’å€¤æ¸¡ã—</returns>
     public List<Vector3> GetCopyPositions()
     {
         return new List<Vector3>(m_positions);
     }
 
     /// <summary>
-    /// Bread‚ÌÅ‘å”‚ğƒZƒbƒg
+    /// Breadã®æœ€å¤§æ•°ã‚’ã‚»ãƒƒãƒˆ
     /// </summary>
-    /// <param name="num">Bread‚ÌÅ‘å”</param>
+    /// <param name="num">Breadã®æœ€å¤§æ•°</param>
     public void SetNumBread(int num)
     {
         m_numBread = num;
     }
 
     /// <summary>
-    /// Bread‚ÌÅ‘å”‚ğæ“¾
+    /// Breadã®æœ€å¤§æ•°ã‚’å–å¾—
     /// </summary>
-    /// <returns>Bread‚ÌÅ‘å”</returns>
+    /// <returns>Breadã®æœ€å¤§æ•°</returns>
     public int GetNumBread()
     {
         return m_numBread;
     }
 
     /// <summary>
-    /// ÅV‚Ìƒ|ƒWƒVƒ‡ƒ“‚ğæ“¾‚·‚é
+    /// æœ€æ–°ã®ãƒã‚¸ã‚·ãƒ§ãƒ³ã‚’å–å¾—ã™ã‚‹
     /// </summary>
     /// <returns></returns>
     public Vector3 GetNewPosition()
@@ -114,15 +114,15 @@ public class BreadCrumb : MonoBehaviour
     }
 
     /// <summary>
-    /// ÅV‚Ìƒ|ƒWƒVƒ‡ƒ“‚©‚çˆø”‚Ì•ª‘O‚Ìƒ|ƒWƒVƒ‡ƒ“‚ğ•Ô‚·B
+    /// æœ€æ–°ã®ãƒã‚¸ã‚·ãƒ§ãƒ³ã‹ã‚‰å¼•æ•°ã®åˆ†å‰ã®ãƒã‚¸ã‚·ãƒ§ãƒ³ã‚’è¿”ã™ã€‚
     /// </summary>
-    /// <param name="backCount">ÅV‚©‚ç‚Ç‚ê‚¾‚¯‘O‚Ìƒ|ƒWƒVƒ‡ƒ“‚©</param>
+    /// <param name="backCount">æœ€æ–°ã‹ã‚‰ã©ã‚Œã ã‘å‰ã®ãƒã‚¸ã‚·ãƒ§ãƒ³ã‹</param>
     /// <returns></returns>
     public Vector3? GetNewBackPosition(uint backCount)
     {
         backCount++;
         int index = m_positions.Count - (int)backCount;
-        //ƒCƒ“ƒfƒbƒNƒX‚ª0‚æ‚è‘å‚«‚©‚Á‚½‚ç•Ô‚·B
+        //ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãŒ0ã‚ˆã‚Šå¤§ãã‹ã£ãŸã‚‰è¿”ã™ã€‚
         if(index >= 0){
             return m_positions[index];
         }
@@ -132,13 +132,13 @@ public class BreadCrumb : MonoBehaviour
     }
 
     /// <summary>
-    /// Ÿ‚Ìƒ|ƒWƒVƒ‡ƒ“‚ğæ“¾‚·‚éB
+    /// æ¬¡ã®ãƒã‚¸ã‚·ãƒ§ãƒ³ã‚’å–å¾—ã™ã‚‹ã€‚
     /// </summary>
-    /// <param name="beforePosition">‘O‰ñ•ª‚Ìƒ|ƒWƒVƒ‡ƒ“</param>
-    /// <returns>Ÿ‚Ìƒ|ƒWƒVƒ‡ƒ“</returns>
+    /// <param name="beforePosition">å‰å›åˆ†ã®ãƒã‚¸ã‚·ãƒ§ãƒ³</param>
+    /// <returns>æ¬¡ã®ãƒã‚¸ã‚·ãƒ§ãƒ³</returns>
     public Vector3? GetNextPosition(Vector3 beforePosition)
     {
-        //Å‘å‚Ìè‘O‚Ü‚Å‰ñ‚·B
+        //æœ€å¤§ã®æ‰‹å‰ã¾ã§å›ã™ã€‚
         for(int i = 0; i < m_positions.Count - 1; i++)
         {
             if(m_positions[i] == beforePosition)

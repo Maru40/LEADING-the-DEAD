@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ProtoGameOver : MonoBehaviour
 {
-    [CustomLabel("ƒQ[ƒ€ƒI[ƒo[ƒeƒLƒXƒg")]
+    [CustomLabel("ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ãƒ†ã‚­ã‚¹ãƒˆ")]
     [SerializeField]
     private Text m_gameOverText;
 
