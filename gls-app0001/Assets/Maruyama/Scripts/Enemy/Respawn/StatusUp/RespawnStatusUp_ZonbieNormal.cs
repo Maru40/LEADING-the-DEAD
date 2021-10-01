@@ -46,4 +46,13 @@ public class RespawnStatusUp_ZonbieNormal : EnemyRespawnStatusUpBase
 
         StatusUp();
     }
+
+    public void SetParametor(CreateSetParametor_ZombieNormal param)
+    {
+        m_param = param;
+    }
+    public CreateSetParametor_ZombieNormal GetParametor()
+    {
+        return m_param;
+    }
 }
