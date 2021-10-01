@@ -41,7 +41,7 @@ namespace GarageKit
                             }
 
                             // 改行コードの置き換え
-                            string contents = enc.GetString(bs).Replace("\r\n", "\n");
+                            string contents = enc.GetString(bs)/*.Replace("\r\n", "\n")*/;
 
                             // ファイルを保存
                             File.WriteAllText(asset, contents, Encoding.GetEncoding("utf-8"));
