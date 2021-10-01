@@ -65,4 +65,10 @@ public class StatusManager_ZombieNormal : StatusManagerBase
     {
         return m_status;
     }
+
+    public void AddStatus(Status status)
+    {
+        m_status.hp += status.hp;
+        m_status.damageIntervalTime += status.damageIntervalTime;
+    }
 }

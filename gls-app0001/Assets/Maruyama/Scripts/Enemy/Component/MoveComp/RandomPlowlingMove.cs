@@ -224,6 +224,16 @@ public class RandomPlowlingMove : MonoBehaviour
         m_param = parametor;
     }
 
+    public void AddParametor(Parametor parametor)
+    {
+        m_param.randomPositionRadius += parametor.randomPositionRadius;
+        m_param.maxSpeed += parametor.maxSpeed;
+        m_param.turningPower += parametor.turningPower;
+        m_param.targetNearRange += parametor.targetNearRange;
+        m_param.maxWaitCalcuRouteTime += parametor.maxWaitCalcuRouteTime;
+        m_param.inThrongRange += parametor.inThrongRange;
+    }
+
     //現在使用していない
     //bool IsRayHit(Vector3 position)
     //{
