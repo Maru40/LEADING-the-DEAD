@@ -34,6 +34,13 @@ public abstract class AttackBase : MonoBehaviour
         return m_baseParam; 
     }
 
+    public void AddBaseParam(AttackParametorBase param)
+    {
+        m_baseParam.power += param.power;
+        m_baseParam.startRange += param.startRange;
+        m_baseParam.moveSpeed += param.moveSpeed;
+    }
+
     /// <summary>
     /// 攻撃力
     /// </summary>

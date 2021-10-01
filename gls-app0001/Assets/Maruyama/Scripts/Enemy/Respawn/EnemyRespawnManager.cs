@@ -39,6 +39,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
 
     StatorBase m_stator;
     WaitTimer m_waitTimer;
+    EnemyRespawnStatusUpBase m_statusUp;
 
     void Awake()
     {
@@ -47,6 +48,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
 
         m_stator = GetComponent<StatorBase>();
         m_waitTimer = GetComponent<WaitTimer>();
+        m_statusUp = GetComponent<EnemyRespawnStatusUpBase>();
     }
 
     //リスポーン準備
@@ -73,6 +75,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
         var respawnPosition = CalcuRespawnRandomPosition();
         transform.position = respawnPosition;
 
+        m_statusUp?.Respawn();  //死亡時にステータスUP
         m_stator.Reset();  //ステートのリセット
     }
 
@@ -110,6 +113,12 @@ public class EnemyRespawnManager : EnemyRespawnBase
     public void SetParametor(RespawnManagerParametor parametor)
     {
         m_param = parametor;
+    }
+
+    //将来的に消す
+    public void AddParametor(RespawnManagerParametor parametor)
+    {
+        m_param.time += parametor.time;
     }
 
     //StartNullCheck----------------------------------------------------

@@ -182,13 +182,24 @@ public class ChaseTarget : MonoBehaviour
         return m_param.inThrongRange;
     }
 
-    public void SetPamametor(ChaseTargetParametor param)
+    public void SetParametor(ChaseTargetParametor param)
     {
         SetNearRange(param.nearRange);
         SetMaxSpeed(param.maxSpeed);
         SetTurningPower(param.turningPower);
         SetLostSeekTime(param.lostSeekTime);
         SetInThrongRange(param.inThrongRange);
+    }
+
+    public void AddParametor(ChaseTargetParametor param)
+    {
+        m_param.nearRange += param.nearRange;
+        m_param.maxSpeed += param.maxSpeed;
+        m_param.turningPower += param.turningPower;
+        m_param.lostSeekTime += param.lostSeekTime;
+        m_param.inThrongRange += param.inThrongRange;
+
+        SetParametor(m_param);
     }
 
     //Collision---------------------------------------------------------------------------

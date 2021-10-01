@@ -2410,6 +2410,7 @@ GameObject:
   - component: {fileID: 5470352065345593249}
   - component: {fileID: -8648523569329281583}
   - component: {fileID: 53500166090635917}
+  - component: {fileID: -7008508848388195314}
   m_Layer: 6
   m_Name: Zombie
   m_TagString: Untagged
@@ -2784,9 +2785,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86ed402316f222748be3c4d5f0b331f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_isRespawn: 1
-  m_time: 1000
+  m_param:
+    isRespawn: 1
+    time: 0
   m_generator: {fileID: 0}
+--- !u!114 &-7008508848388195314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434505739018704334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06c9f80963d982418d4e32376ba349d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_param:
+    respawnParametor:
+      isRespawn: 1
+      time: 0
+    chaseParametor:
+      nearRange: 0
+      maxSpeed: 0.2
+      turningPower: 0
+      lostSeekTime: 0
+      inThrongRange: 0
+    randomPlowlingParametor:
+      randomPositionRadius: 0
+      maxSpeed: 0.2
+      turningPower: 0
+      targetNearRange: 0
+      maxWaitCalcuRouteTime: 0
+      inThrongRange: 0
+    status:
+      hp: 0
+      damageIntervalTime: 0
+    attackParametor:
+      power: 1
+      startRange: 0
+      moveSpeed: 0.2
 --- !u!1 &7689520723826636210
 GameObject:
   m_ObjectHideFlags: 0
