@@ -34,7 +34,10 @@ public class CreateSetParametor_ZombieNormal
 public class EnemyGenerator_ZombieNormal : EnemyGenerator
 {
     [SerializeField]
-    CreateSetParametor_ZombieNormal m_param = new CreateSetParametor_ZombieNormal();
+    CreateSetParametor_ZombieNormal m_createSetParam = new CreateSetParametor_ZombieNormal();
+
+    [SerializeField]
+    CreateSetParametor_ZombieNormal m_respawnStatusUpParam= new CreateSetParametor_ZombieNormal(0.0f);
 
     protected override void Start()
     {
@@ -46,31 +49,37 @@ public class EnemyGenerator_ZombieNormal : EnemyGenerator
         var respawn = obj.GetComponent<EnemyRespawnManager>();
         if (respawn)
         {
-            respawn.SetParametor(m_param.respawnParametor);
+            respawn.SetParametor(m_createSetParam.respawnParametor);
         }
 
         var chase = obj.GetComponent<ChaseTarget>();
         if (chase)
         {
-            chase.SetParametor(m_param.chaseParametor);
+            chase.SetParametor(m_createSetParam.chaseParametor);
         }
 
         var randomPlowling = obj.GetComponent<RandomPlowlingMove>();
         if (randomPlowling)
         {
-            randomPlowling.SetParametor(m_param.randomPlowlingParametor);
+            randomPlowling.SetParametor(m_createSetParam.randomPlowlingParametor);
         }
 
         var statusMgr = obj.GetComponent<StatusManager_ZombieNormal>();
         if (statusMgr)
         {
-            statusMgr.SetStatus(m_param.status);
+            statusMgr.SetStatus(m_createSetParam.status);
         }
 
         var attack = obj.GetComponent<Attack_ZombieNormal>();
         if (attack)
         {
-            attack.SetBaseParam(m_param.attackParametor);
+            attack.SetBaseParam(m_createSetParam.attackParametor);
+        }
+
+        var statusUp = obj.GetComponent<RespawnStatusUp_ZonbieNormal>();
+        if (statusUp)
+        {
+            statusUp.SetParametor(m_respawnStatusUpParam);
         }
     }
 }
