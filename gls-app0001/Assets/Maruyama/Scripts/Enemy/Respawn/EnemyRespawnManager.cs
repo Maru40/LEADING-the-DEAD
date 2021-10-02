@@ -69,6 +69,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
         transform.position = respawnPosition;
 
         DropDistribution();
+        //m_dropManager?.Drop();
         m_statusUp?.Respawn();  //死亡時にステータスUP
         m_stator.Reset();  //ステートのリセット
     }

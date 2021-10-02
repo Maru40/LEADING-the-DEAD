@@ -22,7 +22,20 @@ public class RandomDropDataDistribution
 
     public RandomDropDataDistribution(List<DropDataDistributionParametor> parametors)
     {
-        this.m_params = parametors;
+        foreach(var param in parametors)
+        {
+            //オブジェクトの生成
+            var newObj = MonoBehaviour.Instantiate(param.dropData.obj);
+            newObj.gameObject.SetActive(false);
+
+            //パラメータの生成。
+            var newParam = new DropDataDistributionParametor();
+            newParam.dropData = new DropData(newObj, param.dropData.probability);
+            newParam.numDistribution = param.numDistribution;
+            m_params.Add(newParam);
+        }
+
+        //this.m_params = parametors;
     }
 
     /// <summary>
