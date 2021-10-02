@@ -43,18 +43,27 @@ public class EnemyGenerator : MonoBehaviour
     [SerializeField]
     protected Vector3 m_maxRandomRange = new Vector3();  //ランダムに生成する時の最大距離
 
+    //配布するデータの構造体
+    List<DropDataDistributionParametor> m_distributionParams = new List<DropDataDistributionParametor>();
+    //データを配布する処理をまとめたクラス
+    RandomDropDataDistribution m_distribution;
+
     //生成したゾンビを持つ
     protected List<ThrongData> m_datas = new List<ThrongData>();
 
     protected virtual void Start()
     {
+        //nullCheck
         if(m_outOfTargteDatas.Count == 0)
         {
             var barricade = GameObject.Find("Barricade");
             m_outOfTargteDatas.Add(new OutOfTargetData(barricade));
         }
 
+        m_distribution = new RandomDropDataDistribution(m_distributionParams);
+
         CreateObjects();
+        DropDistribution();
     }
 
     void CreateObjects()
@@ -70,12 +79,13 @@ public class EnemyGenerator : MonoBehaviour
     {
         var obj = Instantiate(m_createObject, createPosition, Quaternion.identity, transform);
         CreateObjectAdjust(obj);  //調整
-        
+
         m_datas.Add(new ThrongData(obj.GetComponent<EnemyVelocityMgr>(),
             obj.GetComponent<TargetManager>(),
             obj.GetComponent<ThrongManager>(),
-            obj.GetComponent<RandomPlowlingMove>()
-        ));
+            obj.GetComponent<RandomPlowlingMove>(),
+            obj.GetComponent<DropObjecptManager>()
+        )); ;
     }
 
     /// <summary>
@@ -97,7 +107,15 @@ public class EnemyGenerator : MonoBehaviour
             Camera.main, m_maxRandomRange, m_centerPosition);
     }
 
-    //アクセッサ---------------------------------------
+    /// <summary>
+    /// DropItem情報を配布をする処理
+    /// </summary>
+    public void DropDistribution()
+    {
+        m_distribution.Distribution(m_datas);
+    }
+
+    //アクセッサ---------------------------------------------------------------------------
 
     /// <summary>
     /// 生成するオブジェクトと渡されたオブジェクトが同じprefabなら
