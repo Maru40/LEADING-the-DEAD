@@ -72,6 +72,11 @@ public class GameStateManager : MonoBehaviour
 
     public void Clear()
     {
+        if(m_gameState != GameState.Play)
+        {
+            return;
+        }
+
         m_gameState = GameState.Clear;
 
         m_gameClearEvent?.Invoke();
@@ -79,6 +84,11 @@ public class GameStateManager : MonoBehaviour
 
     public void GameOver()
     {
+        if(m_gameState != GameState.Play)
+        {
+            return;
+        }
+
         m_gameState = GameState.GameOver;
 
         m_gameOverEvent?.Invoke();
