@@ -81,6 +81,14 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""3aba2e08-be4d-46eb-9af2-013569e3976f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -193,6 +201,17 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""action"": ""ThrowAim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1314145f-a84b-4d81-a9a6-8767ace4f73d"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -209,6 +228,7 @@ public class @GameControls : IInputActionCollection, IDisposable
         m_Player_ThrowingStance = m_Player.FindAction("ThrowingStance", throwIfNotFound: true);
         m_Player_Throw = m_Player.FindAction("Throw", throwIfNotFound: true);
         m_Player_ThrowAim = m_Player.FindAction("ThrowAim", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -266,6 +286,7 @@ public class @GameControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_ThrowingStance;
     private readonly InputAction m_Player_Throw;
     private readonly InputAction m_Player_ThrowAim;
+    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @GameControls m_Wrapper;
@@ -278,6 +299,7 @@ public class @GameControls : IInputActionCollection, IDisposable
         public InputAction @ThrowingStance => m_Wrapper.m_Player_ThrowingStance;
         public InputAction @Throw => m_Wrapper.m_Player_Throw;
         public InputAction @ThrowAim => m_Wrapper.m_Player_ThrowAim;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -311,6 +333,9 @@ public class @GameControls : IInputActionCollection, IDisposable
                 @ThrowAim.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowAim;
                 @ThrowAim.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowAim;
                 @ThrowAim.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowAim;
+                @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -339,6 +364,9 @@ public class @GameControls : IInputActionCollection, IDisposable
                 @ThrowAim.started += instance.OnThrowAim;
                 @ThrowAim.performed += instance.OnThrowAim;
                 @ThrowAim.canceled += instance.OnThrowAim;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -353,5 +381,6 @@ public class @GameControls : IInputActionCollection, IDisposable
         void OnThrowingStance(InputAction.CallbackContext context);
         void OnThrow(InputAction.CallbackContext context);
         void OnThrowAim(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
