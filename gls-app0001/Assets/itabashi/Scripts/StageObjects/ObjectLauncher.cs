@@ -68,14 +68,27 @@ public class ObjectLauncher : MonoBehaviour
         DrawPredictionLine();
     }
 
+    public void Fire(ThrowableObject throwableObject)
+    {
+        var rotation = m_rotationForward ? transform.rotation : Quaternion.identity;
+        Fire(throwableObject, rotation);
+    }
+
+    public void Fire(ThrowableObject throwableObject,Quaternion rotation)
+    {
+        throwableObject.transform.position = transform.position;
+        throwableObject.transform.rotation = rotation;
+        throwableObject.Throwing(new ThrowingData(transform.forward * m_firingSpeed));
+    }
+
     /// <summary>
     /// オブジェクトを発射する
     /// </summary>
     /// <param name="throwableObjectPrefab">オブジェクトのプレハブ</param>
-    public void Fire(ThrowableObject throwableObjectPrefab)
+    public void FirePrefab(ThrowableObject throwableObjectPrefab)
     {
         var rotation = m_rotationForward ? transform.rotation : Quaternion.identity;
-        Fire(throwableObjectPrefab, rotation);
+        FirePrefab(throwableObjectPrefab, rotation);
     }
 
     /// <summary>
@@ -83,7 +96,7 @@ public class ObjectLauncher : MonoBehaviour
     /// </summary>
     /// <param name="throwableObjectPrefab">オブジェクトのプレハブ</param>
     /// <param name="rotation">オブジェクトの回転情報</param>
-    public void Fire(ThrowableObject throwableObjectPrefab, Quaternion rotation)
+    public void FirePrefab(ThrowableObject throwableObjectPrefab, Quaternion rotation)
     {
         var throwableObject = Instantiate(throwableObjectPrefab, transform.position, rotation);
         throwableObject.Throwing(new ThrowingData(transform.forward * m_firingSpeed));
@@ -132,7 +145,6 @@ public class ObjectLauncher : MonoBehaviour
             beforePosition = position;
             count++;
         }
-        Debug.Log($"外に出た {isDrawPredictionLine}");
 
         m_lineRenderer.positionCount = m_linePositions.Count;
         m_lineRenderer.SetPositions(m_linePositions.ToArray());

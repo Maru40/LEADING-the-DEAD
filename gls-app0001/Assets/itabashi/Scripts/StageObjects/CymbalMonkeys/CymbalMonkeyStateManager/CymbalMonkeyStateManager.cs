@@ -16,14 +16,12 @@ public class CymbalMonkeyStateManager : MonoBehaviour
     public CymbalMonkeyState nowState { private set; get; } = CymbalMonkeyState.Normal;
 
     private Rigidbody m_rigidbody;
-    private TimingDevice m_timingDevice;
     private AlarmObject m_alarmObject;
 
     // Start is called before the first frame update
     void Start()
     {
         m_rigidbody = GetComponent<Rigidbody>();
-        m_timingDevice = GetComponent<TimingDevice>();
         m_alarmObject = GetComponent<AlarmObject>();
     }
 
@@ -58,7 +56,6 @@ public class CymbalMonkeyStateManager : MonoBehaviour
         }
 
         m_rigidbody.isKinematic = true;
-        m_timingDevice.TimerStart();
         m_alarmObject.AlarmStart();
 
         nowState = CymbalMonkeyState.ExplosionPreparation;

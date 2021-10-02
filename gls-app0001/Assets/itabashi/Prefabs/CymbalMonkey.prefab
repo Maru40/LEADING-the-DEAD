@@ -57,8 +57,6 @@ GameObject:
   - component: {fileID: 6497287969379345161}
   - component: {fileID: 6519281115040739102}
   - component: {fileID: 6519281115040739101}
-  - component: {fileID: 6519281115040739100}
-  - component: {fileID: 6519281115040739099}
   - component: {fileID: 6519281115040739098}
   - component: {fileID: 3904213817972291339}
   - component: {fileID: 2704017618154575567}
@@ -169,50 +167,6 @@ CapsuleCollider:
   m_Height: 1.8860508
   m_Direction: 1
   m_Center: {x: 0.000018030405, y: 0.4492101, z: 0.15591887}
---- !u!114 &6519281115040739100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6520215467471573455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bffc107142f15f64f92a415ffdb37b83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_fireTime: 10
-  m_startOnAwake: 0
-  m_isLoop: 0
-  m_timerEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6519281115040739099}
-        m_TargetAssemblyTypeName: ObjectBomber, Assembly-CSharp
-        m_MethodName: Explosion
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &6519281115040739099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6520215467471573455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb874171cdc2a5b40ab595f036330a88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_explosionSound: {fileID: 0}
-  m_explosionEfectPrefab: {fileID: 0}
 --- !u!114 &6519281115040739098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,7 +368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4799c0d959667ea459b21a5d01decf66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_pickedUpObjectPrefab: {fileID: 6520215467471573455}
+  m_pickedUpSound: {fileID: 0}
 --- !u!1 &7471403350076812732
 GameObject:
   m_ObjectHideFlags: 0

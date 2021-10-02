@@ -17,11 +17,8 @@ namespace Player
         [SerializeField]
         PlayerAnimationParameters m_playerParameters;
 
-        /// <summary>
-        /// 投げる対象のオブジェクト
-        /// </summary>
         [SerializeField]
-        ThrowableObject m_throwableObjectPrefab;
+        PlayerPickUpper m_playerpickUpper;
 
         /// <summary>
         /// オブジェクト打ち出し装置
@@ -43,6 +40,7 @@ namespace Player
         private float m_countCoolTime;
 
         private ThrowableObject m_takingObject;
+        private PickedUpObject m_pickedUpObject;
 
         private bool m_isThrowingStance = false;
 
@@ -82,10 +80,6 @@ namespace Player
         // Start is called before the first frame update
         void Start()
         {
-            m_takingObject = Instantiate(m_throwableObjectPrefab, m_objectLauncher.transform.position, Quaternion.identity, transform);
-            m_takingObject.Takeing();
-            m_takingObject.gameObject.SetActive(false);
-
             m_countCoolTime = m_coolTime;
         }
 
@@ -99,15 +93,31 @@ namespace Player
 
         void ThrowingStanceStart()
         {
-            if (m_countCoolTime < m_coolTime)
+            if(!m_playerpickUpper.stackObject)
             {
                 return;
             }
 
+            ThrowableObject throwableObject = m_playerpickUpper.stackObject.GetComponent<ThrowableObject>();
+
+            if (m_countCoolTime < m_coolTime || !throwableObject)
+            {
+                return;
+            }
+
+            m_takingObject = throwableObject;
+            m_pickedUpObject = m_playerpickUpper.stackObject;
+
+            m_playerpickUpper.TakeOut();
+
             m_isThrowingStance = true;
             m_playerParameters.isThrowingStance = true;
 
-            m_takingObject.gameObject.SetActive(true);
+            throwableObject.gameObject.SetActive(true);
+            throwableObject.gameObject.transform.SetParent(transform);
+            throwableObject.gameObject.transform.position = m_objectLauncher.transform.position;
+            throwableObject.gameObject.transform.localRotation = Quaternion.identity;
+            throwableObject.Takeing();
 
             m_objectLauncher.isDrawPredictionLine = true;
         }
@@ -117,7 +127,12 @@ namespace Player
             m_isThrowingStance = false;
             m_playerParameters.isThrowingStance = false;
 
-            m_takingObject.gameObject.SetActive(false);
+            m_takingObject = null;
+            if (m_pickedUpObject)
+            {
+                m_playerpickUpper.PutAway(m_pickedUpObject);
+                m_pickedUpObject = null;
+            }
 
             m_objectLauncher.isDrawPredictionLine = false;
         }
@@ -131,8 +146,12 @@ namespace Player
 
             m_countCoolTime = 0.0f;
 
-            m_objectLauncher.Fire(m_throwableObjectPrefab, m_takingObject.transform.rotation);
-            m_takingObject.gameObject.SetActive(false);
+            m_takingObject.transform.SetParent(null);
+
+            m_objectLauncher.Fire(m_takingObject, m_takingObject.transform.rotation);
+
+            m_takingObject = null;
+            m_pickedUpObject = null;
 
             ThrowingStanceEnd();
         }
