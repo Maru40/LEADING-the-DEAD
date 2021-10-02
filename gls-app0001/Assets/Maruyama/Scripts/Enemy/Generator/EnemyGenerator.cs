@@ -116,6 +116,11 @@ public class EnemyGenerator : MonoBehaviour
         m_distribution.Distribution(m_datas);
     }
 
+    public void DropDistribution(List<DropData> dropDatas)
+    {
+        m_distribution.Distribution(m_datas ,dropDatas);
+    }
+
     //アクセッサ---------------------------------------------------------------------------
 
     /// <summary>
