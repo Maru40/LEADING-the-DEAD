@@ -66,6 +66,7 @@ GameObject:
   - component: {fileID: -4843677503418198401}
   - component: {fileID: -3310680540505410762}
   - component: {fileID: 2030420081988791428}
+  - component: {fileID: -6019398565396799119}
   m_Layer: 2
   m_Name: CymbalMonkey
   m_TagString: Untagged
@@ -401,6 +402,19 @@ MonoBehaviour:
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 10
   m_isOutwardToUp: 0
+--- !u!114 &-6019398565396799119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6520215467471573455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4799c0d959667ea459b21a5d01decf66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_pickedUpObjectPrefab: {fileID: 6520215467471573455}
 --- !u!1 &7471403350076812732
 GameObject:
   m_ObjectHideFlags: 0
