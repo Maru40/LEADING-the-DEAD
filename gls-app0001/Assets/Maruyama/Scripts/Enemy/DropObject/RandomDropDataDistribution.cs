@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using System;
 using MaruUtility;
 
+[Serializable]
 public struct DropDataDistributionParametor
 {
-    public DropData data;
+    public DropData dropData;
     public float numDistribution;  //配布する数
 }
 
@@ -39,7 +41,7 @@ public class RandomDropDataDistribution
 
                 if (datas[index].dropManager)
                 {
-                    datas[index].dropManager.AddData(param.data);
+                    datas[index].dropManager.AddData(param.dropData);
                     datas.RemoveAt(index);
                 }
             }
