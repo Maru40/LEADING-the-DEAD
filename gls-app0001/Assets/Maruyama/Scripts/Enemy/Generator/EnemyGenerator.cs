@@ -44,6 +44,7 @@ public class EnemyGenerator : MonoBehaviour
     protected Vector3 m_maxRandomRange = new Vector3();  //ランダムに生成する時の最大距離
 
     //配布するデータの構造体
+    [SerializeField]
     List<DropDataDistributionParametor> m_distributionParams = new List<DropDataDistributionParametor>();
     //データを配布する処理をまとめたクラス
     RandomDropDataDistribution m_distribution;
