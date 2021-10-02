@@ -68,6 +68,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
         var respawnPosition = CalcuRespawnRandomPosition();
         transform.position = respawnPosition;
 
+        DropDistribution();
         m_statusUp?.Respawn();  //死亡時にステータスUP
         m_stator.Reset();  //ステートのリセット
     }
@@ -79,6 +80,19 @@ public class EnemyRespawnManager : EnemyRespawnBase
     Vector3 CalcuRespawnRandomPosition()
     {
         return m_generator.CalcuRandomPosition();
+    }
+
+    /// <summary>
+    /// ドロップアイテムの再配布
+    /// </summary>
+    void DropDistribution()
+    {
+        if (m_dropManager.GetNumData() != 0)  //ドロップデータが存在したら
+        {
+            var datas = m_dropManager.GetDatas();
+            m_generator.DropDistribution(datas);  //配布
+            m_dropManager.RemoveDatas(datas);
+        }
     }
 
     //アクセッサ-------------------------------------------------------
