@@ -46,27 +46,17 @@ namespace Player
         private void Awake()
         {
             m_gameControls = new GameControls();
+            this.RegisterController(m_gameControls);
+
             m_rigitbody = GetComponent<Rigidbody>();
             m_playerStatusManager = GetComponent<PlayerStatusManager>();
         }
 
-        private void OnEnable()
-        {
-            m_gameControls.Enable();
-        }
-
         private void OnDisable()
         {
-            m_gameControls.Disable();
-
             m_playerAnimationParamator.moveInput = 0.0f;
 
             m_rigitbody.velocity = new Vector3(0.0f, m_rigitbody.velocity.y, 0.0f);
-        }
-
-        private void OnDestroy()
-        {
-            m_gameControls.Disable();
         }
 
         // Start is called before the first frame update
@@ -78,6 +68,11 @@ namespace Player
         // Update is called once per frame
         void Update()
         {
+            if(GameTimeManager.isPause)
+            {
+                return;
+            }
+
             var moveVector2 = m_gameControls.Player.Move.ReadValue<Vector2>();
 
             var camera = Camera.main;
