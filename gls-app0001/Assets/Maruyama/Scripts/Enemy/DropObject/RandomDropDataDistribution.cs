@@ -47,4 +47,25 @@ public class RandomDropDataDistribution
             }
         }
     }
+
+    /// <summary>
+    /// データの配布
+    /// </summary>
+    /// <param name="throngOriginDatas"></param>
+    /// <param name="dropOriginDatas"></param>
+    public void Distribution(List<ThrongData> throngOriginDatas, List<DropData> dropOriginDatas)
+    {
+        var dropDatas = new List<DropData>(dropOriginDatas);
+        var throngDatas = new List<ThrongData>(throngOriginDatas);
+        foreach (var dropData in dropDatas)
+        {
+            int index = MyRandom.RandomValue(0, throngDatas.Count);
+
+            if (throngDatas[index].dropManager)
+            {
+                throngDatas[index].dropManager.AddData(dropData);
+                throngDatas.RemoveAt(index);
+            }
+        } 
+    }
 }
