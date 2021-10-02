@@ -68,6 +68,11 @@ namespace Player
         // Update is called once per frame
         void Update()
         {
+            if(GameTimeManager.isPause)
+            {
+                return;
+            }
+
             var moveVector2 = m_gameControls.Player.Move.ReadValue<Vector2>();
 
             var camera = Camera.main;
