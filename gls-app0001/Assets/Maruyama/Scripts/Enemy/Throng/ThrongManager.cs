@@ -29,16 +29,18 @@ public struct ThrongData
     public EnemyVelocityMgr velocityMgr;
     public TargetManager targetMgr;  //ターゲット管理
     public ThrongManager throngMgr;  //群衆管理
-    public RandomPlowlingMove randomPlowlingMove;
+    public RandomPlowlingMove randomPlowlingMove; //ランダム徘徊
+    public DropObjecptManager dropManager;
 
     public ThrongData(EnemyVelocityMgr velocityMgr, TargetManager targetMgr, ThrongManager throngMgr,
-        RandomPlowlingMove randomPlowlingMove)
+        RandomPlowlingMove randomPlowlingMove, DropObjecptManager dropManager)
     {
         this.gameObject = targetMgr.gameObject;
         this.velocityMgr = velocityMgr;
         this.targetMgr = targetMgr;
         this.throngMgr = throngMgr;
         this.randomPlowlingMove = randomPlowlingMove;
+        this.dropManager = dropManager;
     }
 }
 

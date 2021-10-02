@@ -22,17 +22,8 @@ public struct RespawnManagerParametor
 /// </summary>
 public class EnemyRespawnManager : EnemyRespawnBase
 {
-    //[SerializeField]
-    //GameObject m_target = null;  //現在使っていない。
-
     [SerializeField]
     RespawnManagerParametor m_param = new RespawnManagerParametor(true, 0.0f);
-
-    //[SerializeField]
-    //bool m_isRespawn = true;
-
-    //[SerializeField]
-    //float m_time = 10.0f;
 
     [SerializeField]
     EnemyGenerator m_generator = null;
@@ -40,6 +31,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
     StatorBase m_stator;
     WaitTimer m_waitTimer;
     EnemyRespawnStatusUpBase m_statusUp;
+    DropObjecptManager m_dropManager;
 
     void Awake()
     {
@@ -49,6 +41,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
         m_stator = GetComponent<StatorBase>();
         m_waitTimer = GetComponent<WaitTimer>();
         m_statusUp = GetComponent<EnemyRespawnStatusUpBase>();
+        m_dropManager = GetComponent<DropObjecptManager>();
     }
 
     //リスポーン準備
@@ -75,11 +68,10 @@ public class EnemyRespawnManager : EnemyRespawnBase
         var respawnPosition = CalcuRespawnRandomPosition();
         transform.position = respawnPosition;
 
+        DropDistribution();
         m_statusUp?.Respawn();  //死亡時にステータスUP
         m_stator.Reset();  //ステートのリセット
     }
-
-    
 
     /// <summary>
     /// リスポーンする場所の計算
@@ -88,6 +80,19 @@ public class EnemyRespawnManager : EnemyRespawnBase
     Vector3 CalcuRespawnRandomPosition()
     {
         return m_generator.CalcuRandomPosition();
+    }
+
+    /// <summary>
+    /// ドロップアイテムの再配布
+    /// </summary>
+    void DropDistribution()
+    {
+        if (m_dropManager.GetNumData() != 0)  //ドロップデータが存在したら
+        {
+            var datas = m_dropManager.GetDatas();
+            m_generator.DropDistribution(datas);  //配布
+            m_dropManager.RemoveDatas(datas);
+        }
     }
 
     //アクセッサ-------------------------------------------------------

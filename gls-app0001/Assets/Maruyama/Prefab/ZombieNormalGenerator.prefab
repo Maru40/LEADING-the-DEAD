@@ -46,25 +46,59 @@ MonoBehaviour:
   m_outOfTargteDatas: []
   m_createObject: {fileID: 7434505739018704334, guid: 67a643b874b307f46a417e4170a2dd67, type: 3}
   m_numCreate: 100
-  m_centerPosition: {x: 0, y: 0, z: 0}
+  m_centerPosition: {x: 0, y: 0.5, z: 0}
   m_maxRandomRange: {x: 30, y: 0, z: 30}
-  m_chaseParametor:
-    nearRange: 0.75
-    maxSpeed: 3
-    turningPower: 3
-    lostSeekTime: 10
-    inThrongRange: 3
-  m_randomPlowlingParametor:
-    randomPositionRadius: 15
-    maxSpeed: 2.5
-    turningPower: 2
-    targetNearRange: 0.3
-    maxWaitCalcuRouteTime: 3
-    inThrongRange: 1
-  m_status:
-    hp: 1
-    damageIntervalTime: 3
-  m_attackParametor:
-    power: 1
-    startRange: 2.5
-    moveSpeed: 3
+  m_distributionParams:
+  - dropData:
+      obj: {fileID: 6520215467471573455, guid: f89aa22a9f0e87b4f92420ffc278b8a3, type: 3}
+      probability: 100
+      particle: {fileID: 6492296973775632991, guid: 91837f35aa527df4199f8784a19b20ec, type: 3}
+    numDistribution: 1
+  m_createSetParam:
+    respawnParametor:
+      isRespawn: 1
+      time: 0
+    chaseParametor:
+      nearRange: 0.75
+      maxSpeed: 3
+      turningPower: 3
+      lostSeekTime: 10
+      inThrongRange: 3
+    randomPlowlingParametor:
+      randomPositionRadius: 15
+      maxSpeed: 2.5
+      turningPower: 2
+      targetNearRange: 0.3
+      maxWaitCalcuRouteTime: 3
+      inThrongRange: 1
+    status:
+      hp: 1
+      damageIntervalTime: 3
+    attackParametor:
+      power: 1
+      startRange: 2.5
+      moveSpeed: 3
+  m_respawnStatusUpParam:
+    respawnParametor:
+      isRespawn: 1
+      time: 0
+    chaseParametor:
+      nearRange: 0
+      maxSpeed: 0.2
+      turningPower: 0
+      lostSeekTime: 0
+      inThrongRange: 0
+    randomPlowlingParametor:
+      randomPositionRadius: 0
+      maxSpeed: 0
+      turningPower: 0
+      targetNearRange: 0
+      maxWaitCalcuRouteTime: 0
+      inThrongRange: 0
+    status:
+      hp: 0
+      damageIntervalTime: 0
+    attackParametor:
+      power: 0.5
+      startRange: 0
+      moveSpeed: 0.2
