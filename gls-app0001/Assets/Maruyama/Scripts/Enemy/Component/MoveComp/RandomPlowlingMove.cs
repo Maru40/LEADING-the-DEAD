@@ -87,8 +87,11 @@ public class RandomPlowlingMove : MonoBehaviour
 
         m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
 
-        var newTargetPosition = m_throngMgr.CalcuRandomPlowlingMovePositonIntegrated(this);  //ランダムな方向を集団に合わせる。
-        SetTargetPositon(newTargetPosition);
+        if (m_throngMgr) //もし集団行動するなら...
+        {
+            var newTargetPosition = m_throngMgr.CalcuRandomPlowlingMovePositonIntegrated(this);  //ランダムな方向を集団に合わせる。
+            SetTargetPositon(newTargetPosition);
+        }
 
         if (IsRouteEnd())
         {
