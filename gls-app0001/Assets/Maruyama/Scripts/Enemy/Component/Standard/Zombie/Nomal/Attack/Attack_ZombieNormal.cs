@@ -33,8 +33,6 @@ public class Attack_ZombieNormal : AttackBase
 
     void Update()
     {
-        Debug.Log(m_isTargetChase);
-
         if (m_isTargetChase) 
         {
             TargetChase();
@@ -72,20 +70,20 @@ public class Attack_ZombieNormal : AttackBase
     {
         float range = GetBaseParam().startRange;
         FoundObject target = m_targetMgr.GetNowTarget();
-        if (target)
-        {
+        if (target) {
             return Calculation.IsRange(gameObject, target.gameObject, range);
-            //return m_eyeRange.IsInEyeRange(target.gameObject, range);
         }
-        else
-        {
+        else {
             return false;
         }
     }
 
-    override public void Attack(){
-        //Debug.Log("Attack");
+    public override void AttackStart()
+    {
+        m_stator.GetTransitionMember().attackTrigger.Fire();
+    }
 
+    override public void Attack(){
         m_isTargetChase = false;
         m_hitBox.AttackStart();
     }
@@ -101,8 +99,6 @@ public class Attack_ZombieNormal : AttackBase
     /// </summary>
     private void SendDamage(Collider other)
     {
-        //Debug.Log("Attack_Hit");
-
         if(other.gameObject == this.gameObject) {
             return;
         }

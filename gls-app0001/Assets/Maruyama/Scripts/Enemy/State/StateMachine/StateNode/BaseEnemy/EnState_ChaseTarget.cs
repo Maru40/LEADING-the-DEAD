@@ -7,24 +7,27 @@ using UnityEngine.AI;
 public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
 {
     AttackBase m_attackComp;
-    Stator_ZombieNormal m_stator;
 
     public EnState_ChaseTarget(EnemyBase owner)
         : base(owner)
     { }
 
-    public override void OnStart()
+    protected override void ReserveChangeComponents()
     {
         var owner = GetOwner();
 
+        AddChangeComp(owner.GetComponent<ChaseTarget>(), true, false);
+    }
+
+    public override void OnStart()
+    {
+        base.OnStart();
+
+        var owner = GetOwner();
+
         m_attackComp = owner.GetComponent<AttackBase>();
-        m_stator = owner.GetComponent<Stator_ZombieNormal>();
 
         var chaseTarget = owner.GetComponent<ChaseTarget>();
-
-        AddChangeComp(chaseTarget, true, false);
-
-        ChangeComps(EnableChangeType.Start);
 
         //集団行動設定
         var throngMgr = owner.GetComponent<ThrongManager>();
@@ -39,14 +42,12 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
     {
         if (m_attackComp.IsAttackStartRange())
         {
-            m_stator.GetTransitionMember().attackTrigger.Fire();
+            m_attackComp.AttackStart();
         }
-
-        //Debug.Log("ChaseTarget");
     }
 
     public override void OnExit()
     {
-        ChangeComps(EnableChangeType.Exit);
+        base.OnExit();
     }
 }

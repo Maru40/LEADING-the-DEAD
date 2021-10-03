@@ -21,6 +21,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
     TargetManager m_targetMgr;
     BreadCrumb m_bread;
     ThrongManager m_throngMgr;
+    EnemyRotationCtrl m_rotationCtrl;
 
     public BreadSeekTarget(EnemyBase owner, float nearRange, float maxSpeed, float turningPower, float lostSeekTime)
         : base(owner)
@@ -60,6 +61,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
         }
 
         m_throngMgr = owner.GetComponent<ThrongManager>();
+        m_rotationCtrl = owner.GetComponent<EnemyRotationCtrl>();
     }
 
     public override void OnUpdate()
@@ -80,10 +82,11 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
     void UpdateMove()
     {
         var toVec = m_targetPosition - GetOwner().transform.position;
-        m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_maxSpeed, m_turningPower);
+        Vector3 force = CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, toVec, m_maxSpeed);
+        m_velocityMgr.AddForce(force * m_turningPower);
 
-        //var force = UtilityVelocity.CalucSeekVec(m_rigid.velocity, toVec, m_maxSpeed);
-        //m_rigid.AddForce(force);
+        m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
+        //m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_maxSpeed, m_turningPower);
 
         //目的地に到達したら
         if (Calculation.IsArrivalPosition(m_nearRange, GetOwner().transform.position, m_targetPosition)) {

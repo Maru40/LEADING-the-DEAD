@@ -50,6 +50,10 @@ public class EnemyVelocityMgr : MonoBehaviour
         m_force += force;
     }
 
+    public Vector3 GetForce()
+    {
+        return m_force;
+    }
 
     public void ResetVelocity()
     {

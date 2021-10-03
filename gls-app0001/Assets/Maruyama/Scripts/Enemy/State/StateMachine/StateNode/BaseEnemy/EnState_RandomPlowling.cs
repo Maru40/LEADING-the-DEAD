@@ -12,14 +12,19 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
         :base(owner)
     { }
 
-    public override void OnStart()
+    protected override void ReserveChangeComponents()
     {
         var owner = GetOwner();
+
+        AddChangeComp(owner.GetComponent<RandomPlowlingMove>(), true, false);
+    }
+
+    public override void OnStart()
+    {
+        base.OnStart();
+
+        var owner = GetOwner();
         var randomPlowling = owner.GetComponent<RandomPlowlingMove>();
-
-        AddChangeComp(randomPlowling, true, false);
-
-        ChangeComps(EnableChangeType.Start);
 
         //その他コンポーネントの取得
         m_eyeRange = owner.GetComponent<EyeSearchRange>();
@@ -69,7 +74,7 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
 
     public override void OnExit()
     {
-        ChangeComps(EnableChangeType.Exit);
+        base.OnExit();
     }
 
     private void SearchTarget()
