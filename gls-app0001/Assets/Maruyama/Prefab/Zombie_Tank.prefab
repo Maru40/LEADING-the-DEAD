@@ -19,13 +19,19 @@ GameObject:
   - component: {fileID: 3671151443449607076}
   - component: {fileID: 5811559709898055848}
   - component: {fileID: 2142217252378686874}
+  - component: {fileID: -4904942216463697250}
+  - component: {fileID: 3390921781961771869}
+  - component: {fileID: 3338411170978670924}
+  - component: {fileID: 4015090623289556468}
+  - component: {fileID: -5461277465904623971}
+  - component: {fileID: 1265363305}
   m_Layer: 0
   m_Name: Zombie_Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2293255808676022177
 Transform:
   m_ObjectHideFlags: 0
@@ -204,6 +210,83 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &-4904942216463697250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2293255808676022176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61e2a296570b2b04b8b0803086a4ef06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3390921781961771869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2293255808676022176}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7c21e358a8aad545960cdddc3098eda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_baseParam:
+    power: 10
+    startRange: 1
+    moveSpeed: 3
+--- !u!114 &3338411170978670924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2293255808676022176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81e9016c8c6b3274383bafcf83e1d8b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4015090623289556468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2293255808676022176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6291ef08b2dd70b4aa52e0005db76f6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-5461277465904623971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2293255808676022176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb159adcae3da94ba8cb2dc86a9acfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &1265363305
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2293255808676022176}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &2293255808424987547
 PrefabInstance:
   m_ObjectHideFlags: 0
