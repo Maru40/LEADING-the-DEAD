@@ -6,7 +6,6 @@ using StateType = ZombieNormalState;
 using TransitionMember = ZombieNormalTransitionMember;
 using StateMachine = EnemyMainStateMachine<EnemyBase, ZombieNormalState, ZombieNormalTransitionMember>;
 
-
 public enum ZombieNormalState
 {
     RandomPlowling,
@@ -49,7 +48,7 @@ public class Stator_ZombieNormal : StatorBase
 
         m_stateMachine.AddNode(StateType.RandomPlowling, new EnState_RandomPlowling(zombie));
         m_stateMachine.AddNode(StateType.Chase,          new EnState_ChaseTarget(zombie));
-        m_stateMachine.AddNode(StateType.Attack,         new EnState_Attack(zombie));
+        m_stateMachine.AddNode(StateType.Attack,         new StateNode_ZombieNormal_Attack(zombie));
     }
 
     void CreateEdge()
