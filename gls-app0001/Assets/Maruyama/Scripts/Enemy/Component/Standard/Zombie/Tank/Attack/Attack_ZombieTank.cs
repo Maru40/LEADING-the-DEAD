@@ -2,17 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Attack_ZombieTank : MonoBehaviour
+public class Attack_ZombieTank : AttackBase
 {
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public override bool IsAttackStartRange()
+    {
+        return true;
+    }
+
+    public override void Attack()
+    {
+
+    }
+
+    public override void EndAnimationEvent()
+    {
+
+    }
+
+    public override void AttackHitEnd()
+    {
+
     }
 }
