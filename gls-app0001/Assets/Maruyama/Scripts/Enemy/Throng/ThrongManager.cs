@@ -68,15 +68,22 @@ public class ThrongManager : MonoBehaviour
     EnemyGenerator m_generator = null;
 
     EnemyRotationCtrl m_rotationCtrl;
+    EnemyVelocityMgr m_velocityManager;
 
     private void Awake()
     {
         m_rotationCtrl = GetComponent<EnemyRotationCtrl>();
+        m_velocityManager = GetComponent<EnemyVelocityMgr>();
     }
 
     void Start()
     {
         SetSearchGenerator();
+    }
+
+    private void Update()
+    {
+        AvoidNearThrong(m_velocityManager);
     }
 
     /// <summary>
@@ -86,13 +93,16 @@ public class ThrongManager : MonoBehaviour
     /// <param name="moveDirect">そのオブジェクトが向かいたい方向</param>
     /// <param name="maxSpeed">最大スピード</param>
     /// <param name="truningPower">旋回パワー</param>
-    public void AvoidNearThrong(EnemyVelocityMgr velocityMgr, Vector3 moveDirect, float maxSpeed , float truningPower)
+    void AvoidNearThrong(EnemyVelocityMgr velocityMgr)
     {
         var velocity = velocityMgr.velocity;
 
-        moveDirect += CalcuThrongVector();
-        Vector3 force = CalcuVelocity.CalucSeekVec(velocity, moveDirect, maxSpeed);
-        velocityMgr.AddForce(force * truningPower);
+        //moveDirect += CalcuThrongVector();
+        //Vector3 force = CalcuVelocity.CalucSeekVec(velocity, moveDirect, maxSpeed);
+        //velocityMgr.AddForce(force);
+        //velocityMgr.AddForce(force * truningPower);
+
+        velocityMgr.AddForce(CalcuThrongVector());
 
         var avoidVec = CalcuSumAvoidVector();
         if (avoidVec != Vector3.zero) //回避が必要なら
