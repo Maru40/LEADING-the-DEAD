@@ -13,18 +13,23 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
         : base(owner)
     { }
 
+    protected override void ReserveChangeComponents()
+    {
+        var owner = GetOwner();
+
+        AddChangeComp(owner.GetComponent<ChaseTarget>(), true, false);
+    }
+
     public override void OnStart()
     {
+        base.OnStart();
+
         var owner = GetOwner();
 
         m_attackComp = owner.GetComponent<AttackBase>();
         m_stator = owner.GetComponent<Stator_ZombieNormal>();
 
         var chaseTarget = owner.GetComponent<ChaseTarget>();
-
-        AddChangeComp(chaseTarget, true, false);
-
-        ChangeComps(EnableChangeType.Start);
 
         //集団行動設定
         var throngMgr = owner.GetComponent<ThrongManager>();
@@ -47,6 +52,6 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
 
     public override void OnExit()
     {
-        ChangeComps(EnableChangeType.Exit);
+        base.OnExit();
     }
 }

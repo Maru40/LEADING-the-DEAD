@@ -8,6 +8,10 @@ public class TestFromState : EnemyStateNodeBase<TestEnemy>
         :base(owner)
     { }
 
+    protected override void ReserveChangeComponents()
+    {
+    }
+
     public override void OnStart()
     {
         Debug.Log("StartFrom");
