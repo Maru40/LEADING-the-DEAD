@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using MaruUtility;
+
 /// <summary>
 /// 直線的なターゲット追従
 /// </summary>
@@ -14,6 +16,7 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
     TargetManager m_targetMgr;
     EnemyVelocityMgr m_velocityMgr;
     ThrongManager m_throngMgr;
+    EnemyRotationCtrl m_rotationCtrl;
 
     public LinerSeekTarget(EnemyBase owner)
         : this(owner,3.0f, 1.0f)
@@ -29,6 +32,7 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
         m_targetMgr = owner.GetComponent<TargetManager>();
         m_velocityMgr = owner.GetComponent<EnemyVelocityMgr>();
         m_throngMgr = owner.GetComponent<ThrongManager>();
+        m_rotationCtrl = owner.GetComponent<EnemyRotationCtrl>();
     }
 
     public override void OnStart()
@@ -54,7 +58,11 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
         FoundObject target = m_targetMgr.GetNowTarget();
         if (target) {
             Vector3 toVec = target.transform.position - GetOwner().transform.position;
-            m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_maxSpeed, m_turningPower);
+            Vector3 force = CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, toVec, m_maxSpeed);
+            m_velocityMgr.AddForce(force * m_turningPower);
+
+            m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
+            //m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_maxSpeed, m_turningPower);
         }
         else {
             m_chaseTarget.TargetLost();
