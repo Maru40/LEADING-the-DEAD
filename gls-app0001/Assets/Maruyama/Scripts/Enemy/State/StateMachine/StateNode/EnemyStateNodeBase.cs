@@ -38,7 +38,24 @@ public abstract class EnemyStateNodeBase<EnemyType> : NodeBase<EnemyType>
 		m_changeParams = new List<ChangeCompParam>();
 	}
 
-	//protected---------------------------------------------------------
+    public override void OnStart()
+    {
+		ReserveChangeComponents();
+
+		ChangeComps(EnableChangeType.Start);
+    }
+
+    public override void OnExit()
+    {
+		ChangeComps(EnableChangeType.Exit);
+    }
+
+    //protected---------------------------------------------------------
+
+    /// <summary>
+    /// 切り替えるコンポーネントの準備
+    /// </summary>
+    protected abstract void ReserveChangeComponents();
 
 	/// <summary>
 	/// 開始と終了時に切り替えるコンポーネントの追加
