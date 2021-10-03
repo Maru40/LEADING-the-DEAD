@@ -66,6 +66,11 @@ public abstract class AttackBase : MonoBehaviour
     public abstract bool IsAttackStartRange();
 
     /// <summary>
+    /// 攻撃開始処理
+    /// </summary>
+    public abstract void AttackStart();
+
+    /// <summary>
     /// 攻撃処理(アニメーションに合わせる)
     /// </summary>
     public abstract void Attack();
