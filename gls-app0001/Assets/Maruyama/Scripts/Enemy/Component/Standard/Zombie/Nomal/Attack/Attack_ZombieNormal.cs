@@ -70,14 +70,17 @@ public class Attack_ZombieNormal : AttackBase
     {
         float range = GetBaseParam().startRange;
         FoundObject target = m_targetMgr.GetNowTarget();
-        if (target)
-        {
+        if (target) {
             return Calculation.IsRange(gameObject, target.gameObject, range);
         }
-        else
-        {
+        else {
             return false;
         }
+    }
+
+    public override void AttackStart()
+    {
+        m_stator.GetTransitionMember().attackTrigger.Fire();
     }
 
     override public void Attack(){
