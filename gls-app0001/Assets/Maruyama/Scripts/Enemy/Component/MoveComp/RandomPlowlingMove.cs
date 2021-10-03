@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+using MaruUtility;
+
 using System;
 
 /// <summary>
@@ -49,13 +51,15 @@ public class RandomPlowlingMove : MonoBehaviour
     EnemyVelocityMgr m_velocityMgr;
     WaitTimer m_waitTimer;
     ThrongManager m_throngMgr;
-    
+    EnemyRotationCtrl m_rotationCtrl;
+
     void Start()
     {
         //コンポーネントの取得
         m_velocityMgr = GetComponent<EnemyVelocityMgr>();
         m_waitTimer = GetComponent<WaitTimer>();
         m_throngMgr = GetComponent<ThrongManager>();
+        m_rotationCtrl = GetComponent<EnemyRotationCtrl>();
 
         //シード値
         Random.InitState(System.DateTime.Now.Millisecond);
@@ -77,13 +81,14 @@ public class RandomPlowlingMove : MonoBehaviour
 
         //加える力の計算
         var toVec = m_targetPosition - transform.position;
-        m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_param.maxSpeed, m_param.turningPower);
+        Vector3 force = CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, toVec, m_param.maxSpeed);
+        m_velocityMgr.AddForce(force * m_param.turningPower);
+        //m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_param.maxSpeed, m_param.turningPower);
+
+        m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
 
         var newTargetPosition = m_throngMgr.CalcuRandomPlowlingMovePositonIntegrated(this);  //ランダムな方向を集団に合わせる。
         SetTargetPositon(newTargetPosition);
-
-        //var newForce = UtilityVelocity.CalucArriveVec(velocity, toVec, m_speed);
-        //m_rigid.AddForce(newForce);
 
         if (IsRouteEnd())
         {
