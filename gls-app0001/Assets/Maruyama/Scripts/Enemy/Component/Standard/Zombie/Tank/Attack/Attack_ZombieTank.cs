@@ -19,6 +19,11 @@ public class Attack_ZombieTank : AttackBase
         return true;
     }
 
+    public override void AttackStart()
+    {
+
+    }
+
     public override void Attack()
     {
 
