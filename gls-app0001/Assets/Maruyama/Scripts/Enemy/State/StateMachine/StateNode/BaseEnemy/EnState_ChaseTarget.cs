@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
 {
     AttackBase m_attackComp;
-    Stator_ZombieNormal m_stator;
+    I_Chase m_chase;
 
     public EnState_ChaseTarget(EnemyBase owner)
         : base(owner)
@@ -27,7 +27,7 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
         var owner = GetOwner();
 
         m_attackComp = owner.GetComponent<AttackBase>();
-        m_stator = owner.GetComponent<Stator_ZombieNormal>();
+        m_chase = owner.GetComponent<I_Chase>();
 
         var chaseTarget = owner.GetComponent<ChaseTarget>();
 
@@ -44,10 +44,8 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
     {
         if (m_attackComp.IsAttackStartRange())
         {
-            m_stator.GetTransitionMember().attackTrigger.Fire();
+            m_attackComp.AttackStart();
         }
-
-        //Debug.Log("ChaseTarget");
     }
 
     public override void OnExit()
