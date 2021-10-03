@@ -5,6 +5,7 @@ using UnityEngine;
 public class ZombieNormal : EnemyBase, I_Chase, I_Listen
 {
     //コンポーネント系
+
     Stator_ZombieNormal m_stator;
     TargetManager m_targetMgr;
 
