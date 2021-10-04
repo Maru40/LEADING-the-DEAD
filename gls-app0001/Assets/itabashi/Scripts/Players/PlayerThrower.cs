@@ -108,8 +108,6 @@ namespace Player
             m_takingObject = throwableObject;
             m_pickedUpObject = m_playerpickUpper.stackObject;
 
-            m_playerpickUpper.TakeOut();
-
             m_isThrowingStance = true;
             m_playerParameters.isThrowingStance = true;
 
@@ -128,9 +126,11 @@ namespace Player
             m_playerParameters.isThrowingStance = false;
 
             m_takingObject = null;
+
             if (m_pickedUpObject)
             {
-                m_playerpickUpper.PutAway(m_pickedUpObject);
+                m_pickedUpObject.gameObject.SetActive(false);
+                m_pickedUpObject.transform.SetParent(m_pickedUpObject.transform);
                 m_pickedUpObject = null;
             }
 
@@ -147,6 +147,8 @@ namespace Player
             m_countCoolTime = 0.0f;
 
             m_takingObject.transform.SetParent(null);
+
+            m_playerpickUpper.TakeOut();
 
             m_objectLauncher.Fire(m_takingObject, m_takingObject.transform.rotation);
 
