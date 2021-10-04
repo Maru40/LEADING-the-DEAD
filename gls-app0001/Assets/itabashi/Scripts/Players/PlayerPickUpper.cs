@@ -1,19 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
 /// <summary>
 /// プレイヤーキャラクターのアイテムを拾う機能のコンポーネント
 /// </summary>
+[DisallowMultipleComponent]
 public class PlayerPickUpper : MonoBehaviour
 {
     private const string PICKUP_OBJECTS_NAME = "PickUpObjects";
 
     Transform m_pickUpObjectsTransform;
 
-    PickedUpObject m_stackObject;
+    private ReactiveCollection<PickedUpObject> m_stackObjects = new ReactiveCollection<PickedUpObject>();
 
-    public PickedUpObject stackObject { get { return m_stackObject; } }
+    public PickedUpObject stackObject => m_stackObjects.Empty() ? null : m_stackObjects.Front();
+
+    public System.IObservable<int> stackObjectsCountOnChanged => m_stackObjects.ObserveCountChanged();
 
     private void Reset()
     {
@@ -63,23 +67,17 @@ public class PlayerPickUpper : MonoBehaviour
 
     public void PutAway(PickedUpObject pickedUpObject)
     {
-        if(m_stackObject)
-        {
-            Destroy(m_stackObject.gameObject);
-        }
-
         Debug.Log("アイテムを拾いました");
-        m_stackObject = pickedUpObject;
 
-        m_stackObject.gameObject.transform.SetParent(m_pickUpObjectsTransform);
+        m_stackObjects.Add(pickedUpObject);
 
-        m_stackObject.gameObject.SetActive(false);
+        pickedUpObject.gameObject.transform.SetParent(m_pickUpObjectsTransform);
+
+        pickedUpObject.gameObject.SetActive(false);
     }
 
     public PickedUpObject TakeOut()
     {
-        PickedUpObject takeOutObject = m_stackObject;
-        m_stackObject = null;
-        return takeOutObject;
+        return m_stackObjects.FrontPop();
     }
 }
