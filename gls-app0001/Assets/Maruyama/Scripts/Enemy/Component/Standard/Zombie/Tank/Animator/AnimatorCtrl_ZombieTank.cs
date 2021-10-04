@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class AnimatorCtrl_ZombieTank : MonoBehaviour
 {
-    // Start is called before the first frame update
+    Animator m_animator;
+    EnemyVelocityMgr m_velocityManager;
+    
     void Start()
     {
-        
+        m_animator = GetComponent<Animator>();
+        m_velocityManager = GetComponent<EnemyVelocityMgr>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        moveSpeed = m_velocityManager.velocity.magnitude;
+    }
+
+    public float moveSpeed
+    {
+        set { m_animator.SetFloat("moveSpeed", value); }
+        get { return m_animator.GetFloat("moveSpeed"); }
+    }
+
+    public void AttackTriggerFire()
+    {
+        m_animator.SetTrigger("attackTrigger");
     }
 }
