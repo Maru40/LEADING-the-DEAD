@@ -21,10 +21,16 @@ public class StateNode_ZombieTank_Attack : EnState_AttackBase
 
         var owner = GetOwner();
         AddChangeComp(owner.GetComponent<Attack_ZombieTank>(), true, false);
+        AddChangeComp(owner.GetComponent<EnemyRotationCtrl>(), false, true);
     }
 
     public override void OnStart()
     {
         base.OnStart();
+    }
+
+    public override void OnUpdate()
+    {
+        Debug.Log("Attack");
     }
 }
