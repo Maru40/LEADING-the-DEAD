@@ -10,7 +10,9 @@ public class StateNode_ZombieTank_Attack : EnState_AttackBase
 
     protected override void PlayStartAnimation()
     {
-        
+        //攻撃アニメーション再生
+        var animatorCtrl = GetOwner().GetComponent<AnimatorCtrl_ZombieTank>();
+        animatorCtrl.AttackTriggerFire();
     }
 
     protected override void ReserveChangeComponents()
