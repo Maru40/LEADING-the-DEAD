@@ -464,6 +464,13 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.2929293
+        functionName: AddMoveForce
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: f7c21e358a8aad545960cdddc3098eda, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.36363637
         functionName: Attack
         data: 
@@ -471,10 +478,10 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.2929293
-        functionName: AddMoveForce
+      - time: 1
+        functionName: EndAnimationEvent
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: f7c21e358a8aad545960cdddc3098eda, type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: c9427b8032a16694bb241ee432883b36, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
