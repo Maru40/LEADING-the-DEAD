@@ -6,13 +6,17 @@ using MaruUtility;
 
 public class Attack_ZombieTank : AttackBase
 {
+    float m_moveForce = 10.0f;
+
     TargetManager m_targetMgr;
     Stator_ZombieTank m_stator;
+    EnemyVelocityMgr m_velocityManager;
 
-    void Start()
+    void Awake()
     {
         m_targetMgr = GetComponent<TargetManager>();
         m_stator = GetComponent<Stator_ZombieTank>();
+        m_velocityManager = GetComponent<EnemyVelocityMgr>();
     }
 
     void Update()
@@ -35,6 +39,14 @@ public class Attack_ZombieTank : AttackBase
     public override void AttackStart()
     {
         m_stator.GetTransitionMember().attackTrigger.Fire();
+    }
+
+    public void AddMoveForce()
+    {
+        var target = m_targetMgr.GetNowTarget();
+        var toVec = target.gameObject.transform.position - transform.position;
+
+        m_velocityManager?.AddForce(toVec.normalized * m_moveForce);
     }
 
     public override void Attack()
