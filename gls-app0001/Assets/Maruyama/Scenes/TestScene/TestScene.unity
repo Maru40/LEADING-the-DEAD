@@ -690,30 +690,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2834631260142655915, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
   m_PrefabInstance: {fileID: 2834631259931002145}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &469517193 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2293255808676022176, guid: 9c778371245f3a848b92600adf93b319, type: 3}
-  m_PrefabInstance: {fileID: 2293255807419526856}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &469517194
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469517193}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 8c53cffd52097cf4582f0a090c9a833e, type: 3}
-  m_Controller: {fileID: 9100000, guid: 0bdf1097601b565488c40eada24f817d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &485955231
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2874,17 +2850,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1265363305, guid: 9c778371245f3a848b92600adf93b319, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: 153b9424a114c7e4c8a7ee7f1aea9dc6, type: 2}
     - target: {fileID: 2293255808676022176, guid: 9c778371245f3a848b92600adf93b319, type: 3}
       propertyPath: m_Name
       value: Zombie_Tank
-      objectReference: {fileID: 0}
-    - target: {fileID: 2293255808676022176, guid: 9c778371245f3a848b92600adf93b319, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2293255808676022177, guid: 9c778371245f3a848b92600adf93b319, type: 3}
       propertyPath: m_RootOrder
@@ -2930,16 +2898,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3390921781961771869, guid: 9c778371245f3a848b92600adf93b319, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3390921781961771869, guid: 9c778371245f3a848b92600adf93b319, type: 3}
-      propertyPath: m_baseParam.startRange
-      value: 3
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: -2968654223238523596, guid: 9c778371245f3a848b92600adf93b319, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c778371245f3a848b92600adf93b319, type: 3}
 --- !u!1001 &2834631259931002145
 PrefabInstance:
@@ -2998,6 +2957,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655915, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
