@@ -21,7 +21,7 @@ public class AlarmObject : MonoBehaviour
     private AudioSource m_audioSource;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         m_audioSource = GetComponent<AudioSource>();
         
