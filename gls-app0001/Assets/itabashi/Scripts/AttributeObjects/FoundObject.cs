@@ -8,6 +8,7 @@ public class FoundObject : MonoBehaviour
     {
         Player,
         SoundObject,
+        BindObject,
     }
 
     public struct FoundData

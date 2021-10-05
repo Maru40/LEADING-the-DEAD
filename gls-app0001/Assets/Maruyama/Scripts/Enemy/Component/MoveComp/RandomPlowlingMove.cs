@@ -39,12 +39,16 @@ public class RandomPlowlingMove : MonoBehaviour
 
     [SerializeField]
     Parametor m_param = new Parametor(15.0f, 2.5f, 2.0f, 0.3f, 3.0f, 1.0f);
+    float m_firstRandomPositionRadius;
+    float m_firstInThrongRange;
 
     /// <summary>
     /// Rayの障害物するLayerの配列
     /// </summary>
     [SerializeField]
     string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
+
+    GameObject m_centerObject = null;
 
     Vector3 m_targetPosition;    //目的の場所
 
@@ -53,16 +57,20 @@ public class RandomPlowlingMove : MonoBehaviour
     ThrongManager m_throngMgr;
     EnemyRotationCtrl m_rotationCtrl;
 
-    void Start()
+    void Awake()
     {
         //コンポーネントの取得
         m_velocityMgr = GetComponent<EnemyVelocityMgr>();
         m_waitTimer = GetComponent<WaitTimer>();
         m_throngMgr = GetComponent<ThrongManager>();
         m_rotationCtrl = GetComponent<EnemyRotationCtrl>();
+        m_centerObject = gameObject;
 
         //シード値
         Random.InitState(System.DateTime.Now.Millisecond);
+
+        m_firstRandomPositionRadius = m_param.randomPositionRadius;
+        m_firstInThrongRange = m_param.inThrongRange;
 
         SetRandomTargetPosition();
     }
@@ -87,15 +95,26 @@ public class RandomPlowlingMove : MonoBehaviour
 
         m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
 
-        if (m_throngMgr) //もし集団行動するなら...
-        {
-            var newTargetPosition = m_throngMgr.CalcuRandomPlowlingMovePositonIntegrated(this);  //ランダムな方向を集団に合わせる。
-            SetTargetPositon(newTargetPosition);
-        }
+        ThrongProcess();  //集団行動系
 
         if (IsRouteEnd())
         {
             RouteEndProcess();
+        }
+    }
+
+    /// <summary>
+    /// 集団行動の処理
+    /// </summary>
+    void ThrongProcess()
+    {
+        if (m_throngMgr) //もし集団行動するなら...
+        {
+            if (m_throngMgr.enabled)
+            {
+                var newTargetPosition = m_throngMgr.CalcuRandomPlowlingMovePositonIntegrated(this);  //ランダムな方向を集団に合わせる。
+                SetTargetPositon(newTargetPosition);
+            }
         }
     }
 
@@ -152,6 +171,10 @@ public class RandomPlowlingMove : MonoBehaviour
     /// <returns>ランダムな方向</returns>
     Vector3 CalucRandomTargetPosition()
     {
+        if(m_centerObject == null) {
+            ResetCenterObject();
+        }
+
         float directX = CalucRandomDirect();
         float directZ = CalucRandomDirect();
 
@@ -160,7 +183,7 @@ public class RandomPlowlingMove : MonoBehaviour
         float z = Random.value * m_param.randomPositionRadius * directZ;
 
         var toVec = new Vector3(x,y,z);
-        var newPosition = transform.position + toVec;
+        var newPosition = m_centerObject.transform.position + toVec;
 
         return newPosition;
     }
@@ -177,6 +200,14 @@ public class RandomPlowlingMove : MonoBehaviour
         return random < halfValue ? 1 : -1;
     }
 
+    void ResetCenterObject()
+    {
+        m_centerObject = this.gameObject;
+        m_param.randomPositionRadius = m_firstRandomPositionRadius;
+        m_throngMgr.enabled = true;
+        //m_param.inThrongRange = m_firstInThrongRange;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (IsObstract(collision.gameObject))
@@ -190,6 +221,27 @@ public class RandomPlowlingMove : MonoBehaviour
         if (IsObstract(collision.gameObject))
         {
             SetRandomTargetPosition();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        var bind = other.gameObject.GetComponentInParentAndChildren<BindActivateArea>();
+
+        if (bind)
+        {
+            m_centerObject = other.gameObject;
+            m_param.randomPositionRadius = bind.GetBindRange();
+            m_throngMgr.enabled = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        var bind = other.gameObject.GetComponentInParentAndChildren<BindActivateArea>();
+
+        if (bind) {
+            ResetCenterObject();
         }
     }
 
@@ -242,24 +294,6 @@ public class RandomPlowlingMove : MonoBehaviour
         m_param.inThrongRange += parametor.inThrongRange;
     }
 
-    //現在使用していない
-    //bool IsRayHit(Vector3 position)
-    //{
-    //    RaycastHit hitData;
-    //    var direction = position - transform.position;
-    //    //var direction = transform.position - position;
-    //    float range = direction.magnitude;
-
-    //    if (Physics.Raycast(transform.position, direction, out hitData, range))
-    //    //if (Physics.Raycast(position, direction, out hitData, range))
-    //    {
-    //        Debug.Log(transform.position - hitData.transform.position);
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        return false;
-    //    }
-    //}
+    
 
 }
