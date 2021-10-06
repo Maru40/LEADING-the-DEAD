@@ -20,6 +20,6 @@ public class AttackTester : MonoBehaviour
     {
         var takeDamager = collision.gameObject.GetComponent<AttributeObject.TakeDamageObject>();
 
-        takeDamager?.TakeDamage(new AttributeObject.DamageData(10));
+        takeDamager?.TakeDamage(new AttributeObject.DamageData(0,true));
     }
 }
