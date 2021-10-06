@@ -20,6 +20,8 @@ namespace Player
         [SerializeField]
         PlayerPickUpper m_playerpickUpper;
 
+        [SerializeField]
+        PlayerStatusManager m_playerStatusManager;
         /// <summary>
         /// オブジェクト打ち出し装置
         /// </summary>
@@ -88,11 +90,22 @@ namespace Player
         {
             m_countCoolTime += Time.deltaTime;
 
+            if(m_playerStatusManager.isStun && m_isThrowingStance)
+            {
+                ThrowingStanceEnd();
+                return;
+            }
+
             ThrowAngleControl();
         }
 
         void ThrowingStanceStart()
         {
+            if(m_playerStatusManager.isStun)
+            {
+                return;
+            }
+
             if(!m_playerpickUpper.stackObject)
             {
                 return;
