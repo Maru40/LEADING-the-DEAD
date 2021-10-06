@@ -1,6 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
+using System;
+using UnityEngine.Events;
+using Utility;
 
 namespace Player
 {
@@ -15,6 +19,22 @@ namespace Player
         [SerializeField]
         private float m_maxHp;
 
+        [SerializeField]
+        private bool m_isStun = false;
+        public bool isStun
+        {
+            private set
+            {
+                m_isStun = value;
+                m_playerParameters.isStun = m_isStun;
+            }
+
+            get => m_isStun;
+        }
+
+        [SerializeField]
+        private float m_stunSecond = 1.0f;
+
         public float hp
         {
             set
@@ -28,7 +48,8 @@ namespace Player
                     m_deadEvent.Invoke();
                 }
             }
-            get { return m_hp; }
+
+            get => m_hp;
         }
 
         [SerializeField]
@@ -78,21 +99,8 @@ namespace Player
         private void Awake()
         {
             m_gameControls = new GameControls();
-        }
 
-        private void OnEnable()
-        {
-            m_gameControls.Enable();
-        }
-
-        private void OnDisable()
-        {
-            m_gameControls.Disable();
-        }
-
-        private void OnDestroy()
-        {
-            m_gameControls.Disable();
+            this.RegisterController(m_gameControls);
         }
 
         private void Start()
@@ -108,11 +116,24 @@ namespace Player
             }
 
             stamina += m_staminaRecoveryPerSeconds * Time.deltaTime;
+
         }
 
         public void TakeDamage(AttributeObject.DamageData damageData)
         {
             hp -= damageData.damageValue;
+            
+            if(damageData.isStunAttack)
+            {
+                StartStun();
+            }
+        }
+
+        public void StartStun()
+        {
+            isStun = true;
+
+            Observable.Timer(TimeSpan.FromSeconds(m_stunSecond)).Subscribe(_ => isStun = false).AddTo(this);
         }
     }
 }
