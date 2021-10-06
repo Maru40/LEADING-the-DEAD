@@ -34,6 +34,12 @@ namespace Player
             get { return m_playerAnimator.GetBool("isDash"); }
         }
 
+        public bool isStun
+        {
+            set => m_playerAnimator.SetBool("isStun", value);
+            get => m_playerAnimator.GetBool("isStun");
+        }
+
         /// <summary>
         /// Throwトリガー
         /// </summary>

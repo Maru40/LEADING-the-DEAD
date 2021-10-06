@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
+using Abnormal;
 
 namespace Player
 {
@@ -50,6 +52,8 @@ namespace Player
 
             m_rigitbody = GetComponent<Rigidbody>();
             m_playerStatusManager = GetComponent<PlayerStatusManager>();
+
+            //m_playerStatusManager.IsStanChanged.Subscribe(isStan => enabled = !isStan).AddTo(this);
         }
 
         private void OnDisable()
@@ -68,6 +72,15 @@ namespace Player
         // Update is called once per frame
         void Update()
         {
+            if(m_playerStatusManager.isStun)
+            {
+                m_playerAnimationParamator.moveInput = 0.0f;
+
+                m_rigitbody.velocity = new Vector3(0.0f, m_rigitbody.velocity.y, 0.0f);
+
+                return;
+            }
+            
             if(GameTimeManager.isPause)
             {
                 return;

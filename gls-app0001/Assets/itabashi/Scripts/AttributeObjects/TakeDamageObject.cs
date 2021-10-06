@@ -14,14 +14,18 @@ namespace AttributeObject
         /// ダメージ量
         /// </summary>
         public readonly float damageValue;
-
+        /// <summary>
+        /// この攻撃でスタンするか
+        /// </summary>
+        public readonly bool isStunAttack;
         /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="damageValue">ダメージ量</param>
-        public DamageData(float damageValue)
+        public DamageData(float damageValue,bool isStunAttack = false)
         {
             this.damageValue = damageValue;
+            this.isStunAttack = isStunAttack;
         }
     }
 

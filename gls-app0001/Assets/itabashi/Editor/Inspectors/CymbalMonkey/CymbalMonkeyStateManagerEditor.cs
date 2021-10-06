@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
-using UnityEngine.UIElements;
 
 [CustomEditor(typeof(CymbalMonkeyStateManager))]
 public class CymbalMonkeyStateManagerEditor : Editor
