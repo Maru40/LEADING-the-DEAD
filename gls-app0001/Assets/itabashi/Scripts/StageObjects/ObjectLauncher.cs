@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(LineRenderer))]
-
 public class ObjectLauncher : MonoBehaviour
 {
+    [SerializeField]
+    private LineRenderer m_lineRenderer;
+
     /// <summary>
     /// 発射速度
     /// </summary>
@@ -35,11 +36,9 @@ public class ObjectLauncher : MonoBehaviour
     [SerializeField]
     private float m_oneLineSecond = 0.1f;
 
-    [Range(0.01f,1.0f)]
+    [Range(0.01f,100.0f)]
     [SerializeField]
-    private float m_maxDrawLineLength = 1.0f;
-
-    private LineRenderer m_lineRenderer;
+    private float m_maxDrawLineLength = 50.0f;
 
     private List<Vector3> m_linePositions = new List<Vector3>();
 
@@ -55,7 +54,6 @@ public class ObjectLauncher : MonoBehaviour
 
     private void Start()
     {
-        m_lineRenderer = GetComponent<LineRenderer>();
     }
 
     private void Update()
