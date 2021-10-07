@@ -257,6 +257,15 @@ public class RandomPlowlingMove : MonoBehaviour
         return m_param.inThrongRange;
     }
 
+    public void SetRandomPositionRadius(float radius)
+    {
+        m_param.randomPositionRadius = radius;
+    }
+    public float GetRandomPositionRadius()
+    {
+        return m_param.randomPositionRadius;
+    }
+
     public void SetCenterObject(GameObject centerObject)
     {
         m_centerObject = centerObject;
