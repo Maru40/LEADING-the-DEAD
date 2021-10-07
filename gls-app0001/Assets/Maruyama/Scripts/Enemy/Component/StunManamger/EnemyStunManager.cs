@@ -120,9 +120,4 @@ public class EnemyStunManager : MonoBehaviour
     {
         return m_param.time;
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        m_stun.StunStart();   
-    }
 }
