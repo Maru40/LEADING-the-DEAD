@@ -236,6 +236,10 @@ public class ThrongManager : MonoBehaviour
     /// <returns>避けるベクトルの合計</returns>
     public Vector3 CalcuSumAvoidVector()
     {
+        if(m_generator == null) {
+            SetSearchGenerator();
+        }
+
         var throngDatas = m_generator.GetThrongDatas();
         Vector3 avoidVector = Vector3.zero;
 
