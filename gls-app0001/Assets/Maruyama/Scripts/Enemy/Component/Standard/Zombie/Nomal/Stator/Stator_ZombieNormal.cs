@@ -11,6 +11,7 @@ public enum ZombieNormalState
     RandomPlowling,
     Chase,
     Attack,
+    Stun,
 }
 
 public class ZombieNormalTransitionMember
@@ -18,6 +19,7 @@ public class ZombieNormalTransitionMember
     public MyTrigger rondomPlowlingTrigger = new MyTrigger();
     public MyTrigger chaseTrigger = new MyTrigger();
     public MyTrigger attackTrigger = new MyTrigger();
+    public MyTrigger stunTrigger = new MyTrigger();
 }
 
 public class Stator_ZombieNormal : StatorBase
@@ -49,20 +51,27 @@ public class Stator_ZombieNormal : StatorBase
         m_stateMachine.AddNode(StateType.RandomPlowling, new EnState_RandomPlowling(zombie));
         m_stateMachine.AddNode(StateType.Chase,          new EnState_ChaseTarget(zombie));
         m_stateMachine.AddNode(StateType.Attack,         new StateNode_ZombieNormal_Attack(zombie));
+        m_stateMachine.AddNode(StateType.Stun,           new EnState_Stun(zombie));
     }
 
     void CreateEdge()
     {
         //ランダム徘徊
         m_stateMachine.AddEdge(StateType.RandomPlowling, StateType.Chase, ToChaseTrigger);
+        m_stateMachine.AddEdge(StateType.RandomPlowling, StateType.Stun, ToStunTrigger);
 
         //追従処理
         m_stateMachine.AddEdge(StateType.Chase, StateType.RandomPlowling, ToRandomPlowling);
         m_stateMachine.AddEdge(StateType.Chase, StateType.Attack, ToAttackTrigger);
+        m_stateMachine.AddEdge(StateType.Chase, StateType.Stun, ToStunTrigger);
 
         //攻撃処理
         m_stateMachine.AddEdge(StateType.Attack, StateType.Chase, ToChaseTrigger);
         m_stateMachine.AddEdge(StateType.Attack, StateType.RandomPlowling, ToRandomPlowling);
+        m_stateMachine.AddEdge(StateType.Attack, StateType.Stun, ToStunTrigger);
+
+        //スタン時
+        m_stateMachine.AddEdge(StateType.Stun, StateType.RandomPlowling, ToRandomPlowling);
     }
 
 
@@ -80,8 +89,13 @@ public class Stator_ZombieNormal : StatorBase
         return member.attackTrigger.Get();
     }
 
+    bool ToStunTrigger(TransitionMember member)
+    {
+        return member.stunTrigger.Get();
+    }
+
     //アクセッサ----------------------------------------------------------------
-    
+
     /// <summary>
     /// 遷移に利用するメンバーの取得
     /// </summary>
