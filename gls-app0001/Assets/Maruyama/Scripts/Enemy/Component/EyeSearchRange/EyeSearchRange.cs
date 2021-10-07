@@ -116,10 +116,10 @@ public class EyeSearchRange : MonoBehaviour
 
 
     /// <summary>
-/// 視界内にいるならtrueを返す
-/// </summary>
-/// <param name="target">ターゲット</param>
-/// <returns>視界の中にいるならtrue</returns>
+    /// 視界内にいるならtrueを返す
+    /// </summary>
+    /// <param name="target">ターゲット</param>
+    /// <returns>視界の中にいるならtrue</returns>
     public bool IsInEyeRange(GameObject target)
     {
         if (target == null) { 
