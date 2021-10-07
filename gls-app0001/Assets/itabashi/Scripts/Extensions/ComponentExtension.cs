@@ -15,12 +15,12 @@ public static class ComponentExtension
         inputActions.Enable();
 
         component.OnEnableAsObservable()
-            .Subscribe(_ => inputActions.Enable());
+            .Subscribe(_ => inputActions.Enable()).AddTo(component);
 
         component.OnDisableAsObservable()
-            .Subscribe(_ => inputActions.Disable());
+            .Subscribe(_ => inputActions.Disable()).AddTo(component);
 
         component.OnDestroyAsObservable()
-            .Subscribe(_ => inputActions.Disable());
+            .Subscribe(_ => inputActions.Disable()).AddTo(component);
     }
 }
