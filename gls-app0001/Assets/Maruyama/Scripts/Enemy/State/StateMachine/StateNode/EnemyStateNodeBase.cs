@@ -2,6 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using System;
+
+//コンポーネントの変更関係の情報をまとめた構造体
+[Serializable]
+public class ChangeCompParam
+{
+	public Behaviour behaviour;
+	public bool isStart;  //スタート時にどっちにするか？
+	public bool isExit;   //終了時にどっちにするか？
+
+	public ChangeCompParam(Behaviour behaviour, bool isStart, bool isExit)
+	{
+		this.behaviour = behaviour;
+		this.isStart = isStart;
+		this.isExit = isExit;
+	}
+}
+
 /// <summary>
 /// Enemy用の基底StateNodeクラス
 /// </summary>
@@ -12,21 +30,6 @@ public abstract class EnemyStateNodeBase<EnemyType> : NodeBase<EnemyType>
 	protected enum EnableChangeType {
 		Start,
 		Exit,
-	}
-
-	//コンポーネントの変更関係の情報をまとめた構造体
-	protected struct ChangeCompParam
-	{
-		public Behaviour behaviour;
-		public bool isStart;  //スタート時にどっちにするか？
-		public bool isExit;   //終了時にどっちにするか？
-
-		public ChangeCompParam(Behaviour behaviour, bool isStart,bool isExit)
-		{
-			this.behaviour = behaviour;
-			this.isStart = isStart;
-			this.isExit = isExit;
-		}
 	}
 
 	List<ChangeCompParam> m_changeParams;
