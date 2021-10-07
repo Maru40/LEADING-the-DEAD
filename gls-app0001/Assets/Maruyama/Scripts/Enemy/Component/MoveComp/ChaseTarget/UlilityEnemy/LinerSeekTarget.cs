@@ -62,7 +62,6 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
             m_velocityMgr.AddForce(force * m_turningPower);
 
             m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
-            //m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_maxSpeed, m_turningPower);
         }
         else {
             m_chaseTarget.TargetLost();

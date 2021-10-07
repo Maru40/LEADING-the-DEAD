@@ -7,10 +7,14 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
     FoundObject m_target = null;
 
     EyeSearchRange m_eyeRange;
+    TargetManager m_targetMgr = null;
 
     public EnState_RandomPlowling(EnemyBase owner)
         :base(owner)
-    { }
+    {
+        m_eyeRange = owner.GetComponent<EyeSearchRange>();
+        m_targetMgr = owner.GetComponent<TargetManager>();
+    }
 
     protected override void ReserveChangeComponents()
     {
@@ -30,10 +34,12 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
         m_eyeRange = owner.GetComponent<EyeSearchRange>();
 
         //ターゲットの取得
-        m_target = owner.GetComponent<TargetManager>().GetNowTarget();
-        if(m_target == null) {
-            SearchTarget();
-        }
+        SearchTarget();
+        //m_target = owner.GetComponent<TargetManager>().GetNowTarget();
+        //if (m_target == null)
+        //{
+        //    SearchTarget();
+        //}
 
         //集団範囲の設定
         var throngMgr = owner.GetComponent<ThrongManager>();
@@ -42,6 +48,8 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
             float range = randomPlowling.GetInThrongRange();
             throngMgr.SetInThrongRange(range);
         }
+
+        
     }
 
     public override void OnUpdate()
@@ -63,6 +71,7 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
                 var chase = owner.GetComponent<I_Chase>();
                 if (chase != null){
                     chase.ChangeState();
+                    m_targetMgr.SetNowTarget(GetType() ,m_target);
                 }
             }
         }
@@ -83,8 +92,8 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
 
         var target = GameObject.Find("Player");
         var foundObject = target.GetComponent<FoundObject>();
-        var targetMgr = owner.GetComponent<TargetManager>();
-        targetMgr?.SetNowTarget(GetType(), foundObject);
+        m_targetMgr?.SetNowTarget(GetType(), null);
+        //targetMgr?.SetNowTarget(GetType(), foundObject);
 
         m_target = foundObject;
     }

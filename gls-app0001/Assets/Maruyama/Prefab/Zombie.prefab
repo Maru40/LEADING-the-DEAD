@@ -57,6 +57,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5625887cecce634e8577ce3d2a5acbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_enterAction:
+    m_PersistentCalls:
+      m_Calls: []
+  m_stayAction:
+    m_PersistentCalls:
+      m_Calls: []
+  m_exitAction:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &310105908060187271
 GameObject:
   m_ObjectHideFlags: 0
@@ -2636,6 +2645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4888eacfd9a1a4d8d45ebb5ec17a04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_tempPrehab: {fileID: 1730666432876667485, guid: cee7a273615363643856d711659df607, type: 3}
 --- !u!195 &1444888580945028653
 NavMeshAgent:
   m_ObjectHideFlags: 0

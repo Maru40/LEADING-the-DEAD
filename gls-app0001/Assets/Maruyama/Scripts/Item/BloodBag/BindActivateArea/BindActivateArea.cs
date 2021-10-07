@@ -18,4 +18,17 @@ public class BindActivateArea : MonoBehaviour
     {
         return m_bindRange;
     }
+
+    public void Bind(Collider other)
+    {
+        var bind = other.GetComponent<I_BindedActiveArea>();
+        bind?.Bind(this);
+    }
+
+    //バインド解除
+    public void BindRelease(Collider other)
+    {
+        var bind = other.GetComponent<I_BindedActiveArea>();
+        bind?.BindRelease(this);
+    }
 }
