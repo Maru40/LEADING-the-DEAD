@@ -67,14 +67,6 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Throw"",
-                    ""type"": ""Button"",
-                    ""id"": ""c6dc93e5-54d3-43c8-b554-c4d8092af467"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""ThrowAim"",
                     ""type"": ""Value"",
                     ""id"": ""abc3db55-edbb-4c4c-abce-cb9b2db9b274"",
@@ -86,6 +78,46 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""3aba2e08-be4d-46eb-9af2-013569e3976f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ItemSelectUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""da51d974-36d2-4630-a043-ed0da0c32994"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ItemSelectDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""300f730f-0350-4a04-8eca-411b48277dca"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ItemSelectLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""b008c3e3-447e-41ba-b5de-be341ab5959a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ItemSelectRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""0ba1ba3a-45df-41f0-a8f4-0b7bef732087"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""UseItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""078a078a-3d08-4b20-87ff-cbbe05cc71b1"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -159,17 +191,6 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""8b107b64-6520-4815-b2c8-a22ca58d41d9"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Throw"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""Right Stick Vertical"",
                     ""id"": ""561c4ba9-6208-4f57-8c99-64d782e9520c"",
                     ""path"": ""1DAxis"",
@@ -212,6 +233,61 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""67c790b1-d0ce-4ba5-b080-1f29121abaa5"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ItemSelectUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""79e34ec4-c9fc-43cb-a727-d66c5fda444e"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ItemSelectDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d80ca1dd-a805-4612-b0f6-765398647dee"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ItemSelectLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7474b8a9-8211-4133-b065-2fdcfd97addb"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ItemSelectRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd7c2273-38aa-4c05-8736-6309b6ad2758"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -226,9 +302,13 @@ public class @GameControls : IInputActionCollection, IDisposable
         m_Player_RotateViewPoint = m_Player.FindAction("RotateViewPoint", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_ThrowingStance = m_Player.FindAction("ThrowingStance", throwIfNotFound: true);
-        m_Player_Throw = m_Player.FindAction("Throw", throwIfNotFound: true);
         m_Player_ThrowAim = m_Player.FindAction("ThrowAim", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_ItemSelectUp = m_Player.FindAction("ItemSelectUp", throwIfNotFound: true);
+        m_Player_ItemSelectDown = m_Player.FindAction("ItemSelectDown", throwIfNotFound: true);
+        m_Player_ItemSelectLeft = m_Player.FindAction("ItemSelectLeft", throwIfNotFound: true);
+        m_Player_ItemSelectRight = m_Player.FindAction("ItemSelectRight", throwIfNotFound: true);
+        m_Player_UseItem = m_Player.FindAction("UseItem", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -284,9 +364,13 @@ public class @GameControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_RotateViewPoint;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_ThrowingStance;
-    private readonly InputAction m_Player_Throw;
     private readonly InputAction m_Player_ThrowAim;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_ItemSelectUp;
+    private readonly InputAction m_Player_ItemSelectDown;
+    private readonly InputAction m_Player_ItemSelectLeft;
+    private readonly InputAction m_Player_ItemSelectRight;
+    private readonly InputAction m_Player_UseItem;
     public struct PlayerActions
     {
         private @GameControls m_Wrapper;
@@ -297,9 +381,13 @@ public class @GameControls : IInputActionCollection, IDisposable
         public InputAction @RotateViewPoint => m_Wrapper.m_Player_RotateViewPoint;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @ThrowingStance => m_Wrapper.m_Player_ThrowingStance;
-        public InputAction @Throw => m_Wrapper.m_Player_Throw;
         public InputAction @ThrowAim => m_Wrapper.m_Player_ThrowAim;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @ItemSelectUp => m_Wrapper.m_Player_ItemSelectUp;
+        public InputAction @ItemSelectDown => m_Wrapper.m_Player_ItemSelectDown;
+        public InputAction @ItemSelectLeft => m_Wrapper.m_Player_ItemSelectLeft;
+        public InputAction @ItemSelectRight => m_Wrapper.m_Player_ItemSelectRight;
+        public InputAction @UseItem => m_Wrapper.m_Player_UseItem;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -327,15 +415,27 @@ public class @GameControls : IInputActionCollection, IDisposable
                 @ThrowingStance.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowingStance;
                 @ThrowingStance.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowingStance;
                 @ThrowingStance.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowingStance;
-                @Throw.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrow;
-                @Throw.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrow;
-                @Throw.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrow;
                 @ThrowAim.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowAim;
                 @ThrowAim.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowAim;
                 @ThrowAim.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowAim;
                 @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @ItemSelectUp.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemSelectUp;
+                @ItemSelectUp.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemSelectUp;
+                @ItemSelectUp.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemSelectUp;
+                @ItemSelectDown.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemSelectDown;
+                @ItemSelectDown.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemSelectDown;
+                @ItemSelectDown.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemSelectDown;
+                @ItemSelectLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemSelectLeft;
+                @ItemSelectLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemSelectLeft;
+                @ItemSelectLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemSelectLeft;
+                @ItemSelectRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemSelectRight;
+                @ItemSelectRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemSelectRight;
+                @ItemSelectRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemSelectRight;
+                @UseItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
+                @UseItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
+                @UseItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -358,15 +458,27 @@ public class @GameControls : IInputActionCollection, IDisposable
                 @ThrowingStance.started += instance.OnThrowingStance;
                 @ThrowingStance.performed += instance.OnThrowingStance;
                 @ThrowingStance.canceled += instance.OnThrowingStance;
-                @Throw.started += instance.OnThrow;
-                @Throw.performed += instance.OnThrow;
-                @Throw.canceled += instance.OnThrow;
                 @ThrowAim.started += instance.OnThrowAim;
                 @ThrowAim.performed += instance.OnThrowAim;
                 @ThrowAim.canceled += instance.OnThrowAim;
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @ItemSelectUp.started += instance.OnItemSelectUp;
+                @ItemSelectUp.performed += instance.OnItemSelectUp;
+                @ItemSelectUp.canceled += instance.OnItemSelectUp;
+                @ItemSelectDown.started += instance.OnItemSelectDown;
+                @ItemSelectDown.performed += instance.OnItemSelectDown;
+                @ItemSelectDown.canceled += instance.OnItemSelectDown;
+                @ItemSelectLeft.started += instance.OnItemSelectLeft;
+                @ItemSelectLeft.performed += instance.OnItemSelectLeft;
+                @ItemSelectLeft.canceled += instance.OnItemSelectLeft;
+                @ItemSelectRight.started += instance.OnItemSelectRight;
+                @ItemSelectRight.performed += instance.OnItemSelectRight;
+                @ItemSelectRight.canceled += instance.OnItemSelectRight;
+                @UseItem.started += instance.OnUseItem;
+                @UseItem.performed += instance.OnUseItem;
+                @UseItem.canceled += instance.OnUseItem;
             }
         }
     }
@@ -379,8 +491,12 @@ public class @GameControls : IInputActionCollection, IDisposable
         void OnRotateViewPoint(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnThrowingStance(InputAction.CallbackContext context);
-        void OnThrow(InputAction.CallbackContext context);
         void OnThrowAim(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnItemSelectUp(InputAction.CallbackContext context);
+        void OnItemSelectDown(InputAction.CallbackContext context);
+        void OnItemSelectLeft(InputAction.CallbackContext context);
+        void OnItemSelectRight(InputAction.CallbackContext context);
+        void OnUseItem(InputAction.CallbackContext context);
     }
 }

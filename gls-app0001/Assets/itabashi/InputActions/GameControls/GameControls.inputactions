@@ -54,14 +54,6 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Throw",
-                    "type": "Button",
-                    "id": "c6dc93e5-54d3-43c8-b554-c4d8092af467",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "ThrowAim",
                     "type": "Value",
                     "id": "abc3db55-edbb-4c4c-abce-cb9b2db9b274",
@@ -73,6 +65,46 @@
                     "name": "Pause",
                     "type": "Button",
                     "id": "3aba2e08-be4d-46eb-9af2-013569e3976f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "ItemSelectUp",
+                    "type": "Button",
+                    "id": "da51d974-36d2-4630-a043-ed0da0c32994",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "ItemSelectDown",
+                    "type": "Button",
+                    "id": "300f730f-0350-4a04-8eca-411b48277dca",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "ItemSelectLeft",
+                    "type": "Button",
+                    "id": "b008c3e3-447e-41ba-b5de-be341ab5959a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "ItemSelectRight",
+                    "type": "Button",
+                    "id": "0ba1ba3a-45df-41f0-a8f4-0b7bef732087",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "UseItem",
+                    "type": "Button",
+                    "id": "078a078a-3d08-4b20-87ff-cbbe05cc71b1",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -146,17 +178,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "8b107b64-6520-4815-b2c8-a22ca58d41d9",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Throw",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "Right Stick Vertical",
                     "id": "561c4ba9-6208-4f57-8c99-64d782e9520c",
                     "path": "1DAxis",
@@ -197,6 +218,61 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "67c790b1-d0ce-4ba5-b080-1f29121abaa5",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ItemSelectUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "79e34ec4-c9fc-43cb-a727-d66c5fda444e",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ItemSelectDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d80ca1dd-a805-4612-b0f6-765398647dee",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ItemSelectLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7474b8a9-8211-4133-b065-2fdcfd97addb",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ItemSelectRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cd7c2273-38aa-4c05-8736-6309b6ad2758",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

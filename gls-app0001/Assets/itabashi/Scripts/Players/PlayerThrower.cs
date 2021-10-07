@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerThrower : MonoBehaviour
+    public class PlayerThrower : ItemUserBase
     {
         /// <summary>
         /// ゲームの入力
@@ -61,22 +61,7 @@ namespace Player
             m_gameControls.Player.ThrowingStance.performed += context => ThrowingStanceStart();
             m_gameControls.Player.ThrowingStance.canceled += context => ThrowingStanceEnd();
 
-            m_gameControls.Player.Throw.performed += context => Throwing();
-        }
-
-        private void OnEnable()
-        {
-            m_gameControls.Enable();
-        }
-
-        private void OnDisable()
-        {
-            m_gameControls.Disable();
-        }
-
-        private void OnDestroy()
-        {
-            m_gameControls.Disable();
+            this.RegisterController(m_gameControls);
         }
 
         // Start is called before the first frame update
@@ -101,7 +86,7 @@ namespace Player
 
         void ThrowingStanceStart()
         {
-            if(m_playerStatusManager.isStun)
+            if(m_playerStatusManager.isStun || !isUse)
             {
                 return;
             }
@@ -150,9 +135,9 @@ namespace Player
             m_objectLauncher.isDrawPredictionLine = false;
         }
 
-        void Throwing()
+        public override void Use()
         {
-            if (!m_isThrowingStance)
+            if (!m_isThrowingStance || !isUse)
             {
                 return;
             }
