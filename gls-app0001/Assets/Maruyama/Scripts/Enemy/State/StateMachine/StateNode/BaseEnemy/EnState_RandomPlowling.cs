@@ -83,8 +83,8 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
 
         var target = GameObject.Find("Player");
         var foundObject = target.GetComponent<FoundObject>();
-        var targetMgr = owner.GetComponent<TargetManager>();
-        targetMgr?.SetNowTarget(GetType(), foundObject);
+        //var targetMgr = owner.GetComponent<TargetManager>();
+        //targetMgr?.SetNowTarget(GetType(), foundObject);
 
         m_target = foundObject;
     }
