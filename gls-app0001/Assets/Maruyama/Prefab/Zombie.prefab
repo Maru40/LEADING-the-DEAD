@@ -2422,6 +2422,7 @@ GameObject:
   - component: {fileID: -7008508848388195314}
   - component: {fileID: -9140734898953323855}
   - component: {fileID: 7956893243637624007}
+  - component: {fileID: 1098812698911119182}
   m_Layer: 6
   m_Name: Zombie
   m_TagString: Untagged
@@ -2875,6 +2876,20 @@ MonoBehaviour:
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 10
   m_isOutwardToUp: 0
+--- !u!114 &1098812698911119182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434505739018704334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ac89d40dac6584ca4101c578b97ee3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_param:
+    time: 3
 --- !u!1 &7689520723826636210
 GameObject:
   m_ObjectHideFlags: 0
