@@ -21,6 +21,11 @@ public class TargetManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        //Debug.Log(m_nowTarget);
+    }
+
     /// <summary>
     /// ターゲットの追加
     /// </summary>
@@ -50,6 +55,12 @@ public class TargetManager : MonoBehaviour
         m_targets[type] = target;
     }
 
+    public void AbsoluteSetNowTarget(Type type, FoundObject target)
+    {
+        m_nowTarget = target;
+        m_targets[type] = target;
+    }
+
     /// <summary>
     /// 更新が必要かどうかを返す。
     /// </summary>
@@ -57,6 +68,10 @@ public class TargetManager : MonoBehaviour
     /// <returns>更新が必要ならtrue</returns>
     bool IsTargetUpdate(FoundObject target)
     {
+        if(target == null) {
+            return true; //ターゲットがnullならtrueを返す。
+        }
+
         var newPriority = target.GetFoundData().priority;
         var nowPriority = m_nowTarget.GetFoundData().priority;
 
