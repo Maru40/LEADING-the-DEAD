@@ -91,7 +91,6 @@ public class RandomPlowlingMove : MonoBehaviour
         var toVec = m_targetPosition - transform.position;
         Vector3 force = CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, toVec, m_param.maxSpeed);
         m_velocityMgr.AddForce(force * m_param.turningPower);
-        //m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_param.maxSpeed, m_param.turningPower);
 
         m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
 
@@ -200,7 +199,7 @@ public class RandomPlowlingMove : MonoBehaviour
         return random < halfValue ? 1 : -1;
     }
 
-    void ResetCenterObject()
+    public void ResetCenterObject()
     {
         m_centerObject = this.gameObject;
         m_param.randomPositionRadius = m_firstRandomPositionRadius;
@@ -221,27 +220,6 @@ public class RandomPlowlingMove : MonoBehaviour
         if (IsObstract(collision.gameObject))
         {
             SetRandomTargetPosition();
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        var bind = other.gameObject.GetComponentInParentAndChildren<BindActivateArea>();
-
-        if (bind)
-        {
-            m_centerObject = other.gameObject;
-            m_param.randomPositionRadius = bind.GetBindRange();
-            m_throngMgr.enabled = false;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        var bind = other.gameObject.GetComponentInParentAndChildren<BindActivateArea>();
-
-        if (bind) {
-            ResetCenterObject();
         }
     }
 
@@ -277,6 +255,16 @@ public class RandomPlowlingMove : MonoBehaviour
     public  float GetInThrongRange()
     {
         return m_param.inThrongRange;
+    }
+
+    public void SetCenterObject(GameObject centerObject)
+    {
+        m_centerObject = centerObject;
+        SetRandomTargetPosition();
+    }
+    public GameObject GetCenterObject()
+    {
+        return m_centerObject;
     }
 
     public void SetParametor(Parametor parametor)
