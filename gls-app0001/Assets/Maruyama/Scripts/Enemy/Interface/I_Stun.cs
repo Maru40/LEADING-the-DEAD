@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface I_Stun
 {
-    void StunStart();
-    void StunEnd();
+    void StartStun();
+    void EndStun();
 }

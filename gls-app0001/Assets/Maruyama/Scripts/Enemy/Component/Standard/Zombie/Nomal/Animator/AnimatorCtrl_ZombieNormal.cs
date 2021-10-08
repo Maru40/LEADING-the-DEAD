@@ -32,4 +32,14 @@ public class AnimatorCtrl_ZombieNormal : MonoBehaviour
     {
         m_animator.SetTrigger("attackTrigger");
     }
+
+    public void StartStun()
+    {
+        m_animator.SetBool("isStun", true);
+    }
+
+    public void EndStun()
+    {
+        m_animator.SetBool("isStun", false);
+    }
 }

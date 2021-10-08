@@ -54,10 +54,10 @@ public class EnemyStunManager : MonoBehaviour
         m_waitTimer.AddWaitTimer(GetType(), time, EndStun);
     }
 
-    public void EndStun()
+    private void EndStun()
     {
         //スタン解除の処理
-        m_stun.StunEnd();
+        m_stun.EndStun();
 
         //コンポーネントの切替
         ReverseChangeComps();
@@ -119,5 +119,16 @@ public class EnemyStunManager : MonoBehaviour
     public float GetStunTime()
     {
         return m_param.time;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //test用
+
+        //var player = collision.gameObject.GetComponent<PlayerPickUpper>();
+        //if (player)
+        //{
+        //    m_stun.StartStun();
+        //}
     }
 }

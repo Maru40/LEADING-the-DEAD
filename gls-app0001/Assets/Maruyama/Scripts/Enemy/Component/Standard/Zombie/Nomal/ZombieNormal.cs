@@ -12,6 +12,7 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_
     //コンポーネント系
 
     Stator_ZombieNormal m_stator;
+    AnimatorCtrl_ZombieNormal m_animator;
     TargetManager m_targetMgr;
 
     RandomPlowlingMove m_randomPlowling;
@@ -20,6 +21,7 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_
     void Awake()
     {
         m_stator = GetComponent<Stator_ZombieNormal>();
+        m_animator = GetComponent<AnimatorCtrl_ZombieNormal>();
         m_targetMgr = GetComponent<TargetManager>();
 
         m_randomPlowling = GetComponent<RandomPlowlingMove>();
@@ -76,17 +78,19 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_
         m_randomPlowling.ResetCenterObject();
     }
 
-    void I_Stun.StunStart()
+    void I_Stun.StartStun()
     {
         m_stator.GetTransitionMember().stunTrigger.Fire();
 
         //アニメーションの切替
+        m_animator.StartStun();
     }
 
-    void I_Stun.StunEnd()
+    void I_Stun.EndStun()
     {
         m_stator.GetTransitionMember().rondomPlowlingTrigger.Fire();
 
         //アニメーションの切替
+        m_animator.EndStun();
     }
 }
