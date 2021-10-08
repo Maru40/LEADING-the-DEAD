@@ -123,10 +123,12 @@ public class EnemyStunManager : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        var player = collision.gameObject.GetComponent<PlayerPickUpper>();
-        if (player)
-        {
-            m_stun.StartStun();
-        }
+        //test用
+
+        //var player = collision.gameObject.GetComponent<PlayerPickUpper>();
+        //if (player)
+        //{
+        //    m_stun.StartStun();
+        //}
     }
 }
