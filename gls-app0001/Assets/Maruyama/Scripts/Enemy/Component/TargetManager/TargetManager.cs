@@ -16,8 +16,8 @@ public class TargetManager : MonoBehaviour
     {
         //nullCheck
         if(m_targets.Count == 0) {
-            var target = GameObject.Find("Player");
-            m_nowTarget = target.GetComponent<FoundObject>();
+            //var target = GameObject.Find("Player");
+            //m_nowTarget = target.GetComponent<FoundObject>();
         }
     }
 
@@ -111,6 +111,15 @@ public class TargetManager : MonoBehaviour
     /// <returns>ターゲット</returns>
     public FoundObject GetNowTarget()
     {
+        if (m_nowTarget)  //ターゲットがnull出ない。
+        {
+            //対象のアクティブがfalseなら
+            if (m_nowTarget.gameObject.activeSelf == false)
+            {
+                m_nowTarget = null; //ターゲットをnullにする。
+            }
+        }
+
         return m_nowTarget;
     }
 
