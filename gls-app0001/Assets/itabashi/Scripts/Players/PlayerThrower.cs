@@ -91,12 +91,14 @@ namespace Player
                 return;
             }
 
-            if(!m_playerpickUpper.stackObject)
+            var cymbalMonkeyList = m_playerpickUpper.GetPickedUpObjectList("CymbalMonkey");
+
+            if (cymbalMonkeyList.Count == 0)
             {
                 return;
             }
 
-            ThrowableObject throwableObject = m_playerpickUpper.stackObject.GetComponent<ThrowableObject>();
+            ThrowableObject throwableObject = cymbalMonkeyList[0].GetComponent<ThrowableObject>();
 
             if (m_countCoolTime < m_coolTime || !throwableObject)
             {
@@ -104,7 +106,7 @@ namespace Player
             }
 
             m_takingObject = throwableObject;
-            m_pickedUpObject = m_playerpickUpper.stackObject;
+            m_pickedUpObject = cymbalMonkeyList[0];
 
             m_isThrowingStance = true;
             m_playerParameters.isThrowingStance = true;
@@ -146,7 +148,7 @@ namespace Player
 
             m_takingObject.transform.SetParent(null);
 
-            m_playerpickUpper.TakeOut();
+            m_playerpickUpper.TakeOut("CymbalMonkey");
 
             m_objectLauncher.Fire(m_takingObject, m_takingObject.transform.rotation);
 
