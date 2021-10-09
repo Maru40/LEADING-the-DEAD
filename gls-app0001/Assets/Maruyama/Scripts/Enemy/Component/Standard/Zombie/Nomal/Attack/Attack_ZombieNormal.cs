@@ -15,6 +15,9 @@ public class Attack_ZombieNormal : AttackBase
     ThrongManager m_throngManager;
 
     [SerializeField]
+    float m_moveSpeed = 3.0f;
+
+    [SerializeField]
     EnemyAttackTriggerAction m_hitBox = null;
 
     bool m_isTargetChase = true;  //攻撃の途中まではターゲットを追うようにするため。
@@ -55,7 +58,7 @@ public class Attack_ZombieNormal : AttackBase
         toVec += avoidVec;
         toVec.y = 0.0f;  //(yのベクトルを殺す。)
 
-        m_velocityMgr.velocity = toVec.normalized * GetBaseParam().moveSpeed;
+        m_velocityMgr.velocity = toVec.normalized * m_moveSpeed;
 
         m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
     }
