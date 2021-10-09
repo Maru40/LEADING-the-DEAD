@@ -121,6 +121,14 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""BatSwing"",
+                    ""type"": ""Button"",
+                    ""id"": ""7a5bd760-fcea-49d4-886d-f883f86e3511"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -288,6 +296,17 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""action"": ""UseItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""68d2b87b-5998-4965-aecc-fe1b83af7bd4"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BatSwing"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -309,6 +328,7 @@ public class @GameControls : IInputActionCollection, IDisposable
         m_Player_ItemSelectLeft = m_Player.FindAction("ItemSelectLeft", throwIfNotFound: true);
         m_Player_ItemSelectRight = m_Player.FindAction("ItemSelectRight", throwIfNotFound: true);
         m_Player_UseItem = m_Player.FindAction("UseItem", throwIfNotFound: true);
+        m_Player_BatSwing = m_Player.FindAction("BatSwing", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -371,6 +391,7 @@ public class @GameControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_ItemSelectLeft;
     private readonly InputAction m_Player_ItemSelectRight;
     private readonly InputAction m_Player_UseItem;
+    private readonly InputAction m_Player_BatSwing;
     public struct PlayerActions
     {
         private @GameControls m_Wrapper;
@@ -388,6 +409,7 @@ public class @GameControls : IInputActionCollection, IDisposable
         public InputAction @ItemSelectLeft => m_Wrapper.m_Player_ItemSelectLeft;
         public InputAction @ItemSelectRight => m_Wrapper.m_Player_ItemSelectRight;
         public InputAction @UseItem => m_Wrapper.m_Player_UseItem;
+        public InputAction @BatSwing => m_Wrapper.m_Player_BatSwing;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -436,6 +458,9 @@ public class @GameControls : IInputActionCollection, IDisposable
                 @UseItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
                 @UseItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
                 @UseItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
+                @BatSwing.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBatSwing;
+                @BatSwing.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBatSwing;
+                @BatSwing.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBatSwing;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -479,6 +504,9 @@ public class @GameControls : IInputActionCollection, IDisposable
                 @UseItem.started += instance.OnUseItem;
                 @UseItem.performed += instance.OnUseItem;
                 @UseItem.canceled += instance.OnUseItem;
+                @BatSwing.started += instance.OnBatSwing;
+                @BatSwing.performed += instance.OnBatSwing;
+                @BatSwing.canceled += instance.OnBatSwing;
             }
         }
     }
@@ -498,5 +526,6 @@ public class @GameControls : IInputActionCollection, IDisposable
         void OnItemSelectLeft(InputAction.CallbackContext context);
         void OnItemSelectRight(InputAction.CallbackContext context);
         void OnUseItem(InputAction.CallbackContext context);
+        void OnBatSwing(InputAction.CallbackContext context);
     }
 }
