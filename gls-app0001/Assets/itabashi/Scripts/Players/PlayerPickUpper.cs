@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using System.Linq;
 
 /// <summary>
 /// プレイヤーキャラクターのアイテムを拾う機能のコンポーネント
@@ -79,5 +80,20 @@ public class PlayerPickUpper : MonoBehaviour
     public PickedUpObject TakeOut()
     {
         return m_stackObjects.FrontPop();
+    }
+
+    public PickedUpObject TakeOut(string pickedUpObjectName)
+    {
+        var hitObjects = GetPickedUpObjectList(pickedUpObjectName);
+
+        var popObject = hitObjects[0];
+        m_stackObjects.Remove(popObject);
+
+        return popObject;
+    }
+
+    public List<PickedUpObject> GetPickedUpObjectList(string pickedUpObjectName)
+    {
+        return m_stackObjects.Where(obj => obj.pickedUpObjectName == pickedUpObjectName).ToList();
     }
 }

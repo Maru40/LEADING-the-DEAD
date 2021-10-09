@@ -11,9 +11,13 @@ public class UseItemUIPresenter : MonoBehaviour
     [SerializeField]
     private PlayerPickUpper m_playerPickUpper;
 
+    [SerializeField]
+    private string m_pickedUpObjectName;
+
     private void Awake()
     {
-        m_playerPickUpper.stackObjectsCountOnChanged.Subscribe(count => CountChangedEvent(count));
+        m_playerPickUpper.stackObjectsCountOnChanged
+            .Subscribe(count => CountChangedEvent(m_playerPickUpper.GetPickedUpObjectList(m_pickedUpObjectName).Count));
     }
     // Start is called before the first frame update
     void Start()
