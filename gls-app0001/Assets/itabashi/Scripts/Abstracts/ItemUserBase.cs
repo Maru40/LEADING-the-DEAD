@@ -24,5 +24,16 @@ public abstract class ItemUserBase : MonoBehaviour
     /// <summary>
     /// アイテムを使う関数
     /// </summary>
-    public abstract void Use();
+    public void Use()
+    {
+        if(isUse)
+        {
+            OnUse();
+        }
+    }
+
+    /// <summary>
+    /// アイテムが使われた際のコールバック韓嵩
+    /// </summary>
+    protected abstract void OnUse();
 }

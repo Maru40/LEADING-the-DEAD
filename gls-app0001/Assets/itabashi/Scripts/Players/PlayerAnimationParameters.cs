@@ -45,10 +45,18 @@ namespace Player
         /// </summary>
         public void Throw() { m_playerAnimator.SetTrigger("Throw"); }
 
+        public void Swing() { m_playerAnimator.SetTrigger("Swing"); }
+
         // Start is called before the first frame update
         void Start()
         {
             m_playerAnimator = GetComponent<Animator>();
+        }
+
+        private void LateUpdate()
+        {
+            m_playerAnimator.ResetTrigger("Throw");
+            m_playerAnimator.ResetTrigger("Swing");
         }
     }
 }
