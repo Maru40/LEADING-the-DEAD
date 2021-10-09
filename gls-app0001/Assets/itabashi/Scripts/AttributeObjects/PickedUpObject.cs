@@ -8,9 +8,14 @@ using UnityEngine;
 public class PickedUpObject : MonoBehaviour
 {
     [SerializeField]
+    private string m_pickedUpObjectName = "PickedUpObject";
+
+    [SerializeField]
     private AudioClip m_pickedUpSound;
 
     private AudioSource m_audioSource;
+
+    public string pickedUpObjectName => m_pickedUpObjectName;
 
     // Start is called before the first frame update
     void Start()
