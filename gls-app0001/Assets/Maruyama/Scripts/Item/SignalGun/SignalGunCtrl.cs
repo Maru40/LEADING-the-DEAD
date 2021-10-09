@@ -32,7 +32,7 @@ public class SignalGunCtrl : ItemUserBase
     {
     }
 
-    public override void Use()
+    protected override void OnUse()
     {
         if(m_nowCountTime < m_coolTime || !isUse)
         {

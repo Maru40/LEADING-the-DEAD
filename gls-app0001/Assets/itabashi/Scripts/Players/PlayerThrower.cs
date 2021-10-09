@@ -135,9 +135,9 @@ namespace Player
             m_objectLauncher.isDrawPredictionLine = false;
         }
 
-        public override void Use()
+        protected override void OnUse()
         {
-            if (!m_isThrowingStance || !isUse)
+            if (!m_isThrowingStance)
             {
                 return;
             }
