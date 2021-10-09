@@ -8,16 +8,17 @@ namespace AttributeObject
     /// <summary>
     /// ダメージデータ構造体
     /// </summary>
-    public readonly struct DamageData
+    [System.Serializable]
+    public struct DamageData
     {
         /// <summary>
         /// ダメージ量
         /// </summary>
-        public readonly float damageValue;
+        public float damageValue;
         /// <summary>
         /// この攻撃でスタンするか
         /// </summary>
-        public readonly bool isStunAttack;
+        public bool isStunAttack;
         /// <summary>
         /// コンストラクタ
         /// </summary>
