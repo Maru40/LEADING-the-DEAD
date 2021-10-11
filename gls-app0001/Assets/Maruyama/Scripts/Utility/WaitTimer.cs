@@ -38,6 +38,7 @@ class WaitTimerParam
 public class WaitTimer : MonoBehaviour
 {
     Dictionary<Type,WaitTimerParam> m_params = new Dictionary<Type, WaitTimerParam>();
+    Dictionary<Type, WaitTimerParam> m_addParams = new Dictionary<Type, WaitTimerParam>();
 
     void Awake()
     {
@@ -62,6 +63,16 @@ public class WaitTimer : MonoBehaviour
                 param.EndTimer();
             }
         }
+
+        AddParams();
+    }
+
+    void AddParams()
+    {
+        foreach(var param in m_addParams)
+        {
+            m_params[param.Key] = param.Value;
+        }
     }
 
     /// <summary>
@@ -74,7 +85,8 @@ public class WaitTimer : MonoBehaviour
     public void AddWaitTimer(Type type ,float time, Action endAction = null, float countSpeed = 1.0f)
     {
         var newParam = new WaitTimerParam(time, countSpeed, endAction);
-        m_params[type] = newParam;
+        //m_params[type] = newParam;
+        m_addParams[type] = newParam;
     }
 
     /// <summary>
