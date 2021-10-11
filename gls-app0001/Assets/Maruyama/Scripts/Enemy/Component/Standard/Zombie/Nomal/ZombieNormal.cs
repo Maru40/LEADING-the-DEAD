@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_Stun
+public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea
 {
     //test用に表示したり、消したりする用。
     [SerializeField]
@@ -76,21 +76,5 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_
     void I_BindedActiveArea.BindRelease(BindActivateArea bind)
     {
         m_randomPlowling.ResetCenterObject();
-    }
-
-    void I_Stun.StartStun()
-    {
-        m_stator.GetTransitionMember().stunTrigger.Fire();
-
-        //アニメーションの切替
-        m_animator.StartStun();
-    }
-
-    void I_Stun.EndStun()
-    {
-        m_stator.GetTransitionMember().rondomPlowlingTrigger.Fire();
-
-        //アニメーションの切替
-        m_animator.EndStun();
     }
 }
