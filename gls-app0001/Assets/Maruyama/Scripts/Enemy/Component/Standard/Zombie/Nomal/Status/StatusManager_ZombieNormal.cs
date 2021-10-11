@@ -4,7 +4,7 @@ using UnityEngine;
 
 using System;
 
-public class StatusManager_ZombieNormal : StatusManagerBase
+public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
 {
     [Serializable]
     public struct Status
@@ -24,25 +24,35 @@ public class StatusManager_ZombieNormal : StatusManagerBase
 
     WaitTimer m_waitTimer = null;
     EnemyRespawnManager m_respawn = null;
+    Stator_ZombieNormal m_stator = null;
+    AnimatorCtrl_ZombieNormal m_animator = null;
+    I_Stun m_stun;
 
-    void Start()
+    void Awake()
     {
         m_waitTimer = GetComponent<WaitTimer>();
         m_respawn = GetComponent<EnemyRespawnManager>();
+        m_stator = GetComponent<Stator_ZombieNormal>();
+        m_animator = GetComponent<AnimatorCtrl_ZombieNormal>();
+        m_stun = GetComponent<I_Stun>();
     }
 
     public void Damage(AttributeObject.DamageData data)
     {
-        if(m_waitTimer == null) {
-            m_waitTimer = GetComponent<WaitTimer>();
-        }
-
         if (m_waitTimer.IsWait(GetType())) {
             return;
         }
 
-        m_status.hp -= data.damageValue;
-
+        if (data.isStunAttack)  //スタン状態になる攻撃なら
+        {
+            m_stun.StartStun();
+        }
+        else
+        {
+            //普通にダメージを受ける
+            m_status.hp -= data.damageValue;
+        }
+        
         if (m_status.hp <= 0)
         {
             m_status.hp = 0;
@@ -54,8 +64,25 @@ public class StatusManager_ZombieNormal : StatusManagerBase
         m_waitTimer.AddWaitTimer(GetType(), time);
     }
 
+    //インターフェースの実装----------------------------------------------------------------
 
-    //アクセッサ------------------------------------------------------------
+    void I_Stun.StartStun()
+    {
+        m_stator.GetTransitionMember().stunTrigger.Fire();
+
+        //アニメーションの切替
+        m_animator.StartStun();
+    }
+
+    void I_Stun.EndStun()
+    {
+        m_stator.GetTransitionMember().rondomPlowlingTrigger.Fire();
+
+        //アニメーションの切替
+        m_animator.EndStun();
+    }
+
+    //アクセッサ----------------------------------------------------------------------------
 
     public void SetStatus(Status status)
     {
