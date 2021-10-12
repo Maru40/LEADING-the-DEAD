@@ -7,11 +7,15 @@ public class AnimatorCtrl_ZombieNormal : MonoBehaviour
 {
     Rigidbody m_rigid;
     Animator m_animator;
+    AngerManager m_angerManager;
+    Stator_ZombieNormal m_stator;
 
     void Start()
     {
         m_rigid = GetComponent<Rigidbody>();
         m_animator = GetComponent<Animator>();
+        m_angerManager = GetComponent<AngerManager>();
+        m_stator = GetComponent<Stator_ZombieNormal>();
     }
 
     void Update()
@@ -41,5 +45,15 @@ public class AnimatorCtrl_ZombieNormal : MonoBehaviour
     public void EndStun()
     {
         m_animator.SetBool("isStun", false);
+    }
+
+    public void StartAnger()
+    {
+        m_animator.SetTrigger("angerTrigger");
+    }
+
+    public void EndAngerAnimation()
+    {
+        m_stator.GetTransitionMember().rondomPlowlingTrigger.Fire();
     }
 }

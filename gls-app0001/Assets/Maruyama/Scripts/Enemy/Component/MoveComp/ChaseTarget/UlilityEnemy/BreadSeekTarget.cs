@@ -22,6 +22,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
     BreadCrumb m_bread;
     ThrongManager m_throngMgr;
     EnemyRotationCtrl m_rotationCtrl;
+    StatusManagerBase m_statusManager;
 
     public BreadSeekTarget(EnemyBase owner, float nearRange, float maxSpeed, float turningPower, float lostSeekTime)
         : base(owner)
@@ -30,6 +31,8 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
         m_maxSpeed = maxSpeed;
         m_turningPower = turningPower;
         m_lostSeekTime = lostSeekTime;
+
+        m_statusManager = owner.GetComponent<StatusManagerBase>();
     }
 
     public override void OnStart()
@@ -82,7 +85,8 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
     void UpdateMove()
     {
         var toVec = m_targetPosition - GetOwner().transform.position;
-        Vector3 force = CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, toVec, m_maxSpeed);
+        var maxSpeed = m_maxSpeed * m_statusManager.GetBuffParametor().angerParam.speed;
+        Vector3 force = CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, toVec, maxSpeed);
         m_velocityMgr.AddForce(force * m_turningPower);
 
         m_rotationCtrl.SetDirect(m_velocityMgr.velocity);

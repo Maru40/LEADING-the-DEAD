@@ -2423,6 +2423,7 @@ GameObject:
   - component: {fileID: -9140734898953323855}
   - component: {fileID: 7956893243637624007}
   - component: {fileID: 1098812698911119182}
+  - component: {fileID: 6932570756744996945}
   m_Layer: 6
   m_Name: Zombie
   m_TagString: Untagged
@@ -2524,7 +2525,7 @@ MonoBehaviour:
   m_baseParam:
     power: 10
     startRange: 3
-    moveSpeed: 3
+  m_moveSpeed: 3
   m_hitBox: {fileID: 632433336}
 --- !u!114 &1444888580945028645
 MonoBehaviour:
@@ -2759,6 +2760,7 @@ MonoBehaviour:
   m_status:
     hp: 1
     damageIntervalTime: 3
+    isAnger: 0
 --- !u!114 &-8648523569329281583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2834,10 +2836,10 @@ MonoBehaviour:
     status:
       hp: 0
       damageIntervalTime: 0
+      isAnger: 0
     attackParametor:
       power: 1
       startRange: 0
-      moveSpeed: 0.2
 --- !u!114 &-9140734898953323855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2890,6 +2892,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_param:
     time: 3
+  m_changeCompParam: []
+--- !u!114 &6932570756744996945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434505739018704334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8aa6fa30c4f6048bd2a7e7c7b6acff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_riseParam:
+    attackPower: 1.2
+    speed: 1.2
+  m_time: 99
+  m_isAngerTimer: 0
 --- !u!1 &7689520723826636210
 GameObject:
   m_ObjectHideFlags: 0

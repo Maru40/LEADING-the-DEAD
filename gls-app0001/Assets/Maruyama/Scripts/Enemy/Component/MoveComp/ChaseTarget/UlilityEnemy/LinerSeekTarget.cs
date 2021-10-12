@@ -17,6 +17,7 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
     EnemyVelocityMgr m_velocityMgr;
     ThrongManager m_throngMgr;
     EnemyRotationCtrl m_rotationCtrl;
+    StatusManagerBase m_statusManager;
 
     public LinerSeekTarget(EnemyBase owner)
         : this(owner,3.0f, 1.0f)
@@ -33,6 +34,7 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
         m_velocityMgr = owner.GetComponent<EnemyVelocityMgr>();
         m_throngMgr = owner.GetComponent<ThrongManager>();
         m_rotationCtrl = owner.GetComponent<EnemyRotationCtrl>();
+        m_statusManager = owner.GetComponent<StatusManagerBase>();
     }
 
     public override void OnStart()
@@ -58,7 +60,8 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
         FoundObject target = m_targetMgr.GetNowTarget();
         if (target) {
             Vector3 toVec = target.transform.position - GetOwner().transform.position;
-            Vector3 force = CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, toVec, m_maxSpeed);
+            float maxSpeed = m_maxSpeed * m_statusManager.GetBuffParametor().angerParam.speed;
+            Vector3 force = CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, toVec, maxSpeed);
             m_velocityMgr.AddForce(force * m_turningPower);
 
             m_rotationCtrl.SetDirect(m_velocityMgr.velocity);

@@ -28,13 +28,6 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea
         m_throngMgr = GetComponent<ThrongManager>();
     }
 
-    void Update()
-    {
-        
-    }
-
-
-
     //インターフェースの実装-------------------------------------------------
 
     void I_Chase.ChangeState(){
