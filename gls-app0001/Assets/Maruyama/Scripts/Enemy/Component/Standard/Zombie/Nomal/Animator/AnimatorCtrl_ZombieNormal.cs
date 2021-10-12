@@ -52,7 +52,7 @@ public class AnimatorCtrl_ZombieNormal : MonoBehaviour
         m_animator.SetTrigger("angerTrigger");
     }
 
-    public void EndAnger()
+    public void EndAngerAnimation()
     {
         m_stator.GetTransitionMember().rondomPlowlingTrigger.Fire();
     }
