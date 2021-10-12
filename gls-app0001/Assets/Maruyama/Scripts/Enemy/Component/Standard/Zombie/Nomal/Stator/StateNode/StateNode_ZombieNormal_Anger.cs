@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class StateNode_ZombieNormal_Anger : EnState_Anger
 {
-    StatusManager_ZombieNormal m_stator;
+    AngerManager m_angerManager;
+    AnimatorCtrl_ZombieNormal m_animatorCtrl;
 
     public StateNode_ZombieNormal_Anger(EnemyBase owner)
         : base(owner)
     {
-        m_stator = owner.GetComponent<StatusManager_ZombieNormal>();
+        m_angerManager = owner.GetComponent<AngerManager>();
+        m_animatorCtrl = owner.GetComponent<AnimatorCtrl_ZombieNormal>();
     }
 
     protected override void ReserveChangeComponents()
@@ -21,7 +23,8 @@ public class StateNode_ZombieNormal_Anger : EnState_Anger
     {
         base.OnStart();
 
-        m_stator.SetIsAnger(true);
+        m_angerManager.StartAnger();
+        m_animatorCtrl.StartAnger();
     }
 
     public override void OnUpdate()
