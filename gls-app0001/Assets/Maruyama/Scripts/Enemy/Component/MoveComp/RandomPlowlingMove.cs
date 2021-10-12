@@ -56,6 +56,7 @@ public class RandomPlowlingMove : MonoBehaviour
     WaitTimer m_waitTimer;
     ThrongManager m_throngMgr;
     EnemyRotationCtrl m_rotationCtrl;
+    StatusManagerBase m_statusManager;
 
     void Awake()
     {
@@ -64,6 +65,7 @@ public class RandomPlowlingMove : MonoBehaviour
         m_waitTimer = GetComponent<WaitTimer>();
         m_throngMgr = GetComponent<ThrongManager>();
         m_rotationCtrl = GetComponent<EnemyRotationCtrl>();
+        m_statusManager = GetComponent<StatusManagerBase>();
         m_centerObject = gameObject;
 
         //シード値
@@ -89,7 +91,8 @@ public class RandomPlowlingMove : MonoBehaviour
 
         //加える力の計算
         var toVec = m_targetPosition - transform.position;
-        Vector3 force = CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, toVec, m_param.maxSpeed);
+        var maxSpeed = m_param.maxSpeed * m_statusManager.GetBuffParametor().angerParam.speed;
+        Vector3 force = CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, toVec, maxSpeed);
         m_velocityMgr.AddForce(force * m_param.turningPower);
 
         m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
