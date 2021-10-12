@@ -78,7 +78,8 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
 
     void I_Stun.EndStun()
     {
-        m_stator.GetTransitionMember().rondomPlowlingTrigger.Fire();
+        //m_stator.GetTransitionMember().rondomPlowlingTrigger.Fire();
+        m_stator.GetTransitionMember().angerTirgger.Fire();
 
         //アニメーションの切替
         m_animator.EndStun();
