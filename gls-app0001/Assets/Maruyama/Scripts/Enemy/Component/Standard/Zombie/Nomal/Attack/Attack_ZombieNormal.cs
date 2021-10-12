@@ -4,6 +4,7 @@ using UnityEngine;
 
 using System;
 using MaruUtility;
+using UniRx;
 
 public class Attack_ZombieNormal : AttackBase
 {
@@ -13,6 +14,7 @@ public class Attack_ZombieNormal : AttackBase
     EnemyRotationCtrl m_rotationCtrl;
     EyeSearchRange m_eyeRange;
     ThrongManager m_throngManager;
+    StatusManagerBase m_statusManager;
 
     [SerializeField]
     float m_moveSpeed = 3.0f;
@@ -30,6 +32,7 @@ public class Attack_ZombieNormal : AttackBase
         m_rotationCtrl = GetComponent<EnemyRotationCtrl>();
         m_eyeRange = GetComponent<EyeSearchRange>();
         m_throngManager = GetComponent<ThrongManager>();
+        m_statusManager = GetComponent<StatusManagerBase>();
 
         m_hitBox.AddEnterAction(SendDamage);
     }
@@ -107,7 +110,8 @@ public class Attack_ZombieNormal : AttackBase
         var damage = other.GetComponent<AttributeObject.TakeDamageObject>();
         if (damage != null)
         {
-            var data = new AttributeObject.DamageData((int)GetBaseParam().power);
+            var power = GetBaseParam().power * m_statusManager.GetBuffParametor().angerParam.attackPower;
+            var data = new AttributeObject.DamageData(power);
             damage.TakeDamage(data);
         }
     }
