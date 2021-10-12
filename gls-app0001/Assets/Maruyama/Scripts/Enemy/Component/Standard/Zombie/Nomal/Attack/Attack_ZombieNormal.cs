@@ -55,13 +55,14 @@ public class Attack_ZombieNormal : AttackBase
             return;
         }
 
+        float moveSpeed = m_moveSpeed * m_statusManager.GetBuffParametor().angerParam.speed;
         var velocity = m_velocityMgr.velocity;
         var toVec = target.transform.position - transform.position;
         var avoidVec = m_throngManager.CalcuSumAvoidVector();
         toVec += avoidVec;
         toVec.y = 0.0f;  //(yのベクトルを殺す。)
 
-        m_velocityMgr.velocity = toVec.normalized * m_moveSpeed;
+        m_velocityMgr.velocity = toVec.normalized * moveSpeed;
 
         m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
     }
