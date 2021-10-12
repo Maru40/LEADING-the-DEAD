@@ -57,18 +57,18 @@ public class Stator_ZombieNormal : StatorBase
     void CreateEdge()
     {
         //ランダム徘徊
-        m_stateMachine.AddEdge(StateType.RandomPlowling, StateType.Chase, ToChaseTrigger);
         m_stateMachine.AddEdge(StateType.RandomPlowling, StateType.Stun, ToStunTrigger);
+        m_stateMachine.AddEdge(StateType.RandomPlowling, StateType.Chase, ToChaseTrigger);
 
         //追従処理
+        m_stateMachine.AddEdge(StateType.Chase, StateType.Stun, ToStunTrigger);
         m_stateMachine.AddEdge(StateType.Chase, StateType.RandomPlowling, ToRandomPlowling);
         m_stateMachine.AddEdge(StateType.Chase, StateType.Attack, ToAttackTrigger);
-        m_stateMachine.AddEdge(StateType.Chase, StateType.Stun, ToStunTrigger);
 
         //攻撃処理
+        m_stateMachine.AddEdge(StateType.Attack, StateType.Stun, ToStunTrigger);
         m_stateMachine.AddEdge(StateType.Attack, StateType.Chase, ToChaseTrigger);
         m_stateMachine.AddEdge(StateType.Attack, StateType.RandomPlowling, ToRandomPlowling);
-        m_stateMachine.AddEdge(StateType.Attack, StateType.Stun, ToStunTrigger);
 
         //スタン時
         m_stateMachine.AddEdge(StateType.Stun, StateType.RandomPlowling, ToRandomPlowling);
