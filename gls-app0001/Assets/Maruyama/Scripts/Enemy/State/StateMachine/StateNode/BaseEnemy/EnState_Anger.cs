@@ -8,10 +8,8 @@ using UnityEngine;
 public class EnState_Anger : EnemyStateNodeBase<EnemyBase>
 {
     public EnState_Anger(EnemyBase owner)
-    : base(owner)
-    {
-
-    }
+        : base(owner)
+    { }
 
     protected override void ReserveChangeComponents()
     {
