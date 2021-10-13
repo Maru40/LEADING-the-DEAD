@@ -11,13 +11,11 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
     {
         public float hp;
         public float damageIntervalTime;  //ダメージを受けた後の無敵時間
-        public bool isAnger;  //怒り状態かどうか
 
-        public Status(float hp, float damageIntervalTime, bool isAnger = false)
+        public Status(float hp, float damageIntervalTime)
         {
             this.hp = hp;
             this.damageIntervalTime = damageIntervalTime;
-            this.isAnger = isAnger;
         }
     }
 
@@ -100,15 +98,5 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
     {
         m_status.hp += status.hp;
         m_status.damageIntervalTime += status.damageIntervalTime;
-    }
-
-    public bool IsAnger()
-    {
-        return m_status.isAnger;
-    }
-
-    public void SetIsAnger(bool isAnger)
-    {
-        m_status.isAnger = isAnger;
     }
 }
