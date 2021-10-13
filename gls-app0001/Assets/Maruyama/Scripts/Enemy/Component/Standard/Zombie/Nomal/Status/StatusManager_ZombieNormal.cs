@@ -6,24 +6,6 @@ using System;
 
 public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
 {
-    [Serializable]
-    public struct Status
-    {
-        public float hp;
-        public float damageIntervalTime;  //ダメージを受けた後の無敵時間
-        public bool isAnger;  //怒り状態かどうか
-
-        public Status(float hp, float damageIntervalTime, bool isAnger = false)
-        {
-            this.hp = hp;
-            this.damageIntervalTime = damageIntervalTime;
-            this.isAnger = isAnger;
-        }
-    }
-
-    [SerializeField]
-    Status m_status = new Status(1.0f, 3.0f);
-
     WaitTimer m_waitTimer = null;
     EnemyRespawnManager m_respawn = null;
     Stator_ZombieNormal m_stator = null;
@@ -39,7 +21,7 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
         m_stun = GetComponent<I_Stun>();
     }
 
-    public void Damage(AttributeObject.DamageData data)
+    public override void Damage(AttributeObject.DamageData data)
     {
         if (m_waitTimer.IsWait(GetType())) {
             return;
@@ -86,29 +68,4 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
     }
 
     //アクセッサ----------------------------------------------------------------------------
-
-    public void SetStatus(Status status)
-    {
-        m_status = status;
-    }
-    public Status GetStatus()
-    {
-        return m_status;
-    }
-
-    public void AddStatus(Status status)
-    {
-        m_status.hp += status.hp;
-        m_status.damageIntervalTime += status.damageIntervalTime;
-    }
-
-    public bool IsAnger()
-    {
-        return m_status.isAnger;
-    }
-
-    public void SetIsAnger(bool isAnger)
-    {
-        m_status.isAnger = isAnger;
-    }
 }
