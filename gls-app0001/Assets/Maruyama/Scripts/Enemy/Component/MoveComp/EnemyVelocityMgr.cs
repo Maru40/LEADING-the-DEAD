@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using MaruUtility;
+
 public class EnemyVelocityMgr : MonoBehaviour
 {
     Rigidbody m_rigid;
 
     Vector3 m_force = new Vector3();
     Vector3 m_velocity = new Vector3();
+
+    bool m_isDeseleration = false;  //減速中かどうか
+    float m_deselerationPower = 1.0f;
 
     void Start()
     {
@@ -18,6 +23,9 @@ public class EnemyVelocityMgr : MonoBehaviour
     {
         //m_velocity = m_rigid.velocity;
         //return;
+
+        //減速処理
+        Deseleration();
 
         m_velocity += m_force * Time.deltaTime;
 
@@ -35,6 +43,23 @@ public class EnemyVelocityMgr : MonoBehaviour
         //}
     }
 
+    /// <summary>
+    /// 減速処理
+    /// </summary>
+    void Deseleration()
+    {
+        if (!m_isDeseleration) {
+            return;
+        }
+
+        var force = CalcuVelocity.CalucSeekVec(velocity, -velocity, velocity.magnitude * m_deselerationPower);
+        AddForce(force);
+
+        float stopSpeed = 0.1f;
+        if (velocity.magnitude <= stopSpeed) {
+            m_isDeseleration = false;
+        }
+    }
 
     //アクセッサ-------------------------------------------------------
 
@@ -66,4 +91,18 @@ public class EnemyVelocityMgr : MonoBehaviour
         m_force = Vector3.zero;
     }
 
+    public void StartDeseleration(float power = 1.0f)
+    {
+        m_isDeseleration = true;
+        m_deselerationPower = power;
+    }
+
+    /// <summary>
+    /// 減速の強さ
+    /// </summary>
+    public float deselerationPower
+    {
+        set { m_deselerationPower = value; }
+        get { return m_deselerationPower; }
+    }
 }

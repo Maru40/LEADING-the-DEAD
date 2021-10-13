@@ -124,6 +124,14 @@ public class Attack_ZombieTank : AttackBase
         m_attackType = AttackType.Tackle;
     }
 
+    /// <summary>
+    /// 減速開始
+    /// </summary>
+    public void DeselerationStart()
+    {
+        m_velocityManager.StartDeseleration();
+    }
+
     public override void Attack()
     {
         
@@ -136,6 +144,7 @@ public class Attack_ZombieTank : AttackBase
 
     public override void EndAnimationEvent()
     {
+        //Debug.Log("EndAnimation");
         m_stator.GetTransitionMember().chaseTrigger.Fire();
 
         m_attackType = AttackType.Charge;
