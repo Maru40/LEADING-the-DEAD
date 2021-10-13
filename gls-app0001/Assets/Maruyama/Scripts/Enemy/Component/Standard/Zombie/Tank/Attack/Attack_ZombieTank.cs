@@ -30,6 +30,7 @@ public class Attack_ZombieTank : AttackBase
 
     [SerializeField]
     Parametor m_param = new Parametor(2.0f, 10.0f, 1000.0f);
+    bool m_isDeseleration = false;  //減速するかどうか
 
     TargetManager m_targetMgr;
     Stator_ZombieTank m_stator;
@@ -53,6 +54,8 @@ public class Attack_ZombieTank : AttackBase
         MoveProcess();
 
         RotationCtrl();
+
+        Deseleration();
     }
 
     void MoveProcess()
@@ -124,6 +127,33 @@ public class Attack_ZombieTank : AttackBase
         m_attackType = AttackType.Tackle;
     }
 
+    //減速
+    public void Deseleration()
+    {
+        if (!m_isDeseleration) {
+            return;
+        }
+
+        Debug.Log("Deseleration");
+
+        var velocity = m_velocityManager.velocity;
+        var force = CalcuVelocity.CalucSeekVec(velocity, -velocity, velocity.magnitude);
+        m_velocityManager.AddForce(force);
+
+        if(velocity.magnitude <= 0.1f)
+        {
+            m_isDeseleration = false;
+        }
+    }
+
+    /// <summary>
+    /// 減速開始
+    /// </summary>
+    public void DeselerationStart()
+    {
+        m_isDeseleration = true;
+    }
+
     public override void Attack()
     {
         
@@ -136,6 +166,7 @@ public class Attack_ZombieTank : AttackBase
 
     public override void EndAnimationEvent()
     {
+        //Debug.Log("EndAnimation");
         m_stator.GetTransitionMember().chaseTrigger.Fire();
 
         m_attackType = AttackType.Charge;
