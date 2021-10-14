@@ -10,6 +10,9 @@ public class BindActivateArea : MonoBehaviour
     [SerializeField]
     float m_bindRange = 10.0f;  //行動制限範囲
 
+    [SerializeField]
+    GameObject m_area = null;
+
     /// <summary>
     /// 行動制限する距離の取得
     /// </summary>
@@ -17,6 +20,11 @@ public class BindActivateArea : MonoBehaviour
     public float GetBindRange()
     {
         return m_bindRange;
+    }
+
+    public GameObject GetAreaCenterObject()
+    {
+        return m_area;
     }
 
     public void Bind(Collider other)

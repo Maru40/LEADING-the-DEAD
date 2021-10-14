@@ -45,29 +45,34 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea
 
     void I_BindedActiveArea.Bind(BindActivateArea bind)
     {
-        m_randomPlowling.SetCenterObject(bind.gameObject);
+        Debug.Log("Bind");
+
+        m_randomPlowling.SetCenterObject(bind.GetAreaCenterObject());
         m_randomPlowling.SetRandomPositionRadius(bind.GetBindRange());
         //m_throngMgr.enabled = false;  //ThrongMgrをfalseにするか検討中
 
         m_stator.GetTransitionMember().rondomPlowlingTrigger.Fire();
 
         //ターゲットがBindオブジェクトと同じならnullにする。
-        var found = bind.GetComponent<FoundObject>();
-        if (found)
-        {
-            m_targetMgr.SetNowTarget(GetType(), found);
+        //var found = bind.GetComponent<FoundObject>();
+        //if (found)
+        //{
+        //    m_targetMgr.SetNowTarget(GetType(), found);
 
-            var target = m_targetMgr.GetNowTarget();
-            if(found == target)
-            {
-                m_targetMgr.SetNowTarget(GetType(), null);
-                m_throngMgr.enabled = true;
-            }
-        }
+        //    var target = m_targetMgr.GetNowTarget();
+        //    if(found == target)
+        //    {
+        //        m_targetMgr.SetNowTarget(GetType(), null);
+        //        m_throngMgr.enabled = true;
+        //    }
+        //}
     }
 
     void I_BindedActiveArea.BindRelease(BindActivateArea bind)
     {
+        Debug.Log("BindReset");
+
+        //m_targetMgr.SetNowTarget(GetType(), null);
         m_randomPlowling.ResetCenterObject();
     }
 }
