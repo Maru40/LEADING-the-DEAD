@@ -45,7 +45,9 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea
 
     void I_BindedActiveArea.Bind(BindActivateArea bind)
     {
-        m_randomPlowling.SetCenterObject(bind.gameObject);
+        Debug.Log("Bind");
+
+        m_randomPlowling.SetCenterObject(bind.GetAreaCenterObject());
         m_randomPlowling.SetRandomPositionRadius(bind.GetBindRange());
         //m_throngMgr.enabled = false;  //ThrongMgrをfalseにするか検討中
 
@@ -68,6 +70,9 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea
 
     void I_BindedActiveArea.BindRelease(BindActivateArea bind)
     {
+        Debug.Log("BindReset");
+
+        //m_targetMgr.SetNowTarget(GetType(), null);
         m_randomPlowling.ResetCenterObject();
     }
 }
