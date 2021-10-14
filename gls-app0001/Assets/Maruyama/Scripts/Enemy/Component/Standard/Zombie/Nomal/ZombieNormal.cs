@@ -54,18 +54,18 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea
         m_stator.GetTransitionMember().rondomPlowlingTrigger.Fire();
 
         //ターゲットがBindオブジェクトと同じならnullにする。
-        var found = bind.GetComponent<FoundObject>();
-        if (found)
-        {
-            m_targetMgr.SetNowTarget(GetType(), found);
+        //var found = bind.GetComponent<FoundObject>();
+        //if (found)
+        //{
+        //    m_targetMgr.SetNowTarget(GetType(), found);
 
-            var target = m_targetMgr.GetNowTarget();
-            if(found == target)
-            {
-                m_targetMgr.SetNowTarget(GetType(), null);
-                m_throngMgr.enabled = true;
-            }
-        }
+        //    var target = m_targetMgr.GetNowTarget();
+        //    if(found == target)
+        //    {
+        //        m_targetMgr.SetNowTarget(GetType(), null);
+        //        m_throngMgr.enabled = true;
+        //    }
+        //}
     }
 
     void I_BindedActiveArea.BindRelease(BindActivateArea bind)
