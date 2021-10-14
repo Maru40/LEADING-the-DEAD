@@ -207,6 +207,8 @@ public class RandomPlowlingMove : MonoBehaviour
         m_centerObject = this.gameObject;
         m_param.randomPositionRadius = m_firstRandomPositionRadius;
         m_throngMgr.enabled = true;
+
+        SetRandomTargetPosition();
         //m_param.inThrongRange = m_firstInThrongRange;
     }
 
