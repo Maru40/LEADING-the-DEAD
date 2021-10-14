@@ -4,21 +4,21 @@ using UnityEngine;
 
 [RequireComponent(typeof(AlarmObject))]
 [RequireComponent(typeof(WaitTimer))]
+[RequireComponent(typeof(BindActivateArea))]
 public class SignalExplosionCtrl : MonoBehaviour
 {
     [SerializeField]
     float m_alarmTime = 5.0f;
 
-    [SerializeField]
-    GameObject m_bindArea = null;
-
     AlarmObject m_alarm;
     WaitTimer m_waitTimer;
+    BindActivateArea m_bindArea;
 
     void Awake()
     {
         m_alarm = GetComponent<AlarmObject>();
         m_waitTimer = GetComponent<WaitTimer>();
+        m_bindArea = GetComponent<BindActivateArea>();
     }
 
     private void Start()
@@ -31,6 +31,7 @@ public class SignalExplosionCtrl : MonoBehaviour
     void EndAlarm()
     {
         m_alarm.AlarmStop();
+        //m_bindArea.GetAreaCenterObject().GetComponent<Collider>().enabled = false;
 
         Destroy(this.gameObject, 0.1f);
     }
@@ -42,7 +43,7 @@ public class SignalExplosionCtrl : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, direct,out hit))
         {
-            m_bindArea.transform.position = hit.point;
+            m_bindArea.GetAreaCenterObject().transform.position = hit.point;
         }
     }
 }
