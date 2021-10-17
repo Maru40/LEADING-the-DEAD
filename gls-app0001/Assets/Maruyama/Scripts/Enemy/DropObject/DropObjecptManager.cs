@@ -39,6 +39,9 @@ public class DropObjecptManager : MonoBehaviour
     [SerializeField]
     GameObject m_tempNullParticle = null;  //particleがnullの時の仮particle
 
+    [SerializeField]
+    public bool m_isPickUp = true;  //アイテムを拾うかどうか
+
     void InstatiateParticle(DropData data)
     {
         if (data.particle != null)
@@ -73,6 +76,7 @@ public class DropObjecptManager : MonoBehaviour
                 //オブジェクトの生成。
                 data.obj.SetActive(true);
                 data.obj.transform.position = transform.position;
+                data.obj.transform.parent = null;
                 //Instantiate(data.obj, transform.position, Quaternion.identity);
                 //演出の生成(particleとか？)
             }
@@ -117,14 +121,24 @@ public class DropObjecptManager : MonoBehaviour
         return m_datas;
     }
 
-
     //Collision---------------------------------------------------------------------------------
 
     private void OnCollisionEnter(Collision collision)
     {
-        var picked = collision.gameObject.GetComponent<PickedUpObject>();
+        if (m_isPickUp) {
+            PickUp(collision.gameObject);
+        }
+    }
 
-        if (picked) {
+    /// <summary>
+    /// 拾う
+    /// </summary>
+    void PickUp(GameObject other)
+    {
+        var picked = other.GetComponent<PickedUpObject>();
+
+        if (picked)
+        {
             AddData(new DropData(picked.gameObject, 100));
             picked.gameObject.SetActive(false);
         }

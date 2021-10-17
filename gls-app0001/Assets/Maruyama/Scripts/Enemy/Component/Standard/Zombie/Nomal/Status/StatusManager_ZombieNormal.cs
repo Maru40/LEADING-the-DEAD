@@ -10,6 +10,7 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
     EnemyRespawnManager m_respawn = null;
     Stator_ZombieNormal m_stator = null;
     AnimatorCtrl_ZombieNormal m_animator = null;
+    DropObjecptManager m_dropManager = null;
     I_Stun m_stun;
 
     void Awake()
@@ -18,6 +19,7 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
         m_respawn = GetComponent<EnemyRespawnManager>();
         m_stator = GetComponent<Stator_ZombieNormal>();
         m_animator = GetComponent<AnimatorCtrl_ZombieNormal>();
+        m_dropManager = GetComponent<DropObjecptManager>();
         m_stun = GetComponent<I_Stun>();
     }
 
@@ -29,7 +31,7 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
 
         if (data.isStunAttack)  //スタン状態になる攻撃なら
         {
-            m_stun.StartStun();
+            Stun();
         }
         else
         {
@@ -46,6 +48,12 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
         //ダメージインターバル開始
         float time = m_status.damageIntervalTime;
         m_waitTimer.AddWaitTimer(GetType(), time);
+    }
+
+    void Stun()
+    {
+        m_stun.StartStun();
+        m_dropManager.Drop();
     }
 
     //インターフェースの実装----------------------------------------------------------------
