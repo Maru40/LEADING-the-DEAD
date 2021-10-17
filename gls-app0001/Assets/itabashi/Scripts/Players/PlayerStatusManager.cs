@@ -14,23 +14,15 @@ namespace Player
         private Gauge m_hpGauge;
 
         [SerializeField]
-        private float m_hp;
+        private FloatReactiveProperty m_hp = new FloatReactiveProperty(10);
 
         [SerializeField]
         private float m_maxHp;
 
         [SerializeField]
-        private bool m_isStun = false;
-        public bool isStun
-        {
-            private set
-            {
-                m_isStun = value;
-                m_playerParameters.isStun = m_isStun;
-            }
+        private BoolReactiveProperty m_isStun = new BoolReactiveProperty(false);
 
-            get => m_isStun;
-        }
+        public bool isStun { private set => m_isStun.Value = value; get => m_isStun.Value; }
 
         [SerializeField]
         private float m_stunSecond = 1.0f;
@@ -39,17 +31,12 @@ namespace Player
         {
             set
             {
-                m_hp = Mathf.Max(value, 0.0f);
+                m_hp.Value = Mathf.Max(value, 0.0f);
 
-                m_hpGauge.fillAmount = m_hp / m_maxHp;
-
-                if(m_hp == 0.0f)
-                {
-                    m_deadEvent.Invoke();
-                }
+                m_hpGauge.fillAmount = m_hp.Value / m_maxHp;
             }
 
-            get => m_hp;
+            get => m_hp.Value;
         }
 
         [SerializeField]
@@ -90,6 +77,12 @@ namespace Player
         [SerializeField]
         private UnityEngine.Events.UnityEvent m_deadEvent;
 
+        private Subject<Unit> m_endStunSubject = new Subject<Unit>();
+
+        public IObservable<float> OnHpChanged => m_hp;
+
+        public IObservable<bool> OnIsStanChanged => m_isStun;
+
         private void OnValidate()
         {
             m_maxStamina = Mathf.Max(m_maxStamina, 0.0f);
@@ -101,6 +94,12 @@ namespace Player
             m_gameControls = new GameControls();
 
             this.RegisterController(m_gameControls);
+
+            OnHpChanged.Where(hp => hp == 0.0f).Subscribe(_ => m_deadEvent?.Invoke()).AddTo(this);
+
+            m_endStunSubject.Delay(TimeSpan.FromSeconds(m_stunSecond))
+                .Subscribe(_ => isStun = false)
+                .AddTo(this);
         }
 
         private void Start()
@@ -133,7 +132,7 @@ namespace Player
         {
             isStun = true;
 
-            Observable.Timer(TimeSpan.FromSeconds(m_stunSecond)).Subscribe(_ => isStun = false).AddTo(this);
+            m_endStunSubject.OnNext(Unit.Default);
         }
     }
 }
