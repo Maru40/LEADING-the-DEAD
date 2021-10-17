@@ -15,11 +15,13 @@ public class AngerManager : MonoBehaviour
     {
         public float attackPower;
         public float speed;
+        public float attackAnimeSpeed;
 
-        public RiseParametor(float attackPower, float speed)
+        public RiseParametor(float attackPower, float speed, float attackAnimeSpeed)
         {
             this.attackPower = attackPower;
             this.speed = speed;
+            this.attackAnimeSpeed = attackAnimeSpeed;
         }
 
         public static RiseParametor operator +(RiseParametor right, RiseParametor left)
@@ -42,7 +44,7 @@ public class AngerManager : MonoBehaviour
     }
 
     [SerializeField]
-    RiseParametor m_riseParam = new RiseParametor(1.2f,1.2f);  //ステータス上昇のパラメータ
+    RiseParametor m_riseParam = new RiseParametor(1.2f,1.2f, 1.2f);  //ステータス上昇のパラメータ
 
     [SerializeField]
     float m_time = 99.0f;
