@@ -21,4 +21,9 @@ public class InputTester : MonoBehaviour
 
         transform.Translate(new Vector3(move.x, 0.0f, move.y));
     }
+
+    public void Dbg()
+    {
+        Debug.Log("ここからも呼ばれた");
+    }
 }
