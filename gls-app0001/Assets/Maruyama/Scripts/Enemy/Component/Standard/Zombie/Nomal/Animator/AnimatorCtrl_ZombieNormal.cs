@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class AnimatorCtrl_ZombieNormal : MonoBehaviour
 {
+    float m_defaultAttackSpeed = 1.0f;
+
     Rigidbody m_rigid;
     Animator m_animator;
     AngerManager m_angerManager;
     Stator_ZombieNormal m_stator;
+    StatusManager_ZombieNormal m_statusManager;
 
     void Start()
     {
@@ -16,6 +19,7 @@ public class AnimatorCtrl_ZombieNormal : MonoBehaviour
         m_animator = GetComponent<Animator>();
         m_angerManager = GetComponent<AngerManager>();
         m_stator = GetComponent<Stator_ZombieNormal>();
+        m_statusManager = GetComponent<StatusManager_ZombieNormal>();
     }
 
     void Update()
@@ -40,6 +44,8 @@ public class AnimatorCtrl_ZombieNormal : MonoBehaviour
     public void StartStun()
     {
         m_animator.SetBool("isStun", true);
+
+
     }
 
     public void EndStun()
@@ -50,6 +56,8 @@ public class AnimatorCtrl_ZombieNormal : MonoBehaviour
     public void StartAnger()
     {
         m_animator.SetTrigger("angerTrigger");
+
+        m_animator.SetFloat("attackSpeed", m_defaultAttackSpeed * m_angerManager.GetRiseParametor().attackAnimeSpeed);
     }
 
     public void EndAngerAnimation()
