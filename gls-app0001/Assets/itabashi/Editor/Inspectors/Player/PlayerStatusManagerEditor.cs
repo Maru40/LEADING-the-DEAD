@@ -54,14 +54,16 @@ namespace Player
             var maxHp = serializedObject.FindProperty("m_maxHp");
             var hpGauge = serializedObject.FindProperty("m_hpGauge");
 
+            var hpValue = hp.FindPropertyRelative("value");
+
             EditorGUI.indentLevel++;
 
             EditorGUILayout.PropertyField(hpGauge, new GUIContent("HPゲージ"));
             EditorGUILayout.PropertyField(maxHp, new GUIContent("体力の最大値"));
 
-            hp.floatValue = Mathf.Min(hp.floatValue, maxHp.floatValue);
+            hpValue.floatValue = Mathf.Min(hpValue.floatValue, maxHp.floatValue);
 
-            EditorGUILayout.Slider(hp, 0.0f, maxHp.floatValue, new GUIContent("現在の体力"));
+            EditorGUILayout.Slider(hpValue, 0.0f, maxHp.floatValue, new GUIContent("現在の体力"));
 
             EditorGUI.indentLevel--;
         }

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UniRx;
 
 namespace Player
 {
@@ -22,22 +22,10 @@ namespace Player
             get { return m_playerAnimator.GetFloat("stamina"); }
         }
 
-        public bool isThrowingStance
-        {
-            set { m_playerAnimator.SetBool("isThrowingStance", value); }
-            get { return m_playerAnimator.GetBool("isThrowingStance"); }
-        }
-
         public bool isDash
         {
             set { m_playerAnimator.SetBool("isDash", value); }
             get { return m_playerAnimator.GetBool("isDash"); }
-        }
-
-        public bool isStun
-        {
-            set => m_playerAnimator.SetBool("isStun", value);
-            get => m_playerAnimator.GetBool("isStun");
         }
 
         /// <summary>

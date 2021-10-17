@@ -8,32 +8,28 @@ namespace Player
     public class PlayerBatAttacker : PlayerActionBase
     {
         [SerializeField]
-        private PlayerAnimationParameters m_playerParameters;
+        private PlayerAnimatorManager m_animatorManager;
 
         [SerializeField]
         private WeaponBase m_weaponBase;
 
-        [SerializeField]
-        private bool m_hasReady = false;
-
-        private bool m_canSwing = true;
-
         private Subject<Unit> m_swingSubject = new Subject<Unit>();
-        private Subject<Unit> m_swingEndSubject = new Subject<Unit>();
 
         private GameControls m_gameControls;
 
         private void Awake()
         {
-            m_canSwing = !m_hasReady;
+            var batSwingBehaviour = m_animatorManager.behaviourTable["Upper_Layer.Swing.Swing"];
 
             m_swingSubject
-                .Where(_ => (!m_hasReady || m_canSwing) && !m_playerStatusManager.isStun)
-                .Subscribe(_ => SwingStart());
+                .Where(_ => !m_animatorManager.isUseActionMoving && !m_playerStatusManager.isStun)
+                .Subscribe(_ => m_animatorManager.GoState("Swing", "Upper_Layer"));
 
-            m_swingEndSubject
-                .Delay(System.TimeSpan.FromSeconds(0.75f))
-                .Subscribe(_ => m_weaponBase.gameObject.SetActive(false));
+            batSwingBehaviour.onStateEntered.Subscribe(_ => m_weaponBase.gameObject.SetActive(true));
+            batSwingBehaviour.onStateEntered.Subscribe(_ => m_animatorManager.isUseActionMoving = true);
+
+            batSwingBehaviour.onStateExited.Subscribe(_ => m_weaponBase.gameObject.SetActive(false));
+            batSwingBehaviour.onStateExited.Subscribe(_ => m_animatorManager.isUseActionMoving = false);
 
             m_gameControls = new GameControls();
 
@@ -42,22 +38,5 @@ namespace Player
             this.RegisterController(m_gameControls);
         }
 
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        }
-
-        private void SwingStart()
-        {
-            m_playerParameters.Swing();
-            m_weaponBase.gameObject.SetActive(true);
-            m_swingEndSubject.OnNext(Unit.Default);
-        }
     }
 }
