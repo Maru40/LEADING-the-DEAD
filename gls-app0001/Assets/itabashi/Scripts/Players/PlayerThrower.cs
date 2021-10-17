@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
 namespace Player
 {
@@ -9,13 +10,10 @@ namespace Player
         /// <summary>
         /// ゲームの入力
         /// </summary>
-        GameControls m_gameControls;
+        private GameControls m_gameControls;
 
-        /// <summary>
-        /// プレイヤーキャラクターのアニメーションパラメーター
-        /// </summary>
         [SerializeField]
-        PlayerAnimationParameters m_playerParameters;
+        private PlayerAnimatorManager m_animatorManager;
 
         [SerializeField]
         PlayerPickUpper m_playerpickUpper;
@@ -46,6 +44,10 @@ namespace Player
 
         private bool m_isThrowingStance = false;
 
+        private bool m_isThrowing = false;
+
+        private Subject<bool> m_throwingStanceSubject = new Subject<bool>();
+
         private void OnValidate()
         {
             m_minThrowRotateX = Mathf.Clamp(m_minThrowRotateX, -90, 0);
@@ -56,12 +58,37 @@ namespace Player
 
         private void Awake()
         {
+
+            m_throwingStanceSubject.Where(isThrowingStance => isThrowingStance)
+                .Where(_ => !m_animatorManager.isUseActionMoving && !m_playerStatusManager.isStun && isUse)
+                .Subscribe(_ => ThrowingStanceStart());
+
+            m_throwingStanceSubject.Where(isThrowingStance => !isThrowingStance)
+                .Where(_ => m_isThrowingStance && !m_isThrowing)
+                .Subscribe(_ => { ThrowingStanceEnd(); m_animatorManager.GoState("Idle", "Upper_Layer"); });
+
+            var throwingStanceBehaviour = m_animatorManager.behaviourTable["Upper_Layer.Throw.ThrowingStance"];
+
+            throwingStanceBehaviour.onStateEntered.Subscribe(_ => m_animatorManager.isUseActionMoving = true);
+            throwingStanceBehaviour.onStateExited
+                .Where(_ => !m_isThrowing)
+                .Subscribe(_ => m_animatorManager.isUseActionMoving = false);
+
+            var throwingBehaviour = m_animatorManager.behaviourTable["Upper_Layer.Throw.Throwing"];
+
+            throwingBehaviour.onStateEntered.Subscribe(_ => m_isThrowing = true);
+            throwingBehaviour.onStateEntered.Subscribe(_ => m_isThrowingStance = false);
+            throwingBehaviour.onStateExited.Subscribe(_ => m_isThrowing = false);
+            throwingBehaviour.onStateExited.Subscribe(_ => m_animatorManager.isUseActionMoving = false);
+
             m_gameControls = new GameControls();
 
-            m_gameControls.Player.ThrowingStance.performed += context => ThrowingStanceStart();
-            m_gameControls.Player.ThrowingStance.canceled += context => ThrowingStanceEnd();
+            m_gameControls.Player.ThrowingStance.performed += context => m_throwingStanceSubject.OnNext(true);
+            m_gameControls.Player.ThrowingStance.canceled += context => m_throwingStanceSubject.OnNext(false);
 
             this.RegisterController(m_gameControls);
+
+            m_animatorManager.OnIsUseActionMovingChanged.Subscribe(isAction => Debug.Log($"変化しました : {isAction}"));
         }
 
         // Start is called before the first frame update
@@ -86,10 +113,6 @@ namespace Player
 
         void ThrowingStanceStart()
         {
-            if(m_playerStatusManager.isStun || !isUse)
-            {
-                return;
-            }
 
             var cymbalMonkeyList = m_playerpickUpper.GetPickedUpObjectList("CymbalMonkey");
 
@@ -109,7 +132,6 @@ namespace Player
             m_pickedUpObject = cymbalMonkeyList[0];
 
             m_isThrowingStance = true;
-            m_playerParameters.isThrowingStance = true;
 
             throwableObject.gameObject.SetActive(true);
             throwableObject.gameObject.transform.SetParent(transform);
@@ -118,13 +140,12 @@ namespace Player
             throwableObject.Takeing();
 
             m_objectLauncher.isDrawPredictionLine = true;
+
+            m_animatorManager.GoState("ThrowingStance", "Upper_Layer");
         }
 
         void ThrowingStanceEnd()
         {
-            m_isThrowingStance = false;
-            m_playerParameters.isThrowingStance = false;
-
             m_takingObject = null;
 
             if (m_pickedUpObject)
@@ -134,12 +155,14 @@ namespace Player
                 m_pickedUpObject = null;
             }
 
+            m_isThrowingStance = false;
+
             m_objectLauncher.isDrawPredictionLine = false;
         }
 
         protected override void OnUse()
         {
-            if (!m_isThrowingStance)
+            if (!m_isThrowingStance || m_isThrowing)
             {
                 return;
             }
@@ -155,7 +178,11 @@ namespace Player
             m_takingObject = null;
             m_pickedUpObject = null;
 
-            ThrowingStanceEnd();
+            m_isThrowing = true;
+
+            m_animatorManager.GoState("Throwing", "Upper_Layer", 0.1f);
+
+            m_objectLauncher.isDrawPredictionLine = false;
         }
 
         void ThrowAngleControl()
