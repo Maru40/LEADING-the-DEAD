@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 8155939365520465223}
   - component: {fileID: 8155939365520465222}
   - component: {fileID: 8155939365520465221}
+  - component: {fileID: 5603881458882149349}
+  - component: {fileID: 4833544884148459471}
   m_Layer: 3
   m_Name: FlameThrower
   m_TagString: Untagged
@@ -143,6 +145,50 @@ MonoBehaviour:
   m_isShoot: 1
   m_flameParticle: {fileID: 8155939366116673336}
   m_flameDamageTrigger: {fileID: 8155939366785053284}
+--- !u!114 &5603881458882149349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8155939365520465220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d638061b631635b41964733f8831a238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_animator: {fileID: 0}
+  m_isHitStopable: 1
+  m_takeDamageEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4833544884148459471}
+        m_TargetAssemblyTypeName: TagDamage, Assembly-CSharp
+        m_MethodName: Damaged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4833544884148459471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8155939365520465220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57436ba9ae8f7f447a7538693a8d707d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_tags:
+  - ZombieTankTackle
+  m_particle: {fileID: 0}
 --- !u!1001 &8059197699164966168
 PrefabInstance:
   m_ObjectHideFlags: 0
