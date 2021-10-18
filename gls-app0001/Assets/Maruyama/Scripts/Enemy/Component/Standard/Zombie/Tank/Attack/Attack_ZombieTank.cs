@@ -116,6 +116,8 @@ public class Attack_ZombieTank : AttackBase
 
     public void AddMoveForce()
     {
+        Debug.Log("タックル開始");
+
         var target = m_targetMgr.GetNowTarget();
         var toVec = target.gameObject.transform.position - transform.position;
 
