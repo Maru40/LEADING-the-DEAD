@@ -17,12 +17,12 @@ public class Flaregun : MonoBehaviour
 		GetComponent<AudioSource>().PlayOneShot(flareShotSound);
 
 
-		Rigidbody bulletInstance;
-		bulletInstance = Instantiate(flareBullet, barrelEnd.position, barrelEnd.rotation) as Rigidbody; //INSTANTIATING THE FLARE PROJECTILE
+        Rigidbody bulletInstance;
+        bulletInstance = Instantiate(flareBullet, barrelEnd.position, Quaternion.Euler(90,0,0)) as Rigidbody; //INSTANTIATING THE FLARE PROJECTILE
 
 
-		bulletInstance.AddForce(barrelEnd.forward * bulletSpeed); //ADDING FORWARD FORCE TO THE FLARE PROJECTILE
+        bulletInstance.AddForce(Vector3.up * bulletSpeed); //ADDING FORWARD FORCE TO THE FLARE PROJECTILE
 
-		Instantiate(muzzleParticles, barrelEnd.position, barrelEnd.rotation);   //INSTANTIATING THE GUN'S MUZZLE SPARKS	
+        Instantiate(muzzleParticles, barrelEnd.position, barrelEnd.rotation);   //INSTANTIATING THE GUN'S MUZZLE SPARKS	
 	}
 }
