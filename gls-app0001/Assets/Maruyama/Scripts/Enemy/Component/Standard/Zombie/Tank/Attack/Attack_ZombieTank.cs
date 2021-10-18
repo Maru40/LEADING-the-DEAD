@@ -120,6 +120,7 @@ public class Attack_ZombieTank : AttackBase
 
         var target = m_targetMgr.GetNowTarget();
         var toVec = target.gameObject.transform.position - transform.position;
+        toVec.y = 0;
 
         m_velocityManager?.AddForce(toVec.normalized * m_param.tackleSpeed);
 
