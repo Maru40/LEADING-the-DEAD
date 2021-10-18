@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_playerStatusManager: {fileID: 1106717132}
+  m_animator: {fileID: 5795822217416765791}
   m_animatorManager: {fileID: 1106717144}
   m_weaponBase: {fileID: 1717001797}
 --- !u!1 &642393358
@@ -739,6 +740,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d638061b631635b41964733f8831a238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_animator: {fileID: 0}
+  m_isHitStopable: 1
   m_takeDamageEvent:
     m_PersistentCalls:
       m_Calls:
@@ -84415,6 +84418,34 @@ PrefabInstance:
     - target: {fileID: 7602396690420632761, guid: 502cd9cd455036d43a8d944ea3e658e0, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7604240690625314483, guid: 502cd9cd455036d43a8d944ea3e658e0, type: 3}
+      propertyPath: m_baseAttackDamageData.hitStopTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7604240690625314483, guid: 502cd9cd455036d43a8d944ea3e658e0, type: 3}
+      propertyPath: m_opponentDamageEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7604240690625314483, guid: 502cd9cd455036d43a8d944ea3e658e0, type: 3}
+      propertyPath: m_opponentDamageEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 562588182}
+    - target: {fileID: 7604240690625314483, guid: 502cd9cd455036d43a8d944ea3e658e0, type: 3}
+      propertyPath: m_opponentDamageEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7604240690625314483, guid: 502cd9cd455036d43a8d944ea3e658e0, type: 3}
+      propertyPath: m_opponentDamageEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnBatHited
+      objectReference: {fileID: 0}
+    - target: {fileID: 7604240690625314483, guid: 502cd9cd455036d43a8d944ea3e658e0, type: 3}
+      propertyPath: m_opponentDamageEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Player.PlayerBatAttacker, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7604240690625314483, guid: 502cd9cd455036d43a8d944ea3e658e0, type: 3}
+      propertyPath: m_opponentDamageEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7604673703819112103, guid: 502cd9cd455036d43a8d944ea3e658e0, type: 3}
       propertyPath: m_RootOrder

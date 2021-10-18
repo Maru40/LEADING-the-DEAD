@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
+using AttributeObject;
 
 public abstract class WeaponBase : MonoBehaviour
 {
@@ -8,9 +11,14 @@ public abstract class WeaponBase : MonoBehaviour
     private Collider m_weaponCollider;
 
     [SerializeField]
-    private AttributeObject.DamageData m_baseAttackDamageData;
+    private DamageData m_baseAttackDamageData;
 
-    public AttributeObject.DamageData baseAttackDamageData => m_baseAttackDamageData;
+    public DamageData baseAttackDamageData => m_baseAttackDamageData;
+
+    [SerializeField]
+    private UnityEvent<TakeDamageObject, DamageData> m_opponentDamageEvent;
+
+    private List<TakeDamageObject> m_opponentObjects = new List<TakeDamageObject>();
 
     public bool attackColliderEnabled
     {
@@ -20,14 +28,40 @@ public abstract class WeaponBase : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        var takeDamageObject = other.GetComponent<AttributeObject.TakeDamageObject>();
+        var takeDamageObject = other.GetComponent<TakeDamageObject>();
 
-        if(takeDamageObject && takeDamageObject.enabled)
+        if(HitTest(takeDamageObject))
         {
             OnDamageTheOpponent(takeDamageObject, m_baseAttackDamageData);
+
+            m_opponentDamageEvent?.Invoke(takeDamageObject, m_baseAttackDamageData);
         }
-        takeDamageObject?.TakeDamage(m_baseAttackDamageData);
     }
 
-    protected abstract void OnDamageTheOpponent(AttributeObject.TakeDamageObject takeDamageObject, AttributeObject.DamageData baseDamageData);
+    private bool HitTest(TakeDamageObject takeDamageObject)
+    {
+        if(!takeDamageObject || !takeDamageObject.enabled)
+        {
+            return false;
+        }
+
+        foreach(var damageObject in m_opponentObjects)
+        {
+            if (damageObject == takeDamageObject)
+            {
+                return false;
+            }
+        }
+
+        m_opponentObjects.Add(takeDamageObject);
+
+        return true;
+    }
+
+    public void HitClear()
+    {
+        m_opponentObjects.Clear();
+    }
+
+    protected abstract void OnDamageTheOpponent(TakeDamageObject takeDamageObject, DamageData baseDamageData);
 }
