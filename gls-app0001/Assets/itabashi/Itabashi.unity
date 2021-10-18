@@ -251,6 +251,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -20.94
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: dddb6335529eb194f83735c0842fff4f, type: 3}
+      propertyPath: bulletSpeed
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: dddb6335529eb194f83735c0842fff4f, type: 3}
+      propertyPath: flareBullet
+      value: 
+      objectReference: {fileID: 5400000, guid: 2d3baffd1ce24354d99bd548d86ebc98, type: 3}
+    - target: {fileID: 11400000, guid: dddb6335529eb194f83735c0842fff4f, type: 3}
+      propertyPath: muzzleParticles
+      value: 
+      objectReference: {fileID: 101206, guid: 0d6d0598d4c6d514bbf8228309023a4d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dddb6335529eb194f83735c0842fff4f, type: 3}
 --- !u!114 &66348627 stripped
@@ -1073,10 +1085,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_targetObject: {fileID: 1106717131}
-  m_maxRange: 20
+  m_maxRange: 7
   m_rotateSpeed: 1
-  m_minRotateX: 45
-  m_maxRotateX: 45
+  m_minRotateX: 40
+  m_maxRotateX: 40
 --- !u!95 &1309057753 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 4611107182318078631, guid: 67a643b874b307f46a417e4170a2dd67, type: 3}
