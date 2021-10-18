@@ -44,8 +44,6 @@ public class AnimatorCtrl_ZombieNormal : MonoBehaviour
     public void StartStun()
     {
         m_animator.SetBool("isStun", true);
-
-
     }
 
     public void EndStun()
