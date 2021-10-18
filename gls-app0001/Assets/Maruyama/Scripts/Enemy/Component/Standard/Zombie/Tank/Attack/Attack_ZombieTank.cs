@@ -160,7 +160,7 @@ public class Attack_ZombieTank : AttackBase
         if(m_attackType == AttackType.Tackle)
         {
             var damage = collision.gameObject.GetComponent<AttributeObject.TakeDamageObject>();
-            damage?.TakeDamage(new AttributeObject.DamageData(GetBaseParam().damageData.damageValue, true));
+            damage?.TakeDamage(GetBaseParam().damageData);
         }
     }
 }
