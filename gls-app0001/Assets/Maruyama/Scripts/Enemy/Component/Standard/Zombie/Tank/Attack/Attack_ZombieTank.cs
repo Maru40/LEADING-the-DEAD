@@ -110,6 +110,7 @@ public class Attack_ZombieTank : AttackBase
     void TackleAttack()
     {
         m_velocityManager.ResetVelocity();
+        m_velocityManager.ResetForce();
 
         m_animatorCtrl.TackleTriggerFire();
     }
@@ -159,7 +160,7 @@ public class Attack_ZombieTank : AttackBase
         if(m_attackType == AttackType.Tackle)
         {
             var damage = collision.gameObject.GetComponent<AttributeObject.TakeDamageObject>();
-            damage?.TakeDamage(new AttributeObject.DamageData(GetBaseParam().power, true));
+            damage?.TakeDamage(new AttributeObject.DamageData(GetBaseParam().damageData.damageValue, true));
         }
     }
 }

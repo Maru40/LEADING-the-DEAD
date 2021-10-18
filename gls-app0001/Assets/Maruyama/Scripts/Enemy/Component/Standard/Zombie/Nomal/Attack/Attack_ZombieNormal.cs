@@ -111,7 +111,7 @@ public class Attack_ZombieNormal : AttackBase
         var damage = other.GetComponent<AttributeObject.TakeDamageObject>();
         if (damage != null)
         {
-            var power = GetBaseParam().power * m_statusManager.GetBuffParametor().angerParam.attackPower;
+            var power = GetBaseParam().damageData.damageValue * m_statusManager.GetBuffParametor().angerParam.attackPower;
             var data = new AttributeObject.DamageData(power);
             damage.TakeDamage(data);
         }
