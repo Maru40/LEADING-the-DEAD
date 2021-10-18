@@ -875,6 +875,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 469517195, guid: 9c778371245f3a848b92600adf93b319, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2142217252378686874, guid: 9c778371245f3a848b92600adf93b319, type: 3}
+      propertyPath: m_Mass
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2293255808676022176, guid: 9c778371245f3a848b92600adf93b319, type: 3}
       propertyPath: m_Name
       value: Zombie_Tank
@@ -889,7 +897,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2293255808676022177, guid: 9c778371245f3a848b92600adf93b319, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.268
       objectReference: {fileID: 0}
     - target: {fileID: 2293255808676022177, guid: 9c778371245f3a848b92600adf93b319, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2193,6 +2201,8 @@ MonoBehaviour:
   m_eatenDamageData:
     damageValue: 1
     isStunAttack: 0
+    hitStopTime: 0
+    damageTags: []
   m_headTrigger: {fileID: 1384487673}
 --- !u!135 &1384487673 stripped
 SphereCollider:
