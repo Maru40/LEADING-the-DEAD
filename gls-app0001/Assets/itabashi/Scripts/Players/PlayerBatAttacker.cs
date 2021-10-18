@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
+using AttributeObject;
+
 namespace Player
 {
     public class PlayerBatAttacker : PlayerActionBase
     {
+        [SerializeField]
+        private Animator m_animator;
+
         [SerializeField]
         private PlayerAnimatorManager m_animatorManager;
 
@@ -29,6 +34,7 @@ namespace Player
             batSwingBehaviour.onStateEntered.Subscribe(_ => m_animatorManager.isUseActionMoving = true);
 
             batSwingBehaviour.onStateExited.Subscribe(_ => m_weaponBase.gameObject.SetActive(false));
+            batSwingBehaviour.onStateExited.Subscribe(_ => m_weaponBase.HitClear());
             batSwingBehaviour.onStateExited.Subscribe(_ => m_animatorManager.isUseActionMoving = false);
 
             m_gameControls = new GameControls();
@@ -36,6 +42,29 @@ namespace Player
             m_gameControls.Player.BatSwing.performed += _ => m_swingSubject.OnNext(Unit.Default);
 
             this.RegisterController(m_gameControls);
+        }
+
+        public void OnBatHited(TakeDamageObject takeDamageObject,DamageData damageData)
+        {
+            StartCoroutine(HitStop(damageData.hitStopTime));
+        }
+
+        private IEnumerator HitStop(float hitStopTime)
+        {
+            float animatorSpeed = m_animator.speed;
+
+            m_animator.speed = 0.0f;
+
+            float countHitStopTime = 0.0f;
+
+            while (countHitStopTime < hitStopTime)
+            {
+                countHitStopTime += Time.deltaTime;
+
+                yield return null;
+            }
+
+            m_animator.speed = animatorSpeed;
         }
 
     }
