@@ -36,7 +36,7 @@ public class flarebullet : MonoBehaviour {
 		if (myCoroutine == true)
 			
 		{
-			flarelight.intensity = Random.Range(2f,6.0f);
+			//flarelight.intensity = Random.Range(2f,6.0f);
 			
 		}else
 			
