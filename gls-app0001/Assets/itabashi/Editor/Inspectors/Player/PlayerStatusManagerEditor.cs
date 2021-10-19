@@ -35,8 +35,14 @@ namespace Player
 
             EditorGUILayout.Space();
 
-            var deadEvent = serializedObject.FindProperty("m_deadEvent");
-            EditorGUILayout.PropertyField(deadEvent, new GUIContent("死亡イベント"));
+            var animatorManager = serializedObject.FindProperty("m_animatorManager");
+            EditorGUILayout.PropertyField(animatorManager);
+
+            var deadStart = serializedObject.FindProperty("m_deadStartEvent");
+            EditorGUILayout.PropertyField(deadStart, new GUIContent("死亡開始イベント"));
+
+            var deadEnd = serializedObject.FindProperty("m_deadEndEvent");
+            EditorGUILayout.PropertyField(deadEnd, new GUIContent("死亡終了イベント"));
 
             serializedObject.ApplyModifiedProperties();
         }
@@ -93,9 +99,6 @@ namespace Player
             EditorGUILayout.Slider(stamina, 0.0f, maxStamina.floatValue, new GUIContent("現在のスタミナ"));
 
             EditorGUILayout.PropertyField(staminaRecoveryPerSeconds, new GUIContent("回復スタミナ量/秒"));
-
-            EditorGUILayout.Space();
-            EditorGUILayout.PropertyField(updateStaminaEvent, new GUIContent("スタミナ更新イベント"));
 
             EditorGUI.indentLevel--;
         }
