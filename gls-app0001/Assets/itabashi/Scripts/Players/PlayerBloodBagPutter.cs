@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +6,9 @@ namespace Player
 {
     public class PlayerBloodBagPutter : ItemUserBase
     {
+        [SerializeField]
+        private PlayerStatusManager m_playerStatusManager;
+
         [SerializeField]
         private PlayerPickUpper m_playerPickUpper;
 
@@ -26,6 +29,12 @@ namespace Player
 
         protected override void OnUse()
         {
+            if(!m_playerStatusManager.isControllValid || !isUse)
+            {
+                return;
+            }
+            
+
             var bloodBagList = m_playerPickUpper.GetPickedUpObjectList("BloodBag");
 
             if(bloodBagList.Count == 0)

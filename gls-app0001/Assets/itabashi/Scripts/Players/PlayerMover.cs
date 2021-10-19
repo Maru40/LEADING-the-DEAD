@@ -9,7 +9,7 @@ namespace Player
     public class PlayerMover : MonoBehaviour
     {
         [SerializeField]
-        private PlayerAnimationParameters m_playerAnimationParamator;
+        private PlayerAnimatorManager m_animatorManager;
 
         [SerializeField]
         private PlayerStatusManager m_playerStatusManager;
@@ -52,13 +52,11 @@ namespace Player
 
             m_rigitbody = GetComponent<Rigidbody>();
             m_playerStatusManager = GetComponent<PlayerStatusManager>();
-
-            //m_playerStatusManager.IsStanChanged.Subscribe(isStan => enabled = !isStan).AddTo(this);
         }
 
         private void OnDisable()
         {
-            m_playerAnimationParamator.moveInput = 0.0f;
+            m_animatorManager.moveInput = 0.0f;
 
             m_rigitbody.velocity = new Vector3(0.0f, m_rigitbody.velocity.y, 0.0f);
         }
@@ -80,7 +78,7 @@ namespace Player
 
             if(m_playerStatusManager.isStun)
             {
-                m_playerAnimationParamator.moveInput = 0.0f;
+                m_animatorManager.moveInput = 0.0f;
 
                 m_rigitbody.velocity = new Vector3(0.0f, m_rigitbody.velocity.y, 0.0f);
 
@@ -106,15 +104,15 @@ namespace Player
                 forward = camera.transform.position.y - transform.position.y > 0 ? camera.transform.up : -camera.transform.up;
             }
 
-            bool isDash = m_gameControls.Player.Dash.IsPressed() && m_playerStatusManager.stamina > 0;
+            bool canDash = m_gameControls.Player.Dash.IsPressed() && m_playerStatusManager.stamina > 0;
 
-            m_playerAnimationParamator.isDash = isDash;
+            m_animatorManager.canDash = canDash;
 
             var moveVector3 = camera.transform.right * moveVector2.x + forward * moveVector2.y;
 
             float moveInput = moveVector3.magnitude;
 
-            m_playerAnimationParamator.moveInput = moveInput;
+            m_animatorManager.moveInput = moveInput;
 
             if (moveInput > m_moveSpeedDeadZone)
             {
@@ -122,12 +120,12 @@ namespace Player
             }
             else
             {
-                m_playerAnimationParamator.moveInput = 0.0f;
+                m_animatorManager.moveInput = 0.0f;
             }
 
-            var moveSpeed = isDash ? m_moveSpeed * m_dashSpeedScale : m_moveSpeed;
+            var moveSpeed = canDash ? m_moveSpeed * m_dashSpeedScale : m_moveSpeed;
 
-            if (isDash && m_playerAnimationParamator.moveInput > 0.0f)
+            if (canDash && m_animatorManager.moveInput > 0.0f && m_playerStatusManager.stamina > 0)
             {
                 moveVector3 = moveVector3.normalized;
 

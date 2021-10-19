@@ -28,6 +28,8 @@ namespace Player
 
         public bool isHitStoped { set => m_isHitStoped = value; get => m_isHitStoped; }
 
+        public bool isControllValid => !isStun && !isHitStoped && !isDead;
+
         [SerializeField]
         private float m_stunSecond = 1.0f;
 
@@ -57,9 +59,7 @@ namespace Player
             set
             {
                 m_stamina = Mathf.Clamp(value, 0.0f, m_maxStamina);
-                m_playerParameters.stamina = m_stamina;
                 m_staminaGauge.fillAmount = m_stamina / m_maxStamina;
-                m_updateStaminaEvent.Invoke(m_stamina);
             }
             get { return m_stamina; }
         }
@@ -70,16 +70,21 @@ namespace Player
         [SerializeField]
         private float m_staminaRecoveryPerSeconds = 0.0f;
 
+        [SerializeField]
+        private PlayerAnimatorManager m_animatorManager;
 
-        private PlayerAnimationParameters m_playerParameters;
 
         private GameControls m_gameControls;
 
-        [SerializeField]
-        private UnityEngine.Events.UnityEvent<float> m_updateStaminaEvent;
+        private bool m_isDead = false;
+
+        private bool isDead => m_isDead;
 
         [SerializeField]
-        private UnityEngine.Events.UnityEvent m_deadEvent;
+        private UnityEvent m_deadStartEvent;
+
+        [SerializeField]
+        private UnityEvent m_deadEndEvent;
 
         private Subject<Unit> m_endStunSubject = new Subject<Unit>();
 
@@ -99,21 +104,33 @@ namespace Player
 
             this.RegisterController(m_gameControls);
 
-            OnHpChanged.Where(hp => hp == 0.0f).Subscribe(_ => m_deadEvent?.Invoke()).AddTo(this);
+            OnHpChanged.Where(hp => hp == 0.0f)
+                .Subscribe(_ => m_deadStartEvent?.Invoke()).AddTo(this);
 
             m_endStunSubject.Delay(TimeSpan.FromSeconds(m_stunSecond))
                 .Subscribe(_ => isStun = false)
                 .AddTo(this);
+
+            m_deadStartEvent.AddListener(DeadStart);
+
+            var deadBehaviour = m_animatorManager.behaviourTable["Base Layer.Dead"];
+
+            deadBehaviour.onTimeEvent.ClampWhere(3.0f).Subscribe(_ => m_deadEndEvent?.Invoke()).AddTo(this);
+        }
+
+        private void DeadStart()
+        {
+            m_isDead = true;
+            m_animatorManager.GoState("Dead", "Base Layer");
         }
 
         private void Start()
         {
-            m_playerParameters = GetComponent<PlayerAnimationParameters>();
         }
 
         private void Update()
         {
-            if(m_gameControls.Player.Dash.IsPressed() && m_playerParameters.moveInput > 0)
+            if(m_gameControls.Player.Dash.IsPressed() && m_animatorManager.moveInput > 0)
             {
                 return;
             }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
@@ -30,7 +30,7 @@ namespace Player
             var batSwingBehaviour = m_animatorManager.behaviourTable["Upper_Layer.Swing.Swing"];
 
             m_swingSubject
-                .Where(_ => !m_animatorManager.isUseActionMoving && !m_playerStatusManager.isStun)
+                .Where(_ => !m_animatorManager.isUseActionMoving && m_playerStatusManager.isControllValid)
                 .Subscribe(_ => m_animatorManager.GoState("Swing", "Upper_Layer"));
 
             batSwingBehaviour.onStateEntered.Subscribe(_ => m_weaponBase.gameObject.SetActive(true));
