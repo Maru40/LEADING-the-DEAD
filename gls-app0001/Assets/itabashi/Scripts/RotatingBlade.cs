@@ -8,7 +8,7 @@ public class RotatingBlade : MonoBehaviour
     /// 接触ダメージ
     /// </summary>
     [SerializeField]
-    private float m_touchDamage = 10.0f;
+    private AttributeObject.DamageData m_touchDamage;
 
     /// <summary>
     /// 一秒間に回転する角度
@@ -32,6 +32,6 @@ public class RotatingBlade : MonoBehaviour
     {
         var takeDamageTarget = collision.gameObject.GetComponent<AttributeObject.TakeDamageObject>();
 
-        takeDamageTarget?.TakeDamage(new AttributeObject.DamageData(m_touchDamage));
+        takeDamageTarget?.TakeDamage(m_touchDamage);
     }
 }
