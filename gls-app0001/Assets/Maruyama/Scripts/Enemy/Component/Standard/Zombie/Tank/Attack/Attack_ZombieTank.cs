@@ -124,7 +124,6 @@ public class Attack_ZombieTank : AttackBase
         toVec.y = 0;
 
         m_velocityManager?.AddForce(toVec.normalized * m_param.tackleSpeed);
-
         m_attackType = AttackType.Tackle;
     }
 
@@ -148,7 +147,7 @@ public class Attack_ZombieTank : AttackBase
 
     public override void EndAnimationEvent()
     {
-        //Debug.Log("EndAnimation");
+        Debug.Log("EndAnimation");
         m_stator.GetTransitionMember().chaseTrigger.Fire();
 
         m_attackType = AttackType.Charge;
