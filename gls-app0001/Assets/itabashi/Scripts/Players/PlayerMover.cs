@@ -72,6 +72,12 @@ namespace Player
         // Update is called once per frame
         void Update()
         {
+            if(m_playerStatusManager.isHitStoped)
+            {
+                m_rigitbody.velocity = new Vector3(0.0f, m_rigitbody.velocity.y, 0.0f);
+                return;
+            }
+
             if(m_playerStatusManager.isStun)
             {
                 m_playerAnimationParamator.moveInput = 0.0f;
