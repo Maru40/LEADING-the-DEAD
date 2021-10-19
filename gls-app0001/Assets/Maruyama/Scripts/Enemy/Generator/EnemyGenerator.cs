@@ -26,7 +26,7 @@ public struct OutOfTargetData
 }
 
 
-public class EnemyGenerator : MonoBehaviour
+public class EnemyGenerator : GeneratorBase
 {
     //近くに生成したくないオブジェクト群
     [SerializeField]
