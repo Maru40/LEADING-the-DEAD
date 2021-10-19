@@ -91,6 +91,10 @@ public class EnemyVelocityMgr : MonoBehaviour
         m_force = Vector3.zero;
     }
 
+    /// <summary>
+    /// 減速開始
+    /// </summary>
+    /// <param name="power">減速する力</param>
     public void StartDeseleration(float power = 1.0f)
     {
         m_isDeseleration = true;
