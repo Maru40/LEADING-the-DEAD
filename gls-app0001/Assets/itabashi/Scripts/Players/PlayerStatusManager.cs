@@ -24,6 +24,10 @@ namespace Player
 
         public bool isStun { private set => m_isStun.Value = value; get => m_isStun.Value; }
 
+        private bool m_isHitStoped = false;
+
+        public bool isHitStoped { set => m_isHitStoped = value; get => m_isHitStoped; }
+
         [SerializeField]
         private float m_stunSecond = 1.0f;
 
