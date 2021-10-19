@@ -60,7 +60,7 @@ namespace Player
         {
 
             m_throwingStanceSubject.Where(isThrowingStance => isThrowingStance)
-                .Where(_ => !m_animatorManager.isUseActionMoving && !m_playerStatusManager.isStun && isUse)
+                .Where(_ => !m_animatorManager.isUseActionMoving && m_playerStatusManager.isControllValid && isUse)
                 .Subscribe(_ => ThrowingStanceStart());
 
             m_throwingStanceSubject.Where(isThrowingStance => !isThrowingStance)
@@ -102,7 +102,7 @@ namespace Player
         {
             m_countCoolTime += Time.deltaTime;
 
-            if(m_playerStatusManager.isStun && m_isThrowingStance)
+            if(!m_playerStatusManager.isControllValid && m_isThrowingStance)
             {
                 ThrowingStanceEnd();
                 return;

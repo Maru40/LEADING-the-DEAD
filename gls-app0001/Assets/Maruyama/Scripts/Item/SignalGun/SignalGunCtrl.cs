@@ -48,7 +48,7 @@ public class SignalGunCtrl : ItemUserBase
             .Subscribe(_ => { m_animatorManager.isUseActionMoving = false; m_flareGun.gameObject.SetActive(false); });
 
         shotBehaviour.onTimeEvent.ClampWhere(m_animationShotDelay)
-            .Where(_ => !m_statusManager.isStun)
+            .Where(_ => m_statusManager.isControllValid)
             .Subscribe(_ => OnShot())
             .AddTo(this);
 
