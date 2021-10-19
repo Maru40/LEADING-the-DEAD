@@ -157,6 +157,7 @@ MonoBehaviour:
   m_playerStatusManager: {fileID: 1106717132}
   m_animator: {fileID: 5795822217416765791}
   m_animatorManager: {fileID: 1106717144}
+  m_statusManager: {fileID: 1106717132}
   m_weaponBase: {fileID: 1717001797}
 --- !u!1 &642393358
 GameObject:
@@ -84413,7 +84414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7604240690625314483, guid: 502cd9cd455036d43a8d944ea3e658e0, type: 3}
       propertyPath: m_baseAttackDamageData.hitStopTime
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7604240690625314483, guid: 502cd9cd455036d43a8d944ea3e658e0, type: 3}
       propertyPath: m_opponentDamageEvent.m_PersistentCalls.m_Calls.Array.size
