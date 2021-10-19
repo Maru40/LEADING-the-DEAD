@@ -218,7 +218,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_baseParam:
-    power: 5
+    damageData:
+      damageValue: 1
+      isStunAttack: 1
+      hitStopTime: 0
+      damageTags: []
     startRange: 4
   m_param:
     nearRange: 2
