@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
@@ -29,9 +29,13 @@ namespace Player
             }
         }
 
-        private FloatReactiveProperty m_moveSpeed = new FloatReactiveProperty(0);
+        private FloatReactiveProperty m_moveInput = new FloatReactiveProperty(0);
 
-        public float moveSpeed { set => m_moveSpeed.Value = value; get => m_moveSpeed.Value; }
+        public float moveInput { set => m_moveInput.Value = value; get => m_moveInput.Value; }
+
+        private BoolReactiveProperty m_canDash = new BoolReactiveProperty(false);
+
+        public bool canDash { set => m_canDash.Value = value; get => m_canDash.Value; }
 
         private BoolReactiveProperty m_isUseActionMoving = new BoolReactiveProperty(false);
 
@@ -77,7 +81,9 @@ namespace Player
 
         private void SettingParamator()
         {
-            m_moveSpeed.Subscribe(moveInput => m_animator.SetFloat("moveInput", moveInput)).AddTo(this);
+            m_moveInput.Subscribe(moveInput => m_animator.SetFloat("moveInput", moveInput)).AddTo(this);
+
+            m_canDash.Subscribe(isDash => m_animator.SetBool("canDash", isDash)).AddTo(this);
         }
 
         public void GoState(string stateName, string layerName, float transitionTime = 0.25f)
