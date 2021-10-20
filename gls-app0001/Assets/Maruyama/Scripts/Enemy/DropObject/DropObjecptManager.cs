@@ -41,7 +41,7 @@ public class DropObjecptManager : MonoBehaviour
     [SerializeField]
     Vector3 m_dropPowerOffset = Vector3.up;
     [SerializeField]
-    float m_dropPower = 10.0f;
+    float m_dropPower = 100.0f;
 
     //test用、将来的に消す。
     [SerializeField]
@@ -72,23 +72,7 @@ public class DropObjecptManager : MonoBehaviour
     /// </summary>
     public void Drop()
     {
-        foreach(var data in m_datas)
-        {
-            if(data == null) {
-                continue;
-            }
-
-            var isDrop = MyRandom.RandomProbability(data.probability);
-            if (isDrop)  //ドロップするなら。
-            {
-                //オブジェクトの生成。
-                data.obj.SetActive(true);
-                data.obj.transform.position = transform.position + m_dropPositonOffset;
-                data.obj.transform.parent = null;
-                //Instantiate(data.obj, transform.position, Quaternion.identity);
-                //演出の生成(particleとか？)
-            }
-        }   
+        Drop(null); 
     }
 
     /// <summary>
@@ -101,6 +85,7 @@ public class DropObjecptManager : MonoBehaviour
             toVec = transform.position - other.gameObject.transform.position;
         }
 
+        var removeDatas = new List<DropData>();
         foreach (var data in m_datas)
         {
             if (data == null)
@@ -117,10 +102,14 @@ public class DropObjecptManager : MonoBehaviour
                 data.obj.transform.parent = null;
 
                 ItemAddForce(data.obj, toVec);
+
+                removeDatas.Add(data);
                 //Instantiate(data.obj, transform.position, Quaternion.identity);
                 //演出の生成(particleとか？)
             }
         }
+
+        RemoveDatas(removeDatas);
     }
 
     void ItemAddForce(GameObject obj, Vector3 force)
