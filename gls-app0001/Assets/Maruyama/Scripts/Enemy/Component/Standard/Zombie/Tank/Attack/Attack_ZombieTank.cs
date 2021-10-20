@@ -117,18 +117,6 @@ public class Attack_ZombieTank : AttackBase
         m_animatorCtrl.TackleTriggerFire();
     }
 
-    public void AddMoveForce()
-    {
-        //Debug.Log("タックル開始");
-
-        //var target = m_targetMgr.GetNowTarget();
-        //var toVec = target.gameObject.transform.position - transform.position;
-        //toVec.y = 0;
-
-        //m_velocityManager?.AddForce(toVec.normalized * m_param.tackleSpeed);
-        //m_attackType = AttackType.Tackle;
-    }
-
     /// <summary>
     /// 減速開始
     /// </summary>
@@ -153,15 +141,5 @@ public class Attack_ZombieTank : AttackBase
         m_stator.GetTransitionMember().chaseTrigger.Fire();
 
         m_attackType = AttackType.Charge;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        //攻撃状態なら
-        //if(m_attackType == AttackType.Tackle)
-        //{
-        //    var damage = collision.gameObject.GetComponent<AttributeObject.TakeDamageObject>();
-        //    damage?.TakeDamage(GetBaseParam().damageData);
-        //}
     }
 }
