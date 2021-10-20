@@ -66,6 +66,36 @@ MonoBehaviour:
   m_exitAction:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1411818464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1411818465}
+  m_Layer: 6
+  m_Name: DropItemPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1411818465
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411818464}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5870427050103728093}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &310105908060187271
 GameObject:
   m_ObjectHideFlags: 0
@@ -2460,6 +2490,7 @@ Transform:
   - {fileID: 3570106232509839034}
   - {fileID: 7366281397086235154}
   - {fileID: 49534073}
+  - {fileID: 1411818465}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
@@ -2865,9 +2896,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_datas: []
-  m_dropPositonOffset: {x: 0, y: 2, z: 0}
-  m_dropPowerOffset: {x: 0, y: 1, z: 0}
-  m_dropPower: 100
+  m_dropPositionObject: {fileID: 1411818464}
+  m_dropPower: 300
+  m_dropUpPower: 50
   m_tempNullParticle: {fileID: 6492296973775632991, guid: 91837f35aa527df4199f8784a19b20ec, type: 3}
   m_isPickUp: 0
 --- !u!114 &7956893243637624007
