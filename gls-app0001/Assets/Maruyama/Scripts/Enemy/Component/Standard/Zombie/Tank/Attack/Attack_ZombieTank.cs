@@ -36,6 +36,8 @@ public class Attack_ZombieTank : AttackBase
     EnemyVelocityMgr m_velocityManager;
     EnemyRotationCtrl m_rotationCtrl;
     AnimatorCtrl_ZombieTank m_animatorCtrl;
+    EyeSearchRange m_eye;
+    TankTackle m_tankTackle;
 
     AttackType m_attackType = AttackType.Charge;
 
@@ -46,13 +48,15 @@ public class Attack_ZombieTank : AttackBase
         m_velocityManager = GetComponent<EnemyVelocityMgr>();
         m_rotationCtrl = GetComponent<EnemyRotationCtrl>();
         m_animatorCtrl = GetComponent<AnimatorCtrl_ZombieTank>();
+        m_eye = GetComponent<EyeSearchRange>();
+        m_tankTackle = GetComponent<TankTackle>();
     }
 
     void Update()
     {
-        MoveProcess();
+        //MoveProcess();
 
-        RotationCtrl();
+        //RotationCtrl();
     }
 
     void MoveProcess()
@@ -82,7 +86,8 @@ public class Attack_ZombieTank : AttackBase
         float range = GetBaseParam().startRange;
         FoundObject target = m_targetMgr.GetNowTarget();
         if (target) {
-            return Calculation.IsRange(gameObject, target.gameObject, range);
+            return m_eye.IsInEyeRange(target.gameObject, range);
+            //return Calculation.IsRange(gameObject, target.gameObject, range);
         }
         else {
             return false;
@@ -109,22 +114,19 @@ public class Attack_ZombieTank : AttackBase
 
     void TackleAttack()
     {
-        m_velocityManager.ResetVelocity();
-        m_velocityManager.ResetForce();
-
         m_animatorCtrl.TackleTriggerFire();
     }
 
     public void AddMoveForce()
     {
-        Debug.Log("タックル開始");
+        //Debug.Log("タックル開始");
 
-        var target = m_targetMgr.GetNowTarget();
-        var toVec = target.gameObject.transform.position - transform.position;
-        toVec.y = 0;
+        //var target = m_targetMgr.GetNowTarget();
+        //var toVec = target.gameObject.transform.position - transform.position;
+        //toVec.y = 0;
 
-        m_velocityManager?.AddForce(toVec.normalized * m_param.tackleSpeed);
-        m_attackType = AttackType.Tackle;
+        //m_velocityManager?.AddForce(toVec.normalized * m_param.tackleSpeed);
+        //m_attackType = AttackType.Tackle;
     }
 
     /// <summary>
@@ -156,10 +158,10 @@ public class Attack_ZombieTank : AttackBase
     private void OnCollisionEnter(Collision collision)
     {
         //攻撃状態なら
-        if(m_attackType == AttackType.Tackle)
-        {
-            var damage = collision.gameObject.GetComponent<AttributeObject.TakeDamageObject>();
-            damage?.TakeDamage(GetBaseParam().damageData);
-        }
+        //if(m_attackType == AttackType.Tackle)
+        //{
+        //    var damage = collision.gameObject.GetComponent<AttributeObject.TakeDamageObject>();
+        //    damage?.TakeDamage(GetBaseParam().damageData);
+        //}
     }
 }
