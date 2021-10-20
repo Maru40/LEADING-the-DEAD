@@ -4,7 +4,7 @@ using UnityEngine;
 
 using MaruUtility;
 
-public class TankTackle : AttackBase
+public class TankTackle : AttackNodeBase
 {
     enum State 
     {
@@ -19,12 +19,14 @@ public class TankTackle : AttackBase
     TargetManager m_targetManager;
     EnemyVelocityMgr m_velocityManager;
     EnemyRotationCtrl m_rotationCtrl;
+    Stator_ZombieTank m_stator;
 
     private void Awake()
     {
         m_targetManager = GetComponent<TargetManager>();
         m_velocityManager = GetComponent<EnemyVelocityMgr>();
         m_rotationCtrl = GetComponent<EnemyRotationCtrl>();
+        m_stator = GetComponent<Stator_ZombieTank>();
     }
 
     private void Update()
@@ -47,11 +49,14 @@ public class TankTackle : AttackBase
             return;
         }
 
-        var velocity = m_velocityManager.velocity;
-        var toVec = CalcuToTargetVec();
-        toVec.y = 0;
+        Debug.Log("Tackle");
 
-        CalcuVelocity.CalucSeekVec(velocity, toVec, 5.0f);
+        var velocity = m_velocityManager.velocity;
+
+        var force = CalcuVelocity.CalucSeekVec(velocity, m_tackleDirect, 15.0f);
+        m_velocityManager.AddForce(force);
+
+        m_rotationCtrl.SetDirect(m_tackleDirect);
     }
 
     void Rotation()
@@ -67,9 +72,10 @@ public class TankTackle : AttackBase
     public override void AttackStart()
     {
         m_state = State.Charge;
+        enabled = true;
     }
 
-    public override void Attack()
+    public override void AttackHitStart()
     {
         m_state = State.Tackle;
 
@@ -100,7 +106,12 @@ public class TankTackle : AttackBase
 
     public override void EndAnimationEvent()
     {
+        Debug.Log("EndAnimation");
+        m_stator.GetTransitionMember().chaseTrigger.Fire();
 
+        m_state = State.Charge;
+
+        enabled = false;
     }
 
     private void OnCollisionEnter(Collision collision)
