@@ -36,12 +36,12 @@ public class DropObjecptManager : MonoBehaviour
     Dictionary<DropData ,GameObject> m_particles = new Dictionary<DropData, GameObject>();
 
     [SerializeField]
-    Vector3 m_dropPositonOffset = Vector3.up;
+    GameObject m_dropPositionObject = null;
 
     [SerializeField]
-    Vector3 m_dropPowerOffset = Vector3.up;
-    [SerializeField]
     float m_dropPower = 100.0f;
+    [SerializeField]
+    float m_dropUpPower = 50.0f;
 
     //test用、将来的に消す。
     [SerializeField]
@@ -49,6 +49,14 @@ public class DropObjecptManager : MonoBehaviour
 
     [SerializeField]
     public bool m_isPickUp = true;  //アイテムを拾うかどうか
+
+    private void Awake()
+    {
+        if (m_dropPositionObject == null)
+        {
+            m_dropPositionObject = this.gameObject;
+        }
+    }
 
     void InstatiateParticle(DropData data)
     {
@@ -98,7 +106,7 @@ public class DropObjecptManager : MonoBehaviour
             {
                 //オブジェクトの生成。
                 data.obj.SetActive(true);
-                data.obj.transform.position = transform.position + m_dropPositonOffset;
+                data.obj.transform.position = m_dropPositionObject.transform.position;
                 data.obj.transform.parent = null;
 
                 ItemAddForce(data.obj, toVec);
@@ -121,7 +129,7 @@ public class DropObjecptManager : MonoBehaviour
         var rigid = obj.GetComponent<Rigidbody>();
         if (rigid)
         {
-            force += m_dropPowerOffset;
+            rigid.AddForce(Vector3.up * m_dropUpPower);
             rigid.AddForce(force.normalized * m_dropPower);
         }
     }
