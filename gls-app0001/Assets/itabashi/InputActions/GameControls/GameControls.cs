@@ -115,17 +115,33 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""UseItem"",
+                    ""name"": ""BatSwing"",
                     ""type"": ""Button"",
-                    ""id"": ""078a078a-3d08-4b20-87ff-cbbe05cc71b1"",
+                    ""id"": ""7a5bd760-fcea-49d4-886d-f883f86e3511"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""BatSwing"",
+                    ""name"": ""GunShot"",
                     ""type"": ""Button"",
-                    ""id"": ""7a5bd760-fcea-49d4-886d-f883f86e3511"",
+                    ""id"": ""51bf2177-f08f-4a14-a2ce-6afa464f707b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""PutBloodBag"",
+                    ""type"": ""Button"",
+                    ""id"": ""abfd212b-a9cb-4b2a-a30f-ed84aa9d68bc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Throwing"",
+                    ""type"": ""Button"",
+                    ""id"": ""7903c36b-3378-4c33-bdc4-8e447b0079ac"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -179,9 +195,9 @@ public class @GameControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""718662aa-22c7-4c45-bc76-602b581835f7"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""AxisDeadzone"",
                     ""groups"": """",
                     ""action"": ""Dash"",
                     ""isComposite"": false,
@@ -288,23 +304,45 @@ public class @GameControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""cd7c2273-38aa-4c05-8736-6309b6ad2758"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""UseItem"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""68d2b87b-5998-4965-aecc-fe1b83af7bd4"",
                     ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""BatSwing"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ebd2b1e8-bb46-4c00-ad49-f05e24dd2cc5"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GunShot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""13af4204-19b2-4e16-bdf3-5b405a57b918"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PutBloodBag"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cadbb104-c35b-41ea-be1c-6431fd3635b1"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Throwing"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -327,8 +365,10 @@ public class @GameControls : IInputActionCollection, IDisposable
         m_Player_ItemSelectDown = m_Player.FindAction("ItemSelectDown", throwIfNotFound: true);
         m_Player_ItemSelectLeft = m_Player.FindAction("ItemSelectLeft", throwIfNotFound: true);
         m_Player_ItemSelectRight = m_Player.FindAction("ItemSelectRight", throwIfNotFound: true);
-        m_Player_UseItem = m_Player.FindAction("UseItem", throwIfNotFound: true);
         m_Player_BatSwing = m_Player.FindAction("BatSwing", throwIfNotFound: true);
+        m_Player_GunShot = m_Player.FindAction("GunShot", throwIfNotFound: true);
+        m_Player_PutBloodBag = m_Player.FindAction("PutBloodBag", throwIfNotFound: true);
+        m_Player_Throwing = m_Player.FindAction("Throwing", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -390,8 +430,10 @@ public class @GameControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_ItemSelectDown;
     private readonly InputAction m_Player_ItemSelectLeft;
     private readonly InputAction m_Player_ItemSelectRight;
-    private readonly InputAction m_Player_UseItem;
     private readonly InputAction m_Player_BatSwing;
+    private readonly InputAction m_Player_GunShot;
+    private readonly InputAction m_Player_PutBloodBag;
+    private readonly InputAction m_Player_Throwing;
     public struct PlayerActions
     {
         private @GameControls m_Wrapper;
@@ -408,8 +450,10 @@ public class @GameControls : IInputActionCollection, IDisposable
         public InputAction @ItemSelectDown => m_Wrapper.m_Player_ItemSelectDown;
         public InputAction @ItemSelectLeft => m_Wrapper.m_Player_ItemSelectLeft;
         public InputAction @ItemSelectRight => m_Wrapper.m_Player_ItemSelectRight;
-        public InputAction @UseItem => m_Wrapper.m_Player_UseItem;
         public InputAction @BatSwing => m_Wrapper.m_Player_BatSwing;
+        public InputAction @GunShot => m_Wrapper.m_Player_GunShot;
+        public InputAction @PutBloodBag => m_Wrapper.m_Player_PutBloodBag;
+        public InputAction @Throwing => m_Wrapper.m_Player_Throwing;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -455,12 +499,18 @@ public class @GameControls : IInputActionCollection, IDisposable
                 @ItemSelectRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemSelectRight;
                 @ItemSelectRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemSelectRight;
                 @ItemSelectRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnItemSelectRight;
-                @UseItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
-                @UseItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
-                @UseItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
                 @BatSwing.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBatSwing;
                 @BatSwing.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBatSwing;
                 @BatSwing.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBatSwing;
+                @GunShot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGunShot;
+                @GunShot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGunShot;
+                @GunShot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGunShot;
+                @PutBloodBag.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPutBloodBag;
+                @PutBloodBag.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPutBloodBag;
+                @PutBloodBag.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPutBloodBag;
+                @Throwing.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowing;
+                @Throwing.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowing;
+                @Throwing.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowing;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -501,12 +551,18 @@ public class @GameControls : IInputActionCollection, IDisposable
                 @ItemSelectRight.started += instance.OnItemSelectRight;
                 @ItemSelectRight.performed += instance.OnItemSelectRight;
                 @ItemSelectRight.canceled += instance.OnItemSelectRight;
-                @UseItem.started += instance.OnUseItem;
-                @UseItem.performed += instance.OnUseItem;
-                @UseItem.canceled += instance.OnUseItem;
                 @BatSwing.started += instance.OnBatSwing;
                 @BatSwing.performed += instance.OnBatSwing;
                 @BatSwing.canceled += instance.OnBatSwing;
+                @GunShot.started += instance.OnGunShot;
+                @GunShot.performed += instance.OnGunShot;
+                @GunShot.canceled += instance.OnGunShot;
+                @PutBloodBag.started += instance.OnPutBloodBag;
+                @PutBloodBag.performed += instance.OnPutBloodBag;
+                @PutBloodBag.canceled += instance.OnPutBloodBag;
+                @Throwing.started += instance.OnThrowing;
+                @Throwing.performed += instance.OnThrowing;
+                @Throwing.canceled += instance.OnThrowing;
             }
         }
     }
@@ -525,7 +581,9 @@ public class @GameControls : IInputActionCollection, IDisposable
         void OnItemSelectDown(InputAction.CallbackContext context);
         void OnItemSelectLeft(InputAction.CallbackContext context);
         void OnItemSelectRight(InputAction.CallbackContext context);
-        void OnUseItem(InputAction.CallbackContext context);
         void OnBatSwing(InputAction.CallbackContext context);
+        void OnGunShot(InputAction.CallbackContext context);
+        void OnPutBloodBag(InputAction.CallbackContext context);
+        void OnThrowing(InputAction.CallbackContext context);
     }
 }

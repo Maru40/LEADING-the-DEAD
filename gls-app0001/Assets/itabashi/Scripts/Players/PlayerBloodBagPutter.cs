@@ -1,10 +1,11 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
 namespace Player
 {
-    public class PlayerBloodBagPutter : ItemUserBase
+    public class PlayerBloodBagPutter : MonoBehaviour
     {
         [SerializeField]
         private PlayerStatusManager m_playerStatusManager;
@@ -14,6 +15,22 @@ namespace Player
 
         [SerializeField]
         private Transform m_putBloodBagTransform;
+
+        private GameControls m_gameControls;
+
+        private Subject<Unit> m_puttingBloogBagSubject = new Subject<Unit>();
+        private void Awake()
+        {
+            m_puttingBloogBagSubject
+                .Where(_ => m_playerStatusManager.isControllValid)
+                .Subscribe(_ => OnPutting());
+
+            m_gameControls = new GameControls();
+
+            m_gameControls.Player.PutBloodBag.performed += context => m_puttingBloogBagSubject.OnNext(Unit.Default);
+
+            this.RegisterController(m_gameControls);
+        }
 
         // Start is called before the first frame update
         void Start()
@@ -27,13 +44,8 @@ namespace Player
 
         }
 
-        protected override void OnUse()
-        {
-            if(!m_playerStatusManager.isControllValid || !isUse)
-            {
-                return;
-            }
-            
+        private void OnPutting()
+        {            
 
             var bloodBagList = m_playerPickUpper.GetPickedUpObjectList("BloodBag");
 

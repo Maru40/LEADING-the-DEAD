@@ -5,7 +5,7 @@ using UniRx;
 
 namespace Player
 {
-    public class PlayerThrower : ItemUserBase
+    public class PlayerThrower : MonoBehaviour
     {
         /// <summary>
         /// ゲームの入力
@@ -47,6 +47,7 @@ namespace Player
         private bool m_isThrowing = false;
 
         private Subject<bool> m_throwingStanceSubject = new Subject<bool>();
+        private Subject<Unit> m_OnThrowingSubject = new Subject<Unit>();
 
         private void OnValidate()
         {
@@ -60,12 +61,17 @@ namespace Player
         {
 
             m_throwingStanceSubject.Where(isThrowingStance => isThrowingStance)
-                .Where(_ => !m_animatorManager.isUseActionMoving && m_playerStatusManager.isControllValid && isUse)
+                .Where(_ => !m_animatorManager.isUseActionMoving && m_playerStatusManager.isControllValid)
                 .Subscribe(_ => ThrowingStanceStart());
 
             m_throwingStanceSubject.Where(isThrowingStance => !isThrowingStance)
                 .Where(_ => m_isThrowingStance && !m_isThrowing)
                 .Subscribe(_ => { ThrowingStanceEnd(); m_animatorManager.GoState("Idle", "Upper_Layer"); });
+
+            m_OnThrowingSubject
+                .Where(_ => m_isThrowingStance && !m_isThrowing)
+                .Subscribe(_ => Throwing())
+                .AddTo(this);
 
             var throwingStanceBehaviour = m_animatorManager.behaviourTable["Upper_Layer.Throw.ThrowingStance"];
 
@@ -86,9 +92,9 @@ namespace Player
             m_gameControls.Player.ThrowingStance.performed += context => m_throwingStanceSubject.OnNext(true);
             m_gameControls.Player.ThrowingStance.canceled += context => m_throwingStanceSubject.OnNext(false);
 
-            this.RegisterController(m_gameControls);
+            m_gameControls.Player.Throwing.performed += context => m_OnThrowingSubject.OnNext(Unit.Default);
 
-            m_animatorManager.OnIsUseActionMovingChanged.Subscribe(isAction => Debug.Log($"変化しました : {isAction}"));
+            this.RegisterController(m_gameControls);
         }
 
         // Start is called before the first frame update
@@ -160,13 +166,8 @@ namespace Player
             m_objectLauncher.isDrawPredictionLine = false;
         }
 
-        protected override void OnUse()
+        private void Throwing()
         {
-            if (!m_isThrowingStance || m_isThrowing)
-            {
-                return;
-            }
-
             m_countCoolTime = 0.0f;
 
             m_takingObject.transform.SetParent(null);

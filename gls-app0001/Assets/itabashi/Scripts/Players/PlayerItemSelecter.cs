@@ -31,7 +31,7 @@ namespace Player
             m_gameControls.Player.ItemSelectLeft.performed += _ => ChangeUseItemObject(m_leftItemUser);
             m_gameControls.Player.ItemSelectRight.performed += _ => ChangeUseItemObject(m_rightItemUser);
 
-            m_gameControls.Player.UseItem.performed += _ => m_nowItemUser?.Use();
+            //m_gameControls.Player.UseItem.performed += _ => m_nowItemUser?.Use();
 
             this.RegisterController(m_gameControls);
         }
