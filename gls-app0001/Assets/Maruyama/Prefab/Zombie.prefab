@@ -2525,7 +2525,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_baseParam:
-    power: 10
+    damageData:
+      obj: {fileID: 0}
+      damageValue: 1
+      isStunAttack: 0
+      hitStopTime: 0
+      damageTags: []
     startRange: 3
   m_moveSpeed: 3
   m_hitBox: {fileID: 632433336}
@@ -2774,6 +2779,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d638061b631635b41964733f8831a238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_animator: {fileID: 0}
+  m_isHitStopable: 1
   m_takeDamageEvent:
     m_PersistentCalls:
       m_Calls:
@@ -2838,7 +2845,12 @@ MonoBehaviour:
       hp: 0
       damageIntervalTime: 0
     attackParametor:
-      power: 1
+      damageData:
+        obj: {fileID: 0}
+        damageValue: 0
+        isStunAttack: 0
+        hitStopTime: 0
+        damageTags: []
       startRange: 0
 --- !u!114 &-9140734898953323855
 MonoBehaviour:
@@ -2853,6 +2865,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_datas: []
+  m_dropPositonOffset: {x: 0, y: 2, z: 0}
+  m_dropPowerOffset: {x: 0, y: 1, z: 0}
+  m_dropPower: 100
   m_tempNullParticle: {fileID: 6492296973775632991, guid: 91837f35aa527df4199f8784a19b20ec, type: 3}
   m_isPickUp: 0
 --- !u!114 &7956893243637624007
