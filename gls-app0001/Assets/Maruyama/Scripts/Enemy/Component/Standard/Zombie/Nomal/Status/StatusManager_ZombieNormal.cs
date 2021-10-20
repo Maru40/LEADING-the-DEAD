@@ -31,7 +31,7 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
 
         if (data.isStunAttack)  //スタン状態になる攻撃なら
         {
-            Stun();
+            Stun(data.obj);
         }
         else
         {
@@ -50,10 +50,10 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
         m_waitTimer.AddWaitTimer(GetType(), time);
     }
 
-    void Stun()
+    void Stun(GameObject other)
     {
         m_stun.StartStun();
-        m_dropManager.Drop();
+        m_dropManager.Drop(other);
     }
 
     //インターフェースの実装----------------------------------------------------------------

@@ -12,6 +12,10 @@ namespace AttributeObject
     public struct DamageData
     {
         /// <summary>
+        /// ダメージを与えるオブジェクト
+        /// </summary>
+        public GameObject obj;
+        /// <summary>
         /// ダメージ量
         /// </summary>
         public float damageValue;
@@ -30,8 +34,9 @@ namespace AttributeObject
         /// コンストラクタ
         /// </summary>
         /// <param name="damageValue">ダメージ量</param>
-        public DamageData(float damageValue, bool isStunAttack = false, float hitStopTime = 0.0f)
+        public DamageData(float damageValue, bool isStunAttack = false, float hitStopTime = 0.0f, GameObject obj = null)
         {
+            this.obj = obj;
             this.damageValue = damageValue;
             this.isStunAttack = isStunAttack;
             this.hitStopTime = hitStopTime;

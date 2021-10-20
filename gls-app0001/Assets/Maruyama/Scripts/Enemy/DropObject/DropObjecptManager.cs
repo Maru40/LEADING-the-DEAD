@@ -35,12 +35,28 @@ public class DropObjecptManager : MonoBehaviour
 
     Dictionary<DropData ,GameObject> m_particles = new Dictionary<DropData, GameObject>();
 
+    [SerializeField]
+    GameObject m_dropPositionObject = null;
+
+    [SerializeField]
+    float m_dropPower = 100.0f;
+    [SerializeField]
+    float m_dropUpPower = 50.0f;
+
     //test用、将来的に消す。
     [SerializeField]
     GameObject m_tempNullParticle = null;  //particleがnullの時の仮particle
 
     [SerializeField]
     public bool m_isPickUp = true;  //アイテムを拾うかどうか
+
+    private void Awake()
+    {
+        if (m_dropPositionObject == null)
+        {
+            m_dropPositionObject = this.gameObject;
+        }
+    }
 
     void InstatiateParticle(DropData data)
     {
@@ -64,9 +80,24 @@ public class DropObjecptManager : MonoBehaviour
     /// </summary>
     public void Drop()
     {
-        foreach(var data in m_datas)
+        Drop(null); 
+    }
+
+    /// <summary>
+    /// アイテムのドロップ
+    /// </summary>
+    public void Drop(GameObject other)
+    {
+        Vector3 toVec = Vector3.zero;
+        if (other) { //otherがnullでなかったら
+            toVec = transform.position - other.gameObject.transform.position;
+        }
+
+        var removeDatas = new List<DropData>();
+        foreach (var data in m_datas)
         {
-            if(data == null) {
+            if (data == null)
+            {
                 continue;
             }
 
@@ -75,14 +106,34 @@ public class DropObjecptManager : MonoBehaviour
             {
                 //オブジェクトの生成。
                 data.obj.SetActive(true);
-                data.obj.transform.position = transform.position;
+                data.obj.transform.position = m_dropPositionObject.transform.position;
                 data.obj.transform.parent = null;
+
+                ItemAddForce(data.obj, toVec);
+
+                removeDatas.Add(data);
                 //Instantiate(data.obj, transform.position, Quaternion.identity);
                 //演出の生成(particleとか？)
             }
-        }   
+        }
+
+        RemoveDatas(removeDatas);
     }
-    
+
+    void ItemAddForce(GameObject obj, Vector3 force)
+    {
+        if(force == Vector3.zero) {
+            return;
+        }
+
+        var rigid = obj.GetComponent<Rigidbody>();
+        if (rigid)
+        {
+            rigid.AddForce(Vector3.up * m_dropUpPower);
+            rigid.AddForce(force.normalized * m_dropPower);
+        }
+    }
+
     //アクセッサ------------------------------------------------------------------
 
     public void AddData(DropData data)
