@@ -4,7 +4,7 @@ using UnityEngine;
 using UniRx;
 using UniRx.Triggers;
 
-public class SignalGunCtrl : ItemUserBase
+public class SignalGunCtrl : MonoBehaviour
 {
     [SerializeField]
     Player.PlayerAnimatorManager m_animatorManager;
@@ -30,6 +30,8 @@ public class SignalGunCtrl : ItemUserBase
     private Subject<Unit> m_shotStartSubject = new Subject<Unit>();
     private Subject<Unit> m_shotSubject = new Subject<Unit>();
 
+    private GameControls m_gameControls;
+
     private void Awake()
     {
         m_nowCountTime = m_coolTime;
@@ -53,19 +55,25 @@ public class SignalGunCtrl : ItemUserBase
             .AddTo(this);
 
         m_shotStartSubject.Subscribe(_ => m_animatorManager.isUseActionMoving = true);
+
+        m_shotSubject
+            .Where(_ => m_nowCountTime >= m_coolTime && !m_animatorManager.isUseActionMoving)
+            .Subscribe(_ => OnUse())
+            .AddTo(this);
+
+        m_gameControls = new GameControls();
+
+        m_gameControls.Player.GunShot.performed += _ => m_shotSubject.OnNext(Unit.Default);
+
+        this.RegisterController(m_gameControls);
     }
 
     private void Start()
     {
     }
 
-    protected override void OnUse()
+    protected void OnUse()
     {
-        if(m_nowCountTime < m_coolTime || !isUse || m_animatorManager.isUseActionMoving)
-        {
-            return;
-        }
-
         m_nowCountTime = 0.0f;
 
         m_animatorManager.GoState("Shot", "Upper_Layer", 0.1f);
