@@ -35,6 +35,14 @@ public class DropObjecptManager : MonoBehaviour
 
     Dictionary<DropData ,GameObject> m_particles = new Dictionary<DropData, GameObject>();
 
+    [SerializeField]
+    Vector3 m_dropPositonOffset = Vector3.up;
+
+    [SerializeField]
+    Vector3 m_dropPowerOffset = Vector3.up;
+    [SerializeField]
+    float m_dropPower = 10.0f;
+
     //test用、将来的に消す。
     [SerializeField]
     GameObject m_tempNullParticle = null;  //particleがnullの時の仮particle
@@ -75,14 +83,60 @@ public class DropObjecptManager : MonoBehaviour
             {
                 //オブジェクトの生成。
                 data.obj.SetActive(true);
-                data.obj.transform.position = transform.position;
+                data.obj.transform.position = transform.position + m_dropPositonOffset;
                 data.obj.transform.parent = null;
                 //Instantiate(data.obj, transform.position, Quaternion.identity);
                 //演出の生成(particleとか？)
             }
         }   
     }
-    
+
+    /// <summary>
+    /// アイテムのドロップ
+    /// </summary>
+    public void Drop(GameObject other)
+    {
+        Vector3 toVec = Vector3.zero;
+        if (other) { //otherがnullでなかったら
+            toVec = transform.position - other.gameObject.transform.position;
+        }
+
+        foreach (var data in m_datas)
+        {
+            if (data == null)
+            {
+                continue;
+            }
+
+            var isDrop = MyRandom.RandomProbability(data.probability);
+            if (isDrop)  //ドロップするなら。
+            {
+                //オブジェクトの生成。
+                data.obj.SetActive(true);
+                data.obj.transform.position = transform.position + m_dropPositonOffset;
+                data.obj.transform.parent = null;
+
+                ItemAddForce(data.obj, toVec);
+                //Instantiate(data.obj, transform.position, Quaternion.identity);
+                //演出の生成(particleとか？)
+            }
+        }
+    }
+
+    void ItemAddForce(GameObject obj, Vector3 force)
+    {
+        if(force == Vector3.zero) {
+            return;
+        }
+
+        var rigid = obj.GetComponent<Rigidbody>();
+        if (rigid)
+        {
+            force += m_dropPowerOffset;
+            rigid.AddForce(force.normalized * m_dropPower);
+        }
+    }
+
     //アクセッサ------------------------------------------------------------------
 
     public void AddData(DropData data)
