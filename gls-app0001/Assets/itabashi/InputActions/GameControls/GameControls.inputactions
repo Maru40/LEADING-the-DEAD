@@ -102,17 +102,33 @@
                     "interactions": ""
                 },
                 {
-                    "name": "UseItem",
+                    "name": "BatSwing",
                     "type": "Button",
-                    "id": "078a078a-3d08-4b20-87ff-cbbe05cc71b1",
+                    "id": "7a5bd760-fcea-49d4-886d-f883f86e3511",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "BatSwing",
+                    "name": "GunShot",
                     "type": "Button",
-                    "id": "7a5bd760-fcea-49d4-886d-f883f86e3511",
+                    "id": "51bf2177-f08f-4a14-a2ce-6afa464f707b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "PutBloodBag",
+                    "type": "Button",
+                    "id": "abfd212b-a9cb-4b2a-a30f-ed84aa9d68bc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Throwing",
+                    "type": "Button",
+                    "id": "7903c36b-3378-4c33-bdc4-8e447b0079ac",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -166,9 +182,9 @@
                 {
                     "name": "",
                     "id": "718662aa-22c7-4c45-bc76-602b581835f7",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "AxisDeadzone",
                     "groups": "",
                     "action": "Dash",
                     "isComposite": false,
@@ -275,23 +291,45 @@
                 },
                 {
                     "name": "",
-                    "id": "cd7c2273-38aa-4c05-8736-6309b6ad2758",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "UseItem",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "68d2b87b-5998-4965-aecc-fe1b83af7bd4",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "BatSwing",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ebd2b1e8-bb46-4c00-ad49-f05e24dd2cc5",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GunShot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "13af4204-19b2-4e16-bdf3-5b405a57b918",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PutBloodBag",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cadbb104-c35b-41ea-be1c-6431fd3635b1",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Throwing",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
