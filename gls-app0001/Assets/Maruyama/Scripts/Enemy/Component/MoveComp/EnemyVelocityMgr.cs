@@ -52,10 +52,12 @@ public class EnemyVelocityMgr : MonoBehaviour
             return;
         }
 
+        Debug.Log("Deseleration");
+
         var force = CalcuVelocity.CalucSeekVec(velocity, -velocity, velocity.magnitude * m_deselerationPower);
         AddForce(force);
 
-        float stopSpeed = 0.1f;
+        float stopSpeed = 0.3f;
         if (velocity.magnitude <= stopSpeed) {
             m_isDeseleration = false;
         }
@@ -99,6 +101,11 @@ public class EnemyVelocityMgr : MonoBehaviour
     {
         m_isDeseleration = true;
         m_deselerationPower = power;
+    }
+
+    public void SetIsDeseleration(bool isDeseleration)
+    {
+        m_isDeseleration = isDeseleration;
     }
 
     /// <summary>
