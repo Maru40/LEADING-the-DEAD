@@ -137,13 +137,11 @@ public class TankTackle : AttackNodeBase
     /// <returns></returns>
     bool IsTackleEnd()
     {
-        if (IsTargetRange(m_tackleLastRange))
-        {
+        if (IsTargetRange(m_tackleLastRange)) {
             return true;
         }
 
-        if (!IsTackleEyeRad())
-        {
+        if (!IsTackleEyeRad()) {
             return true;
         }
 
