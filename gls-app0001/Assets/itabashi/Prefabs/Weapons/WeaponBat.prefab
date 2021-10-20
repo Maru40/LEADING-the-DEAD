@@ -77,8 +77,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_weaponCollider: {fileID: 6877412286546398772}
   m_baseAttackDamageData:
+    obj: {fileID: 7602396690420632761}
     damageValue: 0
     isStunAttack: 1
+    hitStopTime: 0
+    damageTags: []
+  m_opponentDamageEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!136 &6877412286546398772
 CapsuleCollider:
   m_ObjectHideFlags: 0
