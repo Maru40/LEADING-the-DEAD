@@ -47,8 +47,7 @@ public class NormalAttack : AttackNodeBase
     void TargetChase()
     {
         var target = m_targetMgr.GetNowTarget();
-        if (target == null)
-        {
+        if (target == null) {
             return;
         }
 
@@ -58,7 +57,8 @@ public class NormalAttack : AttackNodeBase
 
         m_velocityMgr.velocity = toVec.normalized * moveSpeed;
 
-        m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
+        transform.forward = toVec.normalized;
+        //m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
     }
 
     /// <summary>
@@ -81,20 +81,23 @@ public class NormalAttack : AttackNodeBase
 
     public override void AttackStart()
     {
-
+        m_isTargetChase = true;
     }
 
     override public void AttackHitStart()
     {
+        Debug.Log("AttackHit");
         m_isTargetChase = false;
         m_hitBox.AttackStart();
+
+        m_velocityMgr.StartDeseleration();
     }
 
     public override void AttackHitEnd()
     {
+        Debug.Log("AttackHitEnd");
         m_hitBox.AttackEnd();
     }
-
 
     /// <summary>
     /// 相手にダメージを与える。
@@ -119,5 +122,7 @@ public class NormalAttack : AttackNodeBase
     {
         m_stator.GetTransitionMember().chaseTrigger.Fire();
         m_isTargetChase = true;
+
+        m_velocityMgr.SetIsDeseleration(false);
     }
 }
