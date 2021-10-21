@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 4590928967863615656}
   - component: {fileID: 5508741021234077921}
   - component: {fileID: 320051757929222284}
+  - component: {fileID: 1738738579}
   m_Layer: 0
   m_Name: flarebullet
   m_TagString: Untagged
@@ -5003,6 +5004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_rigidbody: {fileID: 5400000}
+  m_gunManager: {fileID: 1738738579}
 --- !u!114 &5508741021234077921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5016,7 +5018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_bindRange: 10
-  m_area: {fileID: 1138223934, guid: a401465b2c9bd254684b1532b4e5b704, type: 3}
+  m_area: {fileID: 396452810157583078}
 --- !u!114 &320051757929222284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5031,6 +5033,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_alarmSound: {fileID: 0}
   m_soundRange: {fileID: 791408300, guid: a401465b2c9bd254684b1532b4e5b704, type: 3}
+--- !u!114 &1738738579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4d1d6b75b673ac46918ce69f00738d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_rayObstacleLayerStrings:
+  - L_Ground
+  m_inflenceArea: {fileID: 128687861995454845}
+  m_bindArea: {fileID: 5508741021234077921}
 --- !u!1 &128687861995454845
 GameObject:
   m_ObjectHideFlags: 0
@@ -5074,7 +5092,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 18
+  m_Radius: 14
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &9077576721131206093
 MonoBehaviour:
@@ -5133,7 +5151,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 13
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8357887092192248437
 MonoBehaviour:
@@ -5150,7 +5168,7 @@ MonoBehaviour:
   m_enterAction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5508741021234077921}
         m_TargetAssemblyTypeName: BindActivateArea, Assembly-CSharp
         m_MethodName: Bind
         m_Mode: 0
@@ -5168,7 +5186,7 @@ MonoBehaviour:
   m_exitAction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5508741021234077921}
         m_TargetAssemblyTypeName: BindActivateArea, Assembly-CSharp
         m_MethodName: BindRelease
         m_Mode: 0
