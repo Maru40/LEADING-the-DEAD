@@ -86,7 +86,7 @@ namespace Player
         [SerializeField]
         private UnityEvent m_deadEndEvent;
 
-        private Subject<Unit> m_endStunSubject = new Subject<Unit>();
+        readonly private Subject<Unit> m_endStunSubject = new Subject<Unit>();
 
         public IObservable<float> OnHpChanged => m_hp;
 
@@ -121,7 +121,8 @@ namespace Player
         private void DeadStart()
         {
             m_isDead = true;
-            m_animatorManager.GoState("Dead", "Base Layer");
+            m_animatorManager.GoState("Dead", "Base Layer", 0.0f);
+            m_animatorManager.GoState("Idle", "Upper_Layer", 0.0f);
         }
 
         private void Start()
