@@ -64,8 +64,6 @@ public class TankTackle : AttackNodeBase
             return;
         }
 
-        Debug.Log("Tackle");
-
         var velocity = m_velocityManager.velocity;
         var toVec = CalcuToTargetVec();
 
