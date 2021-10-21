@@ -52,7 +52,7 @@ public class EnemyVelocityMgr : MonoBehaviour
             return;
         }
 
-        Debug.Log("Deseleration");
+        //Debug.Log("Deseleration");
 
         var force = CalcuVelocity.CalucSeekVec(velocity, -velocity, velocity.magnitude * m_deselerationPower);
         AddForce(force);

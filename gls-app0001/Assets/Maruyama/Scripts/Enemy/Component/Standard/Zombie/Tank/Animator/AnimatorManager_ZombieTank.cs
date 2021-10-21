@@ -8,6 +8,13 @@ using UniRx;
 public class AnimatorManager_ZombieTank : MonoBehaviour
 {
     [Serializable]
+    struct NormalAttackParametor
+    {
+        public float hitStartTime;
+        public float hitEndTime;
+    }
+
+    [Serializable]
     struct TackleParametor
     {
         public float tackleStartTime; //タックルスタート
@@ -15,37 +22,59 @@ public class AnimatorManager_ZombieTank : MonoBehaviour
     }
 
     [SerializeField]
+    NormalAttackParametor m_normapAttackParam = new NormalAttackParametor();
+
+    [SerializeField]
     TackleParametor m_tackleParam = new TackleParametor();
 
     Animator m_animator;
 
-    TankTackle m_attackComp;
+    NormalAttack m_normalAttackComp;
+    TankTackle m_tackleComp;
     StateMachineBehaviourTable<TimeEventStateMachineBehaviour> m_behaviorTable;
 
     void Awake()
     {
-        m_attackComp = GetComponent<TankTackle>();
+        m_normalAttackComp = GetComponent<NormalAttack>();
+        m_tackleComp = GetComponent<TankTackle>();
 
         m_animator = GetComponent<Animator>();
         m_behaviorTable = new StateMachineBehaviourTable<TimeEventStateMachineBehaviour>(m_animator);
 
+        SettingNormalAttackAnimation();
         SettingTackleAnimation();
         SettingTackleLastAnimation();
+    }
+
+    void SettingNormalAttackAnimation()
+    {
+        var layerIndex = m_animator.GetLayerIndex("Base Layer");
+
+        //Time系
+        var timeParam = m_normapAttackParam;
+        var attack = m_behaviorTable["Base Layer.NormalAttack"];
+
+        var timeEvent = attack.onTimeEvent;
+        timeEvent.ClampWhere(timeParam.hitStartTime).Subscribe(_ => m_normalAttackComp.AttackHitStart()).AddTo(this);
+        timeEvent.ClampWhere(timeParam.hitEndTime).Subscribe(_ => m_normalAttackComp.AttackHitEnd()).AddTo(this);
+
+        attack.onStateEntered.Subscribe(_ => m_normalAttackComp.AttackStart()).AddTo(this);
+        attack.onStateExited.Subscribe(_ => m_normalAttackComp.EndAnimationEvent()).AddTo(this);
     }
 
     void SettingTackleAnimation()
     { 
         var layerIndex = m_animator.GetLayerIndex("Base Layer");
-        m_attackComp.state.Where(_ => m_attackComp.state.Value == TankTackle.State.TackleLast)
+        m_tackleComp.state.Where(_ => m_tackleComp.state.Value == TankTackle.State.TackleLast)
             .Subscribe(_ => GoState("TackleLast", layerIndex))
             .AddTo(this);
 
         //Time系
         var tackle = m_behaviorTable["Base Layer.TackleAttack"];
-        tackle.onStateEntered.Subscribe(_ => m_attackComp.AttackStart()).AddTo(this);
+        tackle.onStateEntered.Subscribe(_ => m_tackleComp.AttackStart()).AddTo(this);
 
         var timeEvent = tackle.onTimeEvent;
-        timeEvent.ClampWhere(m_tackleParam.tackleStartTime).Subscribe(_ => m_attackComp.AttackHitStart()).AddTo(this);
+        timeEvent.ClampWhere(m_tackleParam.tackleStartTime).Subscribe(_ => m_tackleComp.AttackHitStart()).AddTo(this);
         //timeEvent.ClampWhere(m_tackleParam.deselerationStartTime).Subscribe(_ => m_attackComp.AttackHitEnd()).AddTo(this);
 
         //tackle.onStateExited.Subscribe(_ => m_attackComp.EndAnimationEvent());
@@ -55,7 +84,7 @@ public class AnimatorManager_ZombieTank : MonoBehaviour
     {
         var tackle = m_behaviorTable["Base Layer.TackleLast"];
 
-        tackle.onStateExited.Subscribe(_ => m_attackComp.EndAnimationEvent());
+        tackle.onStateExited.Subscribe(_ => m_tackleComp.EndAnimationEvent());
     }
 
     public void GoState(string stateName, int layerIndex, float transitionTime = 0.0f)
