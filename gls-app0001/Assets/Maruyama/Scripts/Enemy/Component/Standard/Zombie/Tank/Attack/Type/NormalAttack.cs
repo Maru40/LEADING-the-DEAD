@@ -6,12 +6,11 @@ using MaruUtility;
 
 public class NormalAttack : AttackNodeBase
 {
-    Stator_ZombieNormal m_stator;
+    Stator_ZombieTank m_stator;
     TargetManager m_targetMgr;
     EnemyVelocityMgr m_velocityMgr;
     EnemyRotationCtrl m_rotationCtrl;
     EyeSearchRange m_eyeRange;
-    ThrongManager m_throngManager;
     StatusManagerBase m_statusManager;
 
     [SerializeField]
@@ -24,12 +23,11 @@ public class NormalAttack : AttackNodeBase
 
     void Awake()
     {
-        m_stator = GetComponent<Stator_ZombieNormal>();
+        m_stator = GetComponent<Stator_ZombieTank>();
         m_targetMgr = GetComponent<TargetManager>();
         m_velocityMgr = GetComponent<EnemyVelocityMgr>();
         m_rotationCtrl = GetComponent<EnemyRotationCtrl>();
         m_eyeRange = GetComponent<EyeSearchRange>();
-        m_throngManager = GetComponent<ThrongManager>();
         m_statusManager = GetComponent<StatusManagerBase>();
 
         m_hitBox.AddEnterAction(SendDamage);
@@ -56,8 +54,6 @@ public class NormalAttack : AttackNodeBase
 
         float moveSpeed = m_moveSpeed * m_statusManager.GetBuffParametor().angerParam.speed;
         var toVec = target.transform.position - transform.position;
-        var avoidVec = m_throngManager.CalcuSumAvoidVector();
-        toVec += avoidVec;
         toVec.y = 0.0f;  //(yのベクトルを殺す。)
 
         m_velocityMgr.velocity = toVec.normalized * moveSpeed;
@@ -85,7 +81,7 @@ public class NormalAttack : AttackNodeBase
 
     public override void AttackStart()
     {
-        m_stator.GetTransitionMember().attackTrigger.Fire();
+
     }
 
     override public void AttackHitStart()
