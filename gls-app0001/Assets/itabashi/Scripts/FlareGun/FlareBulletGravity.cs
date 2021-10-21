@@ -7,6 +7,9 @@ public class FlareBulletGravity : MonoBehaviour
     [SerializeField]
     Rigidbody m_rigidbody;
 
+    [SerializeField]
+    FlareGunManager m_gunManager = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +23,8 @@ public class FlareBulletGravity : MonoBehaviour
         {
             m_rigidbody.useGravity = false;
             m_rigidbody.velocity = new Vector3();
+
+            m_gunManager.Bomb();
         }
     }
 }
