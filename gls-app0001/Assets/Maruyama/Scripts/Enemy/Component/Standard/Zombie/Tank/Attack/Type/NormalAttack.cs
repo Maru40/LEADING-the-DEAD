@@ -82,6 +82,8 @@ public class NormalAttack : AttackNodeBase
     public override void AttackStart()
     {
         m_isTargetChase = true;
+
+        enabled = true;
     }
 
     override public void AttackHitStart()
@@ -124,5 +126,7 @@ public class NormalAttack : AttackNodeBase
         m_isTargetChase = true;
 
         m_velocityMgr.SetIsDeseleration(false);
+
+        enabled = false;
     }
 }
