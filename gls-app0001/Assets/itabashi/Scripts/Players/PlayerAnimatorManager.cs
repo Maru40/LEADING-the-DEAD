@@ -49,6 +49,8 @@ namespace Player
             {
                 m_behaviourTable = new StateMachineBehaviourTable<TimeEventStateMachineBehaviour>(m_animator);
             }
+
+            PlayerMotionsTable.BaseLayer.Idle.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator).onStateEntered.Subscribe(_ => Debug.Log("うまく"));
             
             SettingBaseLayer();
 
