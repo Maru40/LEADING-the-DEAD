@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 /// <summary>
 /// クリアリザルトUI
@@ -27,17 +28,10 @@ public class ClearResult : MonoBehaviour
     [SerializeField]
     private Text m_scoreText;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField]
+    private Button m_nextStageButton;
+    [SerializeField]
+    private Button m_exitStageButton;
 
     public void SetMissionStar1(bool isAchieve)
     {
@@ -62,5 +56,10 @@ public class ClearResult : MonoBehaviour
         m_rankImage.SetRank(RankImage.Rank.S);
 
         m_scoreText.text = score.ToString();
+    }
+
+    public void OnEnable()
+    {
+        EventSystem.current.SetSelectedGameObject(m_nextStageButton.gameObject);
     }
 }
