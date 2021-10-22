@@ -580,6 +580,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5646726587093447214}
   - component: {fileID: 5646726587093447215}
+  - component: {fileID: 3787414423007466263}
   m_Layer: 5
   m_Name: ClearResult
   m_TagString: Untagged
@@ -635,6 +636,27 @@ MonoBehaviour:
   m_scoreText: {fileID: 5646726587309420103}
   m_nextStageButton: {fileID: 5666101458379749471}
   m_exitStageButton: {fileID: 407146905741183802}
+--- !u!114 &3787414423007466263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5646726587093447209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0be0e77781348d43ab785a0f93dedfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_clearResult: {fileID: 5646726587093447215}
+  m_stageTimer: {fileID: 0}
+  m_playerStatusManager: {fileID: 0}
+  m_scoringBaseTime: 100
+  m_hpScoreBase: 1000
+  m_S_rankBorder: 1000
+  m_A_rankBorder: 750
+  m_B_rankBorder: 500
+  m_timeSecondToScoreScale: 1
 --- !u!1 &5646726587309420097
 GameObject:
   m_ObjectHideFlags: 0
