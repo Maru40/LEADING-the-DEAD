@@ -31,7 +31,7 @@ public class AnimatorManager_ZombieTank : MonoBehaviour
 
     NormalAttack m_normalAttackComp;
     TankTackle m_tackleComp;
-    StateMachineBehaviourTable<TimeEventStateMachineBehaviour> m_behaviorTable;
+    //StateMachineBehaviourTable<TimeEventStateMachineBehaviour> m_behaviorTable;
 
     void Awake()
     {
@@ -39,7 +39,7 @@ public class AnimatorManager_ZombieTank : MonoBehaviour
         m_tackleComp = GetComponent<TankTackle>();
 
         m_animator = GetComponent<Animator>();
-        m_behaviorTable = new StateMachineBehaviourTable<TimeEventStateMachineBehaviour>(m_animator);
+        //m_behaviorTable = new StateMachineBehaviourTable<TimeEventStateMachineBehaviour>(m_animator);
 
         SettingNormalAttackAnimation();
         SettingTackleAnimation();
@@ -52,7 +52,8 @@ public class AnimatorManager_ZombieTank : MonoBehaviour
 
         //Time系
         var timeParam = m_normapAttackParam;
-        var attack = m_behaviorTable["Base Layer.NormalAttack"];
+        //var attack = m_behaviorTable["Base Layer.NormalAttack"];
+        var attack = ZombieTankTable.BaseLayer.NormalAttack.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
 
         var timeEvent = attack.onTimeEvent;
         timeEvent.ClampWhere(timeParam.hitStartTime).Subscribe(_ => m_normalAttackComp.AttackHitStart()).AddTo(this);
@@ -70,7 +71,8 @@ public class AnimatorManager_ZombieTank : MonoBehaviour
             .AddTo(this);
 
         //Time系
-        var tackle = m_behaviorTable["Base Layer.TackleAttack"];
+        //var tackle = m_behaviorTable["Base Layer.TackleAttack"];
+        var tackle = ZombieTankTable.BaseLayer.TackleAttack.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
         tackle.onStateEntered.Subscribe(_ => m_tackleComp.AttackStart()).AddTo(this);
 
         var timeEvent = tackle.onTimeEvent;
@@ -82,7 +84,8 @@ public class AnimatorManager_ZombieTank : MonoBehaviour
 
     void SettingTackleLastAnimation()
     {
-        var tackle = m_behaviorTable["Base Layer.TackleLast"];
+        //var tackle = m_behaviorTable["Base Layer.TackleLast"];
+        var tackle = ZombieTankTable.BaseLayer.TackleLast.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
 
         tackle.onStateExited.Subscribe(_ => m_tackleComp.EndAnimationEvent());
     }
