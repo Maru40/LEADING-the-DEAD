@@ -45,9 +45,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_outOfTargteDatas: []
   m_createObject: {fileID: 7434505739018704334, guid: 67a643b874b307f46a417e4170a2dd67, type: 3}
-  m_numCreate: 100
-  m_centerPosition: {x: 0, y: 0.1, z: 0}
-  m_maxRandomRange: {x: 30, y: 0, z: 30}
+  m_numCreate: 75
+  m_centerPosition: {x: 0, y: 0.2, z: 0}
+  m_maxRandomRange: {x: 24, y: 0, z: 24}
   m_distributionParams:
   - dropData:
       obj: {fileID: 6520215467471573455, guid: f89aa22a9f0e87b4f92420ffc278b8a3, type: 3}
@@ -55,20 +55,20 @@ MonoBehaviour:
       probability: 100
       particle: {fileID: 6492296973775632991, guid: 91837f35aa527df4199f8784a19b20ec, type: 3}
       isRemove: 0
-    numDistribution: 1
+    numDistribution: 7
   m_createSetParam:
     respawnParametor:
       isRespawn: 1
       time: 0
     chaseParametor:
       nearRange: 0.75
-      maxSpeed: 3
+      maxSpeed: 1.5
       turningPower: 3
-      lostSeekTime: 10
+      lostSeekTime: 7
       inThrongRange: 3
     randomPlowlingParametor:
       randomPositionRadius: 15
-      maxSpeed: 2.5
+      maxSpeed: 1.5
       turningPower: 2
       targetNearRange: 1
       maxWaitCalcuRouteTime: 3
@@ -77,7 +77,12 @@ MonoBehaviour:
       hp: 1
       damageIntervalTime: 3
     attackParametor:
-      power: 1
+      damageData:
+        obj: {fileID: 0}
+        damageValue: 2
+        isStunAttack: 0
+        hitStopTime: 1
+        damageTags: []
       startRange: 2.5
   m_respawnStatusUpParam:
     respawnParametor:
@@ -100,5 +105,10 @@ MonoBehaviour:
       hp: 0
       damageIntervalTime: 0
     attackParametor:
-      power: 0.5
+      damageData:
+        obj: {fileID: 0}
+        damageValue: 0
+        isStunAttack: 0
+        hitStopTime: 0
+        damageTags: []
       startRange: 0
