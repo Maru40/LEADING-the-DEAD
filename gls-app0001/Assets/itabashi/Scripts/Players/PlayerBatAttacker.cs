@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
@@ -27,7 +27,8 @@ namespace Player
 
         private void Awake()
         {
-            var batSwingBehaviour = m_animatorManager.behaviourTable["Upper_Layer.Swing.Swing"];
+            var batSwingBehaviour =
+                PlayerMotionsTable.Upper_Layer.Swing.Swing.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
 
             m_swingSubject
                 .Where(_ => !m_animatorManager.isUseActionMoving && m_playerStatusManager.isControllValid)

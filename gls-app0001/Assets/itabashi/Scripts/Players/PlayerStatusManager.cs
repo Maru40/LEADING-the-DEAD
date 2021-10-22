@@ -113,7 +113,7 @@ namespace Player
 
             m_deadStartEvent.AddListener(DeadStart);
 
-            var deadBehaviour = m_animatorManager.behaviourTable["Base Layer.Dead"];
+            var deadBehaviour = PlayerMotionsTable.BaseLayer.Dead.GetBehaviour<TimeEventStateMachineBehaviour>(m_animatorManager.animator);
 
             deadBehaviour.onTimeEvent.ClampWhere(3.0f).Subscribe(_ => m_deadEndEvent?.Invoke()).AddTo(this);
         }

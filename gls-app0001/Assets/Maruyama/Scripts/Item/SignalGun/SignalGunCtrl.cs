@@ -41,7 +41,8 @@ public class SignalGunCtrl : MonoBehaviour
             .Subscribe(_ => { m_nowCountTime += Time.deltaTime;m_coolTimePercentage.Value = m_nowCountTime / m_coolTime; })
             .AddTo(this);
 
-        var shotBehaviour = m_animatorManager.behaviourTable["Upper_Layer.Shot"];
+        var shotBehaviour =
+            PlayerMotionsTable.Upper_Layer.Shot.GetBehaviour<TimeEventStateMachineBehaviour>(m_animatorManager.animator);
 
         shotBehaviour.onStateEntered
             .Subscribe(_ => { m_animatorManager.isUseActionMoving = true; m_flareGun.gameObject.SetActive(true); });
