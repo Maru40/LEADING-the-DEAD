@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
@@ -11,6 +11,9 @@ namespace Player
     public class PlayerStatusManager : MonoBehaviour
     {
         [SerializeField]
+        private GameStateManager m_gameStateManager;
+
+        [SerializeField]
         private Gauge m_hpGauge;
 
         [SerializeField]
@@ -18,6 +21,8 @@ namespace Player
 
         [SerializeField]
         private float m_maxHp;
+
+        public float maxHp => m_maxHp;
 
         [SerializeField]
         private BoolReactiveProperty m_isStun = new BoolReactiveProperty(false);
@@ -81,6 +86,11 @@ namespace Player
         private bool isDead => m_isDead;
 
         [SerializeField]
+        private bool m_isInvincible = false;
+
+        public bool isInvincible { private set => m_isInvincible = value; get => m_isInvincible; }
+
+        [SerializeField]
         private UnityEvent m_deadStartEvent;
 
         [SerializeField]
@@ -104,7 +114,8 @@ namespace Player
 
             this.RegisterController(m_gameControls);
 
-            OnHpChanged.Where(hp => hp == 0.0f)
+            OnHpChanged
+                .Where(hp => hp == 0.0f)
                 .Subscribe(_ => m_deadStartEvent?.Invoke()).AddTo(this);
 
             m_endStunSubject.Delay(TimeSpan.FromSeconds(m_stunSecond))
@@ -112,6 +123,16 @@ namespace Player
                 .AddTo(this);
 
             m_deadStartEvent.AddListener(DeadStart);
+
+            m_gameStateManager.OnChangedGameState
+                .Where(gameState => gameState == GameState.Play)
+                .Subscribe(_ => m_isInvincible = false)
+                .AddTo(this);
+
+            m_gameStateManager.OnChangedGameState
+                .Where(gameState => gameState != GameState.Play)
+                .Subscribe(_ => isInvincible = true)
+                .AddTo(this);
 
             var deadBehaviour = PlayerMotionsTable.BaseLayer.Dead.GetBehaviour<TimeEventStateMachineBehaviour>(m_animatorManager.animator);
 
@@ -121,6 +142,8 @@ namespace Player
         private void DeadStart()
         {
             m_isDead = true;
+            m_isInvincible = true;
+
             m_animatorManager.GoState("Dead", "Base Layer", 0.0f);
             m_animatorManager.GoState("Idle", "Upper_Layer", 0.0f);
         }
@@ -142,6 +165,11 @@ namespace Player
 
         public void TakeDamage(AttributeObject.DamageData damageData)
         {
+            if(m_isInvincible)
+            {
+                return;
+            }
+
             hp -= damageData.damageValue;
             
             if(damageData.isStunAttack)

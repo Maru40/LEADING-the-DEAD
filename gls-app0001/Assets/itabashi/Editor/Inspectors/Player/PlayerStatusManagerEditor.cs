@@ -27,6 +27,9 @@ namespace Player
         {
             serializedObject.Update();
 
+            var gameStateManager = serializedObject.FindProperty("m_gameStateManager");
+            EditorGUILayout.PropertyField(gameStateManager);
+
             HpGUILayout();
 
             StaminaGUILayout();
@@ -105,7 +108,7 @@ namespace Player
 
         private void AbnormalGUILayout()
         {
-            m_abnormalStateFoldout = EditorGUILayout.Foldout(m_abnormalStateFoldout, "状態異常");
+            m_abnormalStateFoldout = EditorGUILayout.Foldout(m_abnormalStateFoldout, "状態");
 
             if(!m_abnormalStateFoldout)
             {
@@ -113,6 +116,10 @@ namespace Player
             }
 
             EditorGUI.indentLevel++;
+
+            var isInvincible = serializedObject.FindProperty("m_isInvincible");
+
+            EditorGUILayout.PropertyField(isInvincible);
 
             StunGUILayout();
 

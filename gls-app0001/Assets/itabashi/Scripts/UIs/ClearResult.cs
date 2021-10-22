@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -46,18 +46,20 @@ public class ClearResult : MonoBehaviour
         m_missionStar3.SetIsAchieve(isAchieve);
     }
 
-    public void SetTime(int time)
+    public void SetTime(float time)
     {
         m_timeText.SetTime(time);
     }
 
     public void SetScore(int score)
     {
-        m_rankImage.SetRank(RankImage.Rank.S);
-
         m_scoreText.text = score.ToString();
     }
 
+    public void SetRank(RankImage.Rank rank)
+    {
+        m_rankImage.SetRank(rank);
+    }
     public void OnEnable()
     {
         EventSystem.current.SetSelectedGameObject(m_nextStageButton.gameObject);

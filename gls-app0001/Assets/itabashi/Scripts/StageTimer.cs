@@ -16,6 +16,16 @@ public class StageTimer : MonoBehaviour
     public bool isCount => m_isCount.Value;
     public IObservable<bool> OnChangedIsCount => m_isCount;
 
+    [SerializeField]
+    private bool m_playOnAwake = false;
+
+    private void Awake()
+    {
+        if(m_playOnAwake)
+        {
+            TimerStart();
+        }
+    }
 
     private void Update()
     {

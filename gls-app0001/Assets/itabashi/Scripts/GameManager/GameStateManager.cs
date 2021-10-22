@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UniRx;
 
 public enum GameState
 {
@@ -11,10 +12,22 @@ public enum GameState
     GameOver
 }
 
+[System.Serializable]
+class GameStateReactiveProperty : ReactiveProperty<GameState>
+{
+    public GameStateReactiveProperty() : base() { }
+
+    public GameStateReactiveProperty(GameState initGameState) : base(initGameState) { }
+}
+
 public class GameStateManager : MonoBehaviour
 {
     [SerializeField]
-    private GameState m_gameState = GameState.Play;
+    private GameStateReactiveProperty m_gameState = new GameStateReactiveProperty(GameState.Play);
+
+    public GameState gameState { private set => m_gameState.Value = value; get => m_gameState.Value; }
+
+    public System.IObservable<GameState> OnChangedGameState => m_gameState;
 
     [SerializeField]
     private UnityEvent m_gameClearEvent;
@@ -45,26 +58,28 @@ public class GameStateManager : MonoBehaviour
         
     }
 
-    private void ChangePause()
+    public void ChangePause()
     {
-        if(m_gameState != GameState.Play && m_gameState != GameState.Pause)
+        if(gameState != GameState.Play && gameState != GameState.Pause)
         {
             Debug.Log("今はポーズにすることはできません");
             return;
         }
 
-        if(m_gameState == GameState.Play)
+        Debug.Log(gameState);
+
+        if(gameState == GameState.Play)
         {
             Debug.Log("ポーズ状態");
-            m_gameState = GameState.Pause;
+            gameState = GameState.Pause;
             GameTimeManager.Pause();
             return;
         }
 
-        if(m_gameState == GameState.Pause)
+        if(gameState == GameState.Pause)
         {
             Debug.Log("ポーズ解除");
-            m_gameState = GameState.Play;
+            gameState = GameState.Play;
             GameTimeManager.UnPause();
             return;
         }
@@ -72,24 +87,24 @@ public class GameStateManager : MonoBehaviour
 
     public void Clear()
     {
-        if(m_gameState != GameState.Play)
+        if(gameState != GameState.Play)
         {
             return;
         }
 
-        m_gameState = GameState.Clear;
+        gameState = GameState.Clear;
 
         m_gameClearEvent?.Invoke();
     }
 
     public void GameOver()
     {
-        if(m_gameState != GameState.Play)
+        if(gameState != GameState.Play)
         {
             return;
         }
-
-        m_gameState = GameState.GameOver;
+        
+        gameState = GameState.GameOver;
 
         m_gameOverEvent?.Invoke();
     }

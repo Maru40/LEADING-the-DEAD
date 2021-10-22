@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using AttributeObject;
 using UnityEngine.Events;
+using UniRx;
+using System;
 
 public class BarricadeDurability : MonoBehaviour
 {
@@ -10,7 +12,16 @@ public class BarricadeDurability : MonoBehaviour
     /// バリケードの耐久度
     /// </summary>
     [SerializeField]
-    private float m_durability = 100;
+    private FloatReactiveProperty m_durability = new FloatReactiveProperty(100.0f);
+
+    public float durability
+    {
+        private set => m_durability.Value = Mathf.Clamp(value, 0.0f, m_maxDurability);
+
+        get => m_durability.Value;
+    }
+
+    public IObservable<float> OnChangedDurability => m_durability;
 
     [SerializeField]
     private float m_maxDurability = 100;
@@ -21,31 +32,30 @@ public class BarricadeDurability : MonoBehaviour
     [SerializeField]
     private UnityEvent m_breakEvent;
 
+    private void Awake()
+    {
+        OnChangedDurability
+            .Subscribe(durability => m_gauge.fillAmount = durability / m_maxDurability)
+            .AddTo(this);
+
+        OnChangedDurability
+            .Where(durability => durability == 0.0f)
+            .Subscribe(_ =>
+            {
+                m_breakEvent?.Invoke();
+                Debug.Log("破壊されました");
+                Destroy(gameObject);
+            })
+            .AddTo(this);
+    }
+
     public void TakeDamage(AttributeObject.DamageData damageData)
     {
-        Debug.Log($"{damageData.damageValue}ダメージ受けました");
-        m_durability -= damageData.damageValue;
-
-        m_durability = Mathf.Clamp(m_durability, 0.0f, m_maxDurability);
-
-        m_gauge.fillAmount = m_durability / m_maxDurability;
-
-        if (m_durability > 0)
-        {
-            return;
-        }
-
-        m_breakEvent?.Invoke();
-
-        Debug.Log("破壊されました");
-
-        Destroy(gameObject);
+        durability -= damageData.damageValue;
     }
 
     public void Recovery(float recoveryValue)
     {
-        m_durability = Mathf.Clamp(m_durability + recoveryValue, 0.0f, m_maxDurability);
-
-        m_gauge.fillAmount = m_durability / m_maxDurability;
+        durability += recoveryValue;
     }
 }
