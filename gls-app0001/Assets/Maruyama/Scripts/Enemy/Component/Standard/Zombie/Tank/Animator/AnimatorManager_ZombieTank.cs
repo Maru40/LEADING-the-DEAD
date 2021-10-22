@@ -31,7 +31,7 @@ public class AnimatorManager_ZombieTank : MonoBehaviour
 
     NormalAttack m_normalAttackComp;
     TankTackle m_tackleComp;
-    StateMachineBehaviourTable<TimeEventStateMachineBehaviour> m_behaviorTable;
+    //StateMachineBehaviourTable<TimeEventStateMachineBehaviour> m_behaviorTable;
 
     void Awake()
     {
@@ -39,7 +39,7 @@ public class AnimatorManager_ZombieTank : MonoBehaviour
         m_tackleComp = GetComponent<TankTackle>();
 
         m_animator = GetComponent<Animator>();
-        m_behaviorTable = new StateMachineBehaviourTable<TimeEventStateMachineBehaviour>(m_animator);
+        //m_behaviorTable = new StateMachineBehaviourTable<TimeEventStateMachineBehaviour>(m_animator);
 
         SettingNormalAttackAnimation();
         SettingTackleAnimation();
