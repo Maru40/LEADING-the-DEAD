@@ -643,8 +643,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_animatorManager: {fileID: 1106717144}
   m_playerStatusManager: {fileID: 1106717132}
-  m_moveSpeed: 4
-  m_dashSpeedScale: 2
+  m_moveSpeed: 3
+  m_dashSpeedScale: 1.2
   m_dashStaminaToOneSecond: 1
   m_moveSpeedDeadZone: 0.01
 --- !u!114 &1106717132
@@ -662,8 +662,8 @@ MonoBehaviour:
   m_gameStateManager: {fileID: 0}
   m_hpGauge: {fileID: 0}
   m_hp:
-    value: 100
-  m_maxHp: 100
+    value: 10
+  m_maxHp: 10
   m_isStun:
     value: 0
   m_stunSecond: 1
@@ -84244,7 +84244,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7539497340573042569, guid: 04d3b5fb1186d0e4184cdad9718f612c, type: 3}
       propertyPath: m_coolTime
-      value: 1.95
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7539497340573042569, guid: 04d3b5fb1186d0e4184cdad9718f612c, type: 3}
       propertyPath: m_flareGun
