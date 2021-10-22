@@ -10,7 +10,9 @@ public class PauseUIPresenter : MonoBehaviour
 
     private void Awake()
     {
-        GameTimeManager.isPauseOnChanged.Subscribe(isPause => m_pauseUIView.gameObject.SetActive(isPause));
+        GameTimeManager.isPauseOnChanged
+            .Subscribe(isPause => m_pauseUIView.gameObject.SetActive(isPause))
+            .AddTo(this);
     }
 
     // Start is called before the first frame update
