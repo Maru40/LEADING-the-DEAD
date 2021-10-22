@@ -73,14 +73,16 @@ namespace Player
                 .Subscribe(_ => Throwing())
                 .AddTo(this);
 
-            var throwingStanceBehaviour = m_animatorManager.behaviourTable["Upper_Layer.Throw.ThrowingStance"];
+            var throwingStanceBehaviour =
+                PlayerMotionsTable.Upper_Layer.Throw.ThrowingStance.GetBehaviour<TimeEventStateMachineBehaviour>(m_animatorManager.animator);
 
             throwingStanceBehaviour.onStateEntered.Subscribe(_ => m_animatorManager.isUseActionMoving = true);
             throwingStanceBehaviour.onStateExited
                 .Where(_ => !m_isThrowing)
                 .Subscribe(_ => m_animatorManager.isUseActionMoving = false);
 
-            var throwingBehaviour = m_animatorManager.behaviourTable["Upper_Layer.Throw.Throwing"];
+            var throwingBehaviour =
+                PlayerMotionsTable.Upper_Layer.Throw.Throwing.GetBehaviour<TimeEventStateMachineBehaviour>(m_animatorManager.animator);
 
             throwingBehaviour.onStateEntered.Subscribe(_ => m_isThrowing = true);
             throwingBehaviour.onStateEntered.Subscribe(_ => m_isThrowingStance = false);

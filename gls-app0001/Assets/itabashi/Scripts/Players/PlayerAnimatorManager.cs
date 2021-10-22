@@ -11,23 +11,10 @@ namespace Player
         [SerializeField]
         private Animator m_animator;
 
+        public Animator animator => m_animator;
+
         [SerializeField]
         private PlayerStatusManager m_statusManager;
-
-        private StateMachineBehaviourTable<TimeEventStateMachineBehaviour> m_behaviourTable;
-
-        public StateMachineBehaviourTable<TimeEventStateMachineBehaviour> behaviourTable
-        {
-            get
-            {
-                if(m_behaviourTable == null)
-                {
-                    m_behaviourTable = new StateMachineBehaviourTable<TimeEventStateMachineBehaviour>(m_animator);
-                }
-
-                return m_behaviourTable;
-            }
-        }
 
         private FloatReactiveProperty m_moveInput = new FloatReactiveProperty(0);
 
@@ -45,12 +32,6 @@ namespace Player
 
         private void Awake()
         {
-            if (m_behaviourTable == null)
-            {
-                m_behaviourTable = new StateMachineBehaviourTable<TimeEventStateMachineBehaviour>(m_animator);
-            }
-
-            PlayerMotionsTable.BaseLayer.Idle.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator).onStateEntered.Subscribe(_ => Debug.Log("うまく"));
             
             SettingBaseLayer();
 
