@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +9,15 @@ public class ClearScoreCalculator : MonoBehaviour
 
     [SerializeField]
     private StageTimer m_stageTimer;
+
+    [SerializeField]
+    private Player.PlayerStatusManager m_playerStatusManager;
+
+    [SerializeField]
+    private float m_scoringBaseTime = 100;
+
+    [SerializeField]
+    private float m_hpScoreBase = 1000;
 
     [SerializeField]
     private float m_S_rankBorder = 1000;
@@ -36,7 +45,9 @@ public class ClearScoreCalculator : MonoBehaviour
     {
         float score = 0.0f;
 
-        score += m_stageTimer.timeSeconds * m_timeSecondToScoreScale;
+        score += Mathf.Max(m_scoringBaseTime - m_stageTimer.timeSeconds, 0.0f) * m_timeSecondToScoreScale;
+
+        score += m_playerStatusManager.hp / m_playerStatusManager.maxHp * m_hpScoreBase;
 
         m_clearResult.SetTime(m_stageTimer.timeSeconds);
 
