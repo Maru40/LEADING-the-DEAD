@@ -18,6 +18,8 @@ public class SignalGunPresenter : MonoBehaviour
 
     void Start()
     {
+        NullCheck();
+
         var coolTimeParcentage = m_signalGunCtrl.coolTimePercentageOnChanged;
 
         coolTimeParcentage.Where(parsent => parsent >= 1.0f)
@@ -38,4 +40,11 @@ public class SignalGunPresenter : MonoBehaviour
             .AddTo(this);
     }
 
+    void NullCheck()
+    {
+        if (m_signalGunCtrl == null)
+        {
+            m_signalGunCtrl = GameObject.FindObjectOfType<SignalGunCtrl>();
+        }
+    }
 }
