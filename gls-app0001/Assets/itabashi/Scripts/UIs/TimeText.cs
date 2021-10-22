@@ -6,10 +6,20 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Text))]
 public class TimeText : MonoBehaviour
 {
+    enum TimeDisplay
+    {
+        HoursMinutesSeconds,
+        MinutesSecounds,
+        Seconds
+    }
+
     private Text m_text;
 
     [SerializeField]
-    private int m_time;
+    private float m_time;
+
+    [SerializeField]
+    private TimeDisplay m_timeDisplay;
 
     private void OnValidate()
     {
@@ -33,7 +43,7 @@ public class TimeText : MonoBehaviour
         
     }
 
-    public void SetTime(int time)
+    public void SetTime(float time)
     {
         m_time = time;
 
@@ -42,6 +52,13 @@ public class TimeText : MonoBehaviour
 
     private void UpdateTimeText()
     {
-        m_text.text = m_time.ToString();
+        var span = System.TimeSpan.FromSeconds(m_time);
+        m_text.text = m_timeDisplay switch
+        {
+            TimeDisplay.HoursMinutesSeconds => span.ToString(@"hh\:mm\:ss"),
+            TimeDisplay.MinutesSecounds => span.ToString(@"mm\:ss"),
+            TimeDisplay.Seconds => span.Seconds.ToString(),
+            _ => ""
+        };
     }
 }
