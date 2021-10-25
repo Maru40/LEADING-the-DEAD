@@ -7,8 +7,19 @@ using UnityEngine;
 /// </summary>
 public class PickedUpObject : MonoBehaviour
 {
+    public enum PickedUpType
+    {
+        Touch,
+        Decision
+    }
+
     [SerializeField]
     private string m_pickedUpObjectName = "PickedUpObject";
+
+    [SerializeField]
+    private PickedUpType m_pickedUpType = PickedUpType.Touch;
+
+    public PickedUpType pickedUpType => m_pickedUpType;
 
     [SerializeField]
     private AudioClip m_pickedUpSound;
@@ -26,7 +37,6 @@ public class PickedUpObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public GameObject PickUp()
