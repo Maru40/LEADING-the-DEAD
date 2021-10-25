@@ -10,6 +10,9 @@ using System.Linq;
 [DisallowMultipleComponent]
 public class PlayerPickUpper : MonoBehaviour
 {
+    [SerializeField]
+    private PossibleUI m_possibleUI;
+
     private const string PICKUP_OBJECTS_NAME = "PickUpObjects";
 
     Transform m_pickUpObjectsTransform;
@@ -58,7 +61,7 @@ public class PlayerPickUpper : MonoBehaviour
     {
         var pickedUpObject = collision.gameObject.GetComponent<PickedUpObject>();
 
-        if(!pickedUpObject)
+        if(!pickedUpObject || pickedUpObject.pickedUpType != PickedUpObject.PickedUpType.Touch)
         {
             return;
         }
@@ -95,5 +98,36 @@ public class PlayerPickUpper : MonoBehaviour
     public List<PickedUpObject> GetPickedUpObjectList(string pickedUpObjectName)
     {
         return m_stackObjects.Where(obj => obj.pickedUpObjectName == pickedUpObjectName).ToList();
+    }
+
+    public void DecisionTriggerEnter(Collider other)
+    {
+        var pickedUpObject = other.gameObject.GetComponent<PickedUpObject>();
+
+        if (!pickedUpObject || pickedUpObject.pickedUpType != PickedUpObject.PickedUpType.Decision)
+        {
+            return;
+        }
+
+        m_possibleUI.AddSelectPossible("拾う", () => Decision(pickedUpObject), pickedUpObject.GetInstanceID());
+    }
+
+    private void Decision(PickedUpObject pickedUpObject)
+    {
+        PutAway(pickedUpObject);
+
+        m_possibleUI.RemoveSelectPossible("拾う", pickedUpObject.GetInstanceID());
+    }
+
+    public void DecisionTriggerExit(Collider other)
+    {
+        var pickedUpObject = other.gameObject.GetComponent<PickedUpObject>();
+
+        if (!pickedUpObject || pickedUpObject.pickedUpType != PickedUpObject.PickedUpType.Decision)
+        {
+            return;
+        }
+
+        m_possibleUI.RemoveSelectPossible("拾う", pickedUpObject.GetInstanceID());
     }
 }
