@@ -32,6 +32,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
     WaitTimer m_waitTimer;
     EnemyRespawnStatusUpBase m_statusUp;
     DropObjecptManager m_dropManager;
+    TargetManager m_targetManger;
 
     void Awake()
     {
@@ -42,6 +43,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
         m_waitTimer = GetComponent<WaitTimer>();
         m_statusUp = GetComponent<EnemyRespawnStatusUpBase>();
         m_dropManager = GetComponent<DropObjecptManager>();
+        m_targetManger = GetComponent<TargetManager>();
     }
 
     //リスポーン準備
@@ -68,7 +70,8 @@ public class EnemyRespawnManager : EnemyRespawnBase
         var respawnPosition = CalcuRespawnRandomPosition();
         transform.position = respawnPosition;
 
-        DropDistribution();
+        DeathCount();  //死亡時カウント
+        DropDistribution();  //ドロップアイテム再配布
         //m_dropManager?.Drop();
         m_statusUp?.Respawn();  //死亡時にステータスUP
         m_stator.Reset();  //ステートのリセット
@@ -95,6 +98,25 @@ public class EnemyRespawnManager : EnemyRespawnBase
             m_dropManager.RemoveDatas(datas);
         }
     }
+
+    /// <summary>
+    /// 死亡数カウント
+    /// </summary>
+    void DeathCount()
+    {
+        var target = m_targetManger.GetNowTarget();
+        if (target)
+        {
+            Debug.Log("sinnda");
+            //ターゲットがplayerなら
+            var playerComp = target.GetComponent<Player.PlayerStatusManager>();
+            if (playerComp)
+            {
+                m_generator.AddDeathCount();
+            }
+        }
+    }
+
 
     //アクセッサ-------------------------------------------------------
 

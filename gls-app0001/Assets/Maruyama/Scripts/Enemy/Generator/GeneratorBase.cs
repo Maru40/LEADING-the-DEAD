@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class GeneratorBase : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    uint m_deathCount = 0;
 
-    // Update is called once per frame
-    void Update()
+    public void AddDeathCount(uint count = 1)
     {
-        
+        m_deathCount += count;
     }
 }
