@@ -6,7 +6,7 @@ using System;
 using MaruUtility;
 using UniRx;
 
-public class Attack_ZombieNormal : AttackBase
+public class Attack_ZombieNormal : AttackNodeManagerBase
 {
     Stator_ZombieNormal m_stator;
     TargetManager m_targetMgr;

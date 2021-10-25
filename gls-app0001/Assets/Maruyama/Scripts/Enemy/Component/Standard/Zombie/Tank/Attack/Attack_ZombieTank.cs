@@ -5,7 +5,7 @@ using System;
 
 using MaruUtility;
 
-public class Attack_ZombieTank : AttackBase
+public class Attack_ZombieTank : AttackNodeManagerBase
 {
     [Serializable]
     struct Parametor {
@@ -52,35 +52,6 @@ public class Attack_ZombieTank : AttackBase
         m_tankTackle = GetComponent<TankTackle>();
     }
 
-    void Update()
-    {
-        //MoveProcess();
-
-        //RotationCtrl();
-    }
-
-    void MoveProcess()
-    {
-        //if(m_attackType == AttackType.Tackle)
-        //{
-        //    var target = m_targetMgr.GetNowTarget();
-        //    var toVec = target.gameObject.transform.position - transform.position;
-        //    var force = CalcuVelocity.CalucSeekVec(m_velocityManager.velocity, toVec, GetBaseParam().moveSpeed);
-
-        //    m_velocityManager.AddForce(force);
-        //}
-    }
-
-    void RotationCtrl()
-    {
-        if (m_attackType == AttackType.Charge)
-        {
-            var target = m_targetMgr.GetNowTarget();
-            var direction = target.transform.position - transform.position;
-            transform.forward = direction.normalized;
-        }
-    }
-
     public override bool IsAttackStartRange()
     {
         float range = GetBaseParam().startRange;
@@ -115,14 +86,6 @@ public class Attack_ZombieTank : AttackBase
     void TackleAttack()
     {
         m_animatorCtrl.TackleTriggerFire();
-    }
-
-    /// <summary>
-    /// 減速開始
-    /// </summary>
-    public void DeselerationStart()
-    {
-        m_velocityManager.StartDeseleration();
     }
 
     public override void Attack()

@@ -6,7 +6,8 @@ using MaruUtility;
 
 public class NormalAttack : AttackNodeBase
 {
-    Stator_ZombieTank m_stator;
+    //Stator_ZombieTank m_stator;
+    AttackNodeManagerBase m_attackManager;
     TargetManager m_targetMgr;
     EnemyVelocityMgr m_velocityMgr;
     EnemyRotationCtrl m_rotationCtrl;
@@ -23,7 +24,8 @@ public class NormalAttack : AttackNodeBase
 
     void Awake()
     {
-        m_stator = GetComponent<Stator_ZombieTank>();
+        //m_stator = GetComponent<Stator_ZombieTank>();
+        m_attackManager = GetComponent<AttackNodeManagerBase>();
         m_targetMgr = GetComponent<TargetManager>();
         m_velocityMgr = GetComponent<EnemyVelocityMgr>();
         m_rotationCtrl = GetComponent<EnemyRotationCtrl>();
@@ -122,7 +124,8 @@ public class NormalAttack : AttackNodeBase
 
     public override void EndAnimationEvent()
     {
-        m_stator.GetTransitionMember().chaseTrigger.Fire();
+        //m_stator.GetTransitionMember().chaseTrigger.Fire();
+        m_attackManager.EndAnimationEvent();
         m_isTargetChase = true;
 
         m_velocityMgr.SetIsDeseleration(false);

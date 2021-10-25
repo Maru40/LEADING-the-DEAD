@@ -18,7 +18,7 @@ public struct AttackParametorBase
     }
 }
 
-public abstract class AttackBase : MonoBehaviour
+public abstract class AttackNodeManagerBase : MonoBehaviour
 {
     [SerializeField]
     private AttackParametorBase m_baseParam = new AttackParametorBase(new AttributeObject.DamageData(1.0f), 1.0f);

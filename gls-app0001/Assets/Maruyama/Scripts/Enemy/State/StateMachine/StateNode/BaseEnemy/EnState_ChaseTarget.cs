@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
 {
-    AttackBase m_attackComp;
+    AttackNodeManagerBase m_attackComp;
 
     public EnState_ChaseTarget(EnemyBase owner)
         : base(owner)
@@ -25,7 +25,7 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
 
         var owner = GetOwner();
 
-        m_attackComp = owner.GetComponent<AttackBase>();
+        m_attackComp = owner.GetComponent<AttackNodeManagerBase>();
 
         var chaseTarget = owner.GetComponent<ChaseTarget>();
 
