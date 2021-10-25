@@ -58,6 +58,10 @@ public class RandomPlowlingMove : MonoBehaviour
     EnemyRotationCtrl m_rotationCtrl;
     StatusManagerBase m_statusManager;
 
+    [SerializeField]
+    float m_collisionStayTime = 2.0f;
+    float m_collisionStayTimerElapsed = 0.0f;
+
     void Awake()
     {
         //コンポーネントの取得
@@ -115,7 +119,12 @@ public class RandomPlowlingMove : MonoBehaviour
             if (m_throngMgr.enabled)
             {
                 var newTargetPosition = m_throngMgr.CalcuRandomPlowlingMovePositonIntegrated(this);  //ランダムな方向を集団に合わせる。
-                SetTargetPositon(newTargetPosition);
+                var toVec = newTargetPosition - transform.position;
+
+                if (!IsRayHitObstacle(toVec))  //障害物が無かったら。
+                {
+                    SetTargetPositon(newTargetPosition);
+                }
             }
         }
     }
@@ -216,7 +225,8 @@ public class RandomPlowlingMove : MonoBehaviour
     {
         if (IsObstract(collision.gameObject))
         {
-            SetRandomTargetPosition();
+            m_targetPosition = -m_targetPosition;
+            //SetRandomTargetPosition();
         }
     }
 
@@ -224,7 +234,21 @@ public class RandomPlowlingMove : MonoBehaviour
     {
         if (IsObstract(collision.gameObject))
         {
-            SetRandomTargetPosition();
+            m_collisionStayTimerElapsed += Time.deltaTime;
+
+            if(m_collisionStayTimerElapsed >= m_collisionStayTime)
+            {
+                m_collisionStayTimerElapsed = 0.0f;
+                SetRandomTargetPosition();
+            }
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (IsObstract(collision.gameObject))
+        {
+            m_collisionStayTimerElapsed = 0.0f;
         }
     }
 
@@ -241,6 +265,24 @@ public class RandomPlowlingMove : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Rayを飛ばして障害物があるかどうか？
+    /// </summary>
+    /// <param name="toVec">Rayを飛ばしたい方向</param>
+    /// <returns>当たったらtrue</returns>
+    bool IsRayHitObstacle(Vector3 toVec)
+    {
+        //var toVec = m_targetPosition - transform.position;
+        int obstacleLayer = LayerMask.GetMask(m_rayObstacleLayerStrings);
+        if (Physics.Raycast(transform.position, toVec, toVec.magnitude, obstacleLayer))
+        {
+            return true;  //障害物がなかったら
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     //アクセッサ-----------------------------------------------------
 

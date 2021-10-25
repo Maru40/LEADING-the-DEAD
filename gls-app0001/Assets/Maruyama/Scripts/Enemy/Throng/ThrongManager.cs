@@ -151,19 +151,31 @@ public class ThrongManager : MonoBehaviour
         return sumPosition / throngSize;
     }
 
-    //群衆の中心のベクトル
+    /// <summary>
+    /// 群衆の中心のベクトル
+    /// </summary>
+    /// <param name="data">集団データ</param>
+    /// <returns>群衆の中心データ</returns>
     Vector3 CalcuCenterVector(ThrongData data)
     {
         return data.gameObject.transform.position;
     }
 
-    //dataの進行方向
+    /// <summary>
+    /// dataの進行方向
+    /// </summary>
+    /// <param name="data">集団データ</param>
+    /// <returns>dataの進行方向</returns>
     Vector3 CalcuDirectVector(ThrongData data)
     {
         return data.velocityMgr.velocity;
     }
 
-    //オブジェクト同士の回避
+    /// <summary>
+    /// オブジェクト同士の回避
+    /// </summary>
+    /// <param name="data">集団データ</param>
+    /// <returns>オブジェクト同士の回避ベクトル</returns>
     Vector3 CalcuAvoidVector(ThrongData data)
     {
         if(data.gameObject == gameObject) {  //自分自身なら処理をしない
@@ -362,42 +374,4 @@ public class ThrongManager : MonoBehaviour
             }
         }
     }
-
-
-    //ボツデータ↓
-
-    //群衆として認識するオブジェクトのセット
-    //void SetCalcuThrongList()
-    //{
-    //    var datas = m_generator.GetThrongDatas();
-    //    foreach (var data in datas)
-    //    {
-    //        if (this.gameObject == data.gameObject)
-    //        {  //自分自身ならcontinue
-    //            continue;
-    //        }
-
-    //        var toVec = data.gameObject.transform.position - transform.position;
-    //        if (toVec.magnitude < m_param.inThrongRange)  //群衆になる範囲にいたら
-    //        {
-    //            if (IsNewData(data))  //新規のデータだったら
-    //            {
-    //                m_throngDatas.Add(data);
-    //            }
-    //        }
-    //    }
-    //}
-
-    //bool IsNewData(ThrongData newData)
-    //{
-    //    foreach (var data in m_throngDatas)
-    //    {
-    //        if (data.gameObject == newData.gameObject)
-    //        {
-    //            return false;
-    //        }
-    //    }
-
-    //    return true;
-    //}
 }
