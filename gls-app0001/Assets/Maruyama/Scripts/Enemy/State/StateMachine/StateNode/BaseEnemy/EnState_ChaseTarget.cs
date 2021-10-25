@@ -25,7 +25,7 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
 
         var owner = GetOwner();
 
-        m_attackComp = owner.GetComponent<AttackBase>();
+        m_attackComp = owner.GetComponent<AttackNodeManagerBase>();
 
         var chaseTarget = owner.GetComponent<ChaseTarget>();
 
