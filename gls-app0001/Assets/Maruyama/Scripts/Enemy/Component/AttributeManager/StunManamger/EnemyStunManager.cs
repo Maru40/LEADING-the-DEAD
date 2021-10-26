@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System;
+using UniRx;
 
 [Serializable]
 struct StunParametor
@@ -23,6 +24,8 @@ public class EnemyStunManager : MonoBehaviour
     [SerializeField]
     List<ChangeCompParam> m_changeCompParam = new List<ChangeCompParam>();
 
+    readonly ReactiveProperty<bool> m_isStun = new ReactiveProperty<bool>();
+
     WaitTimer m_waitTimer;
     I_Stun m_stun;
 
@@ -35,6 +38,8 @@ public class EnemyStunManager : MonoBehaviour
         {
             SetDefaultChangeComps();
         }
+
+        m_isStun.Value = false;
     }
 
     public void StartStun()
@@ -46,6 +51,8 @@ public class EnemyStunManager : MonoBehaviour
     {
         Debug.Log("スタン");
 
+        m_isStun.Value = true;
+
         //切り替えるコンポーネントの今の状態の記録
         SaveNowEnableComps();
         //コンポーネントの切替。
@@ -56,6 +63,8 @@ public class EnemyStunManager : MonoBehaviour
 
     private void EndStun()
     {
+        m_isStun.Value = false;
+
         //スタン解除の処理
         m_stun.EndStun();
 
@@ -121,14 +130,5 @@ public class EnemyStunManager : MonoBehaviour
         return m_param.time;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        //test用
-
-        //var player = collision.gameObject.GetComponent<PlayerPickUpper>();
-        //if (player)
-        //{
-        //    m_stun.StartStun();
-        //}
-    }
+    public IObservable<bool> isStun => m_isStun;
 }
