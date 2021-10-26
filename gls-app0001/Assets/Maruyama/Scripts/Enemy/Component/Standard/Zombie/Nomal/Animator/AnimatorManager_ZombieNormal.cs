@@ -22,16 +22,19 @@ public class AnimatorManager_ZombieNormal : MonoBehaviour
     NormalAttack m_normalAttackComp;
 
     EnemyStunManager m_stunManager;
+    AngerManager m_angerManager;
 
     void Awake()
     {
         m_animator = GetComponent<Animator>();
         m_normalAttackComp = GetComponent<NormalAttack>();
         m_stunManager = GetComponent<EnemyStunManager>();
+        m_angerManager = GetComponent<AngerManager>();
 
         SettingNormalAttack();
 
         SettingStun();
+        SettingAnger();
     }
 
     void SettingNormalAttack()
@@ -51,6 +54,13 @@ public class AnimatorManager_ZombieNormal : MonoBehaviour
     {
         m_stunManager.isStun.Where(isStun => isStun)
             .Subscribe(_ => { ChangeStunAnimation(); Debug.Log("Stun"); })
+            .AddTo(this);
+    }
+
+    void SettingAnger()
+    {
+        m_angerManager.isAnger.Where(isAnger => isAnger)
+            .Subscribe(_ => ChangeAngerAnimation())
             .AddTo(this);
     }
 
@@ -78,5 +88,11 @@ public class AnimatorManager_ZombieNormal : MonoBehaviour
     {
         var layerIndex = m_animator.GetLayerIndex("Base Layer");
         CrossFadeState("Stunned", layerIndex);
+    }
+
+    void ChangeAngerAnimation()
+    {
+        var layerIndex = m_animator.GetLayerIndex("Base Layer");
+        CrossFadeState("Anger", layerIndex);
     }
 }
