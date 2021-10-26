@@ -108,7 +108,7 @@ public class AngerManager : MonoBehaviour
     {
         return m_isReactiveAnger.Value;
     }
-    public IObservable<bool> isAnger => m_isReactiveAnger;
+    public IObservable<bool> isAngerObservable => m_isReactiveAnger;
 
     public RiseParametor GetRiseParametor()
     {

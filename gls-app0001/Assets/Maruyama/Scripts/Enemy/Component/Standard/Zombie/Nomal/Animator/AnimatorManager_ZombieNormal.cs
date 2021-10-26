@@ -67,7 +67,7 @@ public class AnimatorManager_ZombieNormal : MonoBehaviour
 
     void SettingAnger()
     {
-        m_angerManager.isAnger.Where(isAnger => isAnger)
+        m_angerManager.isAngerObservable.Where(isAnger => isAnger)
             .Subscribe(_ => ChangeAngerAnimation())
             .AddTo(this);
     }
