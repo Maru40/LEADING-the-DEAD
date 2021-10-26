@@ -22,7 +22,7 @@ public class AnimatorManager_ZombieTank : MonoBehaviour
     }
 
     [SerializeField]
-    NormalAttackParametor m_normapAttackParam = new NormalAttackParametor();
+    NormalAttackParametor m_normalAttackParam = new NormalAttackParametor();
 
     [SerializeField]
     TackleParametor m_tackleParam = new TackleParametor();
@@ -31,7 +31,6 @@ public class AnimatorManager_ZombieTank : MonoBehaviour
 
     NormalAttack m_normalAttackComp;
     TankTackle m_tackleComp;
-    //StateMachineBehaviourTable<TimeEventStateMachineBehaviour> m_behaviorTable;
 
     void Awake()
     {
@@ -39,7 +38,6 @@ public class AnimatorManager_ZombieTank : MonoBehaviour
         m_tackleComp = GetComponent<TankTackle>();
 
         m_animator = GetComponent<Animator>();
-        //m_behaviorTable = new StateMachineBehaviourTable<TimeEventStateMachineBehaviour>(m_animator);
 
         SettingNormalAttackAnimation();
         SettingTackleAnimation();
@@ -51,7 +49,7 @@ public class AnimatorManager_ZombieTank : MonoBehaviour
         var layerIndex = m_animator.GetLayerIndex("Base Layer");
 
         //Time系
-        var timeParam = m_normapAttackParam;
+        var timeParam = m_normalAttackParam;
         //var attack = m_behaviorTable["Base Layer.NormalAttack"];
         var attack = ZombieTankTable.BaseLayer.NormalAttack.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
 
@@ -67,7 +65,7 @@ public class AnimatorManager_ZombieTank : MonoBehaviour
     { 
         var layerIndex = m_animator.GetLayerIndex("Base Layer");
         m_tackleComp.state.Where(_ => m_tackleComp.state.Value == TankTackle.State.TackleLast)
-            .Subscribe(_ => GoState("TackleLast", layerIndex))
+            .Subscribe(_ => CrossFadeState("TackleLast", layerIndex))
             .AddTo(this);
 
         //Time系
@@ -90,9 +88,9 @@ public class AnimatorManager_ZombieTank : MonoBehaviour
         tackle.onStateExited.Subscribe(_ => m_tackleComp.EndAnimationEvent());
     }
 
-    public void GoState(string stateName, int layerIndex, float transitionTime = 0.0f)
+    public void CrossFadeState(string stateName, int layerIndex, float transitionTime = 0.0f)
     {
-        Debug.Log("GoState");
+        Debug.Log("CrossFadeState");
         m_animator.CrossFade(stateName, transitionTime, layerIndex);
     }
 }
