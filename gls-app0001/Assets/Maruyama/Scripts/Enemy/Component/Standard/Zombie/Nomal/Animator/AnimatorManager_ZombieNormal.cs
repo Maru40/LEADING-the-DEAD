@@ -18,14 +18,20 @@ public class AnimatorManager_ZombieNormal : MonoBehaviour
     NormalAttackParametor m_normalAttackParam = new NormalAttackParametor();
 
     Animator m_animator;
+
     NormalAttack m_normalAttackComp;
+
+    EnemyStunManager m_stunManager;
 
     void Awake()
     {
         m_animator = GetComponent<Animator>();
         m_normalAttackComp = GetComponent<NormalAttack>();
+        m_stunManager = GetComponent<EnemyStunManager>();
 
         SettingNormalAttack();
+
+        SettingStun();
     }
 
     void SettingNormalAttack()
@@ -39,6 +45,13 @@ public class AnimatorManager_ZombieNormal : MonoBehaviour
 
         behavior.onStateEntered.Subscribe(_ => m_normalAttackComp.AttackStart()).AddTo(this);
         behavior.onStateExited.Subscribe(_ => m_normalAttackComp.EndAnimationEvent()).AddTo(this);
+    }
+
+    void SettingStun()
+    {
+        m_stunManager.isStun.Where(isStun => isStun)
+            .Subscribe(_ => { ChangeStunAnimation(); Debug.Log("Stun"); })
+            .AddTo(this);
     }
 
     public void CrossFadeState(string stateName, string layerName, float transitionTime = 0.0f)
@@ -59,5 +72,11 @@ public class AnimatorManager_ZombieNormal : MonoBehaviour
     {
         var layerIndex = m_animator.GetLayerIndex("Base Layer");
         CrossFadeState("NormalAttack", layerIndex);
+    }
+
+    void ChangeStunAnimation()
+    {
+        var layerIndex = m_animator.GetLayerIndex("Base Layer");
+        CrossFadeState("Stunned", layerIndex);
     }
 }
