@@ -52,8 +52,7 @@ public class AngerManager : MonoBehaviour
     [SerializeField]
     bool m_isAngerTimer = false;  //怒り状態をタイマー性にするかどうか
 
-    bool m_isAnger = false;
-    ReactiveProperty<bool> m_isReactiveAnger = new ReactiveProperty<bool>(false);
+    readonly ReactiveProperty<bool> m_isReactiveAnger = new ReactiveProperty<bool>(false);
 
     WaitTimer m_waitTimer;
     StatusManagerBase m_statusManager;
@@ -66,14 +65,16 @@ public class AngerManager : MonoBehaviour
 
     private void Start()
     {
-        m_isReactiveAnger.Skip(1).Subscribe(x => { UpdateBuffParametor(); }).AddTo(this);
+        m_isReactiveAnger.Skip(1)
+            .Subscribe(x => { UpdateBuffParametor(); })
+            .AddTo(this);
     }
 
     public void StartAnger()
     {
         SetIsAnger(true);
 
-        if (m_isAngerTimer) {
+        if (m_isAngerTimer) {  //怒りに時間制限を設ける時。
             m_waitTimer.AddWaitTimer(GetType(), m_time, EndAnger);
         }
     }
@@ -87,7 +88,7 @@ public class AngerManager : MonoBehaviour
     {
         var param = m_statusManager.GetBuffParametor();
 
-        if (m_isAnger) {
+        if (m_isReactiveAnger.Value) {
             param.angerParam = param.angerParam + m_riseParam;
         }
         else {
@@ -99,15 +100,15 @@ public class AngerManager : MonoBehaviour
 
     //アクセッサ--------------------------------------------------------
 
-    public bool IsAnger()
-    {
-        return m_isAnger;
-    }
     public void SetIsAnger(bool isAnger)
     {
-        m_isAnger = isAnger;
         m_isReactiveAnger.Value = isAnger;
     }
+    public bool IsAnger()
+    {
+        return m_isReactiveAnger.Value;
+    }
+    public IObservable<bool> isAngerObservable => m_isReactiveAnger;
 
     public RiseParametor GetRiseParametor()
     {

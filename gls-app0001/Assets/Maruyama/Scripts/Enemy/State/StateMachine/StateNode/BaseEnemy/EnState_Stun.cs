@@ -28,6 +28,7 @@ public class EnState_Stun : EnemyStateNodeBase<EnemyBase>
         m_stunMgr.StartStun();
 
         m_velocityMgr.ResetVelocity();
+        m_velocityMgr.ResetForce();
     }
 
     public override void OnUpdate()

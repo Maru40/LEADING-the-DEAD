@@ -214,6 +214,7 @@ MonoBehaviour:
     inThrongRange: 1
   m_rayObstacleLayerStrings:
   - L_Obstacle
+  m_collisionStayTime: 2
 --- !u!114 &3671151443449607076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,9 +410,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d035f46a00cde30439b7324b359f4ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_normapAttackParam:
+  m_normalAttackParam:
     hitStartTime: 0.5
-    hitEndTime: 1
+    hitEndTime: 0.8
   m_tackleParam:
     tackleStartTime: 0.1
     deselerationStartTime: 1.8

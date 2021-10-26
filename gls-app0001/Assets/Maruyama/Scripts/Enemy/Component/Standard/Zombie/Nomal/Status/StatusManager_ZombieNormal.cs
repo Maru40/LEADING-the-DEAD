@@ -11,6 +11,7 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
     Stator_ZombieNormal m_stator = null;
     AnimatorCtrl_ZombieNormal m_animator = null;
     DropObjecptManager m_dropManager = null;
+    AngerManager m_angerManager;
     I_Stun m_stun;
 
     void Awake()
@@ -20,6 +21,7 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
         m_stator = GetComponent<Stator_ZombieNormal>();
         m_animator = GetComponent<AnimatorCtrl_ZombieNormal>();
         m_dropManager = GetComponent<DropObjecptManager>();
+        m_angerManager = GetComponent<AngerManager>();
         m_stun = GetComponent<I_Stun>();
     }
 
@@ -61,18 +63,18 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
     void I_Stun.StartStun()
     {
         m_stator.GetTransitionMember().stunTrigger.Fire();
-
-        //アニメーションの切替
-        m_animator.StartStun();
     }
 
     void I_Stun.EndStun()
     {
-        //m_stator.GetTransitionMember().rondomPlowlingTrigger.Fire();
-        m_stator.GetTransitionMember().angerTirgger.Fire();
-
-        //アニメーションの切替
-        m_animator.EndStun();
+        if (m_angerManager.IsAnger())
+        {
+            m_stator.GetTransitionMember().rondomPlowlingTrigger.Fire();
+        }
+        else
+        {
+            m_stator.GetTransitionMember().angerTirgger.Fire();
+        }
     }
 
     //アクセッサ----------------------------------------------------------------------------

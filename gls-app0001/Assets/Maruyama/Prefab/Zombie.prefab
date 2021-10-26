@@ -2456,6 +2456,8 @@ GameObject:
   - component: {fileID: 6932570756744996945}
   - component: {fileID: 95905029097332403}
   - component: {fileID: -9033992289825026406}
+  - component: {fileID: 8806759177434941914}
+  - component: {fileID: -3509147400467223985}
   m_Layer: 6
   m_Name: Zombie
   m_TagString: Untagged
@@ -2674,6 +2676,7 @@ MonoBehaviour:
     inThrongRange: 1
   m_rayObstacleLayerStrings:
   - L_Obstacle
+  m_collisionStayTime: 2
 --- !u!114 &1444888580945028652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2998,6 +3001,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c6bb21b93087e489d540ded587b961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8806759177434941914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434505739018704334}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd760d1eb34c86b48ad19c06d6301407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_baseParam:
+    damageData:
+      obj: {fileID: 0}
+      damageValue: 1
+      isStunAttack: 0
+      hitStopTime: 0
+      damageTags: []
+    startRange: 1.5
+  m_moveSpeed: 3
+  m_hitBox: {fileID: 632433336}
+--- !u!114 &-3509147400467223985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434505739018704334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30afa467a97615841a65693963d6387c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_normalAttackParam:
+    hitStartTime: 0.3
+    hitEndTime: 0.8
 --- !u!1 &7689520723826636210
 GameObject:
   m_ObjectHideFlags: 0

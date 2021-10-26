@@ -11,7 +11,7 @@ public class StateNode_ZombieNormal_Anger : EnState_Anger
         : base(owner)
     {
         m_angerManager = owner.GetComponent<AngerManager>();
-        m_animatorCtrl = owner.GetComponent<AnimatorCtrl_ZombieNormal>();
+        //m_animatorCtrl = owner.GetComponent<AnimatorCtrl_ZombieNormal>();
     }
 
     protected override void ReserveChangeComponents()
@@ -24,7 +24,7 @@ public class StateNode_ZombieNormal_Anger : EnState_Anger
         base.OnStart();
 
         m_angerManager.StartAnger();
-        m_animatorCtrl.StartAnger();
+        //m_animatorCtrl.StartAnger();
     }
 
     public override void OnUpdate()
