@@ -11,8 +11,8 @@ public class StateNode_ZombieNormal_Attack : EnState_AttackBase
     protected override void PlayStartAnimation()
     {
         //攻撃アニメーション再生
-        var animatorCtrl = GetOwner().GetComponent<AnimatorCtrl_ZombieNormal>();
-        animatorCtrl.AttackTriggerFire();
+        //var animatorCtrl = GetOwner().GetComponent<AnimatorCtrl_ZombieNormal>();
+        //animatorCtrl.AttackTriggerFire();
     }
 
     protected override void ReserveChangeComponents()
