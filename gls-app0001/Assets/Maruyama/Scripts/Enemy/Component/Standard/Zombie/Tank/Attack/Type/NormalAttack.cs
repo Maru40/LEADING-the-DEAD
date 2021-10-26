@@ -126,9 +126,10 @@ public class NormalAttack : AttackNodeBase
     {
         //m_stator.GetTransitionMember().chaseTrigger.Fire();
         m_attackManager.EndAnimationEvent();
-        m_isTargetChase = true;
 
         m_velocityMgr.SetIsDeseleration(false);
+        m_velocityMgr.ResetForce();
+        m_velocityMgr.ResetVelocity();
 
         enabled = false;
     }
