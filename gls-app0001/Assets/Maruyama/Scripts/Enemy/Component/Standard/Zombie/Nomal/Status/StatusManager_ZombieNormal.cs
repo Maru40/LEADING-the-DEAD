@@ -69,7 +69,7 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
         m_stator.GetTransitionMember().angerTirgger.Fire();
 
         //アニメーションの切替
-        m_animator.EndStun();
+        //m_animator.EndStun();
     }
 
     //アクセッサ----------------------------------------------------------------------------
