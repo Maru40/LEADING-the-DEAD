@@ -65,14 +65,16 @@ public class AngerManager : MonoBehaviour
 
     private void Start()
     {
-        m_isReactiveAnger.Skip(1).Subscribe(x => { UpdateBuffParametor(); }).AddTo(this);
+        m_isReactiveAnger.Skip(1)
+            .Subscribe(x => { UpdateBuffParametor(); })
+            .AddTo(this);
     }
 
     public void StartAnger()
     {
         SetIsAnger(true);
 
-        if (m_isAngerTimer) {
+        if (m_isAngerTimer) {  //怒りに時間制限を設ける時。
             m_waitTimer.AddWaitTimer(GetType(), m_time, EndAnger);
         }
     }
@@ -101,6 +103,10 @@ public class AngerManager : MonoBehaviour
     public void SetIsAnger(bool isAnger)
     {
         m_isReactiveAnger.Value = isAnger;
+    }
+    public bool IsAnger()
+    {
+        return m_isReactiveAnger.Value;
     }
     public IObservable<bool> isAnger => m_isReactiveAnger;
 
