@@ -15,6 +15,7 @@ public class Attack_ZombieNormal : AttackNodeManagerBase
     EyeSearchRange m_eyeRange;
     ThrongManager m_throngManager;
     StatusManagerBase m_statusManager;
+    AnimatorManager_ZombieNormal m_animatorManager;
 
     [SerializeField]
     float m_moveSpeed = 3.0f;
@@ -33,6 +34,7 @@ public class Attack_ZombieNormal : AttackNodeManagerBase
         m_eyeRange = GetComponent<EyeSearchRange>();
         m_throngManager = GetComponent<ThrongManager>();
         m_statusManager = GetComponent<StatusManagerBase>();
+        m_animatorManager = GetComponent<AnimatorManager_ZombieNormal>();
 
         m_hitBox.AddEnterAction(SendDamage);
     }
@@ -41,7 +43,7 @@ public class Attack_ZombieNormal : AttackNodeManagerBase
     {
         if (m_isTargetChase) 
         {
-            TargetChase();
+            //TargetChase();
         }
     }
 
@@ -56,7 +58,6 @@ public class Attack_ZombieNormal : AttackNodeManagerBase
         }
 
         float moveSpeed = m_moveSpeed * m_statusManager.GetBuffParametor().angerParam.speed;
-        var velocity = m_velocityMgr.velocity;
         var toVec = target.transform.position - transform.position;
         var avoidVec = m_throngManager.CalcuSumAvoidVector();
         toVec += avoidVec;
@@ -86,6 +87,8 @@ public class Attack_ZombieNormal : AttackNodeManagerBase
     public override void AttackStart()
     {
         m_stator.GetTransitionMember().attackTrigger.Fire();
+
+        m_animatorManager.ChangeNormalAttackAnimation();
     }
 
     override public void Attack(){
