@@ -61,9 +61,6 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
     void I_Stun.StartStun()
     {
         m_stator.GetTransitionMember().stunTrigger.Fire();
-
-        //アニメーションの切替
-        m_animator.StartStun();
     }
 
     void I_Stun.EndStun()
