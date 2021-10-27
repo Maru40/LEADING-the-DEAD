@@ -89,9 +89,6 @@ public class TankTackle : AttackNodeBase
 
     public override void AttackStart()
     {
-        //m_velocityManager.ResetVelocity();
-        //m_velocityManager.ResetForce();
-
         m_state.Value = State.Charge;
         enabled = true;
     }
