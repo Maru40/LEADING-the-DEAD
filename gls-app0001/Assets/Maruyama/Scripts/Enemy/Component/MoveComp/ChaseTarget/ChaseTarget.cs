@@ -56,10 +56,12 @@ public class ChaseTarget : MonoBehaviour
     //コンポーネント系------------------
 
     TargetManager m_targetMgr;
+    I_Chase m_chase;
 
     void Awake()
     {
         m_targetMgr = GetComponent<TargetManager>();
+        m_chase = GetComponent<I_Chase>();
 
         m_stateMachine = new StateMachine();
 
@@ -134,10 +136,12 @@ public class ChaseTarget : MonoBehaviour
     
     //アクセッサ------------------------------------------------------------
 
+    /// <summary>
+    /// ターゲットを見失ったとき
+    /// </summary>
     public void TargetLost()
     {
-        var stator = GetComponent<Stator_ZombieNormal>();
-        stator.GetTransitionMember().rondomPlowlingTrigger.Fire();
+        m_chase.TargetLost();   
     }
 
     public void SetMaxSpeed(float speed){
