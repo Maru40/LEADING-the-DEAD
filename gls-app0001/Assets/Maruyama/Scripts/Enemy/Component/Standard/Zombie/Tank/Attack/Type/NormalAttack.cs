@@ -58,14 +58,14 @@ public class NormalAttack : AttackNodeBase
         toVec.y = 0.0f;  //(yのベクトルを殺す。)
 
         m_velocityMgr.velocity = toVec.normalized * moveSpeed;
-        ThrongAdjust(moveSpeed);
+        ThrongAdjust();
 
         //向きの調整
         transform.forward = toVec.normalized;
         //m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
     }
 
-    void ThrongAdjust(float moveSpeed)
+    void ThrongAdjust()
     {
         if(m_throngManager == null) {
             return;
