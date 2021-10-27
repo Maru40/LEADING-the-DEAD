@@ -8,4 +8,9 @@ public interface I_Chase
     /// ステートの変更
     /// </summary>
     void ChangeState();
+
+    /// <summary>
+    /// ターゲットを見失った時
+    /// </summary>
+    void TargetLost();
 }
