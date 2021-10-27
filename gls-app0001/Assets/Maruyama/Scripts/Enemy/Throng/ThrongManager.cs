@@ -50,7 +50,6 @@ public struct ThrongData
 /// </summary>
 public class ThrongManager : MonoBehaviour
 {
-
     [SerializeField]
     ThrongManagerParametor m_param = new ThrongManagerParametor();
 
@@ -96,11 +95,6 @@ public class ThrongManager : MonoBehaviour
     void AvoidNearThrong(EnemyVelocityMgr velocityMgr)
     {
         var velocity = velocityMgr.velocity;
-
-        //moveDirect += CalcuThrongVector();
-        //Vector3 force = CalcuVelocity.CalucSeekVec(velocity, moveDirect, maxSpeed);
-        //velocityMgr.AddForce(force);
-        //velocityMgr.AddForce(force * truningPower);
 
         var throngForce = CalcuVelocity.CalucSeekVec(velocity, CalcuThrongVector(), CalcuAverageSpeed());
         velocityMgr.AddForce(throngForce);
