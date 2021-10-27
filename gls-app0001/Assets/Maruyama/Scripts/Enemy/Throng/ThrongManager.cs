@@ -102,7 +102,8 @@ public class ThrongManager : MonoBehaviour
         //velocityMgr.AddForce(force);
         //velocityMgr.AddForce(force * truningPower);
 
-        velocityMgr.AddForce(CalcuThrongVector());
+        var throngForce = CalcuVelocity.CalucSeekVec(velocity, CalcuThrongVector(), CalcuAverageSpeed());
+        velocityMgr.AddForce(throngForce);
 
         var avoidVec = CalcuSumAvoidVector();
         if (avoidVec != Vector3.zero) //回避が必要なら
@@ -237,7 +238,8 @@ public class ThrongManager : MonoBehaviour
         //directVec = (directVec - transform.position) / 8;
 
         //var reVec = (centerPosition + avoidVec) - transform.position;
-        var reVec = (centerPosition + avoidVec + directVec) - transform.position;
+        //var reVec = (centerPosition + avoidVec + directVec) - transform.position;
+        var reVec = (centerPosition + directVec) - transform.position;
 
         return reVec;
     }
