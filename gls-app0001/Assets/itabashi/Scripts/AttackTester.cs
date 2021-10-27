@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class AttackTester : MonoBehaviour
 {
+    [SerializeField]
+    private AudioOptioner audioOptioner;
+
     // Start is called before the first frame update
     void Start()
     {

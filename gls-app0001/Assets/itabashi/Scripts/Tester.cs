@@ -4,28 +4,10 @@ using UnityEngine;
 
 public class Tester : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject focusObject;
+
+    private void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-
-        var foundObject = other.gameObject.GetComponentInParentAndChildren<FoundObject>();
-
-        if(!foundObject)
-        {
-            return;
-        }
-
-        Debug.Log($"{foundObject.gameObject.name}");
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(focusObject);
     }
 }
