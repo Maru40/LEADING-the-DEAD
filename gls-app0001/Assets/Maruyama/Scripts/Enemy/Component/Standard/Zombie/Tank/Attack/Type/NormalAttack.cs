@@ -10,9 +10,9 @@ public class NormalAttack : AttackNodeBase
     AttackNodeManagerBase m_attackManager;
     TargetManager m_targetMgr;
     EnemyVelocityMgr m_velocityMgr;
-    EnemyRotationCtrl m_rotationCtrl;
     EyeSearchRange m_eyeRange;
     StatusManagerBase m_statusManager;
+    ThrongManager m_throngManager;
 
     [SerializeField]
     float m_moveSpeed = 3.0f;
@@ -28,9 +28,9 @@ public class NormalAttack : AttackNodeBase
         m_attackManager = GetComponent<AttackNodeManagerBase>();
         m_targetMgr = GetComponent<TargetManager>();
         m_velocityMgr = GetComponent<EnemyVelocityMgr>();
-        m_rotationCtrl = GetComponent<EnemyRotationCtrl>();
         m_eyeRange = GetComponent<EyeSearchRange>();
         m_statusManager = GetComponent<StatusManagerBase>();
+        m_throngManager = GetComponent<ThrongManager>();
 
         m_hitBox.AddEnterAction(SendDamage);
     }
@@ -58,9 +58,26 @@ public class NormalAttack : AttackNodeBase
         toVec.y = 0.0f;  //(yのベクトルを殺す。)
 
         m_velocityMgr.velocity = toVec.normalized * moveSpeed;
+        ThrongAdjust();
 
+        //向きの調整
         transform.forward = toVec.normalized;
         //m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
+    }
+
+    void ThrongAdjust()
+    {
+        if(m_throngManager == null) {
+            return;
+        }
+
+        var avoidVec = m_throngManager.CalcuSumAvoidVector();
+        if (avoidVec != Vector3.zero) //回避が必要なら
+        {
+            var velocity = m_velocityMgr.velocity;
+            Vector3 avoidForce = CalcuVelocity.CalucSeekVec(velocity, avoidVec, velocity.magnitude);
+            m_velocityMgr.AddForce(avoidForce);
+        }
     }
 
     /// <summary>

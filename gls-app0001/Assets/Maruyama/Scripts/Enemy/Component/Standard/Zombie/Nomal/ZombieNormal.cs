@@ -35,6 +35,11 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea
         member.chaseTrigger.Fire();
     }
 
+    void I_Chase.TargetLost()
+    {
+        m_stator.GetTransitionMember().rondomPlowlingTrigger.Fire();
+    }
+
     void I_Listen.Listen(FoundObject foundObject) {
         //ターゲットの切替
         m_targetMgr.SetNowTarget(GetType() ,foundObject);

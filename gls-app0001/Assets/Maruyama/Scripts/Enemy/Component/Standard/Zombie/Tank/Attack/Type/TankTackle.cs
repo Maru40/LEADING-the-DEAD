@@ -26,6 +26,11 @@ public class TankTackle : AttackNodeBase
     float m_eyeDeg = 40.0f;
     float m_eyeRad = 0.0f;
 
+    [SerializeField]
+    float m_turningPower = 2.0f;
+    [SerializeField]
+    float m_subPursuitTargetForward = 0.7f; //ターゲットとのフォワードの差が0.7fより小さければ、予測タックルにする。
+
     ReactiveProperty<State> m_state = new ReactiveProperty<State>(State.None);
     Vector3 m_tackleDirect = new Vector3();
 
@@ -64,15 +69,37 @@ public class TankTackle : AttackNodeBase
             return;
         }
 
-        var velocity = m_velocityManager.velocity;
-        var toVec = CalcuToTargetVec();
+        Vector3 force = CalcuTackleForce();
+        //var force = 
 
-        var force = CalcuVelocity.CalucSeekVec(velocity, toVec, m_tackleSpeed);
         m_velocityManager.AddForce(force);
 
         if (IsTackleEnd()) //ターゲットに限りなく近づいたら
         {
             AttackHitEnd();
+        }
+    }
+
+    Vector3 CalcuTackleForce()
+    {
+        var target = m_targetManager.GetNowTarget();
+
+        var velocity = m_velocityManager.velocity;
+        var toVec = CalcuToTargetVec();
+
+        var relativeHeading = Vector3.Dot(transform.forward, target.transform.forward);
+
+        //前方にいて、かつ、自分と相手のフォワードの差が開いていなかったら、通常Seek
+        //Dotは差が開いている程、値が小さくなる。
+        if (Vector3.Dot(toVec, transform.forward) > 0 &&
+            Mathf.Abs(relativeHeading) > 0.7f)
+        {
+            //return Vector3.zero;
+            return CalcuVelocity.CalucSeekVec(velocity, toVec, m_tackleSpeed);
+        }
+        else
+        {//フォワードの差が開いていたら、予測Seek
+            return CalcuVelocity.CalcuPursuitForce(velocity, toVec, m_tackleSpeed, gameObject, target.GetComponent<Rigidbody>(), 2.0f);
         }
     }
 
@@ -89,9 +116,6 @@ public class TankTackle : AttackNodeBase
 
     public override void AttackStart()
     {
-        //m_velocityManager.ResetVelocity();
-        //m_velocityManager.ResetForce();
-
         m_state.Value = State.Charge;
         enabled = true;
     }

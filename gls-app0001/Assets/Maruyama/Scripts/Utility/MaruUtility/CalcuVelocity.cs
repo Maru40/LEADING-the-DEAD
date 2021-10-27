@@ -84,6 +84,28 @@ namespace MaruUtility
 			}
 		}
 
+		/// <summary>
+		/// 敵の動きを先読みして、方向を決めるベクトルを返す
+		/// </summary>
+		/// <param name="velocity">現在の速度</param>
+		/// <param name="toVec">行きたい方向</param>
+		/// <param name="maxSpeed">最大speed</param>
+		/// <param name="targetVelocityManager">ターゲットのvelocity管理</param>
+		/// <returns>先読みしたベクトル</returns>
+		static public Vector3 CalcuPursuitForce(Vector3 velocity, Vector3 toVec, float maxSpeed, 
+			GameObject selfObj, Rigidbody targetVelocityManager, float turningPower = 1.0f)
+        {
+			var targetObj = targetVelocityManager.gameObject;
+			var targetVelocity = targetVelocityManager.velocity;
+
+			//先読み時間は、逃げる側と追いかける側の距離に比例し、エージェントの速度に反比例する。
+			var aheadTime = toVec.magnitude / (maxSpeed + targetVelocity.magnitude);
+			var desiredPosition = targetObj.transform.position + targetVelocity * aheadTime * turningPower; //目的のポジション
+			var desiredVec = desiredPosition - selfObj.transform.position; //希望のベクトル
+
+			return CalucSeekVec(velocity, desiredVec, maxSpeed);
+        }
+
 	}
 }
 
