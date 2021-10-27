@@ -29,6 +29,11 @@ public class ZombieTank : EnemyBase, I_Chase, I_Listen
         member.chaseTrigger.Fire();
     }
 
+    void I_Chase.TargetLost()
+    {
+        m_stator.GetTransitionMember().rondomPlowlingTrigger.Fire();
+    }
+
     void I_Listen.Listen(FoundObject foundObject)
     {
         //ターゲットの切替
