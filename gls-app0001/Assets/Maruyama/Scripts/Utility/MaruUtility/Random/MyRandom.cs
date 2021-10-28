@@ -41,7 +41,11 @@ namespace MaruUtility
         public static T RandomList<T>(List<T> tList)
             where T : class
         {
-            var index = RandomValue(0, tList.Count - 1);
+            if(tList.Count == 0) {
+                return null;
+            }
+
+            var index = RandomValue(0, tList.Count);
             return tList[index];
 		}
     }
