@@ -39,8 +39,7 @@ public class RandomAnimationProvider : MonoBehaviour
 
     void Start()
     {
-        m_overrideController = new AnimatorOverrideController();
-        m_overrideController.runtimeAnimatorController = m_animator.runtimeAnimatorController;
+        m_overrideController = new AnimatorOverrideController(m_animator.runtimeAnimatorController);
 
         m_animator.runtimeAnimatorController = m_overrideController;
 
