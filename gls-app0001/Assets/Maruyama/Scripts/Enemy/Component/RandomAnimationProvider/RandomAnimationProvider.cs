@@ -1,26 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 using MaruUtility;
 
+/// <summary>
+/// randomにアニメーションクリップを再生するためのパラメータ
+/// </summary>
+[Serializable]
+public class RandomAnimationProviderParametor
+{
+    public string nowClipName;                  //現在使用中のAnimationClip
+    public List<AnimationClip> animationClips;  //randomに再生したいAnimationClipList
+
+    public RandomAnimationProviderParametor(string nowClipName, List<AnimationClip> animationClips)
+    {
+        this.nowClipName = nowClipName;
+        this.animationClips = animationClips;
+    }
+}
+
+/// <summary>
+/// randomなAnimationClipに設定してくれるクラス
+/// </summary>
 public class RandomAnimationProvider : MonoBehaviour
 {
     [SerializeField]
-    List<AnimationClip> m_animationClips = new List<AnimationClip>();
-
-    [SerializeField]
-    string m_overrideClipName = ""; // 上書きするAnimationClip対象
+    List<RandomAnimationProviderParametor> m_params;
 
     private AnimatorOverrideController m_overrideController;
     private Animator m_animator;
 
-    //public RandomAnimationProvider(List<AnimationClip> clips)
-    //{
-    //    this.m_animationClips = clips;
-    //}
-
-    private void Awake()
+    void Awake()
     {
         m_animator = GetComponent<Animator>();
     }
@@ -32,45 +44,71 @@ public class RandomAnimationProvider : MonoBehaviour
 
         m_animator.runtimeAnimatorController = m_overrideController;
 
-        RandomChangeAnimationClip();
+        RandomChangeAnimationClips();
     }
 
-    public AnimationClip GetRandomAnimationClip()
+    /// <summary>
+    /// 渡されたデータの中で、randomなアニメーションクリップを返す。
+    /// </summary>
+    /// <param name="param">データ</param>
+    /// <returns>randomなアニメーションクリップ</returns>
+    AnimationClip GetRandomAnimationClip(RandomAnimationProviderParametor param)
     {
-        return MyRandom.RandomList(m_animationClips);
+        return MyRandom.RandomList(param.animationClips);
     }
 
-    public void RandomChangeAnimationClip()
+    /// <summary>
+    /// 渡されたデータのみ、randomなアニメーションに変更する。
+    /// </summary>
+    /// <param name="param">randomに変更したいデータ</param>
+    void RandomChangeAnimationClip(RandomAnimationProviderParametor param)
     {
-        ChangeAnimationClip(GetRandomAnimationClip());
+        ChangeAnimationClip(param, GetRandomAnimationClip(param));
     }
 
-    public void ChangeAnimationClip(AnimationClip clip)
+    /// <summary>
+    /// 全てのデータをrandomなアニメーションに変更する。
+    /// </summary>
+    void RandomChangeAnimationClips()
     {
-        Debug.Log("変える");
+        foreach(var param in m_params)
+        {
+            RandomChangeAnimationClip(param);
+        }
+    }
 
-        // ステートをキャッシュ
-        //AnimatorStateInfo[] layerInfo = new AnimatorStateInfo[m_animator.layerCount];
-        //for (int i = 0; i < m_animator.layerCount; i++)
-        //{
-        //    layerInfo[i] = m_animator.GetCurrentAnimatorStateInfo(i);
-        //}
+    /// <summary>
+    /// アニメーションを変更する
+    /// </summary>
+    /// <param name="param">変更を管理するデータ</param>
+    /// <param name="clip">変更したいアニメーション</param>
+    void ChangeAnimationClip(RandomAnimationProviderParametor param ,AnimationClip clip)
+    {
+        if(clip == null) {
+            Debug.Log("clipがnullです");
+            return;
+        }
 
-        // AnimationClipを差し替えて、強制的にアップデート
-        // ステートがリセットされる
-        m_overrideController[m_overrideClipName] = clip;
-        m_overrideClipName = clip.name;
+        // ステートを変更される
+        m_overrideController[param.nowClipName] = clip;
+        param.nowClipName = clip.name;
         //m_animator.Update(0.0f);
-
-        // ステートを戻す
-        //for (int i = 0; i < m_animator.layerCount; i++)
-        //{
-        //    m_animator.Play(layerInfo[i].nameHash, i, layerInfo[i].normalizedTime);
-        //}
     }
 
-    void Test()
-    {
-        //ZombieNormalTable.BaseLayer.NormalAttack
-    }
+
+    //void Test()
+    //{
+    //    // ステートをキャッシュ
+    //    //AnimatorStateInfo[] layerInfo = new AnimatorStateInfo[m_animator.layerCount];
+    //    //for (int i = 0; i < m_animator.layerCount; i++)
+    //    //{
+    //    //    layerInfo[i] = m_animator.GetCurrentAnimatorStateInfo(i);
+    //    //}
+
+    //    // ステートを戻す
+    //    //for (int i = 0; i < m_animator.layerCount; i++)
+    //    //{
+    //    //    m_animator.Play(layerInfo[i].nameHash, i, layerInfo[i].normalizedTime);
+    //    //}
+    //}
 }
