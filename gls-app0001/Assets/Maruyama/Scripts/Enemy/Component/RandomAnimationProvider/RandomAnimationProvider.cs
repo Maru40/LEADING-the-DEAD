@@ -4,13 +4,13 @@ using UnityEngine;
 
 using MaruUtility;
 
-public class TestRandomAnimationProvider : MonoBehaviour
+public class RandomAnimationProvider : MonoBehaviour
 {
     [SerializeField]
     List<AnimationClip> m_animationClips = new List<AnimationClip>();
 
     [SerializeField]
-    string m_overrideClipName = "NormalAttack"; // 上書きするAnimationClip対象
+    string m_overrideClipName = ""; // 上書きするAnimationClip対象
 
     private AnimatorOverrideController m_overrideController;
     private Animator m_animator;
@@ -29,14 +29,6 @@ public class TestRandomAnimationProvider : MonoBehaviour
     {
         m_overrideController = new AnimatorOverrideController();
         m_overrideController.runtimeAnimatorController = m_animator.runtimeAnimatorController;
-
-        Debug.Log(m_overrideController["Z_Idle"]);
-
-        var clips = m_overrideController.animationClips;
-        for (int i = 0; i < clips.Length; i++)
-        {
-            Debug.Log(clips[i]);
-        }
 
         m_animator.runtimeAnimatorController = m_overrideController;
 
@@ -67,7 +59,8 @@ public class TestRandomAnimationProvider : MonoBehaviour
         // AnimationClipを差し替えて、強制的にアップデート
         // ステートがリセットされる
         m_overrideController[m_overrideClipName] = clip;
-        m_animator.Update(0.0f);
+        m_overrideClipName = clip.name;
+        //m_animator.Update(0.0f);
 
         // ステートを戻す
         //for (int i = 0; i < m_animator.layerCount; i++)
