@@ -2458,6 +2458,7 @@ GameObject:
   - component: {fileID: -9033992289825026406}
   - component: {fileID: 8806759177434941914}
   - component: {fileID: -3509147400467223985}
+  - component: {fileID: -6998184374044003836}
   m_Layer: 6
   m_Name: Zombie
   m_TagString: Untagged
@@ -3038,6 +3039,23 @@ MonoBehaviour:
   m_normalAttackParam:
     hitStartTime: 0.3
     hitEndTime: 0.8
+--- !u!114 &-6998184374044003836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434505739018704334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927418201696c7e409381910c896cfb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_params:
+  - nowClipName: Z_Walk
+    animationClips:
+    - {fileID: -6257440219318784398, guid: 59dbfb66512f63c4eb6e1e30e0603198, type: 3}
+    - {fileID: -6257440219318784398, guid: 1d31b4476a14a0246b2e0f023e8877fe, type: 3}
 --- !u!1 &7689520723826636210
 GameObject:
   m_ObjectHideFlags: 0
