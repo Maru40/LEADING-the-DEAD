@@ -2,17 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamagedManagerBase : MonoBehaviour
+public abstract class DamagedManagerBase
 {
-    // Start is called before the first frame update
-    void Start()
+    GameObject m_owner = null;
+
+    public DamagedManagerBase(GameObject owner)
     {
-        
+        m_owner = owner;
     }
 
-    // Update is called once per frame
-    void Update()
+    public abstract void Damaged(AttributeObject.DamageData data);
+
+    //アクセッサ------------------------------------------------------------
+
+    public GameObject GetOwner()
     {
-        
+        return m_owner;
     }
+
 }
