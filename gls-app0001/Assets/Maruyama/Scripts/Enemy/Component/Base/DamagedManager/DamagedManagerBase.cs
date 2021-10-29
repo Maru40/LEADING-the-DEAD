@@ -11,6 +11,10 @@ public abstract class DamagedManagerBase
         m_owner = owner;
     }
 
+    /// <summary>
+    /// ダメージを受けた時の処理
+    /// </summary>
+    /// <param name="data">ダメージデータ</param>
     public abstract void Damaged(AttributeObject.DamageData data);
 
     //アクセッサ------------------------------------------------------------
