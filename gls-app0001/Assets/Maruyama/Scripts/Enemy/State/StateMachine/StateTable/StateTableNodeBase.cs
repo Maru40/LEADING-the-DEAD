@@ -35,7 +35,7 @@ public abstract class StateTableNodeBase<EnemyType> : EnemyStateNodeBase<EnemyTy
         m_isEnd = true;
     }
 
-    protected bool isEnd
+    protected bool IsEnd
     {
         set { m_isEnd = value; }
         get { return m_isEnd; }
