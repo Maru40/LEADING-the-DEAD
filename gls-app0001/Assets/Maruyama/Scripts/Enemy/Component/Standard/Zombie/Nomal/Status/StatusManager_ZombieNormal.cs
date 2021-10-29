@@ -14,6 +14,8 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
     AngerManager m_angerManager;
     I_Stun m_stun;
 
+    DamagedManager_ZombieNormal m_damageManager;
+
     void Awake()
     {
         m_waitTimer = GetComponent<WaitTimer>();
@@ -23,39 +25,13 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
         m_dropManager = GetComponent<DropObjecptManager>();
         m_angerManager = GetComponent<AngerManager>();
         m_stun = GetComponent<I_Stun>();
+
+        m_damageManager = new DamagedManager_ZombieNormal(gameObject);
     }
 
     public override void Damage(AttributeObject.DamageData data)
     {
-        if (m_waitTimer.IsWait(GetType())) {
-            return;
-        }
-
-        if (data.isStunAttack)  //スタン状態になる攻撃なら
-        {
-            Stun(data.obj);
-        }
-        else
-        {
-            //普通にダメージを受ける
-            m_status.hp -= data.damageValue;
-        }
-        
-        if (m_status.hp <= 0)
-        {
-            m_status.hp = 0;
-            m_respawn?.RespawnReserve();
-        }
-
-        //ダメージインターバル開始
-        float time = m_status.damageIntervalTime;
-        m_waitTimer.AddWaitTimer(GetType(), time);
-    }
-
-    void Stun(GameObject other)
-    {
-        m_stun.StartStun();
-        m_dropManager.Drop(other);
+        m_damageManager.Damaged(data);
     }
 
     //インターフェースの実装----------------------------------------------------------------
