@@ -172,7 +172,7 @@ namespace Player
 
             hp -= damageData.damageValue;
             
-            if(damageData.isStunAttack)
+            if(damageData.isStunAttack && !isDead)
             {
                 StartStun();
             }
