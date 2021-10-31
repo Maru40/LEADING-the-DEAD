@@ -258,6 +258,18 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-5458528799396425933
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01edda5a0332f304dac297bda88e48ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!206 &-5188876396069620417
 BlendTree:
   m_ObjectHideFlags: 1
@@ -396,7 +408,8 @@ AnimatorState:
   m_Transitions:
   - {fileID: 885082490881162378}
   - {fileID: -8088278674167856500}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 9021069402499845652}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -614,7 +627,8 @@ AnimatorState:
   m_Transitions:
   - {fileID: 7952973429047393937}
   - {fileID: 1552838874124301301}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -5458528799396425933}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -939,6 +953,18 @@ BlendTree:
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
+--- !u!114 &9021069402499845652
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01edda5a0332f304dac297bda88e48ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1102 &9122370831950523256
 AnimatorState:
   serializedVersion: 6

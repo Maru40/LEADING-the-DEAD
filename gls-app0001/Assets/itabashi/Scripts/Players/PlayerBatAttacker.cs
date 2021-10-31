@@ -26,6 +26,12 @@ namespace Player
         [SerializeField]
         private float m_hitEndSecond = 1.0f;
 
+        [SerializeField]
+        private AudioSource m_audioSource;
+
+        [SerializeField]
+        private AudioClip m_swingSound;
+
         private readonly Subject<Unit> m_swingSubject = new Subject<Unit>();
 
         private GameControls m_gameControls;
@@ -48,6 +54,7 @@ namespace Player
                 {
                     m_weaponBase.attackColliderEnabled = true;
                     m_weaponBase.weaponTrailEnabled = true;
+                    m_audioSource.PlayOneShot(m_swingSound);
                 })
                 .AddTo(this);
 

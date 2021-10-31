@@ -16,6 +16,12 @@ namespace Player
         [SerializeField]
         private Transform m_putBloodBagTransform;
 
+        [SerializeField]
+        private AudioSource m_audioSource;
+
+        [SerializeField]
+        private AudioClip m_audioClip;
+
         private GameControls m_gameControls;
 
         private Subject<Unit> m_puttingBloogBagSubject = new Subject<Unit>();
@@ -60,6 +66,8 @@ namespace Player
 
             bloodBag.transform.position = m_putBloodBagTransform.position;
             bloodBag.transform.rotation = m_putBloodBagTransform.rotation;
+
+            m_audioSource.PlayOneShot(m_audioClip);
         }
     }
 }

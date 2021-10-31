@@ -9,12 +9,15 @@ public class Flaregun : MonoBehaviour
 	public GameObject muzzleParticles;
 	public AudioClip flareShotSound;
 
+	[SerializeField]
+	private AudioSource m_audioSource;
+
 	public int bulletSpeed = 2000;
 
 	public void Shoot()
 	{
 		GetComponent<Animation>().CrossFade("Shoot");
-		GetComponent<AudioSource>().PlayOneShot(flareShotSound);
+		//GetComponent<AudioSource>().PlayOneShot(flareShotSound);
 
 
         Rigidbody bulletInstance;

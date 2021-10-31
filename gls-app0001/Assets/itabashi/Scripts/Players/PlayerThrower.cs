@@ -37,6 +37,12 @@ namespace Player
 
         private float m_throwRotateX = 45.0f;
 
+        [SerializeField]
+        private AudioSource m_audioSource;
+
+        [SerializeField]
+        private AudioClip m_throwingSound;
+
         private float m_countCoolTime;
 
         private ThrowableObject m_takingObject;
@@ -186,6 +192,8 @@ namespace Player
             m_animatorManager.GoState("Throwing", "Upper_Layer", 0.1f);
 
             m_objectLauncher.isDrawPredictionLine = false;
+
+            m_audioSource.PlayOneShot(m_throwingSound);
         }
 
         void ThrowAngleControl()
