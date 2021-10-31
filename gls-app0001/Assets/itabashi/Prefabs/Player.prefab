@@ -142,6 +142,8 @@ MonoBehaviour:
   m_animatorManager: {fileID: 1106717144}
   m_statusManager: {fileID: 1106717132}
   m_weaponBase: {fileID: 1717001797}
+  m_hitStartSecond: 0.4
+  m_hitEndSecond: 0.6
 --- !u!1 &642393358
 GameObject:
   m_ObjectHideFlags: 0
@@ -84296,35 +84298,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1211539537267705793, guid: c90de05025c6e1b49b9baa4ff340c28c, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1211539537267705795, guid: c90de05025c6e1b49b9baa4ff340c28c, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1211539537267705797, guid: c90de05025c6e1b49b9baa4ff340c28c, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1211539537267705799, guid: c90de05025c6e1b49b9baa4ff340c28c, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1211539537267705801, guid: c90de05025c6e1b49b9baa4ff340c28c, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1211539537267705803, guid: c90de05025c6e1b49b9baa4ff340c28c, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1211539537267705805, guid: c90de05025c6e1b49b9baa4ff340c28c, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1211539537267705807, guid: c90de05025c6e1b49b9baa4ff340c28c, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1211539537281506997, guid: c90de05025c6e1b49b9baa4ff340c28c, type: 3}
       propertyPath: m_Name
@@ -84373,6 +84375,10 @@ PrefabInstance:
     - target: {fileID: 1211539537281860245, guid: c90de05025c6e1b49b9baa4ff340c28c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1211539537281860253, guid: c90de05025c6e1b49b9baa4ff340c28c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 352
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c90de05025c6e1b49b9baa4ff340c28c, type: 3}
