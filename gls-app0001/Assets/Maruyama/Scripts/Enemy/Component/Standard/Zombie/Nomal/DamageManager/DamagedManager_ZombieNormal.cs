@@ -9,6 +9,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
     StatusManager_ZombieNormal m_statusManager = null;
     EnemyRespawnManager m_respawn = null;
     DropObjecptManager m_dropManager = null;
+    DamageParticleManager m_particleManager = null;
     I_Stun m_stun = null;
 
     WaitTimer m_waitTimer = null;
@@ -19,6 +20,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
         m_statusManager = owner.GetComponent<StatusManager_ZombieNormal>();
         m_respawn = owner.GetComponent<EnemyRespawnManager>();
         m_dropManager = owner.GetComponent<DropObjecptManager>();
+        m_particleManager = owner.GetComponent<DamageParticleManager>();
         m_stun = owner.GetComponent<I_Stun>();
 
         m_waitTimer = owner.GetComponent<WaitTimer>();
@@ -51,9 +53,20 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
         else {
             //ダメージを受ける
             status.hp -= data.damageValue;
+
+            CreateDamageEffect(data);
         }
 
         StartDamageInterval(ref status); //ダメージインターバルの開始
+    }
+
+    void CreateDamageEffect(DamageData data)
+    {
+        //将来的にステートマシン
+        if(data.type == DamageType.Fire)
+        {
+            m_particleManager.StartDamage(data.type);
+        }
     }
 
     /// <summary>
