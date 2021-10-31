@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7736746011620148753}
   - component: {fileID: 7604240690625314483}
   - component: {fileID: 6877412286546398772}
+  - component: {fileID: -2440262467031413351}
   m_Layer: 0
   m_Name: WeaponBat
   m_TagString: Untagged
@@ -33,6 +34,7 @@ Transform:
   - {fileID: 7608674563500481573}
   - {fileID: 7604885807445232035}
   - {fileID: 7608661661409637705}
+  - {fileID: 7169942287119635181}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -76,6 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_weaponCollider: {fileID: 6877412286546398772}
+  m_weaponTrail: {fileID: -2440262467031413351}
   m_baseAttackDamageData:
     obj: {fileID: 7602396690420632761}
     damageValue: 0
@@ -85,6 +88,7 @@ MonoBehaviour:
   m_opponentDamageEvent:
     m_PersistentCalls:
       m_Calls: []
+  m_hitEffectPrefab: {fileID: 5473238850790075354, guid: 5d5fa94fa37b6bf40a339f2a0a242fd5, type: 3}
 --- !u!136 &6877412286546398772
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -99,6 +103,31 @@ CapsuleCollider:
   m_Height: 0.65
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &-2440262467031413351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7602396690420632761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5ceb339997c8304e9354d4ce5ddc9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _emit: 1
+  _emitTime: 0
+  _material: {fileID: 2100000, guid: 5f402d1520e5fa74fa21e08f85b71370, type: 2}
+  _lifeTime: 0.2
+  _colors: []
+  _sizes: []
+  _minVertexDistance: 0.1
+  _maxVertexDistance: 10
+  _maxAngle: 3
+  _autoDestruct: 0
+  subdivisions: 4
+  _base: {fileID: 7604673703819112103}
+  _tip: {fileID: 7169942287119635181}
 --- !u!1 &7602461310053261265
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,3 +371,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8773599486412872474
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7169942287119635181}
+  m_Layer: 0
+  m_Name: TipObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7169942287119635181
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8773599486412872474}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.79, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7604673703819112103}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

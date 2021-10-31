@@ -32,6 +32,8 @@ namespace Player
 
         private void Awake()
         {
+            m_weaponBase.weaponTrailEnabled = false;
+
             var batSwingBehaviour =
                 PlayerMotionsTable.Upper_Layer.Swing.Swing.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
 
@@ -42,12 +44,20 @@ namespace Player
 
             batSwingBehaviour.onTimeEvent
                 .ClampWhere(m_hitStartSecond)
-                .Subscribe(_ => m_weaponBase.attackColliderEnabled = true)
+                .Subscribe(_ =>
+                {
+                    m_weaponBase.attackColliderEnabled = true;
+                    m_weaponBase.weaponTrailEnabled = true;
+                })
                 .AddTo(this);
 
             batSwingBehaviour.onTimeEvent
                 .ClampWhere(m_hitEndSecond)
-                .Subscribe(_ => m_weaponBase.attackColliderEnabled = false)
+                .Subscribe(_ =>
+                {
+                    m_weaponBase.attackColliderEnabled = false;
+                    m_weaponBase.weaponTrailEnabled = false;
+                })
                 .AddTo(this);
 
             batSwingBehaviour.onStateEntered

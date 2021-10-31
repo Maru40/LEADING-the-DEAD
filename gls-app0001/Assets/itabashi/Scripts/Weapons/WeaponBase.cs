@@ -11,6 +11,9 @@ public abstract class WeaponBase : MonoBehaviour
     private Collider m_weaponCollider;
 
     [SerializeField]
+    private MeleeWeaponTrail m_weaponTrail;
+
+    [SerializeField]
     private DamageData m_baseAttackDamageData;
 
     public DamageData baseAttackDamageData => m_baseAttackDamageData;
@@ -26,13 +29,26 @@ public abstract class WeaponBase : MonoBehaviour
         get => m_weaponCollider.enabled;
     }
 
+    public bool weaponTrailEnabled
+    {
+        set
+        {
+            if (m_weaponTrail) { m_weaponTrail.enabled = value; }
+        }
+
+        get => m_weaponTrail ? m_weaponTrail.enabled : false;
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
         var takeDamageObject = other.GetComponent<TakeDamageObject>();
 
         if(HitTest(takeDamageObject))
         {
-            OnDamageTheOpponent(takeDamageObject, m_baseAttackDamageData);
+            Vector3 hitPosition = other.ClosestPointOnBounds(this.transform.position);
+
+            OnDamageTheOpponent(takeDamageObject, m_baseAttackDamageData, hitPosition);
 
             m_opponentDamageEvent?.Invoke(takeDamageObject, m_baseAttackDamageData);
         }
@@ -63,5 +79,5 @@ public abstract class WeaponBase : MonoBehaviour
         m_opponentObjects.Clear();
     }
 
-    protected abstract void OnDamageTheOpponent(TakeDamageObject takeDamageObject, DamageData baseDamageData);
+    protected abstract void OnDamageTheOpponent(TakeDamageObject takeDamageObject, DamageData baseDamageData, Vector3 hitPosition);
 }
