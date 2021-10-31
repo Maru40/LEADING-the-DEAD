@@ -41,6 +41,9 @@ namespace Player
             var animatorManager = serializedObject.FindProperty("m_animatorManager");
             EditorGUILayout.PropertyField(animatorManager);
 
+            var stunStar = serializedObject.FindProperty("m_stunStar");
+            EditorGUILayout.PropertyField(stunStar);
+
             var deadStart = serializedObject.FindProperty("m_deadStartEvent");
             EditorGUILayout.PropertyField(deadStart, new GUIContent("死亡開始イベント"));
 

@@ -14,6 +14,9 @@ namespace Player
         private GameStateManager m_gameStateManager;
 
         [SerializeField]
+        private StunStar m_stunStar;
+
+        [SerializeField]
         private Gauge m_hpGauge;
 
         [SerializeField]
@@ -119,7 +122,11 @@ namespace Player
                 .Subscribe(_ => m_deadStartEvent?.Invoke()).AddTo(this);
 
             m_endStunSubject.Delay(TimeSpan.FromSeconds(m_stunSecond))
-                .Subscribe(_ => isStun = false)
+                .Subscribe(_ =>
+                {
+                    isStun = false;
+                    m_stunStar.Stop();
+                })
                 .AddTo(this);
 
             m_deadStartEvent.AddListener(DeadStart);
@@ -181,6 +188,10 @@ namespace Player
         public void StartStun()
         {
             isStun = true;
+
+            Debug.Log("ちゃんと");
+
+            m_stunStar.Play();
 
             m_endStunSubject.OnNext(Unit.Default);
         }
