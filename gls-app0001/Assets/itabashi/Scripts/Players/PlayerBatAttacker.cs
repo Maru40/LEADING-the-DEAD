@@ -21,7 +21,12 @@ namespace Player
         [SerializeField]
         private WeaponBase m_weaponBase;
 
-        private Subject<Unit> m_swingSubject = new Subject<Unit>();
+        [SerializeField]
+        private float m_hitStartSecond = 0.0f;
+        [SerializeField]
+        private float m_hitEndSecond = 1.0f;
+
+        private readonly Subject<Unit> m_swingSubject = new Subject<Unit>();
 
         private GameControls m_gameControls;
 
@@ -32,14 +37,33 @@ namespace Player
 
             m_swingSubject
                 .Where(_ => !m_animatorManager.isUseActionMoving && m_playerStatusManager.isControllValid)
-                .Subscribe(_ => m_animatorManager.GoState("Swing", "Upper_Layer"));
+                .Subscribe(_ => m_animatorManager.GoState("Swing", "Upper_Layer"))
+                .AddTo(this);
 
-            batSwingBehaviour.onStateEntered.Subscribe(_ => m_weaponBase.gameObject.SetActive(true));
-            batSwingBehaviour.onStateEntered.Subscribe(_ => m_animatorManager.isUseActionMoving = true);
+            batSwingBehaviour.onTimeEvent
+                .ClampWhere(m_hitStartSecond)
+                .Subscribe(_ => m_weaponBase.attackColliderEnabled = true)
+                .AddTo(this);
 
-            batSwingBehaviour.onStateExited.Subscribe(_ => m_weaponBase.gameObject.SetActive(false));
-            batSwingBehaviour.onStateExited.Subscribe(_ => m_weaponBase.HitClear());
-            batSwingBehaviour.onStateExited.Subscribe(_ => m_animatorManager.isUseActionMoving = false);
+            batSwingBehaviour.onTimeEvent
+                .ClampWhere(m_hitEndSecond)
+                .Subscribe(_ => m_weaponBase.attackColliderEnabled = false)
+                .AddTo(this);
+
+            batSwingBehaviour.onStateEntered
+                .Subscribe(_ =>
+            {
+                m_weaponBase.gameObject.SetActive(true);
+                m_weaponBase.attackColliderEnabled = false;
+                m_animatorManager.isUseActionMoving = true;
+            }).AddTo(this);
+
+            batSwingBehaviour.onStateExited.Subscribe(_ =>
+            {
+                m_weaponBase.gameObject.SetActive(false);
+                m_weaponBase.HitClear();
+                m_animatorManager.isUseActionMoving = false;
+            }).AddTo(this);
 
             m_gameControls = new GameControls();
 
@@ -48,7 +72,7 @@ namespace Player
             this.RegisterController(m_gameControls);
         }
 
-        public void OnBatHited(TakeDamageObject takeDamageObject,DamageData damageData)
+        public void OnBatHited(TakeDamageObject takeDamageObject, DamageData damageData)
         {
             StartCoroutine(HitStop(damageData.hitStopTime));
         }
@@ -66,7 +90,6 @@ namespace Player
             while (countHitStopTime < hitStopTime)
             {
                 countHitStopTime += Time.deltaTime;
-                Debug.Log("こんばんが");
                 yield return null;
             }
 
