@@ -66,6 +66,36 @@ MonoBehaviour:
   m_exitAction:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &684590976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 684590977}
+  m_Layer: 6
+  m_Name: CenterPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &684590977
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684590976}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5870427050103728093}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1411818464
 GameObject:
   m_ObjectHideFlags: 0
@@ -2459,6 +2489,7 @@ GameObject:
   - component: {fileID: 8806759177434941914}
   - component: {fileID: -3509147400467223985}
   - component: {fileID: -6998184374044003836}
+  - component: {fileID: 437899209864115181}
   m_Layer: 6
   m_Name: Zombie
   m_TagString: Untagged
@@ -2494,6 +2525,7 @@ Transform:
   - {fileID: 7366281397086235154}
   - {fileID: 49534073}
   - {fileID: 1411818465}
+  - {fileID: 684590977}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
@@ -2564,6 +2596,7 @@ MonoBehaviour:
       damageValue: 1
       isStunAttack: 0
       hitStopTime: 0
+      type: 0
       damageTags: []
     startRange: 3
   m_moveSpeed: 3
@@ -2802,6 +2835,7 @@ MonoBehaviour:
   m_status:
     hp: 1
     damageIntervalTime: 3
+  m_fireDamageParticle: {fileID: 1567218315478429514, guid: a76fe4d520a4350479f232e7b094a375, type: 3}
 --- !u!114 &-8648523569329281583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2885,6 +2919,7 @@ MonoBehaviour:
         damageValue: 0
         isStunAttack: 0
         hitStopTime: 0
+        type: 0
         damageTags: []
       startRange: 0
 --- !u!114 &-9140734898953323855
@@ -3020,6 +3055,7 @@ MonoBehaviour:
       damageValue: 1
       isStunAttack: 0
       hitStopTime: 0
+      type: 0
       damageTags: []
     startRange: 1.5
   m_moveSpeed: 3
@@ -3056,6 +3092,22 @@ MonoBehaviour:
     animationClips:
     - {fileID: -6257440219318784398, guid: 59dbfb66512f63c4eb6e1e30e0603198, type: 3}
     - {fileID: -6257440219318784398, guid: 1d31b4476a14a0246b2e0f023e8877fe, type: 3}
+--- !u!114 &437899209864115181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434505739018704334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faf76e1a56d0adb4884cf4861adcde43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_isParentChase: 1
+  m_createParticle: {fileID: 1567218315478429514, guid: a76fe4d520a4350479f232e7b094a375, type: 3}
+  m_createPositionObject: {fileID: 684590976}
+  m_time: 2
 --- !u!1 &7689520723826636210
 GameObject:
   m_ObjectHideFlags: 0
