@@ -6,27 +6,32 @@ using System;
 
 public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
 {
-    WaitTimer m_waitTimer = null;
-    EnemyRespawnManager m_respawn = null;
     Stator_ZombieNormal m_stator = null;
-    AnimatorCtrl_ZombieNormal m_animator = null;
-    DropObjecptManager m_dropManager = null;
     AngerManager m_angerManager;
-    I_Stun m_stun;
 
     DamagedManager_ZombieNormal m_damageManager;
+    DamageParticleManager m_damageParticleManager;
+
+    [SerializeField]
+    GameObject m_fireDamageParticle = null;
 
     void Awake()
     {
-        m_waitTimer = GetComponent<WaitTimer>();
-        m_respawn = GetComponent<EnemyRespawnManager>();
         m_stator = GetComponent<Stator_ZombieNormal>();
-        m_animator = GetComponent<AnimatorCtrl_ZombieNormal>();
-        m_dropManager = GetComponent<DropObjecptManager>();
         m_angerManager = GetComponent<AngerManager>();
-        m_stun = GetComponent<I_Stun>();
+        m_damageParticleManager = GetComponent<DamageParticleManager>();
 
         m_damageManager = new DamagedManager_ZombieNormal(gameObject);
+    }
+
+    void Start()
+    {
+        SetDamageParticle();
+    }
+
+    private void SetDamageParticle()
+    {
+        m_damageParticleManager.SetCreateParticels(AttributeObject.DamageType.Fire, m_fireDamageParticle);
     }
 
     public override void Damage(AttributeObject.DamageData data)
