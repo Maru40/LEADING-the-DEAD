@@ -5,6 +5,12 @@ using UnityEngine.Events;
 
 namespace AttributeObject
 {
+    public enum DamageType
+    {
+        None,
+        Fire,
+    }
+
     /// <summary>
     /// ダメージデータ構造体
     /// </summary>
@@ -28,6 +34,7 @@ namespace AttributeObject
         /// </summary>
         public float hitStopTime;
 
+        public DamageType type;
         public List<string> damageTags;
 
         /// <summary>
@@ -41,6 +48,7 @@ namespace AttributeObject
             this.isStunAttack = isStunAttack;
             this.hitStopTime = hitStopTime;
 
+            this.type = DamageType.None;
             damageTags = new List<string>();
         }
 
