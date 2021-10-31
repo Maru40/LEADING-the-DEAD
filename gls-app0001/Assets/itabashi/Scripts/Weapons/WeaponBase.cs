@@ -11,6 +11,9 @@ public abstract class WeaponBase : MonoBehaviour
     private Collider m_weaponCollider;
 
     [SerializeField]
+    private MeleeWeaponTrail m_weaponTrail;
+
+    [SerializeField]
     private DamageData m_baseAttackDamageData;
 
     public DamageData baseAttackDamageData => m_baseAttackDamageData;
@@ -25,6 +28,17 @@ public abstract class WeaponBase : MonoBehaviour
         set => m_weaponCollider.enabled = value;
         get => m_weaponCollider.enabled;
     }
+
+    public bool weaponTrailEnabled
+    {
+        set
+        {
+            if (m_weaponTrail) { m_weaponTrail.enabled = value; }
+        }
+
+        get => m_weaponTrail ? m_weaponTrail.enabled : false;
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
