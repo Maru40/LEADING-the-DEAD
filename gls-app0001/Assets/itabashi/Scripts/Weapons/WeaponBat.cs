@@ -6,7 +6,13 @@ using UnityEngine;
 public class WeaponBat : WeaponBase
 {
     [SerializeField]
-    private GameObject m_hitEffectPrefab; 
+    private GameObject m_hitEffectPrefab;
+
+    [SerializeField]
+    private AudioSource m_audioSource;
+
+    [SerializeField]
+    private AudioClip m_hitSound;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +29,8 @@ public class WeaponBat : WeaponBase
     protected override void OnDamageTheOpponent(TakeDamageObject takeDamageObject, DamageData baseDamageData, Vector3 hitPosition)
     {
         var hitEffect = Instantiate(m_hitEffectPrefab, hitPosition, Quaternion.identity);
+
+        m_audioSource.PlayOneShot(m_hitSound);
 
         takeDamageObject.TakeDamage(baseDamageData);
     }
