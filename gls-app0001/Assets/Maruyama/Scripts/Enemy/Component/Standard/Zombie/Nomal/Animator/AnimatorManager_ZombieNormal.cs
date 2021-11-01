@@ -37,6 +37,8 @@ public class AnimatorManager_ZombieNormal : MonoBehaviour
 
         SettingStun();
         SettingAnger();
+
+        SettingDeath();
     }
 
     void SettingNormalAttack()
@@ -70,6 +72,11 @@ public class AnimatorManager_ZombieNormal : MonoBehaviour
         m_angerManager.isAngerObservable.Where(isAnger => isAnger)
             .Subscribe(_ => ChangeAngerAnimation())
             .AddTo(this);
+    }
+
+    void SettingDeath()
+    {
+
     }
 
     public void CrossFadeState(string stateName, string layerName, float transitionTime = 0.0f)
@@ -108,5 +115,19 @@ public class AnimatorManager_ZombieNormal : MonoBehaviour
     {
         var layerIndex = m_animator.GetLayerIndex("Base Layer");
         CrossFadeState("Idle", layerIndex);
+    }
+
+    public void CrossFadeDeathAnimatiron()
+    {
+        var layerIndex = m_animator.GetLayerIndex("Base Layer");
+        CrossFadeState("Death", layerIndex);
+    }
+
+
+    //アクセッサ・プロパティ----------------------------------------------------------------------
+
+    public Animator GetAniamtor()
+    {
+        return m_animator;
     }
 }
