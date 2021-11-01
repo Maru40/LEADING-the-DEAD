@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 2519966558701118227}
   - component: {fileID: 2107907067}
   - component: {fileID: 2107907068}
+  - component: {fileID: 2588975111235542197}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -158,3 +159,16 @@ MonoBehaviour:
   - m_SceneName: 
   - m_SceneName: 
   - m_SceneName: 
+--- !u!114 &2588975111235542197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2519966558701118223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 391ce5903fb559d4a92b483cf8fe5b82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_audioMixer: {fileID: 24100000, guid: 0e476ec5883ef6448871df02d8c73e22, type: 2}
