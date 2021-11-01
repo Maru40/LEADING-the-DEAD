@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using DyingTypeEnum = StatusManager_ZombieNormal.DyingTypeEnum;
+
 public class DamagedManager_ZombieNormal : DamagedManagerBase
 {
 
     StatusManager_ZombieNormal m_statusManager = null;
+    Stator_ZombieNormal m_stator = null;
     EnemyRespawnManager m_respawn = null;
     DropObjecptManager m_dropManager = null;
     DamageParticleManager m_particleManager = null;
@@ -21,6 +24,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
         m_respawn = owner.GetComponent<EnemyRespawnManager>();
         m_dropManager = owner.GetComponent<DropObjecptManager>();
         m_particleManager = owner.GetComponent<DamageParticleManager>();
+        m_stator = owner.GetComponent<Stator_ZombieNormal>();
         m_stun = owner.GetComponent<I_Stun>();
 
         m_waitTimer = owner.GetComponent<WaitTimer>();
@@ -35,7 +39,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
         var status = m_statusManager.GetStatus();
 
         Damage(data, ref status);  //ダメージを受ける処理
-        Death(ref status);         //死亡判定処理
+        Death(data ,ref status);         //死亡判定処理
 
         m_statusManager.SetStatus(status);
     }
@@ -82,12 +86,23 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
     /// 死亡時の処理
     /// </summary>
     /// <param name="status">現在のステータスの参照</param>
-    void Death(ref StatusManagerBase.Status status)
+    void Death(DamageData data ,ref StatusManagerBase.Status status)
     {
         if (IsDeath(in status))
         {
             status.hp = 0;
-            m_respawn?.RespawnReserve();
+
+            var dyingMode = data.type switch  //瀕死状態のTypeを決定
+            {
+                DamageType.None => DyingTypeEnum.None,
+                DamageType.Fire => DyingTypeEnum.Fire,
+                _ => DyingTypeEnum.None
+            };
+            m_statusManager.ChangeDyingMode(dyingMode);  //瀕死状態のTypeを変更
+
+            m_stator.GetTransitionMember().dyingTrigger.Fire();  //瀕死状態に変更
+
+            //m_respawn?.RespawnReserve();
         }
     }
 

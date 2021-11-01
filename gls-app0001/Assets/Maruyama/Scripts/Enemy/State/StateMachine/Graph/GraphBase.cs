@@ -116,7 +116,9 @@ public class GraphBase<NodeType, EnumType, TransitionType>
 	/// <returns>エッジのリスト取得</returns>
 	public List<EdgeBase<EnumType, TransitionType>> GetNowNodeEdges()
 	{
-		return m_edgesDictionary[m_nowNodeType];
+		var exist = m_edgesDictionary.ContainsKey(m_nowNodeType);
+		//keyが存在したら返す。
+		return exist ? m_edgesDictionary[m_nowNodeType] : new List<EdgeBase<EnumType, TransitionType>>();
 	}
 
 	/// <summary>

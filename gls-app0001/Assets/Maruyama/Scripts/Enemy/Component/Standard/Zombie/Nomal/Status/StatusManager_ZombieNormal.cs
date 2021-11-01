@@ -6,6 +6,14 @@ using System;
 
 public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
 {
+    //瀕死状態
+    public enum DyingTypeEnum
+    {
+        None,
+        Fire,
+        Cutting,
+    }
+
     Stator_ZombieNormal m_stator = null;
     AngerManager m_angerManager;
 
@@ -14,6 +22,8 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
 
     [SerializeField]
     GameObject m_fireDamageParticle = null;
+
+    DyingTypeEnum m_dyingType = DyingTypeEnum.None;
 
     void Awake()
     {
@@ -59,4 +69,10 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
     }
 
     //アクセッサ----------------------------------------------------------------------------
+
+    public DyingTypeEnum DyingType => m_dyingType;
+    public void ChangeDyingMode(DyingTypeEnum mode)
+    {
+        m_dyingType = mode;
+    }
 }

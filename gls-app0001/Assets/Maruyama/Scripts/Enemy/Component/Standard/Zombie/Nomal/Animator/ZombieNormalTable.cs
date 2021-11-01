@@ -18,6 +18,7 @@ public class ZombieNormalTable
         public readonly AnimationState Stunned = new AnimationState("Base Layer.Stunned","Base Layer");
         public readonly AnimationState Anger = new AnimationState("Base Layer.Anger","Base Layer");
         public readonly AnimationState Land = new AnimationState("Base Layer.Land","Base Layer");
+        public readonly AnimationState Death = new AnimationState("Base Layer.Death","Base Layer");
         
     }
     
