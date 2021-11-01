@@ -29,7 +29,11 @@ public class AudioOptionUIPresenter : MonoBehaviour
             .AddTo(this);
 
         m_backButton.onClick.AsObservable()
-            .Subscribe(_ => GameFocusManager.PopFocus())
+            .Subscribe(_ =>
+            {
+                GameFocusManager.PopFocus();
+                gameObject.SetActive(false);
+            })
             .AddTo(this);
     }
 
