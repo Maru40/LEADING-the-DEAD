@@ -63,17 +63,25 @@ public class TaskList<EnumType>
         //タスクが終了したら
         if (isEndOneTask)
         {
-            m_currentTask.exit?.Invoke();  //現在のタスクのExit
+            EndOneTask();
+        }
+    }
 
-            m_currentIndex++; //Indexの更新
+    /// <summary>
+    /// 一つのタスクの終了時
+    /// </summary>
+    void EndOneTask()
+    {
+        m_currentTask.exit?.Invoke();  //現在のタスクのExit
 
-            if (IsEnd)  //次のタスクがないなら
-            {
-                m_currentIndex = 0;
-                m_currentTask = null;
-                m_currentTasks.Clear();
-                return;
-            }
+        m_currentIndex++; //Indexの更新
+
+        if (IsEnd)  //次のタスクがないなら
+        {
+            m_currentIndex = 0;
+            m_currentTask = null;
+            m_currentTasks.Clear();
+            return;
         }
 
         m_currentTask = m_currentTasks[m_currentIndex]; //次のタスクを取得
