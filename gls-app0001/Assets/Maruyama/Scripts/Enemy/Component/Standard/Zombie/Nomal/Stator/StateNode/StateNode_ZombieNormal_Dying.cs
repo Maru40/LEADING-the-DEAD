@@ -11,20 +11,50 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
         Fire
     }
 
-    float m_fireTime = 1.0f;  //炎に包まれながら動く時間
+    public class Parametor
+    {
+        public float fireTime = 0.0f;  //炎に包まれながら動く時間
+
+        public Parametor()
+        { }
+
+        public Parametor(float fireTime)
+        {
+            this.fireTime = fireTime;
+        }
+
+        public Parametor(Parametor param)
+        {
+            this.fireTime = param.fireTime;
+        }
+    }
+
+    Parametor m_param = new Parametor()
+    {
+        fireTime = 0.5f,
+    };  
+
+    Dictionary<TaskEnum, GameTimer> m_timerDictionary = new Dictionary<TaskEnum, GameTimer>();
 
     StatusManager_ZombieNormal m_statusManager;
     Stator_ZombieNormal m_stator;
-    WaitTimer m_waitTimer;
+    EnemyVelocityMgr m_velocityManager;
 
     TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
 
-    public StateNode_ZombieNormal_Dying(EnemyBase owner)
+    public StateNode_ZombieNormal_Dying(EnemyBase owner, Parametor param = null)
         :base(owner)
     {
         m_statusManager = owner.GetComponent<StatusManager_ZombieNormal>();
         m_stator = owner.GetComponent<Stator_ZombieNormal>();
-        m_waitTimer = owner.GetComponent<WaitTimer>();
+        m_velocityManager = owner.GetComponent<EnemyVelocityMgr>();
+
+        //タイマーの初期化
+        m_timerDictionary[TaskEnum.Fire] = new GameTimer(m_param.fireTime);
+
+        if (param != null) {  //渡されたパラメータがnull出なかったら値を更新
+            m_param = param;
+        }
     }
 
     protected override void ReserveChangeComponents()
@@ -85,7 +115,7 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
 
     void OnTaskFadeEnter()
     {
-
+        
     }
 
     bool OnTaskFadeUpdate()
@@ -102,16 +132,34 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
 
     void OnTaskFireEnter()
     {
-        
+        m_timerDictionary[TaskEnum.Fire].ResetTimer(m_param.fireTime);  //Timer初期化
+
+        m_velocityManager.StartDeseleration();  //減速開始
     }
 
     bool OnTaskFireUpdate()
     {
-        return true;
+        GameTimer timer;
+        bool exist = m_timerDictionary.TryGetValue(TaskEnum.Fire,out timer);
+        if (exist == false) {  //存在しないなら処理を飛ばす。
+            return true;
+        }
+
+        timer.UpdateTimer();  //時間計測
+        return timer.IsTimeUp;
     }
 
     void OnTaskFireExit()
     {
+        m_velocityManager.SetIsDeseleration(false);  //減速終了
+    }
 
+
+    //アクセッサ-------------------------------------------------------------------
+
+    public Parametor Param
+    {
+        get { return new Parametor(m_param); }
+        set { m_param = value; }
     }
 }
