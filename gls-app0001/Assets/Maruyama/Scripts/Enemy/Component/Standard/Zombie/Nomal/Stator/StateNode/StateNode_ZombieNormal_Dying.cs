@@ -8,7 +8,8 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
 {
     enum TaskEnum
     {
-        Fire
+        Fire,
+        PlayDeathAnimation,
     }
 
     public class Parametor
@@ -38,6 +39,7 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
 
     StatusManager_ZombieNormal m_statusManager;
     Stator_ZombieNormal m_stator;
+    AnimatorManager_ZombieNormal m_animatorManager;
     EnemyVelocityMgr m_velocityManager;
 
     TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
@@ -47,6 +49,7 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
     {
         m_statusManager = owner.GetComponent<StatusManager_ZombieNormal>();
         m_stator = owner.GetComponent<Stator_ZombieNormal>();
+        m_animatorManager = owner.GetComponent<AnimatorManager_ZombieNormal>();
         m_velocityManager = owner.GetComponent<EnemyVelocityMgr>();
 
         //タイマーの初期化
@@ -90,6 +93,8 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
     void DefineTask()
     {
         m_taskList.DefineTask(TaskEnum.Fire, OnTaskFireEnter, OnTaskFireUpdate, OnTaskFireExit);
+        m_taskList.DefineTask(TaskEnum.PlayDeathAnimation,
+            OnTaskPlayDeathAnimationEnter, OnTaskPlayDeathAnimationUpdate, OnTaskPlayDeathAnimationExit);
     }
 
     /// <summary>
@@ -124,6 +129,24 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
     }
 
     void OnTaskFadeExit()
+    {
+
+    }
+
+    //DeathAnimatinの再生-----------------------------------------------------------------------------------------
+
+    void OnTaskPlayDeathAnimationEnter()
+    {
+        m_animatorManager.CrossFadeDeathAnimatiron();
+    }
+
+    bool OnTaskPlayDeathAnimationUpdate()
+    {
+        //将来的にはAnimationが終了したらの処理に変更
+        return true;
+    }
+
+    void OnTaskPlayDeathAnimationExit()
     {
 
     }
