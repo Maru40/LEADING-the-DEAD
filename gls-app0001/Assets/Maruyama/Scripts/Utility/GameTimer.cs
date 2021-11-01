@@ -22,7 +22,7 @@ public class GameTimerParametor
     /// <param name="isEndAction">終了関数を呼び出すかどうか</param>
     public void EndTimer(bool isEndAction = true)
     {
-        elapsedTime = intervalTime;
+        //elapsedTime = intervalTime;
 
         if (isEndAction)
         {
@@ -38,6 +38,14 @@ public class GameTimer
 
     public GameTimer()
         :this(new GameTimerParametor(0.0f,null))
+    { }
+
+    public GameTimer(float intervalTime)
+        : this(new GameTimerParametor(intervalTime, null))
+    { }
+
+    public GameTimer(float intervalTime, Action endAction)
+        :this(new GameTimerParametor(intervalTime, endAction))
     { }
 
     public GameTimer(GameTimerParametor param)
@@ -145,5 +153,10 @@ public class GameTimer
     /// 経過時間
     /// </summary>
     public float ElapsedTime => m_param.elapsedTime;
+
+    /// <summary>
+    /// 設定時間
+    /// </summary>
+    public float IntervalTime => m_param.intervalTime;
 
 }
