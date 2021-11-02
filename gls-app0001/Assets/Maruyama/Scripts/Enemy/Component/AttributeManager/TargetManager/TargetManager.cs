@@ -3,14 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System;
+using UniRx;
 
 public class TargetManager : MonoBehaviour
 {
+    [Serializable]
+    public struct BuffParametor
+    {
+        public float speed;
+
+        public BuffParametor(float speed)
+        {
+            this.speed = speed;
+        }
+    }
+
+    [SerializeField]
+    BuffParametor m_buffParam = new BuffParametor(1.1f);
+
     //最後に参照されたターゲット
-    FoundObject m_nowTarget = null;
+    readonly ReactiveProperty<FoundObject> m_nowTargetReactive = new ReactiveProperty<FoundObject>();
+    FoundObject m_nowTarget
+    {
+        get => m_nowTargetReactive.Value;
+        set => m_nowTargetReactive.Value = value;
+    }
 
     //どのコンポーネントのターゲットかを確認する。
     Dictionary<Type,FoundObject> m_targets = new Dictionary<Type, FoundObject>();
+
+    StatusManagerBase m_statusManager;
+
+    private void Awake()
+    {
+        m_statusManager = GetComponent<StatusManagerBase>();
+    }
 
     private void Start()
     {
@@ -19,11 +46,37 @@ public class TargetManager : MonoBehaviour
             //var target = GameObject.Find("Player");
             //m_nowTarget = target.GetComponent<FoundObject>();
         }
+
+        //FoundObjectならバフを掛ける。
+        m_nowTargetReactive.Skip(1)
+            .Where(data => data != null)
+            .Where(data => data.GetFoundData().type == FoundObject.FoundType.SoundObject)
+            .Subscribe(_ => ChangeBuffParametor(m_buffParam))
+            .AddTo(this);
+
+        //それ以外ならバフを掛けない。
+        m_nowTargetReactive.Skip(1)
+            .Where(data => data != null)
+            .Where(data => data.GetFoundData().type != FoundObject.FoundType.SoundObject)
+            .Subscribe(_ => ChangeBuffParametor(new BuffParametor(1.0f)))
+            .AddTo(this);
     }
 
     private void Update()
     {
         //Debug.Log(m_nowTarget);
+    }
+
+    /// <summary>
+    /// ターゲットに対するバフの切替
+    /// </summary>
+    /// <param name="parametor">バフデータ</param>
+    void ChangeBuffParametor(BuffParametor parametor)
+    {
+        var buffParametor = m_statusManager.GetBuffParametor();
+        buffParametor.targetParam = parametor;
+
+        m_statusManager.SetBuffParametor(buffParametor);
     }
 
     /// <summary>
