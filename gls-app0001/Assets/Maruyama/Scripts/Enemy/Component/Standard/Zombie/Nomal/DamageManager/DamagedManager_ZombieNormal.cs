@@ -95,6 +95,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
             {
                 DamageType.None => DyingTypeEnum.None,
                 DamageType.Fire => DyingTypeEnum.Fire,
+                DamageType.Cutting => DyingTypeEnum.Cutting,
                 _ => DyingTypeEnum.None
             };
             m_statusManager.ChangeDyingMode(dyingMode);  //瀕死状態のTypeを変更
