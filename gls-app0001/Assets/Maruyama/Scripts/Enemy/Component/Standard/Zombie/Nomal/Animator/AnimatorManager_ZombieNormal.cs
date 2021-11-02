@@ -60,7 +60,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         //スタン解除時
         m_stunManager.isStun.Skip(1)
             .Where(isStun => !isStun)
-            .Subscribe(_ => { ChangeIdleAnimation(); })
+            .Subscribe(_ => { CrossFadeIdleAnimation(); })
             .AddTo(this);
     }
 
@@ -96,7 +96,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         CrossFadeState("Anger", layerIndex);
     }
 
-    void ChangeIdleAnimation()
+    public void CrossFadeIdleAnimation()
     {
         var layerIndex = m_animator.GetLayerIndex("Base Layer");
         CrossFadeState("Idle", layerIndex);
