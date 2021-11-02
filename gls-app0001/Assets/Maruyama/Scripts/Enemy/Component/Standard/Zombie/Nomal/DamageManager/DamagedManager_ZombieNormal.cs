@@ -9,6 +9,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
 {
 
     StatusManager_ZombieNormal m_statusManager = null;
+    AnimatorManager_ZombieNormal m_animatorManager = null;
     Stator_ZombieNormal m_stator = null;
     EnemyRespawnManager m_respawn = null;
     DropObjecptManager m_dropManager = null;
@@ -21,6 +22,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
         :base(owner)
     {
         m_statusManager = owner.GetComponent<StatusManager_ZombieNormal>();
+        m_animatorManager = owner.GetComponent<AnimatorManager_ZombieNormal>();
         m_respawn = owner.GetComponent<EnemyRespawnManager>();
         m_dropManager = owner.GetComponent<DropObjecptManager>();
         m_particleManager = owner.GetComponent<DamageParticleManager>();
@@ -61,12 +63,13 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
             CreateDamageEffect(data);
         }
 
+        m_animatorManager.HitStop(data);  //ヒットストップ
         StartDamageInterval(ref status); //ダメージインターバルの開始
     }
 
     void CreateDamageEffect(DamageData data)
     {
-        //将来的にステートマシン
+        //将来的にこのif文いらない？
         if(data.type == DamageType.Fire)
         {
             m_particleManager.StartDamage(data.type);
