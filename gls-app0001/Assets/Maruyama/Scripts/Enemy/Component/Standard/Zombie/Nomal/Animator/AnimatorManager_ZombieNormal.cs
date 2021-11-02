@@ -5,7 +5,7 @@ using UnityEngine;
 using System;
 using UniRx;
 
-public class AnimatorManager_ZombieNormal : MonoBehaviour
+public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 {
     [Serializable]
     struct NormalAttackParametor
@@ -17,21 +17,18 @@ public class AnimatorManager_ZombieNormal : MonoBehaviour
     [SerializeField]
     NormalAttackParametor m_normalAttackParam = new NormalAttackParametor();
 
-    Animator m_animator;
-
     NormalAttack m_normalAttackComp;
 
     EnemyStunManager m_stunManager;
     AngerManager m_angerManager;
-    Stator_ZombieNormal m_stator;
 
-    void Awake()
+    override protected void Awake()
     {
-        m_animator = GetComponent<Animator>();
+        base.Awake();
+
         m_normalAttackComp = GetComponent<NormalAttack>();
         m_stunManager = GetComponent<EnemyStunManager>();
         m_angerManager = GetComponent<AngerManager>();
-        m_stator = GetComponent<Stator_ZombieNormal>();
 
         SettingNormalAttack();
 
@@ -79,18 +76,6 @@ public class AnimatorManager_ZombieNormal : MonoBehaviour
 
     }
 
-    public void CrossFadeState(string stateName, string layerName, float transitionTime = 0.0f)
-    {
-        int layerIndex = m_animator.GetLayerIndex(layerName);
-        m_animator.CrossFade(stateName, transitionTime, layerIndex);
-    }
-
-    public void CrossFadeState(string stateName, int layerIndex, float transitionTime = 0.0f)
-    {
-        m_animator.CrossFade(stateName, transitionTime, layerIndex);
-    }
-
-
     //ChangeAnimaotion-------------------------------------------------------------------------
 
     public void ChangeNormalAttackAnimation()
@@ -121,13 +106,5 @@ public class AnimatorManager_ZombieNormal : MonoBehaviour
     {
         var layerIndex = m_animator.GetLayerIndex("Base Layer");
         CrossFadeState("Death", layerIndex);
-    }
-
-
-    //アクセッサ・プロパティ----------------------------------------------------------------------
-
-    public Animator GetAniamtor()
-    {
-        return m_animator;
     }
 }
