@@ -69,11 +69,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
 
     void CreateDamageEffect(DamageData data)
     {
-        //将来的にこのif文いらない？
-        if(data.type == DamageType.Fire)
-        {
-            m_particleManager.StartDamage(data.type);
-        }
+        m_particleManager.StartDamage(data.type);
     }
 
     /// <summary>
