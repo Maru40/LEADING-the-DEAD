@@ -161,6 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c8cb0928bad6d4abeccaff7d44e67d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_buffParam:
+    speed: 1.1
 --- !u!114 &8567931424737641941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,6 +294,7 @@ MonoBehaviour:
       damageValue: 1
       isStunAttack: 1
       hitStopTime: 0
+      type: 0
       damageTags: []
     startRange: 10
   m_param:
@@ -412,7 +415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_normalAttackParam:
     hitStartTime: 0.5
-    hitEndTime: 0.8
+    hitEndTime: 1
   m_tackleParam:
     tackleStartTime: 0.1
     deselerationStartTime: 1.8
@@ -434,12 +437,15 @@ MonoBehaviour:
       damageValue: 5
       isStunAttack: 1
       hitStopTime: 0
+      type: 0
       damageTags:
       - ZombieTankTackle
     startRange: 10
   m_tackleSpeed: 15
   m_tackleLastRange: 2
   m_eyeDeg: 50
+  m_turningPower: 2
+  m_subPursuitTargetForward: 0.7
 --- !u!114 &1947119077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,6 +464,7 @@ MonoBehaviour:
       damageValue: 1
       isStunAttack: 0
       hitStopTime: 0
+      type: 0
       damageTags: []
     startRange: 1.5
   m_moveSpeed: 3

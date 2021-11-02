@@ -5,7 +5,7 @@ using UnityEngine;
 using System;
 using UniRx;
 
-public class AnimatorManager_ZombieTank : MonoBehaviour
+public class AnimatorManager_ZombieTank : AnimatorManagerBase
 {
     [Serializable]
     struct NormalAttackParametor
@@ -27,17 +27,15 @@ public class AnimatorManager_ZombieTank : MonoBehaviour
     [SerializeField]
     TackleParametor m_tackleParam = new TackleParametor();
 
-    Animator m_animator;
-
     NormalAttack m_normalAttackComp;
     TankTackle m_tackleComp;
 
-    void Awake()
+    override protected void Awake()
     {
+        base.Awake();
+
         m_normalAttackComp = GetComponent<NormalAttack>();
         m_tackleComp = GetComponent<TankTackle>();
-
-        m_animator = GetComponent<Animator>();
 
         SettingNormalAttackAnimation();
         SettingTackleAnimation();
@@ -86,11 +84,5 @@ public class AnimatorManager_ZombieTank : MonoBehaviour
         var tackle = ZombieTankTable.BaseLayer.TackleLast.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
 
         tackle.onStateExited.Subscribe(_ => m_tackleComp.EndAnimationEvent());
-    }
-
-    public void CrossFadeState(string stateName, int layerIndex, float transitionTime = 0.0f)
-    {
-        Debug.Log("CrossFadeState");
-        m_animator.CrossFade(stateName, transitionTime, layerIndex);
     }
 }

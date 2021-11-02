@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System;
+using UniRx;
 
 public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
 {
@@ -21,9 +22,9 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
     DamageParticleManager m_damageParticleManager;
 
     [SerializeField]
-    GameObject m_fireDamageParticle = null;
+    GameObject m_fireDamageParticle = null;  //炎ダメージ時のparticleのデータ管理
 
-    DyingTypeEnum m_dyingType = DyingTypeEnum.None;
+    DyingTypeEnum m_dyingType = DyingTypeEnum.None;  //瀕死状態
 
     void Awake()
     {
@@ -34,8 +35,10 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
         m_damageManager = new DamagedManager_ZombieNormal(gameObject);
     }
 
-    void Start()
+    override protected void Start()
     {
+        base.Start();
+
         SetDamageParticle();
     }
 
