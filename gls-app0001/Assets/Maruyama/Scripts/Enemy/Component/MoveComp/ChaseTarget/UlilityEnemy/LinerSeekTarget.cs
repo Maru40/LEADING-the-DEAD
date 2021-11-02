@@ -60,7 +60,7 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
         FoundObject target = m_targetMgr.GetNowTarget();
         if (target) {
             Vector3 toVec = target.transform.position - GetOwner().transform.position;
-            float maxSpeed = m_maxSpeed * m_statusManager.GetBuffParametor().angerParam.speed;
+            float maxSpeed = m_maxSpeed * m_statusManager.GetBuffParametor().SpeedBuffMultiply;
             Vector3 force = CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, toVec, maxSpeed);
             m_velocityMgr.AddForce(force * m_turningPower);
 

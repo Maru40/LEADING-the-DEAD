@@ -57,7 +57,7 @@ public class Attack_ZombieNormal : AttackNodeManagerBase
             return;
         }
 
-        float moveSpeed = m_moveSpeed * m_statusManager.GetBuffParametor().angerParam.speed;
+        float moveSpeed = m_moveSpeed * m_statusManager.GetBuffParametor().SpeedBuffMultiply;
         var toVec = target.transform.position - transform.position;
         var avoidVec = m_throngManager.CalcuSumAvoidVector();
         toVec += avoidVec;
