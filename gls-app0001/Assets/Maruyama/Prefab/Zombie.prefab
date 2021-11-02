@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 49534074}
   - component: {fileID: 632433336}
   m_Layer: 6
-  m_Name: AttackHitBox
+  m_Name: RightArmHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 49534072}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 1.23, z: 0.56}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.10452837, w: 0.9945219}
+  m_LocalPosition: {x: -0.01, y: -0.02, z: -0}
+  m_LocalScale: {x: 0.75, y: 0.25, z: 0.25}
   m_Children: []
-  m_Father: {fileID: 5870427050103728093}
-  m_RootOrder: 15
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 3855440571296386604}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -12}
 --- !u!65 &49534074
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -94,8 +94,74 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5870427050103728093}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1363543547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1363543548}
+  - component: {fileID: 1363543550}
+  - component: {fileID: 1363543549}
+  m_Layer: 6
+  m_Name: LeftArmHitBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1363543548
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363543547}
+  m_LocalRotation: {x: 0, y: 0.10452846, z: 0, w: 0.9945219}
+  m_LocalPosition: {x: -0.25, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 0.75000006, y: 0.25, z: 0.25}
+  m_Children: []
+  m_Father: {fileID: 7938873200724491565}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 12, z: 0}
+--- !u!65 &1363543550
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363543547}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1363543549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363543547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5625887cecce634e8577ce3d2a5acbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_enterAction:
+    m_PersistentCalls:
+      m_Calls: []
+  m_stayAction:
+    m_PersistentCalls:
+      m_Calls: []
+  m_exitAction:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1411818464
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,7 +190,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5870427050103728093}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &310105908060187271
 GameObject:
@@ -337,6 +403,7 @@ Transform:
   - {fileID: 6575901033471752631}
   - {fileID: 2852318708999293220}
   - {fileID: 8164969646403963620}
+  - {fileID: 49534073}
   m_Father: {fileID: 5702101426686342457}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1902,6 +1969,7 @@ Transform:
   m_LocalScale: {x: 1, y: 0.99999994, z: 1.0000001}
   m_Children:
   - {fileID: 7763021366507147572}
+  - {fileID: 1363543548}
   m_Father: {fileID: 1736874761276707748}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2523,7 +2591,6 @@ Transform:
   - {fileID: 5739241739102030190}
   - {fileID: 3570106232509839034}
   - {fileID: 7366281397086235154}
-  - {fileID: 49534073}
   - {fileID: 1411818465}
   - {fileID: 684590977}
   m_Father: {fileID: 0}
@@ -2840,6 +2907,7 @@ MonoBehaviour:
   m_hitStopBehaviours:
   - {fileID: 1444888580945028641}
   m_fireDamageParticle: {fileID: 1567218315478429514, guid: a76fe4d520a4350479f232e7b094a375, type: 3}
+  m_cuttingDamageParticle: {fileID: 1834194341294532, guid: d5f26854a8904624c8073139cd2eb346, type: 3}
 --- !u!114 &-8648523569329281583
 MonoBehaviour:
   m_ObjectHideFlags: 0
