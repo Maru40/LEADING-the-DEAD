@@ -43,7 +43,7 @@ public class AnimatorManager_ZombieNormal : MonoBehaviour
 
     void SettingNormalAttack()
     {
-        var behavior = ZombieNormalTable.BaseLayer.NormalAttack.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
+        var behavior = ZombieNormalTable.UpperLayer.NormalAttack.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
 
         var timeParam = m_normalAttackParam;
         var timeEvent = behavior.onTimeEvent;
@@ -95,7 +95,7 @@ public class AnimatorManager_ZombieNormal : MonoBehaviour
 
     public void ChangeNormalAttackAnimation()
     {
-        var layerIndex = m_animator.GetLayerIndex("Base Layer");
+        var layerIndex = m_animator.GetLayerIndex("Upper Layer");
         CrossFadeState("NormalAttack", layerIndex);
     }
 
