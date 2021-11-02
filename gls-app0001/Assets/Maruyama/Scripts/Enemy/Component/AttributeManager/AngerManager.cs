@@ -84,6 +84,9 @@ public class AngerManager : MonoBehaviour
         SetIsAnger(false);
     }
 
+    /// <summary>
+    /// バフデータをStatusManagerに送る
+    /// </summary>
     void UpdateBuffParametor()
     {
         var param = m_statusManager.GetBuffParametor();

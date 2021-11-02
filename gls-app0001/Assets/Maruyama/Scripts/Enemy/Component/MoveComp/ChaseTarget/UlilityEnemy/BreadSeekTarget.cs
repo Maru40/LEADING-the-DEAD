@@ -85,7 +85,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
     void UpdateMove()
     {
         var toVec = m_targetPosition - GetOwner().transform.position;
-        var maxSpeed = m_maxSpeed * m_statusManager.GetBuffParametor().angerParam.speed;
+        var maxSpeed = m_maxSpeed * m_statusManager.GetBuffParametor().SpeedBuffMultiply;
         Vector3 force = CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, toVec, maxSpeed);
         m_velocityMgr.AddForce(force * m_turningPower);
 
