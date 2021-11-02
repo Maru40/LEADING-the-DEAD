@@ -21,5 +21,18 @@ public class ZombieNormalTable
         public readonly AnimationState Death = new AnimationState("Base Layer.Death","Base Layer");
         
     }
+    public static readonly UpperLayerTable UpperLayer = new UpperLayerTable();
+    public class UpperLayerTable
+    {
+        public readonly AnimationState Idle = new AnimationState("Upper Layer.Idle","Upper Layer");
+        public readonly AnimationState NormalAttack = new AnimationState("Upper Layer.NormalAttack","Upper Layer");
+        
+    }
+    public static readonly LowerLayerTable LowerLayer = new LowerLayerTable();
+    public class LowerLayerTable
+    {
+        public readonly AnimationState Idle = new AnimationState("Lower Layer.Idle","Lower Layer");
+        
+    }
     
 }
