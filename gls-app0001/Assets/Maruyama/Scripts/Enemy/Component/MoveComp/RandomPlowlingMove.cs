@@ -95,7 +95,7 @@ public class RandomPlowlingMove : MonoBehaviour
 
         //加える力の計算
         var toVec = m_targetPosition - transform.position;
-        var maxSpeed = m_param.maxSpeed * m_statusManager.GetBuffParametor().angerParam.speed;
+        var maxSpeed = m_param.maxSpeed * m_statusManager.GetBuffParametor().SpeedBuffMultiply;
         Vector3 force = CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, toVec, maxSpeed);
         m_velocityMgr.AddForce(force * m_param.turningPower);
 
