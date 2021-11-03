@@ -73,6 +73,13 @@ public class PlayerPickUpper : MonoBehaviour
     {
         Debug.Log("アイテムを拾いました");
 
+        var cymbalMonkeyStateManager = pickedUpObject.GetComponent<CymbalMonkeyStateManager>();
+
+        if(cymbalMonkeyStateManager)
+        {
+            cymbalMonkeyStateManager.alarmSwitch = false;
+        }
+
         m_stackObjects.Add(pickedUpObject);
 
         pickedUpObject.gameObject.transform.SetParent(m_pickUpObjectsTransform);
