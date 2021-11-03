@@ -20,6 +20,6 @@ public class StateNode_ZombieNormal_Attack : EnState_AttackBase
         base.ReserveChangeComponents();
 
         var owner = GetOwner();
-        AddChangeComp(owner.GetComponent<Attack_ZombieNormal>(), true, false);
+        AddChangeComp(owner.GetComponent<AttackManager_ZombieNormal>(), true, false);
     }
 }

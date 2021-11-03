@@ -70,7 +70,7 @@ public class EnemyGenerator_ZombieNormal : EnemyGenerator
             statusMgr.SetStatus(m_createSetParam.status);
         }
 
-        var attack = obj.GetComponent<Attack_ZombieNormal>();
+        var attack = obj.GetComponent<AttackManager_ZombieNormal>();
         if (attack)
         {
             attack.SetBaseParam(m_createSetParam.attackParametor);
