@@ -6,24 +6,19 @@ using MaruUtility;
 
 public class AttackManager_ZombieNormal : AttackNodeManagerBase
 {
+    public enum AttackType
+    {
+        Normal,
+    }
+
     Stator_ZombieNormal m_stator;
     TargetManager m_targetMgr;
-    EnemyVelocityMgr m_velocityMgr;
-    EnemyRotationCtrl m_rotationCtrl;
-    EyeSearchRange m_eyeRange;
-    ThrongManager m_throngManager;
-    StatusManagerBase m_statusManager;
     AnimatorManager_ZombieNormal m_animatorManager;
 
     void Awake()
     {
         m_stator = GetComponent<Stator_ZombieNormal>();
         m_targetMgr = GetComponent<TargetManager>();
-        m_velocityMgr = GetComponent<EnemyVelocityMgr>();
-        m_rotationCtrl = GetComponent<EnemyRotationCtrl>();
-        m_eyeRange = GetComponent<EyeSearchRange>();
-        m_throngManager = GetComponent<ThrongManager>();
-        m_statusManager = GetComponent<StatusManagerBase>();
         m_animatorManager = GetComponent<AnimatorManager_ZombieNormal>();
     }
 
