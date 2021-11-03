@@ -33,7 +33,13 @@ public class TankTackle : AttackNodeBase
     /// //ターゲットとのフォワードの差がこの数字よりより小さければ、予測タックルにする。
     /// </summary>
     [SerializeField]
-    float m_subPursuitTargetForward = 0.3f; 
+    float m_subPursuitTargetForward = 0.3f;
+
+    /// <summary>
+    /// Rayの障害物するLayerの配列
+    /// </summary>
+    [SerializeField]
+    string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
 
     ReactiveProperty<State> m_state = new ReactiveProperty<State>(State.None);
 
@@ -62,6 +68,10 @@ public class TankTackle : AttackNodeBase
     Vector3 CalcuToTargetVec()
     {
         var target = m_targetManager.GetNowTarget();
+        if(target == null) {
+            return Vector3.zero;
+        }
+
         var toVec = target.gameObject.transform.position - transform.position;
         return toVec;
     }
@@ -85,6 +95,9 @@ public class TankTackle : AttackNodeBase
     Vector3 CalcuTackleForce()
     {
         var target = m_targetManager.GetNowTarget();
+        if(target == null) { 
+            return Vector3.zero; 
+        }
 
         var velocity = m_velocityManager.velocity;
         var toVec = CalcuToTargetVec();
@@ -212,8 +225,27 @@ public class TankTackle : AttackNodeBase
         enabled = false;
     }
 
+    /// <summary>
+    /// 壁に突っかかりを回避
+    /// </summary>
+    /// <param name="collision">コリジョン</param>
+    void TakcleWallAvoid(Collision collision)
+    {
+        foreach (var layerString in m_rayObstacleLayerStrings)
+        {
+            int obstacleLayer = LayerMask.NameToLayer(layerString);
+            if (collision.gameObject.layer == obstacleLayer) {  //障害物と当たったら
+                TackleLastStart();  //タックルを終了
+            }
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
+        if(m_state.Value == State.Tackle) {  //タックル状態で
+            TakcleWallAvoid(collision);  //壁の突っかかり回避
+        }
+
         //攻撃状態なら
         if (m_state.Value == State.Tackle || m_state.Value == State.TackleLast) {
             var damage = collision.gameObject.GetComponent<AttributeObject.TakeDamageObject>();
@@ -221,6 +253,12 @@ public class TankTackle : AttackNodeBase
         }
     }
 
+    private void OnCollisionStay(Collision collision)
+    {
+        if (m_state.Value == State.Tackle) {  //タックル状態で
+            TakcleWallAvoid(collision);  //壁の突っかかり回避
+        }
+    }
 
     //アクセッサ----------------------------------------
 
