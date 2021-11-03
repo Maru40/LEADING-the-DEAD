@@ -22,6 +22,9 @@ public class StageSelecter : MonoBehaviour
     [SerializeField]
     private List<StageData> m_stageDatas;
 
+    [SerializeField]
+    private FocusChangeToPush m_focusChangeToPush;
+
     private int m_selectIndex = -1;
 
     private readonly Subject<SelectStageData> m_onSelectIndexDecrementSubject = new Subject<SelectStageData>();
@@ -69,7 +72,11 @@ public class StageSelecter : MonoBehaviour
             return;
         }
 
-        SceneManager.LoadScene(m_stageDatas[m_selectIndex].sceneObject);
+        m_focusChangeToPush.NextPushFocus();
     }
 
+    public void LoadScene()
+    {
+        SceneManager.LoadScene(m_stageDatas[m_selectIndex].sceneObject);
+    }
 }
