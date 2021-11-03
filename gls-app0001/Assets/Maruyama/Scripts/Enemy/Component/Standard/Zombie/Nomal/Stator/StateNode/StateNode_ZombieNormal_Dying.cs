@@ -35,7 +35,7 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
     Parametor m_param = new Parametor()
     {
         fireTime = 0.5f,
-        deathAnimationTime = 3.0f,
+        deathAnimationTime = 1.5f,
     };  
 
     Dictionary<TaskEnum, GameTimer> m_timerDictionary = new Dictionary<TaskEnum, GameTimer>();
@@ -99,7 +99,7 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
         m_taskList.DefineTask(TaskEnum.Fire, OnTaskFireEnter, OnTaskFireUpdate, OnTaskFireExit);
         m_taskList.DefineTask(TaskEnum.PlayDeathAnimation,
             OnTaskPlayDeathAnimationEnter, OnTaskPlayDeathAnimationUpdate, OnTaskPlayDeathAnimationExit);
-        m_taskList.DefineTask(TaskEnum.Cutting, new CuttilingDeath());  //切断死亡
+        m_taskList.DefineTask(TaskEnum.Cutting, new Task_CuttilingDeath());  //切断死亡
     }
 
     /// <summary>
@@ -189,15 +189,15 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
 
     //Cutting----------------------------------------------------------------
 
-    class CuttilingDeath : TaskNodeBase
+    class Task_CuttilingDeath : TaskNodeBase
     {
         float m_time = 0.1f;
         GameTimer m_timer = new GameTimer();
 
-        public CuttilingDeath()
+        public Task_CuttilingDeath()
             :this(0.1f)
         { }
-        public CuttilingDeath(float time)
+        public Task_CuttilingDeath(float time)
         {
             m_time = time;
         }
