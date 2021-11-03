@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
 using UniRx;
@@ -36,6 +36,12 @@ public class TimeEventStateMachineBehaviour : StateMachineBehaviour
             m_onTimeSubject.OnNext(-1.0f);
             m_isInit = true;
         }
+
+        if(float.IsInfinity(stateInfo.length))
+        {
+            return;
+        }
+
         m_onTimeSubject.OnNext(stateInfo.normalizedTime % 1.0f * stateInfo.length);
 
     }
