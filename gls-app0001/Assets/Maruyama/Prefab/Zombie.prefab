@@ -66,6 +66,15 @@ MonoBehaviour:
   m_exitAction:
     m_PersistentCalls:
       m_Calls: []
+  m_statusManager: {fileID: 5470352065345593249}
+  m_animatorManager: {fileID: -3509147400467223985}
+  m_damageData:
+    obj: {fileID: 49534072}
+    damageValue: 1
+    isStunAttack: 0
+    hitStopTime: 0
+    type: 0
+    damageTags: []
 --- !u!1 &684590976
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,13 +130,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1363543547}
-  m_LocalRotation: {x: 0, y: 0.10452846, z: 0, w: 0.9945219}
-  m_LocalPosition: {x: -0.25, y: 0.01, z: 0.01}
-  m_LocalScale: {x: 0.75000006, y: 0.25, z: 0.25}
+  m_LocalRotation: {x: 0.8209789, y: -0.04854468, z: -0.07995709, w: 0.56324416}
+  m_LocalPosition: {x: 0.01, y: -0.02, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.24999996, z: 0.24999996}
   m_Children: []
-  m_Father: {fileID: 7938873200724491565}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 12, z: 0}
+  m_Father: {fileID: 7763021366507147572}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 113.5, y: 27.8, z: 25.2}
 --- !u!65 &1363543550
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -162,6 +171,15 @@ MonoBehaviour:
   m_exitAction:
     m_PersistentCalls:
       m_Calls: []
+  m_statusManager: {fileID: 5470352065345593249}
+  m_animatorManager: {fileID: -3509147400467223985}
+  m_damageData:
+    obj: {fileID: 1363543547}
+    damageValue: 1
+    isStunAttack: 0
+    hitStopTime: 0
+    type: 0
+    damageTags: []
 --- !u!1 &1411818464
 GameObject:
   m_ObjectHideFlags: 0
@@ -1969,7 +1987,6 @@ Transform:
   m_LocalScale: {x: 1, y: 0.99999994, z: 1.0000001}
   m_Children:
   - {fileID: 7763021366507147572}
-  - {fileID: 1363543548}
   m_Father: {fileID: 1736874761276707748}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2529,7 +2546,6 @@ GameObject:
   - component: {fileID: 4611107182318078631}
   - component: {fileID: 1444888580945028635}
   - component: {fileID: 1444888580945028634}
-  - component: {fileID: 1444888580945028644}
   - component: {fileID: 1444888580945028645}
   - component: {fileID: 1444888580945028646}
   - component: {fileID: 1444888580945028647}
@@ -2558,6 +2574,7 @@ GameObject:
   - component: {fileID: -3509147400467223985}
   - component: {fileID: -6998184374044003836}
   - component: {fileID: 437899209864115181}
+  - component: {fileID: 4173730426119014502}
   m_Layer: 6
   m_Name: Zombie
   m_TagString: Untagged
@@ -2645,29 +2662,6 @@ CapsuleCollider:
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.85, z: 0}
---- !u!114 &1444888580945028644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7434505739018704334}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaa47a8d3c425464cbce813833ffb7df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_baseParam:
-    damageData:
-      obj: {fileID: 7434505739018704334}
-      damageValue: 1
-      isStunAttack: 0
-      hitStopTime: 0
-      type: 0
-      damageTags: []
-    startRange: 3
-  m_moveSpeed: 3
-  m_hitBox: {fileID: 632433336}
 --- !u!114 &1444888580945028645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3145,8 +3139,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_normalAttackParam:
-    hitStartTime: 0.3
-    hitEndTime: 0.8
+    m_typeDraws:
+    - key: 1
+      value:
+        trigger: {fileID: 632433336}
+        startTime: 0
+        endTime: 0.3
+    - key: 0
+      value:
+        trigger: {fileID: 1363543549}
+        startTime: 0.4
+        endTime: 0.7
 --- !u!114 &-6998184374044003836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3180,6 +3183,27 @@ MonoBehaviour:
   m_createParticle: {fileID: 1567218315478429514, guid: a76fe4d520a4350479f232e7b094a375, type: 3}
   m_createPositionObject: {fileID: 684590976}
   m_time: 2
+--- !u!114 &4173730426119014502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434505739018704334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36fefab8ded43344a01014529651328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_baseParam:
+    damageData:
+      obj: {fileID: 0}
+      damageValue: 1
+      isStunAttack: 0
+      hitStopTime: 0
+      type: 0
+      damageTags: []
+    startRange: 3
 --- !u!1 &7689520723826636210
 GameObject:
   m_ObjectHideFlags: 0
@@ -3779,6 +3803,7 @@ Transform:
   - {fileID: 3895081197621843352}
   - {fileID: 1756402347553205724}
   - {fileID: 7258701659778537810}
+  - {fileID: 1363543548}
   m_Father: {fileID: 7938873200724491565}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

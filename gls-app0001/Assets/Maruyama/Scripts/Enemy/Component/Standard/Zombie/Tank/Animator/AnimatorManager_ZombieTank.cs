@@ -7,12 +7,12 @@ using UniRx;
 
 public class AnimatorManager_ZombieTank : AnimatorManagerBase
 {
-    [Serializable]
-    struct NormalAttackParametor
-    {
-        public float hitStartTime;
-        public float hitEndTime;
-    }
+    //[Serializable]
+    //struct NormalAttackParametor
+    //{
+    //    public float hitStartTime;
+    //    public float hitEndTime;
+    //}
 
     [Serializable]
     struct TackleParametor
@@ -22,7 +22,7 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
     }
 
     [SerializeField]
-    NormalAttackParametor m_normalAttackParam = new NormalAttackParametor();
+    AnimationHitColliderParametor m_normalAttackParam = new AnimationHitColliderParametor();
 
     [SerializeField]
     TackleParametor m_tackleParam = new TackleParametor();
@@ -52,8 +52,13 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         var attack = ZombieTankTable.BaseLayer.NormalAttack.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
 
         var timeEvent = attack.onTimeEvent;
-        timeEvent.ClampWhere(timeParam.hitStartTime).Subscribe(_ => m_normalAttackComp.AttackHitStart()).AddTo(this);
-        timeEvent.ClampWhere(timeParam.hitEndTime).Subscribe(_ => m_normalAttackComp.AttackHitEnd()).AddTo(this);
+        timeEvent.ClampWhere(timeParam.startTime)
+            .Subscribe(_ => {
+                timeParam.trigger.AttackStart();
+                m_normalAttackComp.ChaseEnd();  //将来的に関数名変更
+            }).AddTo(this);
+        timeEvent.ClampWhere(timeParam.endTime)
+            .Subscribe(_ => timeParam.trigger.AttackEnd()).AddTo(this);
 
         attack.onStateEntered.Subscribe(_ => m_normalAttackComp.AttackStart()).AddTo(this);
         attack.onStateExited.Subscribe(_ => m_normalAttackComp.EndAnimationEvent()).AddTo(this);
@@ -72,7 +77,7 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         tackle.onStateEntered.Subscribe(_ => m_tackleComp.AttackStart()).AddTo(this);
 
         var timeEvent = tackle.onTimeEvent;
-        timeEvent.ClampWhere(m_tackleParam.tackleStartTime).Subscribe(_ => m_tackleComp.AttackHitStart()).AddTo(this);
+        timeEvent.ClampWhere(m_tackleParam.tackleStartTime).Subscribe(_ => m_tackleComp.TackleStart()).AddTo(this);
         //timeEvent.ClampWhere(m_tackleParam.deselerationStartTime).Subscribe(_ => m_attackComp.AttackHitEnd()).AddTo(this);
 
         //tackle.onStateExited.Subscribe(_ => m_attackComp.EndAnimationEvent());

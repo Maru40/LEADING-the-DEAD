@@ -2,6 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using System;
+
+/// <summary>
+/// AnimationでHitColliderを管理するためのパラメータ
+/// </summary>
+[Serializable]
+struct AnimationHitColliderParametor
+{
+    public EnemyAttackTriggerAction trigger;
+    public float startTime;
+    public float endTime;
+
+    public AnimationHitColliderParametor(EnemyAttackTriggerAction trigger, float startTime, float endTime)
+    {
+        this.trigger = trigger;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+}
+
 public abstract class AnimatorManagerBase : MonoBehaviour
 {
     protected Animator m_animator;

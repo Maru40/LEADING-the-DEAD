@@ -51,15 +51,15 @@ public abstract class AttackNodeBase : MonoBehaviour
     /// </summary>
     public abstract void AttackStart();
 
-    /// <summary>
-    /// 攻撃処理(アニメーションに合わせる)
-    /// </summary>
-    public abstract void AttackHitStart();
+    ///// <summary>
+    ///// 攻撃処理(アニメーションに合わせる)
+    ///// </summary>
+    //public abstract void AttackHitStart();
 
-    /// <summary>
-    /// 攻撃判定の終了を呼ぶ処理
-    /// </summary>
-    public abstract void AttackHitEnd();
+    ///// <summary>
+    ///// 攻撃判定の終了を呼ぶ処理
+    ///// </summary>
+    //public abstract void AttackHitEnd();
 
     /// <summary>
     /// アニメーションの終了時に呼び出す関数

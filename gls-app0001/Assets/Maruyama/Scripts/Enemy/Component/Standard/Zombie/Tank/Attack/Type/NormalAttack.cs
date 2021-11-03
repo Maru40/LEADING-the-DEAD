@@ -17,22 +17,16 @@ public class NormalAttack : AttackNodeBase
     [SerializeField]
     float m_moveSpeed = 3.0f;
 
-    [SerializeField]
-    EnemyAttackTriggerAction m_hitBox = null;
-
     bool m_isTargetChase = true;  //攻撃の途中まではターゲットを追うようにするため。
 
     void Awake()
     {
-        //m_stator = GetComponent<Stator_ZombieTank>();
         m_attackManager = GetComponent<AttackNodeManagerBase>();
         m_targetMgr = GetComponent<TargetManager>();
         m_velocityMgr = GetComponent<EnemyVelocityMgr>();
         m_eyeRange = GetComponent<EyeSearchRange>();
         m_statusManager = GetComponent<StatusManagerBase>();
         m_throngManager = GetComponent<ThrongManager>();
-
-        m_hitBox.AddEnterAction(SendDamage);
     }
 
     void Update()
@@ -65,6 +59,9 @@ public class NormalAttack : AttackNodeBase
         //m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
     }
 
+    /// <summary>
+    /// 集団ベクトル調整
+    /// </summary>
     void ThrongAdjust()
     {
         if(m_throngManager == null) {
@@ -105,43 +102,8 @@ public class NormalAttack : AttackNodeBase
         enabled = true;
     }
 
-    override public void AttackHitStart()
-    {
-        Debug.Log("AttackHit");
-        m_isTargetChase = false;
-        m_hitBox.AttackStart();
-
-        m_velocityMgr.StartDeseleration();
-    }
-
-    public override void AttackHitEnd()
-    {
-        Debug.Log("AttackHitEnd");
-        m_hitBox.AttackEnd();
-    }
-
-    /// <summary>
-    /// 相手にダメージを与える。
-    /// </summary>
-    private void SendDamage(Collider other)
-    {
-        if (other.gameObject == this.gameObject)
-        {
-            return;
-        }
-
-        var damage = other.GetComponent<AttributeObject.TakeDamageObject>();
-        if (damage != null)
-        {
-            var power = GetBaseParam().damageData.damageValue * m_statusManager.GetBuffParametor().angerParam.attackPower;
-            var data = new AttributeObject.DamageData(power);
-            damage.TakeDamage(data);
-        }
-    }
-
     public override void EndAnimationEvent()
     {
-        //m_stator.GetTransitionMember().chaseTrigger.Fire();
         m_attackManager.EndAnimationEvent();
 
         m_velocityMgr.SetIsDeseleration(false);
@@ -149,5 +111,15 @@ public class NormalAttack : AttackNodeBase
         m_velocityMgr.ResetVelocity();
 
         enabled = false;
+    }
+
+    /// <summary>
+    /// 追従処理終了
+    /// </summary>
+    public void ChaseEnd()
+    {
+        m_isTargetChase = false;
+
+        m_velocityMgr.StartDeseleration();
     }
 }

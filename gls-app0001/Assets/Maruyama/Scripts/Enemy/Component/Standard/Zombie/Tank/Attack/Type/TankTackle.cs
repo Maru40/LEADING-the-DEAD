@@ -27,12 +27,15 @@ public class TankTackle : AttackNodeBase
     float m_eyeRad = 0.0f;
 
     [SerializeField]
-    float m_turningPower = 2.0f;
+    float m_turningPower = 3.0f;
+
+    /// <summary>
+    /// //ターゲットとのフォワードの差がこの数字よりより小さければ、予測タックルにする。
+    /// </summary>
     [SerializeField]
-    float m_subPursuitTargetForward = 0.7f; //ターゲットとのフォワードの差が0.7fより小さければ、予測タックルにする。
+    float m_subPursuitTargetForward = 0.3f; 
 
     ReactiveProperty<State> m_state = new ReactiveProperty<State>(State.None);
-    Vector3 m_tackleDirect = new Vector3();
 
     TargetManager m_targetManager;
     EnemyVelocityMgr m_velocityManager;
@@ -70,13 +73,12 @@ public class TankTackle : AttackNodeBase
         }
 
         Vector3 force = CalcuTackleForce();
-        //var force = 
 
         m_velocityManager.AddForce(force);
 
         if (IsTackleEnd()) //ターゲットに限りなく近づいたら
         {
-            AttackHitEnd();
+            TackleLastStart();
         }
     }
 
@@ -91,15 +93,14 @@ public class TankTackle : AttackNodeBase
 
         //前方にいて、かつ、自分と相手のフォワードの差が開いていなかったら、通常Seek
         //Dotは差が開いている程、値が小さくなる。
-        if (Vector3.Dot(toVec, transform.forward) > 0 &&
-            Mathf.Abs(relativeHeading) > 0.7f)
+        if (IsFront(toVec) && IsMinSubForward(relativeHeading, m_subPursuitTargetForward))
         {
-            //return Vector3.zero;
             return CalcuVelocity.CalucSeekVec(velocity, toVec, m_tackleSpeed);
         }
         else
-        {//フォワードの差が開いていたら、予測Seek
-            return CalcuVelocity.CalcuPursuitForce(velocity, toVec, m_tackleSpeed, gameObject, target.GetComponent<Rigidbody>(), 2.0f);
+        {   //フォワードの差が開いていたら、予測Seek
+            Debug.Log("予測Seek");
+            return CalcuVelocity.CalcuPursuitForce(velocity, toVec, m_tackleSpeed, gameObject, target.GetComponent<Rigidbody>(), m_turningPower);
         }
     }
 
@@ -120,18 +121,12 @@ public class TankTackle : AttackNodeBase
         enabled = true;
     }
 
-    public override void AttackHitStart()
+    public  void TackleStart()
     {
         m_state.Value = State.Tackle;
-
-        //タックルする方向を決める
-        var target = m_targetManager.GetNowTarget();
-        var toVec = target.gameObject.transform.position - transform.position;
-        toVec.y = 0;
-        m_tackleDirect = toVec;
     }
 
-    public override void AttackHitEnd()
+    private void TackleLastStart()
     {
         m_velocityManager.StartDeseleration();
         m_state.Value = State.TackleLast;
@@ -151,6 +146,26 @@ public class TankTackle : AttackNodeBase
         else {
             return false;
         }
+    }
+
+    /// <summary>
+    /// ターゲットが正面にいるかどうか
+    /// </summary>
+    /// <param name="toTargetVec">ターゲットの方向</param>
+    /// <returns>正面ならtrue</returns>
+    bool IsFront(Vector3 toTargetVec)
+    {
+        return Vector3.Dot(toTargetVec, transform.forward) > 0 ? true : false;
+    }
+
+    /// <summary>
+    /// 自分と相手のフォワードの差が開いていなかったら
+    /// </summary>
+    /// <param name="relativeHeading">自分と相手のフォワードのdot</param>
+    /// <returns>差が開いていなかったらtrue</returns>
+    bool IsMinSubForward(float relativeHeading, float sub)
+    {
+        return Mathf.Abs(relativeHeading) > sub ? true : false;
     }
 
     /// <summary>
