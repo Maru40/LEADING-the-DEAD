@@ -6,35 +6,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
 
-class InputDirection
-{
-    public enum Direction
-    {
-        Left,
-        Right,
-        Up,
-        Down,
-        None
-    }
-
-    static public Direction GetDirection(Vector2 moveInput)
-    {
-        if(moveInput.sqrMagnitude == 0)
-        {
-            return Direction.None;
-        }
-
-        if(Mathf.Abs(moveInput.x) > Mathf.Abs(moveInput.y))
-        {
-            return moveInput.x > 0 ? Direction.Right : Direction.Left;
-        }
-        else
-        {
-            return moveInput.y > 0 ? Direction.Up : Direction.Down;
-        }
-    }
-}
-
 public class StageSelectSceneEvent : MonoBehaviour
 {
     [SerializeField]
@@ -43,31 +14,17 @@ public class StageSelectSceneEvent : MonoBehaviour
     [SerializeField]
     private StageSelecter m_stageSelecter;
 
-    private UIControls m_uiControls;
-
-    private bool m_isMoveInputed = false;
-
-    private Dictionary<InputDirection.Direction, System.Action> m_directionToActionTable =
-        new Dictionary<InputDirection.Direction, System.Action>();
+    private Dictionary<MoveDirection, System.Action> m_directionToActionTable =
+        new Dictionary<MoveDirection, System.Action>();
 
     private void Awake()
     {
-        m_uiControls = new UIControls();
 
-        m_uiControls.UI.Submit.performed += context => OnSelect();
-
-        m_uiControls.UI.Cancel.performed += context => BackTitle();
-
-        m_uiControls.UI.Navigate.performed += context => OnMove(context);
-        m_uiControls.UI.Navigate.canceled += context => MoveEnd();
-
-        this.RegisterController(m_uiControls);
-
-        m_directionToActionTable.Add(InputDirection.Direction.Left, OnLeft);
-        m_directionToActionTable.Add(InputDirection.Direction.Right, OnRight);
-        m_directionToActionTable.Add(InputDirection.Direction.Up, () => { });
-        m_directionToActionTable.Add(InputDirection.Direction.Down, () => { });
-        m_directionToActionTable.Add(InputDirection.Direction.None, () => { });
+        m_directionToActionTable.Add(MoveDirection.Left, OnLeft);
+        m_directionToActionTable.Add(MoveDirection.Right, OnRight);
+        m_directionToActionTable.Add(MoveDirection.Up, () => { });
+        m_directionToActionTable.Add(MoveDirection.Down, () => { });
+        m_directionToActionTable.Add(MoveDirection.None, () => { });
     }
     // Start is called before the first frame update
     void Start()
@@ -80,29 +37,24 @@ public class StageSelectSceneEvent : MonoBehaviour
         
     }
 
-    private void BackTitle()
+    public void BackTitle()
     {
         SceneManager.LoadScene(m_titleScene);
     }
 
-    private void MoveEnd()
+    public void OnMove(BaseEventData eventData)
     {
-        m_isMoveInputed = false;
-    }
+        var axisEventData = eventData as AxisEventData;
 
-    private void OnMove(InputAction.CallbackContext callbackContext)
-    {
-        if(m_isMoveInputed)
+        if(axisEventData == null)
         {
             return;
         }
 
-        m_isMoveInputed = true;
-
-        m_directionToActionTable[InputDirection.GetDirection(callbackContext.ReadValue<Vector2>())].Invoke();
+        m_directionToActionTable[axisEventData.moveDir].Invoke();
     }
 
-    private void OnLeft()
+    public void OnLeft()
     {
         if (enabled)
         {
@@ -110,7 +62,7 @@ public class StageSelectSceneEvent : MonoBehaviour
         }
     }
 
-    private void OnRight()
+    public void OnRight()
     {
         if (enabled)
         {
@@ -118,7 +70,7 @@ public class StageSelectSceneEvent : MonoBehaviour
         }
     }
 
-    private void OnSelect()
+    public void OnSelect()
     {
         if(enabled)
         {

@@ -40,6 +40,11 @@ public class GameFocusManager
 
         var objectAndColor = m_colorAndfocusObjectStack.Peek();
 
+        if(objectAndColor == null || objectAndColor.focusObject == null)
+        {
+            return;
+        }
+
         var selectable = objectAndColor.focusObject.GetComponent<Selectable>();
 
         if(!selectable)
