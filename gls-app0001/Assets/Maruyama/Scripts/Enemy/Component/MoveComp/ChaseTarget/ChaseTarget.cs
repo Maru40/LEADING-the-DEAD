@@ -94,7 +94,8 @@ public class ChaseTarget : MonoBehaviour
         //障害物が合ったら
         var toVec = target.transform.position - transform.position;
         int obstacleLayer = LayerMask.GetMask(m_rayObstacleLayerStrings);
-        if (Physics.Raycast(transform.position, toVec, toVec.magnitude, obstacleLayer)){
+        var colliders = Physics.OverlapSphere(transform.position, 1, obstacleLayer);
+        if (Physics.Raycast(transform.position, toVec, toVec.magnitude, obstacleLayer) || colliders.Length != 0){
             m_stateMachine.GetTransitionStructMember().breadTrigger.Fire(); //Breadに変更
         }
         else{
