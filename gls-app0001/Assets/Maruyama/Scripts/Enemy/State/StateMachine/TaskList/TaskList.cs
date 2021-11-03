@@ -5,9 +5,18 @@ using UnityEngine;
 using System;
 using System.Linq;
 
+/// <summary>
+/// 一つのタスクのベースクラス
+/// </summary>
+public abstract class TaskNodeBase
+{
+    public abstract void OnEnter();
+    public abstract bool OnUpdate();
+    public abstract void OnExit();
+}
+
 public class TaskList<EnumType>
 {
-
     class Task
     {
         public EnumType type;
@@ -21,6 +30,14 @@ public class TaskList<EnumType>
             this.enter = enter;
             this.update = update ?? delegate { return true; };
             this.exit = exit;
+        }
+
+        public Task(EnumType type, TaskNodeBase task)
+        {
+            this.type = type;
+            this.enter = task.OnEnter;
+            this.update = task.OnUpdate;
+            this.exit = task.OnExit;
         }
     }
 
@@ -86,6 +103,18 @@ public class TaskList<EnumType>
 
         m_currentTask = m_currentTasks[m_currentIndex]; //次のタスクを取得
         m_currentTask.enter?.Invoke(); //次のタスクのEnter
+    }
+
+    /// <summary>
+    /// タスクの定義
+    /// </summary>
+    /// <param name="type">EnumType</param>
+    /// <param name="enter"></param>
+    /// <param name="update"></param>
+    /// <param name="exit"></param>
+    public void DefineTask(EnumType type, TaskNodeBase task)
+    {
+        DefineTask(type, task.OnEnter, task.OnUpdate, task.OnExit);
     }
 
     /// <summary>

@@ -97,7 +97,7 @@ public class DamageParticleManager : MonoBehaviour
         m_createParticle = particle;
     }
 
-    public void SetCreateParticels(DamageType type ,GameObject particle)
+    public void AddCreateParticel(DamageType type ,GameObject particle)
     {
         m_createParticles[type] = particle;
     }

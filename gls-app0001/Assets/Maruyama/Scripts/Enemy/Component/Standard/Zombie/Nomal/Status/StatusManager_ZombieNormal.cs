@@ -23,6 +23,8 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
 
     [SerializeField]
     GameObject m_fireDamageParticle = null;  //炎ダメージ時のparticleのデータ管理
+    [SerializeField]
+    GameObject m_cuttingDamageParticle = null;  //切られた時のparticle
 
     DyingTypeEnum m_dyingType = DyingTypeEnum.None;  //瀕死状態
 
@@ -44,7 +46,8 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
 
     private void SetDamageParticle()
     {
-        m_damageParticleManager.SetCreateParticels(AttributeObject.DamageType.Fire, m_fireDamageParticle);
+        m_damageParticleManager.AddCreateParticel(AttributeObject.DamageType.Fire, m_fireDamageParticle);
+        m_damageParticleManager.AddCreateParticel(AttributeObject.DamageType.Cutting, m_cuttingDamageParticle);
     }
 
     public override void Damage(AttributeObject.DamageData data)

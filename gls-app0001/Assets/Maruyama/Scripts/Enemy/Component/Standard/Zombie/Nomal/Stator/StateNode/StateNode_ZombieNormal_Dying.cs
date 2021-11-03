@@ -9,12 +9,14 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
     enum TaskEnum
     {
         Fire,
+        Cutting,
         PlayDeathAnimation,
     }
 
     public class Parametor
     {
         public float fireTime = 0.0f;  //炎に包まれながら動く時間
+        public float deathAnimationTime;  //死亡アニメーション終了時間
 
         public Parametor()
         { }
@@ -33,6 +35,7 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
     Parametor m_param = new Parametor()
     {
         fireTime = 0.5f,
+        deathAnimationTime = 3.0f,
     };  
 
     Dictionary<TaskEnum, GameTimer> m_timerDictionary = new Dictionary<TaskEnum, GameTimer>();
@@ -54,10 +57,14 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
 
         //タイマーの初期化
         m_timerDictionary[TaskEnum.Fire] = new GameTimer(m_param.fireTime);
+        m_timerDictionary[TaskEnum.PlayDeathAnimation] = new GameTimer(m_param.deathAnimationTime);
 
         if (param != null) {  //渡されたパラメータがnull出なかったら値を更新
             m_param = param;
         }
+
+        //タスクの定義
+        DefineTask();
     }
 
     protected override void ReserveChangeComponents()
@@ -68,9 +75,6 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
     public override void OnStart()
     {
         base.OnStart();
-
-        //タスクの定義
-        DefineTask();
 
         //タスクのセレクト
         SelectTask();
@@ -95,6 +99,7 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
         m_taskList.DefineTask(TaskEnum.Fire, OnTaskFireEnter, OnTaskFireUpdate, OnTaskFireExit);
         m_taskList.DefineTask(TaskEnum.PlayDeathAnimation,
             OnTaskPlayDeathAnimationEnter, OnTaskPlayDeathAnimationUpdate, OnTaskPlayDeathAnimationExit);
+        m_taskList.DefineTask(TaskEnum.Cutting, new CuttilingDeath());  //切断死亡
     }
 
     /// <summary>
@@ -107,6 +112,7 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
         var types = dyingType switch
         {
             DyingTypeEnum.Fire => new TaskEnum[] { TaskEnum.Fire }, //炎に包まれた時
+            DyingTypeEnum.Cutting => new TaskEnum[] { TaskEnum.Cutting, TaskEnum.PlayDeathAnimation },  //切断されたとき
             _ => new TaskEnum[] { }
         };
 
@@ -138,17 +144,21 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
     void OnTaskPlayDeathAnimationEnter()
     {
         m_animatorManager.CrossFadeDeathAnimatiron();
+
+        m_timerDictionary[TaskEnum.PlayDeathAnimation].ResetTimer(m_param.deathAnimationTime);
     }
 
     bool OnTaskPlayDeathAnimationUpdate()
     {
-        //将来的にはAnimationが終了したらの処理に変更
-        return true;
+        var timer = m_timerDictionary[TaskEnum.PlayDeathAnimation];
+        timer.UpdateTimer();
+
+        return timer.IsTimeUp;
     }
 
     void OnTaskPlayDeathAnimationExit()
     {
-
+        m_animatorManager.CrossFadeIdleAnimation();
     }
 
     //ファイアー--------------------------------------------------------------------------------------
@@ -177,6 +187,40 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
         m_velocityManager.SetIsDeseleration(false);  //減速終了
     }
 
+    //Cutting----------------------------------------------------------------
+
+    class CuttilingDeath : TaskNodeBase
+    {
+        float m_time = 0.1f;
+        GameTimer m_timer = new GameTimer();
+
+        public CuttilingDeath()
+            :this(0.1f)
+        { }
+        public CuttilingDeath(float time)
+        {
+            m_time = time;
+        }
+
+        public override void OnEnter()
+        {
+            m_timer.ResetTimer(m_time);
+
+            //血しぶきを上げる
+
+            //肉体が出る
+        }
+
+        public override bool OnUpdate()
+        {
+            m_timer.UpdateTimer();
+
+            return m_timer.IsTimeUp;
+        }
+
+        public override void OnExit()
+        { }
+    }
 
     //アクセッサ-------------------------------------------------------------------
 

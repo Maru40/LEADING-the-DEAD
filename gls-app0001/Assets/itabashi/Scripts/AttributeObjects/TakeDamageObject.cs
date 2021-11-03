@@ -9,6 +9,7 @@ namespace AttributeObject
     {
         None,
         Fire,
+        Cutting,
     }
 
     /// <summary>
