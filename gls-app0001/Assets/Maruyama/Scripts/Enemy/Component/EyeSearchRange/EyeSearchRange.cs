@@ -107,7 +107,18 @@ public class EyeSearchRange : MonoBehaviour
     bool IsRay(GameObject target){
         int obstacleLayer = LayerMask.GetMask(m_rayObstacleLayerStrings);
         var toVec = target.transform.position - transform.position;
-        return !Physics.Raycast(transform.position, toVec, toVec.magnitude, obstacleLayer) ? true : false;
+
+        var colliders = Physics.OverlapSphere(transform.position, 1 ,obstacleLayer);
+
+        Debug.Log("コライダー図:  " + colliders.Length);
+        if (!Physics.Raycast(transform.position, toVec, toVec.magnitude, obstacleLayer) && colliders.Length == 0)
+        {
+            return true;
+        }
+
+        return false;
+
+        //return !Physics.Raycast(transform.position, toVec, toVec.magnitude, obstacleLayer) ? true : false;
 	}
 
     void Hit(EyeTargetParam targetParam) {

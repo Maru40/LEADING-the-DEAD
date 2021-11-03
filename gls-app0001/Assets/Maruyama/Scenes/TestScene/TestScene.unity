@@ -860,7 +860,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1106717132, guid: 4d38e8bdfa80c0c4b8ce01cc8bcc5593, type: 3}
       propertyPath: m_maxHp
-      value: 30
+      value: 1111111
       objectReference: {fileID: 0}
     - target: {fileID: 1106717132, guid: 4d38e8bdfa80c0c4b8ce01cc8bcc5593, type: 3}
       propertyPath: m_hpGauge
@@ -872,7 +872,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1106717132, guid: 4d38e8bdfa80c0c4b8ce01cc8bcc5593, type: 3}
       propertyPath: m_hp.value
-      value: 30
+      value: 1111111
       objectReference: {fileID: 0}
     - target: {fileID: 1106717132, guid: 4d38e8bdfa80c0c4b8ce01cc8bcc5593, type: 3}
       propertyPath: m_maxStamina
@@ -1044,7 +1044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_numBread: 60
-  m_addRange: 1
+  m_addRange: 0.5
 --- !u!114 &721151279 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7176928728427405233, guid: 7ba1192b4cf537b40b1c969fa9f7d88c, type: 3}
@@ -2610,6 +2610,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 218923992}
     m_Modifications:
+    - target: {fileID: 439583100, guid: 94ad2ea8836d356438711e6ab657d5a2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 569910476, guid: 94ad2ea8836d356438711e6ab657d5a2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 569910476, guid: 94ad2ea8836d356438711e6ab657d5a2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2349473719602091154, guid: 94ad2ea8836d356438711e6ab657d5a2, type: 3}
       propertyPath: m_Name
       value: ZombieTanckGenerator
@@ -2675,6 +2687,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ZombieNormalGenerator
       objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655912, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655915, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2721,7 +2737,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_numCreate
-      value: 7
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_createSetParam.chaseParametor.maxSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_distributionParams.Array.data[0].numDistribution
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_distributionParams.Array.data[0].dropData.probability

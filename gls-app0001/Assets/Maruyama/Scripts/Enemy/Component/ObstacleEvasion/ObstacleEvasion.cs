@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System;
+using MaruUtility;
 
 public class ObstacleEvasion : MonoBehaviour
 {
@@ -43,6 +44,8 @@ public class ObstacleEvasion : MonoBehaviour
             var forward = transform.forward;
             var direct = Quaternion.AngleAxis(deg, Vector3.up) * forward; //フォワードを回転
 
+            Debug.DrawRay(transform.position,direct, new Color(1.0f,0.0f,0.0f,1.0f));
+
             var hitPoint = CalcuRayHitPoint(direct);  //ヒットした場所の取得
             if (hitPoint == null) {
                 continue;
@@ -53,6 +56,8 @@ public class ObstacleEvasion : MonoBehaviour
             var moveVec = toSelfVec.normalized * power;
 
             force += moveVec;
+            Debug.Log("壁回避");
+            //force = CalcuVelocity.CalucSeekVec(moveVec);
         }
 
         m_velocityMgr.AddForce(force);
@@ -68,7 +73,8 @@ public class ObstacleEvasion : MonoBehaviour
         var hit = new RaycastHit();
 
         int obstacleLayer = LayerMask.GetMask(m_rayObstacleLayerStrings);
-        if(Physics.Raycast(transform.position, direct,out hit, m_rayRange, obstacleLayer)) //障害物にヒットしたら
+        var colliders = Physics.OverlapSphere(transform.position, 1, obstacleLayer);
+        if (Physics.Raycast(transform.position, direct,out hit, m_rayRange, obstacleLayer)) //障害物にヒットしたら
         {
             return hit.point;
         }

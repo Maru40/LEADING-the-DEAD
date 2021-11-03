@@ -47,16 +47,6 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
         m_animatorManager.ChangeNormalAttackAnimation();
     }
 
-    override public void Attack()
-    {
-
-    }
-
-    public override void AttackHitEnd()
-    {
-
-    }
-
     public override void EndAnimationEvent()
     {
         m_stator.GetTransitionMember().chaseTrigger.Fire();

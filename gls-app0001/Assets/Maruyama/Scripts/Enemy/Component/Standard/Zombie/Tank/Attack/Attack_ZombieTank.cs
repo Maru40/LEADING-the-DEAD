@@ -33,8 +33,6 @@ public class Attack_ZombieTank : AttackNodeManagerBase
 
     TargetManager m_targetMgr;
     Stator_ZombieTank m_stator;
-    EnemyVelocityMgr m_velocityManager;
-    EnemyRotationCtrl m_rotationCtrl;
     AnimatorCtrl_ZombieTank m_animatorCtrl;
     EyeSearchRange m_eye;
     TankTackle m_tankTackle;
@@ -45,8 +43,6 @@ public class Attack_ZombieTank : AttackNodeManagerBase
     {
         m_targetMgr = GetComponent<TargetManager>();
         m_stator = GetComponent<Stator_ZombieTank>();
-        m_velocityManager = GetComponent<EnemyVelocityMgr>();
-        m_rotationCtrl = GetComponent<EnemyRotationCtrl>();
         m_animatorCtrl = GetComponent<AnimatorCtrl_ZombieTank>();
         m_eye = GetComponent<EyeSearchRange>();
         m_tankTackle = GetComponent<TankTackle>();
@@ -86,16 +82,6 @@ public class Attack_ZombieTank : AttackNodeManagerBase
     void TackleAttack()
     {
         m_animatorCtrl.TackleTriggerFire();
-    }
-
-    public override void Attack()
-    {
-        
-    }
-
-    public override void AttackHitEnd()
-    {
-
     }
 
     public override void EndAnimationEvent()
