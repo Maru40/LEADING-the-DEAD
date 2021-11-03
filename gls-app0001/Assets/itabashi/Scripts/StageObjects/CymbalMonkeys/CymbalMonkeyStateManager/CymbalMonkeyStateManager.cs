@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +12,25 @@ public class CymbalMonkeyStateManager : MonoBehaviour
 
     [SerializeField]
     private string[] m_groundTags;
+
+    [SerializeField]
+    private bool m_alarmSwitch = false;
+
+    public bool alarmSwitch
+    {
+        set
+        {
+            m_alarmSwitch = value;
+            
+            if(!value)
+            {
+                m_alarmObject.AlarmStop();
+                nowState = CymbalMonkeyState.Normal;
+            }
+        }
+        
+        get => m_alarmSwitch;
+    }
 
     public CymbalMonkeyState nowState { private set; get; } = CymbalMonkeyState.Normal;
 
@@ -31,9 +50,9 @@ public class CymbalMonkeyStateManager : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (nowState == CymbalMonkeyState.ExplosionPreparation)
+        if (nowState == CymbalMonkeyState.ExplosionPreparation || !m_alarmSwitch)
         {
             return;
         }
