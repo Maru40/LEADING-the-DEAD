@@ -5,17 +5,19 @@ using UnityEngine;
 using System;
 using UniRx;
 
+using MaruUtility.UtilityDictionary;
+
 public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 {
-    [Serializable]
-    struct NormalAttackParametor
+    enum NormalAttackHitColliderType
     {
-        public float hitStartTime;
-        public float hitEndTime;
+        Left,
+        Right
     }
 
     [SerializeField]
-    NormalAttackParametor m_normalAttackParam = new NormalAttackParametor();
+    Ex_Dictionary<NormalAttackHitColliderType, AnimationHitColliderParametor> m_normalAttackParam =
+        new Ex_Dictionary<NormalAttackHitColliderType, AnimationHitColliderParametor>();
 
     NormalAttack m_normalAttackComp;
 
@@ -25,6 +27,8 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     override protected void Awake()
     {
         base.Awake();
+
+        m_normalAttackParam.InsertInspectorData();
 
         m_normalAttackComp = GetComponent<NormalAttack>();
         m_stunManager = GetComponent<EnemyStunManager>();
@@ -43,9 +47,22 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         var behavior = ZombieNormalTable.UpperLayer.NormalAttack.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
 
         var timeParam = m_normalAttackParam;
+        var leftTimeParam = timeParam[NormalAttackHitColliderType.Left];
+        var rightTimeParam = timeParam[NormalAttackHitColliderType.Right];
         var timeEvent = behavior.onTimeEvent;
-        timeEvent.ClampWhere(timeParam.hitStartTime).Subscribe(_ => m_normalAttackComp.AttackHitStart()).AddTo(this);
-        timeEvent.ClampWhere(timeParam.hitEndTime).Subscribe(_ => m_normalAttackComp.AttackHitEnd()).AddTo(this);
+        //左腕もコライダーのOn、Off
+        timeEvent.ClampWhere(leftTimeParam.startTime)
+            .Subscribe(_ => { leftTimeParam.trigger.AttackStart();
+                m_normalAttackComp.AttackHitStart();
+            }).AddTo(this);
+        timeEvent.ClampWhere(leftTimeParam.endTime)
+            .Subscribe(_ => leftTimeParam.trigger.AttackEnd()).AddTo(this);
+
+        //右腕のコライダーのOn、Off
+        timeEvent.ClampWhere(rightTimeParam.startTime)
+            .Subscribe(_ => rightTimeParam.trigger.AttackStart()).AddTo(this);
+        timeEvent.ClampWhere(rightTimeParam.endTime)
+            .Subscribe(_ => rightTimeParam.trigger.AttackEnd()).AddTo(this);
 
         behavior.onStateEntered.Subscribe(_ => m_normalAttackComp.AttackStart()).AddTo(this);
         behavior.onStateExited.Subscribe(_ => m_normalAttackComp.EndAnimationEvent()).AddTo(this);
