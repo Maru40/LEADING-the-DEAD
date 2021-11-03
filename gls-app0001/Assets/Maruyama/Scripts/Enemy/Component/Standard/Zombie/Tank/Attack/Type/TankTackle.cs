@@ -32,7 +32,6 @@ public class TankTackle : AttackNodeBase
     float m_subPursuitTargetForward = 0.7f; //ターゲットとのフォワードの差が0.7fより小さければ、予測タックルにする。
 
     ReactiveProperty<State> m_state = new ReactiveProperty<State>(State.None);
-    Vector3 m_tackleDirect = new Vector3();
 
     TargetManager m_targetManager;
     EnemyVelocityMgr m_velocityManager;
@@ -92,14 +91,14 @@ public class TankTackle : AttackNodeBase
         //前方にいて、かつ、自分と相手のフォワードの差が開いていなかったら、通常Seek
         //Dotは差が開いている程、値が小さくなる。
         if (Vector3.Dot(toVec, transform.forward) > 0 &&
-            Mathf.Abs(relativeHeading) > 0.7f)
+            Mathf.Abs(relativeHeading) > m_subPursuitTargetForward)
         {
             //return Vector3.zero;
             return CalcuVelocity.CalucSeekVec(velocity, toVec, m_tackleSpeed);
         }
         else
-        {//フォワードの差が開いていたら、予測Seek
-            return CalcuVelocity.CalcuPursuitForce(velocity, toVec, m_tackleSpeed, gameObject, target.GetComponent<Rigidbody>(), 2.0f);
+        {   //フォワードの差が開いていたら、予測Seek
+            return CalcuVelocity.CalcuPursuitForce(velocity, toVec, m_tackleSpeed, gameObject, target.GetComponent<Rigidbody>(), m_turningPower);
         }
     }
 
@@ -123,12 +122,6 @@ public class TankTackle : AttackNodeBase
     public override void AttackHitStart()
     {
         m_state.Value = State.Tackle;
-
-        //タックルする方向を決める
-        var target = m_targetManager.GetNowTarget();
-        var toVec = target.gameObject.transform.position - transform.position;
-        toVec.y = 0;
-        m_tackleDirect = toVec;
     }
 
     public override void AttackHitEnd()
