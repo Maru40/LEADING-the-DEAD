@@ -55,7 +55,7 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         timeEvent.ClampWhere(timeParam.startTime)
             .Subscribe(_ => {
                 timeParam.trigger.AttackStart();
-                m_normalAttackComp.AttackHitStart();  //将来的に関数名変更
+                m_normalAttackComp.ChaseEnd();  //将来的に関数名変更
             }).AddTo(this);
         timeEvent.ClampWhere(timeParam.endTime)
             .Subscribe(_ => timeParam.trigger.AttackEnd()).AddTo(this);
@@ -77,7 +77,7 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         tackle.onStateEntered.Subscribe(_ => m_tackleComp.AttackStart()).AddTo(this);
 
         var timeEvent = tackle.onTimeEvent;
-        timeEvent.ClampWhere(m_tackleParam.tackleStartTime).Subscribe(_ => m_tackleComp.AttackHitStart()).AddTo(this);
+        timeEvent.ClampWhere(m_tackleParam.tackleStartTime).Subscribe(_ => m_tackleComp.TackleStart()).AddTo(this);
         //timeEvent.ClampWhere(m_tackleParam.deselerationStartTime).Subscribe(_ => m_attackComp.AttackHitEnd()).AddTo(this);
 
         //tackle.onStateExited.Subscribe(_ => m_attackComp.EndAnimationEvent());

@@ -53,7 +53,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         //左腕もコライダーのOn、Off
         timeEvent.ClampWhere(leftTimeParam.startTime)
             .Subscribe(_ => { leftTimeParam.trigger.AttackStart();
-                m_normalAttackComp.AttackHitStart();
+                m_normalAttackComp.ChaseEnd();
             }).AddTo(this);
         timeEvent.ClampWhere(leftTimeParam.endTime)
             .Subscribe(_ => leftTimeParam.trigger.AttackEnd()).AddTo(this);
