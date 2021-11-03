@@ -102,18 +102,6 @@ public class NormalAttack : AttackNodeBase
         enabled = true;
     }
 
-    override public void AttackHitStart()
-    {
-        m_isTargetChase = false;
-
-        m_velocityMgr.StartDeseleration();
-    }
-
-    public override void AttackHitEnd()
-    {
-        Debug.Log("AttackHitEnd");
-    }
-
     public override void EndAnimationEvent()
     {
         m_attackManager.EndAnimationEvent();
@@ -123,5 +111,15 @@ public class NormalAttack : AttackNodeBase
         m_velocityMgr.ResetVelocity();
 
         enabled = false;
+    }
+
+    /// <summary>
+    /// 追従処理終了
+    /// </summary>
+    public void ChaseEnd()
+    {
+        m_isTargetChase = false;
+
+        m_velocityMgr.StartDeseleration();
     }
 }
