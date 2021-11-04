@@ -2575,6 +2575,7 @@ GameObject:
   - component: {fileID: -6998184374044003836}
   - component: {fileID: 437899209864115181}
   - component: {fileID: 4173730426119014502}
+  - component: {fileID: -350905166790925542}
   m_Layer: 6
   m_Name: Zombie
   m_TagString: Untagged
@@ -2900,6 +2901,7 @@ MonoBehaviour:
     damageIntervalTime: 3
   m_hitStopBehaviours:
   - {fileID: 1444888580945028641}
+  - {fileID: -350905166790925542}
   m_fireDamageParticle: {fileID: 1567218315478429514, guid: a76fe4d520a4350479f232e7b094a375, type: 3}
   m_cuttingDamageParticle: {fileID: 1834194341294532, guid: d5f26854a8904624c8073139cd2eb346, type: 3}
 --- !u!114 &-8648523569329281583
@@ -3125,7 +3127,6 @@ MonoBehaviour:
       damageTags: []
     startRange: 1.5
   m_moveSpeed: 3
-  m_hitBox: {fileID: 632433336}
 --- !u!114 &-3509147400467223985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3204,6 +3205,21 @@ MonoBehaviour:
       type: 0
       damageTags: []
     startRange: 3
+--- !u!114 &-350905166790925542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434505739018704334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55fc9e708b56b8144a41cb63b4b4b20d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_baseParam:
+    lenght: 1
+    speed: 0.5
 --- !u!1 &7689520723826636210
 GameObject:
   m_ObjectHideFlags: 0

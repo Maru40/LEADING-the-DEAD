@@ -14,6 +14,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
     EnemyRespawnManager m_respawn = null;
     DropObjecptManager m_dropManager = null;
     DamageParticleManager m_particleManager = null;
+    KnockBackManager m_knockBack = null;
     I_Stun m_stun = null;
 
     WaitTimer m_waitTimer = null;
@@ -27,6 +28,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
         m_dropManager = owner.GetComponent<DropObjecptManager>();
         m_particleManager = owner.GetComponent<DamageParticleManager>();
         m_stator = owner.GetComponent<Stator_ZombieNormal>();
+        m_knockBack = owner.GetComponent<KnockBackManager>();
         m_stun = owner.GetComponent<I_Stun>();
 
         m_waitTimer = owner.GetComponent<WaitTimer>();
@@ -63,6 +65,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
             CreateDamageEffect(data);
         }
 
+        m_knockBack.KnockBack(data);  //ノックバック
         m_animatorManager.HitStop(data);  //ヒットストップ
         StartDamageInterval(ref status); //ダメージインターバルの開始
     }
@@ -101,8 +104,6 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
             m_statusManager.ChangeDyingMode(dyingMode);  //瀕死状態のTypeを変更
 
             m_stator.GetTransitionMember().dyingTrigger.Fire();  //瀕死状態に変更
-
-            //m_respawn?.RespawnReserve();
         }
     }
 
