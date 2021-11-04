@@ -25,6 +25,9 @@ public class StageSelecter : MonoBehaviour
     [SerializeField]
     private FocusChangeToPush m_focusChangeToPush;
 
+    [SerializeField]
+    private UISounder m_uiSounder;
+
     private int m_selectIndex = -1;
 
     private readonly Subject<SelectStageData> m_onSelectIndexDecrementSubject = new Subject<SelectStageData>();
@@ -34,6 +37,15 @@ public class StageSelecter : MonoBehaviour
     private readonly Subject<SelectStageData> m_onSelectIndexIncrementSubject = new Subject<SelectStageData>();
 
     public System.IObservable<SelectStageData> OnSelectIndexIncrement => m_onSelectIndexIncrementSubject;
+
+    private void Awake()
+    {
+        OnSelectIndexDecrement.Subscribe(_ => m_uiSounder.SelectPlay())
+            .AddTo(this);
+
+        OnSelectIndexIncrement.Subscribe(_ => m_uiSounder.SelectPlay())
+            .AddTo(this);
+    }
 
     public void SelectLeft()
     {
@@ -72,6 +84,7 @@ public class StageSelecter : MonoBehaviour
             return;
         }
 
+        m_uiSounder.SubmitPlay();
         m_focusChangeToPush.NextPushFocus();
     }
 
