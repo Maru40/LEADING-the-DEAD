@@ -4,6 +4,7 @@ using UnityEngine;
 
 using System;
 using MaruUtility;
+using UniRx;
 
 public class KnockBackManager : MonoBehaviour
 {
@@ -32,7 +33,16 @@ public class KnockBackManager : MonoBehaviour
 
     Vector3 m_direct = Vector3.zero;
 
-    bool m_isKnockBack = false;
+    /// <summary>
+    /// ノックバックしたかどうか
+    /// </summary>
+    readonly ReactiveProperty<bool> m_isKnockBackReactive = new ReactiveProperty<bool>();
+    public IObservable<bool> IsKnockBackReactive => m_isKnockBackReactive;
+    public bool IsKnockBack
+    {
+        get => m_isKnockBackReactive.Value;
+        private set => m_isKnockBackReactive.Value = value;
+    }
 
     private void Awake()
     {
@@ -41,7 +51,7 @@ public class KnockBackManager : MonoBehaviour
 
     private void Update()
     {
-        if (m_isKnockBack)
+        if (IsKnockBack)
         {
             MoveProcess();
         }
@@ -56,14 +66,14 @@ public class KnockBackManager : MonoBehaviour
 
         var rate = 1.0f;// - m_elapsedLength / m_param.lenght;
         var speed = m_param.speed * rate;
-        var moveVec = direct.normalized * (m_param.lenght - m_elapsedLength);
+        var moveVec = direct.normalized * speed * Time.deltaTime;
+        //var moveVec = direct.normalized * (m_param.lenght - m_elapsedLength);
         transform.position += moveVec;
 
         m_elapsedLength += moveVec.magnitude;
-        const float endKnockSpeed = 0.01f;
-        if (m_elapsedLength > m_param.lenght || speed < endKnockSpeed)
+        if (m_elapsedLength > m_param.lenght)
         {
-            m_isKnockBack = false;
+            IsKnockBack = false;
         }
     }
 
@@ -78,7 +88,7 @@ public class KnockBackManager : MonoBehaviour
         m_direct = transform.position - other.transform.position;
         m_param = m_baseParam;
 
-        m_isKnockBack = true;
+        IsKnockBack = true;
         m_elapsedLength = 0.0f;
     }
 }

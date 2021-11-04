@@ -9,6 +9,18 @@ using MaruUtility.UtilityDictionary;
 
 public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 {
+    enum LayerEnum
+    {
+        Base,
+        Upper,
+        Lower
+    }
+
+    enum StateEnum
+    {
+
+    }
+
     enum NormalAttackHitColliderType
     {
         Left,
@@ -19,25 +31,34 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     Ex_Dictionary<NormalAttackHitColliderType, AnimationHitColliderParametor> m_normalAttackParam =
         new Ex_Dictionary<NormalAttackHitColliderType, AnimationHitColliderParametor>();
 
+    Dictionary<StateEnum, string> m_stateNameDictionary = new Dictionary<StateEnum, string>();
+
     NormalAttack m_normalAttackComp;
 
     EnemyStunManager m_stunManager;
     AngerManager m_angerManager;
+    KnockBackManager m_knockBackManager;
 
     override protected void Awake()
     {
         base.Awake();
 
-        m_normalAttackParam.InsertInspectorData();
-
         m_normalAttackComp = GetComponent<NormalAttack>();
         m_stunManager = GetComponent<EnemyStunManager>();
         m_angerManager = GetComponent<AngerManager>();
+        m_knockBackManager = GetComponent<KnockBackManager>();
+    }
+
+    private void Start()
+    {
+        m_normalAttackParam.InsertInspectorData();
 
         SettingNormalAttack();
 
         SettingStun();
         SettingAnger();
+
+        SettingKnockBack();
 
         SettingDeath();
     }
@@ -88,6 +109,22 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
             .AddTo(this);
     }
 
+    void SettingKnockBack()
+    {
+        m_knockBackManager.IsKnockBackReactive.Where(isKnockBack => isKnockBack)
+            .Subscribe(_ =>
+            {
+                CrossFadeKnockBackState();
+                Debug.Log("ノックバックReactive");
+            })
+            .AddTo(this);
+
+        m_knockBackManager.IsKnockBackReactive.Skip(1)
+            .Where(isKnockBack => !isKnockBack)
+            .Subscribe(_ => CrossFadeIdleAnimation())
+            .AddTo(this);
+    }
+
     void SettingDeath()
     {
 
@@ -123,5 +160,11 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     {
         var layerIndex = m_animator.GetLayerIndex("Base Layer");
         CrossFadeState("Death", layerIndex);
+    }
+
+    void CrossFadeKnockBackState()
+    {
+        var layerIndex = m_animator.GetLayerIndex("Base Layer");
+        CrossFadeState("KnockBack", layerIndex);
     }
 }

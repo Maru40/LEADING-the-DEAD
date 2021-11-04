@@ -14,11 +14,11 @@ public class ZombieNormalTable
             
         }
         public readonly AnimationState Idle = new AnimationState("Base Layer.Idle","Base Layer");
-        public readonly AnimationState NormalAttack = new AnimationState("Base Layer.NormalAttack","Base Layer");
         public readonly AnimationState Stunned = new AnimationState("Base Layer.Stunned","Base Layer");
         public readonly AnimationState Anger = new AnimationState("Base Layer.Anger","Base Layer");
         public readonly AnimationState Land = new AnimationState("Base Layer.Land","Base Layer");
         public readonly AnimationState Death = new AnimationState("Base Layer.Death","Base Layer");
+        public readonly AnimationState KnockBack = new AnimationState("Base Layer.KnockBack","Base Layer");
         
     }
     public static readonly UpperLayerTable UpperLayer = new UpperLayerTable();
