@@ -56,12 +56,12 @@ public class KnockBackManager : MonoBehaviour
 
         var rate = 1.0f;// - m_elapsedLength / m_param.lenght;
         var speed = m_param.speed * rate;
-        var moveVec = direct.normalized * (m_param.lenght - m_elapsedLength);
+        var moveVec = direct.normalized * speed * Time.deltaTime;
+        //var moveVec = direct.normalized * (m_param.lenght - m_elapsedLength);
         transform.position += moveVec;
 
         m_elapsedLength += moveVec.magnitude;
-        const float endKnockSpeed = 0.01f;
-        if (m_elapsedLength > m_param.lenght || speed < endKnockSpeed)
+        if (m_elapsedLength > m_param.lenght)
         {
             m_isKnockBack = false;
         }
