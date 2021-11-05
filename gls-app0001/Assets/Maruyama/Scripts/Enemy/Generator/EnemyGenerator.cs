@@ -28,6 +28,11 @@ public struct OutOfTargetData
 
 public class EnemyGenerator : GeneratorBase
 {
+    [Header("セレクト時のみ範囲を表示するかどうか"),SerializeField]
+    bool m_isSelectDrawGizmos = false;
+    [Header("生成範囲表示カラー"),SerializeField]
+    Color m_gizmosColor = new Color(1.0f, 0, 0, 0.3f);
+
     //近くに生成したくないオブジェクト群
     [SerializeField]
     List<OutOfTargetData> m_outOfTargteDatas =  new List<OutOfTargetData>();
@@ -155,5 +160,34 @@ public class EnemyGenerator : GeneratorBase
     public Vector3 GetCenterPosition()
     {
         return m_centerPosition;
+    }
+
+
+    private void OnDrawGizmosSelected()
+    {
+        //セレクト時のみ表示だったら
+        if (m_isSelectDrawGizmos)
+        {
+            DrawGizmos();
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        //セレクト時のみ表示で無かったら
+        if (!m_isSelectDrawGizmos)
+        {
+            DrawGizmos();
+        }
+    }
+
+    /// <summary>
+    /// 生成範囲表示用
+    /// </summary>
+    void DrawGizmos()
+    {
+        Gizmos.color = m_gizmosColor;
+        var maxRandomRange = m_maxRandomRange * 2.0f;
+        Gizmos.DrawCube(m_centerPosition, maxRandomRange);
     }
 }
