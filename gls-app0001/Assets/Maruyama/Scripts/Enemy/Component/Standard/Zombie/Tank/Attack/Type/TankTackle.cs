@@ -204,6 +204,11 @@ public class TankTackle : AttackNodeBase
     /// <returns></returns>
     public bool IsTackleEyeRad()
     {
+        var target = m_targetManager.GetNowTarget();
+        if(target == null) {
+            return false;
+        }
+
         var eyeParam = m_eye.GetParam();
         eyeParam.rad = m_eyeRad;
         if (m_eye.IsInEyeRange(m_targetManager.GetNowTarget().gameObject, eyeParam))
@@ -235,7 +240,7 @@ public class TankTackle : AttackNodeBase
         {
             int obstacleLayer = LayerMask.NameToLayer(layerString);
             if (collision.gameObject.layer == obstacleLayer) {  //障害物と当たったら
-                TackleLastStart();  //タックルを終了
+                //TackleLastStart();  //タックルを終了
             }
         }
     }

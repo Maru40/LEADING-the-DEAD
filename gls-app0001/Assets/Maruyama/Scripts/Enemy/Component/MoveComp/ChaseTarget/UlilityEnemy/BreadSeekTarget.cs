@@ -23,6 +23,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
     ThrongManager m_throngMgr;
     EnemyRotationCtrl m_rotationCtrl;
     StatusManagerBase m_statusManager;
+    EyeSearchRange m_eye;
 
     public BreadSeekTarget(EnemyBase owner, float nearRange, float maxSpeed, float turningPower, float lostSeekTime)
         : base(owner)
@@ -33,32 +34,36 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
         m_lostSeekTime = lostSeekTime;
 
         m_statusManager = owner.GetComponent<StatusManagerBase>();
+        m_eye = owner.GetComponent<EyeSearchRange>();
+        m_chaseTarget = owner.GetComponent<ChaseTarget>();
+        m_waitTimer = owner.GetComponent<WaitTimer>();
+        m_rigid = owner.GetComponent<Rigidbody>();
+        m_velocityMgr = owner.GetComponent<EnemyVelocityMgr>();
+        m_targetMgr = owner.GetComponent<TargetManager>();
     }
 
     public override void OnStart()
     {
         var owner = GetOwner();
 
-        m_chaseTarget = owner.GetComponent<ChaseTarget>();
         //WaitTimerで一定時間見失ったら待機状態に移行することにする。
-        m_waitTimer = owner.GetComponent<WaitTimer>();
         m_waitTimer.AddWaitTimer(GetType(), m_lostSeekTime, m_chaseTarget.TargetLost);
 
-        m_rigid = owner.GetComponent<Rigidbody>();
-        m_velocityMgr = owner.GetComponent<EnemyVelocityMgr>();
-
-        m_targetMgr = owner.GetComponent<TargetManager>();
         var target = m_targetMgr.GetNowTarget();
 
         m_bread = target?.GetComponent<BreadCrumb>();
 
         if (m_bread){
             //初期ポジションのセット
-            var position = m_bread.GetNewBackPosition(1); //最新の一個前を取得
-            if(position != null){
+            //var position = m_bread.GetNewBackPosition(1); //最新の一個前を取得
+            var position = CalcuTargetPosition(m_bread);
+            if (position != null){
                 m_targetPosition = (Vector3)position;
+                //Debug.Log("Player" + target.transform.position);
+                //Debug.Log("Target" + m_targetPosition);
             }
             else{  //もしなかったら最新を取得
+                //Debug.Log("ターゲットがNull");
                 m_targetPosition = m_bread.GetNewPosition();
             }
         }
@@ -93,7 +98,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
         //m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_maxSpeed, m_turningPower);
 
         //目的地に到達したら
-        if (Calculation.IsArrivalPosition(m_nearRange, GetOwner().transform.position, m_targetPosition)) {
+        if (Calculation.IsArrivalPosition(m_nearRange, GetOwner().transform.position, m_targetPosition, true)) {
             NextRoute();
         }
     }
@@ -104,12 +109,30 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
 
         if(newPosition != null){
             m_targetPosition = (Vector3)newPosition;
+            //Debug.Log("NextPosition" + m_targetPosition);
         }
         else{
             m_targetPosition = m_bread.GetNewPosition();
         }
     }
 
+    //Rayの及ばない場所の取得
+    Vector3? CalcuTargetPosition(BreadCrumb bread)
+    {
+        var positions = bread.GetCopyPositions();
+
+        //最新のポジションから参照
+        for(int i = positions.Count - 1; i > 0; i--)
+        {
+            //視界内のポジションを取得
+            if (m_eye.IsInEyeRange(positions[i]))
+            {
+                return positions[i];
+            }
+        }
+
+        return null;
+    }
 
     //アクセッサ------------------------------------------------------
 

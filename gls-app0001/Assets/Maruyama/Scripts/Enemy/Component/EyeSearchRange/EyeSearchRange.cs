@@ -54,6 +54,9 @@ public class EyeSearchRange : MonoBehaviour
     List<EyeTargetParam> m_targetParams = new List<EyeTargetParam>();
 
     [SerializeField]
+    GameObject m_centerObject = null;
+
+    [SerializeField]
     EyeSearchRangeParam m_param = new EyeSearchRangeParam();
 
     /// <summary>
@@ -61,6 +64,15 @@ public class EyeSearchRange : MonoBehaviour
     /// </summary>
     [SerializeField]
     string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
+
+    private void Start()
+    {
+        //NullCheck
+        if(m_centerObject == null)
+        {
+            m_centerObject = transform.gameObject;
+        }
+    }
 
     private void Update()
     {
@@ -78,53 +90,92 @@ public class EyeSearchRange : MonoBehaviour
     }
 
     bool IsRange(GameObject target) {
-        var toVec = target.transform.position - transform.position;
-		//長さチェック
-		return toVec.magnitude <= m_param.range ? true : false;
+        return IsRange(target.transform.position);
 	}
+
+    bool IsRange(Vector3 targetPosition) {
+        var toVec = targetPosition - transform.position;
+        //長さチェック
+        return toVec.magnitude <= m_param.range ? true : false;
+    }
 
     bool IsHeight(GameObject target) {
-		var selfPos = transform.position;
-        var targetPos = target.transform.position;
-
-        var subHeight = targetPos.y - selfPos.y;  //高さの差を求める。
-		//高さが小さかったら。
-		return Mathf.Abs(subHeight) <= m_param.height? true : false;
+        return IsHeight(target.transform.position);
 	}
+
+    bool IsHeight(Vector3 targetPosition)
+    {
+        var selfPos = transform.position;
+
+        var subHeight = targetPosition.y - selfPos.y;  //高さの差を求める。
+        //高さが小さかったら。
+        return Mathf.Abs(subHeight) <= m_param.height ? true : false;
+    }
 
     bool IsRad(GameObject target) {
-		var forward = transform.transform.forward;
-        forward.y = 0.0f;
-        var toVec = target.transform.position - transform.position;
-        toVec.y = 0.0f;
-
-		var newDot = Vector3.Dot(forward.normalized, toVec.normalized);
-        var newRad = Mathf.Acos(newDot);
-		//索敵範囲に入っていたら。
-		return newRad <= m_param.rad ? true : false;
+        return IsRad(target.transform.position);
 	}
 
+    bool IsRad(Vector3 targetPosition)
+    {
+        var forward = transform.transform.forward;
+        forward.y = 0.0f;
+        var toVec = targetPosition - transform.position;
+        toVec.y = 0.0f;
+
+        var newDot = Vector3.Dot(forward.normalized, toVec.normalized);
+        var newRad = Mathf.Acos(newDot);
+        //索敵範囲に入っていたら。
+        return newRad <= m_param.rad ? true : false;
+    }
+
     bool IsRay(GameObject target){
+        return IsRay(target.transform.position);
+	}
+
+    bool IsRay(Vector3 targetPosition)
+    {
         int obstacleLayer = LayerMask.GetMask(m_rayObstacleLayerStrings);
-        var toVec = target.transform.position - transform.position;
+        var toVec = targetPosition - transform.position;
 
-        var colliders = Physics.OverlapSphere(transform.position, 1 ,obstacleLayer);
+        const float SphereRange = 0.0f;
+        var colliders = Physics.OverlapSphere(transform.position, SphereRange, obstacleLayer);  //オブジェクトに接触時に透けるバグ解消用
 
-        Debug.Log("コライダー図:  " + colliders.Length);
-        if (!Physics.Raycast(transform.position, toVec, toVec.magnitude, obstacleLayer) && colliders.Length == 0)
+        if (!Physics.Linecast(m_centerObject.transform.position, targetPosition, obstacleLayer) && colliders.Length == 0)
         {
             return true;
         }
+        //if (!Physics.Raycast(transform.position, toVec, toVec.magnitude, obstacleLayer) && colliders.Length == 0)
+        //{
+        //    return true;
+        //}
 
         return false;
 
         //return !Physics.Raycast(transform.position, toVec, toVec.magnitude, obstacleLayer) ? true : false;
-	}
+    }
 
     void Hit(EyeTargetParam targetParam) {
 		targetParam.isFind = true;
 	}
 
+    /// <summary>
+    /// 視界内にいるならtrueを返す
+    /// </summary>
+    /// <param name="targetPosition">ターゲットのポジション</param>
+    /// <returns>視界の中にいるならtrue</returns>
+    public bool IsInEyeRange(Vector3 targetPosition)
+    {
+        //全ての条件がtrueなら視界内に対象がいる。
+        if (IsRange(targetPosition) && IsHeight(targetPosition) && IsRad(targetPosition) && IsRay(targetPosition))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     /// <summary>
     /// 視界内にいるならtrueを返す

@@ -23,9 +23,15 @@ namespace MaruUtility
         /// <param name="nearRange">誤差範囲</param>
         /// <param name="selfPosition">自分のポジション</param>
         /// <param name="targetPosition">目的地</param>
+        /// <param name="isDeleteHeight">高さのYを計算から除外するかどうか</param>
         /// <returns>目的地ならtrue</returns>
-        public static bool IsArrivalPosition(float nearRange, Vector3 selfPosition, Vector3 targetPosition)
+        public static bool IsArrivalPosition(float nearRange, Vector3 selfPosition, Vector3 targetPosition, bool isDeleteHeight = false)
         {
+            if (isDeleteHeight) {  //高さ情報を削除したい場合
+                selfPosition.y = 0;
+                targetPosition.y = 0;
+            }
+
             var toVec = targetPosition - selfPosition;
             return toVec.magnitude < nearRange ? true : false;
         }
