@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 49534074}
   - component: {fileID: 632433336}
   - component: {fileID: 985523611}
+  - component: {fileID: 7619825147386771384}
   m_Layer: 6
   m_Name: RightArmHitBox
   m_TagString: Untagged
@@ -60,7 +61,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enterAction:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7619825147386771384}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayOneShot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_stayAction:
     m_PersistentCalls:
       m_Calls: []
@@ -172,6 +185,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7619825147386771384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49534072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6a77d236321d64bac9375887990305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_audioClip: {fileID: 8300000, guid: b534b812591ffb5428fe37f61367c73c, type: 3}
+  m_isRandom: 1
+  m_volumeRandomRange:
+    min: 0.3
+    max: 0.7
+  m_pitchRandomRange:
+    min: 0.5
+    max: 0.7
 --- !u!1 &684590976
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,6 +247,7 @@ GameObject:
   - component: {fileID: 1363543550}
   - component: {fileID: 1363543549}
   - component: {fileID: 985523613}
+  - component: {fileID: 3316593417240229438}
   m_Layer: 6
   m_Name: LeftArmHitBox
   m_TagString: Untagged
@@ -262,7 +296,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enterAction:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3316593417240229438}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayOneShot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_stayAction:
     m_PersistentCalls:
       m_Calls: []
@@ -374,6 +420,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3316593417240229438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363543547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6a77d236321d64bac9375887990305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_audioClip: {fileID: 8300000, guid: b534b812591ffb5428fe37f61367c73c, type: 3}
+  m_isRandom: 1
+  m_volumeRandomRange:
+    min: 0.3
+    max: 0.7
+  m_pitchRandomRange:
+    min: 0.5
+    max: 0.7
 --- !u!1 &1411818464
 GameObject:
   m_ObjectHideFlags: 0
