@@ -14,8 +14,19 @@ public class EnemyAttackTriggerAction : TriggerAction
 
     [SerializeField]
     DamageData m_damageData = new DamageData();
-    
+
+    //[SerializeField]
+    //float m_maxPitch = 0.7f;
+    //[SerializeField]
+    //float m_minPitch = 0.5f;
+
+    //AudioSource m_audio;
     Collider m_hitCollider;
+
+    private void Awake()
+    {
+        //m_audio = GetComponent<AudioSource>();
+    }
 
     private void Start()
     {
@@ -57,6 +68,7 @@ public class EnemyAttackTriggerAction : TriggerAction
                 damageData.damageValue = power;
             }
 
+            //m_audio.PlayOneShot(m_audio.clip);  //音再生
             m_animatorManager?.HitStop(damageData);
             damage.TakeDamage(damageData);
         }
