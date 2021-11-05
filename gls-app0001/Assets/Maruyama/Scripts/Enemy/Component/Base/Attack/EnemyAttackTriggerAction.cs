@@ -4,6 +4,7 @@ using UnityEngine;
 
 using AttributeObject;
 
+[RequireComponent(typeof(AudioManager))]
 public class EnemyAttackTriggerAction : TriggerAction
 {
     [SerializeField]
@@ -15,17 +16,15 @@ public class EnemyAttackTriggerAction : TriggerAction
     [SerializeField]
     DamageData m_damageData = new DamageData();
 
-    //[SerializeField]
-    //float m_maxPitch = 0.7f;
-    //[SerializeField]
-    //float m_minPitch = 0.5f;
-
-    //AudioSource m_audio;
+    [SerializeField]
+    AudioManager m_audioManager;
+    
     Collider m_hitCollider;
 
     private void Awake()
     {
         //m_audio = GetComponent<AudioSource>();
+        m_audioManager = GetComponent<AudioManager>();
     }
 
     private void Start()
@@ -69,6 +68,7 @@ public class EnemyAttackTriggerAction : TriggerAction
             }
 
             //m_audio.PlayOneShot(m_audio.clip);  //音再生
+            m_audioManager?.PlayOneShot();
             m_animatorManager?.HitStop(damageData);
             damage.TakeDamage(damageData);
         }
