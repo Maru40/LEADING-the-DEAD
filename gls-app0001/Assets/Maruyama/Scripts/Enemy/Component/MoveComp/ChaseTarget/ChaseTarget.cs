@@ -21,10 +21,15 @@ public class SeekTransitonMember
 [Serializable]
 public struct ChaseTargetParametor
 {
+    [Header("目的地にたどり着いたと判断される距離")]
     public float nearRange;      //目的地にたどり着いたと判断される距離
+    [Header("最大スピード")]
     public float maxSpeed;
+    [Header("旋回する力")]
     public float turningPower;
+    [Header("見失ってから追従する時間")]
     public float lostSeekTime;   //見失ってから追従する時間
+    [Header("集団行動をする範囲")]
     public float inThrongRange;  //集団行動をする範囲
 
     public ChaseTargetParametor(float nearRange, float maxSpeed, float turningPower, float lostSeekTime, float inThrongRange)

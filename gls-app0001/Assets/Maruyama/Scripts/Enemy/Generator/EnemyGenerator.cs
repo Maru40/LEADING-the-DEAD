@@ -34,7 +34,7 @@ public class EnemyGenerator : GeneratorBase
     Color m_gizmosColor = new Color(1.0f, 0, 0, 0.3f);
 
     //近くに生成したくないオブジェクト群
-    [SerializeField]
+    [Header("近くに生成したくないオブジェクト群"), SerializeField]
     List<OutOfTargetData> m_outOfTargteDatas =  new List<OutOfTargetData>();
 
     [SerializeField]
@@ -49,7 +49,7 @@ public class EnemyGenerator : GeneratorBase
     protected Vector3 m_maxRandomRange = new Vector3();  //ランダムに生成する時の最大距離
 
     //配布するデータの構造体
-    [SerializeField]
+    [Header("ドロップアイテムを配布するデータ群"), SerializeField]
     List<DropDataDistributionParametor> m_distributionParams = new List<DropDataDistributionParametor>();
     //データを配布する処理をまとめたクラス
     RandomDropDataDistribution m_distribution;

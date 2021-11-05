@@ -15,12 +15,18 @@ public class RandomPlowlingMove : MonoBehaviour
     [Serializable]
     public struct Parametor 
     {
-        public float randomPositionRadius;  //徘徊する場所を決める半径
-        public float maxSpeed;              //最大スピード
-        public float turningPower;          //旋回する力
-        public float targetNearRange;       //目的地に着いたと判断される,目的地との相対距離(小さすぎると判断できなくなるため注意)
-        public float maxWaitCalcuRouteTime; //目的地についたとき、立ち止まる最大の時間
-        public float inThrongRange;         //集団と認識する範囲
+        [Header("徘徊する場所を決める半径")]
+        public float randomPositionRadius; 
+        [Header("最大スピード")]
+        public float maxSpeed;             
+        [Header("旋回する力")]
+        public float turningPower;          
+        [Header("目的地に着いたと判断される,目的地との相対距離(小さすぎると判断できなくなるため注意)")]
+        public float targetNearRange;       
+        [Header("目的地についたとき、立ち止まる最大の時間")]
+        public float maxWaitCalcuRouteTime; 
+        [Header("集団と認識する範囲")]
+        public float inThrongRange;        
 
         public Parametor(float randomPositionRadius, float maxSpeed, float turningPower,
             float targetNearRange, float maxWaitCalcuRouteTime, float inThrongRange)

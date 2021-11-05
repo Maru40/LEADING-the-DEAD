@@ -10,10 +10,15 @@ using System;
 [Serializable]
 public class CreateSetParametor_ZombieNormal
 {
+    [Header("リスポーン管理")]
     public RespawnManagerParametor respawnParametor = new RespawnManagerParametor(true, 0.0f);
+    [Header("追従")]
     public ChaseTargetParametor chaseParametor = new ChaseTargetParametor(0.75f, 3.0f, 3.0f, 10.0f, 3.0f);
+    [Header("徘徊時")]
     public RandomPlowlingMove.Parametor randomPlowlingParametor = new RandomPlowlingMove.Parametor(15.0f, 2.5f, 2.0f, 0.3f, 3.0f, 1.0f);
+    [Header("ステータス")]
     public StatusManager_ZombieNormal.Status status = new StatusManager_ZombieNormal.Status(1.0f, 3.0f);
+    [Header("攻撃力など")]
     public AttackParametorBase attackParametor = new AttackParametorBase(new AttributeObject.DamageData(2.0f), 2.5f);
 
     public CreateSetParametor_ZombieNormal()
@@ -33,10 +38,10 @@ public class CreateSetParametor_ZombieNormal
 
 public class EnemyGenerator_ZombieNormal : EnemyGenerator
 {
-    [SerializeField]
+    [Header("生成時にセットするパラメータ"),SerializeField]
     CreateSetParametor_ZombieNormal m_createSetParam = new CreateSetParametor_ZombieNormal();
 
-    [SerializeField]
+    [Header("リスポーン時にバフを掛けるパラメータ"), SerializeField]
     CreateSetParametor_ZombieNormal m_respawnStatusUpParam= new CreateSetParametor_ZombieNormal(0.0f);
 
     protected override void Start()
