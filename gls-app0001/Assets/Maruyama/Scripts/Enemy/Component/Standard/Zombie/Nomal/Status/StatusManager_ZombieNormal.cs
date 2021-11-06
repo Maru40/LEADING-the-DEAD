@@ -64,6 +64,8 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
 
     void I_Stun.EndStun()
     {
+        IsStun = false;
+
         if (m_angerManager.IsAnger())
         {
             m_stator.GetTransitionMember().rondomPlowlingTrigger.Fire();
