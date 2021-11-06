@@ -93,6 +93,12 @@ public class EnemyVelocityMgr : MonoBehaviour
         m_force = Vector3.zero;
     }
 
+    public void ResetAll()
+    {
+        ResetVelocity();
+        ResetForce();
+    }
+
     /// <summary>
     /// 減速開始
     /// </summary>
