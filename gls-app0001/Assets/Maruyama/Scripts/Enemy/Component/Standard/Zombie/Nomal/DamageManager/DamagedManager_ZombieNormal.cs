@@ -56,6 +56,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
     void Damage(DamageData data, ref StatusManagerBase.Status status)
     {
         if (data.isStunAttack) { //スタン状態になる攻撃なら
+            status.isStun = true;
             Stun(data.obj);
         }
         else {
@@ -65,6 +66,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
             CreateDamageEffect(data);
         }
 
+        m_stator.CrossFade(ZombieNormalState.KnockBack, (int)ZombieNormalState.KnockBack);
         m_knockBack.KnockBack(data);  //ノックバック
         m_animatorManager.HitStop(data);  //ヒットストップ
         StartDamageInterval(ref status); //ダメージインターバルの開始
@@ -123,7 +125,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
     /// <param name="other">スタンを与えてきた相手</param>
     void Stun(GameObject other)
     {
-        m_stun.StartStun();
+        //m_stun.StartStun();
         m_dropManager.Drop(other);
     }
 
