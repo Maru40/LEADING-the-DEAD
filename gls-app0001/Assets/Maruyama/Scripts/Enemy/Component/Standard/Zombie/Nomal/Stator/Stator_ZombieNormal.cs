@@ -13,6 +13,7 @@ public enum ZombieNormalState
     Attack,
     Stun,
     Anger,
+    KnockBack,  //ノックバック
     Dying,  //瀕死状態
     Death,  //死亡状態
 }
@@ -59,6 +60,7 @@ public class Stator_ZombieNormal : StatorBase
         m_stateMachine.AddNode(StateType.Attack,         new StateNode_ZombieNormal_Attack(zombie));
         m_stateMachine.AddNode(StateType.Stun,           new EnState_Stun(zombie));
         m_stateMachine.AddNode(StateType.Anger,          new StateNode_ZombieNormal_Anger(zombie));
+        m_stateMachine.AddNode(StateType.KnockBack,      new StateNode_KnockBack_EnemyBase(zombie));
         m_stateMachine.AddNode(StateType.Dying,          new StateNode_ZombieNormal_Dying(zombie));
         m_stateMachine.AddNode(StateType.Death,          new StateNode_ZombiNormal_Death(zombie));
     }
@@ -90,9 +92,13 @@ public class Stator_ZombieNormal : StatorBase
         m_stateMachine.AddEdge(StateType.Stun, StateType.RandomPlowling, ToRandomPlowling);
         m_stateMachine.AddEdge(StateType.Stun, StateType.Dying, ToDyingTrigger);
 
+        //ノックバック時
+        //m_stateMachine.AddEdge(StateType.KnockBack, StateType.RandomPlowling, ToRandomPlowling);
+        m_stateMachine.AddEdge(StateType.KnockBack, StateType.Stun, ToStunTrigger);
+
         //怒り状態開始
         m_stateMachine.AddEdge(StateType.Anger, StateType.RandomPlowling, ToRandomPlowling);
-        m_stateMachine.AddEdge(StateType.Anger, StateType.Chase, ToChaseTrigger);
+        //m_stateMachine.AddEdge(StateType.Anger, StateType.Chase, ToChaseTrigger);
         m_stateMachine.AddEdge(StateType.Anger, StateType.Dying, ToDyingTrigger);
 
         //瀕死状態
@@ -134,6 +140,15 @@ public class Stator_ZombieNormal : StatorBase
     bool ToDeathTrigger(TransitionMember member)
     {
         return member.deathTrigger.Get();
+    }
+
+        public override void CrossFade<EnumType>(EnumType type, int priority = 0)
+    {
+        if (type is StateType)
+        {
+            StateType? stateType = type as StateType?;
+            m_stateMachine.CrossFade((StateType)stateType, priority);
+        }
     }
 
     //アクセッサ----------------------------------------------------------------
