@@ -17,6 +17,10 @@ public class StateNode_ZombieNormal_Anger : EnState_Anger
     protected override void ReserveChangeComponents()
     {
         base.ReserveChangeComponents();
+
+        var owner = GetOwner();
+        AddChangeComp(owner.GetComponent<ChaseTarget>(), false, true);
+        AddChangeComp(owner.GetComponent<ThrongManager>(), false, true);
     }
 
     public override void OnStart()
@@ -30,5 +34,10 @@ public class StateNode_ZombieNormal_Anger : EnState_Anger
     public override void OnUpdate()
     {
         base.OnUpdate();
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
     }
 }
