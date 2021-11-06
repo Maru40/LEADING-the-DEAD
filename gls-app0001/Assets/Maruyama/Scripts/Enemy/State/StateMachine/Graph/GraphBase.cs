@@ -159,9 +159,10 @@ public class GraphBase<NodeType, EnumType, TransitionType>
 	/// <param name="from">元のタイプ</param>
 	/// <param name="to">遷移先のタイプ</param>
 	/// <param name="isTransitionFunc">遷移条件</param>
-	public void AddEdge(EnumType from, EnumType to, Func<TransitionType, bool> isTransitionFunc)
+	/// <param name="priority">優先度</param>
+	public void AddEdge(EnumType from, EnumType to, Func<TransitionType, bool> isTransitionFunc, int priority)
 	{
-		var newEdge = new EdgeBase<EnumType, TransitionType>(from, to, isTransitionFunc);
+		var newEdge = new EdgeBase<EnumType, TransitionType>(from, to, isTransitionFunc, priority);
 		AddEdge(newEdge);
 	}
 
