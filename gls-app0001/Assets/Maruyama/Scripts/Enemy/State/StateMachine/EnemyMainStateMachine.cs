@@ -3,17 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System;
+using System.Linq;
 
 public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     where NodeType : class
     where EnumType : Enum  
     where TransitionType : class, new()
 {
+
+    /// <summary>
+    /// 遷移優先度系のパラメータ
+    /// </summary>
+    struct TransitionCanditdateParametor
+    {
+        public EnumType type; //遷移先のタイプ
+        public int priority;  //優先度
+
+        public TransitionCanditdateParametor(EnumType type)
+            :this(type, 0)
+        {  }
+
+        public TransitionCanditdateParametor(EnumType type, int priority)
+        {
+            this.type = type;
+            this.priority = priority;
+        }
+    }
+
     //ステートマシン
     GraphBase<NodeType, EnumType, TransitionType> m_stateMachine;
 
     //遷移条件用のメンバー
     TransitionType m_transitionStruct = new TransitionType();
+
+    //遷移候補群
+    List<TransitionCanditdateParametor> m_transitionCandidates = new List<TransitionCanditdateParametor>();
 
     public EnemyMainStateMachine()
     {
@@ -85,11 +109,11 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     /// <param name="from">元のタイプ</param>
     /// <param name="to">遷移先のタイプ</param>
     /// <param name="isTransitionFunc">遷移条件</param>
-    public void AddEdge(EnumType from, EnumType to, Func<TransitionType, bool> isTransitionFunc)
+    /// <param name="priority">優先度(Default: 0)</param>
+    public void AddEdge(EnumType from, EnumType to, Func<TransitionType, bool> isTransitionFunc, int priority = 0)
     {
-        m_stateMachine.AddEdge(from, to, isTransitionFunc);
+        m_stateMachine.AddEdge(from, to, isTransitionFunc, priority);
     }
-
 
     /// <summary>
     /// ノードが空かどうかを判断
@@ -117,6 +141,17 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     }
 
     /// <summary>
+    /// クロスフェード
+    /// </summary>
+    /// <param name="type">遷移先のタイプ</param>
+    /// <param name="priority">優先度</param>
+    public void CrossFade(EnumType type, int priority)
+    {
+        m_transitionCandidates.Add(new TransitionCanditdateParametor(type, priority));
+        //m_stateMachine.ChangeState(type);
+    }
+
+    /// <summary>
     /// 外部からUpdateをする。(主にこれを利用するStateManagerクラス)
     /// </summary>
     public void OnUpdate()
@@ -133,6 +168,12 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
 
         //トリガーのリセット
         TriggerReset();
+
+        //遷移候補から一番優先度が高い遷移先に遷移
+        Transition();
+
+        //遷移候補Clear
+        m_transitionCandidates.Clear();
     }
 
     /// <summary>
@@ -154,8 +195,9 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
         {
             if (edge.IsTransition(m_transitionStruct))
             {
-                m_stateMachine.ChangeState(edge.GetToType());
-                break;
+                m_transitionCandidates.Add(new TransitionCanditdateParametor(edge.GetToType(), edge.Priority));
+                //m_stateMachine.ChangeState(edge.GetToType());
+                //break;
             }
         }
     }
@@ -171,7 +213,33 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
             foreach(var edge in edges.Value)
             {
                 edge.IsTransition(m_transitionStruct);
+                //edge.IsTransition(m_transitionStruct);
+                break;
             }
         }
     }
+
+    /// <summary>
+    /// 実際に遷移する
+    /// </summary>
+    void Transition()
+    {
+        //遷移先が一つも存在しないなら処理を飛ばす
+        if (m_transitionCandidates.Count == 0) {
+            return;
+        }
+
+        //ソートして優先度が一番高いタイプに遷移する。
+        var sorteds = m_transitionCandidates.OrderByDescending(param => param.priority);
+
+        int index = 0;
+        foreach (var sorted in sorteds)
+        {
+            Debug.Log(index + ":トランジション： " + sorted.type);
+        }
+
+        m_stateMachine.ChangeState(sorteds.ElementAt(0).type);  //一番優先度が高い先頭のステートに変更
+    }
+
+
 }
