@@ -10,4 +10,6 @@ using System;
 public abstract class StatorBase : MonoBehaviour
 {
     public abstract void Reset();
+
+    public abstract void CrossFade<EnumType>(EnumType type, int priority = 0) where EnumType : System.Enum;
 }

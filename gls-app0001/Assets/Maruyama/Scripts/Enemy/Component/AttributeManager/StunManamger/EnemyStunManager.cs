@@ -24,7 +24,7 @@ public class EnemyStunManager : MonoBehaviour
     [SerializeField]
     List<ChangeCompParam> m_changeCompParam = new List<ChangeCompParam>();
 
-    readonly ReactiveProperty<bool> m_isStun = new ReactiveProperty<bool>();
+    readonly ReactiveProperty<bool> m_isStunRective = new ReactiveProperty<bool>();
 
     WaitTimer m_waitTimer;
     I_Stun m_stun;
@@ -39,19 +39,19 @@ public class EnemyStunManager : MonoBehaviour
             SetDefaultChangeComps();
         }
 
-        m_isStun.Value = false;
+        IsStun = false;
     }
 
     public void StartStun()
     {
+        Debug.Log("スタン");
+
         StartStun(m_param.time);
     }
 
     public void StartStun(float time)
     {
-        Debug.Log("スタン");
-
-        m_isStun.Value = true;
+        IsStun = true;
 
         //切り替えるコンポーネントの今の状態の記録
         SaveNowEnableComps();
@@ -63,7 +63,7 @@ public class EnemyStunManager : MonoBehaviour
 
     private void EndStun()
     {
-        m_isStun.Value = false;
+        IsStun = false;
 
         //スタン解除の処理
         m_stun.EndStun();
@@ -130,5 +130,10 @@ public class EnemyStunManager : MonoBehaviour
         return m_param.time;
     }
 
-    public IObservable<bool> isStun => m_isStun;
+    public IObservable<bool> IsStunReactive => m_isStunRective;
+    public bool IsStun
+    {
+        get => m_isStunRective.Value;
+        private set => m_isStunRective.Value = value;
+    }
 }

@@ -91,14 +91,15 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 
     void SettingStun()
     {
-        m_stunManager.isStun.Where(isStun => isStun)
-            .Subscribe(_ => { ChangeStunAnimation(); })
+        const float stunTransitionTimes = 0.25f;
+        m_stunManager.IsStunReactive.Where(isStun => isStun)
+            .Subscribe(_ => { CrossFadeStunAnimation(stunTransitionTimes); })
             .AddTo(this);
 
         //スタン解除時
-        m_stunManager.isStun.Skip(1)
+        m_stunManager.IsStunReactive.Skip(1)
             .Where(isStun => !isStun)
-            .Subscribe(_ => { CrossFadeIdleAnimation(); })
+            .Subscribe(_ => { CrossFadeIdleAnimation("Upper Layer"); })
             .AddTo(this);
     }
 
@@ -115,13 +116,20 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
             .Subscribe(_ =>
             {
                 CrossFadeKnockBackState();
-                Debug.Log("ノックバックReactive");
             })
             .AddTo(this);
 
         m_knockBackManager.IsKnockBackReactive.Skip(1)
-            .Where(isKnockBack => !isKnockBack)
+            .Where(isKnockBack => !isKnockBack && !m_statusManager.IsStun)
             .Subscribe(_ => CrossFadeIdleAnimation())
+            .AddTo(this);
+
+        var behavior = ZombieNormalTable.UpperLayer.KnockBack.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
+
+        behavior.onStateExited.Where(_ => m_stunManager.IsStun)
+            .Subscribe(_ => { 
+                CrossFadeStunAnimation();
+            })
             .AddTo(this);
     }
 
@@ -138,10 +146,10 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         CrossFadeState("NormalAttack", layerIndex);
     }
 
-    void ChangeStunAnimation()
+    void CrossFadeStunAnimation(float transitionTime = 0)
     {
-        var layerIndex = m_animator.GetLayerIndex("Base Layer");
-        CrossFadeState("Stunned", layerIndex);
+        var layerIndex = m_animator.GetLayerIndex("Upper Layer");
+        CrossFadeState("Stunned", layerIndex, transitionTime);
     }
 
     void ChangeAngerAnimation()
@@ -150,9 +158,9 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         CrossFadeState("Anger", layerIndex);
     }
 
-    public void CrossFadeIdleAnimation()
+    public void CrossFadeIdleAnimation(string layerString = "Base Layer")
     {
-        var layerIndex = m_animator.GetLayerIndex("Base Layer");
+        var layerIndex = m_animator.GetLayerIndex(layerString);
         CrossFadeState("Idle", layerIndex);
     }
 
@@ -164,7 +172,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 
     void CrossFadeKnockBackState()
     {
-        var layerIndex = m_animator.GetLayerIndex("Base Layer");
+        var layerIndex = m_animator.GetLayerIndex("Upper Layer");
         CrossFadeState("KnockBack", layerIndex);
     }
 }

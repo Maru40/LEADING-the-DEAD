@@ -59,15 +59,12 @@ public class KnockBackManager : MonoBehaviour
 
     void MoveProcess()
     {
-        Debug.Log("ノックバック中");
-
         var direct = m_direct;
         direct.y = 0;
 
         var rate = 1.0f;// - m_elapsedLength / m_param.lenght;
         var speed = m_param.speed * rate;
         var moveVec = direct.normalized * speed * Time.deltaTime;
-        //var moveVec = direct.normalized * (m_param.lenght - m_elapsedLength);
         transform.position += moveVec;
 
         m_elapsedLength += moveVec.magnitude;
@@ -90,5 +87,7 @@ public class KnockBackManager : MonoBehaviour
 
         IsKnockBack = true;
         m_elapsedLength = 0.0f;
+
+        m_velocityManager?.ResetAll();
     }
 }
