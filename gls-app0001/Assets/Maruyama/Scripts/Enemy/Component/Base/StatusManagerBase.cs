@@ -14,12 +14,14 @@ public abstract class StatusManagerBase : MonoBehaviour
         public float hp;
         public float damageIntervalTime;  //ダメージを受けた後の無敵時間
         public readonly ReactiveProperty<bool> isHitStopReactive;
+        public bool isStun;
 
         public Status(float hp, float damageIntervalTime)
         {
             this.hp = hp;
             this.damageIntervalTime = damageIntervalTime;
             this.isHitStopReactive = new ReactiveProperty<bool>();
+            this.isStun = false;
         }
     }
 
@@ -102,5 +104,14 @@ public abstract class StatusManagerBase : MonoBehaviour
     {
         get => m_status.isHitStopReactive.Value;
         set => m_status.isHitStopReactive.Value = value;
+    }
+
+    /// <summary>
+    /// スタンしているかどうか
+    /// </summary>
+    public bool IsStun
+    {
+        get => m_status.isStun;
+        protected set => m_status.isStun = value;
     }
 }
