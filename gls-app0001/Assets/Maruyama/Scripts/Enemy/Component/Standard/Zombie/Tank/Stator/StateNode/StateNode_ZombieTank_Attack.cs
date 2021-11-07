@@ -20,7 +20,7 @@ public class StateNode_ZombieTank_Attack : EnState_AttackBase
         base.ReserveChangeComponents();
 
         var owner = GetOwner();
-        AddChangeComp(owner.GetComponent<Attack_ZombieTank>(), true, false);
+        AddChangeComp(owner.GetComponent<AttackManager_ZombieTank>(), true, false);
         AddChangeComp(owner.GetComponent<EnemyRotationCtrl>(), false, true);
     }
 
