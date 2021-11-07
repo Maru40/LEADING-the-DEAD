@@ -22,6 +22,7 @@ public class StateNode_ZombieTank_Attack : EnState_AttackBase
         var owner = GetOwner();
         AddChangeComp(owner.GetComponent<AttackManager_ZombieTank>(), true, false);
         AddChangeComp(owner.GetComponent<EnemyRotationCtrl>(), false, true);
+        AddChangeComp(owner.GetComponent<ChaseTarget>(), false, true);
     }
 
     public override void OnStart()
