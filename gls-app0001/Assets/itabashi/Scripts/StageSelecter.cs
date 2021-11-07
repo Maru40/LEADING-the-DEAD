@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
-using UnityEngine.SceneManagement;
+using Manager;
 
 public class StageSelecter : MonoBehaviour
 {
@@ -90,6 +90,6 @@ public class StageSelecter : MonoBehaviour
 
     public void LoadScene()
     {
-        SceneManager.LoadScene(m_stageDatas[m_selectIndex].sceneObject);
+        GameSceneManager.Instance.LoadScene(m_stageDatas[m_selectIndex].sceneObject);
     }
 }

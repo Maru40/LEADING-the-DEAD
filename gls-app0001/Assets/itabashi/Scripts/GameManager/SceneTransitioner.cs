@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
+using Manager;
 
 public class SceneTransitioner : MonoBehaviour
 {
@@ -15,6 +13,6 @@ public class SceneTransitioner : MonoBehaviour
 
     public void GoNextScene(SceneObject sceneObject)
     {
-        SceneManager.LoadScene(sceneObject);
+        GameSceneManager.Instance.LoadScene(sceneObject);
     }
 }

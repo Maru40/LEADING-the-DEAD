@@ -1,10 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
-
+using Manager;
 
 public class StageSelectSceneEvent : MonoBehaviour
 {
@@ -39,7 +37,7 @@ public class StageSelectSceneEvent : MonoBehaviour
 
     public void BackTitle()
     {
-        SceneManager.LoadScene(m_titleScene);
+        GameSceneManager.Instance.LoadScene(m_titleScene);
     }
 
     public void OnMove(BaseEventData eventData)
