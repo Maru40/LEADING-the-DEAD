@@ -17,6 +17,6 @@ public class TitleSelectUI : MonoBehaviour
 
     private void Awake()
     {
-        EventSystem.current.SetSelectedGameObject(m_gameStartButton.gameObject);
+        //EventSystem.current.SetSelectedGameObject(m_gameStartButton.gameObject);
     }
 }
