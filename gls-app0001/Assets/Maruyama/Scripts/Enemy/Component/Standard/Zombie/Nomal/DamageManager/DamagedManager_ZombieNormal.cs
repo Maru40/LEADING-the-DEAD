@@ -105,7 +105,8 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
             };
             m_statusManager.ChangeDyingMode(dyingMode);  //瀕死状態のTypeを変更
 
-            m_stator.GetTransitionMember().dyingTrigger.Fire();  //瀕死状態に変更
+            m_stator.CrossFade(ZombieNormalState.Dying, (int)ZombieNormalState.Dying);
+            //m_stator.GetTransitionMember().dyingTrigger.Fire();  //瀕死状態に変更
         }
     }
 
