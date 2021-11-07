@@ -356,7 +356,7 @@ public class @UIControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""77dc75b4-4a6f-45cc-84ef-eca56436786b"",
-                    ""path"": """",
+                    ""path"": ""<Mouse>/scroll"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
