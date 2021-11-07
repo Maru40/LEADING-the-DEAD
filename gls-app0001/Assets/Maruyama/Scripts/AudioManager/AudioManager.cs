@@ -2,27 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using MaruUtility;
+
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
-    [System.Serializable]
-    struct RandomRange
-    {
-        public float min;
-        public float max;
-
-        public RandomRange(float min, float max)
-        {
-            this.min = min;
-            this.max = max;
-        }
-    }
-
     [SerializeField]
     AudioClip m_audioClip;
 
     [SerializeField]
     bool m_isRandom = true;
+    public bool IsRandom => m_isRandom;
 
     [Header("ボリュームのランダム幅"), SerializeField]
     RandomRange m_volumeRandomRange = new RandomRange(0.5f, 1.0f);
@@ -42,8 +32,11 @@ public class AudioManager : MonoBehaviour
     public void PlayOneShot()
     {
         //randomにvolumeとpitchを決める
-        m_audioSource.volume = Random.Range(m_volumeRandomRange.min, m_volumeRandomRange.max);
-        m_audioSource.pitch = Random.Range(m_pitchRandomRange.min, m_pitchRandomRange.max);
+        if (IsRandom)
+        {
+            m_audioSource.volume = Random.Range(m_volumeRandomRange.min, m_volumeRandomRange.max);
+            m_audioSource.pitch = Random.Range(m_pitchRandomRange.min, m_pitchRandomRange.max);
+        }
 
         m_audioSource?.PlayOneShot(m_audioClip);
     }

@@ -10,6 +10,7 @@ public enum ZombieTankState
 {
     RandomPlowling,
     Chase,
+    WaitSee,  //様子見ステート
     Attack,
 }
 
@@ -17,6 +18,7 @@ public class ZombieTankTransitionMember
 {
     public MyTrigger rondomPlowlingTrigger = new MyTrigger();
     public MyTrigger chaseTrigger = new MyTrigger();
+    public MyTrigger waitSeeTrigger = new MyTrigger();
     public MyTrigger attackTrigger = new MyTrigger();
 }
 
@@ -43,6 +45,7 @@ public class Stator_ZombieTank : StatorBase
 
         m_stateMachine.AddNode(StateType.RandomPlowling, new EnState_RandomPlowling(zombie));
         m_stateMachine.AddNode(StateType.Chase, new EnState_ChaseTarget(zombie));
+        m_stateMachine.AddNode(StateType.WaitSee, new StateNode_ZombieTank_WaitSee(zombie));
         m_stateMachine.AddNode(StateType.Attack, new StateNode_ZombieTank_Attack(zombie));
     }
 
@@ -50,10 +53,16 @@ public class Stator_ZombieTank : StatorBase
     {
         //ランダム徘徊
         m_stateMachine.AddEdge(StateType.RandomPlowling, StateType.Chase, ToChaseTrigger);
+        m_stateMachine.AddEdge(StateType.RandomPlowling, StateType.WaitSee, ToWaitSeeTrigger);
 
         //追従処理
         m_stateMachine.AddEdge(StateType.Chase, StateType.RandomPlowling, ToRandomPlowling);
+        m_stateMachine.AddEdge(StateType.Chase, StateType.WaitSee, ToWaitSeeTrigger);
         m_stateMachine.AddEdge(StateType.Chase, StateType.Attack, ToAttackTrigger);
+
+        //様子見
+        m_stateMachine.AddEdge(StateType.WaitSee, StateType.Attack, ToAttackTrigger);
+        m_stateMachine.AddEdge(StateType.WaitSee, StateType.WaitSee, ToWaitSeeTrigger);
 
         //攻撃処理
         m_stateMachine.AddEdge(StateType.Attack, StateType.Chase, ToChaseTrigger);
@@ -70,6 +79,11 @@ public class Stator_ZombieTank : StatorBase
     bool ToRandomPlowling(TransitionMember member)
     {
         return member.rondomPlowlingTrigger.Get();
+    }
+
+    bool ToWaitSeeTrigger(TransitionMember member)
+    {
+        return member.waitSeeTrigger.Get();
     }
 
     bool ToAttackTrigger(TransitionMember member)

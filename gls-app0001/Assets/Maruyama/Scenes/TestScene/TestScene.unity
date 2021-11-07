@@ -460,7 +460,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &162580265
 Transform:
   m_ObjectHideFlags: 0
@@ -1349,11 +1349,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dd85cf200791a14f88cb36656c50660, type: 3}
---- !u!1 &1143413109 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8155939366102752862, guid: 2dd85cf200791a14f88cb36656c50660, type: 3}
-  m_PrefabInstance: {fileID: 1914443237}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1172048838
 GameObject:
   m_ObjectHideFlags: 0
@@ -2431,7 +2426,7 @@ PrefabInstance:
     - target: {fileID: 7617629728195802665, guid: 2dd85cf200791a14f88cb36656c50660, type: 3}
       propertyPath: m_damage.obj
       value: 
-      objectReference: {fileID: 1143413109}
+      objectReference: {fileID: 0}
     - target: {fileID: 7617629728195802665, guid: 2dd85cf200791a14f88cb36656c50660, type: 3}
       propertyPath: m_damage.type
       value: 1
@@ -2644,7 +2639,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2349473719602091154, guid: 94ad2ea8836d356438711e6ab657d5a2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2349473719602091155, guid: 94ad2ea8836d356438711e6ab657d5a2, type: 3}
       propertyPath: m_RootOrder
@@ -2705,7 +2700,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655912, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655915, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_RootOrder

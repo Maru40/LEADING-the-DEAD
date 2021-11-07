@@ -15,6 +15,24 @@ public abstract class TaskNodeBase
     public abstract void OnExit();
 }
 
+public abstract class TaskNodeBase<OwnerType> : TaskNodeBase
+    where OwnerType : class
+{
+    protected OwnerType m_owner;
+
+    public TaskNodeBase(OwnerType owner)
+    {
+        m_owner = owner;
+    }
+
+    protected OwnerType Owner => m_owner;
+
+    protected OwnerType GetOwner()
+    {
+        return m_owner;
+    }
+}
+
 public class TaskList<EnumType>
 {
     class Task

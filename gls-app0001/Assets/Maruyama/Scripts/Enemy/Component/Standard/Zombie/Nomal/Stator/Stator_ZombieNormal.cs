@@ -25,7 +25,7 @@ public class ZombieNormalTransitionMember
     public MyTrigger attackTrigger = new MyTrigger();
     public MyTrigger stunTrigger = new MyTrigger();
     public MyTrigger angerTirgger = new MyTrigger();
-    public MyTrigger dyingTrigger = new MyTrigger();
+    //public MyTrigger dyingTrigger = new MyTrigger();
     public MyTrigger deathTrigger = new MyTrigger();
 }
 
@@ -71,26 +71,26 @@ public class Stator_ZombieNormal : StatorBase
         m_stateMachine.AddEdge(StateType.RandomPlowling, StateType.Stun, ToStunTrigger);
         m_stateMachine.AddEdge(StateType.RandomPlowling, StateType.Anger, ToAngerTrigger);
         m_stateMachine.AddEdge(StateType.RandomPlowling, StateType.Chase, ToChaseTrigger);
-        m_stateMachine.AddEdge(StateType.RandomPlowling, StateType.Dying, ToDyingTrigger);
+        //m_stateMachine.AddEdge(StateType.RandomPlowling, StateType.Dying, ToDyingTrigger);
 
         //追従処理
         m_stateMachine.AddEdge(StateType.Chase, StateType.Stun, ToStunTrigger);
         m_stateMachine.AddEdge(StateType.Chase, StateType.Anger, ToAngerTrigger);
         m_stateMachine.AddEdge(StateType.Chase, StateType.RandomPlowling, ToRandomPlowling);
         m_stateMachine.AddEdge(StateType.Chase, StateType.Attack, ToAttackTrigger);
-        m_stateMachine.AddEdge(StateType.Chase, StateType.Dying, ToDyingTrigger);
+        //m_stateMachine.AddEdge(StateType.Chase, StateType.Dying, ToDyingTrigger);
 
         //攻撃処理
         m_stateMachine.AddEdge(StateType.Attack, StateType.Stun, ToStunTrigger);
         m_stateMachine.AddEdge(StateType.Attack, StateType.Anger, ToAngerTrigger);
         m_stateMachine.AddEdge(StateType.Attack, StateType.Chase, ToChaseTrigger);
         m_stateMachine.AddEdge(StateType.Attack, StateType.RandomPlowling, ToRandomPlowling);
-        m_stateMachine.AddEdge(StateType.Attack, StateType.Dying, ToDyingTrigger);
+        //m_stateMachine.AddEdge(StateType.Attack, StateType.Dying, ToDyingTrigger);
 
         //スタン時
         m_stateMachine.AddEdge(StateType.Stun, StateType.Anger, ToAngerTrigger);
         m_stateMachine.AddEdge(StateType.Stun, StateType.RandomPlowling, ToRandomPlowling);
-        m_stateMachine.AddEdge(StateType.Stun, StateType.Dying, ToDyingTrigger);
+        //m_stateMachine.AddEdge(StateType.Stun, StateType.Dying, ToDyingTrigger);
 
         //ノックバック時
         //m_stateMachine.AddEdge(StateType.KnockBack, StateType.RandomPlowling, ToRandomPlowling);
@@ -99,7 +99,7 @@ public class Stator_ZombieNormal : StatorBase
         //怒り状態開始
         m_stateMachine.AddEdge(StateType.Anger, StateType.RandomPlowling, ToRandomPlowling);
         //m_stateMachine.AddEdge(StateType.Anger, StateType.Chase, ToChaseTrigger);
-        m_stateMachine.AddEdge(StateType.Anger, StateType.Dying, ToDyingTrigger);
+        //m_stateMachine.AddEdge(StateType.Anger, StateType.Dying, ToDyingTrigger);
 
         //瀕死状態
         m_stateMachine.AddEdge(StateType.Dying, StateType.Death, ToDeathTrigger);
@@ -132,10 +132,10 @@ public class Stator_ZombieNormal : StatorBase
         return member.angerTirgger.Get();
     }
 
-    bool ToDyingTrigger(TransitionMember member)
-    {
-        return member.dyingTrigger.Get();
-    }
+    //bool ToDyingTrigger(TransitionMember member)
+    //{
+    //    return member.dyingTrigger.Get();
+    //}
 
     bool ToDeathTrigger(TransitionMember member)
     {
