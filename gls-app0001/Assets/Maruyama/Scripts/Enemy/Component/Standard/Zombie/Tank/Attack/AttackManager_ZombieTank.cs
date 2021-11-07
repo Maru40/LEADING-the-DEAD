@@ -5,7 +5,7 @@ using System;
 
 using MaruUtility;
 
-public class Attack_ZombieTank : AttackNodeManagerBase
+public class AttackManager_ZombieTank : AttackNodeManagerBase
 {
     [Serializable]
     struct Parametor {
