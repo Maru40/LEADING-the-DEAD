@@ -42,11 +42,11 @@ public class FlameThrower : MonoBehaviour
 
         if(m_isShoot)
         {
-            m_flameParticle.gameObject.SetActive(true);
+            m_flameParticle.Play();
         }
         else
         {
-            m_flameParticle.gameObject.SetActive(false);
+            m_flameParticle.Stop();
         }
     }
 }
