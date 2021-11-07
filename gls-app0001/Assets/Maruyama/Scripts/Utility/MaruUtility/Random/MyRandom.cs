@@ -4,6 +4,18 @@ using UnityEngine;
 
 namespace MaruUtility
 {
+    [System.Serializable]
+    struct RandomRange
+    {
+        public float min;
+        public float max;
+
+        public RandomRange(float min, float max)
+        {
+            this.min = min;
+            this.max = max;
+        }
+    }
 
     public class MyRandom
     {
