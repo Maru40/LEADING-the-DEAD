@@ -1,10 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CymbalMonkeyStateManager : MonoBehaviour
+public class RadioStateManager : MonoBehaviour
 {
-    public enum CymbalMonkeyState
+    public enum RadioState
     {
         Normal,
         ExplosionPreparation
@@ -25,14 +25,14 @@ public class CymbalMonkeyStateManager : MonoBehaviour
             if(!value)
             {
                 m_alarmObject.AlarmStop();
-                nowState = CymbalMonkeyState.Normal;
+                nowState = RadioState.Normal;
             }
         }
         
         get => m_alarmSwitch;
     }
 
-    public CymbalMonkeyState nowState { private set; get; } = CymbalMonkeyState.Normal;
+    public RadioState nowState { private set; get; } = RadioState.Normal;
 
     private Rigidbody m_rigidbody;
     private AlarmObject m_alarmObject;
@@ -52,7 +52,7 @@ public class CymbalMonkeyStateManager : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (nowState == CymbalMonkeyState.ExplosionPreparation || !m_alarmSwitch)
+        if (nowState == RadioState.ExplosionPreparation || !m_alarmSwitch)
         {
             return;
         }
@@ -77,6 +77,6 @@ public class CymbalMonkeyStateManager : MonoBehaviour
         m_rigidbody.isKinematic = true;
         m_alarmObject.AlarmStart();
 
-        nowState = CymbalMonkeyState.ExplosionPreparation;
+        nowState = RadioState.ExplosionPreparation;
     }
 }

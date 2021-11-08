@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(CymbalMonkeyStateManager))]
-public class CymbalMonkeyStateManagerEditor : Editor
+[CustomEditor(typeof(RadioStateManager))]
+public class RadioStateManagerEditor : Editor
 {
     private int m_arraySize;
 

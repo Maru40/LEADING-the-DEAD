@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5976707543199653883}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.175, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6514517323444276291}
@@ -43,7 +43,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.1, z: 0.5}
-  m_Center: {x: 0, y: -0.45, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6520215467471573455
 GameObject:
   m_ObjectHideFlags: 0
@@ -66,7 +66,7 @@ GameObject:
   - component: {fileID: -6019398565396799119}
   - component: {fileID: -5966429964488760763}
   m_Layer: 2
-  m_Name: CymbalMonkey
+  m_Name: Radio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ Transform:
   m_GameObject: {fileID: 6520215467471573455}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7731803935398764100}
   - {fileID: 1423566745020390514}
@@ -95,7 +95,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6520215467471573455}
-  m_Mesh: {fileID: 4300000, guid: 1d2364a646d7c894b95d83a0d56e80d5, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 43fa95d65a848fd418105c6b7f7be836, type: 3}
 --- !u!23 &6497287969379345161
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -115,7 +115,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5b809c90501a74a468a795707b2fd138, type: 2}
+  - {fileID: 2100000, guid: 160e393992debaf489d3979bb43d2a4c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -163,10 +163,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.7537596
-  m_Height: 1.8860508
+  m_Radius: 0.2
+  m_Height: 0.75
   m_Direction: 1
-  m_Center: {x: 0.000018030405, y: 0.4492101, z: 0.15591887}
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!114 &3904213817972291339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,6 +196,7 @@ MonoBehaviour:
   - T_Wall
   - Ground
   - StageObject
+  m_alarmSwitch: 0
 --- !u!82 &7460779421075515660
 AudioSource:
   m_ObjectHideFlags: 0
@@ -357,6 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_pickedUpObjectName: CymbalMonkey
+  m_pickedUpType: 0
   m_pickedUpSound: {fileID: 0}
 --- !u!114 &-5966429964488760763
 MonoBehaviour:
@@ -370,6 +372,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14d14808bee6c19409e6f7a793f3e76e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_eatWeight: 1
+  m_eatenEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7471403350076812732
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,5 +418,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 30
+  m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
