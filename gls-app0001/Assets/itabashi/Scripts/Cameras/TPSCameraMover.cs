@@ -36,6 +36,9 @@ public class TPSCameraMover : MonoBehaviour
     [SerializeField]
     private float m_maxRotateX = 90;
 
+    [SerializeField]
+    private LayerMask m_hitLayer;
+
     /// <summary>
     /// 一秒に対しての回転量
     /// </summary>
@@ -100,7 +103,16 @@ public class TPSCameraMover : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(m_rotateX, m_rotateY, 0);
 
-        transform.position = m_targetObject.transform.position + -transform.forward * m_maxRange;
+        float range = m_maxRange;
+
+        if (Physics.Raycast(m_targetObject.transform.position, -transform.forward, out RaycastHit hitInfo, m_maxRange, m_hitLayer))
+        {
+            range = (hitInfo.point - m_targetObject.transform.position).magnitude;
+        }
+
+        Debug.DrawLine(m_targetObject.transform.position, transform.position + -transform.forward * range);
+
+        transform.position = m_targetObject.transform.position + -transform.forward * range;
     }
 
     // Start is called before the first frame update
