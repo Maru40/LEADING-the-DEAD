@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System;
+using AttributeObject;
 
 /// <summary>
 /// 生成時にセットするパラメータ群
@@ -18,8 +19,18 @@ public class CreateSetParametor_ZombieNormal
     public RandomPlowlingMove.Parametor randomPlowlingParametor = new RandomPlowlingMove.Parametor(15.0f, 2.5f, 2.0f, 0.3f, 3.0f, 1.0f);
     [Header("ステータス")]
     public StatusManager_ZombieNormal.Status status = new StatusManager_ZombieNormal.Status(1.0f, 3.0f);
-    [Header("攻撃力など")]
-    public AttackParametorBase attackParametor = new AttackParametorBase(new AttributeObject.DamageData(2.0f), 2.5f);
+    [Header("攻撃開始距離")]
+    public AttackParametorBase attackManagerParametor = new AttackParametorBase(new AttributeObject.DamageData(2.0f), 2.5f);
+    [Header("通常攻撃のパラメータ")]
+    public NormalAttack.Parametor normalAttackParametor = new NormalAttack.Parametor(3.0f);
+    [Header("通常攻撃の右腕の攻撃パラメータ")]
+    public DamageData normalRightHitParametor = new DamageData(1.0f, false, 0);
+    [Header("通常攻撃の左腕の攻撃パラメータ")]
+    public DamageData normalLeftHitParametor = new DamageData(1.0f, false, 0);
+    [Header("怒り状態のバフパラメータ")]
+    public AngerManager.RiseParametor angerBuffParametor = new AngerManager.RiseParametor(1.05f, 1.02f, 1.5f);
+    [Header("ターゲットのバフパラメータ")]
+    public TargetManager.BuffParametor targetBuffParametor = new TargetManager.BuffParametor(3.0f);
 
     public CreateSetParametor_ZombieNormal()
     {
@@ -32,7 +43,7 @@ public class CreateSetParametor_ZombieNormal
         chaseParametor = new ChaseTargetParametor(allInit, allInit, allInit, allInit, allInit);
         randomPlowlingParametor = new RandomPlowlingMove.Parametor(allInit, allInit, allInit, allInit, allInit, allInit);
         status = new StatusManager_ZombieNormal.Status(allInit, allInit);
-        attackParametor = new AttackParametorBase(new AttributeObject.DamageData(allInit), allInit);
+        attackManagerParametor = new AttackParametorBase(new AttributeObject.DamageData(allInit), allInit);
     }
 }
 
@@ -75,10 +86,34 @@ public class EnemyGenerator_ZombieNormal : EnemyGenerator
             statusMgr.SetStatus(m_createSetParam.status);
         }
 
-        var attack = obj.GetComponent<AttackManager_ZombieNormal>();
-        if (attack)
+        var attackManager = obj.GetComponent<AttackManager_ZombieNormal>();
+        if (attackManager)
         {
-            attack.SetBaseParam(m_createSetParam.attackParametor);
+            attackManager.SetBaseParam(m_createSetParam.attackManagerParametor);
+        }
+
+        var normalAttack = obj.GetComponent<NormalAttack>();
+        if (normalAttack)
+        {
+            normalAttack.parametor = m_createSetParam.normalAttackParametor;
+        }
+
+        //通常攻撃→右
+
+        //通常攻撃→左
+
+        //怒りバフ
+        var angerManager = obj.GetComponent<AngerManager>();
+        if (angerManager)
+        {
+            angerManager.SetRiseParametor(m_createSetParam.angerBuffParametor);
+        }
+
+        //ターゲットバフ
+        var targetManager = obj.GetComponent<TargetManager>();
+        if (targetManager)
+        {
+            targetManager.buffParametor = m_createSetParam.targetBuffParametor;
         }
 
         var statusUp = obj.GetComponent<RespawnStatusUp_ZonbieNormal>();
