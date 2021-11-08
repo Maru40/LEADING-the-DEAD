@@ -158,7 +158,7 @@ namespace Player
 
             m_animatorManager.GoState("ThrowingStance", "Upper_Layer");
 
-            var cymbalMonkeyStateManager = throwableObject.GetComponent<CymbalMonkeyStateManager>();
+            var cymbalMonkeyStateManager = throwableObject.GetComponent<RadioStateManager>();
 
             if (cymbalMonkeyStateManager)
             {
