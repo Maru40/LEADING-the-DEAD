@@ -2,10 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using System;
 using MaruUtility;
 
 public class NormalAttack : AttackNodeBase
 {
+    [Serializable]
+    public struct Parametor
+    {
+        public float moveSpeed;
+
+        public Parametor(float moveSpeed)
+        {
+            this.moveSpeed = moveSpeed;
+        }
+    }
+
     //Stator_ZombieTank m_stator;
     AttackNodeManagerBase m_attackManager;
     TargetManager m_targetMgr;
@@ -15,7 +27,7 @@ public class NormalAttack : AttackNodeBase
     ThrongManager m_throngManager;
 
     [SerializeField]
-    float m_moveSpeed = 3.0f;
+    Parametor m_param = new Parametor(3.0f);
 
     bool m_isTargetChase = true;  //攻撃の途中まではターゲットを追うようにするため。
 
@@ -47,7 +59,7 @@ public class NormalAttack : AttackNodeBase
             return;
         }
 
-        float moveSpeed = m_moveSpeed * m_statusManager.GetBuffParametor().angerParam.speed;
+        float moveSpeed = m_param.moveSpeed * m_statusManager.GetBuffParametor().angerParam.speed;
         var toVec = target.transform.position - transform.position;
         toVec.y = 0.0f;  //(yのベクトルを殺す。)
 
@@ -122,4 +134,13 @@ public class NormalAttack : AttackNodeBase
 
         m_velocityMgr.StartDeseleration();
     }
+
+    //アクセッサ・プロパティ----------------------------------------------------------
+
+    public Parametor parametor
+    {
+        get => m_param;
+        set => m_param = value;
+    }
+
 }
