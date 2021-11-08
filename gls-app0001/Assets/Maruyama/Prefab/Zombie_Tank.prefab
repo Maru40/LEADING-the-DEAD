@@ -75,6 +75,8 @@ MonoBehaviour:
     hitStopTime: 0
     type: 0
     damageTags: []
+  m_audioManager: {fileID: 0}
+  m_hitParticleID: 0
 --- !u!1 &693052286
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,6 +227,8 @@ MonoBehaviour:
     hitStopTime: 0
     type: 0
     damageTags: []
+  m_audioManager: {fileID: 0}
+  m_hitParticleID: 0
 --- !u!1 &1786098620
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,6 +511,7 @@ MonoBehaviour:
     nearRange: 3
     normalSpeed: 10
     tackleSpeed: 1000
+    waitSeeProbability: 50
 --- !u!114 &3338411170978670924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,6 +551,7 @@ MonoBehaviour:
   m_status:
     hp: 1
     damageIntervalTime: 3
+    isStun: 0
   m_hitStopBehaviours: []
 --- !u!136 &469517195
 CapsuleCollider:
