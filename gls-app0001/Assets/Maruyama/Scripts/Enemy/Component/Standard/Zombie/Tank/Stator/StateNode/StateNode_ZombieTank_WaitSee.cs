@@ -9,12 +9,25 @@ using MaruUtility;
 /// </summary>
 public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
 {
+    struct TaskParametor
+    {
+        public Task_HorizontalMove.Parametor horizontalMoveParam;   
+    }
+
     enum TaskEnum
     {
         HorizontalMove,
         CircleMove,
     }
 
+    TaskParametor m_taskParam = new TaskParametor()
+    {
+        horizontalMoveParam = new Task_HorizontalMove.Parametor()
+        {
+            timeRange = new RandomRange(2.0f, 3.0f),
+            speed = 1.0f,
+        },
+    };
     TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
 
     AttackNodeManagerBase m_attackManager;
@@ -50,7 +63,6 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
 
         if (m_taskList.IsEnd)
         {
-            Debug.Log("WaitSee終わり");
             //まだ様子を見るか、攻撃するか選ぶ
             m_attackManager.AttackStart();
         }
@@ -61,14 +73,8 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
         m_taskList.DefineTask(TaskEnum.HorizontalMove,
             new Task_HorizontalMove(
                 GetOwner(), 
-                new Task_HorizontalMove.Parametor(new RandomRange(2.0f, 3.0f), 1.0f))
-            );
-
-        m_taskList.DefineTask(TaskEnum.CircleMove, 
-            new Task_CircleMove(
-                GetOwner(),
-                new Task_CircleMove.Parametor(new RandomRange(30.0f,30.0f), 3.0f))
-            );
+                m_taskParam.horizontalMoveParam
+            ));
     }
 
     void SelectTask()
@@ -87,14 +93,14 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
             public RandomRange timeRange;
             public float speed;
 
-            public Vector3 direct;
+            public float rotationDegree;  //Vector3を回転させる角度
 
             public Parametor(RandomRange timeRange, float speed)
             {
                 this.timeRange = timeRange;
                 this.speed = speed;
 
-                this.direct = Vector3.zero;
+                this.rotationDegree = 0.0f;
             }
         }
 
@@ -125,7 +131,7 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
             float time = Random.Range(timeRange.min, timeRange.max);
             m_timer.ResetTimer(time);
 
-            m_param.direct = CalcuRandomMoveDirectVector();
+            m_param.rotationDegree = CalcuRotationDegree();
             m_velocityManager.ResetAll();
         }
 
@@ -135,7 +141,7 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
 
             m_timer.UpdateTimer();
 
-            //MoveUpdate();
+            MoveUpdate();
             RotationUpdate();
 
             return m_timer.IsTimeUp;
@@ -148,7 +154,8 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
 
         void MoveUpdate()
         {
-            Vector3 moveVec = m_param.direct * m_param.speed;
+            var direct = Quaternion.AngleAxis(m_param.rotationDegree, Vector3.up) * CalcuToTargetVec();
+            Vector3 moveVec = direct.normalized * m_param.speed;
 
             m_velocityManager.velocity = moveVec;
         }
@@ -168,16 +175,33 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
         /// 移動方向を返す(右か左)
         /// </summary>
         /// <returns></returns>
-        Vector3 CalcuRandomMoveDirectVector()
+        float CalcuRotationDegree()
         {
-            Vector3[] directs = { Vector3.right, Vector3.left };
+            float[] directs = { +90.0f, -90.0f };
             int index = Random.Range(0, directs.Length);
             return directs[index];
+        }
+
+        /// <summary>
+        /// ターゲット方向のベクトルを返す
+        /// </summary>
+        /// <returns></returns>
+        Vector3 CalcuToTargetVec()
+        {
+            var target = m_targetManager.GetNowTarget();
+            if (target == null) {
+                return Vector3.zero;
+            }
+
+            var toTargetVec = target.transform.position - Owner.transform.position;
+            toTargetVec.y = 0.0f;
+            return toTargetVec;
         }
     }
 
     //サークルMove----------------------------
 
+    //使ってない
     class Task_CircleMove : TaskNodeBase<EnemyBase>
     {
         public struct Parametor
