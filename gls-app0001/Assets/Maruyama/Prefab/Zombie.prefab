@@ -3138,10 +3138,11 @@ MonoBehaviour:
   m_status:
     hp: 1
     damageIntervalTime: 3
+    isStun: 0
   m_hitStopBehaviours:
   - {fileID: 1444888580945028641}
   - {fileID: -350905166790925542}
-  m_fireDamageParticle: {fileID: 1567218315478429514, guid: a76fe4d520a4350479f232e7b094a375, type: 3}
+  m_fireDamageParticle: {fileID: 1725317912486240, guid: e55149ba6f4d00741984987e258c3378, type: 3}
   m_cuttingDamageParticle: {fileID: 1834194341294532, guid: d5f26854a8904624c8073139cd2eb346, type: 3}
 --- !u!114 &-8648523569329281583
 MonoBehaviour:
@@ -3220,6 +3221,7 @@ MonoBehaviour:
     status:
       hp: 0
       damageIntervalTime: 0
+      isStun: 0
     attackParametor:
       damageData:
         obj: {fileID: 0}
