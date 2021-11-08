@@ -10,6 +10,7 @@ public class SelectablesParentUI : Selectable
     [SerializeField]
     private Selectable m_firstSelectable;
 
+#if UNITY_EDITOR
     protected override void OnValidate()
     {
         base.OnValidate();
@@ -25,6 +26,7 @@ public class SelectablesParentUI : Selectable
             m_firstSelectable = null;
         }
     }
+#endif
 
     public override void OnSelect(BaseEventData eventData)
     {
