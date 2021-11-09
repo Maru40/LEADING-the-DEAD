@@ -13,11 +13,13 @@ public class FoundObject : MonoBehaviour
 
     public struct FoundData
     {
+        private GameObject gameObject;
         public int priority;
         public FoundType type;
 
-        public FoundData(int priority, FoundType type)
+        public FoundData(GameObject gameObject, int priority, FoundType type)
         {
+            this.gameObject = gameObject;
             this.priority = priority;
             this.type = type;
         }
@@ -31,6 +33,6 @@ public class FoundObject : MonoBehaviour
 
     public FoundData GetFoundData()
     {
-        return new FoundData(m_priority, m_type);
+        return new FoundData(gameObject, m_priority, m_type);
     }
 }
