@@ -18,7 +18,12 @@ public struct BuffParametor
     /// </summary>
     public float SpeedBuffMultiply
     {
-        get => angerParam.speed * targetParam.speed;
+        get {
+            Debug.Log("angerBuff: " + angerParam.speed) ;
+            Debug.Log("targetBuff: " + targetParam.speed);
+            Debug.Log("BuffSpeed: " + angerParam.speed * targetParam.speed);
+            return angerParam.speed * targetParam.speed; 
+        }
     }
 }
 
