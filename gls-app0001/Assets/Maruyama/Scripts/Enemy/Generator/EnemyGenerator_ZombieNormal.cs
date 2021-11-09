@@ -32,6 +32,8 @@ public class CreateSetParametor_ZombieNormal
     public AngerManager.RiseParametor angerBuffParametor = new AngerManager.RiseParametor(1.05f, 1.02f, 1.5f);
     [Header("ターゲットのバフパラメータ")]
     public TargetManager.BuffParametor targetBuffParametor = new TargetManager.BuffParametor(3.0f);
+    [Header("目線のパラメータ")]
+    public EyeSearchRangeParam eyeSarchRangeParam = new EyeSearchRangeParam(7.0f, 3.0f, 0.7f);
 
     public CreateSetParametor_ZombieNormal()
     {
@@ -123,6 +125,13 @@ public class EnemyGenerator_ZombieNormal : EnemyGenerator
         if (targetManager)
         {
             targetManager.buffParametor = m_createSetParam.targetBuffParametor;
+        }
+
+        //目線パラメータ
+        var eyeSearchRange = obj.GetComponent<EyeSearchRange>();
+        if (eyeSearchRange)
+        {
+            eyeSearchRange.SetParam(m_createSetParam.eyeSarchRangeParam);
         }
 
         var statusUp = obj.GetComponent<RespawnStatusUp_ZonbieNormal>();
