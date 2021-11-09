@@ -54,13 +54,13 @@ public class NormalAttack : AttackNodeBase
     /// </summary>
     void TargetChase()
     {
-        var target = m_targetMgr.GetNowTarget();
-        if (target == null) {
+        var position = m_targetMgr.GetNowTargetPosition();
+        if (position == null) {
             return;
         }
 
         float moveSpeed = m_param.moveSpeed * m_statusManager.GetBuffParametor().angerParam.speed;
-        var toVec = target.transform.position - transform.position;
+        var toVec = (Vector3)position - transform.position;
         toVec.y = 0.0f;  //(yのベクトルを殺す。)
 
         m_velocityMgr.velocity = toVec.normalized * moveSpeed;
