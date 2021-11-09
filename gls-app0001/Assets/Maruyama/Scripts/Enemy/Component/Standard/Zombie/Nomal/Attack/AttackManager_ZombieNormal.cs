@@ -29,10 +29,11 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
     override public bool IsAttackStartRange()
     {
         float range = GetBaseParam().startRange;
-        FoundObject target = m_targetMgr.GetNowTarget();
-        if (target)
+        //FoundObject target = m_targetMgr.GetNowTarget();
+        var position = m_targetMgr.GetNowTargetPosition();
+        if (position != null)
         {
-            return Calculation.IsRange(gameObject, target.gameObject, range);
+            return Calculation.IsRange(gameObject, (Vector3)position, range);
         }
         else
         {

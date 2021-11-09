@@ -100,6 +100,10 @@ public class DropObjecptManager : MonoBehaviour
             {
                 continue;
             }
+            if(data.obj == null)
+            {
+                continue;
+            }
 
             var isDrop = MyRandom.RandomProbability(data.probability);
             if (isDrop)  //ドロップするなら。
