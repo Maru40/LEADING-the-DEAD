@@ -84,9 +84,17 @@ public class ChaseTarget : MonoBehaviour
     void StateCheck()
     {
         var target = m_targetMgr.GetNowTarget();
+        var lostPosition = m_targetMgr.GetLostPosition();
         if(target == null)  //ターゲットがnullなら
         {
-            TargetLost();
+            if(lostPosition == null)
+            {
+                TargetLost();
+            }
+            else
+            {
+                m_stateMachine.GetTransitionStructMember().linerTrigger.Fire(); //Linerに変更
+            }
             return;
         }
 
