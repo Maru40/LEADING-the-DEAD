@@ -43,6 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3474c5959050d041a7b1d231d30c86a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isSelectDrawGizmos: 0
+  m_gizmosColor: {r: 1, g: 0, b: 0, a: 0.3}
   m_outOfTargteDatas: []
   m_createObject: {fileID: 7434505739018704334, guid: 67a643b874b307f46a417e4170a2dd67, type: 3}
   m_numCreate: 75
@@ -55,14 +57,14 @@ MonoBehaviour:
       probability: 100
       particle: {fileID: 6492296973775632991, guid: 91837f35aa527df4199f8784a19b20ec, type: 3}
       isRemove: 0
-    numDistribution: 7
+    numDistribution: 1
   m_createSetParam:
     respawnParametor:
       isRespawn: 1
       time: 0
     chaseParametor:
       nearRange: 0.75
-      maxSpeed: 1.5
+      maxSpeed: 3
       turningPower: 3
       lostSeekTime: 7
       inThrongRange: 3
@@ -76,14 +78,46 @@ MonoBehaviour:
     status:
       hp: 1
       damageIntervalTime: 3
-    attackParametor:
+      isStun: 0
+    attackManagerParametor:
       damageData:
         obj: {fileID: 0}
         damageValue: 2
         isStunAttack: 0
-        hitStopTime: 1
+        hitStopTime: 0
+        type: 0
         damageTags: []
       startRange: 2.5
+    normalAttackParametor:
+      moveSpeed: 3
+    normalAttackHitBoxDictionary:
+      m_typeDraws:
+      - key: 0
+        value:
+          obj: {fileID: 0}
+          damageValue: 1
+          isStunAttack: 0
+          hitStopTime: 0
+          type: 0
+          damageTags: []
+      - key: 1
+        value:
+          obj: {fileID: 0}
+          damageValue: 1
+          isStunAttack: 0
+          hitStopTime: 0
+          type: 0
+          damageTags: []
+    angerBuffParametor:
+      attackPower: 1.05
+      speed: 1.02
+      attackAnimeSpeed: 1.5
+    targetBuffParametor:
+      speed: 3
+    eyeSarchRangeParam:
+      range: 7
+      height: 3
+      rad: 0.7
   m_respawnStatusUpParam:
     respawnParametor:
       isRespawn: 1
@@ -104,11 +138,27 @@ MonoBehaviour:
     status:
       hp: 0
       damageIntervalTime: 0
-    attackParametor:
+      isStun: 0
+    attackManagerParametor:
       damageData:
         obj: {fileID: 0}
         damageValue: 0
         isStunAttack: 0
         hitStopTime: 0
+        type: 0
         damageTags: []
       startRange: 0
+    normalAttackParametor:
+      moveSpeed: 3
+    normalAttackHitBoxDictionary:
+      m_typeDraws: []
+    angerBuffParametor:
+      attackPower: 1.05
+      speed: 1.02
+      attackAnimeSpeed: 1.5
+    targetBuffParametor:
+      speed: 3
+    eyeSarchRangeParam:
+      range: 20
+      height: 3
+      rad: 0.5235988
