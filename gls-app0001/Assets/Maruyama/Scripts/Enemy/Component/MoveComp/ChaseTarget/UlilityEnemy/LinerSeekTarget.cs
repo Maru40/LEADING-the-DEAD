@@ -59,18 +59,44 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
 
         FoundObject target = m_targetMgr.GetNowTarget();
         if (target) {
-            Vector3 toVec = target.transform.position - GetOwner().transform.position;
-            float maxSpeed = m_maxSpeed * m_statusManager.GetBuffParametor().SpeedBuffMultiply;
-            Vector3 force = CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, toVec, maxSpeed);
-            m_velocityMgr.AddForce(force * m_turningPower);
-
-            m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
+            LinerTarget(target);
         }
         else {
-            m_chaseTarget.TargetLost();
+            LinerLostPosition();
+            //m_chaseTarget.TargetLost();
         }
     }
 
+    //ターゲットを追従する処理
+    void LinerTarget(FoundObject target)
+    {
+        Move(target.transform.position);
+    }
+
+    //見失った場所を探す。
+    void LinerLostPosition()
+    {
+        var lostPosition = m_targetMgr.GetLostPosition();
+        if (lostPosition == null)
+        {
+            m_chaseTarget.TargetLost();
+            return;
+        }
+
+        Move((Vector3)lostPosition);
+
+        Debug.Log("見失った―追う");
+    }
+
+    void Move(Vector3 targetPosition)
+    {
+        Vector3 toVec = targetPosition - GetOwner().transform.position;
+        float maxSpeed = m_maxSpeed * m_statusManager.GetBuffParametor().SpeedBuffMultiply;
+        Vector3 force = CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, toVec, maxSpeed);
+        m_velocityMgr.AddForce(force * m_turningPower);
+
+        m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
+    }
 
     //アクセッサ-----------------------------------------------------------------------------
 
