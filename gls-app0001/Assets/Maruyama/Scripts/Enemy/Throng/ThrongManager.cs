@@ -349,10 +349,17 @@ public class ThrongManager : MonoBehaviour
         return m_param;
     }
 
+    public void SetGenerator(EnemyGenerator generator)
+    {
+        m_generator = generator;
+    }
+
     //null回避--------------------------
 
     void SetSearchGenerator()
     {
+        return;
+
         if(m_generator != null) {  //null出なかったら処理をしない。
             return;
         }
