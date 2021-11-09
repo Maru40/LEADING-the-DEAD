@@ -43,6 +43,9 @@ namespace Player
         [SerializeField]
         private AudioClip m_throwingSound;
 
+        [SerializeField]
+        private string m_pickUpItemName = "CymbalMonkey";
+
         private float m_countCoolTime;
 
         private ThrowableObject m_takingObject;
@@ -128,7 +131,7 @@ namespace Player
         void ThrowingStanceStart()
         {
 
-            var cymbalMonkeyList = m_playerpickUpper.GetPickedUpObjectList("CymbalMonkey");
+            var cymbalMonkeyList = m_playerpickUpper.GetPickedUpObjectList(m_pickUpItemName);
 
             if (cymbalMonkeyList.Count == 0)
             {
@@ -164,6 +167,13 @@ namespace Player
             {
                 cymbalMonkeyStateManager.alarmSwitch = true;
             }
+
+            var bottleManager = throwableObject.GetComponent<BottleManager>();
+
+            if(bottleManager)
+            {
+                bottleManager.isCrashable = true;
+            }
         }
 
         void ThrowingStanceEnd()
@@ -188,7 +198,7 @@ namespace Player
 
             m_takingObject.transform.SetParent(null);
 
-            m_playerpickUpper.TakeOut("CymbalMonkey");
+            m_playerpickUpper.TakeOut(m_pickUpItemName);
 
             m_objectLauncher.Fire(m_takingObject, m_takingObject.transform.rotation);
 
