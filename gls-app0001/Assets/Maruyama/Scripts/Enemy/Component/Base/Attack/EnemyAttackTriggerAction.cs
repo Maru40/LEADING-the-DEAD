@@ -77,4 +77,25 @@ public class EnemyAttackTriggerAction : TriggerAction
             damage.TakeDamage(damageData);
         }
     }
+
+
+    //アクセッサ・プロパティ--------------------------------------------------------------------------
+
+    public DamageData damageData
+    {
+        get => m_damageData;
+        set
+        {
+            Debug.Log(value.damageValue);
+            if (value.obj == null)
+            {
+                var obj = m_damageData.obj;
+                m_damageData = value;
+                m_damageData.obj = obj;
+                return;
+            }
+
+            m_damageData = value;
+        }
+    }
 }

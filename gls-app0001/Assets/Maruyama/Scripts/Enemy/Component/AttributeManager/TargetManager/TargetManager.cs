@@ -212,4 +212,13 @@ public class TargetManager : MonoBehaviour
     {
         return m_nowTarget.transform.position - transform.position;
     }
+
+
+    //アクセッサ・プロパティ
+
+    public BuffParametor buffParametor
+    {
+        get => m_buffParam;
+        set => m_buffParam = value;
+    }
 }

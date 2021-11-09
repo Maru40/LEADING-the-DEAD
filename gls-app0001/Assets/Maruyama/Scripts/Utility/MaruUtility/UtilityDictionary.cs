@@ -16,7 +16,7 @@ namespace MaruUtility
         /// <typeparam name="TKey"></typeparam>
         /// <typeparam name="TValue"></typeparam>
         [Serializable]
-        class Ex_Dictionary<TKey, TValue> : Dictionary<TKey, TValue>
+        public class Ex_Dictionary<TKey, TValue> : Dictionary<TKey, TValue>
         {
             [Serializable]
             struct TypeDraw
@@ -39,7 +39,7 @@ namespace MaruUtility
             {
                 foreach (var type in m_typeDraws)
                 {
-                    base[type.key] = type.value;
+                    base.Add(type.key, type.value);
                 }
                 m_typeDraws.Clear();
             }

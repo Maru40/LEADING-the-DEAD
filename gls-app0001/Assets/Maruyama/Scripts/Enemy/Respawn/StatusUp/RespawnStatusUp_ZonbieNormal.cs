@@ -36,7 +36,7 @@ public class RespawnStatusUp_ZonbieNormal : EnemyRespawnStatusUpBase
         var attack = GetComponent<AttackManager_ZombieNormal>();
         if (attack)
         {
-            attack.AddBaseParam(m_param.attackParametor);
+            attack.AddBaseParam(m_param.attackManagerParametor);
         }
     }
 
