@@ -3224,7 +3224,7 @@ MonoBehaviour:
       hp: 0
       damageIntervalTime: 0
       isStun: 0
-    attackParametor:
+    attackManagerParametor:
       damageData:
         obj: {fileID: 0}
         damageValue: 0
@@ -3233,6 +3233,16 @@ MonoBehaviour:
         type: 0
         damageTags: []
       startRange: 0
+    normalAttackParametor:
+      moveSpeed: 3
+    normalAttackHitBoxDictionary:
+      m_typeDraws: []
+    angerBuffParametor:
+      attackPower: 1.05
+      speed: 1.02
+      attackAnimeSpeed: 1.5
+    targetBuffParametor:
+      speed: 3
 --- !u!114 &-9140734898953323855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3369,7 +3379,8 @@ MonoBehaviour:
       type: 0
       damageTags: []
     startRange: 1.5
-  m_moveSpeed: 3
+  m_param:
+    moveSpeed: 3
 --- !u!114 &-3509147400467223985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3408,9 +3419,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_params:
   - nowClipName: Z_Walk
-    animationClips:
-    - {fileID: -6257440219318784398, guid: 59dbfb66512f63c4eb6e1e30e0603198, type: 3}
-    - {fileID: -6257440219318784398, guid: 1d31b4476a14a0246b2e0f023e8877fe, type: 3}
+    animationClipParametors:
+    - animationClip: {fileID: -6257440219318784398, guid: 59dbfb66512f63c4eb6e1e30e0603198, type: 3}
+      speed: 1.3
+    - animationClip: {fileID: 7400000, guid: 4427ff7ccdf204f49860d80928896422, type: 3}
+      speed: 0.5
 --- !u!114 &437899209864115181
 MonoBehaviour:
   m_ObjectHideFlags: 0
