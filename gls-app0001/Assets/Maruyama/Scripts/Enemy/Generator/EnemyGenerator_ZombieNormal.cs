@@ -5,6 +5,8 @@ using UnityEngine;
 using System;
 using AttributeObject;
 
+using MaruUtility.UtilityDictionary;
+
 /// <summary>
 /// 生成時にセットするパラメータ群
 /// </summary>
@@ -23,10 +25,9 @@ public class CreateSetParametor_ZombieNormal
     public AttackParametorBase attackManagerParametor = new AttackParametorBase(new AttributeObject.DamageData(2.0f), 2.5f);
     [Header("通常攻撃のパラメータ")]
     public NormalAttack.Parametor normalAttackParametor = new NormalAttack.Parametor(3.0f);
-    [Header("通常攻撃の右腕の攻撃パラメータ")]
-    public DamageData normalRightHitParametor = new DamageData(1.0f, false, 0);
-    [Header("通常攻撃の左腕の攻撃パラメータ")]
-    public DamageData normalLeftHitParametor = new DamageData(1.0f, false, 0);
+    [Header("通常攻撃の攻撃力パラメータ")]
+    public Ex_Dictionary<AnimatorManager_ZombieNormal.NormalAttackHitColliderType, DamageData> normalAttackHitBoxDictionary = 
+        new Ex_Dictionary<AnimatorManager_ZombieNormal.NormalAttackHitColliderType, DamageData>();
     [Header("怒り状態のバフパラメータ")]
     public AngerManager.RiseParametor angerBuffParametor = new AngerManager.RiseParametor(1.05f, 1.02f, 1.5f);
     [Header("ターゲットのバフパラメータ")]
@@ -98,9 +99,17 @@ public class EnemyGenerator_ZombieNormal : EnemyGenerator
             normalAttack.parametor = m_createSetParam.normalAttackParametor;
         }
 
-        //通常攻撃→右
-
-        //通常攻撃→左
+        //通常攻撃力
+        var animatorManager = obj.GetComponent<AnimatorManager_ZombieNormal>();
+        if (animatorManager)
+        {
+            m_createSetParam.normalAttackHitBoxDictionary.InsertInspectorData();
+            foreach (var data in m_createSetParam.normalAttackHitBoxDictionary)
+            {
+                Debug.Log(data.Key + ": " + data.Value);
+                animatorManager.SetNormalAttackDamageData(data.Key, data.Value);
+            }
+        }
 
         //怒りバフ
         var angerManager = obj.GetComponent<AngerManager>();
