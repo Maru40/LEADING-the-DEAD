@@ -18,6 +18,9 @@ public class AlarmObject : MonoBehaviour
     [SerializeField]
     private Collider m_soundRange;
 
+    [SerializeField]
+    private bool m_playOnAwake = false;
+
     private AudioSource m_audioSource;
 
     // Start is called before the first frame update
@@ -25,7 +28,16 @@ public class AlarmObject : MonoBehaviour
     {
         m_audioSource = GetComponent<AudioSource>();
         
-        if(m_soundRange)
+        if(!m_soundRange)
+        {
+            return;
+        }
+
+        if(m_playOnAwake)
+        {
+            AlarmStart();
+        }
+        else
         {
             m_soundRange.enabled = false;
         }
