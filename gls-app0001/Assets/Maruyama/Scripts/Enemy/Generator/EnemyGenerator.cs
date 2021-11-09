@@ -28,6 +28,23 @@ public struct OutOfTargetData
 
 public class EnemyGenerator : GeneratorBase
 {
+    [Serializable]
+    public struct Parameotor
+    {
+        public GameObject createObject;
+        public int numCreate;
+        public Vector3 centerPosition;
+        public Vector3 maxRandomRange;
+
+        public Parameotor(GameObject createObject, int numCreate, Vector3 centerPosition, Vector3 maxRandomRange)
+        {
+            this.createObject = createObject;
+            this.numCreate = numCreate;
+            this.centerPosition = centerPosition;
+            this.maxRandomRange = maxRandomRange;
+        }
+    }
+
     [Header("セレクト時のみ範囲を表示するかどうか"),SerializeField]
     bool m_isSelectDrawGizmos = false;
     [Header("生成範囲表示カラー"),SerializeField]
@@ -56,6 +73,7 @@ public class EnemyGenerator : GeneratorBase
 
     //生成したゾンビを持つ
     protected List<ThrongData> m_datas = new List<ThrongData>();
+    static List<ThrongData> m_allDatas = new List<ThrongData>();
 
     protected virtual void Start()
     {
@@ -86,20 +104,35 @@ public class EnemyGenerator : GeneratorBase
         var obj = Instantiate(m_createObject, createPosition, Quaternion.identity, transform);
         CreateObjectAdjust(obj);  //調整
 
-        m_datas.Add(new ThrongData(obj.GetComponent<EnemyVelocityMgr>(),
+        var newData = new ThrongData(obj.GetComponent<EnemyVelocityMgr>(),
             obj.GetComponent<TargetManager>(),
             obj.GetComponent<ThrongManager>(),
             obj.GetComponent<RandomPlowlingMove>(),
             obj.GetComponent<DropObjecptManager>()
-        )); ;
+        );
+
+        m_datas.Add(newData);
+        m_allDatas.Add(newData);
     }
 
     /// <summary>
     /// 調整が必要なオブジェクトを渡して、調整
     /// </summary>
     /// <param name="obj">調整したいオブジェクト</param>
-    protected virtual void CreateObjectAdjust(GameObject obj) { }
+    protected virtual void CreateObjectAdjust(GameObject obj)
+    {
+        var throng = obj.GetComponent<ThrongManager>();
+        if (throng)
+        {
+            throng.SetGenerator(this);
+        }
 
+        var respawn = obj.GetComponent<EnemyRespawnManager>();
+        if (respawn)
+        {
+            respawn.SetGenerator(this);
+        }
+    }
 
     /// <summary>
     /// ターゲットから離れた場所を、ランダムに返す。
@@ -108,6 +141,8 @@ public class EnemyGenerator : GeneratorBase
     /// <returns>ランダムな位置</returns>
     public Vector3 CalcuRandomPosition()
     {
+        //return RandomPosition.CalcuPosition(m_maxRandomRange, m_centerPosition);
+
         return RandomPosition.OutCameraAndOutRangeOfTargets(
             m_outOfTargteDatas,
             Camera.main, m_maxRandomRange, m_centerPosition);
@@ -140,7 +175,7 @@ public class EnemyGenerator : GeneratorBase
 
     public List<ThrongData> GetThrongDatas()
     {
-        return m_datas;
+        return m_allDatas;
     }
 
     public GameObject GetCreateObject()
