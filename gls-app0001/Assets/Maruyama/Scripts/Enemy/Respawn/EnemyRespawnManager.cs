@@ -149,6 +149,11 @@ public class EnemyRespawnManager : EnemyRespawnBase
         m_param.time += parametor.time;
     }
 
+    public void SetGenerator(EnemyGenerator generator)
+    {
+        m_generator = generator;
+    }
+
     //StartNullCheck----------------------------------------------------
 
     void StartTargetNullCheck()
@@ -160,6 +165,8 @@ public class EnemyRespawnManager : EnemyRespawnBase
 
     void StartGeneratorNullCheck()
     {
+        return;
+
         if(m_generator != null) { //null出ないなら処理をしない
             return;
         }

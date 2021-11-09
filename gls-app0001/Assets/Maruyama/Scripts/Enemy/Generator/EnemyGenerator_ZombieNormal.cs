@@ -65,6 +65,8 @@ public class EnemyGenerator_ZombieNormal : EnemyGenerator
 
     protected override void CreateObjectAdjust(GameObject obj)
     {
+        base.CreateObjectAdjust(obj);
+
         var respawn = obj.GetComponent<EnemyRespawnManager>();
         if (respawn)
         {
