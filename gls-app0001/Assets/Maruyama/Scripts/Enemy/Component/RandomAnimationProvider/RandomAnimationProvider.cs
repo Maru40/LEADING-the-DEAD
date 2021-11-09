@@ -5,6 +5,13 @@ using System;
 
 using MaruUtility;
 
+[Serializable]
+public class AnimationClipParametor
+{
+    public AnimationClip animationClip = null;
+    public float speed = 1.0f;
+}
+
 /// <summary>
 /// randomにアニメーションクリップを再生するためのパラメータ
 /// </summary>
@@ -12,12 +19,12 @@ using MaruUtility;
 public class RandomAnimationProviderParametor
 {
     public string nowClipName;                  //現在使用中のAnimationClip
-    public List<AnimationClip> animationClips;  //randomに再生したいAnimationClipList
+    public List<AnimationClipParametor> animationClipParametors;  //randomに再生したいAnimationClipList
 
-    public RandomAnimationProviderParametor(string nowClipName, List<AnimationClip> animationClips)
+    public RandomAnimationProviderParametor(string nowClipName, List<AnimationClipParametor> animationClipParametors)
     {
         this.nowClipName = nowClipName;
-        this.animationClips = animationClips;
+        this.animationClipParametors = animationClipParametors;
     }
 }
 
@@ -31,10 +38,12 @@ public class RandomAnimationProvider : MonoBehaviour
 
     private AnimatorOverrideController m_overrideController;
     private Animator m_animator;
+    AnimatorCtrl_ZombieNormal m_animatorController;
 
     void Awake()
     {
         m_animator = GetComponent<Animator>();
+        m_animatorController = GetComponent<AnimatorCtrl_ZombieNormal>();
     }
 
     void Start()
@@ -44,6 +53,8 @@ public class RandomAnimationProvider : MonoBehaviour
         m_animator.runtimeAnimatorController = m_overrideController;
 
         RandomChangeAnimationClips();
+
+
     }
 
     /// <summary>
@@ -51,9 +62,10 @@ public class RandomAnimationProvider : MonoBehaviour
     /// </summary>
     /// <param name="param">データ</param>
     /// <returns>randomなアニメーションクリップ</returns>
-    AnimationClip GetRandomAnimationClip(RandomAnimationProviderParametor param)
+    AnimationClipParametor GetRandomAnimationClip(RandomAnimationProviderParametor param)
     {
-        return MyRandom.RandomList(param.animationClips);
+        var clipParam = MyRandom.RandomList(param.animationClipParametors);
+        return clipParam;
     }
 
     /// <summary>
@@ -81,16 +93,17 @@ public class RandomAnimationProvider : MonoBehaviour
     /// </summary>
     /// <param name="param">変更を管理するデータ</param>
     /// <param name="clip">変更したいアニメーション</param>
-    void ChangeAnimationClip(RandomAnimationProviderParametor param ,AnimationClip clip)
+    void ChangeAnimationClip(RandomAnimationProviderParametor param ,AnimationClipParametor clipParam)
     {
-        if(clip == null) {
+        if(clipParam.animationClip == null) {
             Debug.Log("clipがnullです");
             return;
         }
 
         // ステートを変更される
-        m_overrideController[param.nowClipName] = clip;
-        param.nowClipName = clip.name;
+        m_overrideController[param.nowClipName] = clipParam.animationClip;
+        param.nowClipName = clipParam.animationClip.name;
+        m_animatorController.BaseMoveSpeed = clipParam.speed;
         //m_animator.Update(0.0f);
     }
 
