@@ -29,6 +29,9 @@ public class TargetManager : MonoBehaviour
         set => m_nowTargetReactive.Value = value;
     }
 
+    //最後にターゲットを発見した場所を記録する。
+    Vector3 m_lostPosition = Vector3.zero;
+
     //どのコンポーネントのターゲットかを確認する。
     Dictionary<Type,FoundObject> m_targets = new Dictionary<Type, FoundObject>();
 
@@ -213,8 +216,16 @@ public class TargetManager : MonoBehaviour
         return m_nowTarget.transform.position - transform.position;
     }
 
+    /// <summary>
+    /// 最後にターゲットを確認できた場所
+    /// </summary>
+    /// <returns></returns>
+    public Vector3 GetLostPosition()
+    {
+        return m_lostPosition;
+    }
 
-    //アクセッサ・プロパティ
+    //アクセッサ・プロパティ--------------------------------------------------------
 
     public BuffParametor buffParametor
     {
