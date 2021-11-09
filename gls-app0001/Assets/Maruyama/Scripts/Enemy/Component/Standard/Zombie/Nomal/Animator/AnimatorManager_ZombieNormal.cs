@@ -21,7 +21,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 
     }
 
-    enum NormalAttackHitColliderType
+    public enum NormalAttackHitColliderType
     {
         Left,
         Right
@@ -43,6 +43,8 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     {
         base.Awake();
 
+        m_normalAttackParam.InsertInspectorData();
+
         m_normalAttackComp = GetComponent<NormalAttack>();
         m_stunManager = GetComponent<EnemyStunManager>();
         m_angerManager = GetComponent<AngerManager>();
@@ -51,8 +53,6 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 
     private void Start()
     {
-        m_normalAttackParam.InsertInspectorData();
-
         SettingNormalAttack();
 
         SettingStun();
@@ -174,5 +174,18 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     {
         var layerIndex = m_animator.GetLayerIndex("Upper Layer");
         CrossFadeState("KnockBack", layerIndex);
+    }
+
+
+    //アクセッサ・プロパティ---------------------------------------------------------------------------------
+
+    /// <summary>
+    /// 通常攻撃のトリガーのそれぞれの攻撃力を設定できるようにした。
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="data"></param>
+    public void SetNormalAttackDamageData(NormalAttackHitColliderType type, AttributeObject.DamageData data)
+    {
+        m_normalAttackParam[type].trigger.damageData = data;
     }
 }
