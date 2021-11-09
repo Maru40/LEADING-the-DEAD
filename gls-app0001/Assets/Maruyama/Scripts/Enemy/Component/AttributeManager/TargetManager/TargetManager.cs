@@ -5,8 +5,33 @@ using UnityEngine;
 using System;
 using UniRx;
 
+using FoundType = FoundObject.FoundType;
+using MaruUtility;
+
 public class TargetManager : MonoBehaviour
 {
+    //ターゲットを見失ったときのデータ
+    class LostData
+    {
+        public bool isActive;
+        public Vector3 position;
+
+        public LostData(Vector3 position)
+            :this(position, 0.0f, null)
+        { }
+
+        public LostData(Vector3 position, float activeTime, WaitTimer timer)
+        {
+            this.isActive = true;
+            this.position = position;
+
+            if (timer)
+            {
+                timer.AddWaitTimer(GetType(), activeTime, () => isActive = false);
+            }
+        }
+    }
+
     [Serializable]
     public struct BuffParametor
     {
@@ -21,6 +46,11 @@ public class TargetManager : MonoBehaviour
     [SerializeField]
     BuffParametor m_buffParam = new BuffParametor(1.1f);
 
+    [Header("見失ったポジションを保存する時間"), SerializeField]
+    float m_lostDataSaveTime = 10.0f;
+    [Header("見失ったポジションの乱数幅")]
+    Vector3 m_lostDataPositionRandomRange = new Vector3(2.0f, 0.0f, 2.0f);
+
     //最後に参照されたターゲット
     readonly ReactiveProperty<FoundObject> m_nowTargetReactive = new ReactiveProperty<FoundObject>();
     FoundObject m_nowTarget
@@ -30,16 +60,18 @@ public class TargetManager : MonoBehaviour
     }
 
     //最後にターゲットを発見した場所を記録する。
-    Vector3 m_lostPosition = Vector3.zero;
+    LostData m_lostData = null;
 
     //どのコンポーネントのターゲットかを確認する。
     Dictionary<Type,FoundObject> m_targets = new Dictionary<Type, FoundObject>();
 
     StatusManagerBase m_statusManager;
+    WaitTimer m_waitTimer;
 
     private void Awake()
     {
         m_statusManager = GetComponent<StatusManagerBase>();
+        m_waitTimer = GetComponent<WaitTimer>();
     }
 
     private void Start()
@@ -67,7 +99,7 @@ public class TargetManager : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log(m_nowTarget);
+
     }
 
     /// <summary>
@@ -104,6 +136,21 @@ public class TargetManager : MonoBehaviour
             if (!IsTargetUpdate(target)) {  //更新が必要ないなら
                 return;  //更新せずに処理を飛ばす。
             }
+        }
+
+        //更新
+        m_nowTarget = target;
+        m_targets[type] = target;
+    }
+
+    //ターゲットの更新を確定
+    private void DesicionNowTarget(Type type, FoundObject target)
+    {
+        switch (target.GetFoundData().type)
+        {
+            case FoundType.SoundObject:
+                
+                break;
         }
 
         //更新
@@ -176,7 +223,35 @@ public class TargetManager : MonoBehaviour
             }
         }
 
+        if (m_nowTarget)  //null出なかったら更新する。
+        {
+            SetLostData();
+        }
+        
         return m_nowTarget;
+    }
+
+    public Vector3? GetNowTargetPosition()
+    {
+        if (m_nowTarget)  //ターゲットがnull出ない。
+        {
+            //対象のアクティブがfalseなら
+            if (m_nowTarget.gameObject.activeSelf == false)
+            {
+                return GetLostPosition(); //ターゲットをnullにする。
+            }
+        }
+
+        return m_nowTarget ? m_nowTarget.transform.position : GetLostPosition();
+    }
+
+    void SetLostData()
+    {
+        //見失ったから大まかな位置にする。
+        var targetPosition = m_nowTarget.transform.position;
+        var position = RandomPosition.CalcuPosition(m_lostDataPositionRandomRange, targetPosition);
+        
+        m_lostData = new LostData(position, m_lostDataSaveTime, m_waitTimer);
     }
 
     public FoundObject.FoundData? GetNowTargetFoundData()
@@ -220,9 +295,16 @@ public class TargetManager : MonoBehaviour
     /// 最後にターゲットを確認できた場所
     /// </summary>
     /// <returns></returns>
-    public Vector3 GetLostPosition()
+    public Vector3? GetLostPosition()
     {
-        return m_lostPosition;
+        if (m_lostData == null) {
+            return null;
+        }
+        if (!m_lostData.isActive) {
+            return null;
+        }
+
+        return m_lostData.position;
     }
 
     //アクセッサ・プロパティ--------------------------------------------------------
