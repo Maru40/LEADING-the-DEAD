@@ -54,21 +54,26 @@ public class NormalAttack : AttackNodeBase
     /// </summary>
     void TargetChase()
     {
-        var position = m_targetMgr.GetNowTargetPosition();
-        if (position == null) {
+        var positionCheck = m_targetMgr.GetNowTargetPosition();
+        if (positionCheck == null) {
             return;
         }
+        var position = (Vector3)positionCheck;
 
-        float moveSpeed = m_param.moveSpeed * m_statusManager.GetBuffParametor().angerParam.speed;
-        var toVec = (Vector3)position - transform.position;
-        toVec.y = 0.0f;  //(yのベクトルを殺す。)
+        //視界内ならターゲット方向、そうでないなら直進。
+        if(m_eyeRange.IsInEyeRange(position))
+        {
+            var toVec = position - transform.position;
+            toVec.y = 0;
+            Move(toVec);
+            Rotation();  //向き調整
+        }
+        else
+        {
+            Move(transform.forward);
+        }
 
-        m_velocityMgr.velocity = toVec.normalized * moveSpeed;
         ThrongAdjust();
-
-        //向きの調整
-        transform.forward = toVec.normalized;
-        //m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
     }
 
     /// <summary>
@@ -89,6 +94,23 @@ public class NormalAttack : AttackNodeBase
         }
     }
 
+    private void Move(Vector3 moveVec)
+    {
+        float moveSpeed = m_param.moveSpeed * m_statusManager.GetBuffParametor().angerParam.speed;
+        m_velocityMgr.velocity = moveVec.normalized * moveSpeed;
+    }
+
+    void Rotation()
+    {
+        var position = m_targetMgr.GetNowTargetPosition();
+        if (position != null)
+        {
+            var toVec = (Vector3)position - transform.position;
+            toVec.y = 0.0f;  //(yのベクトルを殺す。)
+            transform.forward = toVec.normalized;
+        }
+    }
+
     /// <summary>
     /// 攻撃を開始する距離かどうか
     /// </summary>
@@ -96,10 +118,12 @@ public class NormalAttack : AttackNodeBase
     override public bool IsAttackStartRange()
     {
         float range = GetBaseParam().startRange;
-        FoundObject target = m_targetMgr.GetNowTarget();
-        if (target)
+        //FoundObject target = m_targetMgr.GetNowTarget();
+        var position = m_targetMgr.GetNowTargetPosition();
+        if (position != null)
         {
-            return Calculation.IsRange(gameObject, target.gameObject, range);
+            return m_eyeRange.IsInEyeRange((Vector3)position);
+            //return Calculation.IsRange(gameObject, target.gameObject, range);
         }
         else
         {
@@ -110,6 +134,7 @@ public class NormalAttack : AttackNodeBase
     public override void AttackStart()
     {
         m_isTargetChase = true;
+        Rotation();
 
         enabled = true;
     }
