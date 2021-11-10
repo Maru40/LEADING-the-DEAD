@@ -155,6 +155,12 @@ namespace Player
             m_animatorManager.GoState("Idle", "Upper_Layer", 0.0f);
         }
 
+        public void Clear()
+        {
+            
+            m_isInvincible = true;
+        }
+
         private void Start()
         {
         }
@@ -188,8 +194,6 @@ namespace Player
         public void StartStun()
         {
             isStun = true;
-
-            Debug.Log("ちゃんと");
 
             m_stunStar.Play();
 
