@@ -46,10 +46,11 @@ public class TargetManager : MonoBehaviour
     [SerializeField]
     BuffParametor m_buffParam = new BuffParametor(1.1f);
 
+    [Header("音オブジェクトのポジションの乱数幅"), SerializeField]
+    Vector3 m_soundPositionRandomRange = new Vector3(2.0f, 0.0f, 2.0f);
+
     [Header("見失ったポジションを保存する時間"), SerializeField]
     float m_lostDataSaveTime = 10.0f;
-    [Header("見失ったポジションの乱数幅")]
-    Vector3 m_lostDataPositionRandomRange = new Vector3(2.0f, 0.0f, 2.0f);
 
     //最後に参照されたターゲット
     readonly ReactiveProperty<FoundObject> m_nowTargetReactive = new ReactiveProperty<FoundObject>();
@@ -78,8 +79,7 @@ public class TargetManager : MonoBehaviour
     {
         //nullCheck
         if(m_targets.Count == 0) {
-            //var target = GameObject.Find("Player");
-            //m_nowTarget = target.GetComponent<FoundObject>();
+
         }
 
         //FoundObjectならバフを掛ける。
@@ -139,27 +139,23 @@ public class TargetManager : MonoBehaviour
         }
 
         //更新
+        FoundDataAdjust(type, target);
         m_nowTarget = target;
         m_targets[type] = target;
     }
 
     //ターゲットの更新を確定
-    private void DesicionNowTarget(Type type, FoundObject target)
+    private void FoundDataAdjust(Type type, FoundObject target)
     {
-        switch (target.GetFoundData().type)
-        {
-            case FoundType.SoundObject:
-                
-                break;
+        if(target == null) {
+            return;
         }
 
-        //更新
-        m_nowTarget = target;
-        m_targets[type] = target;
     }
 
     public void AbsoluteSetNowTarget(Type type, FoundObject target)
     {
+        FoundDataAdjust(type, target);
         m_nowTarget = target;
         m_targets[type] = target;
     }
@@ -241,15 +237,22 @@ public class TargetManager : MonoBehaviour
                 return GetLostPosition(); //ターゲットをnullにする。
             }
         }
+        
+        return m_nowTarget ? CalcuFoundPosition() : GetLostPosition();
+    }
 
-        return m_nowTarget ? m_nowTarget.transform.position : GetLostPosition();
+    Vector3 CalcuFoundPosition()
+    {
+        var data = m_nowTarget.GetFoundData();
+        return data.position;
     }
 
     void SetLostData()
     {
         //見失ったから大まかな位置にする。
-        var targetPosition = m_nowTarget.transform.position;
-        var position = RandomPosition.CalcuPosition(m_lostDataPositionRandomRange, targetPosition);
+        var data = m_nowTarget.GetFoundData();
+        //var targetPosition = m_nowTarget.transform.position;
+        var position = data.position;
         
         m_lostData = new LostData(position, m_lostDataSaveTime, m_waitTimer);
     }
@@ -304,6 +307,7 @@ public class TargetManager : MonoBehaviour
             return null;
         }
 
+        Debug.Log("GetLostTarget");
         return m_lostData.position;
     }
 
