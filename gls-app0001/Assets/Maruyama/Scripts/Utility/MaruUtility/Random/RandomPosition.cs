@@ -124,7 +124,7 @@ namespace MaruUtility
         }
 
         /// <summary>
-        /// カメラの外で複数のターゲットから離れた距離をランダムに返す。
+        /// カメラの外で、障害物の外で、複数のターゲットから離れた距離の、ランダムに返す。
         /// </summary>
         /// <param name="targets">ターゲット達</param>
         /// <param name="outRange">離す距離</param>
@@ -132,8 +132,8 @@ namespace MaruUtility
         /// <param name="maxRange">ランダムに生成する範囲</param>
         /// <param name="centerPosition">ランダムに生成する中心位置</param>
         /// <returns>ランダムな位置</returns>
-        public static Vector3 OutCameraAndOutRangeOfTargets(List<GameObject> targets, float outRange,
-            Camera camera, Vector3 maxRange, Vector3 centerPosition = new Vector3())
+        public static Vector3 OutCameraAndOutObstacleAndOutRangeOfTargets(List<GameObject> targets, float outRange,
+            Camera camera, Vector3 maxRange, Vector3 centerPosition = new Vector3(), params string[] layerNames)
         {
             List<OutOfTargetData> datas = new List<OutOfTargetData>();
 
@@ -142,27 +142,40 @@ namespace MaruUtility
                 datas.Add(new OutOfTargetData(target, outRange));
             }
 
-            return OutCameraAndOutRangeOfTargets(datas, camera, maxRange, centerPosition);
+            return OutCameraAndOutObstacleAndOutRangeOfTargets(datas, camera, maxRange, centerPosition, layerNames);
         }
 
         /// <summary>
-        /// カメラの外で複数のターゲットから離れた距離をランダムに返す。
+        /// カメラの外で、障害物の外で、複数のターゲットから離れた距離の、ランダムに返す。
         /// </summary>
         /// <param name="datas">ターゲットと話したい距離のデータ</param>
         /// <param name="camera">カメラ</param>
         /// <param name="maxRange">ランダムに生成する範囲</param>
         /// <param name="centerPosition">ランダムに生成する中心位置</param>
         /// <returns>ランダムな位置</returns>
-        public static Vector3 OutCameraAndOutRangeOfTargets(List<OutOfTargetData> datas,
-            Camera camera, Vector3 maxRange, Vector3 centerPosition = new Vector3())
+        public static Vector3 OutCameraAndOutObstacleAndOutRangeOfTargets(List<OutOfTargetData> datas,
+            Camera camera, Vector3 maxRange, Vector3 centerPosition = new Vector3(), params string[] layerNames)
         {
             const int numLoop = 100;
             for (int i = 0; i < numLoop; i++)
             {
+                if(i > numLoop - 2) {
+                    Debug.Log("ループオーバー");
+                }
+
                 var position = CalcuPosition(maxRange, centerPosition);
 
                 //カメラと比較
                 if (CalcuCamera.IsInCamera(position, camera))  //カメラ内なら処理を飛ばす。
+                {
+                    continue;
+                }
+
+                //ポジションが壁の中だったら
+                const float radius = 1.0f;
+                int layerIndex = LayerMask.GetMask(layerNames);
+                var colliders = Physics.OverlapSphere(position, radius, layerIndex);
+                if (colliders.Length != 0)
                 {
                     continue;
                 }
