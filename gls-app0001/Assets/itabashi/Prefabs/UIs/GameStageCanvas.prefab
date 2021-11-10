@@ -863,6 +863,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 966770794100585095}
+  - component: {fileID: 7991088979164702749}
+  - component: {fileID: 8698210004346534582}
   m_Layer: 5
   m_Name: BaricadeGaugeGroup
   m_TagString: Untagged
@@ -892,6 +894,31 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -100}
   m_SizeDelta: {x: 1000, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &7991088979164702749
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9124172028790372308}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 1
+--- !u!114 &8698210004346534582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9124172028790372308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36cb4df280ac1b24d80bc4cefcfec463, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_canvasGroup: {fileID: 7991088979164702749}
 --- !u!1001 &168281489909672329
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2249,9 +2276,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b79e683251025cc4caf463b0e1fdd95e, type: 3}
---- !u!224 &8743523490998321441 stripped
+--- !u!224 &6219666306396294512 stripped
 RectTransform:
-  m_CorrespondingSourceObject: {fileID: 318654753611362059, guid: b79e683251025cc4caf463b0e1fdd95e, type: 3}
+  m_CorrespondingSourceObject: {fileID: 3128764825790063450, guid: b79e683251025cc4caf463b0e1fdd95e, type: 3}
   m_PrefabInstance: {fileID: 9023853030508047914}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &6219666306396294511 stripped
@@ -2259,9 +2286,9 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3128764825790063429, guid: b79e683251025cc4caf463b0e1fdd95e, type: 3}
   m_PrefabInstance: {fileID: 9023853030508047914}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &6219666306396294512 stripped
+--- !u!224 &8743523490998321441 stripped
 RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3128764825790063450, guid: b79e683251025cc4caf463b0e1fdd95e, type: 3}
+  m_CorrespondingSourceObject: {fileID: 318654753611362059, guid: b79e683251025cc4caf463b0e1fdd95e, type: 3}
   m_PrefabInstance: {fileID: 9023853030508047914}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &6219666306396294513 stripped
