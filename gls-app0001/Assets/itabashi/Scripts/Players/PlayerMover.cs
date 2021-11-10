@@ -92,8 +92,7 @@ namespace Player
 
             var moveVector2 = m_gameControls.Player.Move.ReadValue<Vector2>();
 
-            var camera = Manager.GameCameraManager.current;
-
+            var camera = Camera.main;
             var forward = camera.transform.forward;
             forward.y = 0;
             forward = forward.normalized;
