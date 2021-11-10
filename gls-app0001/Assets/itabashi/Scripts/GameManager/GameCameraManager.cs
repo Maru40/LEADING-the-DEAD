@@ -9,6 +9,10 @@ namespace Manager
     {
         private static Camera m_currentCamera = null;
 
+        private static float m_currentDepth = 10;
+
+        private static float m_beforeDepth = 0.0f;
+
         public static Camera current
         {
             set
@@ -20,14 +24,15 @@ namespace Manager
 
                 if (current != null)
                 {
-                    m_currentCamera.enabled = false;
+                    m_currentCamera.depth = m_beforeDepth;
                 }
 
                 m_currentCamera = value;
 
                 if (m_currentCamera != null)
                 {
-                    m_currentCamera.enabled = true;
+                    m_beforeDepth = m_currentCamera.depth;
+                    m_currentCamera.depth = m_currentDepth;
                 }
             }
 
@@ -36,6 +41,8 @@ namespace Manager
                 if (m_currentCamera == null)
                 {
                     m_currentCamera = Camera.main;
+
+                    m_beforeDepth = m_currentCamera == null ? 0.0f : m_currentCamera.depth;
                 }
 
                 return m_currentCamera;

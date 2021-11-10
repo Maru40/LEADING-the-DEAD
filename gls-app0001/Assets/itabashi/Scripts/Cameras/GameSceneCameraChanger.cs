@@ -11,7 +11,7 @@ public class GameSceneCameraChanger : MonoBehaviour
 
     private void Awake()
     {
-        Manager.GameCameraManager.current = m_overLookingCamera;
+        m_overLookingCamera.gameObject.SetActive(true);
     }
 
     private void Start()
@@ -21,14 +21,15 @@ public class GameSceneCameraChanger : MonoBehaviour
 
     public void ChangeCamera()
     {
-        if (m_mainCamera.enabled)
-        {
-            Manager.GameCameraManager.current = m_overLookingCamera;
-        }
-        else
-        {
-            Manager.GameCameraManager.current = m_mainCamera;
-        }
+        m_overLookingCamera.gameObject.SetActive(!m_overLookingCamera.gameObject.activeInHierarchy);
+        //if (m_mainCamera == Manager.GameCameraManager.current)
+        //{
+        //    Manager.GameCameraManager.current = m_overLookingCamera;
+        //}
+        //else
+        //{
+        //    Manager.GameCameraManager.current = m_mainCamera;
+        //}
     }
 
 }
