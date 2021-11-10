@@ -32,6 +32,8 @@ public class BarricadeDurability : MonoBehaviour
     [SerializeField]
     private UnityEvent m_breakEvent;
 
+    private bool m_isBreak = false;
+
     private void Awake()
     {
         OnChangedDurability
@@ -44,18 +46,25 @@ public class BarricadeDurability : MonoBehaviour
             {
                 m_breakEvent?.Invoke();
                 Debug.Log("破壊されました");
-                Destroy(gameObject);
+                //Destroy(gameObject);
+                m_isBreak = true;
             })
             .AddTo(this);
     }
 
     public void TakeDamage(AttributeObject.DamageData damageData)
     {
-        durability -= damageData.damageValue;
+        if (!m_isBreak)
+        {
+            durability -= damageData.damageValue;
+        }
     }
 
     public void Recovery(float recoveryValue)
     {
-        durability += recoveryValue;
+        if (!m_isBreak)
+        {
+            durability += recoveryValue;
+        }
     }
 }
