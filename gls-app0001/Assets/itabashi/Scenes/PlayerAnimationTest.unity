@@ -213,6 +213,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 403600040743058501, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_breakEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 403600040743058501, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_breakEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1789033138}
+    - target: {fileID: 403600040743058501, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_breakEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 403600040743058501, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_breakEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Animator, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 403600040743058501, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_breakEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Break
+      objectReference: {fileID: 0}
     - target: {fileID: 1182914468150695407, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -260,6 +280,34 @@ PrefabInstance:
     - target: {fileID: 1182914468150856143, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
       propertyPath: m_Name
       value: Barricade
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419132738376911341, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419132738376911341, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419132738376911341, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1789033136}
+    - target: {fileID: 8419132738376911341, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419132738376911341, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: set_enabled
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419132738376911341, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.Collider, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419132738376911341, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
@@ -509,3 +557,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1789033131 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1182914468150856143, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+  m_PrefabInstance: {fileID: 280904403}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1789033136 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 1182914468706121655, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+  m_PrefabInstance: {fileID: 280904403}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1789033138
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789033131}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 21a9b9d03832e7445a25516db4217b49, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
