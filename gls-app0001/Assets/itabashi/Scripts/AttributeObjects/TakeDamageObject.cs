@@ -10,6 +10,7 @@ namespace AttributeObject
         None,
         Fire,
         Cutting,
+        ObjectBreak,
     }
 
     /// <summary>
