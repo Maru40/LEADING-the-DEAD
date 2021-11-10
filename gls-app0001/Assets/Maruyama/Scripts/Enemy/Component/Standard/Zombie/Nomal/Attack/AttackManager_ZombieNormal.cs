@@ -35,8 +35,8 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
         var position = m_targetMgr.GetNowTargetPosition();
         if (position != null)
         {
-            return m_eye.IsInEyeRange((Vector3)position, range);
-            //return Calculation.IsRange(gameObject, (Vector3)position, range);
+            //return m_eye.IsInEyeRange((Vector3)position, range);
+            return Calculation.IsRange(gameObject, (Vector3)position, range);
         }
         else
         {
