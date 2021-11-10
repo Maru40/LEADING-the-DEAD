@@ -32,6 +32,9 @@ public class BarricadeDurability : MonoBehaviour
     [SerializeField]
     private UnityEvent m_breakEvent;
 
+    [SerializeField]
+    private UnityEvent<bool> m_changingChangeEvent = new UnityEvent<bool>();
+
     private bool m_isBreak = false;
 
     private void Awake()
@@ -49,6 +52,16 @@ public class BarricadeDurability : MonoBehaviour
                 //Destroy(gameObject);
                 m_isBreak = true;
             })
+            .AddTo(this);
+
+        OnChangedDurability
+            .Where(durability => durability == m_maxDurability)
+            .Subscribe(_ => m_changingChangeEvent?.Invoke(false))
+            .AddTo(this);
+
+        OnChangedDurability
+            .Where(durability => durability != m_maxDurability)
+            .Subscribe(_ => m_changingChangeEvent?.Invoke(true))
             .AddTo(this);
     }
 
