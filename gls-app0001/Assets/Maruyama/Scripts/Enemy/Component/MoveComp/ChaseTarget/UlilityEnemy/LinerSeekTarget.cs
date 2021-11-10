@@ -58,13 +58,23 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
         Debug.Log("LinerTargret");
 
         FoundObject target = m_targetMgr.GetNowTarget();
-        if (target) {
-            LinerTarget(target);
+        var position = m_targetMgr.GetNowTargetPosition();
+        if(position != null)
+        {
+            Move((Vector3)position);
         }
-        else {
-            LinerLostPosition();
-            //m_chaseTarget.TargetLost();
+        else
+        {
+            m_chaseTarget.TargetLost();
         }
+
+        //if (target) {
+        //    LinerTarget(target);
+        //}
+        //else {
+        //    LinerLostPosition();
+        //    //m_chaseTarget.TargetLost();
+        //}
     }
 
     //ターゲットを追従する処理
