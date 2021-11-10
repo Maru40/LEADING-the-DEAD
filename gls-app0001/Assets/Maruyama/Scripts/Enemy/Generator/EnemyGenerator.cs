@@ -65,6 +65,9 @@ public class EnemyGenerator : GeneratorBase
     [SerializeField]
     protected Vector3 m_maxRandomRange = new Vector3();  //ランダムに生成する時の最大距離
 
+    [Header("障害物として扱う名前群"),SerializeField]
+    string[] m_obstacleLayerStrings = new string[] { "L_Obstacle" };
+
     //配布するデータの構造体
     [Header("ドロップアイテムを配布するデータ群"), SerializeField]
     List<DropDataDistributionParametor> m_distributionParams = new List<DropDataDistributionParametor>();
@@ -143,9 +146,9 @@ public class EnemyGenerator : GeneratorBase
     {
         //return RandomPosition.CalcuPosition(m_maxRandomRange, m_centerPosition);
 
-        return RandomPosition.OutCameraAndOutRangeOfTargets(
+        return RandomPosition.OutCameraAndOutObstacleAndOutRangeOfTargets(
             m_outOfTargteDatas,
-            Camera.main, m_maxRandomRange, m_centerPosition);
+            Camera.main, m_maxRandomRange, m_centerPosition, m_obstacleLayerStrings);
     }
 
     /// <summary>

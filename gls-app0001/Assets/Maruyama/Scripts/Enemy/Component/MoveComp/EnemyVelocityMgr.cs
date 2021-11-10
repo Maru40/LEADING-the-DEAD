@@ -14,7 +14,7 @@ public class EnemyVelocityMgr : MonoBehaviour
     bool m_isDeseleration = false;  //減速中かどうか
     float m_deselerationPower = 1.0f;
 
-    void Start()
+    void Awake()
     {
         m_rigid = GetComponent<Rigidbody>();
     }
