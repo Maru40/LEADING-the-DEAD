@@ -2962,6 +2962,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_buffParam:
     speed: 3
+  m_soundPositionRandomRange: {x: 10, y: 0, z: 10}
+  m_lostDataSaveTime: 10
 --- !u!114 &1444888580945028641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3243,6 +3245,10 @@ MonoBehaviour:
       attackAnimeSpeed: 1.5
     targetBuffParametor:
       speed: 3
+    eyeSarchRangeParam:
+      range: 7
+      height: 3
+      rad: 0.012217305
 --- !u!114 &-9140734898953323855
 MonoBehaviour:
   m_ObjectHideFlags: 0
