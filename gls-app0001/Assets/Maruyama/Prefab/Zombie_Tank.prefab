@@ -609,6 +609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_buffParam:
     speed: 1.1
+  m_soundPositionRandomRange: {x: 2, y: 0, z: 2}
   m_lostDataSaveTime: 10
 --- !u!114 &8567931424737641941
 MonoBehaviour:
@@ -893,9 +894,9 @@ MonoBehaviour:
       - ZombieTankTackle
     startRange: 10
   m_tackleSpeed: 15
-  m_tackleLastRange: 2
+  m_tackleLastRange: 5
   m_eyeDeg: 50
-  m_turningPower: 3
+  m_turningPower: 2
   m_subPursuitTargetForward: 0.3
   m_rayObstacleLayerStrings:
   - L_Obstacle
