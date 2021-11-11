@@ -141,7 +141,7 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         CrossFadeState("TackleAttack", layerIndex, transitionTime);
     }
 
-    public void CrossFadeTackleCharge(float transitionTime = 0.25f)
+    public void CrossFadeTackleCharge(float transitionTime = 0.5f)
     {
         int layerIndex = m_animator.GetLayerIndex("Upper Layer");
         CrossFadeState("TackleCharge", layerIndex, transitionTime);
