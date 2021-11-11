@@ -35,6 +35,9 @@ public class TankTackle : AttackNodeBase
     [SerializeField]
     float m_subPursuitTargetForward = 0.3f;
 
+    [Header("タックル終了後の待機時間"),SerializeField]
+    float m_waitTime = 1.0f; //タックル終了後の待機時間
+
     /// <summary>
     /// Rayの障害物するLayerの配列
     /// </summary>
@@ -47,6 +50,10 @@ public class TankTackle : AttackNodeBase
     EnemyVelocityMgr m_velocityManager;
     Stator_ZombieTank m_stator;
     EyeSearchRange m_eye;
+    AnimatorManager_ZombieTank m_animatorManager;
+    WaitTimer m_waitTimer;
+
+    TaskList<State> m_taskList = new TaskList<State>();
 
     private void Awake()
     {
@@ -54,6 +61,8 @@ public class TankTackle : AttackNodeBase
         m_velocityManager = GetComponent<EnemyVelocityMgr>();
         m_stator = GetComponent<Stator_ZombieTank>();
         m_eye = GetComponent<EyeSearchRange>();
+        m_animatorManager = GetComponent<AnimatorManager_ZombieTank>();
+        m_waitTimer = GetComponent<WaitTimer>();
 
         m_eyeRad = m_eyeDeg * Mathf.Deg2Rad;
     }
@@ -85,6 +94,8 @@ public class TankTackle : AttackNodeBase
         Vector3 force = CalcuTackleForce();
 
         m_velocityManager.AddForce(force);
+        Debug.Log(m_velocityManager.velocity.magnitude);
+        //m_animatorManager.TackleSpeed = m_velocityManager.velocity.magnitude / m_tackleSpeed;
 
         if (IsTackleEnd()) //ターゲットに限りなく近づいたら
         {
@@ -113,24 +124,30 @@ public class TankTackle : AttackNodeBase
         else
         {   //フォワードの差が開いていたら、予測Seek
             Debug.Log("予測Seek");
-            return CalcuVelocity.CalcuPursuitForce(velocity, toVec, m_tackleSpeed, gameObject, target.GetComponent<Rigidbody>(), m_turningPower);
+            return CalcuVelocity.CalcuPursuitForce(
+                velocity, toVec, m_tackleSpeed, gameObject, target.GetComponent<Rigidbody>(), m_turningPower);
         }
     }
 
     void Rotation()
     {
-        if(m_velocityManager.velocity == Vector3.zero) {
+        var forward = m_state.Value switch {
+            State.Charge => CalcuToTargetVec().normalized,
+            State.Tackle => m_velocityManager.velocity,
+            _ => Vector3.zero
+        };
+
+        if (forward == Vector3.zero) {
             return;
         }
 
-        if (m_state.Value == State.Charge || m_state.Value == State.Tackle) {
-            transform.forward = m_velocityManager.velocity;
-        }
+        transform.forward = forward;
     }
 
     public override void AttackStart()
     {
         m_state.Value = State.Charge;
+        
         enabled = true;
     }
 
@@ -187,7 +204,9 @@ public class TankTackle : AttackNodeBase
     /// <returns></returns>
     bool IsTackleEnd()
     {
-        if (IsTargetRange(m_tackleLastRange)) {
+        var speedRate = m_velocityManager.velocity.magnitude / m_tackleSpeed;
+        var range = m_tackleLastRange * speedRate;
+        if (IsTargetRange(range)) {
             return true;
         }
 
@@ -222,12 +241,15 @@ public class TankTackle : AttackNodeBase
     public override void EndAnimationEvent()
     {
         Debug.Log("EndAnimation");
-        m_stator.GetTransitionMember().chaseTrigger.Fire();
+        //m_stator.GetTransitionMember().chaseTrigger.Fire();
 
         m_state.Value = State.None;
 
         m_velocityManager.SetIsDeseleration(false);
+        m_velocityManager.ResetAll();
         enabled = false;
+
+        m_waitTimer.AddWaitTimer(GetType(), m_waitTime, () => m_stator.GetTransitionMember().chaseTrigger.Fire());
     }
 
     /// <summary>

@@ -13,5 +13,12 @@ public class ZombieTankTable
         public readonly AnimationState TackleLast = new AnimationState("Base Layer.TackleLast","Base Layer");
         
     }
+    public static readonly UpperLayerTable UpperLayer = new UpperLayerTable();
+    public class UpperLayerTable
+    {
+        public readonly AnimationState Idle = new AnimationState("Upper Layer.Idle","Upper Layer");
+        public readonly AnimationState TackleCharge = new AnimationState("Upper Layer.TackleCharge","Upper Layer");
+        
+    }
     
 }

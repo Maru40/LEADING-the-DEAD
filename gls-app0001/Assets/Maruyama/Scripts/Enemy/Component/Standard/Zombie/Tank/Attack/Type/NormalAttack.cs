@@ -60,20 +60,18 @@ public class NormalAttack : AttackNodeBase
         }
         var position = (Vector3)positionCheck;
 
-        //視界内ならターゲット方向、そうでないなら直進。
-        if(m_eyeRange.IsInEyeRange(position))
-        {
-            var toVec = position - transform.position;
-            toVec.y = 0;
-            Move(toVec);
-            Rotation();  //向き調整
-        }
-        else
+        //視界外ならターンしない
+        if (!m_eyeRange.IsInEyeRange(position))
         {
             Move(transform.forward);
+            ThrongAdjust();
+            return;
         }
 
-        ThrongAdjust();
+        var toVec = position - transform.position;
+        toVec.y = 0;
+        Move(toVec);
+        Rotation();  //向き調整
     }
 
     /// <summary>

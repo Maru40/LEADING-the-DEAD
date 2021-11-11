@@ -38,7 +38,8 @@ public class AttackManager_ZombieTank : AttackNodeManagerBase
 
     TargetManager m_targetMgr;
     Stator_ZombieTank m_stator;
-    AnimatorCtrl_ZombieTank m_animatorCtrl;
+    AnimatorManager_ZombieTank m_animatorManager;
+    EnemyVelocityMgr m_velocityManager;
     EyeSearchRange m_eye;
 
     AttackType m_type = AttackType.None;
@@ -47,8 +48,9 @@ public class AttackManager_ZombieTank : AttackNodeManagerBase
     {
         m_targetMgr = GetComponent<TargetManager>();
         m_stator = GetComponent<Stator_ZombieTank>();
-        m_animatorCtrl = GetComponent<AnimatorCtrl_ZombieTank>();
+        m_animatorManager = GetComponent<AnimatorManager_ZombieTank>();
         m_eye = GetComponent<EyeSearchRange>();
+        m_velocityManager = GetComponent<EnemyVelocityMgr>();
     }
 
     public override bool IsAttackStartRange()
@@ -86,13 +88,15 @@ public class AttackManager_ZombieTank : AttackNodeManagerBase
 
     void NearAttackStart()
     {
-        m_animatorCtrl.NearAttackTriggerFire();
+        m_animatorManager.CrossFadeNormalAttack();
         m_type = AttackType.Near;
     }
 
     void TackleAttackStart()
     {
-        m_animatorCtrl.TackleTriggerFire();
+        m_animatorManager.CrossFadeTackle();
+        //m_animatorManager.CrossFadeTackleCharge();
+        m_velocityManager.ResetAll();
         m_type = AttackType.Tackle;
     }
 
@@ -103,7 +107,6 @@ public class AttackManager_ZombieTank : AttackNodeManagerBase
 
     public override void EndAnimationEvent()
     {
-        Debug.Log("EndAnimation");
         m_stator.GetTransitionMember().chaseTrigger.Fire();
         m_type = AttackType.None;
     }

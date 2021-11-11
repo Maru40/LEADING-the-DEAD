@@ -224,19 +224,18 @@ public class ChaseTarget : MonoBehaviour
 
     private void WallAttack()
     {
+
+
         var target = m_targetMgr.GetNowTarget();
-        if(target == null) {
+        if (target == null) {
             return;
         }
 
         var data = target.GetFoundData();
-        if(data.type == FoundObject.FoundType.SoundObject) //SoundObjectなら
+        if (data.type == FoundObject.FoundType.SoundObject) //SoundObjectなら
         {
-            var stator = GetComponent<Stator_ZombieNormal>(); //壁でも攻撃する。
-            if (stator)
-            {
-                stator.GetTransitionMember().attackTrigger.Fire();
-            }
+            var attackManager = GetComponent<AttackNodeManagerBase>();
+            attackManager.AttackStart();
         }
     }
 

@@ -7,17 +7,12 @@ using UniRx;
 
 public class AnimatorManager_ZombieTank : AnimatorManagerBase
 {
-    //[Serializable]
-    //struct NormalAttackParametor
-    //{
-    //    public float hitStartTime;
-    //    public float hitEndTime;
-    //}
 
     [Serializable]
     struct TackleParametor
     {
-        public float tackleStartTime; //タックルスタート
+        //public float tackleStartTime; //タックルスタート
+        public float chargeTime;
         public float deselerationStartTime; //減速スタート
     }
 
@@ -29,11 +24,13 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
 
     NormalAttack m_normalAttackComp;
     TankTackle m_tackleComp;
+    WaitTimer m_waitTimer;
 
     override protected void Awake()
     {
         base.Awake();
 
+        m_waitTimer = GetComponent<WaitTimer>();
         m_normalAttackComp = GetComponent<NormalAttack>();
         m_tackleComp = GetComponent<TankTackle>();
 
@@ -42,13 +39,20 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         SettingTackleLastAnimation();
     }
 
+    private void Update()
+    {
+        //Debug.Log("トラン: " + m_animator.IsInTransition(0));
+    }
+
+    /// <summary>
+    /// 通常攻撃
+    /// </summary>
     void SettingNormalAttackAnimation()
     {
         var layerIndex = m_animator.GetLayerIndex("Base Layer");
 
         //Time系
         var timeParam = m_normalAttackParam;
-        //var attack = m_behaviorTable["Base Layer.NormalAttack"];
         var attack = ZombieTankTable.BaseLayer.NormalAttack.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
 
         var timeEvent = attack.onTimeEvent;
@@ -64,30 +68,90 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         attack.onStateExited.Subscribe(_ => m_normalAttackComp.EndAnimationEvent()).AddTo(this);
     }
 
+    /// <summary>
+    /// タックル攻撃
+    /// </summary>
     void SettingTackleAnimation()
-    { 
-        var layerIndex = m_animator.GetLayerIndex("Base Layer");
+    {
+        var baseIndex = m_animator.GetLayerIndex("Base Layer");
+        var upperIndex = m_animator.GetLayerIndex("Upper Layer");
         m_tackleComp.state.Where(_ => m_tackleComp.state.Value == TankTackle.State.TackleLast)
-            .Subscribe(_ => CrossFadeState("TackleLast", layerIndex))
+            .Subscribe(_ => CrossFadeState("TackleLast", baseIndex))
             .AddTo(this);
 
-        //Time系
-        //var tackle = m_behaviorTable["Base Layer.TackleAttack"];
         var tackle = ZombieTankTable.BaseLayer.TackleAttack.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
         tackle.onStateEntered.Subscribe(_ => m_tackleComp.AttackStart()).AddTo(this);
 
-        var timeEvent = tackle.onTimeEvent;
-        timeEvent.ClampWhere(m_tackleParam.tackleStartTime).Subscribe(_ => m_tackleComp.TackleStart()).AddTo(this);
-        //timeEvent.ClampWhere(m_tackleParam.deselerationStartTime).Subscribe(_ => m_attackComp.AttackHitEnd()).AddTo(this);
+        var actionBehaviour = ZombieTankTable.BaseLayer.TackleAttack.GetBehaviour<AnimationActionBehavior>(m_animator);
+        actionBehaviour.AddFirstTransitionAction(() => {
+            float speed = m_animator.speed;
+            m_animator.speed = 0.0f;
+            m_waitTimer.AddWaitTimer(GetType(), 0.2f, () => TackleStart(speed));
+        });
 
-        //tackle.onStateExited.Subscribe(_ => m_attackComp.EndAnimationEvent());
+        //Time系
+        var timeEvent = tackle.onTimeEvent;
+        //タックルを開始する時間
+
+        //timeEvent.ClampWhere(m_tackleParam.tackleStartTime)
+        //    .Subscribe(_ => {
+        //        float speed = m_animator.speed;
+        //        m_animator.speed = 0.0f;
+        //        m_waitTimer.AddWaitTimer(GetType(), 0.2f, () => TackleStart(speed));
+        //    })
+        //    .AddTo(this);
+
+        //timeEvent.ClampWhere(m_tackleParam.tackleStartTime)
+        //    .Subscribe(_ => m_tackleComp.TackleStart())
+        //    .AddTo(this);
+
     }
 
+    void TackleStart(float speed)
+    {
+        m_animator.speed = speed;
+        int upperIndex = m_animator.GetLayerIndex("Upper Layer");
+        m_tackleComp.TackleStart();
+        CrossFadeState("Idle", upperIndex, 0.0f);
+        CrossFadeTackle();
+    }
+
+    /// <summary>
+    /// タックル終了攻撃
+    /// </summary>
     void SettingTackleLastAnimation()
     {
-        //var tackle = m_behaviorTable["Base Layer.TackleLast"];
         var tackle = ZombieTankTable.BaseLayer.TackleLast.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
-
+        
         tackle.onStateExited.Subscribe(_ => m_tackleComp.EndAnimationEvent());
+    }
+
+
+    //クロスフェード--------------------------------------------------------------------------
+
+    public void CrossFadeNormalAttack(float transitionTime = 0.25f)
+    {
+        int layerIndex = m_animator.GetLayerIndex("Base Layer");
+        CrossFadeState("NormalAttack", layerIndex, transitionTime);
+    }
+
+    public void CrossFadeTackle(float transitionTime = 0.25f)
+    {
+        int layerIndex = m_animator.GetLayerIndex("Base Layer");
+        CrossFadeState("TackleAttack", layerIndex, transitionTime);
+    }
+
+    public void CrossFadeTackleCharge(float transitionTime = 0.5f)
+    {
+        int layerIndex = m_animator.GetLayerIndex("Upper Layer");
+        CrossFadeState("TackleCharge", layerIndex, transitionTime);
+    }
+
+    //アクセッサ・プロパティ--------------------------------------------------------------------
+
+    public float TackleSpeed
+    {
+        get => m_animator.GetFloat("tackleSpeed");
+        set => m_animator.SetFloat("tackleSpeed", value);
     }
 }
