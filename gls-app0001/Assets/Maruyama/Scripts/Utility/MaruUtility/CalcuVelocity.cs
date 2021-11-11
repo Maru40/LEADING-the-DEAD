@@ -100,7 +100,7 @@ namespace MaruUtility
 
 			//先読み時間は、逃げる側と追いかける側の距離に比例し、エージェントの速度に反比例する。
 			var aheadTime = toVec.magnitude / (maxSpeed + targetVelocity.magnitude);
-			var desiredPosition = targetObj.transform.position + targetVelocity * aheadTime * turningPower; //目的のポジション
+			var desiredPosition = targetObj.transform.position + (targetVelocity * aheadTime * turningPower); //目的のポジション
 			var desiredVec = desiredPosition - selfObj.transform.position; //希望のベクトル
 
 			return CalucSeekVec(velocity, desiredVec, maxSpeed);
