@@ -48,6 +48,8 @@ public class TankTackle : AttackNodeBase
     Stator_ZombieTank m_stator;
     EyeSearchRange m_eye;
 
+    TaskList<State> m_taskList = new TaskList<State>();
+
     private void Awake()
     {
         m_targetManager = GetComponent<TargetManager>();
@@ -113,7 +115,8 @@ public class TankTackle : AttackNodeBase
         else
         {   //フォワードの差が開いていたら、予測Seek
             Debug.Log("予測Seek");
-            return CalcuVelocity.CalcuPursuitForce(velocity, toVec, m_tackleSpeed, gameObject, target.GetComponent<Rigidbody>(), m_turningPower);
+            return CalcuVelocity.CalcuPursuitForce(
+                velocity, toVec, m_tackleSpeed, gameObject, target.GetComponent<Rigidbody>(), m_turningPower);
         }
     }
 
@@ -131,6 +134,8 @@ public class TankTackle : AttackNodeBase
     public override void AttackStart()
     {
         m_state.Value = State.Charge;
+
+
         enabled = true;
     }
 
@@ -187,7 +192,10 @@ public class TankTackle : AttackNodeBase
     /// <returns></returns>
     bool IsTackleEnd()
     {
-        if (IsTargetRange(m_tackleLastRange)) {
+        var speedRate = m_velocityManager.velocity.magnitude / m_tackleSpeed;
+        //Debug.Log("スピードレート" + speedRate);
+        var range = m_tackleLastRange * speedRate;
+        if (IsTargetRange(range)) {
             return true;
         }
 
