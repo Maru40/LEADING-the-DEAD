@@ -88,14 +88,12 @@ public class AttackManager_ZombieTank : AttackNodeManagerBase
 
     void NearAttackStart()
     {
-        //m_animatorCtrl.NearAttackTriggerFire();
         m_animatorManager.CrossFadeNormalAttack();
         m_type = AttackType.Near;
     }
 
     void TackleAttackStart()
     {
-        //m_animatorCtrl.TackleTriggerFire();
         m_animatorManager.CrossFadeTackle();
         //m_animatorManager.CrossFadeTackleCharge();
         m_velocityManager.ResetAll();
@@ -109,7 +107,6 @@ public class AttackManager_ZombieTank : AttackNodeManagerBase
 
     public override void EndAnimationEvent()
     {
-        Debug.Log("EndAnimation");
         m_stator.GetTransitionMember().chaseTrigger.Fire();
         m_type = AttackType.None;
     }
