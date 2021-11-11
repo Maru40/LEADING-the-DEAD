@@ -468,47 +468,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_mainCamera: {fileID: 2494370294108492378}
   m_overLookingCamera: {fileID: 3581277806438981219}
---- !u!135 &3925144435903544968
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3672481949353448505}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 7
-  m_Center: {x: 0, y: 0, z: 1.5}
---- !u!114 &8710109782975257688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3672481949353448505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ef95796fdafcce41a391bab0c0c63d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_checkObject: {fileID: 3411706998660103106}
-  m_visibleChangeEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2557142107212186787}
-        m_TargetAssemblyTypeName: BarricadeGaugeVisibleManager, Assembly-CSharp
-        m_MethodName: set_IsVisible
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &3865517850154003025
 GameObject:
   m_ObjectHideFlags: 0
@@ -1248,6 +1207,18 @@ PrefabInstance:
       propertyPath: m_changingChangeEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 619778834551323993, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_checkObject
+      value: 
+      objectReference: {fileID: 3411706998660103106}
+    - target: {fileID: 619778834551323993, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_visibleChangeEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2557142107212186787}
+    - target: {fileID: 619778834551323993, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_visibleChangeEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_IsVisible
+      objectReference: {fileID: 0}
     - target: {fileID: 1182914468150695407, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1300,13 +1271,16 @@ PrefabInstance:
       propertyPath: m_probability
       value: 0.0001
       objectReference: {fileID: 0}
+    - target: {fileID: 6213939264249230131, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_checkObject
+      value: 
+      objectReference: {fileID: 3411706998660103106}
+    - target: {fileID: 6213939264249230131, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_visibleChangeEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2557142107212186787}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
---- !u!1 &3672481949353448505 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1182914468150856143, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
-  m_PrefabInstance: {fileID: 2494370294046809590}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3672481949353019417 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1182914468150695407, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
