@@ -31,6 +31,6 @@ public class AnimatorCtrl_ZombieTank : MonoBehaviour
 
     public void TackleTriggerFire()
     {
-        m_animator.SetTrigger("tackleTrigger");
+        //m_animator.SetTrigger("tackleTrigger");
     }
 }
