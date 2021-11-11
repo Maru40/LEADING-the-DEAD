@@ -47,7 +47,7 @@ public class FadeImageObject : FadeObject
 
         while(countTime < fadeTime)
         {
-            countTime += Time.deltaTime;
+            countTime += Time.unscaledDeltaTime;
 
             float setAlpha = countTime / fadeTime;
             
