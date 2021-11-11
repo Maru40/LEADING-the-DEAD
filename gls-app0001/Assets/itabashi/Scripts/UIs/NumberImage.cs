@@ -64,6 +64,17 @@ public class NumberImage : MonoBehaviour
     [SerializeField, Min(0)]
     private int m_value = 0;
 
+    public int value
+    {
+        set
+        {
+            m_value = value;
+            NumberChanged();
+        }
+
+        get => m_value;
+    }
+
     [SerializeField, Min(0.0f)]
     private float m_digitDistance = 0.0f;
 
