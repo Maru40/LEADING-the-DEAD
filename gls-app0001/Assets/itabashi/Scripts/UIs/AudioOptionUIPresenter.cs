@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
+using Manager;
 
 public class AudioOptionUIPresenter : MonoBehaviour
 {
@@ -15,17 +16,14 @@ public class AudioOptionUIPresenter : MonoBehaviour
     [SerializeField]
     private Button m_backButton = null;
 
-    [SerializeField]
-    private AudioOptioner m_audioOptioner = null;
-
     private void Awake()
     {
         m_bgmSlider.onValueChanged.AsObservable()
-            .Subscribe(value => m_audioOptioner.BGMVolume = value / m_bgmSlider.maxValue)
+            .Subscribe(value => GameAudioManager.Instance.BGMVolume = value / m_bgmSlider.maxValue)
             .AddTo(this);
 
         m_seSlider.onValueChanged.AsObservable()
-            .Subscribe(value => m_audioOptioner.SEVolume = value / m_seSlider.maxValue)
+            .Subscribe(value => GameAudioManager.Instance.SEVolume = value / m_seSlider.maxValue)
             .AddTo(this);
 
         m_backButton.onClick.AsObservable()
