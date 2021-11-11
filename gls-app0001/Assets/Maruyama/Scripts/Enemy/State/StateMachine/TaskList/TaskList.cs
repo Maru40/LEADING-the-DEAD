@@ -96,8 +96,7 @@ public class TaskList<EnumType>
         bool isEndOneTask = m_currentTask.update();
 
         //タスクが終了したら
-        if (isEndOneTask)
-        {
+        if (isEndOneTask) {
             EndOneTask();
         }
     }
@@ -163,7 +162,7 @@ public class TaskList<EnumType>
         Task task = null;
         //存在したら取得できる関数
         var exist = m_defineTaskDictionary.TryGetValue(type, out task);
-        if(exist == false)
+        if(exist == false) 
         {
             Debug.Log("タスクが登録されていません");
             return;
@@ -184,6 +183,14 @@ public class TaskList<EnumType>
         m_currentTask = null;
         m_currentTasks.Clear();
         m_currentIndex = 0;
+    }
+
+    /// <summary>
+    /// 強制的に次のタスクに変更する。
+    /// </summary>
+    public void AbsoluteNextTask()
+    {
+        EndOneTask();
     }
 
     //アクセッサ-------------------------------------------------------------------------------------------
