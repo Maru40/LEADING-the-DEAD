@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UniRx;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 namespace Manager
 {
@@ -20,7 +20,13 @@ namespace Manager
         private GameObject m_loadDrawObject = null;
 
         [SerializeField]
-        private Canvas m_canvas;
+        private Canvas m_canvas = null;
+
+        [SerializeField]
+        private Camera m_camera = null;
+
+        [SerializeField]
+        private UnityEvent m_sceneChangedOneEvent = new UnityEvent();
 
         public bool IsFeding { private set; get; }
 
@@ -40,7 +46,7 @@ namespace Manager
 
         public void LoadScene(string sceneName, FadeObject fadeOutObjectPrefab, FadeObject fadeInObjectPrefab)
         {
-            if(IsFeding)
+            if (IsFeding)
             {
                 Debug.LogError("遷移中に遷移はできません");
                 return;
@@ -52,7 +58,7 @@ namespace Manager
             StartCoroutine(LoadEnumerator(sceneName, fadeOutObject, fadeInObject));
         }
 
-        private IEnumerator LoadEnumerator(string sceneName,FadeObject fadeOutObject,FadeObject fadeInObject)
+        private IEnumerator LoadEnumerator(string sceneName, FadeObject fadeOutObject, FadeObject fadeInObject)
         {
             var unloadScene = SceneManager.GetActiveScene();
 
@@ -64,7 +70,7 @@ namespace Manager
 
             IsFeding = true;
 
-             fadeOutObject.FadeStart();
+            fadeOutObject.FadeStart();
 
             Debug.Log("フェードアウト開始");
 
@@ -74,6 +80,12 @@ namespace Manager
             }
 
             Debug.Log("フェードアウト終了");
+
+            m_sceneChangedOneEvent?.Invoke();
+
+            m_sceneChangedOneEvent.RemoveAllListeners();
+
+            m_camera.gameObject.SetActive(true);
 
             Destroy(fadeOutObject.gameObject);
 
@@ -95,8 +107,8 @@ namespace Manager
             var asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 
             asyncLoad.allowSceneActivation = false;
-            
-            while(asyncLoad.progress < 0.9f)
+
+            while (asyncLoad.progress < 0.9f)
             {
                 yield return null;
             }
@@ -104,8 +116,8 @@ namespace Manager
             Debug.Log("ロード準備が終わりました");
 
             asyncLoad.allowSceneActivation = true;
-            
-            while(!asyncLoad.isDone)
+
+            while (!asyncLoad.isDone)
             {
                 yield return null;
             }
@@ -116,6 +128,7 @@ namespace Manager
 
             m_loadDrawObject.SetActive(false);
             fadeInObject.gameObject.SetActive(true);
+            m_camera.gameObject.SetActive(false);
 
             Debug.Log("フェードイン開始");
 
@@ -134,5 +147,12 @@ namespace Manager
 
             IsFeding = false;
         }
+
+        public void AddSceneChangedOneEvent(UnityAction changeOneEvent)
+        {
+            m_sceneChangedOneEvent.AddListener(changeOneEvent);
+        }
+
     }
+
 }
