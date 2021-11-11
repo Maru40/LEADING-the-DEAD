@@ -14,12 +14,14 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
     Stator_ZombieNormal m_stator;
     TargetManager m_targetMgr;
     AnimatorManager_ZombieNormal m_animatorManager;
+    EyeSearchRange m_eye;
 
     void Awake()
     {
         m_stator = GetComponent<Stator_ZombieNormal>();
         m_targetMgr = GetComponent<TargetManager>();
         m_animatorManager = GetComponent<AnimatorManager_ZombieNormal>();
+        m_eye = GetComponent<EyeSearchRange>();
     }
 
     /// <summary>
@@ -33,6 +35,7 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
         var position = m_targetMgr.GetNowTargetPosition();
         if (position != null)
         {
+            //return m_eye.IsInEyeRange((Vector3)position, range);
             return Calculation.IsRange(gameObject, (Vector3)position, range);
         }
         else

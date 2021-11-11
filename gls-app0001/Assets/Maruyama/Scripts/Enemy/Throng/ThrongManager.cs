@@ -82,7 +82,10 @@ public class ThrongManager : MonoBehaviour
 
     private void Update()
     {
-        AvoidNearThrong(m_velocityManager);
+        if(m_generator != null)
+        {
+            AvoidNearThrong(m_velocityManager);
+        }
     }
 
     /// <summary>

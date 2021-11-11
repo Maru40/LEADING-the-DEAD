@@ -76,7 +76,12 @@ public class EnemyGenerator : GeneratorBase
 
     //生成したゾンビを持つ
     protected List<ThrongData> m_datas = new List<ThrongData>();
-    static List<ThrongData> m_allDatas = new List<ThrongData>();
+    static List<ThrongData> sm_allDatas = new List<ThrongData>();
+
+    protected virtual void Awake()
+    {
+        sm_allDatas.Clear();
+    }
 
     protected virtual void Start()
     {
@@ -115,7 +120,7 @@ public class EnemyGenerator : GeneratorBase
         );
 
         m_datas.Add(newData);
-        m_allDatas.Add(newData);
+        sm_allDatas.Add(newData);
     }
 
     /// <summary>
@@ -178,7 +183,7 @@ public class EnemyGenerator : GeneratorBase
 
     public List<ThrongData> GetThrongDatas()
     {
-        return m_allDatas;
+        return sm_allDatas;
     }
 
     public GameObject GetCreateObject()
