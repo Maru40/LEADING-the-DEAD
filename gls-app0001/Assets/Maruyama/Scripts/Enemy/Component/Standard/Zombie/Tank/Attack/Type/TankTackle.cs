@@ -47,6 +47,7 @@ public class TankTackle : AttackNodeBase
     EnemyVelocityMgr m_velocityManager;
     Stator_ZombieTank m_stator;
     EyeSearchRange m_eye;
+    AnimatorManager_ZombieTank m_animatorManager;
 
     TaskList<State> m_taskList = new TaskList<State>();
 
@@ -56,6 +57,7 @@ public class TankTackle : AttackNodeBase
         m_velocityManager = GetComponent<EnemyVelocityMgr>();
         m_stator = GetComponent<Stator_ZombieTank>();
         m_eye = GetComponent<EyeSearchRange>();
+        m_animatorManager = GetComponent<AnimatorManager_ZombieTank>();
 
         m_eyeRad = m_eyeDeg * Mathf.Deg2Rad;
     }
@@ -87,6 +89,8 @@ public class TankTackle : AttackNodeBase
         Vector3 force = CalcuTackleForce();
 
         m_velocityManager.AddForce(force);
+        Debug.Log(m_velocityManager.velocity.magnitude);
+        //m_animatorManager.TackleSpeed = m_velocityManager.velocity.magnitude / m_tackleSpeed;
 
         if (IsTackleEnd()) //ターゲットに限りなく近づいたら
         {
@@ -122,20 +126,23 @@ public class TankTackle : AttackNodeBase
 
     void Rotation()
     {
-        if(m_velocityManager.velocity == Vector3.zero) {
+        var forward = m_state.Value switch {
+            State.Charge => CalcuToTargetVec().normalized,
+            State.Tackle => m_velocityManager.velocity,
+            _ => Vector3.zero
+        };
+
+        if (forward == Vector3.zero) {
             return;
         }
 
-        if (m_state.Value == State.Charge || m_state.Value == State.Tackle) {
-            transform.forward = m_velocityManager.velocity;
-        }
+        transform.forward = forward;
     }
 
     public override void AttackStart()
     {
         m_state.Value = State.Charge;
-
-
+        
         enabled = true;
     }
 
@@ -193,7 +200,6 @@ public class TankTackle : AttackNodeBase
     bool IsTackleEnd()
     {
         var speedRate = m_velocityManager.velocity.magnitude / m_tackleSpeed;
-        //Debug.Log("スピードレート" + speedRate);
         var range = m_tackleLastRange * speedRate;
         if (IsTargetRange(range)) {
             return true;
