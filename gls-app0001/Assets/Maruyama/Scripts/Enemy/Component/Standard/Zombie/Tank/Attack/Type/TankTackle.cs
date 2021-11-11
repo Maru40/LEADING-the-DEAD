@@ -35,6 +35,9 @@ public class TankTackle : AttackNodeBase
     [SerializeField]
     float m_subPursuitTargetForward = 0.3f;
 
+    [Header("タックル終了後の待機時間"),SerializeField]
+    float m_waitTime = 1.0f; //タックル終了後の待機時間
+
     /// <summary>
     /// Rayの障害物するLayerの配列
     /// </summary>
@@ -48,6 +51,7 @@ public class TankTackle : AttackNodeBase
     Stator_ZombieTank m_stator;
     EyeSearchRange m_eye;
     AnimatorManager_ZombieTank m_animatorManager;
+    WaitTimer m_waitTimer;
 
     TaskList<State> m_taskList = new TaskList<State>();
 
@@ -58,6 +62,7 @@ public class TankTackle : AttackNodeBase
         m_stator = GetComponent<Stator_ZombieTank>();
         m_eye = GetComponent<EyeSearchRange>();
         m_animatorManager = GetComponent<AnimatorManager_ZombieTank>();
+        m_waitTimer = GetComponent<WaitTimer>();
 
         m_eyeRad = m_eyeDeg * Mathf.Deg2Rad;
     }
@@ -236,12 +241,15 @@ public class TankTackle : AttackNodeBase
     public override void EndAnimationEvent()
     {
         Debug.Log("EndAnimation");
-        m_stator.GetTransitionMember().chaseTrigger.Fire();
+        //m_stator.GetTransitionMember().chaseTrigger.Fire();
 
         m_state.Value = State.None;
 
         m_velocityManager.SetIsDeseleration(false);
+        m_velocityManager.ResetAll();
         enabled = false;
+
+        m_waitTimer.AddWaitTimer(GetType(), m_waitTime, () => m_stator.GetTransitionMember().chaseTrigger.Fire());
     }
 
     /// <summary>
