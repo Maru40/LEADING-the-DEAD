@@ -14,6 +14,12 @@ public class SelectStageLabelAnimatorManager : MonoBehaviour
     [SerializeField]
     private GameObject m_numStageLabel;
 
+    [SerializeField]
+    private StageSelecter m_stageSelecter;
+
+    [SerializeField]
+    private NumberImage m_numberImage;
+
     private StageSelecter.SelectStageData m_selectStageData;
 
     private void Awake()
@@ -40,5 +46,9 @@ public class SelectStageLabelAnimatorManager : MonoBehaviour
 
         m_episodeLabel.SetActive(false);
         m_numStageLabel.SetActive(true);
+
+        m_numberImage.value = m_stageSelecter.selectIndex + 1;
+
+        Debug.Log("呼ばれた");
     }
 }
