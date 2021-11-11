@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using Manager;
 
 public class GameSceneTransitioner : MonoBehaviour
 {
     [SerializeField]
     List<SceneObject> m_sceneObjects;
 
+    [SerializeField]
+    private SceneObject m_stageSelectScene;
+
     private void Update()
     {
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
-            Exit();
-        }
     }
 
     public void Retry()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameSceneManager.Instance.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void GoNextScene()
@@ -36,12 +36,10 @@ public class GameSceneTransitioner : MonoBehaviour
         SceneManager.LoadScene(m_sceneObjects[index + 1]);
     }
 
-    public void Exit()
+    public void BackSelectScene()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif        
+        GameSceneManager.Instance.AddSceneChangedOneEvent(() => GameTimeManager.UnPause());
+
+        GameSceneManager.Instance.LoadScene(m_stageSelectScene);
     }
 }
