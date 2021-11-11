@@ -64,6 +64,17 @@ public class NumberImage : MonoBehaviour
     [SerializeField, Min(0)]
     private int m_value = 0;
 
+    public int value
+    {
+        set
+        {
+            m_value = value;
+            NumberChanged();
+        }
+
+        get => m_value;
+    }
+
     [SerializeField, Min(0.0f)]
     private float m_digitDistance = 0.0f;
 
@@ -128,6 +139,8 @@ public class NumberImage : MonoBehaviour
 
         for (int i = 0; i < m_maxDigits; ++i)
         {
+            m_numImages[i].gameObject.SetActive(true);
+
             int numIndex = value % 10;
             value /= 10;
 
@@ -140,7 +153,13 @@ public class NumberImage : MonoBehaviour
 
             if(numIndex == 0)
             {
-                m_numImages[i].sprite = m_isZeroPadding ? m_numberSprites.num0 : null;
+                m_numImages[i].sprite = m_numberSprites.num0;
+
+                if(!m_isZeroPadding)
+                {
+                    m_numImages[i].gameObject.SetActive(false);
+                }
+
                 continue;
             }
 

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
@@ -29,6 +29,8 @@ public class StageSelecter : MonoBehaviour
     private UISounder m_uiSounder;
 
     private int m_selectIndex = -1;
+
+    public int selectIndex => m_selectIndex;
 
     private readonly Subject<SelectStageData> m_onSelectIndexDecrementSubject = new Subject<SelectStageData>();
 
