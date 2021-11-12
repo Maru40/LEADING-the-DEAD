@@ -19,8 +19,9 @@ public class EnemyAttackTriggerAction : TriggerAction
     [SerializeField]
     AudioManager m_audioManager;
 
-    [Header("ヒット時のパーティクル"),SerializeField]
-    ParticleManager.ParticleID m_hitParticleID;
+    [Header("ヒット時のパーティクル"), SerializeField]
+    List<ParticleManager.ParticleID> m_hitParticleIDs;
+    //ParticleManager.ParticleID m_hitParticleID;
     
     Collider m_hitCollider;
 
@@ -71,13 +72,20 @@ public class EnemyAttackTriggerAction : TriggerAction
             }
 
             //m_audio.PlayOneShot(m_audio.clip);  //音再生
-            ParticleManager.Instance.Play(m_hitParticleID ,transform.position);
+            CreateParticles();
             m_audioManager?.PlayOneShot();
             m_animatorManager?.HitStop(damageData);
             damage.TakeDamage(damageData);
         }
     }
 
+    void CreateParticles()
+    {
+        foreach (var id in m_hitParticleIDs)
+        {
+            ParticleManager.Instance.Play(id, transform.position);
+        }
+    }
 
     //アクセッサ・プロパティ--------------------------------------------------------------------------
 
