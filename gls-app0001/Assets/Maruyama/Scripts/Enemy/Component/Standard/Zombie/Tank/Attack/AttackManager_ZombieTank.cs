@@ -94,7 +94,9 @@ public class AttackManager_ZombieTank : AttackNodeManagerBase
 
     void TackleAttackStart()
     {
-        m_animatorManager.CrossFadeTackle();
+        m_animatorManager.CrossFadeShout();
+        //m_animatorManager.CrossFadeDrumming();
+        //m_animatorManager.CrossFadeTackle();
         //m_animatorManager.CrossFadeTackleCharge();
         m_velocityManager.ResetAll();
         m_type = AttackType.Tackle;

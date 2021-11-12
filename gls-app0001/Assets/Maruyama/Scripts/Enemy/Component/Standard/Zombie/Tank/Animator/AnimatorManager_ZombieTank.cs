@@ -37,6 +37,8 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         SettingNormalAttackAnimation();
         SettingTackleAnimation();
         SettingTackleLastAnimation();
+        SettingDrumming();
+        SettingShout();
     }
 
     private void Update()
@@ -86,25 +88,11 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         actionBehaviour.AddFirstTransitionAction(() => {
             float speed = m_animator.speed;
             m_animator.speed = 0.0f;
-            m_waitTimer.AddWaitTimer(GetType(), 0.2f, () => TackleStart(speed));
+            m_waitTimer.AddWaitTimer(GetType(), m_tackleParam.chargeTime, () => TackleStart(speed));
         });
 
         //Time系
         var timeEvent = tackle.onTimeEvent;
-        //タックルを開始する時間
-
-        //timeEvent.ClampWhere(m_tackleParam.tackleStartTime)
-        //    .Subscribe(_ => {
-        //        float speed = m_animator.speed;
-        //        m_animator.speed = 0.0f;
-        //        m_waitTimer.AddWaitTimer(GetType(), 0.2f, () => TackleStart(speed));
-        //    })
-        //    .AddTo(this);
-
-        //timeEvent.ClampWhere(m_tackleParam.tackleStartTime)
-        //    .Subscribe(_ => m_tackleComp.TackleStart())
-        //    .AddTo(this);
-
     }
 
     void TackleStart(float speed)
@@ -126,6 +114,29 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         tackle.onStateExited.Subscribe(_ => m_tackleComp.EndAnimationEvent());
     }
 
+    /// <summary>
+    /// ドラミング攻撃
+    /// </summary>
+    void SettingDrumming()
+    {
+        var baseIndex = m_animator.GetLayerIndex("Base Layer");
+
+        var shoutTimeBehaviour = ZombieTankTable.BaseLayer.Drumming.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
+        shoutTimeBehaviour.onStateEntered.
+            Subscribe(_ => m_tackleComp.AttackStart()).AddTo(this);
+    }
+
+    /// <summary>
+    /// シャウト
+    /// </summary>
+    void SettingShout()
+    {
+        var baseIndex = m_animator.GetLayerIndex("Base Layer");
+
+        var shoutTimeBehaviour = ZombieTankTable.BaseLayer.Shout.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
+        shoutTimeBehaviour.onStateEntered.
+            Subscribe(_ => m_tackleComp.AttackStart()).AddTo(this);
+    }
 
     //クロスフェード--------------------------------------------------------------------------
 
@@ -145,6 +156,18 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
     {
         int layerIndex = m_animator.GetLayerIndex("Upper Layer");
         CrossFadeState("TackleCharge", layerIndex, transitionTime);
+    }
+
+    public void CrossFadeDrumming(float transitionTime = 0.25f)
+    {
+        int layerIndex = m_animator.GetLayerIndex("Base Layer");
+        CrossFadeState("Drumming", layerIndex, transitionTime);
+    }
+
+    public void CrossFadeShout(float transitionTime = 0.25f)
+    {
+        int layerIndex = m_animator.GetLayerIndex("Base Layer");
+        CrossFadeState("Shout", layerIndex, transitionTime);
     }
 
     //アクセッサ・プロパティ--------------------------------------------------------------------
