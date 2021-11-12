@@ -18,6 +18,19 @@ public struct AttackParametorBase
     }
 }
 
+[Serializable]
+public struct TimeParametor<T>
+{
+    public float time;
+    public T value;
+
+    public TimeParametor(float time, T value)
+    {
+        this.time = time;
+        this.value = value;
+    }
+}
+
 public abstract class AttackNodeManagerBase : MonoBehaviour
 {
     [SerializeField]

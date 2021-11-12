@@ -11,6 +11,7 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
     {
         None = -1,
         HitAttack_Normal,
+        CloudDust  //土煙
     }
 
     [SerializeField]

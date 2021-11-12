@@ -4,6 +4,7 @@ using UnityEngine;
 
 using System;
 using UniRx;
+using MaruUtility.UtilityDictionary;
 
 public class AnimatorManager_ZombieTank : AnimatorManagerBase
 {
@@ -22,6 +23,10 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
     [SerializeField]
     TackleParametor m_tackleParam = new TackleParametor();
 
+    [SerializeField]
+    Ex_Dictionary<AttackManager_ZombieTank.AttackType, TimeParametor<ParticleManager.ParticleID>> m_attackParticleDictionary =
+        new Ex_Dictionary<AttackManager_ZombieTank.AttackType, TimeParametor<ParticleManager.ParticleID>>();
+
     NormalAttack m_normalAttackComp;
     TankTackle m_tackleComp;
     WaitTimer m_waitTimer;
@@ -29,6 +34,8 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
     override protected void Awake()
     {
         base.Awake();
+
+        m_attackParticleDictionary.InsertInspectorData();
 
         m_waitTimer = GetComponent<WaitTimer>();
         m_normalAttackComp = GetComponent<NormalAttack>();
@@ -65,6 +72,11 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
             }).AddTo(this);
         timeEvent.ClampWhere(timeParam.endTime)
             .Subscribe(_ => timeParam.trigger.AttackEnd()).AddTo(this);
+
+        //パーティクルセット
+        SettingTimeEventParticle(timeEvent, 
+            AttackManager_ZombieTank.AttackType.Near, 
+            m_normalAttackParam.trigger.gameObject);
 
         attack.onStateEntered.Subscribe(_ => m_normalAttackComp.AttackStart()).AddTo(this);
         attack.onStateExited.Subscribe(_ => m_normalAttackComp.EndAnimationEvent()).AddTo(this);
@@ -136,6 +148,24 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         var shoutTimeBehaviour = ZombieTankTable.BaseLayer.Shout.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
         shoutTimeBehaviour.onStateEntered.
             Subscribe(_ => m_tackleComp.AttackStart()).AddTo(this);
+    }
+
+    /// <summary>
+    /// AniamtionEventで発生するParticleを設定
+    /// </summary>
+    /// <param name="timeEvent">TimeEvent</param>
+    /// <param name="type">攻撃タイプ</param>
+    /// <param name="owner">パーティクルが発生する場所</param>
+    void SettingTimeEventParticle(IObservable<UniRxIObservableExtension.BeforeAfterData<float>> timeEvent ,
+        AttackManager_ZombieTank.AttackType type,
+        GameObject owner)
+    {
+        if (m_attackParticleDictionary.ContainsKey(type))
+        {
+            var param = m_attackParticleDictionary[type];
+            timeEvent.ClampWhere(param.time)
+                .Subscribe(_ => ParticleManager.Instance.Play(param.value, owner.transform.position));
+        }
     }
 
     //クロスフェード--------------------------------------------------------------------------

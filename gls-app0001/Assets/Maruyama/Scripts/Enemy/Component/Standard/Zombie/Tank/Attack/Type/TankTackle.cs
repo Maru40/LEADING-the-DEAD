@@ -94,7 +94,7 @@ public class TankTackle : AttackNodeBase
         Vector3 force = CalcuTackleForce();
 
         m_velocityManager.AddForce(force);
-        Debug.Log(m_velocityManager.velocity.magnitude);
+        //Debug.Log(m_velocityManager.velocity.magnitude);
         //m_animatorManager.TackleSpeed = m_velocityManager.velocity.magnitude / m_tackleSpeed;
 
         if (IsTackleEnd()) //ターゲットに限りなく近づいたら
