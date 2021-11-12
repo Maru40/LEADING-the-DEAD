@@ -5,10 +5,12 @@ using UnityEngine;
 public class ListenSound : MonoBehaviour
 {
     I_Listen m_listen;
+    TargetManager m_targetManager;
 
-    void Start()
+    void Awake()
     {
         m_listen = GetComponent<I_Listen>();
+        m_targetManager = GetComponent<TargetManager>();
     }
 
     void Update()
@@ -25,6 +27,18 @@ public class ListenSound : MonoBehaviour
         m_listen?.Listen(foundObject);
     }
 
+    void Lost(FoundObject other)
+    {
+        var target = m_targetManager.GetNowTarget();
+        if (target)
+        {
+            if(other == target)
+            {
+                m_targetManager.SetNowTarget(GetType(), null);
+            }
+        }
+    }
+
     //トリガーで範囲を指定する場合があるから
     private void OnTriggerEnter(Collider other)
     {
@@ -32,6 +46,15 @@ public class ListenSound : MonoBehaviour
         if (foundObject)
         {
             Listen(foundObject);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        var foundObject = other.gameObject.GetComponentInParentAndChildren<FoundObject>();
+        if (foundObject)
+        {
+            Lost(foundObject);
         }
     }
 }
