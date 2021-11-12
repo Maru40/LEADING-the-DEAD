@@ -86,25 +86,11 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         actionBehaviour.AddFirstTransitionAction(() => {
             float speed = m_animator.speed;
             m_animator.speed = 0.0f;
-            m_waitTimer.AddWaitTimer(GetType(), 0.2f, () => TackleStart(speed));
+            m_waitTimer.AddWaitTimer(GetType(), m_tackleParam.chargeTime, () => TackleStart(speed));
         });
 
         //Time系
         var timeEvent = tackle.onTimeEvent;
-        //タックルを開始する時間
-
-        //timeEvent.ClampWhere(m_tackleParam.tackleStartTime)
-        //    .Subscribe(_ => {
-        //        float speed = m_animator.speed;
-        //        m_animator.speed = 0.0f;
-        //        m_waitTimer.AddWaitTimer(GetType(), 0.2f, () => TackleStart(speed));
-        //    })
-        //    .AddTo(this);
-
-        //timeEvent.ClampWhere(m_tackleParam.tackleStartTime)
-        //    .Subscribe(_ => m_tackleComp.TackleStart())
-        //    .AddTo(this);
-
     }
 
     void TackleStart(float speed)
