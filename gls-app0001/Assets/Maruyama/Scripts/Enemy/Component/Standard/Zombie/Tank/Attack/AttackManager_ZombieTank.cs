@@ -25,7 +25,7 @@ public class AttackManager_ZombieTank : AttackNodeManagerBase
         }
     }
 
-    enum AttackType
+    public enum AttackType
     {
          None,
          Near,
