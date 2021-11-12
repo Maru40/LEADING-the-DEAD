@@ -869,7 +869,7 @@ MonoBehaviour:
     startTime: 0.5
     endTime: 1.4
   m_tackleParam:
-    chargeTime: 0.5
+    chargeTime: 0.1
     deselerationStartTime: 1.8
 --- !u!114 &3116183869311014974
 MonoBehaviour:
@@ -898,6 +898,7 @@ MonoBehaviour:
   m_eyeDeg: 50
   m_turningPower: 2
   m_subPursuitTargetForward: 0.3
+  m_waitTime: 1
   m_rayObstacleLayerStrings:
   - L_Obstacle
 --- !u!114 &1947119077
