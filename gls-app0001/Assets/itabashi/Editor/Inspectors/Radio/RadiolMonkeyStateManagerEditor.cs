@@ -37,6 +37,10 @@ public class RadioStateManagerEditor : Editor
             }
         }
 
+        var stopTimerSecond = serializedObject.FindProperty("m_stopTimerSecond");
+
+        EditorGUILayout.PropertyField(stopTimerSecond, new GUIContent("止まるまでの時間"));
+
         serializedObject.ApplyModifiedProperties();
     }
 }

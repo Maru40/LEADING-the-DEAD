@@ -16,6 +16,9 @@ public class RadioStateManager : MonoBehaviour
     [SerializeField]
     private bool m_alarmSwitch = false;
 
+    [SerializeField]
+    private float m_stopTimerSecond = 5.0f;
+
     public bool alarmSwitch
     {
         set
@@ -26,6 +29,7 @@ public class RadioStateManager : MonoBehaviour
             {
                 m_alarmObject.AlarmStop();
                 nowState = RadioState.Normal;
+                Debug.Log("アラームが停止しました");
             }
         }
         
@@ -78,5 +82,21 @@ public class RadioStateManager : MonoBehaviour
         m_alarmObject.AlarmStart();
 
         nowState = RadioState.ExplosionPreparation;
+
+        StartCoroutine(StartTimer());
+    }
+
+    private IEnumerator StartTimer()
+    {
+        float countTimer = 0.0f;
+
+        while(countTimer < m_stopTimerSecond)
+        {
+            countTimer += Time.deltaTime;
+
+            yield return null;
+        }
+
+        alarmSwitch = false;
     }
 }
