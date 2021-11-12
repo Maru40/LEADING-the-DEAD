@@ -78,7 +78,7 @@ MonoBehaviour:
     type: 3
     damageTags: []
   m_audioManager: {fileID: 0}
-  m_hitParticleID: 0
+  m_hitParticleIDs: 00000000
 --- !u!82 &1377736536478169077
 AudioSource:
   m_ObjectHideFlags: 0
@@ -348,7 +348,7 @@ MonoBehaviour:
     type: 0
     damageTags: []
   m_audioManager: {fileID: 0}
-  m_hitParticleID: 0
+  m_hitParticleIDs: 
 --- !u!82 &3513929150319197639
 AudioSource:
   m_ObjectHideFlags: 0
@@ -871,6 +871,12 @@ MonoBehaviour:
   m_tackleParam:
     chargeTime: 0
     deselerationStartTime: 1.8
+  m_attackParticleDictionary:
+    m_typeDraws:
+    - key: 1
+      value:
+        time: 1
+        value: 0
 --- !u!114 &3116183869311014974
 MonoBehaviour:
   m_ObjectHideFlags: 0
