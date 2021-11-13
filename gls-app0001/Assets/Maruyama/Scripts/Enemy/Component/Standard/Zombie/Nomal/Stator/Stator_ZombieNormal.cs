@@ -11,6 +11,7 @@ public enum ZombieNormalState
     RandomPlowling,
     Chase,
     Attack,
+    Find,  //見つけた
     Stun,
     Anger,
     KnockBack,  //ノックバック
@@ -21,6 +22,7 @@ public enum ZombieNormalState
 public class ZombieNormalTransitionMember
 {
     public MyTrigger rondomPlowlingTrigger = new MyTrigger();
+    public MyTrigger findTrigger = new MyTrigger();
     public MyTrigger chaseTrigger = new MyTrigger();
     public MyTrigger attackTrigger = new MyTrigger();
     public MyTrigger stunTrigger = new MyTrigger();
@@ -32,6 +34,11 @@ public class ZombieNormalTransitionMember
 public class Stator_ZombieNormal : StatorBase
 {
     StateMachine m_stateMachine;
+
+    //パラメータ
+
+    [SerializeField]
+    StateNode_ZombieNormal_Find.Parametor m_findParametor = new StateNode_ZombieNormal_Find.Parametor(1.0f);
 
     void Awake()
     {
@@ -56,6 +63,7 @@ public class Stator_ZombieNormal : StatorBase
         var zombie = GetComponent<ZombieNormal>();
 
         m_stateMachine.AddNode(StateType.RandomPlowling, new EnState_RandomPlowling(zombie));
+        m_stateMachine.AddNode(StateType.Find,           new StateNode_ZombieNormal_Find(zombie, m_findParametor));
         m_stateMachine.AddNode(StateType.Chase,          new EnState_ChaseTarget(zombie));
         m_stateMachine.AddNode(StateType.Attack,         new StateNode_ZombieNormal_Attack(zombie));
         m_stateMachine.AddNode(StateType.Stun,           new EnState_Stun(zombie));
@@ -68,10 +76,14 @@ public class Stator_ZombieNormal : StatorBase
     void CreateEdge()
     {
         //ランダム徘徊
+        m_stateMachine.AddEdge(StateType.RandomPlowling, StateType.Find, ToFindTrigger);
         m_stateMachine.AddEdge(StateType.RandomPlowling, StateType.Stun, ToStunTrigger);
         m_stateMachine.AddEdge(StateType.RandomPlowling, StateType.Anger, ToAngerTrigger);
         m_stateMachine.AddEdge(StateType.RandomPlowling, StateType.Chase, ToChaseTrigger);
         //m_stateMachine.AddEdge(StateType.RandomPlowling, StateType.Dying, ToDyingTrigger);
+
+        //見つけた
+        m_stateMachine.AddEdge(StateType.Find, StateType.Chase, ToChaseTrigger);
 
         //追従処理
         m_stateMachine.AddEdge(StateType.Chase, StateType.Stun, ToStunTrigger);
@@ -109,6 +121,11 @@ public class Stator_ZombieNormal : StatorBase
 
 
     //遷移条件系---------------------------------------------------------------
+
+    bool ToFindTrigger(TransitionMember member)
+    {
+        return member.findTrigger.Get();
+    }
 
     bool ToChaseTrigger(TransitionMember member) {
         return member.chaseTrigger.Get();
