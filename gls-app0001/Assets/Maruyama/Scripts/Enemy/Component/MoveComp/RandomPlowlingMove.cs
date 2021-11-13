@@ -105,13 +105,25 @@ public class RandomPlowlingMove : MonoBehaviour
         Vector3 force = CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, toVec, maxSpeed);
         m_velocityMgr.AddForce(force * m_param.turningPower);
 
-        m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
-
         ThrongProcess();  //集団行動系
 
         if (IsRouteEnd())
         {
             RouteEndProcess();
+        }
+
+        Rotation();
+    }
+
+    void Rotation()
+    {
+        if (m_waitTimer.IsWait(GetType())) {
+            return;
+        }
+
+        if (m_velocityMgr.velocity != Vector3.zero)
+        {
+            m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
         }
     }
 
