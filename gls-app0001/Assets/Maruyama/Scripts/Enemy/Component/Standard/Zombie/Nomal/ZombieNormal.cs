@@ -31,8 +31,9 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea
     //インターフェースの実装-------------------------------------------------
 
     void I_Chase.ChangeState(){
-        var member = m_stator.GetTransitionMember();
-        member.chaseTrigger.Fire();
+        m_stator.GetTransitionMember().findTrigger.Fire();
+        //var member = m_stator.GetTransitionMember();
+        //member.chaseTrigger.Fire();
     }
 
     void I_Chase.TargetLost()

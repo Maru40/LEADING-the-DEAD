@@ -69,12 +69,16 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
 
     protected override void ReserveChangeComponents()
     {
-        //特になし
+        var owner = GetOwner();
+        AddChangeComp(owner.GetComponent<KnockBackManager>(),false, true);
     }
 
     public override void OnStart()
     {
         base.OnStart();
+
+        //上半身アニメーションレイヤーの削除
+        m_animatorManager.Dying();
 
         //タスクのセレクト
         SelectTask();
@@ -83,12 +87,20 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
     public override void OnUpdate()
     {
         m_taskList.UpdateTask();
+        //m_animatorManager.CrossFadeIdleAnimation("Upper Layer");
 
         if (m_taskList.IsEnd)  //タスクが終了したら。
         {
             //死亡状態に変更
             m_stator.GetTransitionMember().deathTrigger.Fire();
         }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+
+        m_animatorManager.Respawn();
     }
 
     /// <summary>

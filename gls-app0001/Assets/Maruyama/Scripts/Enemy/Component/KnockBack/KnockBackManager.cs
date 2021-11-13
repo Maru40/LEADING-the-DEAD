@@ -77,7 +77,7 @@ public class KnockBackManager : MonoBehaviour
     public void KnockBack(AttributeObject.DamageData data)
     {
         var other = data.obj;
-        if(other == null) { 
+        if(other == null || enabled == false) { 
             return; 
         }
         
