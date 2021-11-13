@@ -164,6 +164,11 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         CrossFadeState("Idle", layerIndex);
     }
 
+    public void CrossFadeIdleAnimation(int layerIndex)
+    {
+        CrossFadeState("Idle", layerIndex);
+    }
+
     public void CrossFadeDeathAnimatiron()
     {
         var layerIndex = m_animator.GetLayerIndex("Base Layer");
@@ -187,5 +192,22 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     public void SetNormalAttackDamageData(NormalAttackHitColliderType type, AttributeObject.DamageData data)
     {
         m_normalAttackParam[type].trigger.damageData = data;
+    }
+
+    public int BaseLayerIndex => m_animator.GetLayerIndex("Base Layer");
+    public int UpperLayerIndex => m_animator.GetLayerIndex("Upper Layer");
+
+    public void Dying()
+    {
+        const float weight = 0.0f;
+        m_animator.SetLayerWeight(UpperLayerIndex, weight);
+        CrossFadeIdleAnimation(UpperLayerIndex);
+    }
+
+    public void Respawn()
+    {
+        const float weight = 1.0f;
+        m_animator.SetLayerWeight(UpperLayerIndex, weight);
+        CrossFadeIdleAnimation(UpperLayerIndex);
     }
 }
