@@ -91,7 +91,7 @@ namespace Player
         [SerializeField]
         private bool m_isInvincible = false;
 
-        public bool isInvincible { private set => m_isInvincible = value; get => m_isInvincible; }
+        public bool isInvincible { set => m_isInvincible = value; get => m_isInvincible; }
 
         [SerializeField]
         private UnityEvent m_deadStartEvent;
