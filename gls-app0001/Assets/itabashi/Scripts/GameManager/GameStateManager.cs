@@ -9,7 +9,8 @@ public enum GameState
     Play,
     Pause,
     Clear,
-    GameOver
+    GameOver,
+    OverLooking
 }
 
 [System.Serializable]
@@ -25,9 +26,15 @@ public class GameStateManager : MonoBehaviour
     [SerializeField]
     private GameStateReactiveProperty m_gameState = new GameStateReactiveProperty(GameState.Play);
 
+    [SerializeField]
+    private Camera m_overLookingCamera;
+
     public GameState gameState { private set => m_gameState.Value = value; get => m_gameState.Value; }
 
     public System.IObservable<GameState> OnChangedGameState => m_gameState;
+
+    [SerializeField]
+    private UnityEvent m_gameStartEvent;
 
     [SerializeField]
     private UnityEvent m_gameClearEvent;
@@ -44,6 +51,10 @@ public class GameStateManager : MonoBehaviour
         this.RegisterController(m_gameControls);
 
         m_gameControls.Player.Pause.performed += context => ChangePause();
+
+        m_gameControls.Player.Select.performed += context => EndOverLooking();
+
+        m_gameStartEvent.AddListener(() => Debug.Log("ゲーム開始"));
     }
 
     // Start is called before the first frame update
@@ -107,5 +118,31 @@ public class GameStateManager : MonoBehaviour
         gameState = GameState.GameOver;
 
         m_gameOverEvent?.Invoke();
+    }
+
+    private void EndOverLooking()
+    {
+        if(gameState != GameState.OverLooking)
+        {
+            return;
+        }
+
+        gameState = GameState.Play;
+
+        m_overLookingCamera.gameObject.SetActive(false);
+
+        m_gameStartEvent?.Invoke();
+    }
+
+    public void OnOverLookingEnd()
+    {
+        if(gameState != GameState.OverLooking)
+        {
+            return;
+        }
+
+        gameState = GameState.Play;
+
+        m_gameStartEvent?.Invoke();
     }
 }
