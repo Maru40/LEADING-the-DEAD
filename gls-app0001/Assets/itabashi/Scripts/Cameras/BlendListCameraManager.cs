@@ -39,7 +39,7 @@ public class BlendListCameraManager : MonoBehaviour
     {
         float time = 0;
 
-        while(time < count)
+        while (time < count)
         {
             time += Time.deltaTime;
 
