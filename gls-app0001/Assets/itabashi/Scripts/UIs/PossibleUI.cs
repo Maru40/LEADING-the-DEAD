@@ -54,9 +54,16 @@ public class PossibleUI : MonoBehaviour
 
     private int m_index = 0;
 
+    private GameControls m_gameControls = null;
+
     private void Awake()
     {
         UpdateSelect();
+
+        m_gameControls = new GameControls();
+        this.RegisterController(m_gameControls);
+
+        m_gameControls.Player.PutBloodBag.performed += context => PushSelectEvent();
     }
 
     public void AddSelectPossible(string displayName,Action selectEvent,int instanceID)
@@ -84,7 +91,7 @@ public class PossibleUI : MonoBehaviour
 
         m_button.gameObject.SetActive(true);
 
-        EventSystem.current.SetSelectedGameObject(m_button.gameObject);
+        //EventSystem.current.SetSelectedGameObject(m_button.gameObject);
 
         m_index = Mathf.Clamp(m_index, 0, m_possibleEvents.Count - 1);
 
@@ -95,6 +102,9 @@ public class PossibleUI : MonoBehaviour
 
     public void PushSelectEvent()
     {
-        m_possibleEvents[m_index]?.selectEvent();
+        if (m_button.gameObject.activeInHierarchy)
+        {
+            m_possibleEvents[m_index]?.selectEvent();
+        }
     }
 }

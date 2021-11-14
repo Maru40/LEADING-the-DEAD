@@ -28,7 +28,7 @@ namespace Player
         private void Awake()
         {
             m_puttingBloogBagSubject
-                .Where(_ => m_playerStatusManager.isControllValid)
+                .Where(_ => m_playerStatusManager.isControllValid && !m_playerPickUpper.pickedUpDecition)
                 .Subscribe(_ => OnPutting());
 
             m_gameControls = new GameControls();
