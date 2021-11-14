@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
@@ -48,7 +48,7 @@ namespace Player
                 .Subscribe(_ => GoState("Stun", layerIndex))
                 .AddTo(this);
 
-            m_statusManager.OnIsStanChanged.Where(isStun => !isStun)
+            m_statusManager.OnIsStanChanged.Where(isStun => !isStun && !m_statusManager.isDead)
                 .Subscribe(_ => GoState("Idle", layerIndex))
                 .AddTo(this);
         }
