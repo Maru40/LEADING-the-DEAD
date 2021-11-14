@@ -161,6 +161,17 @@ public class @GameControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""b491163b-c0ea-4409-a9d1-e40c71c893fe"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""864d7c9c-001a-4c62-b737-1b3d1a162ba1"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
