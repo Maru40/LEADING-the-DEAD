@@ -19,6 +19,11 @@ public class GameSceneCameraChanger : MonoBehaviour
         Debug.Log(Manager.GameCameraManager.current);
     }
 
+    public void StartGameCamera()
+    {
+        m_overLookingCamera.gameObject.SetActive(false);
+    }
+
     public void ChangeCamera()
     {
         m_overLookingCamera.gameObject.SetActive(!m_overLookingCamera.gameObject.activeInHierarchy);
