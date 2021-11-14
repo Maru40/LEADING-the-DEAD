@@ -23,6 +23,10 @@ public class PlayerPickUpper : MonoBehaviour
 
     public System.IObservable<int> stackObjectsCountOnChanged => m_stackObjects.ObserveCountChanged();
 
+    private bool m_pickedUpDecision = false;
+
+    public bool pickedUpDecition => m_pickedUpDecision;
+
     private void Reset()
     {
         m_pickUpObjectsTransform = transform.Find(PICKUP_OBJECTS_NAME);
@@ -122,7 +126,7 @@ public class PlayerPickUpper : MonoBehaviour
     private void Decision(PickedUpObject pickedUpObject)
     {
         PutAway(pickedUpObject);
-
+        m_pickedUpDecision = true;
         m_possibleUI.RemoveSelectPossible("拾う", pickedUpObject.GetInstanceID());
     }
 
@@ -136,5 +140,10 @@ public class PlayerPickUpper : MonoBehaviour
         }
 
         m_possibleUI.RemoveSelectPossible("拾う", pickedUpObject.GetInstanceID());
+    }
+
+    private void LateUpdate()
+    {
+        m_pickedUpDecision = false;
     }
 }
