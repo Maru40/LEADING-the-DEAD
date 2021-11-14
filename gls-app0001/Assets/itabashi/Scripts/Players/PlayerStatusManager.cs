@@ -86,7 +86,7 @@ namespace Player
 
         private bool m_isDead = false;
 
-        private bool isDead => m_isDead;
+        public bool isDead => m_isDead;
 
         [SerializeField]
         private bool m_isInvincible = false;
@@ -150,6 +150,12 @@ namespace Player
         {
             m_isDead = true;
             m_isInvincible = true;
+
+            if(isStun)
+            {
+                isStun = false;
+                m_stunStar.Stop();
+            }
 
             m_animatorManager.GoState("Dead", "Base Layer", 0.0f);
             m_animatorManager.GoState("Idle", "Upper_Layer", 0.0f);
