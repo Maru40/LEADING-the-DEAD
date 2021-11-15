@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using MaruUtility;
 using System;
 
 [Serializable]
 public struct RespawnManagerParametor
 {
+    public bool isAbsoluteRespawn;  //強制リスポーン
     public bool isRespawn;
     public float time;
 
     public RespawnManagerParametor(bool isRespawn, float time)
     {
+        this.isAbsoluteRespawn = false;
         this.isRespawn = isRespawn;
         this.time = time;
     }
@@ -50,7 +53,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
     public void RespawnReserve()
     {
         //リスポーンするなら準備をする。
-        if (m_param.isRespawn)
+        if (IsRespawn())
         {
             //使いまわすため、削除せずにリスポーンポイントに設定する。
             gameObject.transform.position = new Vector3(0.0f, -100.0f, 0.0f);
@@ -117,6 +120,31 @@ public class EnemyRespawnManager : EnemyRespawnBase
         }
     }
 
+    /// <summary>
+    /// リスポーンするかどうかの判断
+    /// </summary>
+    /// <returns></returns>
+    bool IsRespawn()
+    {
+        if (m_param.isAbsoluteRespawn) { //強制リスポーン
+            return true;
+        }
+
+        if (!m_param.isRespawn) {  //リスポーンさせないならfalse
+            return false;
+        }
+
+        if (CalcuCamera.IsInCamera(transform.position, Camera.main)) {  //カメラの内なら
+            return false;
+        }
+
+        var targetType = m_targetManger.GetNowTargetType();
+        if(targetType == FoundObject.FoundType.Player) {  //ターゲットがPlayerなら
+            return false;
+        }
+
+        return true;  //どの条件にも当てはまらないならリスポーンする。
+    }
 
     //アクセッサ-------------------------------------------------------
 
