@@ -19,6 +19,8 @@ public class GameSceneTransitioner : MonoBehaviour
 
     public void Retry()
     {
+        GameSceneManager.Instance.AddSceneChangedOneEvent(() => GameTimeManager.UnPause());
+
         GameSceneManager.Instance.LoadScene(SceneManager.GetActiveScene().name);
     }
 
