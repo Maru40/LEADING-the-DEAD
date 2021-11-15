@@ -46,7 +46,7 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea
         m_targetMgr.SetNowTarget(GetType() ,foundObject);
 
         var member = m_stator.GetTransitionMember();
-        member.chaseTrigger.Fire();
+        member.findTrigger.Fire();
     }
 
     void I_BindedActiveArea.Bind(BindActivateArea bind)

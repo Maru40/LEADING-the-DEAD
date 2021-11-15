@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System;
+using MaruUtility;
 
 public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
 {
@@ -10,15 +11,18 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
     public struct Parametor
     {
         public float maxFindWaitTime;
+        public float rotationSpeed;  //回転スピード
 
-        public Parametor(float maxFindWaitTime)
+        public Parametor(float maxFindWaitTime, float rotationSpeed)
         {
             this.maxFindWaitTime = maxFindWaitTime;
+            this.rotationSpeed = rotationSpeed;
         }
     }
 
     enum TaskEnum
     {
+        LookRotation,  //見たい方法を見る。
         SeeWait,
     }
 
@@ -41,6 +45,9 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
     protected override void ReserveChangeComponents()
     {
         var owner = GetOwner();
+
+        AddChangeComp(owner.GetComponent<ThrongManager>(), false, true);
+        AddChangeComp(owner.GetComponent<ChaseTarget>(), false, false);
     }
 
     public override void OnStart()
@@ -56,8 +63,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
 
         m_taskList.UpdateTask();
 
-        if (m_taskList.IsEnd)
-        {
+        if (m_taskList.IsEnd) {
             ChangeState();  //ステートの切替
         }
     }
@@ -71,11 +77,13 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
     {
         var enemy = GetOwner().GetComponent<EnemyBase>();
 
+        m_taskList.DefineTask(TaskEnum.LookRotation, new Task_LookTargetRotation(enemy, m_param.rotationSpeed));
         m_taskList.DefineTask(TaskEnum.SeeWait, new Task_SeeWait(enemy, m_param.maxFindWaitTime));
     }
 
     void SelectTask()
     {
+        m_taskList.AddTask(TaskEnum.LookRotation);
         m_taskList.AddTask(TaskEnum.SeeWait);
     }
 
@@ -134,16 +142,94 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
 
         void Rotation()
         {
-            var positionCheck = m_targetManager.GetNowTargetPosition();
+            var positionCheck = m_targetManager.GetToNowTargetVector();
             if(positionCheck == null) {
                 return;
             }
-            var position = (Vector3)positionCheck;
-            var toVec = position - GetOwner().transform.position;
-            toVec.y = 0;
+            var toTargetVector = (Vector3)positionCheck;
 
-            GetOwner().transform.forward = toVec.normalized;
-            m_enemyRotationController.SetDirect(toVec);
+            m_enemyRotationController.SetDirect(toTargetVector);
+        }
+    }
+
+
+    //ターゲットの方向を向く処理
+    class Task_LookTargetRotation : TaskNodeBase<EnemyBase>
+    {
+        float m_speed = 2.0f;
+        float m_frontDotSize = 0.9f;  //真正面と判断する数値
+
+        float m_saveRotationSpeed = 0.0f;       //ローテーションのスピードの保存
+        bool m_saveRotationCompEnable = false;  //ローテーションのEnable状態の保存
+
+        EnemyRotationCtrl m_rotationController;
+        TargetManager m_targetManager;
+        EnemyVelocityMgr m_velocityManager;
+
+        public Task_LookTargetRotation(EnemyBase owner, float speed, float frontDotSize = 0.9f)
+            :base(owner)
+        {
+            m_speed = speed;
+            const float maxFrontDotSize = 0.95f;
+            m_frontDotSize = Mathf.Clamp(frontDotSize, 0, maxFrontDotSize);
+
+            m_rotationController = owner.GetComponent<EnemyRotationCtrl>();
+            m_targetManager = owner.GetComponent<TargetManager>();
+            m_velocityManager = owner.GetComponent<EnemyVelocityMgr>();
+        }
+
+        public override void OnEnter()
+        {
+            m_saveRotationSpeed = m_rotationController.GetSpeed();
+            m_saveRotationCompEnable = m_rotationController.enabled;
+            m_rotationController.enabled = true;
+            m_rotationController.SetSpeed(m_speed);
+
+            m_velocityManager.StartDeseleration();
+        }
+
+        public override bool OnUpdate()
+        {
+            Rotation();
+
+            return IsEnd();
+        }
+
+        public override void OnExit()
+        {
+            m_rotationController.SetSpeed(m_saveRotationSpeed);
+            m_rotationController.enabled = m_saveRotationCompEnable;
+        }
+
+        void Rotation()
+        {
+            var positionCheck = m_targetManager.GetToNowTargetVector();
+            if(positionCheck == null) {
+                return;
+            }
+            var toTargetVec = (Vector3)positionCheck;
+
+            m_rotationController.SetDirect(toTargetVec);
+        }
+
+        bool IsEnd()
+        {
+            //方向とフォワードの差が少なかったら。
+            var positionCheck = m_targetManager.GetToNowTargetVector();
+            if (positionCheck == null){
+                return true;
+            }
+            var toTargetVec = (Vector3)positionCheck;
+
+            float fDot = Vector3.Dot(toTargetVec.normalized, GetOwner().transform.forward);
+
+            //if(UtilityMath.IsFront(GetOwner().transform.forward, toTargetVec, 10.0f))
+            if(fDot >= m_frontDotSize)  //内積が0.9f以上ならほぼ真正面を向いたことになる。
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

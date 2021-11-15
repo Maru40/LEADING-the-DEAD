@@ -65,7 +65,7 @@ public class EyeSearchRange : MonoBehaviour
     [SerializeField]
     string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
 
-    private void Start()
+    private void Awake()
     {
         //NullCheck
         if(m_centerObject == null)

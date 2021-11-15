@@ -57,9 +57,10 @@ public class EnemyVelocityMgr : MonoBehaviour
         var force = CalcuVelocity.CalucSeekVec(velocity, -velocity, velocity.magnitude * m_deselerationPower);
         AddForce(force);
 
-        float stopSpeed = 0.3f;
+        const float stopSpeed = 0.3f;
         if (velocity.magnitude <= stopSpeed) {
             m_isDeseleration = false;
+            ResetVelocity();
         }
     }
 

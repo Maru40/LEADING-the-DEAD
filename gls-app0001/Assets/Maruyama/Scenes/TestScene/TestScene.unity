@@ -519,6 +519,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4994611356889195577, guid: 2b0bfd7816e24d44ebaa7fd2b4de10b8, type: 3}
+      propertyPath: m_particleDictionary.m_typeDraws.Array.data[0].value
+      value: 
+      objectReference: {fileID: 1834194341294532, guid: d5f26854a8904624c8073139cd2eb346, type: 3}
+    - target: {fileID: 4994611356889195577, guid: 2b0bfd7816e24d44ebaa7fd2b4de10b8, type: 3}
       propertyPath: m_particleDictionary.m_typeDraws.Array.data[1].value
       value: 
       objectReference: {fileID: 1725317912486240, guid: e55149ba6f4d00741984987e258c3378, type: 3}
@@ -673,7 +677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6587894267555409032, guid: 626156f32c88bfe4a9c2eba24244f401, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6587894267555409035, guid: 626156f32c88bfe4a9c2eba24244f401, type: 3}
       propertyPath: m_RootOrder
@@ -1925,13 +1929,14 @@ GameObject:
   - component: {fileID: 1806059450}
   - component: {fileID: 1806059449}
   - component: {fileID: 1806059448}
+  - component: {fileID: 1806059454}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1806059448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2052,6 +2057,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1806059454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806059447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d8d231d1b847548a9e685dccc32839, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_target: {fileID: 596197787}
 --- !u!1 &1836498397
 GameObject:
   m_ObjectHideFlags: 0
@@ -2615,7 +2633,7 @@ PrefabInstance:
       objectReference: {fileID: 6520215467471573455, guid: f89aa22a9f0e87b4f92420ffc278b8a3, type: 3}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_distributionParams.Array.data[0].numDistribution
-      value: 1
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_distributionParams.Array.data[1].numDistribution

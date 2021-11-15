@@ -38,7 +38,7 @@ public class Stator_ZombieNormal : StatorBase
     //パラメータ
 
     [SerializeField]
-    StateNode_ZombieNormal_Find.Parametor m_findParametor = new StateNode_ZombieNormal_Find.Parametor(1.0f);
+    StateNode_ZombieNormal_Find.Parametor m_findParametor = new StateNode_ZombieNormal_Find.Parametor(1.0f, 2.0f);
 
     void Awake()
     {

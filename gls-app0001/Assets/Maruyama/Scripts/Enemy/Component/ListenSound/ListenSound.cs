@@ -45,7 +45,10 @@ public class ListenSound : MonoBehaviour
         var foundObject = other.gameObject.GetComponentInParentAndChildren<FoundObject>();
         if (foundObject)
         {
-            Listen(foundObject);
+            if(foundObject.GetFoundData().type == FoundObject.FoundType.SoundObject)
+            {
+                Listen(foundObject);
+            }
         }
     }
 
@@ -54,7 +57,10 @@ public class ListenSound : MonoBehaviour
         var foundObject = other.gameObject.GetComponentInParentAndChildren<FoundObject>();
         if (foundObject)
         {
-            Lost(foundObject);
+            if (foundObject.GetFoundData().type == FoundObject.FoundType.SoundObject)
+            {
+                Lost(foundObject);
+            }
         }
     }
 }
