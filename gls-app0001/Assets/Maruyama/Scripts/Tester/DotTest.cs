@@ -19,8 +19,10 @@ public class DotTest : MonoBehaviour
         if(m_target)
         {
             var toVec = m_target.transform.position - transform.position;
+            toVec.y = 0;
             var testDot = Vector3.Dot(toVec.normalized, transform.forward);
-            Debug.Log("DotTest: " + testDot );
+            var rad = Mathf.Acos(testDot);
+            Debug.Log("DotTest: " + rad * Mathf.Rad2Deg );
         }
     }
 }
