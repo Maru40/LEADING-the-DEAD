@@ -2928,6 +2928,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee8593316a61584cbd918bd99ce8c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_findParametor:
+    maxFindWaitTime: 1
 --- !u!114 &1444888580945028647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2963,7 +2965,7 @@ MonoBehaviour:
   m_buffParam:
     speed: 3
   m_soundPositionRandomRange: {x: 10, y: 0, z: 10}
-  m_lostDataSaveTime: 1
+  m_lostDataSaveTime: 0
 --- !u!114 &1444888580945028641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3190,6 +3192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_param:
+    isAbsoluteRespawn: 0
     isRespawn: 1
     time: 0
   m_generator: {fileID: 0}
@@ -3207,6 +3210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_param:
     respawnParametor:
+      isAbsoluteRespawn: 0
       isRespawn: 1
       time: 0
     chaseParametor:
