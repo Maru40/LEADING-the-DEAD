@@ -60,6 +60,11 @@ public class EnemyRespawnManager : EnemyRespawnBase
 
             m_waitTimer.AddWaitTimer(GetType(), m_param.time, Respawn);
         }
+        else
+        {
+            m_generator.AddDeathCount();
+            gameObject.SetActive(false);
+        }
     }
 
     void Respawn()
@@ -73,9 +78,8 @@ public class EnemyRespawnManager : EnemyRespawnBase
         var respawnPosition = CalcuRespawnRandomPosition();
         transform.position = respawnPosition;
 
-        DeathCount();  //死亡時カウント
+        //DeathCount();  //死亡時カウント
         DropDistribution();  //ドロップアイテム再配布
-        //m_dropManager?.Drop();
         m_statusUp?.Respawn();  //死亡時にステータスUP
         m_stator.Reset();  //ステートのリセット
     }
@@ -110,7 +114,6 @@ public class EnemyRespawnManager : EnemyRespawnBase
         var target = m_targetManger.GetNowTarget();
         if (target)
         {
-            Debug.Log("sinnda");
             //ターゲットがplayerなら
             var playerComp = target.GetComponent<Player.PlayerStatusManager>();
             if (playerComp)
