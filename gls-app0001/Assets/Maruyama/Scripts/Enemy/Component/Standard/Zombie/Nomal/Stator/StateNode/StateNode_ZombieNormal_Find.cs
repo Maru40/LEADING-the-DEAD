@@ -157,6 +157,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
     class Task_LookTargetRotation : TaskNodeBase<EnemyBase>
     {
         float m_speed = 2.0f;
+        float m_frontDotSize = 0.9f;  //真正面と判断する数値
 
         float m_saveRotationSpeed = 0.0f;       //ローテーションのスピードの保存
         bool m_saveRotationCompEnable = false;  //ローテーションのEnable状態の保存
@@ -165,10 +166,12 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
         TargetManager m_targetManager;
         EnemyVelocityMgr m_velocityManager;
 
-        public Task_LookTargetRotation(EnemyBase owner, float speed)
+        public Task_LookTargetRotation(EnemyBase owner, float speed, float frontDotSize = 0.9f)
             :base(owner)
         {
             m_speed = speed;
+            const float maxFrontDotSize = 0.95f;
+            m_frontDotSize = Mathf.Clamp(frontDotSize, 0, maxFrontDotSize);
 
             m_rotationController = owner.GetComponent<EnemyRotationCtrl>();
             m_targetManager = owner.GetComponent<TargetManager>();
@@ -221,8 +224,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
             float fDot = Vector3.Dot(toTargetVec.normalized, GetOwner().transform.forward);
 
             //if(UtilityMath.IsFront(GetOwner().transform.forward, toTargetVec, 10.0f))
-            const float frontDotSize = 0.9f;  //ほぼ正面になる数値
-            if(fDot >= frontDotSize)  //内積が0.9f以上ならそっちの方向を向いたことになる。
+            if(fDot >= m_frontDotSize)  //内積が0.9f以上ならほぼ真正面を向いたことになる。
             {
                 return true;
             }
