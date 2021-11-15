@@ -31,22 +31,26 @@ public class EnemyRespawnManager : EnemyRespawnBase
     [SerializeField]
     EnemyGenerator m_generator = null;
 
+    StatusManagerBase m_statusManager;
     StatorBase m_stator;
     WaitTimer m_waitTimer;
     EnemyRespawnStatusUpBase m_statusUp;
     DropObjecptManager m_dropManager;
     TargetManager m_targetManger;
+    AngerManager m_angerManager;
 
     void Awake()
     {
         //StartTargetNullCheck();
         StartGeneratorNullCheck();
 
+        m_statusManager = GetComponent<StatusManagerBase>();
         m_stator = GetComponent<StatorBase>();
         m_waitTimer = GetComponent<WaitTimer>();
         m_statusUp = GetComponent<EnemyRespawnStatusUpBase>();
         m_dropManager = GetComponent<DropObjecptManager>();
         m_targetManger = GetComponent<TargetManager>();
+        m_angerManager = GetComponent<AngerManager>();
     }
 
     //リスポーン準備
@@ -81,6 +85,8 @@ public class EnemyRespawnManager : EnemyRespawnBase
         //DeathCount();  //死亡時カウント
         DropDistribution();  //ドロップアイテム再配布
         m_statusUp?.Respawn();  //死亡時にステータスUP
+        m_angerManager.SetIsAnger(false);  //怒りのoff
+        m_statusManager.Respawn();
         m_stator.Reset();  //ステートのリセット
     }
 
