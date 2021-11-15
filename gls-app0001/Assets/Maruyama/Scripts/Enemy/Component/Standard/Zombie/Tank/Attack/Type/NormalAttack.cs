@@ -25,6 +25,7 @@ public class NormalAttack : AttackNodeBase
     EyeSearchRange m_eyeRange;
     StatusManagerBase m_statusManager;
     ThrongManager m_throngManager;
+    EnemyRotationCtrl m_rotationController;
 
     [SerializeField]
     Parametor m_param = new Parametor(3.0f);
@@ -39,6 +40,7 @@ public class NormalAttack : AttackNodeBase
         m_eyeRange = GetComponent<EyeSearchRange>();
         m_statusManager = GetComponent<StatusManagerBase>();
         m_throngManager = GetComponent<ThrongManager>();
+        m_rotationController = GetComponent<EnemyRotationCtrl>();
     }
 
     void Update()
@@ -71,7 +73,8 @@ public class NormalAttack : AttackNodeBase
         var toVec = position - transform.position;
         toVec.y = 0;
         Move(toVec);
-        Rotation();  //向き調整
+        Rotation(toVec);
+        ThrongAdjust();
     }
 
     /// <summary>
@@ -96,9 +99,22 @@ public class NormalAttack : AttackNodeBase
     {
         float moveSpeed = m_param.moveSpeed * m_statusManager.GetBuffParametor().angerParam.speed;
         m_velocityMgr.velocity = moveVec.normalized * moveSpeed;
+
+        //if(UtilityMath.IsFront(transform.forward, moveVec, 30.0f))
+        //{
+        //    m_velocityMgr.velocity = moveVec.normalized * moveSpeed;
+        //    Rotation(moveVec);
+        //}
+        //else
+        //{
+        //    m_velocityMgr.velocity = transform.forward * moveSpeed;
+        //}
     }
 
-    void Rotation()
+    /// <summary>
+    /// ターゲットの方向を向く処理
+    /// </summary>
+    void SetForwardTarget()
     {
         var position = m_targetMgr.GetNowTargetPosition();
         if (position != null)
@@ -107,6 +123,12 @@ public class NormalAttack : AttackNodeBase
             toVec.y = 0.0f;  //(yのベクトルを殺す。)
             transform.forward = toVec.normalized;
         }
+    }
+
+    void Rotation(Vector3 direct)
+    {
+        m_rotationController.SetDirect(direct);
+        //transform.forward = direct;
     }
 
     /// <summary>
@@ -132,7 +154,8 @@ public class NormalAttack : AttackNodeBase
     public override void AttackStart()
     {
         m_isTargetChase = true;
-        Rotation();
+        SetForwardTarget();
+        m_rotationController.enabled = true;
 
         enabled = true;
     }
