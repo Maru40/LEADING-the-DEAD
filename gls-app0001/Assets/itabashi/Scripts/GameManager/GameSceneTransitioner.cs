@@ -8,14 +8,7 @@ using Manager;
 public class GameSceneTransitioner : MonoBehaviour
 {
     [SerializeField]
-    List<SceneObject> m_sceneObjects;
-
-    [SerializeField]
     private SceneObject m_stageSelectScene;
-
-    private void Update()
-    {
-    }
 
     public void Retry()
     {
@@ -26,16 +19,14 @@ public class GameSceneTransitioner : MonoBehaviour
 
     public void GoNextScene()
     {
-        string nowSceneName = SceneManager.GetActiveScene().name;
-
-        int index = m_sceneObjects.IndexOf(nowSceneName);
-
-        if (index + 1 >= m_sceneObjects.Count)
+        if(!GameStageManager.Instance.CanIncrement())
         {
             return;
         }
 
-        SceneManager.LoadScene(m_sceneObjects[index + 1]);
+        GameStageManager.Instance.Increment();
+
+        GameSceneManager.Instance.LoadScene(GameStageManager.Instance.currentStageData.sceneObject);
     }
 
     public void BackSelectScene()

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Manager;
 
 public class SelectDirectionAnimatorManager : MonoBehaviour
 {
@@ -23,18 +24,28 @@ public class SelectDirectionAnimatorManager : MonoBehaviour
         m_rightHide = m_rightImage.color.a == 0;
     }
 
-    public void OnStageChanged(StageSelecter.SelectStageData selectStageData)
+    private void Start()
     {
+        m_leftHide = !GameStageManager.Instance.CanDecrement();
+        m_rightHide = !GameStageManager.Instance.CanIncrement();
 
-        if(selectStageData.isEdge)
+        var color = m_leftImage.color;
+        m_leftImage.color = new Color(color.r, color.g, color.b, m_leftHide ? 0.0f : 1.0f);
+        color = m_rightImage.color;
+        m_rightImage.color = new Color(color.r, color.g, color.b, m_rightHide ? 0.0f : 1.0f);
+    }
+
+    public void OnStageChanged()
+    {
+        if(!GameStageManager.Instance.CanDecrement())
         {
-            if(selectStageData.stageIndex < 0)
-            {
-                m_leftHide = true;
-                StartCoroutine(Fadeout(m_leftImage));
-                return;
-            }
+            m_leftHide = true;
+            StartCoroutine(Fadeout(m_leftImage));
+            return;
+        }
 
+        if(!GameStageManager.Instance.CanIncrement())
+        {
             m_rightHide = true;
             StartCoroutine(Fadeout(m_rightImage));
             return;

@@ -123,79 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &2697635
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2107907067, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2107907068, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519966558326117993, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519966558701118223, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
-      propertyPath: m_Name
-      value: GameManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519966558701118225, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519966558701118225, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519966558701118225, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519966558701118225, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519966558701118225, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519966558701118225, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519966558701118225, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519966558701118225, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519966558701118225, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519966558701118225, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519966558701118225, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519966558701118227, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
 --- !u!1 &36151361 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9188292085522008101, guid: ff3dea946bce5c44d819ec9f28259fd7, type: 3}
@@ -2213,19 +2140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e693904cdc2f4664688a8bff0a4fb026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_stageDatas:
-  - sceneObject:
-      m_SceneName: Farm1
-    stagePoint: {x: -100, y: 0}
-    StageName: Stage1
-  - sceneObject:
-      m_SceneName: Indastorial
-    stagePoint: {x: 0, y: -100}
-    StageName: Stage2
-  - sceneObject:
-      m_SceneName: ShoppingStreet1
-    stagePoint: {x: 0, y: -100}
-    StageName: Stage3
   m_focusChangeToPush: {fileID: 1906140858}
   m_uiSounder: {fileID: 1906140859}
 --- !u!114 &1906140858

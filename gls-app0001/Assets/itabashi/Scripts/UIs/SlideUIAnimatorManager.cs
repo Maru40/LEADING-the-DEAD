@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
@@ -28,12 +28,12 @@ public class SlideUIAnimatorManager : MonoBehaviour
         rightScrollBehaviour.onStateEntered.Subscribe(_ => m_sceneEvent.enabled = false);
     }
 
-    public void LeftScroll(StageSelecter.SelectStageData selectStageData)
+    public void LeftScroll()
     {
         m_animator.Play(SlideUITable.BaseLayer.LeftScroll.LeftScrollOut.stateFullPath);
     }
 
-    public void RightScroll(StageSelecter.SelectStageData selectStageData)
+    public void RightScroll()
     {
         m_animator.Play(SlideUITable.BaseLayer.RightScroll.RihgtScrollOut.stateFullPath);
     }
