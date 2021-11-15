@@ -110,7 +110,7 @@ public class ThrongManager : MonoBehaviour
         }
 
         if(m_velocityManager.velocity != Vector3.zero) {
-            m_rotationCtrl.SetDirect(velocityMgr.velocity);
+            //m_rotationCtrl.SetDirect(velocityMgr.velocity);
         }
     }
 
