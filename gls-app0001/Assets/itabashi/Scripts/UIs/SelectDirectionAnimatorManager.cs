@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +22,17 @@ public class SelectDirectionAnimatorManager : MonoBehaviour
     {
         m_leftHide = m_leftImage.color.a == 0;
         m_rightHide = m_rightImage.color.a == 0;
+    }
+
+    private void Start()
+    {
+        m_leftHide = !GameStageManager.Instance.CanDecrement();
+        m_rightHide = !GameStageManager.Instance.CanIncrement();
+
+        var color = m_leftImage.color;
+        m_leftImage.color = new Color(color.r, color.g, color.b, m_leftHide ? 0.0f : 1.0f);
+        color = m_rightImage.color;
+        m_rightImage.color = new Color(color.r, color.g, color.b, m_rightHide ? 0.0f : 1.0f);
     }
 
     public void OnStageChanged()
