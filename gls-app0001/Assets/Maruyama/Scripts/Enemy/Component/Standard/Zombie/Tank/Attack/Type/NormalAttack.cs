@@ -105,10 +105,6 @@ public class NormalAttack : AttackNodeBase
         //    m_velocityMgr.velocity = moveVec.normalized * moveSpeed;
         //    Rotation(moveVec);
         //}
-        //else
-        //{
-        //    m_velocityMgr.velocity = transform.forward * moveSpeed;
-        //}
     }
 
     /// <summary>
