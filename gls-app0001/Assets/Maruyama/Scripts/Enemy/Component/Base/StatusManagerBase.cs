@@ -71,6 +71,8 @@ public abstract class StatusManagerBase : MonoBehaviour
 
     public abstract void Damage(AttributeObject.DamageData data);
 
+    public virtual void Respawn() { }  //リスポーン時に呼んで欲しいこと
+
     //アクセッサ--------------------------------------------------------
 
     public void SetBuffParametor(BuffParametor parametor)
