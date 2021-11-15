@@ -15,15 +15,17 @@ public class TargetManager : MonoBehaviour
     {
         public bool isActive;
         public Vector3 position;
+        public FoundType type;
 
-        public LostData(Vector3 position)
-            :this(position, 0.0f, null)
+        public LostData(Vector3 position, FoundType type)
+            :this(position, type, 0.0f, null)
         { }
 
-        public LostData(Vector3 position, float activeTime, WaitTimer timer)
+        public LostData(Vector3 position, FoundType type, float activeTime, WaitTimer timer)
         {
             this.isActive = true;
             this.position = position;
+            this.type = type;
 
             if (timer)
             {
@@ -227,6 +229,15 @@ public class TargetManager : MonoBehaviour
         return m_nowTarget;
     }
 
+    public FoundType? GetNowTargetType()
+    {
+        if(m_nowTarget == null) {
+            return FoundType.None;
+        }
+
+        return m_nowTarget.GetFoundData().type;
+    }
+
     public Vector3? GetNowTargetPosition()
     {
         if (m_nowTarget)  //ターゲットがnull出ない。
@@ -254,7 +265,7 @@ public class TargetManager : MonoBehaviour
         //var targetPosition = m_nowTarget.transform.position;
         var position = data.position;
         
-        m_lostData = new LostData(position, m_lostDataSaveTime, m_waitTimer);
+        m_lostData = new LostData(position, data.type, m_lostDataSaveTime, m_waitTimer);
     }
 
     public FoundObject.FoundData? GetNowTargetFoundData()
