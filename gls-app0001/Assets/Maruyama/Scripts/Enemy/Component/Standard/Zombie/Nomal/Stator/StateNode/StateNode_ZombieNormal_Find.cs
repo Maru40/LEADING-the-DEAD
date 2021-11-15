@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System;
+using MaruUtility;
 
 public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
 {
@@ -10,10 +11,12 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
     public struct Parametor
     {
         public float maxFindWaitTime;
+        public float rotationSpeed;  //回転スピード
 
-        public Parametor(float maxFindWaitTime)
+        public Parametor(float maxFindWaitTime, float rotationSpeed)
         {
             this.maxFindWaitTime = maxFindWaitTime;
+            this.rotationSpeed = rotationSpeed;
         }
     }
 
@@ -60,8 +63,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
 
         m_taskList.UpdateTask();
 
-        if (m_taskList.IsEnd)
-        {
+        if (m_taskList.IsEnd) {
             ChangeState();  //ステートの切替
         }
     }
@@ -75,7 +77,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
     {
         var enemy = GetOwner().GetComponent<EnemyBase>();
 
-        m_taskList.DefineTask(TaskEnum.LookRotation, new Task_LookTargetRotation(enemy));
+        m_taskList.DefineTask(TaskEnum.LookRotation, new Task_LookTargetRotation(enemy, m_param.rotationSpeed));
         m_taskList.DefineTask(TaskEnum.SeeWait, new Task_SeeWait(enemy, m_param.maxFindWaitTime));
     }
 
@@ -145,10 +147,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
                 return;
             }
             var toTargetVector = (Vector3)positionCheck;
-            //var toVec = position - GetOwner().transform.position;
-            //toVec.y = 0;
 
-            //GetOwner().transform.forward = toTargetVector.normalized;
             m_enemyRotationController.SetDirect(toTargetVector);
         }
     }
@@ -159,17 +158,18 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
     {
         float m_speed = 2.0f;
 
-        float m_saveRotationSpeed = 0.0f;
-        bool m_saveRotationCompEnable = false;  //ローテーションの
+        float m_saveRotationSpeed = 0.0f;       //ローテーションのスピードの保存
+        bool m_saveRotationCompEnable = false;  //ローテーションのEnable状態の保存
 
         EnemyRotationCtrl m_rotationController;
         TargetManager m_targetManager;
         EnemyVelocityMgr m_velocityManager;
 
-        public Task_LookTargetRotation(EnemyBase owner)
+        public Task_LookTargetRotation(EnemyBase owner, float speed)
             :base(owner)
         {
-            //m_speed = speed;
+            m_speed = speed;
+
             m_rotationController = owner.GetComponent<EnemyRotationCtrl>();
             m_targetManager = owner.GetComponent<TargetManager>();
             m_velocityManager = owner.GetComponent<EnemyVelocityMgr>();
@@ -218,9 +218,11 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
             }
             var toTargetVec = (Vector3)positionCheck;
 
-            float dot = Vector3.Dot(toTargetVec.normalized, GetOwner().transform.forward);
-            
-            if(dot >= 0.9f)  //内積が0.9f以上ならそっちの方向を向いたことになる。
+            float fDot = Vector3.Dot(toTargetVec.normalized, GetOwner().transform.forward);
+
+            //if(UtilityMath.IsFront(GetOwner().transform.forward, toTargetVec, 10.0f))
+            const float frontDotSize = 0.9f;  //ほぼ正面になる数値
+            if(fDot >= frontDotSize)  //内積が0.9f以上ならそっちの方向を向いたことになる。
             {
                 return true;
             }
