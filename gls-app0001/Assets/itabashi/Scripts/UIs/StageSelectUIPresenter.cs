@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
@@ -43,4 +43,9 @@ public class StageSelectUIPresenter : MonoBehaviour
             .AddTo(this);
     }
 
+    private void Start()
+    {
+        m_selectStageLabelAnimatorManager.StageLabelChange();
+        m_stagePointer.OnStageChanged();
+    }
 }
