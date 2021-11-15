@@ -19,7 +19,6 @@ public class EnemyRotationCtrl : MonoBehaviour
         m_rigid = GetComponent<Rigidbody>();
     }
 
-
     void Update()
     {
         //仮で回転するようにした。
@@ -35,6 +34,7 @@ public class EnemyRotationCtrl : MonoBehaviour
                                      m_rotationSpeed * Time.deltaTime);
         }
 
+        //Debug.Log("回転中―");
         //Debug.Log("velocityRange" + m_rigid.velocity.magnitude);
     }
 
@@ -49,4 +49,12 @@ public class EnemyRotationCtrl : MonoBehaviour
         return m_direct;
     }
 
+    public void SetSpeed(float speed)
+    {
+        m_rotationSpeed = speed;
+    }
+    public float GetSpeed()
+    {
+        return m_rotationSpeed;
+    }
 }
