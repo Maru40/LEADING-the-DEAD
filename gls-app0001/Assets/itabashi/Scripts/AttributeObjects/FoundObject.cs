@@ -8,6 +8,7 @@ public class FoundObject : MonoBehaviour
 {
     public enum FoundType
     {
+        None = -1,
         Player,
         SoundObject,
         BindObject,

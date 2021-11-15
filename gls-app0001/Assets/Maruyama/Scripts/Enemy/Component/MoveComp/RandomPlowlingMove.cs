@@ -153,7 +153,11 @@ public class RandomPlowlingMove : MonoBehaviour
     /// <returns>目的地についたらtrue</returns>
     bool IsRouteEnd()
     {
-        var toVec = m_targetPosition - transform.position;
+        var selfPosition = transform.position;
+        selfPosition.y = 0.0f;
+        m_targetPosition.y = 0.0f;
+
+        var toVec = m_targetPosition - selfPosition;
         float range = toVec.magnitude;
 
         return range <= m_param.targetNearRange ? true : false;
