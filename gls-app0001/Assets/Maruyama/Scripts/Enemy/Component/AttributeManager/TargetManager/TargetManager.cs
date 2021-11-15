@@ -101,7 +101,10 @@ public class TargetManager : MonoBehaviour
 
     private void Update()
     {
-
+        if(m_nowTarget == null)
+        {
+            Debug.Log("null");
+        }
     }
 
     /// <summary>
@@ -297,12 +300,19 @@ public class TargetManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 現在のターゲット方向のベクトルを返す
+    /// 現在のターゲット方向のベクトルを返す。
     /// </summary>
-    /// <returns>ターゲット方向のベクトル</returns>
-    public Vector3 GetToNowTargetVector()
+    /// <returns></returns>
+    public Vector3? GetToNowTargetVector()
     {
-        return m_nowTarget.transform.position - transform.position;
+        var positionCheck = GetNowTargetPosition();
+        if (positionCheck != null)
+        {
+            var position = (Vector3)positionCheck;
+            return position - transform.position;
+        }
+
+        return null;
     }
 
     /// <summary>
