@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
@@ -33,7 +33,7 @@ public class SelectStageLabelAnimatorManager : MonoBehaviour
         m_animator.Play(SelectStageLabelTable.BaseLayer.FadeOut.stateFullPath);
     }
 
-    private void StageLabelChange()
+    public void StageLabelChange()
     {
         if(GameStageManager.Instance.currentStageData == null)
         {
