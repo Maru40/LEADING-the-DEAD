@@ -80,4 +80,23 @@ public class BarricadeDurability : MonoBehaviour
             durability += recoveryValue;
         }
     }
+
+    private void Update()
+    {
+        BreakCommand();
+    }
+
+    // コマンドで強制破壊用
+    private void BreakCommand()
+    {
+        if(m_isBreak)
+        {
+            return;
+        }
+
+        if (UnityEngine.InputSystem.Keyboard.current.bKey.isPressed && UnityEngine.InputSystem.Keyboard.current.kKey.isPressed)
+        {
+            TakeDamage(new DamageData(100000000));
+        }
+    }
 }
