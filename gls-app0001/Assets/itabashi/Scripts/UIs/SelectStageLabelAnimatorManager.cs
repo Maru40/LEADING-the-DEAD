@@ -1,7 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using Manager;
 
 public class SelectStageLabelAnimatorManager : MonoBehaviour
 {
@@ -20,8 +21,6 @@ public class SelectStageLabelAnimatorManager : MonoBehaviour
     [SerializeField]
     private NumberImage m_numberImage;
 
-    private StageSelecter.SelectStageData m_selectStageData;
-
     private void Awake()
     {
         SelectStageLabelTable.BaseLayer.FadeIn.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator).onStateEntered
@@ -29,15 +28,14 @@ public class SelectStageLabelAnimatorManager : MonoBehaviour
             .AddTo(this);
     }
 
-    public void OnSelectStageChanged(StageSelecter.SelectStageData selectStageData)
+    public void OnSelectStageChanged()
     {
-        m_selectStageData = selectStageData;
         m_animator.Play(SelectStageLabelTable.BaseLayer.FadeOut.stateFullPath);
     }
 
     private void StageLabelChange()
     {
-        if(m_selectStageData.stageData == null)
+        if(GameStageManager.Instance.currentStageData == null)
         {
             m_episodeLabel.SetActive(true);
             m_numStageLabel.SetActive(false);
@@ -47,8 +45,6 @@ public class SelectStageLabelAnimatorManager : MonoBehaviour
         m_episodeLabel.SetActive(false);
         m_numStageLabel.SetActive(true);
 
-        m_numberImage.value = m_stageSelecter.selectIndex + 1;
-
-        Debug.Log("呼ばれた");
+        m_numberImage.value = GameStageManager.Instance.stageIndex + 1;
     }
 }

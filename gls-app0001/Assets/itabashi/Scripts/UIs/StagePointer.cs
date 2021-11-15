@@ -1,7 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Manager;
+
 
 public class StagePointer : MonoBehaviour
 {
@@ -18,9 +20,11 @@ public class StagePointer : MonoBehaviour
         m_rectTransform = GetComponent<RectTransform>();
     }
 
-    public void OnStageChanged(StageSelecter.SelectStageData selectStageData)
+    public void OnStageChanged()
     {
-        if(selectStageData.stageData == null)
+        StageData stageData = GameStageManager.Instance.currentStageData;
+
+        if(stageData == null)
         {
             gameObject.SetActive(false);
             return;
@@ -28,8 +32,8 @@ public class StagePointer : MonoBehaviour
 
         gameObject.SetActive(true);
 
-        m_rectTransform.anchoredPosition = selectStageData.stageData.stagePoint;
+        m_rectTransform.anchoredPosition = stageData.stagePoint;
 
-        m_stageNameText.text = selectStageData.stageData.StageName;
+        m_stageNameText.text = stageData.StageName;
     }
 }

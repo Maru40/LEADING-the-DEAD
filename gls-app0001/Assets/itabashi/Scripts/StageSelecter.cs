@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
@@ -6,39 +6,19 @@ using Manager;
 
 public class StageSelecter : MonoBehaviour
 {
-    public class SelectStageData
-    {
-        public StageData stageData;
-        public int stageIndex;
-        public bool isEdge;
-        public SelectStageData(StageData stageData, int stageIndex,bool isEdge)
-        {
-            this.stageData = stageData;
-            this.stageIndex = stageIndex;
-            this.isEdge = isEdge;
-        }
-    }
-
-    [SerializeField]
-    private List<StageData> m_stageDatas;
-
     [SerializeField]
     private FocusChangeToPush m_focusChangeToPush;
 
     [SerializeField]
     private UISounder m_uiSounder;
 
-    private int m_selectIndex = -1;
+    private readonly Subject<Unit> m_onSelectIndexDecrementSubject = new Subject<Unit>();
 
-    public int selectIndex => m_selectIndex;
+    public System.IObservable<Unit> OnSelectIndexDecrement => m_onSelectIndexDecrementSubject;
 
-    private readonly Subject<SelectStageData> m_onSelectIndexDecrementSubject = new Subject<SelectStageData>();
+    private readonly Subject<Unit> m_onSelectIndexIncrementSubject = new Subject<Unit>();
 
-    public System.IObservable<SelectStageData> OnSelectIndexDecrement => m_onSelectIndexDecrementSubject;
-
-    private readonly Subject<SelectStageData> m_onSelectIndexIncrementSubject = new Subject<SelectStageData>();
-
-    public System.IObservable<SelectStageData> OnSelectIndexIncrement => m_onSelectIndexIncrementSubject;
+    public System.IObservable<Unit> OnSelectIndexIncrement => m_onSelectIndexIncrementSubject;
 
     private void Awake()
     {
@@ -51,37 +31,31 @@ public class StageSelecter : MonoBehaviour
 
     public void SelectLeft()
     {
-        if(m_selectIndex < 0)
+        if(!GameStageManager.Instance.CanDecrement())
         {
             return;
         }
 
-        m_selectIndex = Mathf.Max(m_selectIndex - 1, -1);
+        GameStageManager.Instance.Decrement();
 
-        StageData stageData = m_selectIndex >= 0 ? m_stageDatas[m_selectIndex] : null;
-
-        bool isEdge = m_selectIndex < 0;
-
-        m_onSelectIndexDecrementSubject.OnNext(new SelectStageData(stageData, m_selectIndex, isEdge));
+        m_onSelectIndexDecrementSubject.OnNext(Unit.Default);
     }
 
     public void SelectRight()
     {
-        if (m_selectIndex == m_stageDatas.Count - 1)
+        if(!GameStageManager.Instance.CanIncrement())
         {
             return;
         }
 
-        m_selectIndex = Mathf.Min(m_selectIndex + 1, m_stageDatas.Count - 1);
+        GameStageManager.Instance.Increment();
 
-        bool isEdge = m_selectIndex == m_stageDatas.Count - 1;
-
-        m_onSelectIndexIncrementSubject.OnNext(new SelectStageData(m_stageDatas[m_selectIndex], m_selectIndex, isEdge));
+        m_onSelectIndexIncrementSubject.OnNext(Unit.Default);
     }
 
     public void StageIsSelect()
     {
-        if(m_selectIndex < 0)
+        if(!GameStageManager.Instance.isSelectStage)
         {
             return;
         }
@@ -92,6 +66,6 @@ public class StageSelecter : MonoBehaviour
 
     public void LoadScene()
     {
-        GameSceneManager.Instance.LoadScene(m_stageDatas[m_selectIndex].sceneObject);
+        GameSceneManager.Instance.LoadScene(GameStageManager.Instance.currentStageData.sceneObject);
     }
 }

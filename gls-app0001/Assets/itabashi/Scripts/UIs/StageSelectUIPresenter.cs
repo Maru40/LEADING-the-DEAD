@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
@@ -23,22 +23,22 @@ public class StageSelectUIPresenter : MonoBehaviour
     private void Awake()
     {
         m_stageSelecter.OnSelectIndexIncrement
-            .Subscribe(stageData =>
+            .Subscribe(_ =>
             {
-                m_slideUIAnimatorManager.LeftScroll(stageData);
-                m_selectStageLabelAnimatorManager.OnSelectStageChanged(stageData);
-                m_selectDirectionAnimatorManager.OnStageChanged(stageData);
-                m_stagePointer.OnStageChanged(stageData);
+                m_slideUIAnimatorManager.LeftScroll();
+                m_selectStageLabelAnimatorManager.OnSelectStageChanged();
+                m_selectDirectionAnimatorManager.OnStageChanged();
+                m_stagePointer.OnStageChanged();
             })
             .AddTo(this);
 
         m_stageSelecter.OnSelectIndexDecrement
-            .Subscribe(stageData =>
+            .Subscribe(_ =>
             {
-                m_slideUIAnimatorManager.RightScroll(stageData);
-                m_selectStageLabelAnimatorManager.OnSelectStageChanged(stageData);
-                m_selectDirectionAnimatorManager.OnStageChanged(stageData);
-                m_stagePointer.OnStageChanged(stageData);
+                m_slideUIAnimatorManager.RightScroll();
+                m_selectStageLabelAnimatorManager.OnSelectStageChanged();
+                m_selectDirectionAnimatorManager.OnStageChanged();
+                m_stagePointer.OnStageChanged();
             })
             .AddTo(this);
     }
