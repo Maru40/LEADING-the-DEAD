@@ -34,6 +34,8 @@ public class GameFocusManager
 
     public static void PushFocus(GameObject nextObject)
     {
+        UISounder.beforeSelected = null;
+
         m_colorAndfocusObjectStack.Push(new ColorAndFocusObject(FocusObject));
 
         EventSystem.current.SetSelectedGameObject(nextObject);
@@ -62,10 +64,13 @@ public class GameFocusManager
 
     public static void PopFocus()
     {
+
         if(m_colorAndfocusObjectStack.Count == 0)
         {
             return;
         }
+
+        UISounder.beforeSelected = null;
 
         var objectAndColor = m_colorAndfocusObjectStack.Pop();
 
