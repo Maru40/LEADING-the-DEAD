@@ -11,10 +11,12 @@ public class NormalAttack : AttackNodeBase
     public struct Parametor
     {
         public float moveSpeed;
+        public float endWaitTime;  //終了時にストップする時間
 
         public Parametor(float moveSpeed)
         {
             this.moveSpeed = moveSpeed;
+            this.endWaitTime = 0.1f;
         }
     }
 
@@ -26,6 +28,7 @@ public class NormalAttack : AttackNodeBase
     StatusManagerBase m_statusManager;
     ThrongManager m_throngManager;
     EnemyRotationCtrl m_rotationController;
+    WaitTimer m_waitTimer;
 
     [SerializeField]
     Parametor m_param = new Parametor(3.0f);
@@ -41,6 +44,7 @@ public class NormalAttack : AttackNodeBase
         m_statusManager = GetComponent<StatusManagerBase>();
         m_throngManager = GetComponent<ThrongManager>();
         m_rotationController = GetComponent<EnemyRotationCtrl>();
+        m_waitTimer = GetComponent<WaitTimer>();
     }
 
     void Update()
@@ -152,19 +156,22 @@ public class NormalAttack : AttackNodeBase
         m_isTargetChase = true;
         SetForwardTarget();
         m_rotationController.enabled = true;
+        m_waitTimer.AbsoluteEndTimer(GetType(), false);
 
         enabled = true;
     }
 
     public override void EndAnimationEvent()
     {
-        m_attackManager.EndAnimationEvent();
+        Debug.Log("終了タイマー" + m_param.endWaitTime);
+        m_waitTimer.AddWaitTimer(GetType(),m_param.endWaitTime,() => { m_attackManager.EndAnimationEvent(); enabled = false; });
+        //m_attackManager.EndAnimationEvent();
 
         m_velocityMgr.SetIsDeseleration(false);
         m_velocityMgr.ResetForce();
         m_velocityMgr.ResetVelocity();
 
-        enabled = false;
+        
     }
 
     /// <summary>
