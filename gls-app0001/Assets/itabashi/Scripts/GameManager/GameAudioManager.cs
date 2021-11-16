@@ -28,6 +28,8 @@ namespace Manager
         [SerializeField]
         private AudioSource m_seSource;
 
+        private float m_bgmVolume = 1.0f;
+
         public static GameAudioManager Instance { private set; get; }
 
         private void Awake()
@@ -36,9 +38,11 @@ namespace Manager
             {
                 Instance = this;
             }
+
+            m_bgmVolume = m_bgmSource.volume;
         }
 
-        public void BGMPlay(AudioClip bgmClip)
+        public void BGMPlay(AudioClip bgmClip,float fadeTime = 0.0f)
         {
             if(m_bgmSource.isPlaying)
             {
@@ -47,12 +51,12 @@ namespace Manager
 
             m_bgmSource.clip = bgmClip;
 
-            m_bgmSource.Play();
+            StartCoroutine(SoundFadeIn(fadeTime));
         }
 
-        public void BGMStop()
+        public void BGMStop(float fadeTime = 0.0f)
         {
-            m_bgmSource.Stop();
+            StartCoroutine(SoundFadeOut(fadeTime));
         }
 
         public void BGMPause()
@@ -68,6 +72,39 @@ namespace Manager
         public void SEPlayOneShot(AudioClip seClip, float volumeScale)
         {
             m_seSource.PlayOneShot(seClip, volumeScale);
+        }
+
+        private IEnumerator SoundFadeOut(float fadeTime)
+        {
+            m_bgmVolume = m_bgmSource.volume;
+
+            float countTime = 0.0f;
+
+            while(countTime < fadeTime)
+            {
+                countTime += Time.unscaledDeltaTime;
+                m_bgmSource.volume = m_bgmVolume * (1 - countTime / fadeTime);
+                yield return null;
+            }
+
+            m_bgmSource.volume = 0.0f;
+            m_bgmSource.Stop();
+        }
+
+        private IEnumerator SoundFadeIn(float fadeTime)
+        {
+            m_bgmSource.Play();
+
+            float countTime = 0.0f;
+
+            while(countTime < fadeTime)
+            {
+                countTime += Time.unscaledDeltaTime;
+                m_bgmSource.volume = m_bgmVolume * countTime / fadeTime;
+                yield return null;
+            }
+
+            m_bgmSource.volume = m_bgmVolume;
         }
 
         public float MasterVolume
