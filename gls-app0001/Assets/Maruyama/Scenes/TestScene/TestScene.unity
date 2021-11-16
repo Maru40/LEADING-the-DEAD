@@ -512,11 +512,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4994611356889195577, guid: 2b0bfd7816e24d44ebaa7fd2b4de10b8, type: 3}
       propertyPath: m_particleDictionary.m_typeDraws.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4994611356889195577, guid: 2b0bfd7816e24d44ebaa7fd2b4de10b8, type: 3}
       propertyPath: m_particleDictionary.m_typeDraws.Array.data[1].key
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4994611356889195577, guid: 2b0bfd7816e24d44ebaa7fd2b4de10b8, type: 3}
+      propertyPath: m_particleDictionary.m_typeDraws.Array.data[2].key
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4994611356889195577, guid: 2b0bfd7816e24d44ebaa7fd2b4de10b8, type: 3}
       propertyPath: m_particleDictionary.m_typeDraws.Array.data[0].value
@@ -526,6 +530,10 @@ PrefabInstance:
       propertyPath: m_particleDictionary.m_typeDraws.Array.data[1].value
       value: 
       objectReference: {fileID: 1876081050882714, guid: e5df5caad603c8349ba3481b8ded0927, type: 3}
+    - target: {fileID: 4994611356889195577, guid: 2b0bfd7816e24d44ebaa7fd2b4de10b8, type: 3}
+      propertyPath: m_particleDictionary.m_typeDraws.Array.data[2].value
+      value: 
+      objectReference: {fileID: 1834194341294532, guid: d5f26854a8904624c8073139cd2eb346, type: 3}
     - target: {fileID: 4994611356889195582, guid: 2b0bfd7816e24d44ebaa7fd2b4de10b8, type: 3}
       propertyPath: m_Name
       value: ParticleManager
