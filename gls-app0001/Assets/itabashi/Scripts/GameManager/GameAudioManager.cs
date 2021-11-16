@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -69,7 +69,7 @@ namespace Manager
             m_bgmSource.UnPause();
         }
 
-        public void SEPlayOneShot(AudioClip seClip, float volumeScale)
+        public void SEPlayOneShot(AudioClip seClip, float volumeScale = 1.0f)
         {
             m_seSource.PlayOneShot(seClip, volumeScale);
         }
