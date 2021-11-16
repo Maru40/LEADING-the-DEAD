@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System;
+using MaruUtility;
 
 [Serializable]
-public struct AttackParametorBase
+public struct AttackParametorBase : I_Random<AttackParametorBase>
 {
     public AttributeObject.DamageData damageData;
     public float startRange;  //攻撃開始範囲
@@ -15,6 +16,13 @@ public struct AttackParametorBase
     {
         this.damageData = damageData;
         this.startRange = startRange;
+    }
+
+    public void Random(RandomRange<AttackParametorBase> range)
+    {
+        if (range.isActive == false) { return; }  //isActiveがfalseなら処理をしない
+
+        startRange = UnityEngine.Random.Range(range.min.startRange, range.max.startRange);
     }
 }
 
