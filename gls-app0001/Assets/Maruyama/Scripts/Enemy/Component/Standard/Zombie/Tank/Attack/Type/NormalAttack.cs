@@ -142,7 +142,7 @@ public class NormalAttack : AttackNodeBase
         var position = m_targetMgr.GetNowTargetPosition();
         if (position != null)
         {
-            return m_eyeRange.IsInEyeRange((Vector3)position);
+            return m_eyeRange.IsInEyeRange((Vector3)position, range);
             //return Calculation.IsRange(gameObject, target.gameObject, range);
         }
         else
@@ -170,8 +170,6 @@ public class NormalAttack : AttackNodeBase
         m_velocityMgr.SetIsDeseleration(false);
         m_velocityMgr.ResetForce();
         m_velocityMgr.ResetVelocity();
-
-        
     }
 
     /// <summary>
