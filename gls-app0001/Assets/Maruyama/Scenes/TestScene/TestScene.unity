@@ -525,7 +525,7 @@ PrefabInstance:
     - target: {fileID: 4994611356889195577, guid: 2b0bfd7816e24d44ebaa7fd2b4de10b8, type: 3}
       propertyPath: m_particleDictionary.m_typeDraws.Array.data[1].value
       value: 
-      objectReference: {fileID: 1725317912486240, guid: e55149ba6f4d00741984987e258c3378, type: 3}
+      objectReference: {fileID: 1876081050882714, guid: e5df5caad603c8349ba3481b8ded0927, type: 3}
     - target: {fileID: 4994611356889195582, guid: 2b0bfd7816e24d44ebaa7fd2b4de10b8, type: 3}
       propertyPath: m_Name
       value: ParticleManager
@@ -681,7 +681,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6587894267555409035, guid: 626156f32c88bfe4a9c2eba24244f401, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6587894267555409035, guid: 626156f32c88bfe4a9c2eba24244f401, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2055,7 +2055,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1806059454
 MonoBehaviour:
@@ -2631,6 +2631,10 @@ PrefabInstance:
       propertyPath: m_distributionParams.Array.data[1].dropData.obj
       value: 
       objectReference: {fileID: 6520215467471573455, guid: f89aa22a9f0e87b4f92420ffc278b8a3, type: 3}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_createSetParam.normalAttackParametor.endWaitTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_distributionParams.Array.data[0].numDistribution
       value: 50
