@@ -2930,6 +2930,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_findParametor:
     maxFindWaitTime: 1
+    rotationSpeed: 2
 --- !u!114 &1444888580945028647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3241,6 +3242,7 @@ MonoBehaviour:
       startRange: 0
     normalAttackParametor:
       moveSpeed: 3
+      endWaitTime: 0.1
     normalAttackHitBoxDictionary:
       m_typeDraws: []
     angerBuffParametor:
@@ -3391,6 +3393,7 @@ MonoBehaviour:
     startRange: 1.5
   m_param:
     moveSpeed: 3
+    endWaitTime: 1
 --- !u!114 &-3509147400467223985
 MonoBehaviour:
   m_ObjectHideFlags: 0
