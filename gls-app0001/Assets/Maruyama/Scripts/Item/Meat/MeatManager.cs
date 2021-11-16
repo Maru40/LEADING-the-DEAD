@@ -16,6 +16,7 @@ public class MeatManager : MonoBehaviour
     {
         public float time; //捕食時間
         public MeatState state;
+        public float count;  //食べられた回数
     }
 
     [SerializeField]
@@ -79,5 +80,14 @@ public class MeatManager : MonoBehaviour
     public void EatenStart()
     {
         m_timer.ResetTimer(m_param.time);
+    }
+
+    /// <summary>
+    /// 食べられたときの反応
+    /// </summary>
+    public void Eaten()
+    {
+        ParticleManager.Instance.Play(ParticleManager.ParticleID.MeatParticle, transform.position);
+        m_param.count++;
     }
 }
