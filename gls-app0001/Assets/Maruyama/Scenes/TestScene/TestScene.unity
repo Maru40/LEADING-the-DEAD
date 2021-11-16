@@ -655,29 +655,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1412975775, guid: 626156f32c88bfe4a9c2eba24244f401, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1673241272, guid: 626156f32c88bfe4a9c2eba24244f401, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1865408092, guid: 626156f32c88bfe4a9c2eba24244f401, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6587894267555409032, guid: 626156f32c88bfe4a9c2eba24244f401, type: 3}
       propertyPath: m_Name
       value: BloodBag
-      objectReference: {fileID: 0}
-    - target: {fileID: 6587894267555409032, guid: 626156f32c88bfe4a9c2eba24244f401, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6587894267555409032, guid: 626156f32c88bfe4a9c2eba24244f401, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6587894267555409035, guid: 626156f32c88bfe4a9c2eba24244f401, type: 3}
       propertyPath: m_RootOrder
@@ -725,11 +705,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 626156f32c88bfe4a9c2eba24244f401, type: 3}
---- !u!4 &678850484 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6587894267555409035, guid: 626156f32c88bfe4a9c2eba24244f401, type: 3}
-  m_PrefabInstance: {fileID: 678850483}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &839692309
 GameObject:
   m_ObjectHideFlags: 0
@@ -2101,67 +2076,6 @@ Transform:
   m_Father: {fileID: 880715798}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1851459017
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 678850484}
-    m_Modifications:
-    - target: {fileID: 5688577819479564283, guid: a83c6681215e1bb46abaf86baac0dcbd, type: 3}
-      propertyPath: m_Name
-      value: BloodBag
-      objectReference: {fileID: 0}
-    - target: {fileID: 5688577819479564283, guid: a83c6681215e1bb46abaf86baac0dcbd, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5688577819479564284, guid: a83c6681215e1bb46abaf86baac0dcbd, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5688577819479564284, guid: a83c6681215e1bb46abaf86baac0dcbd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5688577819479564284, guid: a83c6681215e1bb46abaf86baac0dcbd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5688577819479564284, guid: a83c6681215e1bb46abaf86baac0dcbd, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5688577819479564284, guid: a83c6681215e1bb46abaf86baac0dcbd, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5688577819479564284, guid: a83c6681215e1bb46abaf86baac0dcbd, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5688577819479564284, guid: a83c6681215e1bb46abaf86baac0dcbd, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5688577819479564284, guid: a83c6681215e1bb46abaf86baac0dcbd, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5688577819479564284, guid: a83c6681215e1bb46abaf86baac0dcbd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5688577819479564284, guid: a83c6681215e1bb46abaf86baac0dcbd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5688577819479564284, guid: a83c6681215e1bb46abaf86baac0dcbd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a83c6681215e1bb46abaf86baac0dcbd, type: 3}
 --- !u!1 &1873238221
 GameObject:
   m_ObjectHideFlags: 0
@@ -2484,7 +2398,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2349473719602091154, guid: 94ad2ea8836d356438711e6ab657d5a2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2349473719602091155, guid: 94ad2ea8836d356438711e6ab657d5a2, type: 3}
       propertyPath: m_RootOrder
@@ -2624,13 +2538,45 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_randomSetParam.cahseParametor.isActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_createSetParam.targetBuffParametor.speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_randomSetParam.cahseParametor.max.maxSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_randomSetParam.cahseParametor.min.maxSpeed
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_distributionParams.Array.data[1].dropData.obj
       value: 
       objectReference: {fileID: 6520215467471573455, guid: f89aa22a9f0e87b4f92420ffc278b8a3, type: 3}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_randomSetParam.attackManagerParametor.isActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_randomSetParam.cahseParametor.max.lostSeekTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_randomSetParam.cahseParametor.min.lostSeekTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_randomSetParam.cahseParametor.max.inThrongRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_randomSetParam.cahseParametor.min.inThrongRange
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_createSetParam.normalAttackParametor.endWaitTime
       value: 1
@@ -2647,6 +2593,14 @@ PrefabInstance:
       propertyPath: m_distributionParams.Array.data[1].dropData.particle
       value: 
       objectReference: {fileID: 6492296973775632991, guid: 91837f35aa527df4199f8784a19b20ec, type: 3}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_randomSetParam.attackManagerParametor.max.startRange
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_randomSetParam.attackManagerParametor.min.startRange
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_distributionParams.Array.data[1].dropData.probability
       value: 100
