@@ -11,17 +11,25 @@ public abstract class StatusManagerBase : MonoBehaviour
     [Serializable]
     public struct Status
     {
+        public float maxHp;
         public float hp;
         public float damageIntervalTime;  //ダメージを受けた後の無敵時間
         public readonly ReactiveProperty<bool> isHitStopReactive;
         public bool isStun;
 
-        public Status(float hp, float damageIntervalTime)
+        public Status(float maxHp, float damageIntervalTime)
         {
-            this.hp = hp;
+            this.maxHp = maxHp;
+            this.hp = maxHp;
             this.damageIntervalTime = damageIntervalTime;
             this.isHitStopReactive = new ReactiveProperty<bool>();
             this.isStun = false;
+        }
+
+        public void Respawn()
+        {
+            hp = maxHp;
+            isStun = false;
         }
     }
 
@@ -71,7 +79,10 @@ public abstract class StatusManagerBase : MonoBehaviour
 
     public abstract void Damage(AttributeObject.DamageData data);
 
-    public virtual void Respawn() { }  //リスポーン時に呼んで欲しいこと
+    //リスポーン時に呼んで欲しいこと
+    public virtual void Respawn() {
+        m_status.Respawn();
+    }  
 
     //アクセッサ--------------------------------------------------------
 
