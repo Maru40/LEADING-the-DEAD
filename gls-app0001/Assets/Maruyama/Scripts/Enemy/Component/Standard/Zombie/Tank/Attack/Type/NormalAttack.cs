@@ -8,7 +8,7 @@ using MaruUtility;
 public class NormalAttack : AttackNodeBase
 {
     [Serializable]
-    public struct Parametor
+    public struct Parametor : I_Random<Parametor>
     {
         public float moveSpeed;
         public float endWaitTime;  //終了時にストップする時間
@@ -17,6 +17,14 @@ public class NormalAttack : AttackNodeBase
         {
             this.moveSpeed = moveSpeed;
             this.endWaitTime = 0.1f;
+        }
+
+        public void Random(RandomRange<Parametor> range)
+        {
+            if (range.isActive == false) { return; }
+
+            moveSpeed = UnityEngine.Random.Range(range.min.moveSpeed, range.max.moveSpeed);
+            endWaitTime = UnityEngine.Random.Range(range.min.endWaitTime, range.max.endWaitTime);
         }
     }
 

@@ -17,6 +17,31 @@ namespace MaruUtility
         }
     }
 
+    [System.Serializable]
+    public struct RandomRange<T>
+    {
+        public bool isActive;
+        public T min;
+        public T max;
+
+        public RandomRange(T min, T max)
+        {
+            this.isActive = false;
+            this.min = min;
+            this.max = max;
+        }
+    }
+
+    public interface I_Random<T>
+    {
+        /// <summary>
+        /// ランダムな値を入れる。
+        /// </summary>
+        /// <param name="min">最小値</param>
+        /// <param name="max">最大値</param>
+        public void Random(RandomRange<T> range);
+    }
+
     public class MyRandom
     {
         static System.Random sm_random = new System.Random(System.DateTime.Now.Millisecond);

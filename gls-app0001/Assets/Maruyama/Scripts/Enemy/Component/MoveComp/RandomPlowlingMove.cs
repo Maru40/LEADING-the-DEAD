@@ -13,7 +13,7 @@ using System;
 public class RandomPlowlingMove : MonoBehaviour
 {
     [Serializable]
-    public struct Parametor 
+    public struct Parametor : I_Random<Parametor>
     {
         [Header("徘徊する場所を決める半径")]
         public float randomPositionRadius; 
@@ -37,6 +37,17 @@ public class RandomPlowlingMove : MonoBehaviour
             this.targetNearRange = targetNearRange;
             this.maxWaitCalcuRouteTime = maxWaitCalcuRouteTime;
             this.inThrongRange = inThrongRange;
+        }
+
+        public void Random(RandomRange<Parametor> range)
+        {
+            if (range.isActive == false) { return; }
+
+            randomPositionRadius = UnityEngine.Random.Range(range.min.randomPositionRadius, range.max.randomPositionRadius);
+            maxSpeed = UnityEngine.Random.Range(range.min.maxSpeed, range.max.maxSpeed);
+            turningPower = UnityEngine.Random.Range(range.min.turningPower, range.max.turningPower);
+            maxWaitCalcuRouteTime = UnityEngine.Random.Range(range.min.maxWaitCalcuRouteTime, range.max.maxWaitCalcuRouteTime);
+            inThrongRange = UnityEngine.Random.Range(range.min.inThrongRange, range.max.inThrongRange);
         }
     }
 

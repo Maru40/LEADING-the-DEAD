@@ -4,6 +4,7 @@ using UnityEngine;
 
 using UnityEngine.AI;
 using System;
+using MaruUtility;
 
 using StateMachine = EnemyMainStateMachine<EnemyBase, SeekType, SeekTransitonMember>;
 
@@ -19,7 +20,7 @@ public class SeekTransitonMember
 }
 
 [Serializable]
-public struct ChaseTargetParametor
+public struct ChaseTargetParametor : I_Random<ChaseTargetParametor>
 {
     [Header("目的地にたどり着いたと判断される距離")]
     public float nearRange;      //目的地にたどり着いたと判断される距離
@@ -39,6 +40,16 @@ public struct ChaseTargetParametor
         this.turningPower = turningPower;
         this.lostSeekTime = lostSeekTime;
         this.inThrongRange = inThrongRange;
+    }
+
+    public void Random(RandomRange<ChaseTargetParametor> range)
+    {
+        if (range.isActive == false) { return; }
+
+        maxSpeed = UnityEngine.Random.Range(range.min.maxSpeed, range.max.maxSpeed);
+        turningPower = UnityEngine.Random.Range(range.min.turningPower, range.max.turningPower);
+        lostSeekTime = UnityEngine.Random.Range(range.min.lostSeekTime, range.max.lostSeekTime);
+        inThrongRange = UnityEngine.Random.Range(range.min.inThrongRange, range.max.inThrongRange);
     }
 }
 
