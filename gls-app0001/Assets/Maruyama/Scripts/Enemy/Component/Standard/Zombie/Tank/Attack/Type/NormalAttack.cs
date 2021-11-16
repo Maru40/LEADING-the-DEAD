@@ -151,7 +151,7 @@ public class NormalAttack : AttackNodeBase
     {
         m_isTargetChase = true;
         SetForwardTarget();
-        //m_rotationController.enabled = true;
+        m_rotationController.enabled = true;
 
         enabled = true;
     }
