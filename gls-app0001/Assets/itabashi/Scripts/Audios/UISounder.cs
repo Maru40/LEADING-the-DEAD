@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Manager;
+using UniRx.Triggers;
 
-public class UISounder : MonoBehaviour, ISelectHandler, ISubmitHandler, ICancelHandler
+
+public class UISounder : MonoBehaviour, ISelectHandler, ISubmitHandler, ICancelHandler, IDeselectHandler
 {
+    public static UISounder beforeSelected { set; get; } = null;
+
+    private static int count = 0;
+
     [SerializeField]
     private AudioSource m_audioSource;
 
@@ -21,18 +27,32 @@ public class UISounder : MonoBehaviour, ISelectHandler, ISubmitHandler, ICancelH
     [SerializeField]
     private float m_seVolumeScale = 1.0f;
 
+    private void Awake()
+    {
+        ++count;
+    }
+
+    private void OnDestroy()
+    {
+        --count;
+
+        if(count == 0)
+        {
+            beforeSelected = null;
+        }
+    }
+
     private void OneShot(AudioClip audioClip)
     {
-        if(!audioClip)
+        if (!audioClip)
         {
             return;
         }
 
-        if(m_audioSource)
+        if (m_audioSource)
         {
             m_audioSource.PlayOneShot(audioClip, m_seVolumeScale);
         }
-
         GameAudioManager.Instance.SEPlayOneShot(audioClip, m_seVolumeScale);
     }
 
@@ -46,5 +66,16 @@ public class UISounder : MonoBehaviour, ISelectHandler, ISubmitHandler, ICancelH
 
     public void OnCancel(BaseEventData baseEventData) => CancelPlay();
 
-    public void OnSelect(BaseEventData baseEventData) => SelectPlay();
+    public void OnSelect(BaseEventData baseEventData)
+    {
+        if (beforeSelected)
+        {
+            SelectPlay();
+        }
+    }
+
+    public void OnDeselect(BaseEventData baseEventData)
+    {
+        beforeSelected = this;
+    }
 }
