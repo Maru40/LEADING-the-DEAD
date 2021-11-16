@@ -17,6 +17,25 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         public float deselerationStartTime; //減速スタート
     }
 
+    [Serializable]
+    struct AudioClipParametor
+    {
+        public AudioClip clip;
+        public float volume;
+
+        public AudioClipParametor(AudioClip clip, float volume)
+        {
+            this.clip = clip;
+            this.volume = volume;
+        }
+    }
+
+    [Serializable]
+    struct AudioParametor
+    {
+        public AudioManager shout; 
+    }
+
     [SerializeField]
     AnimationHitColliderParametor m_normalAttackParam = new AnimationHitColliderParametor();
 
@@ -27,9 +46,13 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
     Ex_Dictionary<AttackManager_ZombieTank.AttackType, TimeParametor<ParticleManager.ParticleID>> m_attackParticleDictionary =
         new Ex_Dictionary<AttackManager_ZombieTank.AttackType, TimeParametor<ParticleManager.ParticleID>>();
 
+    [SerializeField]
+    AudioParametor m_audioParam = new AudioParametor();
+
     NormalAttack m_normalAttackComp;
     TankTackle m_tackleComp;
     WaitTimer m_waitTimer;
+    AudioManager m_audioManager;
 
     override protected void Awake()
     {
@@ -40,8 +63,10 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         m_waitTimer = GetComponent<WaitTimer>();
         m_normalAttackComp = GetComponent<NormalAttack>();
         m_tackleComp = GetComponent<TankTackle>();
+        m_audioManager = GetComponent<AudioManager>();
 
         SettingNormalAttackAnimation();
+        SettingShoutAnimation();
         SettingTackleAnimation();
         SettingTackleLastAnimation();
         SettingDrumming();
@@ -80,6 +105,19 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
 
         attack.onStateEntered.Subscribe(_ => m_normalAttackComp.AttackStart()).AddTo(this);
         attack.onStateExited.Subscribe(_ => m_normalAttackComp.EndAnimationEvent()).AddTo(this);
+    }
+
+    /// <summary>
+    /// シャウトアニメーション
+    /// </summary>
+    void SettingShoutAnimation()
+    {
+        var timeEvent = ZombieTankTable.BaseLayer.Shout.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
+
+        //開始時に叫び声を上げる。
+        timeEvent.onStateEntered
+            .Subscribe(_ => { SEPlayOneShot(m_audioParam.shout); })
+            .AddTo(this);
     }
 
     /// <summary>
@@ -166,6 +204,16 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
             timeEvent.ClampWhere(param.time)
                 .Subscribe(_ => ParticleManager.Instance.Play(param.value, owner.transform.position));
         }
+    }
+
+    void SEPlayOneShot(AudioManager manager)
+    {
+        manager.PlayOneShot();
+    }
+
+    void SEPlayOneShot(AudioClipParametor param)
+    { 
+        Manager.GameAudioManager.Instance.SEPlayOneShot(param.clip, param.volume);
     }
 
     //クロスフェード--------------------------------------------------------------------------
