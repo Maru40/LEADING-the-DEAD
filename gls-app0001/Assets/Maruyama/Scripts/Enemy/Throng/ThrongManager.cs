@@ -100,12 +100,14 @@ public class ThrongManager : MonoBehaviour
         var velocity = velocityMgr.velocity;
 
         var throngForce = CalcuVelocity.CalucSeekVec(velocity, CalcuThrongVector(), CalcuAverageSpeed());
+        throngForce.y = 0;
         velocityMgr.AddForce(throngForce);
 
         var avoidVec = CalcuSumAvoidVector();
         if (avoidVec != Vector3.zero) //回避が必要なら
         {
             Vector3 avoidForce = CalcuVelocity.CalucSeekVec(velocity, avoidVec, CalcuAverageSpeed());
+            avoidForce.y = 0;
             velocityMgr.AddForce(avoidForce);
         }
 
