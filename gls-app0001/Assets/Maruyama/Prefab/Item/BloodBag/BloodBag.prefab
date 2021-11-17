@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3204860358444743751}
   - component: {fileID: 7099943397895087011}
   - component: {fileID: 7099943397895087010}
+  - component: {fileID: 286499271}
   m_Layer: 0
   m_Name: BloodBag
   m_TagString: Untagged
@@ -126,7 +127,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -143,6 +144,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_rigidbody: {fileID: 7099943397895087011}
+--- !u!114 &286499271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3204860358444743748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edec3d6761566604eb43ae9ee1471768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_particleIDs: 02000000
+  m_breakBlood: {fileID: 75954198124480330, guid: 31a248768d20bb143a6226232eea427d, type: 3}
 --- !u!1001 &287797922766415326
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -150,6 +165,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3204860358444743747}
     m_Modifications:
+    - target: {fileID: 958548730139197897, guid: b34a1d18be9c8f844943c282bd9df0f5, type: 3}
+      propertyPath: m_Radius
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4186800254482711480, guid: b34a1d18be9c8f844943c282bd9df0f5, type: 3}
       propertyPath: m_Name
       value: BindAreaManager
@@ -198,7 +217,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7022913130879877938, guid: b34a1d18be9c8f844943c282bd9df0f5, type: 3}
+      propertyPath: m_bindRange
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4186800254482711482, guid: b34a1d18be9c8f844943c282bd9df0f5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b34a1d18be9c8f844943c282bd9df0f5, type: 3}
 --- !u!4 &4171729675521058405 stripped
 Transform:
