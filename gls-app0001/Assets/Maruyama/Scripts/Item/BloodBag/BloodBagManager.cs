@@ -33,7 +33,7 @@ public class BloodBagManager : MonoBehaviour
         var position = CalcuBreakBloodPosition();
         Instantiate(m_breakBlood, position, Quaternion.identity);
 
-        Destroy(gameObject, 0.1f);
+        Destroy(gameObject);
     }
 
     Vector3 CalcuBreakBloodPosition()
