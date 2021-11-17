@@ -42,13 +42,6 @@ public class NumberImage : MonoBehaviour
         }
     }
 
-    enum Alignment
-    {
-        Left,
-        Center,
-        Right
-    }
-
     [SerializeField]
     private Image m_numberPrefab;
 
@@ -75,24 +68,14 @@ public class NumberImage : MonoBehaviour
         get => m_value;
     }
 
-    [SerializeField, Min(0.0f)]
-    private float m_digitDistance = 0.0f;
-
     [SerializeField]
     private bool m_isZeroPadding = false;
-
-    [SerializeField]
-    private Alignment m_alignment = Alignment.Right;
-
-    private RectTransform m_rectTransform;
 
     private void OnValidate()
     {
         DigitsChanged();
 
         NumberChanged();
-
-        PositionChanged();
     }
 
     private void DigitsChanged()
@@ -167,84 +150,11 @@ public class NumberImage : MonoBehaviour
         }
     }
 
-    private void PositionChanged()
-    {
-        if(!m_rectTransform)
-        {
-            m_rectTransform = GetComponent<RectTransform>();
-        }
-
-        switch(m_alignment)
-        {
-            case Alignment.Left:
-
-                var leftPosX = -m_rectTransform.rect.width / 2;
-
-                foreach(var image in m_numImages.Reverse<Image>())
-                {
-                    var rect = image.rectTransform.rect;
-
-                    float x = leftPosX + rect.width / 2;
-
-                    image.rectTransform.anchoredPosition = new Vector2(x, 0);
-
-                    leftPosX = image.rectTransform.anchoredPosition.x + rect.width / 2 + m_digitDistance;
-                }
-
-                break;
-
-            case Alignment.Center:
-
-                float allWidth = 0.0f;
-
-                foreach(var image in m_numImages)
-                {
-                    allWidth += image.rectTransform.rect.width;
-                }
-
-                var allWidthRightPosX = allWidth / 2;
-
-                foreach (var image in m_numImages)
-                {
-                    var rect = image.rectTransform.rect;
-
-                    float x = allWidthRightPosX - rect.width / 2;
-
-                    image.rectTransform.anchoredPosition = new Vector2(x, 0);
-
-                    allWidthRightPosX = image.rectTransform.anchoredPosition.x - rect.width / 2 - m_digitDistance;
-                }
-
-                break;
-
-            case Alignment.Right:
-
-                var rightPosX = m_rectTransform.rect.width / 2;
-
-                foreach (var image in m_numImages)
-                {
-                    var rect = image.rectTransform.rect;
-
-                    float x = rightPosX - rect.width / 2;
-
-                    image.rectTransform.anchoredPosition = new Vector2(x, 0);
-
-                    rightPosX = image.rectTransform.anchoredPosition.x - rect.width / 2 - m_digitDistance;
-                }
-
-                break;
-        }
-    }
 
     int Digit(int num)
     {
         // Mathf.Log10(0)はNegativeInfinityを返すため、別途処理する。
         return (num == 0) ? 1 : ((int)Mathf.Log10(num) + 1);
-    }
-
-    private void Awake()
-    {
-        PositionChanged();
     }
 
     public void SetNumber(int number)
