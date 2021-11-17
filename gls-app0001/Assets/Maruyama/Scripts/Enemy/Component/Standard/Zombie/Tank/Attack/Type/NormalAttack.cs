@@ -11,11 +11,13 @@ public class NormalAttack : AttackNodeBase
     public struct Parametor : I_Random<Parametor>
     {
         public float moveSpeed;
+        public float startWaitTime;
         public float endWaitTime;  //終了時にストップする時間
 
         public Parametor(float moveSpeed)
         {
             this.moveSpeed = moveSpeed;
+            this.startWaitTime = 0.1f;
             this.endWaitTime = 0.1f;
         }
 
@@ -110,13 +112,9 @@ public class NormalAttack : AttackNodeBase
     private void Move(Vector3 moveVec)
     {
         float moveSpeed = m_param.moveSpeed * m_statusManager.GetBuffParametor().angerParam.speed;
+        //var force = CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, moveVec, moveSpeed);
+        //m_velocityMgr.AddForce(force);
         m_velocityMgr.velocity = moveVec.normalized * moveSpeed;
-
-        //if(UtilityMath.IsFront(transform.forward, moveVec, 30.0f))
-        //{
-        //    m_velocityMgr.velocity = moveVec.normalized * moveSpeed;
-        //    Rotation(moveVec);
-        //}
     }
 
     /// <summary>
