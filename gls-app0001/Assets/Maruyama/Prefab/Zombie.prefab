@@ -2816,6 +2816,7 @@ GameObject:
   - component: {fileID: 437899209864115181}
   - component: {fileID: 4173730426119014502}
   - component: {fileID: -350905166790925542}
+  - component: {fileID: -1360444936329894128}
   m_Layer: 6
   m_Name: Zombie
   m_TagString: Untagged
@@ -3143,6 +3144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_status:
+    maxHp: 1
     hp: 1
     damageIntervalTime: 3
     isStun: 0
@@ -3228,6 +3230,7 @@ MonoBehaviour:
       maxWaitCalcuRouteTime: 0
       inThrongRange: 0
     status:
+      maxHp: 0
       hp: 0
       damageIntervalTime: 0
       isStun: 0
@@ -3489,6 +3492,18 @@ MonoBehaviour:
   m_baseParam:
     lenght: 1
     speed: 5
+--- !u!114 &-1360444936329894128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434505739018704334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4857bd9be417aaa4c95526330daa162b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7689520723826636210
 GameObject:
   m_ObjectHideFlags: 0

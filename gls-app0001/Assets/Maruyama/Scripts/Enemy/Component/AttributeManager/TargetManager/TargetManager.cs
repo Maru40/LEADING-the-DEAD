@@ -103,7 +103,7 @@ public class TargetManager : MonoBehaviour
     {
         if(m_nowTarget == null)
         {
-            Debug.Log("null");
+            //Debug.Log("null");
         }
     }
 

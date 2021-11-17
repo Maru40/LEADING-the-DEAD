@@ -11,7 +11,8 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
     {
         None = -1,
         HitAttack_Normal,
-        CloudDust  //土煙
+        CloudDust,  //土煙
+        MeatParticle,  //肉が弾ける。
     }
 
     [SerializeField]
@@ -21,7 +22,7 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
     {
         m_particleDictionary.InsertInspectorData();
 
-        Debug.Log(m_particleDictionary.Count);
+        //Debug.Log(m_particleDictionary.Count);
     }
 
     public GameObject Play(ParticleID id, Vector3 position)
@@ -38,6 +39,28 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
         }
 
         var particle = Instantiate(prefab, position, Quaternion.identity);  //生成
+        particle.transform.SetParent(transform);     //ParticleManagerの子供にする。
+
+        return particle;
+    }
+
+    public GameObject Play(ParticleID id, Vector3 position, Vector3 scale)
+    {
+        if (!m_particleDictionary.ContainsKey(id))
+        {  //particleが存在しないなら
+            Debug.Log("idが存在しません");
+            return null;
+        }
+
+        var prefab = m_particleDictionary[id];
+        if (prefab == null)
+        {  //prefabが存在しないなら
+            Debug.Log("prefabが存在しません。");
+            return null;
+        }
+
+        var particle = Instantiate(prefab, position, Quaternion.identity);  //生成
+        particle.transform.localScale = scale;
         particle.transform.SetParent(transform);     //ParticleManagerの子供にする。
 
         return particle;
