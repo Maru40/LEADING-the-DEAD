@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using MaruUtility.UtilityDictionary;
+
 public class MeatManager : MonoBehaviour
 {
     enum MeatState
@@ -14,27 +16,25 @@ public class MeatManager : MonoBehaviour
     [System.Serializable]
     struct Parametor
     {
-        public float time; //捕食時間
         public MeatState state;
-        public float count;  //食べられた回数
+        public float maxEatCount;      //最大の食べられた回数。
+        public float elapsedEatCount;  //食べられた回数
     }
 
     [SerializeField]
+    Ex_Dictionary<MeatState, GameObject> m_modelDictionary = new Ex_Dictionary<MeatState, GameObject>();
+
+    [SerializeField]
     Parametor m_param = new Parametor();
-    GameTimer m_timer =  new GameTimer();
+
+    private void Awake()
+    {
+        m_modelDictionary.InsertInspectorData();
+    }
 
     void Update()
     {
-        m_timer.UpdateTimer();
-
-        StateCheck();
-
-        if (m_timer.IsTimeUp)  //時間経過
-        {
-            ParticleManager.Instance.Play(ParticleManager.ParticleID.MeatParticle, transform.position);
-            m_param.state = MeatState.Destroy;
-            Destroy(this.gameObject, 0.1f);
-        }
+        StateCheck(); //ステートのチェック
     }
 
     /// <summary>
@@ -42,10 +42,12 @@ public class MeatManager : MonoBehaviour
     /// </summary>
     void StateCheck()
     {
+        var rate = m_param.elapsedEatCount / m_param.maxEatCount;
+
         const float half = 0.5f;
-        if (m_timer.TimeRate > half)
+        if(rate > half)
         {
-            ChageState(MeatState.Half);
+            ChangeState(MeatState.Half);
         }
     }
 
@@ -53,33 +55,22 @@ public class MeatManager : MonoBehaviour
     /// ステートの変更
     /// </summary>
     /// <param name="state"></param>
-    void ChageState(MeatState state)
+    void ChangeState(MeatState state)
     {
+        ChangeModel(state);
+
         m_param.state = state;
+    }
 
-        System.Action func = state switch
+    void ChangeModel(MeatState state)
+    {
+        //どちらのモデルも存在したら。
+        if(m_modelDictionary.ContainsKey(m_param.state) &&
+            m_modelDictionary.ContainsKey(state))
         {
-            MeatState.Half => () => ChangeHalf(),
-            _ => null
-        };
-
-        func?.Invoke();
-    }
-
-    /// <summary>
-    /// 肉をハーフ状態にする。
-    /// </summary>
-    void ChangeHalf()
-    {
-
-    }
-
-    /// <summary>
-    /// 捕食開始
-    /// </summary>
-    public void EatenStart()
-    {
-        m_timer.ResetTimer(m_param.time);
+            m_modelDictionary[state].SetActive(false);
+            m_modelDictionary[state].SetActive(true);
+        }
     }
 
     /// <summary>
@@ -88,6 +79,27 @@ public class MeatManager : MonoBehaviour
     public void Eaten()
     {
         ParticleManager.Instance.Play(ParticleManager.ParticleID.MeatParticle, transform.position);
-        m_param.count++;
+        m_param.elapsedEatCount++;
+        StateCheck();
+
+        if (m_param.elapsedEatCount >= m_param.maxEatCount) //最大捕食回数が超えたら。
+        {
+            EndProcess();
+        }
+    }
+
+    /// <summary>
+    /// 終了処理
+    /// </summary>
+    void EndProcess()
+    {
+        ParticleManager.Instance.Play(ParticleManager.ParticleID.MeatParticle, transform.position);
+        m_param.state = MeatState.Destroy;
+        Destroy(this.gameObject, 0.1f);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Eaten();
     }
 }
