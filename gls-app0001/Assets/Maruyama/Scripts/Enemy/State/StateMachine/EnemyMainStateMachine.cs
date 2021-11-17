@@ -235,7 +235,7 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
         int index = 0;
         foreach (var sorted in sorteds)
         {
-            Debug.Log(index + ":トランジション： " + sorted.type);
+            //Debug.Log(index + ":トランジション： " + sorted.type);
         }
 
         m_stateMachine.ChangeState(sorteds.ElementAt(0).type);  //一番優先度が高い先頭のステートに変更
