@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -48,8 +48,6 @@ public class ClearScoreCalculator : MonoBehaviour
         score += Mathf.Max(m_scoringBaseTime - m_stageTimer.timeSeconds, 0.0f) * m_timeSecondToScoreScale;
 
         score += m_playerStatusManager.hp / m_playerStatusManager.maxHp * m_hpScoreBase;
-
-        m_clearResult.SetTime(m_stageTimer.timeSeconds);
 
         m_clearResult.SetScore((int)score);
 
