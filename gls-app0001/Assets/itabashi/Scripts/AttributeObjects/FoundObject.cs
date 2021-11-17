@@ -12,7 +12,7 @@ public class FoundObject : MonoBehaviour
         Player,
         SoundObject,
         BindObject,
-        Meat,
+        Smell,  //匂い
     }
 
     public struct FoundData
