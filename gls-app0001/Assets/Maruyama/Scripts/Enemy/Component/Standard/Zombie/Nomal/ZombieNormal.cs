@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea
+public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_Smell
 {
     //test用に表示したり、消したりする用。
     [SerializeField]
@@ -80,5 +80,12 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea
 
         //m_targetMgr.SetNowTarget(GetType(), null);
         m_randomPlowling.ResetCenterObject();
+    }
+
+    void I_Smell.SmellFind(FoundObject foundObject)
+    {
+        Debug.Log("におうぞ");
+        m_targetMgr.SetNowTarget(GetType(), foundObject);
+        m_stator.GetTransitionMember().findTrigger.Fire();
     }
 }
