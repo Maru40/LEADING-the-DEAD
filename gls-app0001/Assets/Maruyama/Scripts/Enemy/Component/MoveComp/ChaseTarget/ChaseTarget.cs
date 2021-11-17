@@ -235,15 +235,13 @@ public class ChaseTarget : MonoBehaviour
 
     private void WallAttack()
     {
-
-
         var target = m_targetMgr.GetNowTarget();
         if (target == null) {
             return;
         }
 
         var data = target.GetFoundData();
-        if (data.type == FoundObject.FoundType.SoundObject) //SoundObjectなら
+        if (data.type == FoundObject.FoundType.SoundObject || data.type == FoundObject.FoundType.Smell) //SoundObjectなら
         {
             var attackManager = GetComponent<AttackNodeManagerBase>();
             attackManager.AttackStart();
