@@ -59,5 +59,12 @@ public class ThrowableObject : MonoBehaviour
 
         m_rigidbody.isKinematic = false;
         m_rigidbody.velocity = throwingData.throwVector;
+
+        //血袋ならThrow状態にする。
+        var blood = GetComponent<BloodBagManager>();
+        if (blood)
+        {
+            blood.ChangeState(BloodBagManager.StateEnum.Throw);
+        }
     }
 }
