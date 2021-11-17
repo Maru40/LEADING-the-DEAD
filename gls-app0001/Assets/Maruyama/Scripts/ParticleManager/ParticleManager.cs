@@ -22,7 +22,7 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
     {
         m_particleDictionary.InsertInspectorData();
 
-        Debug.Log(m_particleDictionary.Count);
+        //Debug.Log(m_particleDictionary.Count);
     }
 
     public GameObject Play(ParticleID id, Vector3 position)
