@@ -62,7 +62,7 @@ public class PossibleUI : MonoBehaviour
 
         m_gameControls = new GameControls();
         this.RegisterController(m_gameControls);
-
+        
         m_gameControls.Player.PutBloodBag.performed += context => PushSelectEvent();
     }
 
@@ -102,6 +102,11 @@ public class PossibleUI : MonoBehaviour
 
     public void PushSelectEvent()
     {
+        if(m_button == null)
+        {
+            return;
+        }
+
         if (m_button.gameObject.activeInHierarchy)
         {
             m_possibleEvents[m_index]?.selectEvent();

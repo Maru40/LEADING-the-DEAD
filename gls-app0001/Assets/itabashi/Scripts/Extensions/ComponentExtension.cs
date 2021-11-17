@@ -10,7 +10,7 @@ public static class ComponentExtension
     /// </summary>
     /// <param name="component">コンポーネント</param>
     /// <param name="inputActions">連動させるInputAction</param>
-    public static void RegisterController(this Component component, IInputActionCollection inputActions)
+    public static void RegisterController<T>(this Component component, T inputActions) where T : IInputActionCollection, System.IDisposable
     {
         inputActions.Enable();
 
@@ -21,6 +21,6 @@ public static class ComponentExtension
             .Subscribe(_ => inputActions.Disable()).AddTo(component);
 
         component.OnDestroyAsObservable()
-            .Subscribe(_ => inputActions.Disable()).AddTo(component);
+            .Subscribe(_ => inputActions.Dispose()).AddTo(component);
     }
 }
