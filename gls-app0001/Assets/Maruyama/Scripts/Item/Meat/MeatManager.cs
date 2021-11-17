@@ -34,7 +34,7 @@ public class MeatManager : MonoBehaviour
 
     void Update()
     {
-        StateCheck(); //ステートのチェック
+        //StateCheck(); //ステートのチェック
     }
 
     /// <summary>

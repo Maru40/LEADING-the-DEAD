@@ -2260,6 +2260,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dd85cf200791a14f88cb36656c50660, type: 3}
+--- !u!1 &1985825273 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 74315314873781078, guid: 31a248768d20bb143a6226232eea427d, type: 3}
+  m_PrefabInstance: {fileID: 75954197134589040}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1995136293
 GameObject:
   m_ObjectHideFlags: 0
@@ -2440,6 +2445,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8959706819278290810, guid: 31a248768d20bb143a6226232eea427d, type: 3}
+      propertyPath: m_param.maxEatCount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959706819278290810, guid: 31a248768d20bb143a6226232eea427d, type: 3}
+      propertyPath: m_modelDictionary.m_typeDraws.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959706819278290810, guid: 31a248768d20bb143a6226232eea427d, type: 3}
+      propertyPath: m_modelDictionary.m_typeDraws.Array.data[1].key
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959706819278290810, guid: 31a248768d20bb143a6226232eea427d, type: 3}
+      propertyPath: m_modelDictionary.m_typeDraws.Array.data[1].value
+      value: 
+      objectReference: {fileID: 1985825273}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31a248768d20bb143a6226232eea427d, type: 3}
 --- !u!1001 &2349473719786639752
