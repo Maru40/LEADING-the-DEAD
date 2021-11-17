@@ -98,8 +98,8 @@ public class MeatManager : MonoBehaviour
         Destroy(this.gameObject, 0.1f);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Eaten();
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    Eaten();
+    //}
 }
