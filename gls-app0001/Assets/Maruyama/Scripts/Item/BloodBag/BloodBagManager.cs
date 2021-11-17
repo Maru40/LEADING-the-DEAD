@@ -39,8 +39,8 @@ public class BloodBagManager : MonoBehaviour
         var breakBlood = Instantiate(m_breakBlood, hitGround.point, Quaternion.identity);
         var bloodPuddle = breakBlood.GetComponent<BloodPuddleManager>();
 
-        CreateBloodInk(other, bloodPuddle);       //当たった場所の血だまり生成
-        CreateBloodInk(hitGround, bloodPuddle);   //地面に血だまり
+        //CreateBloodInk(other, bloodPuddle);       //当たった場所の血だまり生成
+        //CreateBloodInk(hitGround, bloodPuddle);   //地面に血だまり
 
         Destroy(gameObject);
     }
