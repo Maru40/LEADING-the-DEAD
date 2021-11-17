@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,13 +23,11 @@ public class ClearResult : MonoBehaviour
     private MissionStar m_missionStar3;
 
     [SerializeField]
-    private TimeText m_timeText;
-
-    [SerializeField]
-    private Text m_scoreText;
+    private NumberImage m_scoreImage;
 
     [SerializeField]
     private Button m_nextStageButton;
+
     [SerializeField]
     private Button m_exitStageButton;
 
@@ -46,14 +44,9 @@ public class ClearResult : MonoBehaviour
         m_missionStar3.SetIsAchieve(isAchieve);
     }
 
-    public void SetTime(float time)
-    {
-        m_timeText.SetTime(time);
-    }
-
     public void SetScore(int score)
     {
-        m_scoreText.text = score.ToString();
+        m_scoreImage.value = score;
     }
 
     public void SetRank(RankImage.Rank rank)
