@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
 
-public class MissionStar : MonoBehaviour
+public class MissionStamp : MonoBehaviour
 {
     /// <summary>
     /// 達成時に表示される画像
