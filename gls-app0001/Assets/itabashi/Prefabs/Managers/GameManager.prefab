@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2519966558326117994}
   - component: {fileID: 2519966558326117995}
+  - component: {fileID: 7470711079739636337}
   m_Layer: 0
   m_Name: Presenter
   m_TagString: Untagged
@@ -43,7 +44,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2f6953241636b47858a3eebf357a45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_pauseUIView: {fileID: 0}
+  m_focusChangeToPush: {fileID: 7470711079739636337}
+--- !u!114 &7470711079739636337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2519966558326117993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 421bd8db2e52b1e4889fda5e3d5b51fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_pushActiveObject: {fileID: 0}
+  m_moveSelectableObject: {fileID: 0}
 --- !u!1 &2519966558701118223
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,13 +171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b382ace536965ef47bb4c7bfcf1f25e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_sceneObjects:
-  - m_SceneName: 
-  - m_SceneName: 
-  - m_SceneName: 
-  - m_SceneName: 
-  - m_SceneName: 
-  - m_SceneName: 
   m_stageSelectScene:
     m_SceneName: StageSelectScene
 --- !u!114 &2588975111235542197

@@ -8,6 +8,8 @@ public class FocusChangeToPush : MonoBehaviour
     [SerializeField]
     private GameObject m_pushActiveObject;
 
+    public GameObject pushActiveObject => m_pushActiveObject;
+
     [SerializeField]
     private Selectable m_moveSelectableObject;
     

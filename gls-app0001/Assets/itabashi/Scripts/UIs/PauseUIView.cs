@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Manager;
+
 
 public class PauseUIView : MonoBehaviour
 {
@@ -12,10 +14,15 @@ public class PauseUIView : MonoBehaviour
     [SerializeField]
     private Button m_goStageSelectBotton;
 
-    private void OnEnable()
-    {
-        EventSystem.current.SetSelectedGameObject(m_backGameButton.gameObject);
-    }
+    //private void OnEnable()
+    //{
+    //    GameFocusManager.PushFocus(m_backGameButton.gameObject);
+    //}
+
+    //private void OnDisable()
+    //{
+    //    GameFocusManager.PopFocus();
+    //}
 
     // Start is called before the first frame update
     void Start()

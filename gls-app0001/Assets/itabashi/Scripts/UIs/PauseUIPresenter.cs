@@ -6,12 +6,22 @@ using UniRx;
 public class PauseUIPresenter : MonoBehaviour
 {
     [SerializeField]
-    private PauseUIView m_pauseUIView;
+    private FocusChangeToPush m_focusChangeToPush;
 
     private void Awake()
     {
         GameTimeManager.isPauseOnChanged
-            .Subscribe(isPause => m_pauseUIView.gameObject.SetActive(isPause))
+            .Where(isPause => isPause)
+            .Subscribe(_ => m_focusChangeToPush.NextPushFocus())
+            .AddTo(this);
+
+        GameTimeManager.isPauseOnChanged
+            .Where(isPause => !isPause)
+            .Subscribe(_ =>
+            {
+                m_focusChangeToPush.pushActiveObject.SetActive(false);
+                GameFocusManager.PopFocus();
+            })
             .AddTo(this);
     }
 
