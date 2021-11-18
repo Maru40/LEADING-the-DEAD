@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System;
+using UnityEngine.Animations;
 
 public class AnimationActionBehavior : StateMachineBehaviour
 {
     //遷移完了時に呼んで欲しいActionが呼ばれたかどうか
     bool m_isFirstInTransition;
 
+    Action m_enterAction;
+    Action m_exitAction;
     //アップデート時に呼んで欲しいイベント
     Action m_updateAction;
     //初めて遷移が完了したタイミングで呼んで欲しいエベント
@@ -17,6 +20,8 @@ public class AnimationActionBehavior : StateMachineBehaviour
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Resete();
+
+        m_enterAction?.Invoke();
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -33,12 +38,24 @@ public class AnimationActionBehavior : StateMachineBehaviour
         m_updateAction?.Invoke();
     }
 
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, AnimatorControllerPlayable controller)
+    {
+        base.OnStateExit(animator, stateInfo, layerIndex, controller);
+
+        m_exitAction?.Invoke();
+    }
+
     void Resete()
     {
         m_isFirstInTransition = true;
     }
 
     //アクセッサ・プロパティ---------------------------------------------------------------------------
+
+    public void AddEnterAction(Action action)
+    {
+        m_enterAction += action;
+    }
 
     /// <summary>
     /// Update時に呼びたいAction
@@ -47,6 +64,11 @@ public class AnimationActionBehavior : StateMachineBehaviour
     public void AddUpdateAction(Action action)
     {
         m_updateAction += action;
+    }
+
+    public void AddExitAction(Action action)
+    {
+        m_exitAction += action;
     }
 
     /// <summary>

@@ -3439,7 +3439,7 @@ MonoBehaviour:
   m_params:
   - nowClipName: Z_Walk
     animationClipParametors:
-    - animationClip: {fileID: -6257440219318784398, guid: 59dbfb66512f63c4eb6e1e30e0603198, type: 3}
+    - animationClip: {fileID: 7400000, guid: 2695de705873c1f44ac4a4341c85c8a4, type: 2}
       speed: 1.3
     - animationClip: {fileID: 7400000, guid: 4427ff7ccdf204f49860d80928896422, type: 3}
       speed: 0.5
@@ -3480,6 +3480,11 @@ MonoBehaviour:
       type: 0
       damageTags: []
     startRange: 3
+  m_preliminaryParam:
+    timeRandomRange:
+      min: 0.5
+      max: 1
+    moveSpeed: 1
 --- !u!114 &-350905166790925542
 MonoBehaviour:
   m_ObjectHideFlags: 0

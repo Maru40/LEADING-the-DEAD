@@ -11,10 +11,30 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
         Normal,
     }
 
+    [System.Serializable]
+    public struct PreliminaryParametor
+    {
+        [Header("予備動作のランダム時間範囲")]
+        public RandomRange timeRandomRange;
+        [Header("予備動作の移動スピード")]
+        public float moveSpeed;
+
+        public PreliminaryParametor(RandomRange timeRandomRange, float moveSpeed)
+        {
+            this.timeRandomRange = timeRandomRange;
+            this.moveSpeed = moveSpeed;
+        }
+    }
+
+    [Header("予備動作のパラメータ") ,SerializeField]
+    PreliminaryParametor m_preliminaryParam = new PreliminaryParametor(new RandomRange(1.0f,1.0f), 1.0f);
+
     Stator_ZombieNormal m_stator;
     TargetManager m_targetMgr;
     AnimatorManager_ZombieNormal m_animatorManager;
     EyeSearchRange m_eye;
+
+    GameTimer m_gameTimer = new GameTimer();
 
     void Awake()
     {
@@ -44,15 +64,36 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
         }
     }
 
+    private void Update()
+    {
+        if(m_stator.GetNowStateType() == ZombieNormalState.Attack)  //ステートタイプが攻撃なら
+        {
+            m_gameTimer.UpdateTimer();
+        }
+    }
+
     public override void AttackStart()
     {
         m_stator.GetTransitionMember().attackTrigger.Fire();
 
-        m_animatorManager.ChangeNormalAttackAnimation();
+        m_animatorManager.CrossFadePreliminaryNormalAttackAniamtion();  //予備動作に変更
+
+        var time = m_preliminaryParam.timeRandomRange.RandomValue;
+        m_gameTimer.ResetTimer(time, () => m_animatorManager.CrossFadeNormalAttackAnimation());
+
+        //m_animatorManager.CrossFadeNormalAttackAnimation();
     }
 
     public override void EndAnimationEvent()
     {
         m_stator.GetTransitionMember().chaseTrigger.Fire();
+    }
+
+    //アクセッサ・プロパティ--------------------------------------------------------------------------
+    
+    public PreliminaryParametor PreliminaryParametorProperty
+    {
+        get => m_preliminaryParam;
+        set => m_preliminaryParam = value;
     }
 }

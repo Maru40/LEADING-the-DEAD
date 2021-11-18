@@ -5,7 +5,7 @@ using UnityEngine;
 namespace MaruUtility
 {
     [System.Serializable]
-    struct RandomRange
+    public struct RandomRange
     {
         public float min;
         public float max;
@@ -15,6 +15,11 @@ namespace MaruUtility
             this.min = min;
             this.max = max;
         }
+
+        /// <summary>
+        /// ランダムな値を返す。
+        /// </summary>
+        public float RandomValue => Random.Range(min, max);
     }
 
     [System.Serializable]

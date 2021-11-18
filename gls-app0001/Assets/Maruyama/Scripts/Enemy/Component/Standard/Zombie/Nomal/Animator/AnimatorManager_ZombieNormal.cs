@@ -5,6 +5,7 @@ using UnityEngine;
 using System;
 using UniRx;
 
+using MaruUtility;
 using MaruUtility.UtilityDictionary;
 
 public class AnimatorManager_ZombieNormal : AnimatorManagerBase
@@ -38,6 +39,10 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     EnemyStunManager m_stunManager;
     AngerManager m_angerManager;
     KnockBackManager m_knockBackManager;
+    EnemyRotationCtrl m_rotationController;
+    TargetManager m_targetManager;
+    EnemyVelocityMgr m_velocityManager;
+    AttackManager_ZombieNormal m_attackManager;
 
     override protected void Awake()
     {
@@ -49,11 +54,16 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         m_stunManager = GetComponent<EnemyStunManager>();
         m_angerManager = GetComponent<AngerManager>();
         m_knockBackManager = GetComponent<KnockBackManager>();
+        m_rotationController = GetComponent<EnemyRotationCtrl>();
+        m_targetManager = GetComponent<TargetManager>();
+        m_velocityManager = GetComponent<EnemyVelocityMgr>();
+        m_attackManager = GetComponent<AttackManager_ZombieNormal>();
     }
 
     private void Start()
     {
         SettingNormalAttack();
+        SettingPreliminaryNormalAttack();
 
         SettingStun();
         SettingAnger();
@@ -87,6 +97,31 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 
         behavior.onStateEntered.Subscribe(_ => m_normalAttackComp.AttackStart()).AddTo(this);
         behavior.onStateExited.Subscribe(_ => m_normalAttackComp.EndAnimationEvent()).AddTo(this);
+    }
+
+    /// <summary>
+    /// 通常攻撃の予備動作
+    /// </summary>
+    void SettingPreliminaryNormalAttack()
+    {
+        var actionBehaviour = ZombieNormalTable.UpperLayer.PreliminaryNormalAttack.GetBehaviour<AnimationActionBehavior>(m_animator);
+
+        actionBehaviour.AddEnterAction(() => m_rotationController.enabled = true);  //ローテーションのenableをtrue
+
+        actionBehaviour.AddUpdateAction(() => {
+            //予備動作中のアップデート
+            var vectorCheck = m_targetManager.GetToNowTargetVector();
+            if(vectorCheck == null) {
+                return;
+            }
+            var toTragetVec = (Vector3)vectorCheck;
+
+            m_rotationController.SetDirect(toTragetVec);  //回転計算
+            //速度計算
+            var moveSpeed = m_attackManager.PreliminaryParametorProperty.moveSpeed;
+            var force = CalcuVelocity.CalucSeekVec(m_velocityManager.velocity, toTragetVec, moveSpeed);
+            m_velocityManager.AddForce(force); 
+        });
     }
 
     void SettingStun()
@@ -140,10 +175,17 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 
     //ChangeAnimaotion-------------------------------------------------------------------------
 
-    public void ChangeNormalAttackAnimation()
+    public void CrossFadeNormalAttackAnimation()
     {
-        var layerIndex = m_animator.GetLayerIndex("Upper Layer");
-        CrossFadeState("NormalAttack", layerIndex);
+        CrossFadeState("NormalAttack", UpperLayerIndex);
+    }
+
+    /// <summary>
+    /// 通常攻撃の予備動作
+    /// </summary>
+    public void CrossFadePreliminaryNormalAttackAniamtion(float transitionTime = 0.75f)
+    {
+        CrossFadeState("PreliminaryNormalAttack", UpperLayerIndex, transitionTime);
     }
 
     void CrossFadeStunAnimation(float transitionTime = 0)
