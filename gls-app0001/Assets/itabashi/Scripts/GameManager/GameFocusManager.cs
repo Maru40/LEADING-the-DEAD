@@ -76,6 +76,11 @@ public class GameFocusManager
 
         EventSystem.current.SetSelectedGameObject(objectAndColor.focusObject);
 
+        if(!objectAndColor.focusObject)
+        {
+            return;
+        }
+
         var selectable = objectAndColor.focusObject.GetComponent<Selectable>();
 
         if (!selectable)
