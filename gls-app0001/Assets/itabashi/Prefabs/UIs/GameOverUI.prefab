@@ -160,6 +160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8863901371604078995}
   - component: {fileID: 8863901371604078994}
+  - component: {fileID: -8688945196353067037}
   m_Layer: 5
   m_Name: GameOverUI
   m_TagString: Untagged
@@ -204,6 +205,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_retryButton: {fileID: 1407437584788905559}
   m_goStageSelectButton: {fileID: 1618714431866531002}
+--- !u!114 &-8688945196353067037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8863901371604078997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 421bd8db2e52b1e4889fda5e3d5b51fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_pushActiveObject: {fileID: 8863901371604078997}
+  m_moveSelectableObject: {fileID: 1407437584788905559}
 --- !u!1001 &6445144248931600823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -211,6 +226,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8863901371604078995}
     m_Modifications:
+    - target: {fileID: 5402623612787628000, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5402623612787628000, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 1618714431866531002}
     - target: {fileID: 5402623612787628001, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -328,6 +351,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8863901371604078995}
     m_Modifications:
+    - target: {fileID: 5402623612787628000, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5402623612787628000, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 1407437584788905559}
     - target: {fileID: 5402623612787628001, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

@@ -12,10 +12,6 @@ public class GameOverUI : MonoBehaviour
     [SerializeField]
     private Button m_goStageSelectButton;
 
-    private void OnEnable()
-    {
-        EventSystem.current.SetSelectedGameObject(m_retryButton.gameObject);
-    }
     // Start is called before the first frame update
     void Start()
     {
