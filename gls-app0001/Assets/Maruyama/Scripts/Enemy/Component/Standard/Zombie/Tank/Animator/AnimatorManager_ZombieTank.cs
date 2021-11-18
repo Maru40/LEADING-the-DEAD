@@ -15,6 +15,9 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         //public float tackleStartTime; //タックルスタート
         public float chargeTime;
         public float deselerationStartTime; //減速スタート
+        //足音を鳴らす時間
+        public float rightFootStepsSoundTime;
+        public float leftFootStepsSoundTime;
     }
 
     [Serializable]
@@ -33,7 +36,8 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
     [Serializable]
     struct AudioParametor
     {
-        public AudioManager shout; 
+        public AudioManager shout;
+        public AudioManager tackleFootSteps;  //タックル時の足音
     }
 
     [SerializeField]
@@ -143,6 +147,14 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
 
         //Time系
         var timeEvent = tackle.onTimeEvent;
+
+        //足音
+        timeEvent.ClampWhere(m_tackleParam.rightFootStepsSoundTime)
+            .Subscribe(_ => SEPlayOneShot(m_audioParam.tackleFootSteps))
+            .AddTo(this);
+        timeEvent.ClampWhere(m_tackleParam.leftFootStepsSoundTime)
+            .Subscribe(_ => SEPlayOneShot(m_audioParam.tackleFootSteps))
+            .AddTo(this);
     }
 
     void TackleStart(float speed)
