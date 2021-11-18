@@ -1,8 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Manager;
 
 /// <summary>
 /// クリアリザルトUI
@@ -31,6 +32,13 @@ public class ClearResult : MonoBehaviour
     [SerializeField]
     private Button m_exitStageButton;
 
+    [SerializeField]
+    private PopUpUI m_popUI;
+
+    private void Start()
+    {
+    }
+
     public void SetMissionUI1(bool isAchieve, string text)
     {
         m_missionUI1.SetMissionStatus(isAchieve, text);
@@ -52,5 +60,15 @@ public class ClearResult : MonoBehaviour
     public void SetRank(RankImageViewer.Rank rank)
     {
         m_rankImageViewer.SetRank(rank);
+    }
+
+    public void UpdateFirstSelect()
+    {
+        if (!GameStageManager.Instance.CanIncrement())
+        {
+            m_popUI.firstSelectObject = m_exitStageButton.gameObject;
+
+            m_nextStageButton.gameObject.SetActive(false);
+        }
     }
 }
