@@ -116,7 +116,8 @@ public class EnemyGenerator : GeneratorBase
             obj.GetComponent<TargetManager>(),
             obj.GetComponent<ThrongManager>(),
             obj.GetComponent<RandomPlowlingMove>(),
-            obj.GetComponent<DropObjecptManager>()
+            obj.GetComponent<DropObjecptManager>(),
+            obj.GetComponent<ClearManager_Zombie>()
         );
 
         m_datas.Add(newData);
@@ -169,6 +170,17 @@ public class EnemyGenerator : GeneratorBase
         m_distribution.Distribution(m_datas ,dropDatas);
     }
 
+    /// <summary>
+    /// ゲームクリア時に呼んで欲しい関数
+    /// </summary>
+    public virtual void ClearProcess()
+    {
+        foreach(var data in m_datas)
+        {
+            data.clearManager.ClearProcess();
+        }
+    }
+
     //アクセッサ---------------------------------------------------------------------------
 
     /// <summary>
@@ -205,6 +217,7 @@ public class EnemyGenerator : GeneratorBase
         return m_centerPosition;
     }
 
+    //Gizmos-------------------------------------------------------------------------------------------
 
     private void OnDrawGizmosSelected()
     {
