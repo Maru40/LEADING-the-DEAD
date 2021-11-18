@@ -88,6 +88,8 @@ namespace Player
 
         public bool isDead => m_isDead;
 
+        private bool m_isDeadEnd = false;
+
         [SerializeField]
         private bool m_isInvincible = false;
 
@@ -143,7 +145,13 @@ namespace Player
 
             var deadBehaviour = PlayerMotionsTable.BaseLayer.Dead.GetBehaviour<TimeEventStateMachineBehaviour>(m_animatorManager.animator);
 
-            deadBehaviour.onTimeEvent.ClampWhere(3.0f).Subscribe(_ => m_deadEndEvent?.Invoke()).AddTo(this);
+            deadBehaviour.onTimeEvent.ClampWhere(3.0f)
+                .Where(_ => !m_isDeadEnd)
+                .Subscribe(_ =>
+                {
+                    m_isDeadEnd = true;
+                    m_deadEndEvent?.Invoke();
+                }).AddTo(this);
         }
 
         private void DeadStart()
