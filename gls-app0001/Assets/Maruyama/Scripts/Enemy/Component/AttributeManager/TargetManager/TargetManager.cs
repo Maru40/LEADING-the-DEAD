@@ -68,6 +68,9 @@ public class TargetManager : MonoBehaviour
     //どのコンポーネントのターゲットかを確認する。
     Dictionary<Type,FoundObject> m_targets = new Dictionary<Type, FoundObject>();
 
+    //対象外にしたいターゲット群 == exclude == 除外
+    List<FoundObject> m_excludeTargets = new List<FoundObject>();
+
     StatusManagerBase m_statusManager;
     WaitTimer m_waitTimer;
 
@@ -75,6 +78,8 @@ public class TargetManager : MonoBehaviour
     {
         m_statusManager = GetComponent<StatusManagerBase>();
         m_waitTimer = GetComponent<WaitTimer>();
+
+        m_excludeTargets.Clear();
     }
 
     private void Start()
@@ -156,6 +161,7 @@ public class TargetManager : MonoBehaviour
             return;
         }
 
+
     }
 
     public void AbsoluteSetNowTarget(Type type, FoundObject target)
@@ -176,6 +182,12 @@ public class TargetManager : MonoBehaviour
             return true; //ターゲットがnullならtrueを返す。
         }
 
+        //ターゲットが対象外なら更新しない
+        if (IsExcludeTarget(target))
+        {
+            return false;
+        }
+        
         var newPriority = target.GetFoundData().priority;
         var nowPriority = m_nowTarget.GetFoundData().priority;
 
@@ -190,6 +202,24 @@ public class TargetManager : MonoBehaviour
         }
 
         return false;  //どちらでも無かったら更新しない。
+    }
+
+    /// <summary>
+    /// 対象外かどうかを判断する。
+    /// </summary>
+    /// <param name="newTarget"></param>
+    /// <returns>対象外ならtrue</returns>
+    bool IsExcludeTarget(FoundObject newTarget)
+    {
+        foreach(var target in m_excludeTargets)
+        {
+            if(target == newTarget)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /// <summary>
@@ -332,7 +362,36 @@ public class TargetManager : MonoBehaviour
         return m_lostData.position;
     }
 
+    /// <summary>
+    /// 対象外にするターゲットを増やす
+    /// </summary>
+    public void AddExcludeTarget(FoundObject target)
+    {
+        m_excludeTargets.Add(target);
+        if(target == m_nowTarget) {
+            SetNowTarget(GetType(), null);
+        }
+    }
+
+    /// <summary>
+    /// 現在のターゲットを対象外にする。
+    /// </summary>
+    public void AddExcludeNowTarget()
+    {
+        m_excludeTargets.Add(m_nowTarget);
+        SetNowTarget(GetType(), null);
+    }
+
     //アクセッサ・プロパティ--------------------------------------------------------
+
+    /// <summary>
+    /// ターゲットを持っているかどうか
+    /// </summary>
+    /// <returns>ターゲットを持っていたらターゲットにする。</returns>
+    public bool HasTarget()
+    {
+        return m_nowTarget == null ? false : true;
+    }
 
     public BuffParametor buffParametor
     {
