@@ -38,6 +38,8 @@ public class GameFocusManager
 
         m_colorAndfocusObjectStack.Push(new ColorAndFocusObject(FocusObject));
 
+        Debug.Log(nextObject.name + "にフォーカスが移動しました");
+
         EventSystem.current.SetSelectedGameObject(nextObject);
 
         var objectAndColor = m_colorAndfocusObjectStack.Peek();
@@ -73,6 +75,8 @@ public class GameFocusManager
         UISounder.beforeSelected = null;
 
         var objectAndColor = m_colorAndfocusObjectStack.Pop();
+
+        Debug.Log("ひとつ前に選択が戻りました");
 
         EventSystem.current.SetSelectedGameObject(objectAndColor.focusObject);
 

@@ -5,20 +5,20 @@ using UnityEngine;
 public class PopUpUI : MonoBehaviour
 {
     [SerializeField]
-    private GameObject m_firstSelectObject;
+    public GameObject firstSelectObject;
 
     public void Awake()
     {
-        if(m_firstSelectObject == null)
+        if(firstSelectObject == null)
         {
-            m_firstSelectObject = gameObject;
+            firstSelectObject = gameObject;
         }
     }
 
     public void PopUp()
     {
         gameObject.SetActive(true);
-        GameFocusManager.PushFocus(m_firstSelectObject);
+        GameFocusManager.PushFocus(firstSelectObject);
     }
 
     public void Close()
