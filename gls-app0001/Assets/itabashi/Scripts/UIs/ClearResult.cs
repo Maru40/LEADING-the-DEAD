@@ -13,14 +13,14 @@ public class ClearResult : MonoBehaviour
     /// ランク表示画像
     /// </summary>
     [SerializeField]
-    private RankImage m_rankImage;
+    private RankImageViewer m_rankImageViewer;
 
     [SerializeField]
-    private MissionStar m_missionStar1;
+    private MissionUI m_missionUI1;
     [SerializeField]
-    private MissionStar m_missionStar2;
+    private MissionUI m_missionUI2;
     [SerializeField]
-    private MissionStar m_missionStar3;
+    private MissionUI m_missionUI3;
 
     [SerializeField]
     private NumberImage m_scoreImage;
@@ -31,17 +31,17 @@ public class ClearResult : MonoBehaviour
     [SerializeField]
     private Button m_exitStageButton;
 
-    public void SetMissionStar1(bool isAchieve)
+    public void SetMissionUI1(bool isAchieve, string text)
     {
-        m_missionStar1.SetIsAchieve(isAchieve);
+        m_missionUI1.SetMissionStatus(isAchieve, text);
     }
-    public void SetMissionStar2(bool isAchieve)
+    public void SetMissionUI2(bool isAchieve, string text)
     {
-        m_missionStar2.SetIsAchieve(isAchieve);
+        m_missionUI2.SetMissionStatus(isAchieve, text);
     }
-    public void SetMissionStar3(bool isAchieve)
+    public void SetMissionUI3(bool isAchieve, string text)
     {
-        m_missionStar3.SetIsAchieve(isAchieve);
+        m_missionUI3.SetMissionStatus(isAchieve, text);
     }
 
     public void SetScore(int score)
@@ -49,9 +49,9 @@ public class ClearResult : MonoBehaviour
         m_scoreImage.value = score;
     }
 
-    public void SetRank(RankImage.Rank rank)
+    public void SetRank(RankImageViewer.Rank rank)
     {
-        m_rankImage.SetRank(rank);
+        m_rankImageViewer.SetRank(rank);
     }
     public void OnEnable()
     {

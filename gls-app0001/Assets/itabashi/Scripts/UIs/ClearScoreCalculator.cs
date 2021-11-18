@@ -1,9 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ClearScoreCalculator : MonoBehaviour
 {
+
     [SerializeField]
     private ClearResult m_clearResult;
 
@@ -12,6 +13,9 @@ public class ClearScoreCalculator : MonoBehaviour
 
     [SerializeField]
     private Player.PlayerStatusManager m_playerStatusManager;
+
+    [SerializeField]
+    private EnemyGenerator m_enemyGenerator;
 
     [SerializeField]
     private float m_scoringBaseTime = 100;
@@ -28,6 +32,13 @@ public class ClearScoreCalculator : MonoBehaviour
 
     [SerializeField]
     private float m_timeSecondToScoreScale = 1.0f;
+
+    [SerializeField]
+    private MissionData m_mission1;
+    [SerializeField]
+    private MissionData m_mission2;
+    [SerializeField]
+    private MissionData m_mission3;
 
     // Start is called before the first frame update
     void Start()
@@ -53,27 +64,31 @@ public class ClearScoreCalculator : MonoBehaviour
 
         m_clearResult.SetRank(GetScoreRank(score));
 
+        m_clearResult.SetMissionUI1(m_mission1.IsMissionClear(m_playerStatusManager, m_enemyGenerator), m_mission1.GetexplanationText());
+        m_clearResult.SetMissionUI2(m_mission2.IsMissionClear(m_playerStatusManager, m_enemyGenerator), m_mission2.GetexplanationText());
+        m_clearResult.SetMissionUI3(m_mission3.IsMissionClear(m_playerStatusManager, m_enemyGenerator), m_mission3.GetexplanationText());
 
         m_clearResult.gameObject.SetActive(true);
+
     }
 
-    private RankImage.Rank GetScoreRank(float score)
+    private RankImageViewer.Rank GetScoreRank(float score)
     {
         if(score >= m_S_rankBorder)
         {
-            return RankImage.Rank.S;
+            return RankImageViewer.Rank.S;
         }
 
         if(score >= m_A_rankBorder)
         {
-            return RankImage.Rank.A;
+            return RankImageViewer.Rank.A;
         }
 
         if(score >= m_B_rankBorder)
         {
-            return RankImage.Rank.B;
+            return RankImageViewer.Rank.B;
         }
 
-        return RankImage.Rank.C;
+        return RankImageViewer.Rank.C;
     }
 }
