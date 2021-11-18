@@ -12,7 +12,7 @@ public class ClearScoreCalculator : MonoBehaviour
     private StageTimer m_stageTimer;
 
     [SerializeField]
-    private FocusChangeToPush m_focusChangeToPush;
+    private PopUpUI m_popUpUI;
 
     [SerializeField]
     private Player.PlayerStatusManager m_playerStatusManager;
@@ -71,7 +71,9 @@ public class ClearScoreCalculator : MonoBehaviour
         m_clearResult.SetMissionUI2(m_mission2.IsMissionClear(m_playerStatusManager, m_enemyGenerator), m_mission2.GetexplanationText());
         m_clearResult.SetMissionUI3(m_mission3.IsMissionClear(m_playerStatusManager, m_enemyGenerator), m_mission3.GetexplanationText());
 
-        m_focusChangeToPush.NextPushFocus();
+        m_clearResult.UpdateFirstSelect();
+
+        m_popUpUI.PopUp();
 
     }
 
