@@ -124,6 +124,8 @@ namespace Manager
 
             Debug.Log("ロードが終わりました");
 
+            GameFocusManager.ClearFocus();
+
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
 
             m_loadDrawObject.SetActive(false);
