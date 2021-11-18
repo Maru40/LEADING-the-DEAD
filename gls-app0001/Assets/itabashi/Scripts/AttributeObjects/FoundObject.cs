@@ -41,9 +41,13 @@ public class FoundObject : MonoBehaviour
     [SerializeField]
     private Vector3 m_positionOffset = new Vector3();
 
+    private void Start()
+    {
+        m_positionOffset = RandomPosition.CalcuVec(m_positionOffset);
+    }
+
     public FoundData GetFoundData()
     {
-        var offset = RandomPosition.CalcuVec(m_positionOffset);
-        return new FoundData(gameObject, m_priority, m_type, offset);
+        return new FoundData(gameObject, m_priority, m_type, m_positionOffset);
     }
 }
