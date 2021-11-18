@@ -27,6 +27,9 @@ public class BloodPuddleManager : MonoBehaviour
     [SerializeField]
     float m_time = 5.0f;
 
+    [Header("BloodPuddleの見た目を管理するRenderManager群"), SerializeField]
+    List<RenderFadeManager> m_bloodPuddleRenderManagers = new List<RenderFadeManager>();
+
     WaitTimer m_waitTimer;
 
     List<InkParametor> m_inkParams = new List<InkParametor>();
@@ -39,6 +42,16 @@ public class BloodPuddleManager : MonoBehaviour
     private void Start()
     {
         m_waitTimer.AddWaitTimer(GetType(), m_time, EndProcess);
+
+        FadeStart();
+    }
+
+    void FadeStart()
+    {
+        foreach(var manager in m_bloodPuddleRenderManagers)
+        {
+            manager.FadeStart(m_time);
+        }
     }
 
     /// <summary>
