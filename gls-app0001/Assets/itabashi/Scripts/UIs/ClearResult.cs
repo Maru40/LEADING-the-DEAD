@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -52,9 +52,5 @@ public class ClearResult : MonoBehaviour
     public void SetRank(RankImageViewer.Rank rank)
     {
         m_rankImageViewer.SetRank(rank);
-    }
-    public void OnEnable()
-    {
-        EventSystem.current.SetSelectedGameObject(m_nextStageButton.gameObject);
     }
 }

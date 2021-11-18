@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +10,9 @@ public class ClearScoreCalculator : MonoBehaviour
 
     [SerializeField]
     private StageTimer m_stageTimer;
+
+    [SerializeField]
+    private FocusChangeToPush m_focusChangeToPush;
 
     [SerializeField]
     private Player.PlayerStatusManager m_playerStatusManager;
@@ -68,7 +71,7 @@ public class ClearScoreCalculator : MonoBehaviour
         m_clearResult.SetMissionUI2(m_mission2.IsMissionClear(m_playerStatusManager, m_enemyGenerator), m_mission2.GetexplanationText());
         m_clearResult.SetMissionUI3(m_mission3.IsMissionClear(m_playerStatusManager, m_enemyGenerator), m_mission3.GetexplanationText());
 
-        m_clearResult.gameObject.SetActive(true);
+        m_focusChangeToPush.NextPushFocus();
 
     }
 
