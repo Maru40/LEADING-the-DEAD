@@ -145,6 +145,14 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""UseMeat"",
+                    ""type"": ""Button"",
+                    ""id"": ""a736199a-9b58-42d9-b080-274a52601742"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -488,6 +496,28 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""action"": ""Throwing"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9ed9948a-52e1-4e15-951a-43fb4b8bf6ec"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseMeat"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bfc746fb-a316-4e3c-8702-6f7dfa165cb3"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseMeat"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -512,6 +542,7 @@ public class @GameControls : IInputActionCollection, IDisposable
         m_Player_GunShot = m_Player.FindAction("GunShot", throwIfNotFound: true);
         m_Player_PutBloodBag = m_Player.FindAction("PutBloodBag", throwIfNotFound: true);
         m_Player_Throwing = m_Player.FindAction("Throwing", throwIfNotFound: true);
+        m_Player_UseMeat = m_Player.FindAction("UseMeat", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -577,6 +608,7 @@ public class @GameControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_GunShot;
     private readonly InputAction m_Player_PutBloodBag;
     private readonly InputAction m_Player_Throwing;
+    private readonly InputAction m_Player_UseMeat;
     public struct PlayerActions
     {
         private @GameControls m_Wrapper;
@@ -597,6 +629,7 @@ public class @GameControls : IInputActionCollection, IDisposable
         public InputAction @GunShot => m_Wrapper.m_Player_GunShot;
         public InputAction @PutBloodBag => m_Wrapper.m_Player_PutBloodBag;
         public InputAction @Throwing => m_Wrapper.m_Player_Throwing;
+        public InputAction @UseMeat => m_Wrapper.m_Player_UseMeat;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -654,6 +687,9 @@ public class @GameControls : IInputActionCollection, IDisposable
                 @Throwing.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowing;
                 @Throwing.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowing;
                 @Throwing.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowing;
+                @UseMeat.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseMeat;
+                @UseMeat.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseMeat;
+                @UseMeat.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseMeat;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -706,6 +742,9 @@ public class @GameControls : IInputActionCollection, IDisposable
                 @Throwing.started += instance.OnThrowing;
                 @Throwing.performed += instance.OnThrowing;
                 @Throwing.canceled += instance.OnThrowing;
+                @UseMeat.started += instance.OnUseMeat;
+                @UseMeat.performed += instance.OnUseMeat;
+                @UseMeat.canceled += instance.OnUseMeat;
             }
         }
     }
@@ -728,5 +767,6 @@ public class @GameControls : IInputActionCollection, IDisposable
         void OnGunShot(InputAction.CallbackContext context);
         void OnPutBloodBag(InputAction.CallbackContext context);
         void OnThrowing(InputAction.CallbackContext context);
+        void OnUseMeat(InputAction.CallbackContext context);
     }
 }
