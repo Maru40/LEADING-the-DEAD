@@ -10,6 +10,7 @@ public enum ZombieNormalState
 {
     RandomPlowling,
     Chase,
+    Eat,   //食べる。
     Attack,
     Find,  //見つけた
     Stun,
@@ -23,6 +24,7 @@ public class ZombieNormalTransitionMember
 {
     public MyTrigger rondomPlowlingTrigger = new MyTrigger();
     public MyTrigger findTrigger = new MyTrigger();
+    public MyTrigger eatTrigger = new MyTrigger();
     public MyTrigger chaseTrigger = new MyTrigger();
     public MyTrigger attackTrigger = new MyTrigger();
     public MyTrigger stunTrigger = new MyTrigger();
@@ -65,6 +67,7 @@ public class Stator_ZombieNormal : StatorBase
         m_stateMachine.AddNode(StateType.RandomPlowling, new EnState_RandomPlowling(zombie));
         m_stateMachine.AddNode(StateType.Find,           new StateNode_ZombieNormal_Find(zombie, m_findParametor));
         m_stateMachine.AddNode(StateType.Chase,          new EnState_ChaseTarget(zombie));
+        m_stateMachine.AddNode(StateType.Eat,            new StateNode_ZombieNormal_Eat(zombie));
         m_stateMachine.AddNode(StateType.Attack,         new StateNode_ZombieNormal_Attack(zombie));
         m_stateMachine.AddNode(StateType.Stun,           new EnState_Stun(zombie));
         m_stateMachine.AddNode(StateType.Anger,          new StateNode_ZombieNormal_Anger(zombie));
@@ -90,7 +93,11 @@ public class Stator_ZombieNormal : StatorBase
         m_stateMachine.AddEdge(StateType.Chase, StateType.Anger, ToAngerTrigger);
         m_stateMachine.AddEdge(StateType.Chase, StateType.RandomPlowling, ToRandomPlowling);
         m_stateMachine.AddEdge(StateType.Chase, StateType.Attack, ToAttackTrigger);
+        m_stateMachine.AddEdge(StateType.Chase, StateType.Eat, ToEatTrigger);
         //m_stateMachine.AddEdge(StateType.Chase, StateType.Dying, ToDyingTrigger);
+
+        //食べているときの処理
+        m_stateMachine.AddEdge(StateType.Eat, StateType.RandomPlowling, ToRandomPlowling);
 
         //攻撃処理
         m_stateMachine.AddEdge(StateType.Attack, StateType.Stun, ToStunTrigger);
@@ -129,6 +136,11 @@ public class Stator_ZombieNormal : StatorBase
 
     bool ToChaseTrigger(TransitionMember member) {
         return member.chaseTrigger.Get();
+    }
+
+    bool ToEatTrigger(TransitionMember member)
+    {
+        return member.eatTrigger.Get();
     }
 
     bool ToRandomPlowling(TransitionMember member) {
