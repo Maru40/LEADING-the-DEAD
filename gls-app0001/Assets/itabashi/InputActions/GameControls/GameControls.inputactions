@@ -140,6 +140,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "TakeItem",
+                    "type": "Button",
+                    "id": "095290cc-7c41-47fe-9483-92d116dc080f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -503,6 +511,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "UseMeat",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b74b80d2-68a1-45e7-9ff8-05987293fc51",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TakeItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "22c35e4e-bf87-4cdc-af5d-b46fe7d30bf1",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TakeItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
