@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_Smell
+public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_Smell, I_Eat
 {
     //test用に表示したり、消したりする用。
     [SerializeField]
@@ -87,5 +87,12 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_
         Debug.Log("におうぞ");
         m_targetMgr.SetNowTarget(GetType(), foundObject);
         m_stator.GetTransitionMember().findTrigger.Fire();
+    }
+
+    public void Eat()
+    {
+        Debug.Log("食べる");
+
+        m_stator.GetTransitionMember().eatTrigger.Fire();
     }
 }
