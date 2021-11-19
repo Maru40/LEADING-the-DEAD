@@ -148,6 +148,8 @@ namespace Player
             m_takingObject = throwableObject;
             m_pickedUpObject = cymbalMonkeyList[0];
 
+            m_pickedUpObject.enabled = false;
+
             m_isThrowingStance = true;
 
             throwableObject.gameObject.SetActive(true);
@@ -184,6 +186,8 @@ namespace Player
             {
                 m_pickedUpObject.gameObject.SetActive(false);
                 m_pickedUpObject.transform.SetParent(m_pickedUpObject.transform);
+
+                m_pickedUpObject.enabled = true;
                 m_pickedUpObject = null;
             }
 
@@ -203,6 +207,7 @@ namespace Player
             m_objectLauncher.Fire(m_takingObject, m_takingObject.transform.rotation);
 
             m_takingObject = null;
+
             m_pickedUpObject = null;
 
             m_isThrowing = true;
