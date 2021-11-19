@@ -400,6 +400,7 @@ GameObject:
   - component: {fileID: 3563955400330254605}
   - component: {fileID: 5270387879719411248}
   - component: {fileID: 1394207532703912604}
+  - component: {fileID: 1120043031455998196}
   m_Layer: 0
   m_Name: Barricade
   m_TagString: Untagged
@@ -472,6 +473,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: BarricadeEffecter, Assembly-CSharp
         m_MethodName: Damage
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1120043031455998196}
+        m_TargetAssemblyTypeName: DamageSoundManager, Assembly-CSharp
+        m_MethodName: Damaged
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -616,6 +629,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1120043031455998196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182914468150856143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a45b6c1ac5ca2a949bfd3cc95b69e3f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_audioParamDictionary:
+    m_typeDraws:
+    - key: 0
+      value:
+        clip: {fileID: 8300000, guid: b534b812591ffb5428fe37f61367c73c, type: 3}
+        volume: 1
 --- !u!1 &1182914468150856145
 GameObject:
   m_ObjectHideFlags: 0

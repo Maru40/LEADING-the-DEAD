@@ -5,6 +5,7 @@ using UnityEngine;
 using System;
 using UniRx;
 using MaruUtility.UtilityDictionary;
+using MaruUtility.Sound;
 
 public class AnimatorManager_ZombieTank : AnimatorManagerBase
 {
@@ -18,19 +19,6 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         //足音を鳴らす時間
         public float rightFootStepsSoundTime;
         public float leftFootStepsSoundTime;
-    }
-
-    [Serializable]
-    struct AudioClipParametor
-    {
-        public AudioClip clip;
-        public float volume;
-
-        public AudioClipParametor(AudioClip clip, float volume)
-        {
-            this.clip = clip;
-            this.volume = volume;
-        }
     }
 
     [Serializable]
