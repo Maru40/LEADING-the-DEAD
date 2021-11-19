@@ -50,6 +50,8 @@ MonoBehaviour:
   m_numCreate: 75
   m_centerPosition: {x: 0, y: 0.2, z: 0}
   m_maxRandomRange: {x: 24, y: 0, z: 24}
+  m_obstacleLayerStrings:
+  - L_Obstacle
   m_distributionParams:
   - dropData:
       obj: {fileID: 6520215467471573455, guid: f89aa22a9f0e87b4f92420ffc278b8a3, type: 3}
@@ -57,9 +59,10 @@ MonoBehaviour:
       probability: 100
       particle: {fileID: 6492296973775632991, guid: 91837f35aa527df4199f8784a19b20ec, type: 3}
       isRemove: 0
-    numDistribution: 1
+    numDistribution: 0
   m_createSetParam:
     respawnParametor:
+      isAbsoluteRespawn: 0
       isRespawn: 1
       time: 0
     chaseParametor:
@@ -76,6 +79,7 @@ MonoBehaviour:
       maxWaitCalcuRouteTime: 3
       inThrongRange: 0.5
     status:
+      maxHp: 1
       hp: 1
       damageIntervalTime: 3
       isStun: 0
@@ -90,6 +94,8 @@ MonoBehaviour:
       startRange: 2.5
     normalAttackParametor:
       moveSpeed: 3
+      startWaitTime: 0.1
+      endWaitTime: 0.1
     normalAttackHitBoxDictionary:
       m_typeDraws:
       - key: 0
@@ -120,6 +126,7 @@ MonoBehaviour:
       rad: 0.7
   m_respawnStatusUpParam:
     respawnParametor:
+      isAbsoluteRespawn: 0
       isRespawn: 1
       time: 0
     chaseParametor:
@@ -136,6 +143,7 @@ MonoBehaviour:
       maxWaitCalcuRouteTime: 0
       inThrongRange: 0
     status:
+      maxHp: 0
       hp: 0
       damageIntervalTime: 0
       isStun: 0
@@ -150,6 +158,8 @@ MonoBehaviour:
       startRange: 0
     normalAttackParametor:
       moveSpeed: 3
+      startWaitTime: 0.1
+      endWaitTime: 0.1
     normalAttackHitBoxDictionary:
       m_typeDraws: []
     angerBuffParametor:
@@ -162,3 +172,64 @@ MonoBehaviour:
       range: 20
       height: 3
       rad: 0.5235988
+  m_randomSetParam:
+    cahseParametor:
+      isActive: 0
+      min:
+        nearRange: 0
+        maxSpeed: 0
+        turningPower: 0
+        lostSeekTime: 0
+        inThrongRange: 0
+      max:
+        nearRange: 0
+        maxSpeed: 0
+        turningPower: 0
+        lostSeekTime: 0
+        inThrongRange: 0
+    randomPlowlingParametor:
+      isActive: 0
+      min:
+        randomPositionRadius: 0
+        maxSpeed: 0
+        turningPower: 0
+        targetNearRange: 0
+        maxWaitCalcuRouteTime: 0
+        inThrongRange: 0
+      max:
+        randomPositionRadius: 0
+        maxSpeed: 0
+        turningPower: 0
+        targetNearRange: 0
+        maxWaitCalcuRouteTime: 0
+        inThrongRange: 0
+    attackManagerParametor:
+      isActive: 0
+      min:
+        damageData:
+          obj: {fileID: 0}
+          damageValue: 0
+          isStunAttack: 0
+          hitStopTime: 0
+          type: 0
+          damageTags: []
+        startRange: 0
+      max:
+        damageData:
+          obj: {fileID: 0}
+          damageValue: 0
+          isStunAttack: 0
+          hitStopTime: 0
+          type: 0
+          damageTags: []
+        startRange: 0
+    normalAttackParametor:
+      isActive: 0
+      min:
+        moveSpeed: 0
+        startWaitTime: 0
+        endWaitTime: 0
+      max:
+        moveSpeed: 0
+        startWaitTime: 0
+        endWaitTime: 0
