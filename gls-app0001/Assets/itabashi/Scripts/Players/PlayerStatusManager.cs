@@ -36,7 +36,7 @@ namespace Player
 
         public bool isHitStoped { set => m_isHitStoped = value; get => m_isHitStoped; }
 
-        public bool isControllValid => !isStun && !isHitStoped && !isDead;
+        public bool isControllValid => !isStun && !isHitStoped && !isDead && !GameTimeManager.isPause;
 
         [SerializeField]
         private float m_stunSecond = 1.0f;
