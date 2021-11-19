@@ -87,6 +87,7 @@ public class BarricadeDurability : MonoBehaviour
     }
 
     // コマンドで強制破壊用
+# if UNITY_EDITOR
     private void BreakCommand()
     {
         if(m_isBreak)
@@ -99,4 +100,5 @@ public class BarricadeDurability : MonoBehaviour
             TakeDamage(new DamageData(100000000));
         }
     }
+#endif
 }
