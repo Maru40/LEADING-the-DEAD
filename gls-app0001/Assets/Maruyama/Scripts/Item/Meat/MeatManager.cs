@@ -4,7 +4,7 @@ using UnityEngine;
 
 using MaruUtility.UtilityDictionary;
 
-public class MeatManager : MonoBehaviour
+public class MeatManager : EatenBase
 {
     enum MeatState
     {
@@ -76,7 +76,7 @@ public class MeatManager : MonoBehaviour
     /// <summary>
     /// 食べられたときの反応
     /// </summary>
-    public void Eaten()
+    public override void Eaten()
     {
         ParticleManager.Instance.Play(ParticleManager.ParticleID.MeatParticle, transform.position);
         m_param.elapsedEatCount++;

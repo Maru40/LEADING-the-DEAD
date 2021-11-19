@@ -14,6 +14,8 @@ public class SmellManaer : MonoBehaviour
     I_Smell m_smell;
     WaitTimer m_waitTimer;
     EnemyVelocityMgr m_velocityManager;
+    I_Eat m_eat;
+    StatorBase m_stator;
 
     private void Awake()
     {
@@ -21,6 +23,8 @@ public class SmellManaer : MonoBehaviour
         m_smell = GetComponent<I_Smell>();
         m_waitTimer = GetComponent<WaitTimer>();
         m_velocityManager = GetComponent<EnemyVelocityMgr>();
+        m_eat = GetComponent<I_Eat>();
+        m_stator = GetComponent<StatorBase>();
     }
 
     private void Update()
@@ -78,6 +82,7 @@ public class SmellManaer : MonoBehaviour
         if(IsTargetNear(m_nearRange))
         {
             //食べるモーション再生
+            m_eat.Eat();
         }
     }
 

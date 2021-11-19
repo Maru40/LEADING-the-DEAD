@@ -29,6 +29,7 @@ public class ZombieNormalTable
         public readonly AnimationState KnockBack = new AnimationState("Upper Layer.KnockBack","Upper Layer");
         public readonly AnimationState Stunned = new AnimationState("Upper Layer.Stunned","Upper Layer");
         public readonly AnimationState PreliminaryNormalAttack = new AnimationState("Upper Layer.PreliminaryNormalAttack","Upper Layer");
+        public readonly AnimationState Eat = new AnimationState("Upper Layer.Eat","Upper Layer");
         
     }
     public static readonly LowerLayerTable LowerLayer = new LowerLayerTable();

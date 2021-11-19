@@ -65,6 +65,8 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         SettingNormalAttack();
         SettingPreliminaryNormalAttack();
 
+        SettingEat();
+
         SettingStun();
         SettingAnger();
 
@@ -122,6 +124,26 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
             var force = CalcuVelocity.CalucSeekVec(m_velocityManager.velocity, toTragetVec, moveSpeed);
             m_velocityManager.AddForce(force); 
         });
+    }
+
+    void SettingEat()
+    {
+        var timeBehaviour = ZombieNormalTable.UpperLayer.Eat.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
+        var timeEvent = timeBehaviour.onTimeEvent;
+
+        const float time = 0.25f; //将来的にインスぺクタから変更
+        timeEvent.ClampWhere(time)
+            .Subscribe(_ => {
+                if (!m_targetManager.HasTarget()) {
+                    return;
+                }
+
+                var eaten = m_targetManager.GetNowTarget().GetComponent<EatenBase>();
+                if (eaten) {
+                    eaten.Eaten();
+                }
+            })
+            .AddTo(this);
     }
 
     void SettingStun()
@@ -223,6 +245,10 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         CrossFadeState("KnockBack", layerIndex);
     }
 
+    public void CrossFadeEatAnimation(float transitionTime = 0.25f)
+    {
+        CrossFadeState("Eat", UpperLayerIndex, transitionTime);
+    }
 
     //アクセッサ・プロパティ---------------------------------------------------------------------------------
 

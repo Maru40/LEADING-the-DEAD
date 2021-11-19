@@ -768,7 +768,7 @@ MonoBehaviour:
     - key: 0
       value:
         clip: {fileID: 8300000, guid: cf92e3ff38015ff4f98b2c3e64979ac8, type: 3}
-        volume: 0.4
+        volume: 0.3
 --- !u!114 &596197801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2136,10 +2136,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2494370294946505619, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2494370294946505619, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2494370294946505619, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2494370294946505619, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
@@ -2147,7 +2151,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 596197788}
     - target: {fileID: 2494370294946505619, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 596197789}
+    - target: {fileID: 2494370294946505619, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2494370294946505619, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2494370294946505619, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
@@ -2155,11 +2167,23 @@ PrefabInstance:
       value: StartDamage
       objectReference: {fileID: 0}
     - target: {fileID: 2494370294946505619, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Damaged
+      objectReference: {fileID: 0}
+    - target: {fileID: 2494370294946505619, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: DamageParticleManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2494370294946505619, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: DamageSoundManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2494370294946505619, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2494370294946505619, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2494370295222091617, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
@@ -2975,7 +2999,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8959706819278290810, guid: 31a248768d20bb143a6226232eea427d, type: 3}
       propertyPath: m_param.maxEatCount
-      value: 20
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8959706819278290810, guid: 31a248768d20bb143a6226232eea427d, type: 3}
       propertyPath: m_modelDictionary.m_typeDraws.Array.size
@@ -3016,7 +3040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2349473719602091154, guid: 94ad2ea8836d356438711e6ab657d5a2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2349473719602091155, guid: 94ad2ea8836d356438711e6ab657d5a2, type: 3}
       propertyPath: m_RootOrder
@@ -3125,7 +3149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_numCreate
-      value: 50
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_centerPosition.y
@@ -3201,10 +3225,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_createSetParam.normalAttackParametor.endWaitTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
-      propertyPath: m_distributionParams.Array.data[0].numDistribution
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
