@@ -55,12 +55,13 @@ namespace Player
 
             var bloodBagList = m_playerPickUpper.GetPickedUpObjectList("BloodBag");
 
-            if(bloodBagList.Count == 0)
+            if(bloodBagList.Count == 0 || !bloodBagList[0].enabled)
             {
                 return;
             }
 
             var bloodBag = m_playerPickUpper.TakeOut("BloodBag");
+
             bloodBag.transform.SetParent(null);
             bloodBag.gameObject.SetActive(true);
 
