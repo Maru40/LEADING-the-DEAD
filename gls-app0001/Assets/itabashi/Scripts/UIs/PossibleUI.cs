@@ -63,7 +63,7 @@ public class PossibleUI : MonoBehaviour
         m_gameControls = new GameControls();
         this.RegisterController(m_gameControls);
         
-        m_gameControls.Player.PutBloodBag.performed += context => PushSelectEvent();
+        m_gameControls.Player.TakeItem.performed += context => PushSelectEvent();
     }
 
     public void AddSelectPossible(string displayName,Action selectEvent,int instanceID)
