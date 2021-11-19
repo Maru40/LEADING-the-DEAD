@@ -83,7 +83,9 @@ public class BarricadeDurability : MonoBehaviour
 
     private void Update()
     {
+#if UNITY_EDITOR
         BreakCommand();
+#endif
     }
 
     // コマンドで強制破壊用

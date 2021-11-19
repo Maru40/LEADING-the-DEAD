@@ -22,25 +22,17 @@ public class MissionStamp : MonoBehaviour
     [SerializeField]
     private bool m_isAchieve = false;
 
+    [SerializeField]
     private Image m_image;
 
     private void Reset()
     {
-        m_image = GetComponent<Image>();
-
         SetAchieveSprite(m_isAchieve);
     }
 
     private void OnValidate()
     {
-        m_image = GetComponent<Image>();
         SetAchieveSprite(m_isAchieve);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        m_image = GetComponent<Image>();
     }
 
     // Update is called once per frame
