@@ -20,7 +20,7 @@ public class EnemyAttackTriggerAction : TriggerAction
     AudioManager m_audioManager;
 
     [Header("ヒット時のパーティクル"), SerializeField]
-    List<ParticleManager.ParticleID> m_hitParticleIDs;
+    List<ParticleManager.ParticleID> m_hitParticleIDs = new List<ParticleManager.ParticleID>();
     //ParticleManager.ParticleID m_hitParticleID;
     
     Collider m_hitCollider;
