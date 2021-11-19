@@ -115,7 +115,7 @@ public class PlayerPickUpper : MonoBehaviour
     {
         var pickedUpObject = other.gameObject.GetComponent<PickedUpObject>();
 
-        if (!pickedUpObject || pickedUpObject.pickedUpType != PickedUpObject.PickedUpType.Decision)
+        if (!pickedUpObject || !pickedUpObject.enabled || pickedUpObject.pickedUpType != PickedUpObject.PickedUpType.Decision)
         {
             return;
         }
