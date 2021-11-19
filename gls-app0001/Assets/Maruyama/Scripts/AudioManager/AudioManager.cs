@@ -11,6 +11,10 @@ public class AudioManager : MonoBehaviour
     AudioClip m_audioClip;
 
     [SerializeField]
+    bool m_isActive = true;
+    public bool IsActive => m_isActive;
+
+    [SerializeField]
     bool m_isRandom = true;
     public bool IsRandom => m_isRandom;
 
@@ -31,6 +35,10 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     public void PlayOneShot()
     {
+        if (IsActive == false) {
+            return;
+        }
+
         //randomにvolumeとpitchを決める
         if (IsRandom)
         {
