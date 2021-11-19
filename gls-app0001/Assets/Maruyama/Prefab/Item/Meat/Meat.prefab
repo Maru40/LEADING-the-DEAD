@@ -88,7 +88,6 @@ GameObject:
   - component: {fileID: 7398067405139205753}
   - component: {fileID: 3281476579968711581}
   - component: {fileID: 8959706819278290810}
-  - component: {fileID: 3339398136970300755}
   m_Layer: 0
   m_Name: MeatManager
   m_TagString: Untagged
@@ -159,35 +158,6 @@ MonoBehaviour:
     state: 0
     maxEatCount: 7
     elapsedEatCount: 0
---- !u!114 &3339398136970300755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 138892127134538641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d638061b631635b41964733f8831a238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_animator: {fileID: 0}
-  m_isHitStopable: 1
-  m_takeDamageEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8959706819278290810}
-        m_TargetAssemblyTypeName: MeatManager, Assembly-CSharp
-        m_MethodName: Eaten
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1001 &75954197266910848
 PrefabInstance:
   m_ObjectHideFlags: 0
