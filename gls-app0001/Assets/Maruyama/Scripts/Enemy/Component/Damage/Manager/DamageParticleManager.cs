@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using AttributeObject;
+using MaruUtility.UtilityDictionary;
 
 public class DamageParticleManager : MonoBehaviour
 {
@@ -19,10 +20,12 @@ public class DamageParticleManager : MonoBehaviour
     [SerializeField]
     float m_time = 2.0f;  //particle表示時間
 
-    Dictionary<DamageType, GameObject> m_createParticles = new Dictionary<DamageType, GameObject>();
+    [SerializeField]
+    Ex_Dictionary<DamageType, GameObject> m_createParticleDictionary = new Ex_Dictionary<DamageType, GameObject>();
 
     private void Awake()
     {
+        m_createParticleDictionary.InsertInspectorData();
         NullCheck();
     }
 
@@ -56,7 +59,8 @@ public class DamageParticleManager : MonoBehaviour
         m_particle = particle;
     }
 
-    //ダメージ開始-----------
+    //ダメージ開始---------------------------------------------------------------
+
     public void StartDamage()
     {
         StartDamage(m_time, m_createParticle);
@@ -69,18 +73,26 @@ public class DamageParticleManager : MonoBehaviour
     {
         StartDamage(m_time, particle);
     }
+    public void StartDamage(DamageData data)
+    {
+        StartDamage(data.type);
+    }
+    public void StartDamage(float time, DamageData data)
+    {
+        StartDamage(time, data.type);
+    }
     public void StartDamage(DamageType type)
     {
-        if (m_createParticles.ContainsKey(type))
+        if (m_createParticleDictionary.ContainsKey(type))
         {
-            StartDamage(m_time, m_createParticles[type]);
+            StartDamage(m_time, m_createParticleDictionary[type]);
         }
     }
     public void StartDamage(float time, DamageType type)
     {
-        if (m_createParticles.ContainsKey(type))
+        if (m_createParticleDictionary.ContainsKey(type))
         {
-            StartDamage(time, m_createParticles[type]);
+            StartDamage(time, m_createParticleDictionary[type]);
         }
     }
     public void StartDamage(float time, GameObject particle)
@@ -89,6 +101,8 @@ public class DamageParticleManager : MonoBehaviour
         SetCreateParticle(particle);
         CreateParticle();
     }
+
+    //---------------------------------------------------------------------------
 
     //アクセッサ--------------------------------------------------------------
 
@@ -99,7 +113,7 @@ public class DamageParticleManager : MonoBehaviour
 
     public void AddCreateParticel(DamageType type ,GameObject particle)
     {
-        m_createParticles[type] = particle;
+        m_createParticleDictionary[type] = particle;
     }
 
     //NullCheck----------------------------------------------------------------
