@@ -27,19 +27,27 @@ class EyeTargetParam
 [Serializable]
 public class EyeSearchRangeParam
 {
+    [Header("長さ")]
     public float range;  //索敵範囲(同心円状)
+    [Header("高さ")]
     public float height; //索敵範囲(高さ)
-    public float rad;    //索敵範囲(角度)
+    [Header("角度")]
+    public float degree; //索敵範囲(角度)
+    public float rad
+    {
+        get => degree * Mathf.Deg2Rad;
+        set => degree = value * Mathf.Rad2Deg;
+    }
 
     public EyeSearchRangeParam()
         :this(20.0f ,3.0f ,30.0f)
 	{}
 
-	public EyeSearchRangeParam(float range, float height, float deg)
+	public EyeSearchRangeParam(float range, float height, float degree)
     {
         this.range = range;
         this.height = height;
-        this.rad = deg * Mathf.Deg2Rad;
+        this.degree = degree;
     }
 }
 
