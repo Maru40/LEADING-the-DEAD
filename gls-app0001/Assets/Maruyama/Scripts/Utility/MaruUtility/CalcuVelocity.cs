@@ -27,6 +27,7 @@ namespace MaruUtility
 		/// <param name="velocity">現在の速度</param>
 		/// <param name="toVec">ターゲット方向のベクトル</param>
 		/// <param name="maxSpeed">最大速度</param>
+		/// <param name="maxTurningDegree">最大旋回角度</param>
 		/// <returns>「ターゲットの方向のベクトル」- 「現在の速度」</returns>
 		static public Vector3 CalucSeekVec(Vector3 velocity, Vector3 toVec, float maxSpeed)
 		{
@@ -106,7 +107,48 @@ namespace MaruUtility
 			return CalucSeekVec(velocity, desiredVec, maxSpeed);
         }
 
-	}
+		//指定した角度より大きくないかどうか
+		static public bool IsTurningVector(Vector3 velocity, Vector3 toVec, float turningDegree)
+        {
+			var newDot = Vector3.Dot(velocity.normalized, toVec.normalized);
+			var rad = Mathf.Acos(newDot);
+			var turningRad = turningDegree * Mathf.Deg2Rad;
+
+			return rad < turningRad ? true : false;
+        }
+
+		//角度差を返す。
+		static public float CalcuSubDotRad(Vector3 velocity, Vector3 toVec, float turningDegree)
+        {
+			var newDot = Vector3.Dot(velocity.normalized, toVec.normalized);
+			var rad = Mathf.Acos(newDot);
+			var turningRad = turningDegree * Mathf.Deg2Rad;
+
+			return rad - turningRad;
+		}
+
+		//角度内のベクターに変換する。
+		static public Vector3 CalcuInTurningVector(Vector3 velocity, Vector3 toVec, float turningDegree, Vector3 axis)
+        {
+			if(IsTurningVector(velocity, toVec, turningDegree)) {
+				Debug.Log("曲がれる");
+				return toVec;
+			}
+
+			//回転方向を時計回りか反時計回りによって変える。
+			var angle = Vector3.SignedAngle(velocity.normalized, toVec.normalized, axis);  
+			var subRad = CalcuSubDotRad(velocity, toVec, turningDegree) * Mathf.Sign(angle); 
+
+			var quat = Quaternion.AngleAxis(subRad, axis);
+			//var inverseQuat = Quaternion.Inverse(quat);
+
+			var newVec = quat * toVec;
+            Debug.Log("toVec:  " + toVec);
+            Debug.Log("newVec: " + newVec);
+
+			return newVec;
+        }
+    }
 }
 
 
