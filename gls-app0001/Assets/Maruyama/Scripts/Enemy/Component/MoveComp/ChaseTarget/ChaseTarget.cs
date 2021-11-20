@@ -166,6 +166,7 @@ public class ChaseTarget : MonoBehaviour
     /// </summary>
     public void TargetLost()
     {
+        Debug.Log("対象のロスト");
         m_chase.TargetLost();   
     }
 
