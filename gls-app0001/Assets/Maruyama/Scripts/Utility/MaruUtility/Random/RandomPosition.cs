@@ -33,13 +33,6 @@ namespace MaruUtility
         public static Vector3 CalcuPosition(Vector3 maxRange, Vector3 centerPosition)
         {
             var randomPosition = CalcuVec(maxRange);
-            //Vector3 minVec = -maxRange;
-            //Vector3 maxVec = maxRange;
-            //Vector3 randomPosition = Vector3.zero;
-
-            //randomPosition.x = sm_random.Next((int)minVec.x, (int)maxVec.x);
-            //randomPosition.y = sm_random.Next((int)minVec.y, (int)maxVec.y);
-            //randomPosition.z = sm_random.Next((int)minVec.z, (int)maxVec.z);
             return centerPosition + randomPosition;
         }
 
@@ -171,11 +164,8 @@ namespace MaruUtility
                     continue;
                 }
 
-                //ポジションが壁の中だったら
-                const float radius = 1.0f;
-                int layerIndex = LayerMask.GetMask(layerNames);
-                var colliders = Physics.OverlapSphere(position, radius, layerIndex);
-                if (colliders.Length != 0)
+                //ポジションが障害物の中だったら
+                if (IsInObstacle(position, layerNames))  
                 {
                     continue;
                 }
@@ -188,6 +178,53 @@ namespace MaruUtility
             }
 
             return Vector3.zero;
+        }
+
+        /// <summary>
+        /// 障害物の外で、複数のターゲットから離れている場所
+        /// </summary>
+        /// <param name="datas">ターゲットと話したい距離のデータ</param>
+        /// <param name="maxRange">ランダムに生成する範囲</param>
+        /// <param name="maxRange">ランダムに生成する範囲</param>
+        /// <param name="centerPosition">ランダムに生成する中心位置</param>
+        /// <returns>ランダムな位置</returns>
+        public static Vector3 OutObstacleAndOutRangeOfTargets(List<OutOfTargetData> datas,
+            Vector3 maxRange, Vector3 centerPosition = new Vector3(), params string[] layerNames)
+        {
+            const int numLoop = 100;
+            for (int i = 0; i < numLoop; i++)
+            {
+                var position = CalcuPosition(maxRange, centerPosition);
+
+                //ポジションが障害物の中だったら
+                if (IsInObstacle(position, layerNames))
+                {
+                    continue;
+                }
+
+                //ターゲットの全てと比較して、離れていたら
+                if (IsOutRangeOfTargets(position, datas))
+                {
+                    return position;  //全ての条件をクリアしたら、positionを返す。
+                }
+            }
+
+            return Vector3.zero;
+        }
+
+        /// <summary>
+        /// 障害物の中だったらtrue
+        /// </summary>
+        /// <param name="position">生成する場所</param>
+        /// <param name="layerNames">障害物レイヤーの設定</param>
+        /// <returns>障害物の中だったらtrue</returns>
+        public static bool IsInObstacle(Vector3 position, params string[] layerNames)
+        {
+            const float Radius = 1.0f;
+            int layerIndex = LayerMask.GetMask(layerNames);
+            var colliders = Physics.OverlapSphere(position, Radius, layerIndex);
+
+            return colliders.Length != 0 ? true : false;
         }
 
         /// <summary>
