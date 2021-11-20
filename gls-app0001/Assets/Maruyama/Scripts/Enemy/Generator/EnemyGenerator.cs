@@ -35,6 +35,7 @@ public class EnemyGenerator : GeneratorBase
         public int numCreate;
         public Vector3 centerPosition;
         public Vector3 maxRandomRange;
+        public bool isInCameraCreate;
 
         public Parameotor(GameObject createObject, int numCreate, Vector3 centerPosition, Vector3 maxRandomRange)
         {
@@ -42,6 +43,7 @@ public class EnemyGenerator : GeneratorBase
             this.numCreate = numCreate;
             this.centerPosition = centerPosition;
             this.maxRandomRange = maxRandomRange;
+            this.isInCameraCreate = false;
         }
     }
 
@@ -64,6 +66,9 @@ public class EnemyGenerator : GeneratorBase
     protected Vector3 m_centerPosition = new Vector3();  //生成するときの中心点
     [SerializeField]
     protected Vector3 m_maxRandomRange = new Vector3();  //ランダムに生成する時の最大距離
+
+    [SerializeField]
+    protected bool m_isInCameraCreate = false;  //カメラの範囲内に生成するかどうか
 
     [Header("障害物として扱う名前群"),SerializeField]
     string[] m_obstacleLayerStrings = new string[] { "L_Obstacle" };
@@ -152,9 +157,18 @@ public class EnemyGenerator : GeneratorBase
     {
         //return RandomPosition.CalcuPosition(m_maxRandomRange, m_centerPosition);
 
-        return RandomPosition.OutCameraAndOutObstacleAndOutRangeOfTargets(
-            m_outOfTargteDatas,
-            Camera.main, m_maxRandomRange, m_centerPosition, m_obstacleLayerStrings);
+        if(m_isInCameraCreate)
+        {
+            return RandomPosition.OutObstacleAndOutRangeOfTargets(
+                m_outOfTargteDatas,
+                m_maxRandomRange, m_centerPosition, m_obstacleLayerStrings);
+        }
+        else
+        {
+            return RandomPosition.OutCameraAndOutObstacleAndOutRangeOfTargets(
+               m_outOfTargteDatas,
+               Camera.main, m_maxRandomRange, m_centerPosition, m_obstacleLayerStrings);
+        }
     }
 
     /// <summary>
