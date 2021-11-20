@@ -92,14 +92,13 @@ public class TargetManager : MonoBehaviour
         //FoundObjectならバフを掛ける。
         m_nowTargetReactive.Skip(1)
             .Where(data => data != null)
-            .Where(data => data.GetFoundData().type == FoundObject.FoundType.SoundObject)
+            .Where(data => IsBuff(data))
             .Subscribe(_ => ChangeBuffParametor(m_buffParam))
             .AddTo(this);
 
         //それ以外ならバフを掛けない。
-        m_nowTargetReactive.Skip(1)
-            .Where(data => data != null)
-            .Where(data => data.GetFoundData().type != FoundObject.FoundType.SoundObject)
+        m_nowTargetReactive.Skip(0)
+            .Where(data => !IsBuff(data))
             .Subscribe(_ => ChangeBuffParametor(new BuffParametor(1.0f)))
             .AddTo(this);
     }
@@ -110,6 +109,19 @@ public class TargetManager : MonoBehaviour
         {
             //Debug.Log("null");
         }
+    }
+
+    bool IsBuff(FoundObject data)
+    {
+        if(data == null) {
+            return false;
+        }
+
+        if(data.GetFoundData().type == FoundType.Smell) {
+            return true;
+        }
+
+        return false;
     }
 
     /// <summary>
