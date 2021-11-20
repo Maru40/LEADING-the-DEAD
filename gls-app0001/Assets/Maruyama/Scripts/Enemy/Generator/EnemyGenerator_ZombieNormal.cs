@@ -35,6 +35,8 @@ public class CreateSetParametor_ZombieNormal
     public TargetManager.BuffParametor targetBuffParametor = new TargetManager.BuffParametor(3.0f);
     [Header("目線のパラメータ")]
     public EyeSearchRangeParam eyeSarchRangeParam = new EyeSearchRangeParam(7.0f, 3.0f, 0.7f);
+    [Header("群衆パラメータ")]
+    public ThrongManagerParametor throngParam = new ThrongManagerParametor(1.0f, 1.0f, 3.0f);
 
     public CreateSetParametor_ZombieNormal()
     { }
@@ -165,6 +167,13 @@ public class EnemyGenerator_ZombieNormal : EnemyGenerator
         if (statusUp)
         {
             statusUp.SetParametor(m_respawnStatusUpParam);
+        }
+
+        //集団行動
+        var throngManager = obj.GetComponent<ThrongManager>();
+        if (throngManager)
+        {
+            throngManager.SetParametor(m_createSetParam.throngParam);
         }
     }
 
