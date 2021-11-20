@@ -6,11 +6,14 @@ using System;
 using MaruUtility;
 
 [Serializable]
-public struct ThrongManagerParametor  //群衆Mgrのパラメータp
+public struct ThrongManagerParametor  //群衆Managerのパラメータ
 {
+    [Header("群衆と判断する範囲")]
     public float inThrongRange;   //群衆と判断する範囲
 
+    [Header("隣人と判断される距離")]
     public float nearObjectRange; //隣人と判断される距離
+    [Header("回避する最大力")]
     public float maxAvoidPower;   //回避する最大力
 
     public ThrongManagerParametor(float inThrongRange, float nearObjectRange, float maxAvoidPower)
@@ -353,11 +356,15 @@ public class ThrongManager : MonoBehaviour
         return m_param.nearObjectRange;
     }
 
+    public void SetParametor(ThrongManagerParametor param)
+    {
+        m_param = param;
+    }
     public ThrongManagerParametor GetParametor()
     {
         return m_param;
     }
-
+    
     public void SetGenerator(EnemyGenerator generator)
     {
         m_generator = generator;
