@@ -103,20 +103,24 @@ public class ThrongManager : MonoBehaviour
     void AvoidNearThrong(EnemyVelocityMgr velocityMgr)
     {
         var velocity = velocityMgr.velocity;
+        velocity += m_velocityManager.GetForce() * Time.deltaTime;
 
         var throngForce = CalcuVelocity.CalucSeekVec(velocity, CalcuThrongVector(), CalcuAverageSpeed());
         throngForce.y = 0;
+        //velocityMgr.AddForce(throngForce);
+
+        //var avoidVec = CalcuSumAvoidVector();
+        //if (avoidVec != Vector3.zero) //回避が必要なら
+        //{
+        //    Vector3 avoidForce = CalcuVelocity.CalucSeekVec(velocity, avoidVec, CalcuAverageSpeed());
+        //    avoidForce.y = 0;
+        //    //velocityMgr.AddForce(avoidForce);
+        //    //throngForce += avoidForce;
+        //}
+
         velocityMgr.AddForce(throngForce);
 
-        var avoidVec = CalcuSumAvoidVector();
-        if (avoidVec != Vector3.zero) //回避が必要なら
-        {
-            Vector3 avoidForce = CalcuVelocity.CalucSeekVec(velocity, avoidVec, CalcuAverageSpeed());
-            avoidForce.y = 0;
-            velocityMgr.AddForce(avoidForce);
-        }
-
-        if(m_velocityManager.velocity != Vector3.zero) {
+        if (m_velocityManager.velocity != Vector3.zero) {
             //m_rotationCtrl.SetDirect(velocityMgr.velocity);
         }
     }
@@ -193,7 +197,9 @@ public class ThrongManager : MonoBehaviour
         var toSelfVec = transform.position - data.gameObject.transform.position;
 
         if(IsRange(data, m_param.nearObjectRange)) {  //隣人なら
-            var power =　m_param.maxAvoidPower - toSelfVec.magnitude;
+            //var desiredVec = toSelfVec.normalized * m_param.maxAvoidPower;
+            //var avoidVec = m_velocityManager.velocity - desiredVec;
+            var power = m_param.maxAvoidPower - toSelfVec.magnitude;
             var avoidVec = toSelfVec.normalized * power;
 
             return avoidVec;
@@ -245,7 +251,7 @@ public class ThrongManager : MonoBehaviour
 
         //var reVec = (centerPosition + avoidVec) - transform.position;
         //var reVec = (centerPosition + avoidVec + directVec) - transform.position;
-        var reVec = (centerPosition + directVec) - transform.position;
+        var reVec = (centerPosition + directVec + avoidVec) - transform.position;
 
         return reVec;
     }
