@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_Smell, I_Eat
+public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_Smell, I_Eat, I_BindPlowlingArea
 {
     //test用に表示したり、消したりする用。
     [SerializeField]
@@ -94,5 +94,19 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_
         Debug.Log("食べる");
 
         m_stator.GetTransitionMember().eatTrigger.Fire();
+    }
+
+    public void InBind(BindPlowlingAreaManager manager)
+    {
+        Debug.Log("■バインドされた");
+
+        m_randomPlowling.SetCenterObject(manager.CenterObject);
+        m_randomPlowling.SetRandomPositionRadius(manager.BindRange);
+    }
+
+    public void OutBind(BindPlowlingAreaManager manager)
+    {
+        Debug.Log("■バインド解除");
+        m_randomPlowling.ResetCenterObject();
     }
 }
