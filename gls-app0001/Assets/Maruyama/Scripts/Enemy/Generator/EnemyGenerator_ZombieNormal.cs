@@ -29,6 +29,9 @@ public class CreateSetParametor_ZombieNormal
     [Header("通常攻撃の攻撃力パラメータ")]
     public Ex_Dictionary<AnimatorManager_ZombieNormal.NormalAttackHitColliderType, DamageData> normalAttackHitBoxDictionary = 
         new Ex_Dictionary<AnimatorManager_ZombieNormal.NormalAttackHitColliderType, DamageData>();
+    [Header("予備動作のパラメータ")]
+    public AttackManager_ZombieNormal.PreliminaryParametor preliminaryParam = 
+        new AttackManager_ZombieNormal.PreliminaryParametor(new RandomRange(1.0f, 1.0f), 1.0f);
     [Header("怒り状態のバフパラメータ")]
     public AngerManager.RiseParametor angerBuffParametor = new AngerManager.RiseParametor(1.05f, 1.02f, 1.5f);
     [Header("ターゲットのバフパラメータ")]
@@ -122,6 +125,7 @@ public class EnemyGenerator_ZombieNormal : EnemyGenerator
         if (attackManager)
         {
             attackManager.SetBaseParam(m_createSetParam.attackManagerParametor);
+            attackManager.PreliminaryParametorProperty = m_createSetParam.preliminaryParam;
         }
 
         var normalAttack = obj.GetComponent<NormalAttack>();
