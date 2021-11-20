@@ -195,8 +195,7 @@ public class TargetManager : MonoBehaviour
         }
 
         //ターゲットが対象外なら更新しない
-        if (IsExcludeTarget(target))
-        {
+        if (IsExcludeTarget(target)) {
             return false;
         }
         
