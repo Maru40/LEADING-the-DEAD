@@ -11,12 +11,14 @@ public class NormalAttack : AttackNodeBase
     public struct Parametor : I_Random<Parametor>
     {
         public float moveSpeed;
+        public float turningDegree;  //曲がれる角度
         public float startWaitTime;
         public float endWaitTime;  //終了時にストップする時間
 
         public Parametor(float moveSpeed)
         {
             this.moveSpeed = moveSpeed;
+            this.turningDegree = 0.0f;
             this.startWaitTime = 0.1f;
             this.endWaitTime = 0.1f;
         }
@@ -111,6 +113,12 @@ public class NormalAttack : AttackNodeBase
 
     private void Move(Vector3 moveVec)
     {
+        //moveVec = CalcuVelocity.CalcuInTurningVector(m_velocityMgr.velocity, moveVec, 0.0f, Vector3.up); //回転方向を
+        if (!CalcuVelocity.IsTurningVector(m_velocityMgr.velocity, moveVec, m_param.turningDegree)) {  //追従できる角度でないなら
+            Debug.Log("曲がれない");
+            moveVec = transform.forward; //直進する。
+        }
+
         float moveSpeed = m_param.moveSpeed * m_statusManager.GetBuffParametor().angerParam.speed;
         //var force = CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, moveVec, moveSpeed);
         //m_velocityMgr.AddForce(force);
