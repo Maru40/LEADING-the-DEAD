@@ -2835,7 +2835,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7434505739018704334}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 20.74, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8324235537073577830}
@@ -2952,7 +2952,7 @@ MonoBehaviour:
   m_param:
     range: 20
     height: 3
-    rad: 0.5235988
+    degree: 30
   m_rayObstacleLayerStrings:
   - L_Obstacle
 --- !u!114 &1444888580945028640
@@ -3249,10 +3249,15 @@ MonoBehaviour:
     normalAttackParametor:
       moveSpeed: 3
       turningDegree: 0
-      startWaitTime: 0.1
+      nearAvoidVec: 1
       endWaitTime: 0.1
     normalAttackHitBoxDictionary:
       m_typeDraws: []
+    preliminaryParam:
+      timeRandomRange:
+        min: 1
+        max: 1
+      moveSpeed: 1
     angerBuffParametor:
       attackPower: 1.05
       speed: 1.02
@@ -3262,7 +3267,11 @@ MonoBehaviour:
     eyeSarchRangeParam:
       range: 7
       height: 3
-      rad: 0.012217305
+      degree: 0.7
+    throngParam:
+      inThrongRange: 1
+      nearObjectRange: 1
+      maxAvoidPower: 3
 --- !u!114 &-9140734898953323855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3402,7 +3411,7 @@ MonoBehaviour:
   m_param:
     moveSpeed: 3
     turningDegree: 0
-    startWaitTime: 0.1
+    nearAvoidVec: 1
     endWaitTime: 1
 --- !u!114 &-3509147400467223985
 MonoBehaviour:
