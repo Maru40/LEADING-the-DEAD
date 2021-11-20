@@ -11,15 +11,18 @@ public class NormalAttack : AttackNodeBase
     public struct Parametor : I_Random<Parametor>
     {
         public float moveSpeed;
-        public float turningDegree;  //曲がれる角度
-        public float startWaitTime;
-        public float endWaitTime;  //終了時にストップする時間
+        [Header("曲がれる角度")]
+        public float turningDegree; 
+        [Header("近くのゾンビを避ける力")]
+        public float nearAvoidVec;
+        [Header("終了時にストップする時間")]
+        public float endWaitTime;
 
         public Parametor(float moveSpeed)
         {
             this.moveSpeed = moveSpeed;
             this.turningDegree = 0.0f;
-            this.startWaitTime = 0.1f;
+            this.nearAvoidVec = 1.0f;
             this.endWaitTime = 0.1f;
         }
 
@@ -171,6 +174,7 @@ public class NormalAttack : AttackNodeBase
         SetForwardTarget();
         m_rotationController.enabled = true;
         m_waitTimer.AbsoluteEndTimer(GetType(), false);
+        //m_velocityMgr.ResetAll();
 
         enabled = true;
     }
