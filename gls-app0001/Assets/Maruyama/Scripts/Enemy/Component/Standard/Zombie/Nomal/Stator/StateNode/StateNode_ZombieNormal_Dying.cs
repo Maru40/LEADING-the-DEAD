@@ -9,6 +9,7 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
     enum TaskEnum
     {
         Fire,
+        RenderFadeOut,
         Cutting,
         PlayDeathAnimation,
     }
@@ -109,6 +110,7 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
     void DefineTask()
     {
         m_taskList.DefineTask(TaskEnum.Fire, OnTaskFireEnter, OnTaskFireUpdate, OnTaskFireExit);
+        m_taskList.DefineTask(TaskEnum.RenderFadeOut, new Task_RenderFadeOut(GetOwner()));
         m_taskList.DefineTask(TaskEnum.PlayDeathAnimation,
             OnTaskPlayDeathAnimationEnter, OnTaskPlayDeathAnimationUpdate, OnTaskPlayDeathAnimationExit);
         m_taskList.DefineTask(TaskEnum.Cutting, new Task_CuttilingDeath());  //切断死亡
@@ -124,7 +126,7 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
         var types = dyingType switch
         {
             DyingTypeEnum.Fire => new TaskEnum[] { TaskEnum.Fire }, //炎に包まれた時
-            DyingTypeEnum.Cutting => new TaskEnum[] { TaskEnum.Cutting, TaskEnum.PlayDeathAnimation },  //切断されたとき
+            DyingTypeEnum.Cutting => new TaskEnum[] { TaskEnum.Cutting, TaskEnum.PlayDeathAnimation, TaskEnum.RenderFadeOut},  //切断されたとき
             _ => new TaskEnum[] { }
         };
 
@@ -136,19 +138,41 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
 
     //フェードして消える-----------------------------------------------------------------------------------------
 
-    void OnTaskFadeEnter()
+    class Task_RenderFadeOut : TaskNodeBase<EnemyBase>
     {
-        
-    }
+        List<RenderFadeManager> m_fadeManagers = new List<RenderFadeManager>();
 
-    bool OnTaskFadeUpdate()
-    {
-        return true;
-    }
+        public Task_RenderFadeOut(EnemyBase owner)
+            :base(owner)
+        {
+            m_fadeManagers = new List<RenderFadeManager>(GetOwner().GetComponentsInChildren<RenderFadeManager>());
+        }
 
-    void OnTaskFadeExit()
-    {
+        public override void OnEnter()
+        {
+            foreach(var fade in m_fadeManagers)
+            {
+                fade?.FadeStart();
+            }
+        }
 
+        public override bool OnUpdate()
+        {
+            foreach (var fade in m_fadeManagers)
+            {
+                if (fade.IsEnd)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public override void OnExit()
+        {
+
+        }
     }
 
     //DeathAnimatinの再生-----------------------------------------------------------------------------------------
@@ -170,7 +194,7 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
 
     void OnTaskPlayDeathAnimationExit()
     {
-        m_animatorManager.CrossFadeIdleAnimation();
+        //m_animatorManager.CrossFadeIdleAnimation();
     }
 
     //ファイアー--------------------------------------------------------------------------------------
