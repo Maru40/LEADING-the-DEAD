@@ -61,7 +61,6 @@ public class EnemyRespawnManager : EnemyRespawnBase
         {
             //使いまわすため、削除せずにリスポーンポイントに設定する。
             gameObject.transform.position = new Vector3(0.0f, -100.0f, 0.0f);
-
             m_waitTimer.AddWaitTimer(GetType(), m_param.time, Respawn);
         }
         else
@@ -96,6 +95,12 @@ public class EnemyRespawnManager : EnemyRespawnBase
         m_angerManager.SetIsAnger(false);  //怒りのoff
         m_statusManager.Respawn();
         m_stator.Reset();  //ステートのリセット
+        //レンダーのリセット
+        var fadeManagers = GetComponentsInChildren<RenderFadeManager>();
+        foreach (var fade in fadeManagers)
+        {
+            fade?.ResetInit();
+        }
     }
 
     /// <summary>
