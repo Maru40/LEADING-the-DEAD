@@ -277,5 +277,6 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         const float weight = 1.0f;
         m_animator.SetLayerWeight(UpperLayerIndex, weight);
         CrossFadeIdleAnimation(UpperLayerIndex);
+        CrossFadeIdleAnimation();
     }
 }

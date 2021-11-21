@@ -67,7 +67,7 @@ public class BloodBagManager : MonoBehaviour
         foreach (var contact in other.contacts)
         {
             //そのままの位置だとオブジェクトに埋まるから、法線方向に少し位置をずらす。
-            const float positionAdjustDistance = 0.01f;
+            const float positionAdjustDistance = 0.05f;
 
             var puddle = Instantiate(m_breakBlood, contact.point, Quaternion.identity);
             puddle.transform.forward = contact.normal;
