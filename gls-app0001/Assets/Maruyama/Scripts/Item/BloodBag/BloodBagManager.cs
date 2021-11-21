@@ -35,9 +35,8 @@ public class BloodBagManager : MonoBehaviour
     {
         CreateParticle();
 
-        var hitGround = CalcuRaycastHitGround();
-        var breakBlood = Instantiate(m_breakBlood, hitGround.point, Quaternion.identity);
-        var bloodPuddle = breakBlood.GetComponent<BloodPuddleManager>();
+        //var bloodPuddleGround = CreateBloodPuddleGround();
+        CreateBloodPuddleContacts(other);  //当たった場所に血だまりを増やす。
 
         //CreateBloodInk(other, bloodPuddle);       //当たった場所の血だまり生成
         //CreateBloodInk(hitGround, bloodPuddle);   //地面に血だまり
@@ -57,6 +56,31 @@ public class BloodBagManager : MonoBehaviour
         Physics.Raycast(transform.position, Vector3.down, out hit, layerMask);
 
         return hit;
+    }
+
+    /// <summary>
+    /// 接した場所の血だまりをくっつける
+    /// </summary>
+    /// <param name="other">当たったコライダー</param>
+    void CreateBloodPuddleContacts(Collision other)
+    {
+        foreach (var contact in other.contacts)
+        {
+            //そのままの位置だとオブジェクトに埋まるから、法線方向に少し位置をずらす。
+            const float positionAdjustDistance = 0.01f;
+
+            var puddle = Instantiate(m_breakBlood, contact.point, Quaternion.identity);
+            puddle.transform.forward = contact.normal;
+            puddle.transform.position += contact.normal.normalized * positionAdjustDistance;
+        }
+    }
+
+    BloodPuddleManager CreateBloodPuddleGround()
+    {
+        var hitGround = CalcuRaycastHitGround();
+        var breakBlood = Instantiate(m_breakBlood, hitGround.point, Quaternion.identity);
+        var bloodPuddle = breakBlood.GetComponent<BloodPuddleManager>();
+        return bloodPuddle;
     }
 
     /// <summary>
