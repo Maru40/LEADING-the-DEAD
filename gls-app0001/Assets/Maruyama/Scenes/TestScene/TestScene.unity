@@ -1938,7 +1938,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6514517323444276291, guid: f89aa22a9f0e87b4f92420ffc278b8a3, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6514517323444276291, guid: f89aa22a9f0e87b4f92420ffc278b8a3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2558,7 +2558,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1806059454
 MonoBehaviour:
@@ -3135,6 +3135,10 @@ PrefabInstance:
       value: -0.82
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_isInCameraCreate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_maxRandomRange.x
       value: 10
       objectReference: {fileID: 0}
@@ -3233,6 +3237,10 @@ PrefabInstance:
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_createSetParam.normalAttackParametor.nearAvoidVec
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_createSetParam.respawnParametor.isAbsoluteRespawn
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_createSetParam.normalAttackParametor.turningDegree
