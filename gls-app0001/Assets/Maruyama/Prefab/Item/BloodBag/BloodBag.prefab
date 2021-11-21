@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7099943397895087011}
   - component: {fileID: 7099943397895087010}
   - component: {fileID: 286499271}
+  - component: {fileID: 6011067228027034928}
   m_Layer: 3
   m_Name: BloodBag
   m_TagString: Untagged
@@ -171,6 +172,31 @@ MonoBehaviour:
     colorBlendType: 0
     normalBlendType: 0
     heightBlendType: 0
+--- !u!114 &6011067228027034928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3204860358444743748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1259da91c24a6d34ba000c2454d018a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brush:
+    brushTexture: {fileID: 2800000, guid: b8702b5a8624a114f82a6d09bc3ce746, type: 3}
+    brushNormalTexture: {fileID: 2800000, guid: 945b831b22eb06945bf77e00f16ff51a, type: 3}
+    brushHeightTexture: {fileID: 0}
+    brushScale: 0
+    rotateAngle: 0
+    brushNormalBlend: 0
+    brushHeightBlend: 0
+    brushColor: {r: 0, g: 0, b: 0, a: 0}
+    colorBlendType: 0
+    normalBlendType: 0
+    heightBlendType: 0
+  wait: 3
 --- !u!1 &3349458415506925452
 GameObject:
   m_ObjectHideFlags: 0

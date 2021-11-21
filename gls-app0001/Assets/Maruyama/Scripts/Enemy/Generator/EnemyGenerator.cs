@@ -122,7 +122,8 @@ public class EnemyGenerator : GeneratorBase
             obj.GetComponent<ThrongManager>(),
             obj.GetComponent<RandomPlowlingMove>(),
             obj.GetComponent<DropObjecptManager>(),
-            obj.GetComponent<ClearManager_Zombie>()
+            obj.GetComponent<ClearManager_Zombie>(),
+            obj.GetComponent<EnemyRespawnManager>()
         );
 
         m_datas.Add(newData);
@@ -192,6 +193,17 @@ public class EnemyGenerator : GeneratorBase
         foreach(var data in m_datas)
         {
             data.clearManager.ClearProcess();
+        }
+    }
+
+    /// <summary>
+    /// 全部リスポーン
+    /// </summary>
+    public void RepawnPositoinAll()
+    {
+        foreach(var data in m_datas)
+        {
+            data.respawn.RespawnPosition();
         }
     }
 

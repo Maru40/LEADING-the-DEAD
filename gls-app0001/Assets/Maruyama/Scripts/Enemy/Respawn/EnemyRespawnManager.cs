@@ -71,6 +71,15 @@ public class EnemyRespawnManager : EnemyRespawnBase
         }
     }
 
+    /// <summary>
+    /// ポジションのみのリスポーン
+    /// </summary>
+    public void RespawnPosition()
+    {
+        var respawnPosition = CalcuRespawnRandomPosition();
+        transform.position = respawnPosition;
+    }
+
     void Respawn()
     {
         //if(m_target == null || m_generator == null) {
@@ -79,8 +88,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
             StartGeneratorNullCheck();
         }
 
-        var respawnPosition = CalcuRespawnRandomPosition();
-        transform.position = respawnPosition;
+        RespawnPosition();  //ポジションのリスポン
 
         //DeathCount();  //死亡時カウント
         DropDistribution();  //ドロップアイテム再配布
