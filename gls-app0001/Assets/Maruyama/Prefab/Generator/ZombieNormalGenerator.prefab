@@ -50,6 +50,7 @@ MonoBehaviour:
   m_numCreate: 75
   m_centerPosition: {x: 0, y: 0.2, z: 0}
   m_maxRandomRange: {x: 24, y: 0, z: 24}
+  m_isInCameraCreate: 0
   m_obstacleLayerStrings:
   - L_Obstacle
   m_distributionParams:
@@ -67,13 +68,13 @@ MonoBehaviour:
       time: 0
     chaseParametor:
       nearRange: 0.75
-      maxSpeed: 3
+      maxSpeed: 3.5
       turningPower: 3
       lostSeekTime: 7
       inThrongRange: 3
     randomPlowlingParametor:
       randomPositionRadius: 15
-      maxSpeed: 1.5
+      maxSpeed: 1.3
       turningPower: 2
       targetNearRange: 1
       maxWaitCalcuRouteTime: 3
@@ -94,7 +95,8 @@ MonoBehaviour:
       startRange: 2.5
     normalAttackParametor:
       moveSpeed: 3
-      startWaitTime: 0.1
+      turningDegree: 0
+      nearAvoidVec: 1
       endWaitTime: 0.1
     normalAttackHitBoxDictionary:
       m_typeDraws:
@@ -114,6 +116,11 @@ MonoBehaviour:
           hitStopTime: 0
           type: 0
           damageTags: []
+    preliminaryParam:
+      timeRandomRange:
+        min: 1
+        max: 1
+      moveSpeed: 1
     angerBuffParametor:
       attackPower: 1.05
       speed: 1.02
@@ -123,7 +130,11 @@ MonoBehaviour:
     eyeSarchRangeParam:
       range: 7
       height: 3
-      rad: 0.7
+      degree: 0.7
+    throngParam:
+      inThrongRange: 1
+      nearObjectRange: 1
+      maxAvoidPower: 3
   m_respawnStatusUpParam:
     respawnParametor:
       isAbsoluteRespawn: 0
@@ -158,10 +169,16 @@ MonoBehaviour:
       startRange: 0
     normalAttackParametor:
       moveSpeed: 3
-      startWaitTime: 0.1
+      turningDegree: 0
+      nearAvoidVec: 1
       endWaitTime: 0.1
     normalAttackHitBoxDictionary:
       m_typeDraws: []
+    preliminaryParam:
+      timeRandomRange:
+        min: 1
+        max: 1
+      moveSpeed: 1
     angerBuffParametor:
       attackPower: 1.05
       speed: 1.02
@@ -171,7 +188,11 @@ MonoBehaviour:
     eyeSarchRangeParam:
       range: 20
       height: 3
-      rad: 0.5235988
+      degree: 0.7
+    throngParam:
+      inThrongRange: 1
+      nearObjectRange: 1
+      maxAvoidPower: 3
   m_randomSetParam:
     cahseParametor:
       isActive: 0
@@ -227,9 +248,11 @@ MonoBehaviour:
       isActive: 0
       min:
         moveSpeed: 0
-        startWaitTime: 0
+        turningDegree: 0
+        nearAvoidVec: 0
         endWaitTime: 0
       max:
         moveSpeed: 0
-        startWaitTime: 0
+        turningDegree: 0
+        nearAvoidVec: 0
         endWaitTime: 0
