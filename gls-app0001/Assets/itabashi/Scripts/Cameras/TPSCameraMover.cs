@@ -39,6 +39,13 @@ public class TPSCameraMover : MonoBehaviour
     [SerializeField]
     private LayerMask m_hitLayer;
 
+    [SerializeField]
+    private float m_clampSpeed = 1.0f;
+
+    private const float CLAMP_SPEED_VALUE = 50.0f;
+
+    private float m_hitBeforeRange = 0.0f;
+
     /// <summary>
     /// 一秒に対しての回転量
     /// </summary>
@@ -68,22 +75,12 @@ public class TPSCameraMover : MonoBehaviour
     private void Awake()
     {
         m_gameControls = new GameControls();
+
+        this.RegisterController(m_gameControls);
+
+        m_hitBeforeRange = m_maxRange;
+
         UpdatePosition();
-    }
-
-    private void OnEnable()
-    {
-        m_gameControls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        m_gameControls.Disable();
-    }
-
-    private void OnDestroy()
-    {
-        m_gameControls.Disable();
     }
 
     private void UpdatePosition()
@@ -110,9 +107,17 @@ public class TPSCameraMover : MonoBehaviour
             range = (hitInfo.point - m_targetObject.transform.position).magnitude;
         }
 
+        float sign = Mathf.Sign(range - m_hitBeforeRange);
+        float min = Mathf.Min(range, m_hitBeforeRange);
+        float max = Mathf.Max(range, m_hitBeforeRange);
+
+        range = Mathf.Clamp(m_hitBeforeRange + CLAMP_SPEED_VALUE * m_clampSpeed * Time.deltaTime * sign, min, max);
+
         Debug.DrawLine(m_targetObject.transform.position, transform.position + -transform.forward * range);
 
         transform.position = m_targetObject.transform.position + -transform.forward * range;
+
+        m_hitBeforeRange = range;
     }
 
     // Start is called before the first frame update
