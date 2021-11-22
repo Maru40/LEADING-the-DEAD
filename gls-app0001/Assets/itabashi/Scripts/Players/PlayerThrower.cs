@@ -101,9 +101,9 @@ namespace Player
             m_gameControls = new GameControls();
 
             m_gameControls.Player.ThrowingStance.performed += context => m_throwingStanceSubject.OnNext(true);
-            m_gameControls.Player.ThrowingStance.canceled += context => m_throwingStanceSubject.OnNext(false);
+            m_gameControls.Player.ThrowingStance.canceled += context => m_OnThrowingSubject.OnNext(Unit.Default);
 
-            m_gameControls.Player.Throwing.performed += context => m_OnThrowingSubject.OnNext(Unit.Default);
+            m_gameControls.Player.ThrowCancel.performed += context => m_throwingStanceSubject.OnNext(false);
 
             this.RegisterController(m_gameControls);
         }
