@@ -148,6 +148,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "ThrowCancel",
+                    "type": "Button",
+                    "id": "482a1ea5-c276-4d0b-a51b-0e70120d6fdc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -286,7 +294,7 @@
                 {
                     "name": "",
                     "id": "3d54afae-c8c3-4bb7-8a9a-1554b9a55061",
-                    "path": "<Gamepad>/leftShoulder",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -533,6 +541,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "TakeItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0af650a9-6281-49ba-951c-d9704c2719f8",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThrowCancel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

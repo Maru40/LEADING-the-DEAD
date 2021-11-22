@@ -161,6 +161,14 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ThrowCancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""482a1ea5-c276-4d0b-a51b-0e70120d6fdc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -299,7 +307,7 @@ public class @GameControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3d54afae-c8c3-4bb7-8a9a-1554b9a55061"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -548,6 +556,17 @@ public class @GameControls : IInputActionCollection, IDisposable
                     ""action"": ""TakeItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0af650a9-6281-49ba-951c-d9704c2719f8"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThrowCancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -574,6 +593,7 @@ public class @GameControls : IInputActionCollection, IDisposable
         m_Player_Throwing = m_Player.FindAction("Throwing", throwIfNotFound: true);
         m_Player_UseMeat = m_Player.FindAction("UseMeat", throwIfNotFound: true);
         m_Player_TakeItem = m_Player.FindAction("TakeItem", throwIfNotFound: true);
+        m_Player_ThrowCancel = m_Player.FindAction("ThrowCancel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -641,6 +661,7 @@ public class @GameControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Throwing;
     private readonly InputAction m_Player_UseMeat;
     private readonly InputAction m_Player_TakeItem;
+    private readonly InputAction m_Player_ThrowCancel;
     public struct PlayerActions
     {
         private @GameControls m_Wrapper;
@@ -663,6 +684,7 @@ public class @GameControls : IInputActionCollection, IDisposable
         public InputAction @Throwing => m_Wrapper.m_Player_Throwing;
         public InputAction @UseMeat => m_Wrapper.m_Player_UseMeat;
         public InputAction @TakeItem => m_Wrapper.m_Player_TakeItem;
+        public InputAction @ThrowCancel => m_Wrapper.m_Player_ThrowCancel;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -726,6 +748,9 @@ public class @GameControls : IInputActionCollection, IDisposable
                 @TakeItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTakeItem;
                 @TakeItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTakeItem;
                 @TakeItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTakeItem;
+                @ThrowCancel.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowCancel;
+                @ThrowCancel.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowCancel;
+                @ThrowCancel.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowCancel;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -784,6 +809,9 @@ public class @GameControls : IInputActionCollection, IDisposable
                 @TakeItem.started += instance.OnTakeItem;
                 @TakeItem.performed += instance.OnTakeItem;
                 @TakeItem.canceled += instance.OnTakeItem;
+                @ThrowCancel.started += instance.OnThrowCancel;
+                @ThrowCancel.performed += instance.OnThrowCancel;
+                @ThrowCancel.canceled += instance.OnThrowCancel;
             }
         }
     }
@@ -808,5 +836,6 @@ public class @GameControls : IInputActionCollection, IDisposable
         void OnThrowing(InputAction.CallbackContext context);
         void OnUseMeat(InputAction.CallbackContext context);
         void OnTakeItem(InputAction.CallbackContext context);
+        void OnThrowCancel(InputAction.CallbackContext context);
     }
 }
