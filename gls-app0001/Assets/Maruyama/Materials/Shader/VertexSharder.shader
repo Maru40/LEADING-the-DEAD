@@ -3,6 +3,7 @@ Shader "Unlit/VertexSharder"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _Color("Color", Color) = (1,1,1,1)
     }
 
     //êFÇÃÇ›ìKâûÇ≥ÇπÇΩÇ¢
@@ -87,6 +88,7 @@ Shader "Unlit/VertexSharder"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            float4 _Color;
 
             //v2f vert (appdata v)
             //{
@@ -120,7 +122,7 @@ Shader "Unlit/VertexSharder"
             {
                 col = tex2D(_MainTex, i.uv)
                 UNITY_APPLY_FOG(i.fogCoord, col);
-                col *= i.color;
+                col *= i.color * _Color;
             }
             ENDCG
         }
