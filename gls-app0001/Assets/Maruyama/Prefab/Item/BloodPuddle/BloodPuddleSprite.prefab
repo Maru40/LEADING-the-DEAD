@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1676196849129147233}
   - component: {fileID: 1676196849129147238}
   - component: {fileID: 6237986829001682222}
+  - component: {fileID: -7557385195673516784}
   m_Layer: 0
   m_Name: BloodPuddleSprite
   m_TagString: Untagged
@@ -52,7 +53,7 @@ MonoBehaviour:
     height: 1
     depth: 0
     length: 1
-    sides: 100
+    sides: 30
     color: {r: 0.6603774, g: 0, b: 0.17549965, a: 1}
   m_sides: 10
   m_material: {fileID: 2100000, guid: a813452a7743bde4898b96df2697fe55, type: 2}
@@ -130,4 +131,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_fadeTime: 1
-  m_render: {fileID: 1676196849129147233}
+--- !u!114 &-7557385195673516784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676196849129147229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a647a4fe9b9584d909a0e3f68190dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
