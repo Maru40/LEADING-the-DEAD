@@ -191,7 +191,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_fadeTime: 1
-  m_render: {fileID: 0}
 --- !u!1 &3772984638980697143
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,6 +258,7 @@ MonoBehaviour:
   m_time: 20
   m_bloodPuddleRenderManagers:
   - {fileID: 6432455279586140487}
+  m_verticesAlphaMangaer: {fileID: 1786708813344213369}
 --- !u!135 &4212496767501641426
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -294,6 +294,10 @@ PrefabInstance:
     - target: {fileID: 1676196849129147229, guid: eefa60d6944e0f6499df643954bbb6ab, type: 3}
       propertyPath: m_Name
       value: BloodPuddleSprite
+      objectReference: {fileID: 0}
+    - target: {fileID: 1676196849129147234, guid: eefa60d6944e0f6499df643954bbb6ab, type: 3}
+      propertyPath: m_param.sides
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1676196849129147235, guid: eefa60d6944e0f6499df643954bbb6ab, type: 3}
       propertyPath: m_RootOrder
@@ -355,5 +359,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a26cc96ffcc6c2b4f9ce2ee2aa4f9599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1786708813344213369 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -7557385195673516784, guid: eefa60d6944e0f6499df643954bbb6ab, type: 3}
+  m_PrefabInstance: {fileID: 1140936860166818921}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a647a4fe9b9584d909a0e3f68190dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
