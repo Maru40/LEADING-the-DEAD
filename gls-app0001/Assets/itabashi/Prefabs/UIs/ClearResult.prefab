@@ -876,6 +876,7 @@ GameObject:
   - component: {fileID: 9169878596264537190}
   - component: {fileID: 6345409754441384245}
   - component: {fileID: 3452536025631325118}
+  - component: {fileID: 8836794592835771602}
   m_Layer: 5
   m_Name: ClearBinder
   m_TagString: Untagged
@@ -900,7 +901,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 150, y: -50}
+  m_AnchoredPosition: {x: 100, y: 0}
   m_SizeDelta: {x: 800, y: 800}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &6345409754441384245
@@ -941,6 +942,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &8836794592835771602
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4740675335073511808}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4785347925706564431
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,6 +1567,7 @@ GameObject:
   - component: {fileID: 3787414423007466263}
   - component: {fileID: 7326859045416891866}
   - component: {fileID: 8086991161873878089}
+  - component: {fileID: 8929493586763850617}
   m_Layer: 5
   m_Name: ClearResult
   m_TagString: Untagged
@@ -1648,6 +1669,25 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!320 &8929493586763850617
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5646726587093447209}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 1914582e0169ae043bf52808b53741e1, type: 2}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 4894447625818431841, guid: 1914582e0169ae043bf52808b53741e1, type: 2}
+    value: {fileID: 0}
+  m_ExposedReferences:
+    m_References: []
 --- !u!1 &6130981288733253890
 GameObject:
   m_ObjectHideFlags: 0
