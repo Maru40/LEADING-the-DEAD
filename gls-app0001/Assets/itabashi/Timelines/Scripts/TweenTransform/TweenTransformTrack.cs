@@ -11,6 +11,14 @@ namespace Timelines.Playables.Itabashi
     [TrackClipType(typeof(TweenTransformClip))]
     public class TweenTransformTrack : TrackAsset
     {
+        public enum AnimationType
+        {
+            Absolute,
+            Relative
+        }
+
+        public AnimationType animationType = AnimationType.Relative;
+
         public override Playable CreateTrackMixer(PlayableGraph graph, GameObject go, int inputCount)
         {
             var mixer = ScriptPlayable<TweenTransformMixerBehaviour>.Create(graph, inputCount);
