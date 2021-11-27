@@ -22,11 +22,21 @@ namespace Timelines.Playables.CanvasGroupAlpha
             double time = Director.time;
             float alpha = 0;
 
+            bool isNoneClip = true;
+
             for (int i = 0; i < Clips.Length; ++i)
             {
                 var clip = Clips[i];
                 var clipAsset = clip.asset as CanvasGroupAlphaClip;
                 var clipWeight = playable.GetInputWeight(i);
+
+                if(clipWeight == 0.0f)
+                {
+                    continue;
+                }
+
+                isNoneClip = false;
+
                 var clipProgress = (float)((time - clip.start) / clip.duration);
 
                 if (clipProgress >= 0.0f && clipProgress <= 1.0f)
@@ -35,7 +45,7 @@ namespace Timelines.Playables.CanvasGroupAlpha
                 }
             }
 
-            canvasGroup.alpha = alpha;
+            canvasGroup.alpha = isNoneClip ? canvasGroup.alpha : alpha;
         }
     }
 }
