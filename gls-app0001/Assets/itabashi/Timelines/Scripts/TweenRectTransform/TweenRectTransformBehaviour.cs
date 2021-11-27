@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.Playables;
 
-public class TweenRectTransformBehaviour : MonoBehaviour
+namespace Timelines.Playables.TweenRectTransform
 {
-    // Start is called before the first frame update
-    void Start()
+    [System.Serializable]
+    public class TweenRectTransformBehaviour : PlayableBehaviour
     {
-    }
+        public bool animatePosition = false;
+        public bool animateRotation = false;
+        public bool animateScale = false;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public AnimationCurve3 positionCurve = new AnimationCurve3(true, true, false);
+        public AnimationCurve3 rotationCurve = new AnimationCurve3();
+        public AnimationCurve3 scaleCurve = new AnimationCurve3(true, true, false);
     }
 }
