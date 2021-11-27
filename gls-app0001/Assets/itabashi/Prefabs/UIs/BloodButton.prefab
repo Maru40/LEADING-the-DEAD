@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5402623612787628003}
   - component: {fileID: 5402623612787628000}
   - component: {fileID: 7097736260265296088}
+  - component: {fileID: 2561121219598354848}
   m_Layer: 5
   m_Name: BloodButton
   m_TagString: Untagged
@@ -139,6 +140,18 @@ MonoBehaviour:
   m_cancelSound: {fileID: 0}
   m_selectSound: {fileID: 8300000, guid: eddf02ee7cc1e1f438d5079611ed51f9, type: 3}
   m_seVolumeScale: 1
+--- !u!225 &2561121219598354848
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5402623612787628014}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5402623613104071992
 GameObject:
   m_ObjectHideFlags: 0
