@@ -109,7 +109,10 @@ public class MeleeWeaponTrail : MonoBehaviour
 #if USE_INTERPOLATION
 		_smoothedPoints.Clear();
 #endif
-		_trailMesh.Clear();
+		if (_trailMesh)
+		{
+			_trailMesh.Clear();
+		}
 	}
 
 	private void OnDestroy()
