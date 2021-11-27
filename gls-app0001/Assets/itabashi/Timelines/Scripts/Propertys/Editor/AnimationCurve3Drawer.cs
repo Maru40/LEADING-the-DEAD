@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 
-namespace Timelines.Playables.TweenTransform
+namespace Timelines.Playables
 {
-    [CustomPropertyDrawer(typeof(TweenTransformBehaviour.AnimationCurve3))]
+    [CustomPropertyDrawer(typeof(AnimationCurve3))]
     public class AnimationCurve3Drawer : PropertyDrawer
     {
         private GUILayoutOption m_labelWidth = GUILayout.Width(25);
@@ -27,7 +25,7 @@ namespace Timelines.Playables.TweenTransform
 
             using(new EditorGUILayout.HorizontalScope())
             {
-                animate.boolValue = EditorGUILayout.Toggle(animate.boolValue);
+                animate.boolValue = EditorGUILayout.Toggle(animate.boolValue, m_labelWidth);
                 EditorGUILayout.LabelField(field, m_labelWidth);
                 curve.animationCurveValue = EditorGUILayout.CurveField(curve.animationCurveValue, color, Rect.zero);
             }
