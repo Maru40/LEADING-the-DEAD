@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1193619006192807643}
   - component: {fileID: 1573816668844970646}
   - component: {fileID: 600394373511962334}
+  - component: {fileID: 2661141314521785354}
   m_Layer: 5
   m_Name: MissionUI
   m_TagString: Untagged
@@ -94,6 +95,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_missionStamp: {fileID: 5237780478600646982}
   m_missionText: {fileID: 1490274458657618917}
+--- !u!95 &2661141314521785354
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4868923779019118545}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9c3a2d789620ec744b450d77f19c5ab4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6165149224738020033
 GameObject:
   m_ObjectHideFlags: 0
