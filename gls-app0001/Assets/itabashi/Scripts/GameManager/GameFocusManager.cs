@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UniRx;
+using UniRx.Triggers;
 
 public class GameFocusManager
 {
@@ -44,14 +45,14 @@ public class GameFocusManager
 
         var objectAndColor = m_colorAndfocusObjectStack.Peek();
 
-        if(objectAndColor == null || objectAndColor.focusObject == null)
+        if (objectAndColor == null || objectAndColor.focusObject == null)
         {
             return;
         }
 
         var selectable = objectAndColor.focusObject.GetComponent<Selectable>();
 
-        if(!selectable)
+        if (!selectable)
         {
             return;
         }
