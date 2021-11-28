@@ -26,6 +26,7 @@ public class Board : MonoBehaviour
         public float depth;
         public float length;
         public int sides;
+        public int heightSides;  //高さをどれだけ分けるかどうか
         public Color color;
     }
 
@@ -121,14 +122,26 @@ public class Board : MonoBehaviour
             var topUV = new Vector2(position.magnitude, 0.0f);   //上部のUV座標
             var bottomUV = new Vector2(position.magnitude, 1.0f);//下部のUV座標
 
-            m_vertices.Add(new Vector3(firstPosition + position.x, +halfHeight, position.z));
-            m_vertices.Add(new Vector3(firstPosition + position.x, -halfHeight, position.z));
+            for(int j = 0 ; j < m_param.heightSides + 1; j++)
+            {
+                float heightNormalize = (m_param.height / m_param.heightSides);
+                float heightRate = heightNormalize * j;
+                float height = halfHeight - heightRate;
+                var uv = new Vector3(position.magnitude, heightRate);
 
-            m_colors.Add(color);
-            m_colors.Add(color);
+                m_vertices.Add(new Vector3(firstPosition + position.x, height, position.z));
+                m_colors.Add(color);
+                m_uvs.Add(uv);
+            }
 
-            m_uvs.Add(topUV);
-            m_uvs.Add(bottomUV);
+            //m_vertices.Add(new Vector3(firstPosition + position.x, +halfHeight, position.z));
+            //m_vertices.Add(new Vector3(firstPosition + position.x, -halfHeight, position.z));
+
+            //m_colors.Add(color);
+            //m_colors.Add(color);
+
+            //m_uvs.Add(topUV);
+            //m_uvs.Add(bottomUV);
         }
 
         //m_vertices = vertices;
@@ -139,19 +152,31 @@ public class Board : MonoBehaviour
     /// </summary>
     protected virtual void CreateIndices()
     {
-        var baseIndices = new int[] {
-            //0, 1, 2,
-            //2, 1, 3
-            0, 2, 1,
-            1, 2, 3,
-        };
+        //var baseIndices = new int[] {
+        //    //0, 1, 2,
+        //    //2, 1, 3
+        //    0, 2, 1,
+        //    1, 2, 3,
+        //};
+
+        var baseIndices = new List<int>();
+        for(int i = 0; i < m_param.heightSides; i++)
+        {
+            baseIndices.Add(i);
+            baseIndices.Add(m_param.heightSides + (i + 1));
+            baseIndices.Add(i + 1);
+
+            baseIndices.Add(i + 1);
+            baseIndices.Add(m_param.heightSides + (i + 1));
+            baseIndices.Add(m_param.heightSides + (i + 2));
+        }
 
         //インディセスの作成
         for (int i = 0; i < m_param.sides; i++)
         {
             foreach(var baseIndex in baseIndices)
             {
-                m_indices.Add(baseIndex + (i * 2));  //ループのたびに、2プラスした数字を代入
+                m_indices.Add(baseIndex + (i * (m_param.heightSides + 1)));  //ループのたびに、2プラスした数字を代入
             }
         }
 
