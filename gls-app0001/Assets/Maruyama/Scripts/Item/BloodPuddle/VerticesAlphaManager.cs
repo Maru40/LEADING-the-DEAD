@@ -37,8 +37,9 @@ public class VerticesAlphaManager : MonoBehaviour
             var colliders = Physics.OverlapSphere(transform.position, SphereRange, layerIndex);
             RaycastHit hit;
 
-            Debug.DrawRay(transform.position + transform.rotation * vartices[i], transform.forward, new Color(1.0f, 0.0f, 0.0f, 1.0f));
-            if (!Physics.Raycast(transform.position + transform.rotation * vartices[i], transform.forward, out hit, maxRange, layerIndex))
+            var startPosition = transform.position + (transform.rotation * vartices[i]);
+            //Debug.DrawRay(startPosition, transform.forward, new Color(1.0f, 0.0f, 0.0f, 1.0f));
+            if (!Physics.Raycast(startPosition, transform.forward, out hit, maxRange, layerIndex))
                 //&& colliders.Length == 0)
             {
                 colors[i].a = 0.0f;
