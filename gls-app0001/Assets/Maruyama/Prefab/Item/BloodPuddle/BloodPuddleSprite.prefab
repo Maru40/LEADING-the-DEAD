@@ -53,9 +53,9 @@ MonoBehaviour:
     height: 1
     depth: 0
     length: 1
-    sides: 30
+    widthSides: 0
+    heightSides: 0
     color: {r: 0.6603774, g: 0, b: 0.17549965, a: 1}
-  m_sides: 10
   m_material: {fileID: 2100000, guid: a813452a7743bde4898b96df2697fe55, type: 2}
 --- !u!33 &1676196849129147232
 MeshFilter:
@@ -143,3 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a647a4fe9b9584d909a0e3f68190dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isAllAlphaDelete: 1
