@@ -18,7 +18,7 @@ public class VerticesAlphaManager : MonoBehaviour
 
     private void Update()
     {
-        ChangeAlpha();
+        //ChangeAlpha();
     }
 
     public void ChangeAlpha()
@@ -41,17 +41,8 @@ public class VerticesAlphaManager : MonoBehaviour
             if (!Physics.Raycast(transform.position + transform.rotation * vartices[i], transform.forward, out hit, maxRange, layerIndex))
                 //&& colliders.Length == 0)
             {
-                Debug.Log("■消える");
                 colors[i].a = 0.0f;
-
                 //vartices[i] = hit.point + (transform.forward * 0.1f);
-                //Debug.Log("■：" + hit.point);
-            }
-            else
-            {
-                //Physics.Raycast(transform.position + vartices[i], transform.forward, out hit, maxRange, layerIndex);
-
-                //vartices[i] = hit.point;
             }
         }
 
