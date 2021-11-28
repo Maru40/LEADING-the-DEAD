@@ -8,6 +8,7 @@ public class RenderFadeManager : MonoBehaviour
 {
     public enum BlendMode
     {
+        None = -1,
         Opaque,
         Cutout,
         Fade,
@@ -47,8 +48,9 @@ public class RenderFadeManager : MonoBehaviour
         //初期化用のデータを取得
         if (material.IsKeywordEnabled("_Mode"))
         {
-            m_initParam = new InitParametor((BlendMode)material.GetFloat("_Mode"), material.color);
+            m_initParam.blendMode = (BlendMode)material.GetFloat("_Mode");
         }
+        m_initParam.color = material.color;
     }
 
     void Start()
@@ -101,11 +103,10 @@ public class RenderFadeManager : MonoBehaviour
     /// </summary>
     public void ResetInit()
     {
-        var material = m_render.material;
-        if (!material.IsKeywordEnabled("_Mode")) {
+        if (m_initParam.blendMode == BlendMode.None) {
             return;
         }
-
+        var material = m_render.material;
         ChangeBlendMode(material, m_initParam.blendMode);
         material.color = m_initParam.color;
 

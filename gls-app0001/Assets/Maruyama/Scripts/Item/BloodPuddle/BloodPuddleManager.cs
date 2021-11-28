@@ -30,6 +30,9 @@ public class BloodPuddleManager : MonoBehaviour
     [Header("BloodPuddleの見た目を管理するRenderManager群"), SerializeField]
     List<RenderFadeManager> m_bloodPuddleRenderManagers = new List<RenderFadeManager>();
 
+    [SerializeField]
+    VerticesAlphaManager m_verticesAlphaMangaer;
+
     WaitTimer m_waitTimer;
 
     List<InkParametor> m_inkParams = new List<InkParametor>();
@@ -44,6 +47,7 @@ public class BloodPuddleManager : MonoBehaviour
         m_waitTimer.AddWaitTimer(GetType(), m_time, EndProcess);
 
         FadeStart();
+        //m_verticesAlphaMangaer?.ChangeAlpha();
     }
 
     void FadeStart()
