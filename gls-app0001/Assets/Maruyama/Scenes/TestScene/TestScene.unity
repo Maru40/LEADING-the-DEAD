@@ -2936,6 +2936,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Meat
       objectReference: {fileID: 0}
+    - target: {fileID: 75954198124480330, guid: 31a248768d20bb143a6226232eea427d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 75954198124480331, guid: 31a248768d20bb143a6226232eea427d, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -3008,6 +3012,10 @@ PrefabInstance:
     - target: {fileID: 1676196849129147229, guid: eefa60d6944e0f6499df643954bbb6ab, type: 3}
       propertyPath: m_Name
       value: SpriteObjectTest
+      objectReference: {fileID: 0}
+    - target: {fileID: 1676196849129147229, guid: eefa60d6944e0f6499df643954bbb6ab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1676196849129147234, guid: eefa60d6944e0f6499df643954bbb6ab, type: 3}
       propertyPath: m_param.sides
@@ -3201,7 +3209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_numCreate
-      value: 1
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_centerPosition.y
@@ -3213,7 +3221,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_isInCameraCreate
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_maxRandomRange.x
