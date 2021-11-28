@@ -25,16 +25,13 @@ public class Board : MonoBehaviour
         public float height;
         public float depth;
         public float length;
-        public int sides;
+        public int widthSides;
         public int heightSides;  //高さをどれだけ分けるかどうか
         public Color color;
     }
 
     [SerializeField]
     Parametor m_param = new Parametor();
-
-    [SerializeField]
-    float m_sides = 10.0f;
 
     [SerializeField]
     protected Material m_material;
@@ -82,7 +79,6 @@ public class Board : MonoBehaviour
         CreateNormals();
 
         //情報をメッシュに渡す。
-        //m_mesh.vertices = m_vertices.ToArray();
         m_mesh.vertices = m_vertices.ToArray();
         m_mesh.triangles = m_indices.ToArray();
         m_mesh.uv = m_uvs.ToArray();
@@ -98,53 +94,35 @@ public class Board : MonoBehaviour
     /// </summary>
     protected virtual void CreateVertices()
     {
-        //var vertices = new Vector3[]{
-        //    new Vector3(-1, -1, 0),
-        //    new Vector3(-1, 1, 0),
-        //    new Vector3(1, -1, 0),
-        //    new Vector3(1, 1, 0)
-        //};
-
-        float fSides = (float)m_param.sides;  //横に欲しい頂点の数
+        float widthSides = (float)m_param.widthSides;  //横に欲しい頂点の数
+        float heightSides = (float)m_param.heightSides;
         float width = m_param.width;
         float depth = m_param.depth;
-        float halfHeight = m_param.height * 0.5f;              //縦の高さ
-        float firstPosition = -width * 0.5f;
-        var color = m_param.color;                 //カラー
+        float height = m_param.height;
+        Vector3 firstPosition = new Vector3(-width, +height, -depth) * 0.5f;
+        var color = m_param.color; 
 
-        //var vertices = new List<Vector3>();
         var directVec = new Vector3(width, 0.0f, depth);
         //Verticesの作成
-        for (int i = 0; i < m_param.sides + 1; i++)
+        for (int i = 0; i < m_param.widthSides + 1; i++)  //横に欲しい分ループ
         {
-            float length = (m_param.length / fSides) * i;
-            var position = directVec.normalized * length;
-            var topUV = new Vector2(position.magnitude, 0.0f);   //上部のUV座標
-            var bottomUV = new Vector2(position.magnitude, 1.0f);//下部のUV座標
+            float length = (m_param.length / widthSides) * i;  //ループ分の横の長さの計算
+            var offset = directVec.normalized * length;  //ループ分のオフセットを計算
 
-            for(int j = 0 ; j < m_param.heightSides + 1; j++)
+            for(int j = 0 ; j < m_param.heightSides + 1; j++)  //高さの数分ループ
             {
-                float heightNormalize = (m_param.height / m_param.heightSides);
-                float heightRate = heightNormalize * j;
-                float height = halfHeight - heightRate;
-                var uv = new Vector3(position.magnitude, heightRate);
+                float heightNormalize = height / heightSides;  //一回分の縦の長さ
+                float heightRate = heightNormalize * j;  //ループ分の縦の長さ
+                var uv = new Vector2(offset.magnitude, heightRate); //UV座標
 
-                m_vertices.Add(new Vector3(firstPosition + position.x, height, position.z));
+                var createPosition = firstPosition + offset; //offset分座標を移動する。
+                createPosition.y += -heightRate;  //高さの調整もする。
+
+                m_vertices.Add(createPosition);
                 m_colors.Add(color);
                 m_uvs.Add(uv);
             }
-
-            //m_vertices.Add(new Vector3(firstPosition + position.x, +halfHeight, position.z));
-            //m_vertices.Add(new Vector3(firstPosition + position.x, -halfHeight, position.z));
-
-            //m_colors.Add(color);
-            //m_colors.Add(color);
-
-            //m_uvs.Add(topUV);
-            //m_uvs.Add(bottomUV);
         }
-
-        //m_vertices = vertices;
     }
 
     /// <summary>
@@ -172,11 +150,11 @@ public class Board : MonoBehaviour
         }
 
         //インディセスの作成
-        for (int i = 0; i < m_param.sides; i++)
+        for (int i = 0; i < m_param.widthSides; i++)
         {
             foreach(var baseIndex in baseIndices)
             {
-                m_indices.Add(baseIndex + (i * (m_param.heightSides + 1)));  //ループのたびに、2プラスした数字を代入
+                m_indices.Add(baseIndex + (i * (m_param.heightSides + 1)));  //ループのたびに、縦に増やした分プラスした数字を代入
             }
         }
 
