@@ -72,6 +72,8 @@ public class BloodBagManager : MonoBehaviour
             var puddle = Instantiate(m_breakBlood, contact.point, Quaternion.identity);
             puddle.transform.forward = contact.normal;
             puddle.transform.position += contact.normal.normalized * positionAdjustDistance;
+
+            puddle.GetComponentInChildren<VerticesAlphaManager>().ChangeAlpha();
         }
     }
 
