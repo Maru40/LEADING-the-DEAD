@@ -7,6 +7,9 @@ using UniRx;
 public class YesNoCheckUI : MonoBehaviour
 {
     [SerializeField]
+    private PopUpUI m_popUpUI;
+
+    [SerializeField]
     private Button m_yesButton;
 
     [SerializeField]
@@ -17,16 +20,14 @@ public class YesNoCheckUI : MonoBehaviour
         m_yesButton.OnClickAsObservable()
             .Subscribe(_ =>
             {
-                GameFocusManager.PopFocus();
-                gameObject.SetActive(false);
+                m_popUpUI.Close();
             })
             .AddTo(this);
 
         m_noButton.OnClickAsObservable()
             .Subscribe(_ =>
             {
-                GameFocusManager.PopFocus();
-                gameObject.SetActive(false);
+                m_popUpUI.Close();
             })
             .AddTo(this);
     }

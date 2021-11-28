@@ -15,6 +15,14 @@ public class FocusChangeToPush : MonoBehaviour
     
     public void NextPushFocus()
     {
+        var popUpUI = m_pushActiveObject.GetComponent<PopUpUI>();
+
+        if(popUpUI)
+        {
+            popUpUI.PopUp();
+            return;
+        }
+
         m_pushActiveObject.SetActive(true);
         GameFocusManager.PushFocus(m_moveSelectableObject.gameObject);
     }
