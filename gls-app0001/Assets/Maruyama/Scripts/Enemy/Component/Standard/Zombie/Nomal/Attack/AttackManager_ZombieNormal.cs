@@ -29,6 +29,9 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
     [Header("予備動作のパラメータ") ,SerializeField]
     PreliminaryParametor m_preliminaryParam = new PreliminaryParametor(new RandomRange(1.0f,1.0f), 1.0f);
 
+    [SerializeField]
+    AudioManager m_audioManager = null;
+
     Stator_ZombieNormal m_stator;
     TargetManager m_targetMgr;
     AnimatorManager_ZombieNormal m_animatorManager;
@@ -74,6 +77,8 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
 
     public override void AttackStart()
     {
+        m_audioManager?.PlayOneShot();
+
         m_stator.GetTransitionMember().attackTrigger.Fire();
 
         m_animatorManager.CrossFadePreliminaryNormalAttackAniamtion();  //予備動作に変更

@@ -4,6 +4,7 @@ using UnityEngine;
 
 using MaruUtility;
 
+[RequireComponent(typeof(AudioFade))]
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
@@ -24,10 +25,12 @@ public class AudioManager : MonoBehaviour
     RandomRange m_pitchRandomRange = new RandomRange(0.5f, 0.7f);
 
     AudioSource m_audioSource;
+    AudioFade m_fade;
 
     private void Awake()
     {
         m_audioSource = GetComponent<AudioSource>();
+        m_fade = GetComponent<AudioFade>();
     }
 
     /// <summary>
@@ -47,5 +50,15 @@ public class AudioManager : MonoBehaviour
         }
 
         m_audioSource?.PlayOneShot(m_audioClip);
+    }
+
+    public void Stop()
+    {
+        m_audioSource.Stop();
+    }
+
+    public void FadeOutStart()
+    {
+        m_fade.FadeStart(AudioFade.FadeType.Out);
     }
 }

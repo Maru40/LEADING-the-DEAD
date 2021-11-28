@@ -44,6 +44,9 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     EnemyVelocityMgr m_velocityManager;
     AttackManager_ZombieNormal m_attackManager;
 
+    [SerializeField]
+    AudioManager m_preliminaryNormalAttackVoice;
+
     override protected void Awake()
     {
         base.Awake();
@@ -98,6 +101,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
             .Subscribe(_ => rightTimeParam.trigger.AttackEnd()).AddTo(this);
 
         behavior.onStateEntered.Subscribe(_ => m_normalAttackComp.AttackStart()).AddTo(this);
+
         behavior.onStateExited.Subscribe(_ => m_normalAttackComp.EndAnimationEvent()).AddTo(this);
     }
 
@@ -108,7 +112,10 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     {
         var actionBehaviour = ZombieNormalTable.UpperLayer.PreliminaryNormalAttack.GetBehaviour<AnimationActionBehavior>(m_animator);
 
-        actionBehaviour.AddEnterAction(() => m_rotationController.enabled = true);  //ローテーションのenableをtrue
+        actionBehaviour.AddEnterAction(() => { 
+            m_rotationController.enabled = true; //ローテーションのenableをtrue
+
+        });  
 
         actionBehaviour.AddUpdateAction(() => {
             //予備動作中のアップデート
@@ -124,6 +131,8 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
             var force = CalcuVelocity.CalucSeekVec(m_velocityManager.velocity, toTragetVec, moveSpeed);
             m_velocityManager.AddForce(force); 
         });
+
+        actionBehaviour.AddExitAction(() => m_preliminaryNormalAttackVoice?.FadeOutStart());
     }
 
     void SettingEat()
