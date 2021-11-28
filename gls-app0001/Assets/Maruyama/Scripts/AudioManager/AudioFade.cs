@@ -72,6 +72,8 @@ public class AudioFade : MonoBehaviour
     /// <param name="type">フェードタイプ</param>
     void FadeInit(FadeType type)
     {
+        m_timer.AbsoluteEndTimer(true);
+
         switch(type)
         {
             case FadeType.In:
