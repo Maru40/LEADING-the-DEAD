@@ -6,6 +6,9 @@ public class VerticesAlphaManager : MonoBehaviour
 {
     Board m_board;
 
+    [Header("全て透明なら削除するかどうか"),SerializeField]
+    bool m_isAllAlphaDelete = true;
+
     private void Awake()
     {
         m_board = GetComponent<Board>();
@@ -26,6 +29,7 @@ public class VerticesAlphaManager : MonoBehaviour
         var vartices = m_board.Vertices;
         var colors = m_board.Colors;
 
+        int index = 0;
         for (int i = 0; i < vartices.Length; i++)
         {
             //Debug.Log("■バーテックス範囲" + transform.position + vartices[i]);
@@ -43,11 +47,17 @@ public class VerticesAlphaManager : MonoBehaviour
                 //&& colliders.Length == 0)
             {
                 colors[i].a = 0.0f;
+                index++;
                 //vartices[i] = hit.point + (transform.forward * 0.1f);
             }
         }
 
         m_board.Vertices = vartices;
         m_board.Colors = colors;
+
+        if(m_isAllAlphaDelete && vartices.Length >= index) //全て透明で削除するなら
+        {
+            Destroy(gameObject);
+        }
     }
 }
