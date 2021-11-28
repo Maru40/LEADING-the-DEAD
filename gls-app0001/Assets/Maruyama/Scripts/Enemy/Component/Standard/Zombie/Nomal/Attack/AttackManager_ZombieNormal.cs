@@ -77,7 +77,7 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
 
     public override void AttackStart()
     {
-        //m_audioManager?.PlayOneShot();
+        m_audioManager?.PlayOneShot();
 
         m_stator.GetTransitionMember().attackTrigger.Fire();
 
