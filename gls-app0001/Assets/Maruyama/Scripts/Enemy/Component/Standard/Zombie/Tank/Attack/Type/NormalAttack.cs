@@ -48,6 +48,9 @@ public class NormalAttack : AttackNodeBase
     [SerializeField]
     Parametor m_param = new Parametor(3.0f);
 
+    [SerializeField]
+    AudioManager m_audioManager = null;
+
     bool m_isTargetChase = true;  //攻撃の途中まではターゲットを追うようにするため。
 
     void Awake()
@@ -170,6 +173,8 @@ public class NormalAttack : AttackNodeBase
 
     public override void AttackStart()
     {
+        m_audioManager?.PlayOneShot();
+
         m_isTargetChase = true;
         SetForwardTarget();
         m_rotationController.enabled = true;
