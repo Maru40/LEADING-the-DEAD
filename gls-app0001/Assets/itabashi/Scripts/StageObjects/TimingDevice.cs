@@ -9,7 +9,7 @@ public class TimingDevice : MonoBehaviour
     /// イベント発火までの時間
     /// </summary>
     [SerializeField]
-    private float m_fireTime = 1.0f;
+    private float[] m_fireTimes = { 1.0f };
 
     /// <summary>
     /// イベント発火までのカウント時間
@@ -29,6 +29,8 @@ public class TimingDevice : MonoBehaviour
 
     [SerializeField]
     private bool m_isLoop = false;
+
+    private int m_index = 0;
 
     /// <summary>
     /// 時間になると発火されるイベント
@@ -87,14 +89,14 @@ public class TimingDevice : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!m_isTimerActive)
+        if(!m_isTimerActive || m_fireTimes.Length == 0)
         {
             return;
         }
 
         m_nowCountTime += Time.deltaTime;
 
-        if(m_nowCountTime<m_fireTime)
+        if (m_nowCountTime < m_fireTimes[m_index])
         {
             return;
         }
@@ -105,7 +107,14 @@ public class TimingDevice : MonoBehaviour
 
         if(m_isLoop)
         {
-            m_nowCountTime -= m_fireTime;
+            m_nowCountTime -= m_fireTimes[m_index];
+
+            ++m_index;
+
+            if (m_index >= m_fireTimes.Length)
+            {
+                m_index = 0;
+            }
 
             return;
         }
