@@ -21,7 +21,18 @@ public class BloodBagManager : MonoBehaviour
     [Header("血だまりブラシ設定"), SerializeField]
     Brush m_brush = null;
 
+    [Header("障害物の対象"), SerializeField]
+    List<string> m_layerStrings = new List<string>();
+
     StateEnum m_state = StateEnum.Put;
+
+    private void Start()
+    {
+        if(m_layerStrings.Count == 0) {
+            m_layerStrings.Add("L_Obstacle");
+            m_layerStrings.Add("L_Ground");
+        }
+    }
 
     public void ChangeState(StateEnum state)
     {
@@ -36,12 +47,29 @@ public class BloodBagManager : MonoBehaviour
         CreateParticle();
 
         //var bloodPuddleGround = CreateBloodPuddleGround();
-        CreateBloodPuddleContacts(other);  //当たった場所に血だまりを増やす。
+        if (IsCreateBloodPuddle(other)) {
+            Debug.Log("■　生成");
+            CreateBloodPuddleContacts(other);  //当たった場所に血だまりを増やす。
+        }
 
         //CreateBloodInk(other, bloodPuddle);       //当たった場所の血だまり生成
         //CreateBloodInk(hitGround, bloodPuddle);   //地面に血だまり
 
         Destroy(gameObject);
+    }
+
+    bool IsCreateBloodPuddle(Collision other)
+    {
+        int layerInt = 1 << other.gameObject.layer;
+
+        foreach (var str in m_layerStrings)
+        {
+            if(layerInt == LayerMask.GetMask(str)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /// <summary>
@@ -129,8 +157,7 @@ public class BloodBagManager : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         var player = collision.gameObject.GetComponent<Player.PlayerStatusManager>();
-        if (player)
-        {
+        if (player) {
             return;
         }
 
