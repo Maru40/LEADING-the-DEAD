@@ -527,35 +527,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18b2a8a43d74eee41aaeac9bdb66cd0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_stageDatas:
-  - sceneObject:
-      m_SceneName: tutorial1
-    stagePoint: {x: -100, y: 0}
-    StageName: tutorial1
-  - sceneObject:
-      m_SceneName: tutorial2
-    stagePoint: {x: 0, y: -100}
-    StageName: tutorial2
-  - sceneObject:
-      m_SceneName: tutorial3
-    stagePoint: {x: 0, y: 100}
-    StageName: tutorial3
+  m_tutorialStageData:
   - sceneObject:
       m_SceneName: tutorial4
-    stagePoint: {x: 0, y: 90}
-    StageName: tutorial4
+    stagePoint: {x: 0, y: 0}
+    StageName: 
   - sceneObject:
-      m_SceneName: tutorial5
-    stagePoint: {x: 0, y: 80}
-    StageName: tutorial5
+      m_SceneName: tutorial4
+    stagePoint: {x: 0, y: 0}
+    StageName: 
   - sceneObject:
-      m_SceneName: tutorial6
-    stagePoint: {x: 0, y: 70}
-    StageName: tutorial6
+      m_SceneName: tutorial4
+    stagePoint: {x: 0, y: 0}
+    StageName: 
+  m_gameStageDatas:
   - sceneObject:
       m_SceneName: tutorial7
-    stagePoint: {x: 0, y: 60}
-    StageName: tutorial7
+    stagePoint: {x: 0, y: 0}
+    StageName: 
+  - sceneObject:
+      m_SceneName: tutorial7
+    stagePoint: {x: 0, y: 0}
+    StageName: 
 --- !u!1 &1387809907
 GameObject:
   m_ObjectHideFlags: 0
