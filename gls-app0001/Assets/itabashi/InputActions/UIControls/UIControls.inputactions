@@ -84,6 +84,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "ChangeTutorial",
+                    "type": "Button",
+                    "id": "caa8f8e3-05bd-44db-9990-e014d8dac27b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -348,6 +356,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "ScrollWheel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8174e0fa-09fd-47ec-922e-cc948896c905",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeTutorial",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c6e9146f-6d07-4d76-9264-f787936b7ad5",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeTutorial",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

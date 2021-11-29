@@ -7,7 +7,12 @@ namespace Manager
     public class GameStageManager : MonoBehaviour
     {
         [SerializeField]
-        private List<StageData> m_stageDatas = new List<StageData>();
+        private List<StageData> m_tutorialStageData = new List<StageData>();
+
+        [SerializeField]
+        private List<StageData> m_gameStageDatas = new List<StageData>();
+
+        private List<StageData> m_selectStageDatas => m_isTutorial ? m_tutorialStageData : m_gameStageDatas;
 
         private int m_stageIndex = -1;
 
@@ -19,7 +24,11 @@ namespace Manager
 
         public static GameStageManager Instance { private set; get; }
 
-        public StageData currentStageData => m_isSelectedStage ? m_stageDatas[m_stageIndex] : null;
+        public StageData currentStageData => m_isSelectedStage ? m_selectStageDatas[m_stageIndex] : null;
+
+        private bool m_isTutorial = false;
+
+        public bool isTutorial => m_isTutorial;
 
         private void Awake()
         {
@@ -41,13 +50,13 @@ namespace Manager
 
         }
 
-        public bool CanIncrement() => m_stageIndex < m_stageDatas.Count - 1;
+        public bool CanIncrement() => m_stageIndex < m_selectStageDatas.Count - 1;
 
         public bool CanDecrement() => m_stageIndex >= 0;
 
         public void Increment()
         {
-            if (m_stageIndex != m_stageDatas.Count - 1)
+            if (m_stageIndex != m_selectStageDatas.Count - 1)
             {
                 ++m_stageIndex;
             }
@@ -63,6 +72,19 @@ namespace Manager
             }
 
             m_isSelectedStage = m_stageIndex >= 0;
+        }
+
+        public bool CanChangeTutorial()
+        {
+            return true;
+        }
+
+        public void ChangeTutorial()
+        {
+            m_stageIndex = -1;
+            m_isSelectedStage = false;
+
+            m_isTutorial = !m_isTutorial;
         }
     }
 }

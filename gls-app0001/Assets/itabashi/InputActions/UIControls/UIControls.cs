@@ -97,6 +97,14 @@ public class @UIControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ChangeTutorial"",
+                    ""type"": ""Button"",
+                    ""id"": ""caa8f8e3-05bd-44db-9990-e014d8dac27b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -363,6 +371,28 @@ public class @UIControls : IInputActionCollection, IDisposable
                     ""action"": ""ScrollWheel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8174e0fa-09fd-47ec-922e-cc948896c905"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeTutorial"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c6e9146f-6d07-4d76-9264-f787936b7ad5"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeTutorial"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -404,6 +434,7 @@ public class @UIControls : IInputActionCollection, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_MiddleClick = m_UI.FindAction("MiddleClick", throwIfNotFound: true);
         m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
+        m_UI_ChangeTutorial = m_UI.FindAction("ChangeTutorial", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -463,6 +494,7 @@ public class @UIControls : IInputActionCollection, IDisposable
     private readonly InputAction m_UI_RightClick;
     private readonly InputAction m_UI_MiddleClick;
     private readonly InputAction m_UI_ScrollWheel;
+    private readonly InputAction m_UI_ChangeTutorial;
     public struct UIActions
     {
         private @UIControls m_Wrapper;
@@ -477,6 +509,7 @@ public class @UIControls : IInputActionCollection, IDisposable
         public InputAction @RightClick => m_Wrapper.m_UI_RightClick;
         public InputAction @MiddleClick => m_Wrapper.m_UI_MiddleClick;
         public InputAction @ScrollWheel => m_Wrapper.m_UI_ScrollWheel;
+        public InputAction @ChangeTutorial => m_Wrapper.m_UI_ChangeTutorial;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -516,6 +549,9 @@ public class @UIControls : IInputActionCollection, IDisposable
                 @ScrollWheel.started -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollWheel;
                 @ScrollWheel.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollWheel;
                 @ScrollWheel.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollWheel;
+                @ChangeTutorial.started -= m_Wrapper.m_UIActionsCallbackInterface.OnChangeTutorial;
+                @ChangeTutorial.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnChangeTutorial;
+                @ChangeTutorial.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnChangeTutorial;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -550,6 +586,9 @@ public class @UIControls : IInputActionCollection, IDisposable
                 @ScrollWheel.started += instance.OnScrollWheel;
                 @ScrollWheel.performed += instance.OnScrollWheel;
                 @ScrollWheel.canceled += instance.OnScrollWheel;
+                @ChangeTutorial.started += instance.OnChangeTutorial;
+                @ChangeTutorial.performed += instance.OnChangeTutorial;
+                @ChangeTutorial.canceled += instance.OnChangeTutorial;
             }
         }
     }
@@ -584,5 +623,6 @@ public class @UIControls : IInputActionCollection, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnMiddleClick(InputAction.CallbackContext context);
         void OnScrollWheel(InputAction.CallbackContext context);
+        void OnChangeTutorial(InputAction.CallbackContext context);
     }
 }

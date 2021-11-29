@@ -20,6 +20,10 @@ public class StageSelecter : MonoBehaviour
 
     public System.IObservable<Unit> OnSelectIndexIncrement => m_onSelectIndexIncrementSubject;
 
+    public readonly Subject<Unit> m_OnChangedIsTutorialSubject = new Subject<Unit>();
+
+    public System.IObservable<Unit> OnChangedIsTutorial => m_OnChangedIsTutorialSubject;
+
     private void Awake()
     {
         OnSelectIndexDecrement.Subscribe(_ => m_uiSounder.SelectPlay())
@@ -31,6 +35,7 @@ public class StageSelecter : MonoBehaviour
 
     public void SelectLeft()
     {
+
         if(!GameStageManager.Instance.CanDecrement())
         {
             return;
@@ -51,6 +56,17 @@ public class StageSelecter : MonoBehaviour
         GameStageManager.Instance.Increment();
 
         m_onSelectIndexIncrementSubject.OnNext(Unit.Default);
+    }
+    public void ChangeTutorial()
+    {
+
+        if(!GameStageManager.Instance.CanChangeTutorial())
+        {
+            return;
+        }
+
+        GameStageManager.Instance.ChangeTutorial();
+        m_OnChangedIsTutorialSubject.OnNext(Unit.Default);
     }
 
     public void StageIsSelect()

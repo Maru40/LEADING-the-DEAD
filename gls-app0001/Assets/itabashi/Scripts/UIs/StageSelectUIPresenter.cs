@@ -18,6 +18,9 @@ public class StageSelectUIPresenter : MonoBehaviour
     private SelectDirectionAnimatorManager m_selectDirectionAnimatorManager;
 
     [SerializeField]
+    private SelectGroupAnimatorManager m_selectGroupAnimatorManager;
+
+    [SerializeField]
     private StagePointer m_stagePointer;
 
     private void Awake()
@@ -40,6 +43,14 @@ public class StageSelectUIPresenter : MonoBehaviour
                 m_selectDirectionAnimatorManager.OnStageChanged();
                 m_stagePointer.OnStageChanged();
             })
+            .AddTo(this);
+
+        m_stageSelecter.OnChangedIsTutorial
+            .Where(_ => !m_selectGroupAnimatorManager.isFading)
+            .Subscribe(_ =>
+           {
+               m_selectGroupAnimatorManager.SelectGroupAnimationPlay();
+           })
             .AddTo(this);
     }
 
