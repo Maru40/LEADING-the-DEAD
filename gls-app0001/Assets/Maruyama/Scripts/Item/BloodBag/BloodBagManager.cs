@@ -48,7 +48,6 @@ public class BloodBagManager : MonoBehaviour
 
         //var bloodPuddleGround = CreateBloodPuddleGround();
         if (IsCreateBloodPuddle(other)) {
-            Debug.Log("■　生成");
             CreateBloodPuddleContacts(other);  //当たった場所に血だまりを増やす。
         }
 

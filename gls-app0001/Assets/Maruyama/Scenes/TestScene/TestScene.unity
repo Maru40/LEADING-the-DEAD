@@ -2287,10 +2287,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6218076970843051035, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6218076970843051035, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6218076970843051035, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6218076970843051035, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
@@ -2298,7 +2302,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 153063787}
     - target: {fileID: 6218076970843051035, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 1870181366}
+    - target: {fileID: 6218076970843051035, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6218076970843051035, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6218076970843051035, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
@@ -2306,11 +2318,23 @@ PrefabInstance:
       value: Damaged
       objectReference: {fileID: 0}
     - target: {fileID: 6218076970843051035, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: AddClearServices
+      objectReference: {fileID: 0}
+    - target: {fileID: 6218076970843051035, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: DamageSoundManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6218076970843051035, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: EnemyGenerator, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6218076970843051035, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6218076970843051035, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6338989849230920662, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
@@ -3019,7 +3043,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1676196849129147229, guid: eefa60d6944e0f6499df643954bbb6ab, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1676196849129147234, guid: eefa60d6944e0f6499df643954bbb6ab, type: 3}
       propertyPath: m_param.sides
@@ -3104,7 +3128,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2349473719602091154, guid: 94ad2ea8836d356438711e6ab657d5a2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2349473719602091155, guid: 94ad2ea8836d356438711e6ab657d5a2, type: 3}
       propertyPath: m_RootOrder

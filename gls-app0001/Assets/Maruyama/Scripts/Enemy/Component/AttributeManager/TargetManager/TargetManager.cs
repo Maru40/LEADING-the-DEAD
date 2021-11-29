@@ -368,8 +368,6 @@ public class TargetManager : MonoBehaviour
         if (!m_lostData.isActive) {
             return null;
         }
-
-        Debug.Log("GetLostTarget");
         return m_lostData.position;
     }
 
