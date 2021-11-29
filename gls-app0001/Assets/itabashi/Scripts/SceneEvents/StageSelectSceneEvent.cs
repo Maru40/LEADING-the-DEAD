@@ -15,6 +15,8 @@ public class StageSelectSceneEvent : MonoBehaviour
     private Dictionary<MoveDirection, System.Action> m_directionToActionTable =
         new Dictionary<MoveDirection, System.Action>();
 
+    private UIControls m_uiControls;
+
     private void Awake()
     {
 
@@ -23,6 +25,11 @@ public class StageSelectSceneEvent : MonoBehaviour
         m_directionToActionTable.Add(MoveDirection.Up, () => { });
         m_directionToActionTable.Add(MoveDirection.Down, () => { });
         m_directionToActionTable.Add(MoveDirection.None, () => { });
+
+        m_uiControls = new UIControls();
+        this.RegisterController(m_uiControls);
+
+        m_uiControls.UI.ChangeTutorial.performed += _ => OnChangeTutorial();
     }
     // Start is called before the first frame update
     void Start()
@@ -49,13 +56,15 @@ public class StageSelectSceneEvent : MonoBehaviour
             return;
         }
 
+        Debug.Log(EventSystem.current.currentSelectedGameObject.name);
         m_directionToActionTable[axisEventData.moveDir].Invoke();
     }
 
     public void OnLeft()
     {
+
         if (enabled)
-        {
+        { 
             m_stageSelecter.SelectLeft();
         }
     }
@@ -73,6 +82,14 @@ public class StageSelectSceneEvent : MonoBehaviour
         if(enabled)
         {
             m_stageSelecter.StageIsSelect();
+        }
+    }
+
+    public void OnChangeTutorial()
+    {
+        if(enabled)
+        {
+            m_stageSelecter.ChangeTutorial();
         }
     }
 }
