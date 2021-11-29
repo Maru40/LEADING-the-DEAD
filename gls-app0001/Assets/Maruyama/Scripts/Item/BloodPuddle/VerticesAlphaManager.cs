@@ -21,7 +21,7 @@ public class VerticesAlphaManager : MonoBehaviour
 
     private void Update()
     {
-        //ChangeAlpha();
+        ChangeAlpha();
     }
 
     public void ChangeAlpha()
