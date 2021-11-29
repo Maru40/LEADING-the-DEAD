@@ -57,7 +57,7 @@ public class ObstacleEvasion : MonoBehaviour
             force = CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, toSelfVec, m_maxSpeed);
 
             //force += moveVec;
-            Debug.Log("壁回避");
+
             //force = CalcuVelocity.CalucSeekVec(moveVec);
             break;
         }
