@@ -10,4 +10,6 @@ public class GeneratorBase : MonoBehaviour
     {
         m_deathCount += count;
     }
+
+    public int DeathCount => (int)m_deathCount;
 }
