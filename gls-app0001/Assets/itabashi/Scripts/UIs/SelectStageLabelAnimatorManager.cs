@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using Manager;
+using UnityEngine.UI;
 
 public class SelectStageLabelAnimatorManager : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class SelectStageLabelAnimatorManager : MonoBehaviour
     private GameObject m_numStageLabel;
 
     [SerializeField]
-    private StageSelecter m_stageSelecter;
+    private StageLabelImageUI m_stageLabelImage;
 
     [SerializeField]
     private NumberImage m_numberImage;
@@ -45,6 +46,7 @@ public class SelectStageLabelAnimatorManager : MonoBehaviour
         m_episodeLabel.SetActive(false);
         m_numStageLabel.SetActive(true);
 
+        m_stageLabelImage.ChangeLabelImage();
         m_numberImage.value = GameStageManager.Instance.stageIndex + 1;
     }
 }
