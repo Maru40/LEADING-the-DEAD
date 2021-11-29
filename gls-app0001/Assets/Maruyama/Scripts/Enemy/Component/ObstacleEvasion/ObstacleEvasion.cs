@@ -44,7 +44,7 @@ public class ObstacleEvasion : MonoBehaviour
             var forward = transform.forward;
             var direct = Quaternion.AngleAxis(deg, Vector3.up) * forward; //フォワードを回転
 
-            Debug.DrawRay(transform.position,direct, new Color(1.0f,0.0f,0.0f,1.0f));
+            Debug.DrawRay(transform.position + Vector3.up,direct, new Color(1.0f,0.0f,0.0f,1.0f));
 
             var hitPoint = CalcuRayHitPoint(direct);  //ヒットした場所の取得
             if (hitPoint == null) {
@@ -52,12 +52,14 @@ public class ObstacleEvasion : MonoBehaviour
             }
 
             var toSelfVec = transform.position - (Vector3)hitPoint;
-            var power = m_maxSpeed - toSelfVec.magnitude;
-            var moveVec = toSelfVec.normalized * power;
+            //var power = m_maxSpeed - toSelfVec.magnitude;
+            //var moveVec = toSelfVec.normalized * power;
+            force = CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, toSelfVec, m_maxSpeed);
 
-            force += moveVec;
+            //force += moveVec;
             Debug.Log("壁回避");
             //force = CalcuVelocity.CalucSeekVec(moveVec);
+            break;
         }
 
         m_velocityMgr.AddForce(force);
