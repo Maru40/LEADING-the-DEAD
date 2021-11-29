@@ -26,6 +26,11 @@ public class SelectDirectionAnimatorManager : MonoBehaviour
 
     private void Start()
     {
+        ColorReset();
+    }
+
+    public void ColorReset()
+    {
         m_leftHide = !GameStageManager.Instance.CanDecrement();
         m_rightHide = !GameStageManager.Instance.CanIncrement();
 
@@ -46,6 +51,7 @@ public class SelectDirectionAnimatorManager : MonoBehaviour
 
         if(!GameStageManager.Instance.CanIncrement())
         {
+
             m_rightHide = true;
             StartCoroutine(Fadeout(m_rightImage));
             return;
