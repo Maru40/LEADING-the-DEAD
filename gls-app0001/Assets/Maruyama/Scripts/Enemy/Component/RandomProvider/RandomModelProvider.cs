@@ -27,9 +27,16 @@ public class RandomModelProvider : MonoBehaviour
     [SerializeField]
     List<Parametor> m_params = new List<Parametor>();
 
-    private void Start()
+    Parametor m_nowParam;
+
+    private void Awake()
     {
         Provider();
+    }
+
+    private void Start()
+    {
+        m_animator.avatar = m_nowParam.avatar;
     }
 
     /// <summary>
@@ -42,15 +49,17 @@ public class RandomModelProvider : MonoBehaviour
             return;
         }
 
-        //var model = Instantiate(param.model, transform.position, Quaternion.identity, transform);
-        param.model.SetActive(true);
-        m_animator.avatar = param.avatar;
-
-        HitObjectProvider(param);
-
         //いらないモデル群の削除
         m_params.Remove(param);
         RemoveModels();
+
+        m_animator.avatar = param.avatar;
+        //var model = Instantiate(param.model, transform.position, Quaternion.identity, transform);
+        param.model.SetActive(true);
+
+        HitObjectProvider(param);
+
+        m_nowParam = param;
     }
 
     private void HitObjectProvider(Parametor param)
