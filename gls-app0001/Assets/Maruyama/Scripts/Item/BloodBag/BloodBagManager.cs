@@ -26,6 +26,9 @@ public class BloodBagManager : MonoBehaviour
 
     StateEnum m_state = StateEnum.Put;
 
+    [Header("割れた時の音"), SerializeField]
+    AudioClip m_breakSoundClip = null;
+
     private void Start()
     {
         if(m_layerStrings.Count == 0) {
@@ -54,6 +57,8 @@ public class BloodBagManager : MonoBehaviour
         //CreateBloodInk(other, bloodPuddle);       //当たった場所の血だまり生成
         //CreateBloodInk(hitGround, bloodPuddle);   //地面に血だまり
 
+        //割れた音を出す。
+        Manager.GameAudioManager.Instance.SEPlayOneShot(m_breakSoundClip);
         Destroy(gameObject);
     }
 
