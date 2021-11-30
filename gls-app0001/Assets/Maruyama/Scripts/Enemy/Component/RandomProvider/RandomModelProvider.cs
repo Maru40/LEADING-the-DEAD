@@ -36,7 +36,8 @@ public class RandomModelProvider : MonoBehaviour
 
     private void Start()
     {
-        m_animator.avatar = m_nowParam.avatar;
+        //m_animator.
+        //m_animator.avatar = m_nowParam.avatar;
     }
 
     /// <summary>
