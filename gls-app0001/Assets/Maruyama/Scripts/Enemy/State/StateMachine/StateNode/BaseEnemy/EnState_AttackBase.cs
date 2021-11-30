@@ -32,7 +32,7 @@ public abstract class EnState_AttackBase : EnemyStateNodeBase<EnemyBase>
 
     public override void OnUpdate()
     {
-
+        Debug.Log("AttackState");
     }
 
     public override void OnExit()
