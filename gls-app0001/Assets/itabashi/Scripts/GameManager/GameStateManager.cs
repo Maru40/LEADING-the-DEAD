@@ -28,7 +28,7 @@ public class GameStateManager : MonoBehaviour
     private GameStateReactiveProperty m_gameState = new GameStateReactiveProperty(GameState.Play);
 
     [SerializeField]
-    private CinemachineBlendListCamera m_overLookingListCamera;
+    private GameObject m_overLookingCameraObject;
 
     public GameState gameState { private set => m_gameState.Value = value; get => m_gameState.Value; }
 
@@ -130,7 +130,7 @@ public class GameStateManager : MonoBehaviour
 
         gameState = GameState.Play;
 
-        m_overLookingListCamera.gameObject.SetActive(false);
+        m_overLookingCameraObject.gameObject.SetActive(false);
 
         m_gameStartEvent?.Invoke();
     }

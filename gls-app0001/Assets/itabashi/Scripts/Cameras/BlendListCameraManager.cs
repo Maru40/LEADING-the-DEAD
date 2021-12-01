@@ -23,9 +23,12 @@ public class BlendListCameraManager : MonoBehaviour
             m_maxTime += instruction.m_Hold;
             m_maxTime += instruction.m_Blend.BlendTime;
         }
+
+        StartCoroutine(TimeCount(m_maxTime));
+
     }
 
-    public void ChangeTest(ICinemachineCamera afterCamera, ICinemachineCamera beforeCamera)
+    public void CameraChange(ICinemachineCamera afterCamera, ICinemachineCamera beforeCamera)
     {
         ICinemachineCamera cinemachineCamera = m_blendListCamera;
 
