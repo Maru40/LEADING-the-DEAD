@@ -250,6 +250,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -7306975858159848384}
     m_Position: {x: 260, y: -100, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 889187273601132493}
+    m_Position: {x: 810, y: 120, z: 0}
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: -9222920904102157656}
@@ -471,7 +474,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -6257440219318784398, guid: 631762b9a30b33a42836730a6b37d13f, type: 3}
+  m_Motion: {fileID: 7400000, guid: e247d8f2f20bd95459cdf471ada0153a, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -670,6 +673,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: isEat
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -757,6 +766,33 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &889187273601132493
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Eat
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours:
+  - {fileID: 4657934321911388983}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: e247d8f2f20bd95459cdf471ada0153a, type: 3}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &1890174729200365880
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -768,6 +804,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 4
     m_ConditionEvent: moveSpeed
     m_EventTreshold: 0.3
+  - m_ConditionMode: 2
+    m_ConditionEvent: isEat
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4590191603057279836}
   m_Solo: 0
@@ -810,6 +849,18 @@ BlendTree:
   m_NormalizedBlendValues: 0
   m_BlendType: 0
 --- !u!114 &4229302260546781235
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01edda5a0332f304dac297bda88e48ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4657934321911388983
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
