@@ -17,6 +17,7 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_
 
     RandomPlowlingMove m_randomPlowling;
     ThrongManager m_throngMgr;
+    StatusManager_ZombieNormal m_statusManager;
 
     void Awake()
     {
@@ -26,6 +27,7 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_
 
         m_randomPlowling = GetComponent<RandomPlowlingMove>();
         m_throngMgr = GetComponent<ThrongManager>();
+        m_statusManager = GetComponent<StatusManager_ZombieNormal>();
     }
 
     //インターフェースの実装-------------------------------------------------
@@ -91,14 +93,18 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_
 
     public void Eat()
     {
-        Debug.Log("食べる");
+        if (m_statusManager.IsEat) {
+            return;
+        }
 
+        Debug.Log("食べる");
+        m_statusManager.IsEat = true;
         m_stator.GetTransitionMember().eatTrigger.Fire();
     }
 
     public void InBind(BindPlowlingAreaManager manager)
     {
-        Debug.Log("■バインドされた");
+        //Debug.Log("■バインドされた");
 
         m_randomPlowling.SetCenterObject(manager.CenterObject);
         m_randomPlowling.SetRandomPositionRadius(manager.BindRange);
@@ -106,7 +112,7 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_
 
     public void OutBind(BindPlowlingAreaManager manager)
     {
-        Debug.Log("■バインド解除");
+        //Debug.Log("■バインド解除");
         m_randomPlowling.ResetCenterObject();
     }
 }
