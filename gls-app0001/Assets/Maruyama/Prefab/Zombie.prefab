@@ -9664,6 +9664,7 @@ MonoBehaviour:
     hp: 1
     damageIntervalTime: 3
     isStun: 0
+    isEat: 0
   m_hitStopBehaviours:
   - {fileID: 1444888580945028641}
   - {fileID: -350905166790925542}
@@ -9750,6 +9751,7 @@ MonoBehaviour:
       hp: 0
       damageIntervalTime: 0
       isStun: 0
+      isEat: 0
     attackManagerParametor:
       damageData:
         obj: {fileID: 0}
@@ -10047,7 +10049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4857bd9be417aaa4c95526330daa162b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_nearRange: 0.5
+  m_nearRange: 1
   m_nearWaitTime: 2
 --- !u!114 &-7045518753148058587
 MonoBehaviour:

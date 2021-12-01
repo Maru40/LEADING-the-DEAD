@@ -16,6 +16,10 @@ public class SmellManaer : MonoBehaviour
     EnemyVelocityMgr m_velocityManager;
     I_Eat m_eat;
     StatorBase m_stator;
+    AttackNodeManagerBase m_attackManager;
+
+    [Header("攻撃するタグ"), SerializeField]
+    List<string> m_attackTags = new List<string>();
 
     private void Awake()
     {
@@ -25,6 +29,11 @@ public class SmellManaer : MonoBehaviour
         m_velocityManager = GetComponent<EnemyVelocityMgr>();
         m_eat = GetComponent<I_Eat>();
         m_stator = GetComponent<StatorBase>();
+        m_attackManager = GetComponent<AttackNodeManagerBase>();
+
+        if(m_attackTags.Count == 0) { 
+            m_attackTags.Add("T_Wall"); 
+        }
     }
 
     private void Update()
@@ -74,6 +83,27 @@ public class SmellManaer : MonoBehaviour
         return toTargetVec.magnitude < nearRange ? true : false;  
     }
 
+    bool IsAttack()
+    {
+        //T_Wallでないなら
+        var parent = m_targetManager.GetNowTarget().transform.parent;
+        //if (parent.gameObject.tag != "T_Wall") {
+        //    return false;
+        //}
+
+        foreach(var tag in m_attackTags) {
+            //タグが一緒で、攻撃範囲なら
+            if(parent.tag == tag && m_attackManager.IsAttackStartRange())
+            {
+                return true;
+            }
+        }
+
+        return false;
+        //攻撃範囲内ならtrue
+        //return m_attackManager.IsAttackStartRange() ? true : false;
+    }
+
     /// <summary>
     /// 肉のチェック
     /// </summary>
@@ -91,11 +121,16 @@ public class SmellManaer : MonoBehaviour
     /// </summary>
     void BloodPuddleCheck()
     {
+        if (IsAttack()) { //攻撃するなら
+            m_attackManager.AttackStart();
+            return;
+        }
+
         if (IsTargetNear(m_nearRange))  //正体に気づく距離まで来たら。
         {
-            enabled = false;
-            m_velocityManager.ResetAll();
-            m_velocityManager.enabled = false;
+            enabled = false; //自分自身をoff
+            m_velocityManager.ResetAll(); //速度のリセット
+            m_velocityManager.enabled = false; //速度を計算しないようにする。
 
             m_waitTimer.AddWaitTimer(GetType(), m_nearWaitTime, () => {
                 enabled = true;
