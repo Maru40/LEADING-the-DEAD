@@ -16,6 +16,7 @@ public abstract class StatusManagerBase : MonoBehaviour
         public float damageIntervalTime;  //ダメージを受けた後の無敵時間
         public readonly ReactiveProperty<bool> isHitStopReactive;
         public bool isStun;
+        public bool isEat;
 
         public Status(float maxHp, float damageIntervalTime)
         {
@@ -24,6 +25,7 @@ public abstract class StatusManagerBase : MonoBehaviour
             this.damageIntervalTime = damageIntervalTime;
             this.isHitStopReactive = new ReactiveProperty<bool>();
             this.isStun = false;
+            this.isEat = false;
         }
 
         public void Respawn()
@@ -126,5 +128,11 @@ public abstract class StatusManagerBase : MonoBehaviour
     {
         get => m_status.isStun;
         protected set => m_status.isStun = value;
+    }
+
+    public bool IsEat
+    {
+        get => m_status.isEat;
+        set => m_status.isEat = value;
     }
 }
