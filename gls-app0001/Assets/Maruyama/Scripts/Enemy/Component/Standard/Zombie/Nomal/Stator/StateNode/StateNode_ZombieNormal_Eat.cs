@@ -33,7 +33,7 @@ public class StateNode_ZombieNormal_Eat : EnemyStateNodeBase<EnemyBase>
 
     public override void OnUpdate()
     {
-        Debug.Log("Eat");
+        Debug.Log("EatUpdate");
 
         if (m_targetManager.HasTarget())  //ターゲットが無かったら
         {
@@ -52,7 +52,7 @@ public class StateNode_ZombieNormal_Eat : EnemyStateNodeBase<EnemyBase>
     {
         base.OnExit();
 
-        m_animatorManager.CrossFadeIdleAnimation(m_animatorManager.UpperLayerIndex);
+        m_animatorManager.CrossFadeIdleAnimation(m_animatorManager.BaseLayerIndex);
         m_velocityManager.SetIsDeseleration(false);
     }
 }
