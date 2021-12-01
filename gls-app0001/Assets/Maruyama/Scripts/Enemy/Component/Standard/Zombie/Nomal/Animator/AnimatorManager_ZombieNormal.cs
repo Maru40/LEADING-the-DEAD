@@ -137,20 +137,38 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 
     void SettingEat()
     {
-        var timeBehaviour = ZombieNormalTable.UpperLayer.Eat.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
+        var timeBehaviour = ZombieNormalTable.BaseLayer.Eat.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
         var timeEvent = timeBehaviour.onTimeEvent;
 
-        const float time = 0.25f; //将来的にインスぺクタから変更
-        timeEvent.ClampWhere(time)
-            .Subscribe(_ => {
-                if (!m_targetManager.HasTarget()) {
-                    return;
-                }
+        //const float time = 3.0f; //将来的にインスぺクタから変更
+        List<float> times = new List<float>();
+        times.Add(3.0f);
+        times.Add(11.0f);
 
-                var eaten = m_targetManager.GetNowTarget().GetComponent<EatenBase>();
-                if (eaten) {
-                    eaten.Eaten();
-                }
+        foreach(var time in times)
+        {
+            timeEvent.ClampWhere(time)
+                .Subscribe(_ => {
+                    if (!m_targetManager.HasTarget()) {
+                        return;
+                    }
+
+                    var eaten = m_targetManager.GetNowTarget().GetComponent<EatenBase>();
+                    if (eaten) {
+                        eaten.Eaten();
+                        Debug.Log("△食べたよ");
+                    }
+            })
+            .AddTo(this);
+        }
+
+        timeBehaviour.onStateEntered  //スタート時のEat状態にする。
+            .Subscribe(_ => m_statusManager.IsEat = true)
+            .AddTo(this);
+
+        timeBehaviour.onStateExited
+            .Subscribe(_ => { m_animator.SetBool("isEat", false);
+                m_statusManager.IsEat = false;
             })
             .AddTo(this);
     }
@@ -237,9 +255,9 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         CrossFadeState("Idle", layerIndex);
     }
 
-    public void CrossFadeIdleAnimation(int layerIndex)
+    public void CrossFadeIdleAnimation(int layerIndex, float transitionTime = 0.05f)
     {
-        CrossFadeState("Idle", layerIndex);
+        CrossFadeState("Idle", layerIndex, transitionTime);
     }
 
     public void CrossFadeDeathAnimatiron()
@@ -254,9 +272,10 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         CrossFadeState("KnockBack", layerIndex);
     }
 
-    public void CrossFadeEatAnimation(float transitionTime = 0.25f)
+    public void CrossFadeEatAnimation(float transitionTime = 0.005f)
     {
-        CrossFadeState("Eat", UpperLayerIndex, transitionTime);
+        CrossFadeState("Eat", BaseLayerIndex, transitionTime);
+        m_animator.SetBool("isEat", true);
     }
 
     //アクセッサ・プロパティ---------------------------------------------------------------------------------
