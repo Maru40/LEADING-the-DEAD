@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UniRx;
+using Cinemachine;
 
 public enum GameState
 {
@@ -27,7 +28,7 @@ public class GameStateManager : MonoBehaviour
     private GameStateReactiveProperty m_gameState = new GameStateReactiveProperty(GameState.Play);
 
     [SerializeField]
-    private Camera m_overLookingCamera;
+    private CinemachineBlendListCamera m_overLookingListCamera;
 
     public GameState gameState { private set => m_gameState.Value = value; get => m_gameState.Value; }
 
@@ -129,7 +130,7 @@ public class GameStateManager : MonoBehaviour
 
         gameState = GameState.Play;
 
-        m_overLookingCamera.gameObject.SetActive(false);
+        m_overLookingListCamera.gameObject.SetActive(false);
 
         m_gameStartEvent?.Invoke();
     }

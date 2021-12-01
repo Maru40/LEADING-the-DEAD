@@ -1,17 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class GameSceneCameraChanger : MonoBehaviour
 {
     [SerializeField]
     private Camera m_mainCamera = null;
     [SerializeField]
-    private Camera m_overLookingCamera = null;
+    private CinemachineBlendListCamera m_overLookingListCamera = null;
 
     private void Awake()
     {
-        m_overLookingCamera.gameObject.SetActive(true);
+        m_overLookingListCamera.gameObject.SetActive(true);
     }
 
     private void Start()
@@ -21,12 +22,12 @@ public class GameSceneCameraChanger : MonoBehaviour
 
     public void StartGameCamera()
     {
-        m_overLookingCamera.gameObject.SetActive(false);
+        m_overLookingListCamera.gameObject.SetActive(false);
     }
 
     public void ChangeCamera()
     {
-        m_overLookingCamera.gameObject.SetActive(!m_overLookingCamera.gameObject.activeInHierarchy);
+        m_overLookingListCamera.gameObject.SetActive(!m_overLookingListCamera.gameObject.activeInHierarchy);
         //if (m_mainCamera == Manager.GameCameraManager.current)
         //{
         //    Manager.GameCameraManager.current = m_overLookingCamera;
