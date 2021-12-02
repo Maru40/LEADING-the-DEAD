@@ -150,7 +150,9 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
 
         public override void OnEnter()
         {
-            foreach(var fade in m_fadeManagers)
+            m_fadeManagers = new List<RenderFadeManager>(GetOwner().GetComponentsInChildren<RenderFadeManager>());
+
+            foreach (var fade in m_fadeManagers)
             {
                 fade?.FadeStart();
             }
@@ -158,6 +160,8 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
 
         public override bool OnUpdate()
         {
+            //Debug.Log("■■フェードアップデート");
+
             foreach (var fade in m_fadeManagers)
             {
                 if (fade.IsEnd)
