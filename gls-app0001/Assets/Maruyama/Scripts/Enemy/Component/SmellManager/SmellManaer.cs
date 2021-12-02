@@ -38,6 +38,10 @@ public class SmellManaer : MonoBehaviour
 
     private void Update()
     {
+        if (!m_targetManager.HasTarget()) {
+            return;
+        }
+
         if (IsUpdate())
         {
             var meat = m_targetManager.GetNowTarget().GetComponent<MeatManager>();
@@ -87,9 +91,6 @@ public class SmellManaer : MonoBehaviour
     {
         //T_Wallでないなら
         var parent = m_targetManager.GetNowTarget().transform.parent;
-        //if (parent.gameObject.tag != "T_Wall") {
-        //    return false;
-        //}
 
         foreach(var tag in m_attackTags) {
             //タグが一緒で、攻撃範囲なら
@@ -100,8 +101,6 @@ public class SmellManaer : MonoBehaviour
         }
 
         return false;
-        //攻撃範囲内ならtrue
-        //return m_attackManager.IsAttackStartRange() ? true : false;
     }
 
     /// <summary>
@@ -128,26 +127,38 @@ public class SmellManaer : MonoBehaviour
 
         if (IsTargetNear(m_nearRange))  //正体に気づく距離まで来たら。
         {
+            Debug.Log("△PulldeCheck");
+
             enabled = false; //自分自身をoff
             m_velocityManager.ResetAll(); //速度のリセット
             m_velocityManager.enabled = false; //速度を計算しないようにする。
 
             m_waitTimer.AddWaitTimer(GetType(), m_nearWaitTime, () => {
+                m_targetManager.AddExcludeNowTarget();  //ターゲット対象から外す。
                 enabled = true;
                 m_velocityManager.enabled = true;
                 m_velocityManager.ResetAll();
-                m_targetManager.AddExcludeNowTarget();  //ターゲット対象から外す。
             });
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        CheckSmellFind(other);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        CheckSmellFind(other);
+    }
+
+    void CheckSmellFind(Collider other)
+    {
         var foundObject = other.GetComponent<FoundObject>();
-        if(foundObject) 
+        if (foundObject)
         {
             //対象が匂いタイプだったら
-            if(foundObject.GetFoundData().type == FoundObject.FoundType.Smell)
+            if (foundObject.GetFoundData().type == FoundObject.FoundType.Smell)
             {
                 m_smell?.SmellFind(foundObject);
             }
