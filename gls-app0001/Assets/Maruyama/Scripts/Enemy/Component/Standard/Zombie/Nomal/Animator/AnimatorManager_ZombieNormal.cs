@@ -163,7 +163,8 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         }
 
         timeBehaviour.onStateEntered  //スタート時のEat状態にする。
-            .Subscribe(_ => m_statusManager.IsEat = true)
+            .Subscribe(_ => { m_statusManager.IsEat = true;
+            })
             .AddTo(this);
 
         timeBehaviour.onStateExited
