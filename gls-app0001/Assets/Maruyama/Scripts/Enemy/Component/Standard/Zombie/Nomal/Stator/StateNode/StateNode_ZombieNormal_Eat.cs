@@ -20,7 +20,9 @@ public class StateNode_ZombieNormal_Eat : EnemyStateNodeBase<EnemyBase>
 
     protected override void ReserveChangeComponents()
     {
-        
+        var owner = GetOwner();
+
+        AddChangeComp(owner.GetComponent<ThrongManager>(), false, true);
     }
 
     public override void OnStart()
