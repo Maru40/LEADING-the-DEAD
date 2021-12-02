@@ -153,12 +153,9 @@ public class TargetManager : MonoBehaviour
     /// <param name="target">ターゲット</param>
     public bool SetNowTarget(Type type, FoundObject target)
     {
-        ////nowTargetがnullでなかったら
-        //if(m_nowTarget != null) {
-            if (!IsTargetUpdate(target)) {  //更新が必要ないなら
-                return false;  //更新せずに処理を飛ばす。
-            }
-        //}
+        if (!IsTargetUpdate(target)) {  //更新が必要ないなら
+            return false;  //更新せずに処理を飛ばす。
+        }
 
         //更新
         FoundDataAdjust(type, target);
@@ -396,7 +393,6 @@ public class TargetManager : MonoBehaviour
     public void AddExcludeNowTarget()
     {
         m_excludeTargets.Add(m_nowTarget);
-        Debug.Log(m_nowTarget);
         m_nowTarget = null;
         //SetNowTarget(GetType(), null);
     }
