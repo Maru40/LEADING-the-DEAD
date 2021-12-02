@@ -37,7 +37,7 @@ public class UseItemUI : MonoBehaviour
     private float m_disabledAlpha = 0.25f;
 
     [SerializeField]
-    private Image m_useItemImage;
+    private Image[] m_useItemImages = { };
 
     [SerializeField]
     private UseItemType m_useItemType = UseItemType.SingleItem;
@@ -109,14 +109,22 @@ public class UseItemUI : MonoBehaviour
 
     private void UpdateItemImageAlpha()
     {
-        if (!m_useItemImage)
+        if (m_useItemImages.Length == 0)
         {
             return;
         }
 
-        var color = m_useItemImage.color;
-        color.a = m_isValidity ? 1.0f : m_disabledAlpha;
-        m_useItemImage.color = color;
+        foreach (var image in m_useItemImages)
+        {
+            if(!image)
+            {
+                continue;
+            }
+
+            var color = image.color;
+            color.a = m_isValidity ? 1.0f : m_disabledAlpha;
+            image.color = color;
+        }
     }
 
     private void UpdateCountText()
