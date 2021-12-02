@@ -86,9 +86,11 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_
 
     void I_Smell.SmellFind(FoundObject foundObject)
     {
-        Debug.Log("におうぞ");
-        m_targetMgr.SetNowTarget(GetType(), foundObject);
-        m_stator.GetTransitionMember().findTrigger.Fire();
+        if(m_targetMgr.SetNowTarget(GetType(), foundObject))
+        {
+            Debug.Log("におうぞ");
+            m_stator.GetTransitionMember().findTrigger.Fire();
+        }
     }
 
     public void Eat()
