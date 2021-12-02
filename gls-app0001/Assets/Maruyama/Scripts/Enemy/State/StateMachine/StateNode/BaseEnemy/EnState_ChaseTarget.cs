@@ -10,11 +10,15 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
 {
     AttackNodeManagerBase m_attackComp;
     TargetManager m_targetManager;
+    EyeSearchRange m_eye;
+
+    FoundObject m_eyeTarget = null;
 
     public EnState_ChaseTarget(EnemyBase owner)
         : base(owner)
     {
         m_targetManager = owner.GetComponent<TargetManager>();
+        m_eye = owner.GetComponent<EyeSearchRange>();
     }
 
     protected override void ReserveChangeComponents()
@@ -35,11 +39,11 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
         var chaseTarget = owner.GetComponent<ChaseTarget>();
 
         //集団行動設定
-        var throngMgr = owner.GetComponent<ThrongManager>();
-        if (chaseTarget && throngMgr)
+        var throngManager = owner.GetComponent<ThrongManager>();
+        if (chaseTarget && throngManager)
         {
             float range = chaseTarget.GetInThrongRange();
-            throngMgr.SetInThrongRange(range);
+            throngManager.SetInThrongRange(range);
         }
     }
 
@@ -47,10 +51,7 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
     {
         StateCheck();
 
-        //if (m_attackComp.IsAttackStartRange())
-        //{
-        //    m_attackComp.AttackStart();
-        //}
+        TargetCheck();
     }
 
     public override void OnExit()
@@ -89,27 +90,32 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
 
     void SmellCheck()
     {
-        //現状はSmallManagerで管理中、後で習性候補
-        return;
 
-        //if (!m_targetManager.HasTarget()) {
-        //    return;
-        //}
+    }
 
-        //肉なら食べるモーション
+    /// <summary>
+    /// ターゲットのチェック
+    /// </summary>
+    void TargetCheck()
+    {
+        //ターゲットが視界に入ったら切り替える。
+        if(m_eyeTarget == null) {
+            SearchEyeTarget();
+        }
 
+        if(m_eye.IsInEyeRange(m_eyeTarget.gameObject)) { //視界の中にいたら
+            m_targetManager.SetNowTarget(GetType(), m_eyeTarget);  //ターゲットの変更
+        }
+    }
 
-        //匂いならターゲットをnullにする。
-        //var positionCheck = m_targetManager.GetToNowTargetVector();
-        //if(positionCheck == null) {
-        //    return;
-        //}
-        //var toTargetVec = (Vector3)positionCheck;
+    private void SearchEyeTarget()
+    {
+        var owner = GetOwner();
 
-        //const float near = 0.5f;
-        //if(toTargetVec.magnitude < near)
-        //{
-        //    m_targetManager.AddExcludeNowTarget();
-        //}
+        var target = GameObject.Find("Player");
+        var foundObject = target.GetComponent<FoundObject>();
+        m_targetManager?.SetNowTarget(GetType(), null);
+
+        m_eyeTarget = foundObject;
     }
 }

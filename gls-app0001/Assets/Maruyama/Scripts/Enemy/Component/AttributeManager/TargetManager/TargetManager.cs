@@ -151,19 +151,21 @@ public class TargetManager : MonoBehaviour
     /// </summary>
     /// <param name="type">コンポーネントのタイプ</param>
     /// <param name="target">ターゲット</param>
-    public void SetNowTarget(Type type, FoundObject target)
+    public bool SetNowTarget(Type type, FoundObject target)
     {
-        //nowTargetがnullでなかったら
-        if(m_nowTarget != null) {
+        ////nowTargetがnullでなかったら
+        //if(m_nowTarget != null) {
             if (!IsTargetUpdate(target)) {  //更新が必要ないなら
-                return;  //更新せずに処理を飛ばす。
+                return false;  //更新せずに処理を飛ばす。
             }
-        }
+        //}
 
         //更新
         FoundDataAdjust(type, target);
         m_nowTarget = target;
         m_targets[type] = target;
+
+        return true;
     }
 
     //ターゲットの更新を確定
@@ -172,8 +174,6 @@ public class TargetManager : MonoBehaviour
         if(target == null) {
             return;
         }
-
-
     }
 
     public void AbsoluteSetNowTarget(Type type, FoundObject target)
@@ -190,7 +190,7 @@ public class TargetManager : MonoBehaviour
     /// <returns>更新が必要ならtrue</returns>
     bool IsTargetUpdate(FoundObject target)
     {
-        if(target == null) {
+        if (target == null) {
             return true; //ターゲットがnullならtrueを返す。
         }
 
@@ -198,7 +198,15 @@ public class TargetManager : MonoBehaviour
         if (IsExcludeTarget(target)) {
             return false;
         }
-        
+
+        if(m_nowTarget == null) { //現在のターゲットがnullなら
+            return true;
+        }
+
+        if (target == m_nowTarget) {  //ターゲットが同じなら更新しない。
+            return false;
+        }
+
         var newPriority = target.GetFoundData().priority;
         var nowPriority = m_nowTarget.GetFoundData().priority;
 
@@ -388,7 +396,9 @@ public class TargetManager : MonoBehaviour
     public void AddExcludeNowTarget()
     {
         m_excludeTargets.Add(m_nowTarget);
-        SetNowTarget(GetType(), null);
+        Debug.Log(m_nowTarget);
+        m_nowTarget = null;
+        //SetNowTarget(GetType(), null);
     }
 
     //アクセッサ・プロパティ--------------------------------------------------------
@@ -396,7 +406,7 @@ public class TargetManager : MonoBehaviour
     /// <summary>
     /// ターゲットを持っているかどうか
     /// </summary>
-    /// <returns>ターゲットを持っていたらターゲットにする。</returns>
+    /// <returns>ターゲットを持っていたらtrueを返す。</returns>
     public bool HasTarget()
     {
         return m_nowTarget == null ? false : true;
