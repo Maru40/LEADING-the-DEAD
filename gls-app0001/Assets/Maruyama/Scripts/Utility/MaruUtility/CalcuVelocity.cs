@@ -107,7 +107,13 @@ namespace MaruUtility
 			return CalucSeekVec(velocity, desiredVec, maxSpeed);
         }
 
-		//指定した角度より大きくないかどうか
+		/// <summary>
+		/// 指定した角度より大きくないかどうか
+		/// </summary>
+		/// <param name="velocity">現在の速度</param>
+		/// <param name="toVec">行きたい方向</param>
+		/// <param name="turningDegree">曲がる最大角度</param>
+		/// <returns>角度差が小さいならtrueを返す</returns>
 		static public bool IsTurningVector(Vector3 velocity, Vector3 toVec, float turningDegree)
         {
 			var newDot = Vector3.Dot(velocity.normalized, toVec.normalized);
@@ -117,7 +123,13 @@ namespace MaruUtility
 			return rad < turningRad ? true : false;
         }
 
-		//角度差を返す。
+		/// <summary>
+		/// 角度差を返す。
+		/// </summary>
+		/// <param name="velocity">現在の速度</param>
+		/// <param name="toVec">行きたい方向</param>
+		/// <param name="turningDegree">曲がりたい角度</param>
+		/// <returns>角度の差</returns>
 		static public float CalcuSubDotRad(Vector3 velocity, Vector3 toVec, float turningDegree)
         {
 			var newDot = Vector3.Dot(velocity.normalized, toVec.normalized);
@@ -127,7 +139,14 @@ namespace MaruUtility
 			return rad - turningRad;
 		}
 
-		//角度内のベクターに変換する。
+		/// <summary>
+		/// 角度内のベクターに変換する。
+		/// </summary>
+		/// <param name="velocity">現在の速度</param>
+		/// <param name="toVec">行きたい方向</param>
+		/// <param name="turningDegree">曲がれる角度</param>
+		/// <param name="axis">dotの基準となるベクトル</param>
+		/// <returns></returns>
 		static public Vector3 CalcuInTurningVector(Vector3 velocity, Vector3 toVec, float turningDegree, Vector3 axis)
         {
 			if(IsTurningVector(velocity, toVec, turningDegree)) {
