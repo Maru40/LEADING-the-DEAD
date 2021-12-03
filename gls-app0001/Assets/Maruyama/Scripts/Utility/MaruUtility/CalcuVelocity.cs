@@ -108,6 +108,59 @@ namespace MaruUtility
         }
 
 		/// <summary>
+		/// 条件付き予測フォース
+		/// </summary>
+		/// <param name="velocity">現在の速度</param>
+		/// <param name="toVec">行きたい方向</param>
+		/// <param name="maxSpeed">最大スピード</param>
+		/// <param name="selfObj">自分自身</param>
+		/// <param name="targetVelocityManager">速度管理</param>
+		/// <param name="relativeHeading">ターゲットとのフォワードの差(dot)</param>
+		/// <param name="subPursuitTargetForward">曲がってよい差</param>
+		/// <param name="turningPower">曲がる力</param>
+		/// <returns></returns>
+		static public Vector3 CalcuConditionPursuitForce(Vector3 velocity, Vector3 toVec, float maxSpeed,
+			GameObject selfObj, Rigidbody targetVelocityManager,
+			float relativeHeading, float subPursuitTargetForward,
+			float turningPower = 1.0f)
+		{	
+			//前方にいて、かつ、自分と相手のフォワードの差が開いていなかったら、通常Seek
+			//Dotは差が開いている程、値が小さくなる。
+			if (IsFront(selfObj.transform.forward,toVec) && IsMinSubForward(relativeHeading, subPursuitTargetForward))
+			{
+				return CalucSeekVec(velocity, toVec, maxSpeed);
+			}
+			else
+			{   //フォワードの差が開いていたら、予測Seek
+				Debug.Log("予測Seek");
+				return CalcuPursuitForce(
+					velocity, toVec, maxSpeed, selfObj, targetVelocityManager, turningPower);
+			}
+		}
+
+		/// <summary>
+		/// ターゲットが正面にいるかどうか
+		/// </summary>
+		/// <param name="selfForward">自分自身のフォワード</param>
+		/// <param name="toTargetVec">ターゲットの方向</param>
+		/// <returns>正面ならtrue</returns>
+		static bool IsFront(Vector3 selfForward ,Vector3 toTargetVec)
+		{
+			return Vector3.Dot(toTargetVec, selfForward) > 0 ? true : false;
+		}
+
+		/// <summary>
+		/// 自分と相手のフォワードの差が開いていなかったら
+		/// </summary>
+		/// <param name="relativeHeading">自分と相手のフォワードのdot</param>
+		/// <param name="sub">基準となる差</param>
+		/// <returns>差が開いていなかったらtrue</returns>
+		static bool IsMinSubForward(float relativeHeading, float sub)
+		{
+			return Mathf.Abs(relativeHeading) > sub ? true : false;
+		}
+
+		/// <summary>
 		/// 指定した角度より大きくないかどうか
 		/// </summary>
 		/// <param name="velocity">現在の速度</param>
