@@ -8,6 +8,7 @@ public class DashAttack : AttackNodeBase
         Preliminary,
         Chase,
         Attack,
+        Wait,
     }
 
     [System.Serializable]
@@ -19,6 +20,12 @@ public class DashAttack : AttackNodeBase
         public float maxTurningDegree;
         [Header("予備動作パラメータ")]
         public PreliminaryParametor preliminaryParam;
+        [Header("追うパラメータ")]
+        public Task_ChaseTarget.Parametor chaseParam;
+        [Header("攻撃パラメータ")]
+        public Task_WallAttack.Parametor attackParam;
+        [Header("待機状態パラメータ")]
+        public Task_Wait.Parametor waitParam;
     }
 
     [SerializeField]
@@ -40,6 +47,18 @@ public class DashAttack : AttackNodeBase
     private void Start()
     {
         DefineTask();
+
+        enabled = false;
+    }
+
+    void Update()
+    {
+        m_taskList.UpdateTask();
+
+        if (m_taskList.IsEnd)
+        {
+            EndAnimationEvent();
+        }
     }
 
     /// <summary>
@@ -50,8 +69,9 @@ public class DashAttack : AttackNodeBase
         var enemy = GetComponent<EnemyBase>();
 
         m_taskList.DefineTask(TaskEnum.Preliminary, new Task_Preliminary(enemy, m_param.preliminaryParam));
-        m_taskList.DefineTask(TaskEnum.Chase, new Task_ChaseTarget(enemy));
-        m_taskList.DefineTask(TaskEnum.Attack, new Task_WallAttack(enemy));
+        m_taskList.DefineTask(TaskEnum.Chase, new Task_ChaseTarget(enemy, m_param.chaseParam));
+        m_taskList.DefineTask(TaskEnum.Attack, new Task_WallAttack(enemy, m_param.attackParam));
+        m_taskList.DefineTask(TaskEnum.Wait, new Task_Wait(m_param.waitParam));
     }
 
     void SelectTask()
@@ -59,7 +79,8 @@ public class DashAttack : AttackNodeBase
         TaskEnum[] types = { 
             TaskEnum.Preliminary,
             TaskEnum.Chase, 
-            TaskEnum.Attack 
+            TaskEnum.Attack,
+            TaskEnum.Wait,
         }; 
 
         foreach(var type in types)
@@ -88,5 +109,6 @@ public class DashAttack : AttackNodeBase
     public override void EndAnimationEvent()
     {
         m_attackManager.EndAnimationEvent();
+        enabled = false;
     }
 }
