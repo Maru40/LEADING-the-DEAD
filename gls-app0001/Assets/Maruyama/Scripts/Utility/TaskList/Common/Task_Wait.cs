@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System;
+using UnityEngine.Events;
 
 public class Task_Wait : TaskNodeBase
 {
+    [Serializable]
     public struct Parametor
     {
         public float time;
@@ -20,13 +22,25 @@ public class Task_Wait : TaskNodeBase
             update = null;
             exit = null;
         }
+
+        public Parametor(float time, Action enter, Action update, Action exit)
+        {
+            this.time = time;
+            this.enter = enter;
+            this.update = update;
+            this.exit = exit;
+        }
     }
 
     GameTimer m_timer = new GameTimer();
 
     Parametor m_param = new Parametor();
 
-    public Task_Wait(Parametor param)
+    public Task_Wait(float time) 
+    {
+        m_param = new Parametor(time);
+    }
+    public Task_Wait(Parametor param) 
     {
         m_param = param;
     }
