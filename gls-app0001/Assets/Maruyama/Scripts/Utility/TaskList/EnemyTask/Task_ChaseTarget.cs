@@ -6,7 +6,7 @@ using MaruUtility;
 
 public class Task_ChaseTarget : TaskNodeBase<EnemyBase>
 {
-    struct Parametor 
+    public struct Parametor 
     {
         public float maxSpeed;
         /// <summary>
@@ -22,12 +22,14 @@ public class Task_ChaseTarget : TaskNodeBase<EnemyBase>
     EnemyVelocityMgr m_velocityManager;
     EnemyRotationCtrl m_rotationController;
 
-    public Task_ChaseTarget(EnemyBase owner)
+    public Task_ChaseTarget(EnemyBase owner, Parametor param)
         :base(owner)
     {
         m_targetManager = owner.GetComponent<TargetManager>();
         m_velocityManager = owner.GetComponent<EnemyVelocityMgr>();
         m_rotationController = owner.GetComponent<EnemyRotationCtrl>();
+
+        m_param = param;
     }
 
     public override void OnEnter()
