@@ -262,6 +262,29 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+--- !u!114 &-4891680189167149514
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a16748d9461eae46a725db9776d5390, type: 3}
+  m_Name: Markers
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips: []
+  m_Markers:
+    m_Objects: []
 --- !u!114 &-2762377729614404920
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -366,6 +389,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97fecb706c4219347a76df5df192512e, type: 3}
   m_Name: UIInputToSkipClip
   m_EditorClassIdentifier: 
+--- !u!114 &-2600570620639550331
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3b29360ca8462742a0dc7d0b2280d5d, type: 3}
+  m_Name: ObjectActiveMarker
+  m_EditorClassIdentifier: 
+  m_Time: 2.55
+  m_isActive: 0
 --- !u!114 &-2572687382987691934
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -475,9 +512,49 @@ MonoBehaviour:
   m_Tracks:
   - {fileID: -2572687382987691934}
   - {fileID: -2762377729614404920}
+  - {fileID: 7301740786573153079}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
     m_ScenePreview: 1
   m_DurationMode: 0
-  m_MarkerTrack: {fileID: 0}
+  m_MarkerTrack: {fileID: -4891680189167149514}
+--- !u!114 &7301740786573153079
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b215373e0b7d04c4d9e6e1de76954d6c, type: 3}
+  m_Name: Object Marker Track
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips: []
+  m_Markers:
+    m_Objects:
+    - {fileID: 9165123289293737064}
+    - {fileID: -2600570620639550331}
+--- !u!114 &9165123289293737064
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3b29360ca8462742a0dc7d0b2280d5d, type: 3}
+  m_Name: ObjectActiveMarker
+  m_EditorClassIdentifier: 
+  m_Time: 2.95
+  m_isActive: 1
