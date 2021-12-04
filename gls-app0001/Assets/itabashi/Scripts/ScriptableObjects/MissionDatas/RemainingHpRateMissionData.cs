@@ -1,4 +1,4 @@
-﻿using Player;
+using Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +14,7 @@ public class RemainingHpRateMissionData : MissionData
         return playerStatusManager.hp / playerStatusManager.maxHp >= m_hpRateBoader;
     }
 
-    public override string GetexplanationText()
+    public override string GetExplanationText()
     {
         float hpParsent = m_hpRateBoader * 100.0f;
 
