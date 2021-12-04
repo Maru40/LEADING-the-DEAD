@@ -21,22 +21,6 @@ public class ClearScoreCalculator : MonoBehaviour
     private EnemyGenerator m_enemyGenerator;
 
     [SerializeField]
-    private float m_scoringBaseTime = 100;
-
-    [SerializeField]
-    private float m_hpScoreBase = 1000;
-
-    [SerializeField]
-    private float m_S_rankBorder = 1000;
-    [SerializeField]
-    private float m_A_rankBorder = 750;
-    [SerializeField]
-    private float m_B_rankBorder = 500;
-
-    [SerializeField]
-    private float m_timeSecondToScoreScale = 1.0f;
-
-    [SerializeField]
     private MissionData m_mission1;
     [SerializeField]
     private MissionData m_mission2;
@@ -59,37 +43,48 @@ public class ClearScoreCalculator : MonoBehaviour
     {
         float score = 0.0f;
 
-        score += Mathf.Max(m_scoringBaseTime - m_stageTimer.timeSeconds, 0.0f) * m_timeSecondToScoreScale;
+        //score += Mathf.Max(m_scoringBaseTime - m_stageTimer.timeSeconds, 0.0f) * m_timeSecondToScoreScale;
 
-        score += m_playerStatusManager.hp / m_playerStatusManager.maxHp * m_hpScoreBase;
+        //score += m_playerStatusManager.hp / m_playerStatusManager.maxHp * m_hpScoreBase;
 
         m_clearResult.SetScore((int)score);
 
-        m_clearResult.SetRank(GetScoreRank(score));
 
-        m_clearResult.SetMissionUI1(m_mission1.IsMissionClear(m_playerStatusManager, m_enemyGenerator), m_mission1.GetexplanationText());
-        m_clearResult.SetMissionUI2(m_mission2.IsMissionClear(m_playerStatusManager, m_enemyGenerator), m_mission2.GetexplanationText());
-        m_clearResult.SetMissionUI3(m_mission3.IsMissionClear(m_playerStatusManager, m_enemyGenerator), m_mission3.GetexplanationText());
+        int missionClearNum = 0;
 
+        bool isAchieve = m_mission1.IsMissionClear(m_playerStatusManager, m_enemyGenerator);
+        m_clearResult.SetMissionUI1(isAchieve, m_mission1.GetExplanationText());
+        if (isAchieve) { ++missionClearNum; }
+
+        isAchieve = m_mission2.IsMissionClear(m_playerStatusManager, m_enemyGenerator);
+        m_clearResult.SetMissionUI2(isAchieve, m_mission2.GetExplanationText());
+        if (isAchieve) { ++missionClearNum; }
+
+        isAchieve = m_mission3.IsMissionClear(m_playerStatusManager, m_enemyGenerator);
+        m_clearResult.SetMissionUI3(isAchieve, m_mission3.GetExplanationText());
+        if (isAchieve) { ++missionClearNum; }
+
+         m_clearResult.SetRank(GetScoreRank(missionClearNum));
+      
         m_clearResult.UpdateFirstSelect();
 
         m_popUpUI.PopUp();
 
     }
 
-    private RankImageViewer.Rank GetScoreRank(float score)
+    private RankImageViewer.Rank GetScoreRank(int missionClearNum)
     {
-        if(score >= m_S_rankBorder)
+        if(missionClearNum >= 3)
         {
             return RankImageViewer.Rank.S;
         }
 
-        if(score >= m_A_rankBorder)
+        if(missionClearNum >= 2)
         {
             return RankImageViewer.Rank.A;
         }
 
-        if(score >= m_B_rankBorder)
+        if(missionClearNum >= 1)
         {
             return RankImageViewer.Rank.B;
         }

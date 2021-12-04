@@ -14,7 +14,7 @@ public class BarricadeBreakerCountMissionData : MissionData
         return false;
     }
 
-    public override string GetexplanationText()
+    public override string GetExplanationText()
     {
         return regexText.Replace(VALUE_REPLACE_TEXT, m_breakerCountBoader.ToString());
     }
