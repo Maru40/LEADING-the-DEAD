@@ -11,7 +11,8 @@ public enum GameState
     Pause,
     Clear,
     GameOver,
-    OverLooking
+    OverLooking,
+    BlackOut
 }
 
 [System.Serializable]
@@ -29,6 +30,9 @@ public class GameStateManager : MonoBehaviour
 
     [SerializeField]
     private GameObject m_overLookingCameraObject;
+
+    [SerializeField]
+    private StageResetFade m_stageResetFade;
 
     public GameState gameState { private set => m_gameState.Value = value; get => m_gameState.Value; }
 
@@ -56,18 +60,6 @@ public class GameStateManager : MonoBehaviour
         m_gameControls.Player.Select.performed += context => EndOverLooking();
 
         m_gameStartEvent.AddListener(() => Debug.Log("ゲーム開始"));
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void ChangePause()
@@ -128,11 +120,9 @@ public class GameStateManager : MonoBehaviour
             return;
         }
 
-        gameState = GameState.Play;
+        gameState = GameState.BlackOut;
 
-        m_overLookingCameraObject.gameObject.SetActive(false);
-
-        m_gameStartEvent?.Invoke();
+        m_stageResetFade.FadeStart();
     }
 
     public void OnOverLookingEnd()
@@ -142,8 +132,13 @@ public class GameStateManager : MonoBehaviour
             return;
         }
 
-        gameState = GameState.Play;
+        gameState = GameState.BlackOut;
 
+        m_stageResetFade.FadeStart();
+    }
+
+    public void GameStart()
+    {
         m_gameStartEvent?.Invoke();
     }
 }
