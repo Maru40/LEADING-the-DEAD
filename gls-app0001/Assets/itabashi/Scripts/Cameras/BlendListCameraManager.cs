@@ -9,10 +9,16 @@ public class BlendListCameraManager : MonoBehaviour
     [SerializeField]
     private CinemachineBlendListCamera m_blendListCamera;
 
+    [SerializeField, Min(0.0f)]
+    private float m_startWaitTime = 0.0f;
+
     [SerializeField]
     private UnityEvent m_transitionEndEvent = new UnityEvent();
 
     private float m_maxTime = 0.0f;
+
+    [SerializeField]
+    private bool m_playOnAwake = false;
 
     private void Awake()
     {
@@ -24,8 +30,10 @@ public class BlendListCameraManager : MonoBehaviour
             m_maxTime += instruction.m_Blend.BlendTime;
         }
 
-        StartCoroutine(TimeCount(m_maxTime));
-
+        if (m_playOnAwake)
+        {
+            StartCoroutine(WaitStart(m_startWaitTime));
+        }
     }
 
     public void CameraChange(ICinemachineCamera afterCamera, ICinemachineCamera beforeCamera)
@@ -34,8 +42,22 @@ public class BlendListCameraManager : MonoBehaviour
 
         if (afterCamera == cinemachineCamera)
         {
-            StartCoroutine(TimeCount(m_maxTime));
+            StartCoroutine(WaitStart(m_startWaitTime));
         }
+    }
+
+    private IEnumerator WaitStart(float waitTime)
+    {
+        float time = 0;
+
+        while(time < waitTime)
+        {
+            time += Time.deltaTime;
+
+            yield return null;
+        }
+
+        StartCoroutine(TimeCount(m_maxTime));
     }
 
     private IEnumerator TimeCount(float count)
