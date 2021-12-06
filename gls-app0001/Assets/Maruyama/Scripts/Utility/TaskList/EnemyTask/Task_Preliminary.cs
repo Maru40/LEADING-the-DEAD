@@ -11,11 +11,14 @@ public struct PreliminaryParametor
     public RandomRange timeRandomRange;
     [Header("予備動作の移動スピード")]
     public float moveSpeed;
+    [Header("最初に再生するアニメーション")]
+    public System.Action enterAnimation;
 
     public PreliminaryParametor(RandomRange timeRandomRange, float moveSpeed)
     {
         this.timeRandomRange = timeRandomRange;
         this.moveSpeed = moveSpeed;
+        this.enterAnimation = null;
     }
 }
 
@@ -42,18 +45,18 @@ public class Task_Preliminary : TaskNodeBase<EnemyBase>
 
     public override void OnEnter()
     {
-        //アニメーション遷移
-
-
         //タイマーセット
         var time = m_param.timeRandomRange.RandomValue;
         m_timer.ResetTimer(time);
 
         m_rotationController.enabled = true;
+        m_param.enterAnimation?.Invoke();
     }
 
     public override bool OnUpdate()
     {
+        Debug.Log("△予備");
+
         m_timer.UpdateTimer();
         Rotation();
 
@@ -62,8 +65,7 @@ public class Task_Preliminary : TaskNodeBase<EnemyBase>
 
     public override void OnExit()
     {
-        //アニメーションの遷移
-
+        
     }
 
     void Rotation()
