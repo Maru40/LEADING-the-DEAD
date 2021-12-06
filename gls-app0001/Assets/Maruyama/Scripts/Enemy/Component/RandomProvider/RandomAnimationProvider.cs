@@ -38,23 +38,29 @@ public class RandomAnimationProvider : MonoBehaviour
 
     private AnimatorOverrideController m_overrideController;
     private Animator m_animator;
+    public Animator animator
+    {
+        get => m_animator;
+        set => m_animator = value;
+    }
     AnimatorCtrl_ZombieNormal m_animatorController;
 
     void Awake()
     {
-        m_animator = GetComponent<Animator>();
+        //m_animator = GetComponent<Animator>();
         m_animatorController = GetComponent<AnimatorCtrl_ZombieNormal>();
     }
 
     void Start()
     {
+        if(m_animator == null) {
+            m_animator = GetComponentInChildren<Animator>();
+        }
         m_overrideController = new AnimatorOverrideController(m_animator.runtimeAnimatorController);
 
         m_animator.runtimeAnimatorController = m_overrideController;
 
         RandomChangeAnimationClips();
-
-
     }
 
     /// <summary>
@@ -106,21 +112,4 @@ public class RandomAnimationProvider : MonoBehaviour
         m_animatorController.BaseMoveSpeed = clipParam.speed;
         //m_animator.Update(0.0f);
     }
-
-
-    //void Test()
-    //{
-    //    // ステートをキャッシュ
-    //    //AnimatorStateInfo[] layerInfo = new AnimatorStateInfo[m_animator.layerCount];
-    //    //for (int i = 0; i < m_animator.layerCount; i++)
-    //    //{
-    //    //    layerInfo[i] = m_animator.GetCurrentAnimatorStateInfo(i);
-    //    //}
-
-    //    // ステートを戻す
-    //    //for (int i = 0; i < m_animator.layerCount; i++)
-    //    //{
-    //    //    m_animator.Play(layerInfo[i].nameHash, i, layerInfo[i].normalizedTime);
-    //    //}
-    //}
 }
