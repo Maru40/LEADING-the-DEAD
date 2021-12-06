@@ -251,6 +251,14 @@ public class EnemyGenerator : GeneratorBase
 
     //アクセッサ---------------------------------------------------------------------------
 
+    static public void AllDestroy()
+    {
+        foreach(var data in sm_allDatas)
+        {
+            Destroy(data.gameObject);
+        }
+    }
+
     /// <summary>
     /// 生成するオブジェクトと渡されたオブジェクトが同じprefabなら
     /// </summary>
