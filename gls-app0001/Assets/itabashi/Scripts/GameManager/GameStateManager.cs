@@ -93,8 +93,11 @@ public class GameStateManager : MonoBehaviour
     {
         if(gameState != GameState.Play)
         {
+            Debug.LogWarning("クリア状態にはできません");
             return;
         }
+
+        Debug.Log("クリアしました");
 
         gameState = GameState.Clear;
 
@@ -140,5 +143,6 @@ public class GameStateManager : MonoBehaviour
     public void GameStart()
     {
         m_gameStartEvent?.Invoke();
+        gameState = GameState.Play;
     }
 }
