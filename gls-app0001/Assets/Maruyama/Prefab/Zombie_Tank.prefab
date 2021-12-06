@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6a77d236321d64bac9375887990305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_audioClip: {fileID: 0}
+  m_audioClipParams: []
   m_isActive: 1
   m_isRandom: 1
   m_volumeRandomRange:
@@ -476,7 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6a77d236321d64bac9375887990305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_audioClip: {fileID: 0}
+  m_audioClipParams: []
   m_isActive: 1
   m_isRandom: 1
   m_volumeRandomRange:
@@ -828,6 +828,7 @@ MonoBehaviour:
     hp: 1
     damageIntervalTime: 3
     isStun: 0
+    isEat: 0
   m_hitStopBehaviours: []
 --- !u!136 &469517195
 CapsuleCollider:
@@ -1118,7 +1119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6a77d236321d64bac9375887990305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_audioClip: {fileID: 8300000, guid: 7923fc81b6e0cb64283bbc165f5ef07b, type: 3}
+  m_audioClipParams:
+  - clip: {fileID: 8300000, guid: 7923fc81b6e0cb64283bbc165f5ef07b, type: 3}
+    volume: 1
   m_isActive: 1
   m_isRandom: 1
   m_volumeRandomRange:
@@ -1284,7 +1287,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6a77d236321d64bac9375887990305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_audioClip: {fileID: 8300000, guid: e091ec09dc4e92041a808eedc46dccd8, type: 3}
+  m_audioClipParams:
+  - clip: {fileID: 8300000, guid: efd8fefaeda174e4384f9f2ccccd5cd3, type: 3}
+    volume: 1
   m_isActive: 1
   m_isRandom: 1
   m_volumeRandomRange:

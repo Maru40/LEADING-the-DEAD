@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6a77d236321d64bac9375887990305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_audioClip: {fileID: 8300000, guid: cf92e3ff38015ff4f98b2c3e64979ac8, type: 3}
+  m_audioClipParams: []
   m_isActive: 0
   m_isRandom: 1
   m_volumeRandomRange:
@@ -431,7 +431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6a77d236321d64bac9375887990305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_audioClip: {fileID: 8300000, guid: cf92e3ff38015ff4f98b2c3e64979ac8, type: 3}
+  m_audioClipParams: []
   m_isActive: 0
   m_isRandom: 1
   m_volumeRandomRange:
@@ -1853,7 +1853,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6a77d236321d64bac9375887990305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_audioClip: {fileID: 8300000, guid: 428c90bf4b64ad842a365773a1443347, type: 3}
+  m_audioClipParams:
+  - clip: {fileID: 8300000, guid: 428c90bf4b64ad842a365773a1443347, type: 3}
+    volume: 1
   m_isActive: 1
   m_isRandom: 1
   m_volumeRandomRange:
@@ -6136,7 +6138,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6a77d236321d64bac9375887990305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_audioClip: {fileID: 8300000, guid: e091ec09dc4e92041a808eedc46dccd8, type: 3}
+  m_audioClipParams:
+  - clip: {fileID: 8300000, guid: e091ec09dc4e92041a808eedc46dccd8, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: 071d33d6382debc44ae002b5df050bce, type: 3}
+    volume: 1
   m_isActive: 1
   m_isRandom: 1
   m_volumeRandomRange:
@@ -10402,21 +10408,19 @@ MonoBehaviour:
       damageTags: []
     startRange: 1.5
   m_param:
-    maxSpeed: 3
-    maxTurningDegree: 0.3
     preliminaryParam:
       timeRandomRange:
         min: 1
         max: 1.5
       moveSpeed: 3
     chaseParam:
-      maxSpeed: 10
+      maxSpeed: 9
       subPursuitTargetForward: 0.5
-      nearRange: 2
+      nearRange: 2.5
       turningPower: 5
     attackParam:
       time: 1
-      maxSpeed: 11
+      maxSpeed: 10
     waitParam:
       time: 1
     probability: 20
