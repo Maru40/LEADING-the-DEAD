@@ -95,7 +95,16 @@ public class MeatManager : EatenBase
     {
         ParticleManager.Instance.Play(ParticleManager.ParticleID.MeatParticle, transform.position);
         m_param.state = MeatState.Destroy;
-        Destroy(this.gameObject, 0.1f);
+
+        const float time = 0.1f;
+        var parent = transform.parent;
+        if (parent)
+        {
+            Destroy(parent.gameObject, time);
+            return;
+        }
+
+        Destroy(gameObject, time);
     }
 
     //private void OnCollisionEnter(Collision collision)
