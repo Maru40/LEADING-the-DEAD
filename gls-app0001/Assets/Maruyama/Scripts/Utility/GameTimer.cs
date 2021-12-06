@@ -34,7 +34,7 @@ public class GameTimerParametor
 
 public class GameTimer
 {
-    GameTimerParametor m_param = new GameTimerParametor(0.0f, null);
+    private GameTimerParametor m_param = new GameTimerParametor(0.0f, null);
 
     public GameTimer()
         :this(new GameTimerParametor(0.0f,null))
@@ -158,5 +158,4 @@ public class GameTimer
     /// 設定時間
     /// </summary>
     public float IntervalTime => m_param.intervalTime;
-
 }
