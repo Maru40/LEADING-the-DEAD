@@ -43,6 +43,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     TargetManager m_targetManager;
     EnemyVelocityMgr m_velocityManager;
     AttackManager_ZombieNormal m_attackManager;
+    Stator_ZombieNormal m_stator;
 
     [SerializeField]
     AudioManager m_preliminaryNormalAttackVoice;
@@ -61,10 +62,13 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         m_targetManager = GetComponent<TargetManager>();
         m_velocityManager = GetComponent<EnemyVelocityMgr>();
         m_attackManager = GetComponent<AttackManager_ZombieNormal>();
+        m_stator = GetComponent<Stator_ZombieNormal>();
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         SettingNormalAttack();
         SettingPreliminaryNormalAttack();
 
@@ -205,6 +209,11 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     {
         m_angerManager.isAngerObservable.Where(isAnger => isAnger)
             .Subscribe(_ => ChangeAngerAnimation())
+            .AddTo(this);
+
+        var timeBehaviour = ZombieNormalTable.BaseLayer.Land.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
+        timeBehaviour.onStateExited
+            .Subscribe(_ => m_stator.GetTransitionMember().rondomPlowlingTrigger.Fire())
             .AddTo(this);
     }
 
