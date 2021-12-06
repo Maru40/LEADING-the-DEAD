@@ -15,13 +15,19 @@ public class AnimatorCtrl_ZombieNormal : MonoBehaviour
 
     Rigidbody m_rigid;
     Animator m_animator;
+    public Animator animator
+    {
+        get => m_animator;
+        set => m_animator = value;
+    }
+
     AngerManager m_angerManager;
     Stator_ZombieNormal m_stator;
     StatusManager_ZombieNormal m_statusManager;
 
     void Start()
     {
-        m_rigid = GetComponent<Rigidbody>();
+        m_rigid = GetComponentInChildren<Rigidbody>();
         m_animator = GetComponent<Animator>();
         m_angerManager = GetComponent<AngerManager>();
         m_stator = GetComponent<Stator_ZombieNormal>();
@@ -30,6 +36,11 @@ public class AnimatorCtrl_ZombieNormal : MonoBehaviour
 
     void Update()
     {
+        if(m_animator == null)
+        {
+            m_animator = GetComponentInChildren<Animator>();
+        }
+
         //仮歩き同期
         moveSpeed = m_rigid.velocity.magnitude * BaseMoveSpeed;
     }
@@ -62,10 +73,5 @@ public class AnimatorCtrl_ZombieNormal : MonoBehaviour
         m_animator.SetTrigger("angerTrigger");
 
         m_animator.SetFloat("attackSpeed", m_defaultAttackSpeed * m_angerManager.GetRiseParametor().attackAnimeSpeed);
-    }
-
-    public void EndAngerAnimation()
-    {
-        m_stator.GetTransitionMember().rondomPlowlingTrigger.Fire();
     }
 }

@@ -43,6 +43,10 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
+        if(m_audioClipParams.Count == 0) {
+            return;
+        }
+
         var index = MyRandom.RandomValue(0, m_audioClipParams.Count);
         var param = m_audioClipParams[index];
 

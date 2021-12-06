@@ -25,12 +25,24 @@ struct AnimationHitColliderParametor
 public abstract class AnimatorManagerBase : MonoBehaviour
 {
     protected Animator m_animator;
+    public Animator animator
+    {
+        get => m_animator;
+        set => m_animator = value;
+    }
     protected StatusManagerBase m_statusManager; 
 
     virtual protected void Awake()
     {
-        m_animator = GetComponent<Animator>();
         m_statusManager = GetComponent<StatusManagerBase>();
+    }
+
+    virtual protected void Start()
+    {
+        if(m_animator == null)
+        {
+            m_animator = GetComponent<Animator>();
+        }
     }
 
     public void CrossFadeState(string stateName, string layerName, float transitionTime = 0.0f)
