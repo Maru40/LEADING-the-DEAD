@@ -11,21 +11,6 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
         Normal,
     }
 
-    [System.Serializable]
-    public struct PreliminaryParametor
-    {
-        [Header("予備動作のランダム時間範囲")]
-        public RandomRange timeRandomRange;
-        [Header("予備動作の移動スピード")]
-        public float moveSpeed;
-
-        public PreliminaryParametor(RandomRange timeRandomRange, float moveSpeed)
-        {
-            this.timeRandomRange = timeRandomRange;
-            this.moveSpeed = moveSpeed;
-        }
-    }
-
     [Header("予備動作のパラメータ") ,SerializeField]
     PreliminaryParametor m_preliminaryParam = new PreliminaryParametor(new RandomRange(1.0f,1.0f), 1.0f);
 
@@ -35,6 +20,7 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
     Stator_ZombieNormal m_stator;
     TargetManager m_targetMgr;
     AnimatorManager_ZombieNormal m_animatorManager;
+    DashAttack m_dashAttack;
     EyeSearchRange m_eye;
 
     GameTimer m_gameTimer = new GameTimer();
@@ -45,6 +31,7 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
         m_targetMgr = GetComponent<TargetManager>();
         m_animatorManager = GetComponent<AnimatorManager_ZombieNormal>();
         m_eye = GetComponent<EyeSearchRange>();
+        m_dashAttack = GetComponent<DashAttack>();
     }
 
     /// <summary>
@@ -84,6 +71,9 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
         m_audioManager?.PlayOneShot();
 
         m_stator.GetTransitionMember().attackTrigger.Fire();
+        //m_dashAttack.AttackStart();
+        //m_dashAttack.enabled = true;
+        //return;
 
         m_animatorManager.CrossFadePreliminaryNormalAttackAniamtion();  //予備動作に変更
 
@@ -96,6 +86,7 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
     public override void EndAnimationEvent()
     {
         m_stator.GetTransitionMember().chaseTrigger.Fire();
+        //m_dashAttack.enabled = false;
     }
 
     //アクセッサ・プロパティ--------------------------------------------------------------------------

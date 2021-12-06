@@ -28,6 +28,7 @@ public class EnemyVelocityMgr : MonoBehaviour
         Deseleration();
 
         m_velocity += m_force * Time.deltaTime;
+        m_velocity.y = m_rigid.velocity.y;
 
         m_rigid.velocity = m_velocity;
 
