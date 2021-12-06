@@ -105,7 +105,11 @@ public class TargetManager : MonoBehaviour
 
     private void Update()
     {
-        if(m_nowTarget == null)
+        if(m_lostData == null) {
+            return;
+        }
+
+        if (m_nowTarget == null && !m_lostData.isActive)
         {
             //Debug.Log("null");
         }
