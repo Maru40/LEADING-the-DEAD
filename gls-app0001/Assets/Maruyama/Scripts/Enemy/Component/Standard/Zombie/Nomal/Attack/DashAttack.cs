@@ -16,10 +16,6 @@ public class DashAttack : AttackNodeBase
     [System.Serializable]
     struct Parametor
     {
-        [Header("最大スピード")]
-        public float maxSpeed;
-        [Header("曲がれる最大角度")]
-        public float maxTurningDegree;
         [Header("予備動作パラメータ")]
         public PreliminaryParametor preliminaryParam;
         [Header("追うパラメータ")]
