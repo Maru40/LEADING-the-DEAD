@@ -10402,24 +10402,26 @@ MonoBehaviour:
       damageTags: []
     startRange: 1.5
   m_param:
-    maxSpeed: 0
-    maxTurningDegree: 0
+    maxSpeed: 3
+    maxTurningDegree: 0.3
     preliminaryParam:
       timeRandomRange:
-        min: 0
-        max: 0
-      moveSpeed: 0
+        min: 1
+        max: 1.5
+      moveSpeed: 3
+    chaseParam:
+      maxSpeed: 10
+      subPursuitTargetForward: 0.5
+      nearRange: 2
+      turningPower: 5
+    attackParam:
+      time: 1
+      maxSpeed: 15
     waitParam:
-      time: 0
-      enter:
-        m_PersistentCalls:
-          m_Calls: []
-      update:
-        m_PersistentCalls:
-          m_Calls: []
-      exit:
-        m_PersistentCalls:
-          m_Calls: []
+      time: 1
+    probability: 10
+    startRange: 15
+    probabilityInterbalTime: 10
 --- !u!1 &7689520723826636210
 GameObject:
   m_ObjectHideFlags: 0
