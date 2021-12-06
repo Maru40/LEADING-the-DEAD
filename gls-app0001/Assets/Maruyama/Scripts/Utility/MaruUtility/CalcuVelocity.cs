@@ -132,7 +132,7 @@ namespace MaruUtility
 			}
 			else
 			{   //フォワードの差が開いていたら、予測Seek
-				Debug.Log("予測Seek");
+				Debug.Log("◆予測Seek");
 				return CalcuPursuitForce(
 					velocity, toVec, maxSpeed, selfObj, targetVelocityManager, turningPower);
 			}
