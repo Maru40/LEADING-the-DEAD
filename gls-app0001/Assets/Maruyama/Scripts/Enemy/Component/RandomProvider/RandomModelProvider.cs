@@ -50,10 +50,6 @@ public class RandomModelProvider : MonoBehaviour
             return;
         }
 
-        //いらないモデル群の削除
-        m_params.Remove(param);
-        RemoveModels();
-
         m_animator.avatar = param.avatar;
         //var model = Instantiate(param.model, transform.position, Quaternion.identity, transform);
         param.model.SetActive(true);
@@ -61,6 +57,10 @@ public class RandomModelProvider : MonoBehaviour
         HitObjectProvider(param);
 
         m_nowParam = param;
+
+        //いらないモデル群の削除
+        m_params.Remove(param);
+        RemoveModels();
     }
 
     private void HitObjectProvider(Parametor param)
