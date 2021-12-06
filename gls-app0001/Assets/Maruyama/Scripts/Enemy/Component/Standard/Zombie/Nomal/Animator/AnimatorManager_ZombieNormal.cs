@@ -68,6 +68,9 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         SettingNormalAttack();
         SettingPreliminaryNormalAttack();
 
+        SettingDashAttack();
+        SettingDashAttackMove();
+
         SettingEat();
 
         SettingStun();
@@ -133,6 +136,16 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         });
 
         actionBehaviour.AddExitAction(() => m_preliminaryNormalAttackVoice?.FadeOutStart());
+    }
+
+    void SettingDashAttack()
+    {
+        //var timeBehaviour = ZombieNormalTable.UpperLayer.DashAttackWalk;
+    }
+
+    void SettingDashAttackMove()
+    {
+        
     }
 
     void SettingEat()
@@ -277,6 +290,16 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     {
         CrossFadeState("Eat", BaseLayerIndex, transitionTime);
         m_animator.SetBool("isEat", true);
+    }
+
+    public void CrossFadeDashAttack(float transitionTime = 0.1f)
+    {
+        CrossFadeState("DashAttack", UpperLayerIndex, transitionTime);
+    }
+
+    public void CrossFadeDashAttackMove(float transitionTime = 0.5f)
+    {
+        CrossFadeState("DashAttackWalk", UpperLayerIndex, transitionTime);
     }
 
     //アクセッサ・プロパティ---------------------------------------------------------------------------------
