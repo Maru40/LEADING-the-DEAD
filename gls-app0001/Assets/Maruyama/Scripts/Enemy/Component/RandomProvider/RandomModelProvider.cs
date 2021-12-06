@@ -29,8 +29,16 @@ public class RandomModelProvider : MonoBehaviour
 
     Parametor m_nowParam;
 
+    AnimatorCtrl_ZombieNormal m_animatorContoroller;
+    RandomAnimationProvider m_randomAimationProvider;
+    AnimatorManagerBase m_aniamtorManager;
+
     private void Awake()
     {
+        m_animatorContoroller = GetComponentInParent<AnimatorCtrl_ZombieNormal>();
+        m_randomAimationProvider = GetComponentInParent<RandomAnimationProvider>();
+        m_aniamtorManager = GetComponentInParent<AnimatorManagerBase>();
+
         Provider();
     }
 
@@ -50,7 +58,7 @@ public class RandomModelProvider : MonoBehaviour
             return;
         }
 
-        m_animator.avatar = param.avatar;
+        //m_animator.avatar = param.avatar;
         //var model = Instantiate(param.model, transform.position, Quaternion.identity, transform);
         param.model.SetActive(true);
 
@@ -61,6 +69,11 @@ public class RandomModelProvider : MonoBehaviour
         //いらないモデル群の削除
         m_params.Remove(param);
         RemoveModels();
+
+        m_animator = param.model.GetComponent<Animator>();
+        m_randomAimationProvider.animator = m_animator;
+        m_animatorContoroller.animator = m_animator;
+        m_aniamtorManager.animator = m_animator;
     }
 
     private void HitObjectProvider(Parametor param)
