@@ -56,6 +56,11 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         m_normalAttackComp = GetComponent<NormalAttack>();
         m_tackleComp = GetComponent<TankTackle>();
         m_audioManager = GetComponent<AudioManager>();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
 
         SettingNormalAttackAnimation();
         SettingShoutAnimation();
