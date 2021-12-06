@@ -96,6 +96,10 @@ namespace MaruUtility
 		static public Vector3 CalcuPursuitForce(Vector3 velocity, Vector3 toVec, float maxSpeed, 
 			GameObject selfObj, Rigidbody targetVelocityManager, float turningPower = 1.0f)
         {
+			if(targetVelocityManager == null)
+            {
+				return CalucSeekVec(velocity, toVec, maxSpeed);
+            }
 			var targetObj = targetVelocityManager.gameObject;
 			var targetVelocity = targetVelocityManager.velocity;
 
