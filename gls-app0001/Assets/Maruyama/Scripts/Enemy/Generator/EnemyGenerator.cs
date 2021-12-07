@@ -69,6 +69,10 @@ public class EnemyGenerator : GeneratorBase
 
     [SerializeField]
     protected bool m_isInCameraCreate = false;  //カメラの範囲内に生成するかどうか
+    public bool IsInCameraCreate {  //カメラの範囲内に生成するかどうかのアクセッサ
+        get => m_isInCameraCreate;
+        set => m_isInCameraCreate = value;
+    }
 
     [Header("障害物として扱う名前群"),SerializeField]
     string[] m_obstacleLayerStrings = new string[] { "L_Obstacle" };
@@ -87,7 +91,7 @@ public class EnemyGenerator : GeneratorBase
     float m_clearServicesTime = 5.0f;
     HashSet<GameObject> m_clearServices = new HashSet<GameObject>();  //クリアに貢献したオブジェクト
     List<GameObject> m_removeClearServices = new List<GameObject>();  //削除申請の出されたクリア貢献オブジェクト
-    Dictionary<GameObject, GameTimer> m_clearServicesTimerDictionary = new Dictionary<GameObject, GameTimer>();
+    Dictionary<GameObject, GameTimer> m_clearServicesTimerDictionary = new Dictionary<GameObject, GameTimer>();  //
 
     protected virtual void Awake()
     {
@@ -111,15 +115,13 @@ public class EnemyGenerator : GeneratorBase
 
     private void Update()
     {
-        //m_clearServicesTimer.UpdateTimer();
-
         UpdateClearServicesTimers();
         RemoveClearServices();
-        //Debug.Log("△" + m_clearServices.Count);
-        //Debug.Log("■" + m_clearServicesTimers.Count);
+
         Debug.Log("〇" + GetNumAllClearServices());
     }
 
+    //貢献した数を時間で管理する。
     void UpdateClearServicesTimers()
     {
         System.Action removeAction = null;
@@ -198,8 +200,6 @@ public class EnemyGenerator : GeneratorBase
     /// <returns>ランダムな位置</returns>
     public Vector3 CalcuRandomPosition()
     {
-        //return RandomPosition.CalcuPosition(m_maxRandomRange, m_centerPosition);
-
         if(m_isInCameraCreate)
         {
             return RandomPosition.OutObstacleAndOutRangeOfTargets(
@@ -349,7 +349,7 @@ public class EnemyGenerator : GeneratorBase
     /// <summary>
     /// クリアに貢献した数。
     /// </summary>
-    int NumClearServices => m_clearServices.Count;
+    public int NumClearServices => m_clearServices.Count;
 
     //Gizmos-------------------------------------------------------------------------------------------
 
