@@ -35,6 +35,9 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     [SerializeField]
     AnimationHitColliderParametor m_dashAttackParam = new AnimationHitColliderParametor();
 
+    [SerializeField]
+    AnimationHitColliderParametor m_wallAttackParam = new AnimationHitColliderParametor();
+
     Dictionary<StateEnum, string> m_stateNameDictionary = new Dictionary<StateEnum, string>();
 
     NormalAttack m_normalAttackComp;
@@ -77,6 +80,9 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 
         SettingDashAttack();
         SettingDashAttackMove();
+
+        SettingWallAttack();
+        SettingPutWallAttack();
 
         SettingEat();
 
@@ -163,6 +169,28 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 
     void SettingDashAttackMove()
     {
+        
+    }
+
+    void SettingWallAttack()
+    {
+        var timeBehaviour = ZombieNormalTable.UpperLayer.WallAttack.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
+        var timeEvent = timeBehaviour.onTimeEvent;
+
+        timeEvent.ClampWhere(m_wallAttackParam.startTime)
+            .Subscribe(_ => m_wallAttackParam.trigger.AttackStart())
+            .AddTo(this);
+
+        timeEvent.ClampWhere(m_wallAttackParam.endTime)
+            .Subscribe(_ => m_wallAttackParam.trigger.AttackEnd())
+            .AddTo(this);
+    }
+
+    void SettingPutWallAttack()
+    {
+        var timeBehaviour = ZombieNormalTable.UpperLayer.PutWallAttack.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
+        var timeEvent = timeBehaviour.onTimeEvent;
+
         
     }
 
@@ -323,6 +351,16 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     public void CrossFadeDashAttackMove(float transitionTime = 0.5f)
     {
         CrossFadeState("DashAttackWalk", UpperLayerIndex, transitionTime);
+    }
+
+    public void CrossFadeWallAttack(float transitionTime = 0.25f)
+    {
+        CrossFadeState("WallAttack", UpperLayerIndex, transitionTime);
+    }
+
+    public void CrossFadePutWallAttack(float transitionTime = 0.25f)
+    {
+        CrossFadeState("PutWallAttack", UpperLayerIndex, transitionTime);
     }
 
     //アクセッサ・プロパティ---------------------------------------------------------------------------------
