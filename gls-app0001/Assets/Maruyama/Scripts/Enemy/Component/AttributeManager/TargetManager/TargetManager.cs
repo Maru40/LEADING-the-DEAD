@@ -195,6 +195,10 @@ public class TargetManager : MonoBehaviour
             return true; //ターゲットがnullならtrueを返す。
         }
 
+        if (target.enabled == false) {
+            return false;
+        }
+
         //ターゲットが対象外なら更新しない
         if (IsExcludeTarget(target)) {
             return false;
