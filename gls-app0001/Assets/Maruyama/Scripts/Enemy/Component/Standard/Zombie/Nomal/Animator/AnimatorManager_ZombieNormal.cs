@@ -32,6 +32,9 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     Ex_Dictionary<NormalAttackHitColliderType, AnimationHitColliderParametor> m_normalAttackParam =
         new Ex_Dictionary<NormalAttackHitColliderType, AnimationHitColliderParametor>();
 
+    [SerializeField]
+    AnimationHitColliderParametor m_dashAttackParam = new AnimationHitColliderParametor();
+
     Dictionary<StateEnum, string> m_stateNameDictionary = new Dictionary<StateEnum, string>();
 
     NormalAttack m_normalAttackComp;
@@ -99,13 +102,16 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
                 m_normalAttackComp.ChaseEnd();
             }).AddTo(this);
         timeEvent.ClampWhere(leftTimeParam.endTime)
-            .Subscribe(_ => leftTimeParam.trigger.AttackEnd()).AddTo(this);
+            .Subscribe(_ => leftTimeParam.trigger.AttackEnd())
+            .AddTo(this);
 
         //右腕のコライダーのOn、Off
         timeEvent.ClampWhere(rightTimeParam.startTime)
-            .Subscribe(_ => rightTimeParam.trigger.AttackStart()).AddTo(this);
+            .Subscribe(_ => rightTimeParam.trigger.AttackStart())
+            .AddTo(this);
         timeEvent.ClampWhere(rightTimeParam.endTime)
-            .Subscribe(_ => rightTimeParam.trigger.AttackEnd()).AddTo(this);
+            .Subscribe(_ => rightTimeParam.trigger.AttackEnd())
+            .AddTo(this);
 
         behavior.onStateEntered.Subscribe(_ => m_normalAttackComp.AttackStart()).AddTo(this);
 
@@ -144,7 +150,15 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 
     void SettingDashAttack()
     {
-        //var timeBehaviour = ZombieNormalTable.UpperLayer.DashAttackWalk;
+        //攻撃判定の入れだし
+        var timeBehaviour = ZombieNormalTable.UpperLayer.DashAttack.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
+        timeBehaviour.onTimeEvent.ClampWhere(m_dashAttackParam.startTime)
+            .Subscribe(_ => m_dashAttackParam.trigger.AttackStart())
+            .AddTo(this);
+
+        timeBehaviour.onTimeEvent.ClampWhere(m_dashAttackParam.endTime)
+            .Subscribe(_ => m_dashAttackParam.trigger.AttackEnd())
+            .AddTo(this);
     }
 
     void SettingDashAttackMove()
