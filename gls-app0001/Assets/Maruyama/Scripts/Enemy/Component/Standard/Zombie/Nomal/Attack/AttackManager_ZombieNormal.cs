@@ -9,6 +9,7 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
     public enum AttackType
     {
         Normal,
+        WallAttack,
     }
 
     [Header("予備動作のパラメータ") ,SerializeField]
@@ -20,8 +21,6 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
     Stator_ZombieNormal m_stator;
     TargetManager m_targetMgr;
     AnimatorManager_ZombieNormal m_animatorManager;
-    DashAttack m_dashAttack;
-    EyeSearchRange m_eye;
 
     GameTimer m_gameTimer = new GameTimer();
 
@@ -30,8 +29,6 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
         m_stator = GetComponent<Stator_ZombieNormal>();
         m_targetMgr = GetComponent<TargetManager>();
         m_animatorManager = GetComponent<AnimatorManager_ZombieNormal>();
-        m_eye = GetComponent<EyeSearchRange>();
-        m_dashAttack = GetComponent<DashAttack>();
     }
 
     /// <summary>
@@ -68,22 +65,19 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
             return;
         }
 
-        m_audioManager?.PlayOneShot();
+        m_audioManager?.PlayOneShot();  //声を出す。
 
-        m_stator.GetTransitionMember().attackTrigger.Fire();
+        m_stator.GetTransitionMember().attackTrigger.Fire();  //攻撃状態に遷移
 
         m_animatorManager.CrossFadePreliminaryNormalAttackAniamtion();  //予備動作に変更
 
         var time = m_preliminaryParam.timeRandomRange.RandomValue;
         m_gameTimer.ResetTimer(time, () => m_animatorManager.CrossFadeNormalAttackAnimation());
-
-        //m_animatorManager.CrossFadeNormalAttackAnimation();
     }
 
     public override void EndAnimationEvent()
     {
         m_stator.GetTransitionMember().chaseTrigger.Fire();
-        //m_dashAttack.enabled = false;
     }
 
     //アクセッサ・プロパティ--------------------------------------------------------------------------
