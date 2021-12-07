@@ -164,6 +164,10 @@ public class DashAttack : AttackNodeBase
             return false;
         }
 
+        if(m_targetManager.GetNowTargetType() != FoundObject.FoundType.Player) { //Playerでなかったら攻撃をしない。
+            return false;
+        }
+
         bool isProbability = MyRandom.RandomProbability(m_param.probability);
 
         var toTargetVec = (Vector3)m_targetManager.GetToNowTargetVector();
