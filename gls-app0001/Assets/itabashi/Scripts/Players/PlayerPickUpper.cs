@@ -11,7 +11,7 @@ using System.Linq;
 public class PlayerPickUpper : MonoBehaviour
 {
     [SerializeField]
-    private PossibleUI m_possibleUI;
+    private Canvas m_canvas;
 
     private const string PICKUP_OBJECTS_NAME = "PickUpObjects";
 
@@ -27,6 +27,14 @@ public class PlayerPickUpper : MonoBehaviour
 
     public bool pickedUpDecition => m_pickedUpDecision;
 
+    private readonly Subject<List<PickedUpObject>> m_decisionSubject = new Subject<List<PickedUpObject>>();
+
+    private GameControls m_gameControls;
+
+    private List<PickedUpObject> m_triggerPickedUpObjects = new List<PickedUpObject>();
+
+    private int m_currentDisitionIndex = 0;
+
     private void Reset()
     {
         m_pickUpObjectsTransform = transform.Find(PICKUP_OBJECTS_NAME);
@@ -36,6 +44,19 @@ public class PlayerPickUpper : MonoBehaviour
             m_pickUpObjectsTransform = new GameObject(PICKUP_OBJECTS_NAME).transform;
             m_pickUpObjectsTransform.SetParent(transform);
         }
+    }
+
+    private void Awake()
+    {
+        m_decisionSubject
+            .Where(_ => m_canvas.gameObject.activeSelf)
+            .Subscribe(list => Decision(list[m_currentDisitionIndex]))
+            .AddTo(this);
+
+        m_gameControls = new GameControls();
+        this.RegisterController(m_gameControls);
+
+        m_gameControls.Player.Select.performed += _ => m_decisionSubject.OnNext(m_triggerPickedUpObjects);
     }
 
     // Start is called before the first frame update
@@ -55,10 +76,51 @@ public class PlayerPickUpper : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    void UpdateCanvas()
     {
-        
+        var pickUpObjects = m_triggerPickedUpObjects.Where(pickUpObject => pickUpObject.IsValid() && pickUpObject.gameObject.activeInHierarchy);
+
+        if (pickUpObjects.Count() == 0)
+        {
+            m_canvas.gameObject.SetActive(false);
+            return;
+        }
+
+        float range = 999999999.0f;
+
+        int count = 0;
+
+        for (int i = 0; i < m_triggerPickedUpObjects.Count; ++i)
+        {
+            var pickUpObject = m_triggerPickedUpObjects[i];
+
+            if (!pickUpObject.IsValid() || !pickUpObject.gameObject.activeInHierarchy)
+            {
+                continue;
+            }
+
+            float objectRange = (pickUpObject.transform.position - transform.position).sqrMagnitude;
+
+            if (objectRange < range)
+            {
+                range = objectRange;
+                m_currentDisitionIndex = count;
+
+                Vector3 objectPosition = pickUpObject.transform.position;
+                objectPosition.y += 0.5f;
+                m_canvas.transform.position = objectPosition;
+            }
+
+            ++count;
+        }
+
+        m_pickedUpDecision = false;
+    }
+
+    // Update is called once per frame
+    void LateUpdate()
+    {
+        UpdateCanvas();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -115,19 +177,25 @@ public class PlayerPickUpper : MonoBehaviour
     {
         var pickedUpObject = other.gameObject.GetComponent<PickedUpObject>();
 
-        if (!pickedUpObject || !pickedUpObject.enabled || pickedUpObject.pickedUpType != PickedUpObject.PickedUpType.Decision)
+        if (!pickedUpObject || !pickedUpObject.enabled || !pickedUpObject.gameObject.activeInHierarchy || pickedUpObject.pickedUpType != PickedUpObject.PickedUpType.Decision)
         {
             return;
         }
 
-        m_possibleUI.AddSelectPossible("拾う", () => Decision(pickedUpObject), pickedUpObject.GetInstanceID());
+        m_canvas.gameObject.SetActive(true);
+
+        m_triggerPickedUpObjects.Add(pickedUpObject);
+
+        //m_possibleUI.AddSelectPossible("拾う", () => Decision(pickedUpObject), pickedUpObject.GetInstanceID());
     }
 
     private void Decision(PickedUpObject pickedUpObject)
     {
+        m_triggerPickedUpObjects.Remove(pickedUpObject);
         PutAway(pickedUpObject);
         m_pickedUpDecision = true;
-        m_possibleUI.RemoveSelectPossible("拾う", pickedUpObject.GetInstanceID());
+        UpdateCanvas();
+        //m_possibleUI.RemoveSelectPossible("拾う", pickedUpObject.GetInstanceID());
     }
 
     public void DecisionTriggerExit(Collider other)
@@ -139,11 +207,13 @@ public class PlayerPickUpper : MonoBehaviour
             return;
         }
 
-        m_possibleUI.RemoveSelectPossible("拾う", pickedUpObject.GetInstanceID());
-    }
+        m_triggerPickedUpObjects.Remove(pickedUpObject);
 
-    private void LateUpdate()
-    {
-        m_pickedUpDecision = false;
+        if(m_triggerPickedUpObjects.Count == 0)
+        {
+            m_canvas.gameObject.SetActive(false);
+        };
+
+        //m_possibleUI.RemoveSelectPossible("拾う", pickedUpObject.GetInstanceID());
     }
 }
