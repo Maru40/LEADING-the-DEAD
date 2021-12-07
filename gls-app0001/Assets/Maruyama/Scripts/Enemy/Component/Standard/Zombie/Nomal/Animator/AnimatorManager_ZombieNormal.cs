@@ -225,7 +225,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 
     void SettingEat()
     {
-        var timeBehaviour = ZombieNormalTable.BaseLayer.Eat.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
+        var timeBehaviour = ZombieNormalTable.AllLayer.Eat.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
         var timeEvent = timeBehaviour.onTimeEvent;
 
         //const float time = 3.0f; //将来的にインスぺクタから変更
@@ -237,29 +237,37 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         {
             timeEvent.ClampWhere(time)
                 .Subscribe(_ => {
-                    if (!m_targetManager.HasTarget()) {
-                        return;
-                    }
-
-                    var eaten = m_targetManager.GetNowTarget().GetComponent<EatenBase>();
-                    if (eaten) {
-                        eaten.Eaten();
-                        Debug.Log("△食べたよ");
-                    }
+                    Eat();
             })
             .AddTo(this);
         }
 
         timeBehaviour.onStateEntered  //スタート時のEat状態にする。
-            .Subscribe(_ => { m_statusManager.IsEat = true;
+            .Subscribe(_ => {
+                m_statusManager.IsEat = true;
             })
             .AddTo(this);
 
         timeBehaviour.onStateExited
-            .Subscribe(_ => { m_animator.SetBool("isEat", false);
+            .Subscribe(_ => { 
+                m_animator.SetBool("isEat", false);
                 m_statusManager.IsEat = false;
             })
             .AddTo(this);
+    }
+
+    void Eat()
+    {
+        if (!m_targetManager.HasTarget())  {
+            return;
+        }
+
+        var eaten = m_targetManager.GetNowTarget().GetComponent<EatenBase>();
+        if (eaten)
+        {
+            eaten.Eaten();
+            Debug.Log("△食べたよ");
+        }
     }
 
     void SettingStun()
@@ -366,9 +374,9 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         CrossFadeState("KnockBack", layerIndex);
     }
 
-    public void CrossFadeEatAnimation(float transitionTime = 0.005f)
+    public void CrossFadeEatAnimation(float transitionTime = 0.25f)
     {
-        CrossFadeState("Eat", BaseLayerIndex, transitionTime);
+        CrossFadeState("Eat", AllLayerIndex, transitionTime);
         m_animator.SetBool("isEat", true);
     }
 
@@ -406,6 +414,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 
     public int BaseLayerIndex => m_animator.GetLayerIndex("Base Layer");
     public int UpperLayerIndex => m_animator.GetLayerIndex("Upper Layer");
+    public int AllLayerIndex => m_animator.GetLayerIndex("All Layer");
 
     public void Dying()
     {

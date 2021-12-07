@@ -43,5 +43,12 @@ public class ZombieNormalTable
         public readonly AnimationState Idle = new AnimationState("Lower Layer.Idle","Lower Layer");
         
     }
+    public static readonly AllLayerTable AllLayer = new AllLayerTable();
+    public class AllLayerTable
+    {
+        public readonly AnimationState Idle = new AnimationState("All Layer.Idle","All Layer");
+        public readonly AnimationState Eat = new AnimationState("All Layer.Eat","All Layer");
+        
+    }
     
 }
