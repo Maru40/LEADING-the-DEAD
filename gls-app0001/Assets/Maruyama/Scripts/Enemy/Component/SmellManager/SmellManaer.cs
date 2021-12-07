@@ -17,6 +17,7 @@ public class SmellManaer : MonoBehaviour
     I_Eat m_eat;
     StatorBase m_stator;
     AttackNodeManagerBase m_attackManager;
+    WallAttack_ZombieNormal m_wallAttack;
 
     [Header("攻撃するタグ"), SerializeField]
     List<string> m_attackTags = new List<string>();
@@ -30,6 +31,7 @@ public class SmellManaer : MonoBehaviour
         m_eat = GetComponent<I_Eat>();
         m_stator = GetComponent<StatorBase>();
         m_attackManager = GetComponent<AttackNodeManagerBase>();
+        m_wallAttack = GetComponent<WallAttack_ZombieNormal>();
 
         if(m_attackTags.Count == 0) { 
             m_attackTags.Add("T_Wall"); 
@@ -54,7 +56,7 @@ public class SmellManaer : MonoBehaviour
             var bloodPuddle = m_targetManager.GetNowTarget().GetComponent<BloodPuddleManager>();
             if (bloodPuddle)
             {
-                BloodPuddleCheck();
+                BloodPuddleCheck(bloodPuddle);
                 return;
             }
         }
@@ -94,7 +96,7 @@ public class SmellManaer : MonoBehaviour
 
         foreach(var tag in m_attackTags) {
             //タグが一緒で、攻撃範囲なら
-            if(parent.tag == tag && m_attackManager.IsAttackStartRange())
+            if(parent.tag == tag && m_wallAttack.IsAttackStartRange())
             {
                 return true;
             }
@@ -118,10 +120,12 @@ public class SmellManaer : MonoBehaviour
     /// <summary>
     /// 血の液体チェック
     /// </summary>
-    void BloodPuddleCheck()
+    void BloodPuddleCheck(BloodPuddleManager blood)
     {
         if (IsAttack()) { //攻撃するなら
-            m_attackManager.AttackStart();
+            //m_attackManager.AttackStart();
+            m_wallAttack.AttackStart();
+            
             return;
         }
 
