@@ -54,7 +54,7 @@ public class StateNode_ZombieNormal_Eat : EnemyStateNodeBase<EnemyBase>
     {
         base.OnExit();
 
-        m_animatorManager.CrossFadeIdleAnimation(m_animatorManager.BaseLayerIndex);
+        m_animatorManager.CrossFadeIdleAnimation(m_animatorManager.AllLayerIndex);
         m_velocityManager.SetIsDeseleration(false);
     }
 }
