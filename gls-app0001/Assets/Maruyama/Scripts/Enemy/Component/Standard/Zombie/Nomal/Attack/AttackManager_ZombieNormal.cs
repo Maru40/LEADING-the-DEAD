@@ -71,9 +71,6 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
         m_audioManager?.PlayOneShot();
 
         m_stator.GetTransitionMember().attackTrigger.Fire();
-        //m_dashAttack.AttackStart();
-        //m_dashAttack.enabled = true;
-        //return;
 
         m_animatorManager.CrossFadePreliminaryNormalAttackAniamtion();  //予備動作に変更
 
