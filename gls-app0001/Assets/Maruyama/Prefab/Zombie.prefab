@@ -5344,7 +5344,7 @@ MonoBehaviour:
   m_param:
     wallAttackParam:
       time: 1
-      maxSpeed: 3
+      maxSpeed: 5
     waitParam:
       time: 1
 --- !u!1 &7585137866309258482
@@ -5376,7 +5376,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7585137866309258482}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 1.339, z: 0.387}
+  m_LocalPosition: {x: 0.00000001303852, y: 1.339, z: 0.27499995}
   m_LocalScale: {x: 0.5, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 9191106090604975019}
@@ -5560,7 +5560,7 @@ BoxCollider:
   m_GameObject: {fileID: 7585137866309258482}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -5593,7 +5593,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8776395906788539947}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 1.339, z: 0.387}
+  m_LocalPosition: {x: 0, y: 1.339, z: 0.275}
   m_LocalScale: {x: 0.5, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 9191106090604975019}
@@ -6089,7 +6089,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1931478052233276, guid: 01e6801ac2c297e4896c26173a23bf8b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4464095493078870, guid: 01e6801ac2c297e4896c26173a23bf8b, type: 3}
       propertyPath: m_RootOrder
