@@ -244,8 +244,9 @@ public class ChaseTarget : MonoBehaviour
         var data = target.GetFoundData();
         if (data.type == FoundObject.FoundType.SoundObject || data.type == FoundObject.FoundType.Smell) //SoundObjectなら
         {
-            var attackManager = GetComponent<AttackNodeManagerBase>();
-            attackManager.AttackStart();
+            //m_wallAttack.AttackStart();
+            //var attackManager = GetComponent<AttackNodeManagerBase>();
+            //attackManager.AttackStart();
         }
     }
 

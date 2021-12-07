@@ -69,14 +69,6 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
         {
             m_chaseTarget.TargetLost();
         }
-
-        //if (target) {
-        //    LinerTarget(target);
-        //}
-        //else {
-        //    LinerLostPosition();
-        //    //m_chaseTarget.TargetLost();
-        //}
     }
 
     //ターゲットを追従する処理

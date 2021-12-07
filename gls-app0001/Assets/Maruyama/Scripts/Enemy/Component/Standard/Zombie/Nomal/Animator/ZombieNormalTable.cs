@@ -34,6 +34,7 @@ public class ZombieNormalTable
         public readonly AnimationState DashAttackWalk = new AnimationState("Upper Layer.DashAttackWalk","Upper Layer");
         public readonly AnimationState DashAttack = new AnimationState("Upper Layer.DashAttack","Upper Layer");
         public readonly AnimationState WallAttack = new AnimationState("Upper Layer.WallAttack","Upper Layer");
+        public readonly AnimationState PutWallAttack = new AnimationState("Upper Layer.PutWallAttack","Upper Layer");
         
     }
     public static readonly LowerLayerTable LowerLayer = new LowerLayerTable();

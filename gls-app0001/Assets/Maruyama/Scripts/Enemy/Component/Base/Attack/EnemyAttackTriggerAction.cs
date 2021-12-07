@@ -1,12 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 using AttributeObject;
 
 [RequireComponent(typeof(AudioManager))]
 public class EnemyAttackTriggerAction : TriggerAction
 {
+    enum HitType 
+    {
+        Enter,
+        Stay,
+    }
+
+    [SerializeField]
+    private UnityEvent m_damageEvent = null;
+
     [SerializeField]
     StatusManagerBase m_statusManager = null;
 
@@ -16,6 +26,9 @@ public class EnemyAttackTriggerAction : TriggerAction
     [SerializeField]
     DamageData m_damageData = new DamageData();
 
+    [SerializeField]
+    HitType m_hitType = HitType.Enter;
+    
     [SerializeField]
     AudioManager m_audioManager;
 
@@ -35,7 +48,14 @@ public class EnemyAttackTriggerAction : TriggerAction
     {
         m_hitCollider = GetComponent<Collider>();
 
-        AddEnterAction(SendDamage);
+        System.Action action = m_hitType switch {
+            HitType.Enter => () => AddEnterAction(SendDamage),
+            HitType.Stay => () => AddStayAction(SendDamage),
+            _ => null
+        };
+
+        action?.Invoke();
+        //AddEnterAction(SendDamage);
     }
 
     /// <summary>
@@ -76,6 +96,8 @@ public class EnemyAttackTriggerAction : TriggerAction
             m_audioManager?.PlayOneShot();
             m_animatorManager?.HitStop(damageData);
             damage.TakeDamage(damageData);
+
+            m_damageEvent?.Invoke();
         }
     }
 

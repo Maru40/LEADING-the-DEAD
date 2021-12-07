@@ -229,6 +229,16 @@ public class TaskList<EnumType>
         EndOneTask();
     }
 
+    /// <summary>
+    /// 終了処理を呼ばない強制終了
+    /// </summary>
+    public void AbsoluteReset()
+    {
+        m_currentTask = null;
+        m_currentTasks.Clear();
+        m_currentIndex = 0;
+    }
+
     //アクセッサ-------------------------------------------------------------------------------------------
 
     /// <summary>

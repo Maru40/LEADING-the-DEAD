@@ -35,6 +35,12 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     [SerializeField]
     AnimationHitColliderParametor m_dashAttackParam = new AnimationHitColliderParametor();
 
+    [SerializeField]
+    AnimationHitColliderParametor m_wallAttackParam = new AnimationHitColliderParametor();
+
+    [Header("壁攻撃ダメ―ジ与える時間"), SerializeField]
+    List<AnimationHitColliderParametor> m_putWallParams = new List<AnimationHitColliderParametor>();
+
     Dictionary<StateEnum, string> m_stateNameDictionary = new Dictionary<StateEnum, string>();
 
     NormalAttack m_normalAttackComp;
@@ -47,6 +53,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     EnemyVelocityMgr m_velocityManager;
     AttackManager_ZombieNormal m_attackManager;
     Stator_ZombieNormal m_stator;
+    ThrongManager m_throngManager;
 
     [SerializeField]
     AudioManager m_preliminaryNormalAttackVoice;
@@ -66,6 +73,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         m_velocityManager = GetComponent<EnemyVelocityMgr>();
         m_attackManager = GetComponent<AttackManager_ZombieNormal>();
         m_stator = GetComponent<Stator_ZombieNormal>();
+        m_throngManager = GetComponent<ThrongManager>();
     }
 
     protected override void Start()
@@ -77,6 +85,9 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 
         SettingDashAttack();
         SettingDashAttackMove();
+
+        SettingWallAttack();
+        SettingPutWallAttack();
 
         SettingEat();
 
@@ -164,6 +175,52 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     void SettingDashAttackMove()
     {
         
+    }
+
+    void SettingWallAttack()
+    {
+        var timeBehaviour = ZombieNormalTable.UpperLayer.WallAttack.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
+        var timeEvent = timeBehaviour.onTimeEvent;
+
+        timeEvent.ClampWhere(m_wallAttackParam.startTime)
+            .Subscribe(_ => m_wallAttackParam.trigger.AttackStart())
+            .AddTo(this);
+
+        timeEvent.ClampWhere(m_wallAttackParam.endTime)
+            .Subscribe(_ => m_wallAttackParam.trigger.AttackEnd())
+            .AddTo(this);
+
+        timeBehaviour.onStateExited
+            .Subscribe(_ => m_wallAttackParam.trigger.AttackEnd())
+            .AddTo(this);
+    }
+
+    void SettingPutWallAttack()
+    {
+        var timeBehaviour = ZombieNormalTable.UpperLayer.PutWallAttack.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
+        var timeEvent = timeBehaviour.onTimeEvent;
+
+        foreach(var param in m_putWallParams)
+        {
+            timeEvent.ClampWhere(param.startTime)
+                .Subscribe(_ => param.trigger.AttackStart()) 
+                .AddTo(this);
+
+            timeEvent.ClampWhere(param.endTime)
+                .Subscribe(_ => param.trigger.AttackEnd())   
+                .AddTo(this);
+        }
+
+        timeBehaviour.onStateEntered  //集団行動Off
+            .Subscribe(_ => { 
+                m_throngManager.enabled = false;
+                m_velocityManager.ResetAll();
+            }) 
+            .AddTo(this);
+
+        timeBehaviour.onStateExited
+            .Subscribe(_ => m_throngManager.enabled = true)  //集団行動On
+            .AddTo(this);
     }
 
     void SettingEat()
@@ -323,6 +380,16 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     public void CrossFadeDashAttackMove(float transitionTime = 0.5f)
     {
         CrossFadeState("DashAttackWalk", UpperLayerIndex, transitionTime);
+    }
+
+    public void CrossFadeWallAttack(float transitionTime = 0.25f)
+    {
+        CrossFadeState("WallAttack", UpperLayerIndex, transitionTime);
+    }
+
+    public void CrossFadePutWallAttack(float transitionTime = 0.25f)
+    {
+        CrossFadeState("PutWallAttack", UpperLayerIndex, transitionTime);
     }
 
     //アクセッサ・プロパティ---------------------------------------------------------------------------------
