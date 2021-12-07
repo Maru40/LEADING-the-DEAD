@@ -26,6 +26,7 @@ public class WallAttack_ZombieNormal : AttackNodeBase
     EyeSearchRange m_eye;
     AttackNodeManagerBase m_attackManager;
     Stator_ZombieNormal m_stator;
+    EnemyVelocityMgr m_velocityManager;
 
     bool m_isPutAttack = false;
 
@@ -36,6 +37,7 @@ public class WallAttack_ZombieNormal : AttackNodeBase
         m_eye = GetComponent<EyeSearchRange>();
         m_attackManager = GetComponent<AttackNodeManagerBase>();
         m_stator = GetComponent<Stator_ZombieNormal>();
+        m_velocityManager = GetComponent<EnemyVelocityMgr>();
     }
 
     private void Start()
@@ -128,6 +130,7 @@ public class WallAttack_ZombieNormal : AttackNodeBase
         if (m_stator.GetNowStateType() != ZombieNormalState.Attack)
         {
             m_animatorManager.CrossFadeIdleAnimation(m_animatorManager.UpperLayerIndex);
+            m_velocityManager.ResetAll();
             m_isPutAttack = false;
         }
     }
