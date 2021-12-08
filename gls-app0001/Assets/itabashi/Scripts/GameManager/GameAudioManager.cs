@@ -42,6 +42,8 @@ namespace Manager
             m_bgmVolume = m_bgmSource.volume;
         }
 
+        public bool IsBGMPlaying => m_bgmSource.isPlaying;
+
         public void BGMPlay(AudioClip bgmClip,float fadeTime = 0.0f)
         {
             if(m_bgmSource.isPlaying)
