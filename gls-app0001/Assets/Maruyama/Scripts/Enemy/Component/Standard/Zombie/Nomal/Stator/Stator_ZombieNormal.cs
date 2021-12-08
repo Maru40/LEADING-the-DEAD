@@ -98,6 +98,7 @@ public class Stator_ZombieNormal : StatorBase
 
         //食べているときの処理
         m_stateMachine.AddEdge(StateType.Eat, StateType.RandomPlowling, ToRandomPlowling);
+        m_stateMachine.AddEdge(StateType.Eat, StateType.Chase, ToChaseTrigger);
 
         //攻撃処理
         m_stateMachine.AddEdge(StateType.Attack, StateType.Stun, ToStunTrigger);

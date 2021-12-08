@@ -146,6 +146,9 @@ public class PlayerPickUpper : MonoBehaviour
             RadioStateManager.alarmSwitch = false;
         }
 
+        var bloodBagManager = pickedUpObject.GetComponent<BloodBagManager>();
+        bloodBagManager?.PickUp();
+
         m_stackObjects.Add(pickedUpObject);
 
         pickedUpObject.gameObject.transform.SetParent(m_pickUpObjectsTransform);

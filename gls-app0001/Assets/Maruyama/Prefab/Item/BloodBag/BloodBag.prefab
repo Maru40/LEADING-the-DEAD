@@ -177,6 +177,7 @@ MonoBehaviour:
   - L_Obstacle
   - L_Ground
   m_breakSoundClip: {fileID: 8300000, guid: 908d866a3c79ea14583b008b2f46d2f9, type: 3}
+  m_pudBlood: {fileID: 6365381956168777785}
 --- !u!114 &6011067228027034928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,7 +389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4045021488458044060, guid: a44fee215b20adf43ab38c83a9c1beed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.4
+      value: -1.9
       objectReference: {fileID: 0}
     - target: {fileID: 4045021488458044060, guid: a44fee215b20adf43ab38c83a9c1beed, type: 3}
       propertyPath: m_LocalPosition.z
@@ -430,8 +431,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: PutBloodPuddleSprite
       objectReference: {fileID: 0}
+    - target: {fileID: 4070980899073711343, guid: a44fee215b20adf43ab38c83a9c1beed, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a44fee215b20adf43ab38c83a9c1beed, type: 3}
+--- !u!1 &6365381956168777785 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4045021488458044066, guid: a44fee215b20adf43ab38c83a9c1beed, type: 3}
+  m_PrefabInstance: {fileID: 6950370019222098587}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6365381956168777735 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4045021488458044060, guid: a44fee215b20adf43ab38c83a9c1beed, type: 3}
