@@ -29,6 +29,9 @@ public class BloodBagManager : MonoBehaviour
     [Header("割れた時の音"), SerializeField]
     AudioClip m_breakSoundClip = null;
 
+    [Header("血だまり"), SerializeField]
+    GameObject m_pudBlood = null;
+
     private void Start()
     {
         if(m_layerStrings.Count == 0) {
@@ -157,6 +160,11 @@ public class BloodBagManager : MonoBehaviour
         {
             ParticleManager.Instance.Play(id, transform.position);
         }
+    }
+
+    public void PickUp()
+    {
+        m_pudBlood?.SetActive(false);
     }
 
     private void OnCollisionEnter(Collision collision)
