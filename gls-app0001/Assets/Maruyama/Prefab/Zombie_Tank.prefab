@@ -69,6 +69,9 @@ MonoBehaviour:
   m_exitAction:
     m_PersistentCalls:
       m_Calls: []
+  m_damageEvent:
+    m_PersistentCalls:
+      m_Calls: []
   m_statusManager: {fileID: -5461277465904623971}
   m_animatorManager: {fileID: -3538298119593497930}
   m_damageData:
@@ -78,6 +81,7 @@ MonoBehaviour:
     hitStopTime: 0
     type: 3
     damageTags: []
+  m_hitType: 0
   m_audioManager: {fileID: 0}
   m_hitParticleIDs: 00000000
 --- !u!82 &1377736536478169077
@@ -357,6 +361,9 @@ MonoBehaviour:
   m_exitAction:
     m_PersistentCalls:
       m_Calls: []
+  m_damageEvent:
+    m_PersistentCalls:
+      m_Calls: []
   m_statusManager: {fileID: -5461277465904623971}
   m_animatorManager: {fileID: -3538298119593497930}
   m_damageData:
@@ -366,6 +373,7 @@ MonoBehaviour:
     hitStopTime: 0
     type: 0
     damageTags: []
+  m_hitType: 0
   m_audioManager: {fileID: 0}
   m_hitParticleIDs: 
 --- !u!82 &3513929150319197639
@@ -1125,8 +1133,8 @@ MonoBehaviour:
   m_isActive: 1
   m_isRandom: 1
   m_volumeRandomRange:
-    min: 0.5
-    max: 0.6
+    min: 0
+    max: 0
   m_pitchRandomRange:
     min: 1
     max: 1
