@@ -8,6 +8,7 @@ public class StateNode_ZombieNormal_Eat : EnemyStateNodeBase<EnemyBase>
     TargetManager m_targetManager;
     Stator_ZombieNormal m_stator;
     EnemyVelocityMgr m_velocityManager;
+    SmellManaer m_smellManager;
 
     public StateNode_ZombieNormal_Eat(EnemyBase owner)
         :base(owner)
@@ -16,6 +17,7 @@ public class StateNode_ZombieNormal_Eat : EnemyStateNodeBase<EnemyBase>
         m_targetManager = owner.GetComponent<TargetManager>();
         m_stator = owner.GetComponent<Stator_ZombieNormal>();
         m_velocityManager = owner.GetComponent<EnemyVelocityMgr>();
+        m_smellManager = owner.GetComponent<SmellManaer>();
     }
 
     protected override void ReserveChangeComponents()
@@ -37,14 +39,21 @@ public class StateNode_ZombieNormal_Eat : EnemyStateNodeBase<EnemyBase>
     {
         Debug.Log("EatUpdate");
 
-        if (m_targetManager.HasTarget())  //ターゲットが無かったら
+        if (m_targetManager.HasTarget())  
         {
+            //ターゲットと遠かったらChase
+            if (!m_smellManager.IsTargetNear(m_smellManager.NearRange))
+            {
+                m_stator.GetTransitionMember().chaseTrigger.Fire();
+                return;
+            }
+
             var eaten = m_targetManager.GetNowTarget().GetComponent<EatenBase>();
             if (eaten == null) {
                 m_stator.GetTransitionMember().rondomPlowlingTrigger.Fire();
             }
         }
-        else
+        else  //ターゲットが無かったら
         {
             m_stator.GetTransitionMember().rondomPlowlingTrigger.Fire();
         }
