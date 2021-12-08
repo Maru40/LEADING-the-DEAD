@@ -387,7 +387,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 
     public void CrossFadeDashAttackMove(float transitionTime = 0.5f)
     {
-        CrossFadeState("DashAttackWalk", UpperLayerIndex, transitionTime);
+        CrossFadeState("DashAttackMove", UpperLayerIndex, transitionTime);
     }
 
     public void CrossFadeWallAttack(float transitionTime = 0.25f)
