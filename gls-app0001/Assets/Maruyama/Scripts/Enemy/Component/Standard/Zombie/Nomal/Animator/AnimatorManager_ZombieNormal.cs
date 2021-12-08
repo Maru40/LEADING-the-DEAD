@@ -54,6 +54,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     AttackManager_ZombieNormal m_attackManager;
     Stator_ZombieNormal m_stator;
     ThrongManager m_throngManager;
+    SmellManaer m_smellManager;
 
     [SerializeField]
     AudioManager m_preliminaryNormalAttackVoice;
@@ -74,6 +75,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         m_attackManager = GetComponent<AttackManager_ZombieNormal>();
         m_stator = GetComponent<Stator_ZombieNormal>();
         m_throngManager = GetComponent<ThrongManager>();
+        m_smellManager = GetComponent<SmellManaer>();
     }
 
     protected override void Start()
@@ -260,6 +262,10 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     {
         if (!m_targetManager.HasTarget())  {
             return;
+        }
+
+        if (!m_smellManager.IsTargetNear(m_smellManager.NearRange)) {
+            return;  //遠かったら食べれない。
         }
 
         var eaten = m_targetManager.GetNowTarget().GetComponent<EatenBase>();
