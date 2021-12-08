@@ -245,7 +245,8 @@ public class EnemyGenerator : GeneratorBase
     {
         foreach(var data in m_datas)
         {
-            data.respawn.RespawnPosition();
+            data.gameObject.SetActive(true);
+            data.respawn.Respawn();
         }
     }
 
