@@ -38,6 +38,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
     DropObjecptManager m_dropManager;
     TargetManager m_targetManger;
     AngerManager m_angerManager;
+    GameStateManager m_gameStateManager;
 
     void Awake()
     {
@@ -51,11 +52,19 @@ public class EnemyRespawnManager : EnemyRespawnBase
         m_dropManager = GetComponent<DropObjecptManager>();
         m_targetManger = GetComponent<TargetManager>();
         m_angerManager = GetComponent<AngerManager>();
+        m_gameStateManager = FindObjectOfType<GameStateManager>();
     }
 
     //リスポーン準備
     public void RespawnReserve()
     {
+        //ゲーム開始前なら処理を飛ばす
+        if (m_gameStateManager.gameState != GameState.Play)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
         //リスポーンするなら準備をする。
         if (IsRespawn())
         {
@@ -79,7 +88,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
         transform.position = respawnPosition;
     }
 
-    void Respawn()
+    public void Respawn()
     {
         //if(m_target == null || m_generator == null) {
         if (m_generator == null) { 
@@ -107,7 +116,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
     /// リスポーンする場所の計算
     /// </summary>
     /// <returns>リスポーンする場所</returns>
-    Vector3 CalcuRespawnRandomPosition()
+    private Vector3 CalcuRespawnRandomPosition()
     {
         return m_generator.CalcuRandomPosition();
     }
@@ -115,7 +124,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
     /// <summary>
     /// ドロップアイテムの再配布
     /// </summary>
-    void DropDistribution()
+    private void DropDistribution()
     {
         if (m_dropManager.GetNumData() != 0)  //ドロップデータが存在したら
         {
@@ -128,7 +137,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
     /// <summary>
     /// 死亡数カウント
     /// </summary>
-    void DeathCount()
+    private void DeathCount()
     {
         var target = m_targetManger.GetNowTarget();
         if (target)
@@ -146,7 +155,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
     /// リスポーンするかどうかの判断
     /// </summary>
     /// <returns></returns>
-    bool IsRespawn()
+    private bool IsRespawn()
     {
         if (m_param.isAbsoluteRespawn) { //強制リスポーン
             return true;
@@ -206,14 +215,14 @@ public class EnemyRespawnManager : EnemyRespawnBase
 
     //StartNullCheck----------------------------------------------------
 
-    void StartTargetNullCheck()
+    private void StartTargetNullCheck()
     {
         //if(m_target == null) {
         //    m_target = GameObject.Find("Player");
         //}
     }
 
-    void StartGeneratorNullCheck()
+    private void StartGeneratorNullCheck()
     {
         return;
 
