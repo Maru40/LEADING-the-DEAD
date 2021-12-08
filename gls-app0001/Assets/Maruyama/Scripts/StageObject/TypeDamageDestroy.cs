@@ -15,10 +15,12 @@ public class TypeDamageDestroy : MonoBehaviour
 
     public void Damaged(DamageData data)
     {
+        Debug.Log("△△呼ばれたよ");
         foreach(var type in m_takeDamageTypes)
         {
             if(data.type == type)
             {
+                Debug.Log("△△破壊するよ");
                 Damage(data);
                 break;
             }
@@ -29,8 +31,15 @@ public class TypeDamageDestroy : MonoBehaviour
     {
         CreateParticles();
 
-        const float time = 0.1f;
-        Destroy(gameObject, time);
+        Destroy(this.gameObject);
+
+        Debug.Log("△△デストローイ");
+        gameObject.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        //Apple = null;
     }
 
     void CreateParticles()
