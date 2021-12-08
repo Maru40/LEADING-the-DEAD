@@ -77,7 +77,7 @@ public class SmellManaer : MonoBehaviour
         return type == FoundObject.FoundType.Smell ? true : false;
     }
 
-    bool IsTargetNear(float nearRange)
+    public bool IsTargetNear(float nearRange)
     {
         var positionCheck = m_targetManager.GetToNowTargetVector();
         if (positionCheck == null) {
@@ -168,4 +168,8 @@ public class SmellManaer : MonoBehaviour
             }
         }
     }
+
+    //アクセッサ-----------------------------------------------------------------
+
+    public float NearRange => m_nearRange;
 }
