@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -70,14 +70,12 @@ public class PopUpUI : MonoBehaviour
 
         if (m_directorType == DirectorType.None)
         {
-            Debug.Log("ここから");
             GameFocusManager.PushFocus(firstSelectObject);
             return;
         }
 
         if(m_directorType == DirectorType.SimpleStartEndAnimator)
         {
-            Debug.Log("ポップアップ");
             m_animateDirector.StartAnimationPlay();
         }
     }
