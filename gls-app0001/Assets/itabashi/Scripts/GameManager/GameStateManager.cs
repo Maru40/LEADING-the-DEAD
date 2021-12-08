@@ -29,7 +29,7 @@ public class GameStateManager : MonoBehaviour
     private GameStateReactiveProperty m_gameState = new GameStateReactiveProperty(GameState.Play);
 
     [SerializeField]
-    private GameObject m_overLookingCameraObject;
+    private PopUpUI m_pauseUI;
 
     [SerializeField]
     private StageResetFade m_stageResetFade;
@@ -49,13 +49,36 @@ public class GameStateManager : MonoBehaviour
 
     private GameControls m_gameControls;
 
+    private bool m_forcedPause = false;
+
+    private readonly Subject<bool> m_forcedPauseSubject = new Subject<bool>();
+
+    public System.IObservable<bool> OnChangedForcedPause => m_forcedPauseSubject;
+
     [SerializeField]
     private void Awake()
     {
         m_gameControls = new GameControls();
         this.RegisterController(m_gameControls);
 
-        m_gameControls.Player.Pause.performed += context => ChangePause();
+        m_gameControls.Player.Pause.performed += context =>
+        {
+            if(m_forcedPause)
+            {
+                return;
+            }
+
+            ChangePause();
+
+            if(GameTimeManager.isPause)
+            {
+                m_pauseUI.PopUp();
+            }
+            else
+            {
+                m_pauseUI.Close();
+            }
+        };
 
         m_gameControls.Player.Select.performed += context => EndOverLooking();
 
@@ -64,6 +87,12 @@ public class GameStateManager : MonoBehaviour
 
     public void ChangePause()
     {
+        if(m_forcedPause)
+        {
+            Debug.Log("今は強制ポーズ中です");
+            return;
+        }
+
         if(gameState != GameState.Play && gameState != GameState.Pause)
         {
             Debug.Log("今はポーズにすることはできません");
@@ -87,6 +116,24 @@ public class GameStateManager : MonoBehaviour
             GameTimeManager.UnPause();
             return;
         }
+    }
+
+    public void ChangeForcedPause()
+    {
+        m_forcedPause = !m_forcedPause;
+
+        if(m_forcedPause)
+        {
+            gameState = GameState.Pause;
+            GameTimeManager.Pause();
+        }
+        else
+        {
+            gameState = GameState.Play;
+            GameTimeManager.UnPause();
+        }
+
+        m_forcedPauseSubject.OnNext(m_forcedPause);
     }
 
     public void Clear()
