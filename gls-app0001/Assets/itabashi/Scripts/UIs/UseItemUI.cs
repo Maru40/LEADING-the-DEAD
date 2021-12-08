@@ -46,7 +46,7 @@ public class UseItemUI : MonoBehaviour
     private int m_count;
 
     [SerializeField]
-    private ImageText m_countImageText;
+    private NumberImage m_countImage;
 
 
     /// <summary>
@@ -129,21 +129,21 @@ public class UseItemUI : MonoBehaviour
 
     private void UpdateCountText()
     {
-        if(!m_countImageText)
+        if(!m_countImage)
         {
             return;
         }
 
         if (m_useItemType != UseItemType.CountItem)
         {
-            m_countImageText.gameObject.SetActive(false);
+            m_countImage.gameObject.SetActive(false);
 
             return;
         }
 
-        m_countImageText.gameObject.SetActive(m_count > 0);
+        m_countImage.gameObject.SetActive(true);
 
-        m_countImageText.text.text = m_count.ToString();
+        m_countImage.SetNumber(m_count);
 
         m_isValidity = m_count > 0;
 
