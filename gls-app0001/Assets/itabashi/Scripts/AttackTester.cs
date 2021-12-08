@@ -12,6 +12,22 @@ public class AttackTester : MonoBehaviour, Test
     [SerializeField]
     private AudioOptioner audioOptioner;
 
+    [SerializeField]
+    private GameStateManager stateManager;
+
+    private GameControls m_gamecontrols;
+
+    [SerializeField]
+    private UnityEngine.Events.UnityEvent testEvent;
+
+    private void Awake()
+    {
+        m_gamecontrols = new GameControls();
+        this.RegisterController(m_gamecontrols);
+
+        m_gamecontrols.Player.UseMeat.performed += _ => testEvent?.Invoke();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
