@@ -120,6 +120,8 @@ public class NumberImage : MonoBehaviour
 
         int value = m_value;
 
+        int upperDisit = 0;
+
         for (int i = 0; i < m_maxDigits; ++i)
         {
             m_numImages[i].gameObject.SetActive(true);
@@ -147,6 +149,12 @@ public class NumberImage : MonoBehaviour
             }
 
             m_numImages[i].sprite = m_numberSprites[numIndex];
+            upperDisit = i;
+        }
+
+        for (int i = 0; i < upperDisit; ++i)
+        {
+            m_numImages[i].gameObject.SetActive(true);
         }
     }
 
