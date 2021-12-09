@@ -96,8 +96,8 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
             .Subscribe(_ => timeParam.trigger.AttackEnd()).AddTo(this);
 
         //パーティクルセット
-        SettingTimeEventParticle(timeEvent, 
-            AttackManager_ZombieTank.AttackType.Near, 
+        SettingTimeEventParticle(timeEvent,
+            AttackManager_ZombieTank.AttackType.Near,
             m_normalAttackParam.trigger.gameObject);
 
         attack.onStateEntered.Subscribe(_ => m_normalAttackComp.AttackStart()).AddTo(this);
@@ -165,7 +165,7 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
     void SettingTackleLastAnimation()
     {
         var tackle = ZombieTankTable.BaseLayer.TackleLast.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
-        
+
         tackle.onStateExited.Subscribe(_ => m_tackleComp.EndAnimationEvent());
     }
 
@@ -199,7 +199,7 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
     /// <param name="timeEvent">TimeEvent</param>
     /// <param name="type">攻撃タイプ</param>
     /// <param name="owner">パーティクルが発生する場所</param>
-    void SettingTimeEventParticle(IObservable<UniRxIObservableExtension.BeforeAfterData<float>> timeEvent ,
+    void SettingTimeEventParticle(IObservable<UniRxIObservableExtension.BeforeAfterData<float>> timeEvent,
         AttackManager_ZombieTank.AttackType type,
         GameObject owner)
     {
@@ -217,11 +217,16 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
     }
 
     void SEPlayOneShot(AudioClipParametor param)
-    { 
+    {
         Manager.GameAudioManager.Instance.SEPlayOneShot(param.clip, param.volume);
     }
 
     //クロスフェード--------------------------------------------------------------------------
+
+    public void CrossFadeIdle(int layerIndex = 0, float transitionTime = 0.0f)
+    {
+        CrossFadeState("Idle" ,layerIndex, transitionTime);
+    }
 
     public void CrossFadeNormalAttack(float transitionTime = 0.25f)
     {
@@ -253,6 +258,11 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         CrossFadeState("Shout", layerIndex, transitionTime);
     }
 
+    public void CrossFadeLoopShout(float transitionTime = 0.0f)
+    {
+        CrossFadeState("LoopShout", BaseLayerIndex, transitionTime);
+    }
+
     //アクセッサ・プロパティ--------------------------------------------------------------------
 
     public float TackleSpeed
@@ -260,4 +270,6 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         get => m_animator.GetFloat("tackleSpeed");
         set => m_animator.SetFloat("tackleSpeed", value);
     }
+
+    public int BaseLayerIndex => m_animator.GetLayerIndex("Base Layer");
 }
