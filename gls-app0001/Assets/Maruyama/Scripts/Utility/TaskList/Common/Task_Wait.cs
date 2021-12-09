@@ -54,7 +54,7 @@ public class Task_Wait : TaskNodeBase
 
     public override bool OnUpdate()
     {
-        Debug.Log("△待機");
+        //Debug.Log("△待機");
 
         m_timer.UpdateTimer();
         m_param.update?.Invoke();
