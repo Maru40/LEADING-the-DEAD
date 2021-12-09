@@ -5,10 +5,12 @@ using UnityEngine;
 public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGeneratorManager>
 {
     List<EnemyGenerator> m_generators = new List<EnemyGenerator>();
+    List<ZombieTank> m_tanks = new List<ZombieTank>();
 
     void Start()
     {
         m_generators = new List<EnemyGenerator>(FindObjectsOfType<EnemyGenerator>());
+        m_tanks = new List<ZombieTank>(FindObjectsOfType<ZombieTank>());
     }
 
     //ゲームフェード時に
@@ -27,6 +29,11 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
         foreach (var generator in m_generators)
         {
             
+        }
+
+        foreach(var tank in m_tanks)
+        {
+            tank.GameStartEvent();
         }
     }
 
