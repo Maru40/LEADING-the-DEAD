@@ -59,5 +59,6 @@ public class StageSelectUIPresenter : MonoBehaviour
     {
         m_selectStageLabelAnimatorManager.StageLabelChange();
         m_stagePointer.OnStageChanged();
+        m_slideUIAnimatorManager.SlideUIUpdate();
     }
 }
