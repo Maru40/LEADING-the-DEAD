@@ -61,6 +61,7 @@ MonoBehaviour:
       particle: {fileID: 6492296973775632991, guid: 91837f35aa527df4199f8784a19b20ec, type: 3}
       isRemove: 0
     numDistribution: 0
+  m_clearServicesTime: 5
   m_createSetParam:
     respawnParametor:
       isAbsoluteRespawn: 0
@@ -68,15 +69,15 @@ MonoBehaviour:
       time: 0
     chaseParametor:
       nearRange: 0.75
-      maxSpeed: 3.5
+      maxSpeed: 2
       turningPower: 3
-      lostSeekTime: 7
-      inThrongRange: 3
+      lostSeekTime: 3
+      inThrongRange: 2
     randomPlowlingParametor:
-      randomPositionRadius: 15
-      maxSpeed: 1.3
-      turningPower: 2
-      targetNearRange: 1
+      randomPositionRadius: 5
+      maxSpeed: 2
+      turningPower: 1
+      targetNearRange: 1.5
       maxWaitCalcuRouteTime: 3
       inThrongRange: 0.5
     status:
@@ -84,6 +85,7 @@ MonoBehaviour:
       hp: 1
       damageIntervalTime: 3
       isStun: 0
+      isEat: 0
     attackManagerParametor:
       damageData:
         obj: {fileID: 0}
@@ -92,12 +94,12 @@ MonoBehaviour:
         hitStopTime: 0
         type: 0
         damageTags: []
-      startRange: 2.5
+      startRange: 2
     normalAttackParametor:
-      moveSpeed: 3
+      moveSpeed: 2.5
       turningDegree: 0
-      nearAvoidVec: 1
-      endWaitTime: 0.1
+      nearAvoidVec: 3
+      endWaitTime: 1
     normalAttackHitBoxDictionary:
       m_typeDraws:
       - key: 0
@@ -118,23 +120,23 @@ MonoBehaviour:
           damageTags: []
     preliminaryParam:
       timeRandomRange:
-        min: 1
+        min: 0.1
         max: 1
       moveSpeed: 1
     angerBuffParametor:
       attackPower: 1.05
-      speed: 1.02
+      speed: 1.05
       attackAnimeSpeed: 1.5
     targetBuffParametor:
       speed: 3
     eyeSarchRangeParam:
-      range: 7
+      range: 5
       height: 3
-      degree: 0.7
+      degree: 15
     throngParam:
       inThrongRange: 1
       nearObjectRange: 1
-      maxAvoidPower: 3
+      maxAvoidPower: 12
   m_respawnStatusUpParam:
     respawnParametor:
       isAbsoluteRespawn: 0
@@ -158,6 +160,7 @@ MonoBehaviour:
       hp: 0
       damageIntervalTime: 0
       isStun: 0
+      isEat: 0
     attackManagerParametor:
       damageData:
         obj: {fileID: 0}
