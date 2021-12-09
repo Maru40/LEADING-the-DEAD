@@ -43,28 +43,28 @@ public abstract class TaskNodeBase_Ex<OwnerType> : TaskNodeBase<OwnerType>
         public Action exit;
     }
 
-    Parametor m_param = new Parametor();
+    Parametor m_actionParam = new Parametor();
 
     public TaskNodeBase_Ex(OwnerType owner, Parametor param = new Parametor())
         :base(owner)
     {
-        m_param = param;
+        m_actionParam = param;
     }
 
     public override void OnEnter()
     {
-        m_param.enter?.Invoke();
+        m_actionParam.enter?.Invoke();
     }
 
     public override bool OnUpdate()
     {
-        m_param.update?.Invoke();
+        m_actionParam.update?.Invoke();
         return true;
     }
 
     public override void OnExit()
     {
-        m_param.exit?.Invoke();
+        m_actionParam.exit?.Invoke();
     }
 }
 
