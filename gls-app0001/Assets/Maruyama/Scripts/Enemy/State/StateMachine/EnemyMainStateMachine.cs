@@ -182,7 +182,7 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     void NodeUpdate()
     {
         var nowNode = GetNowNode();
-        nowNode.OnUpdate();
+        nowNode?.OnUpdate();
     }
 
     /// <summary>

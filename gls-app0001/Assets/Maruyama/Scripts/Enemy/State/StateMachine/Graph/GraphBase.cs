@@ -132,7 +132,7 @@ public class GraphBase<NodeType, EnumType, TransitionType>
 		{
 			m_firstType = type;
 			m_nowNodeType = type;
-			node.OnStart();
+			node?.OnStart();
 		}
 
 		m_nodes[type] = node;
@@ -189,10 +189,10 @@ public class GraphBase<NodeType, EnumType, TransitionType>
 	/// <param name="type">変更したいステートのタイプ</param>
 	public void ChangeState(EnumType type)
 	{
-		m_nodes[m_nowNodeType].OnExit();
+		m_nodes[m_nowNodeType]?.OnExit();
 
 		m_nowNodeType = type;
-		m_nodes[m_nowNodeType].OnStart();
+		m_nodes[m_nowNodeType]?.OnStart();
 	}
 
 }

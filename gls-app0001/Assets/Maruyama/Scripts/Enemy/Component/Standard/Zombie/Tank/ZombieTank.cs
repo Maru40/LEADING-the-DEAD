@@ -7,12 +7,16 @@ public class ZombieTank : EnemyBase, I_Chase, I_Listen
     //コンポーネント系
 
     Stator_ZombieTank m_stator;
+    AnimatorManager_ZombieTank m_animatorManager;
     TargetManager m_targetMgr;
 
     void Start()
     {
         m_stator = GetComponent<Stator_ZombieTank>();
+        m_animatorManager = GetComponent<AnimatorManager_ZombieTank>();
         m_targetMgr = GetComponent<TargetManager>();
+
+        m_animatorManager.CrossFadeLoopShout();
     }
 
     void Update()
@@ -20,6 +24,11 @@ public class ZombieTank : EnemyBase, I_Chase, I_Listen
         
     }
 
+    public void GameStartEvent()
+    {
+        m_stator.GetTransitionMember().rondomPlowlingTrigger.Fire();
+        m_animatorManager.CrossFadeIdle();
+    }
 
     //インターフェースの実装-------------------------------------------------
 
