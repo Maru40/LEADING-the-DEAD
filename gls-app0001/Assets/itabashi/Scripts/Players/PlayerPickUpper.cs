@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using System.Linq;
+using UnityEngine.Events;
 
 /// <summary>
 /// プレイヤーキャラクターのアイテムを拾う機能のコンポーネント
@@ -32,6 +33,9 @@ public class PlayerPickUpper : MonoBehaviour
     private GameControls m_gameControls;
 
     private List<PickedUpObject> m_triggerPickedUpObjects = new List<PickedUpObject>();
+
+    [SerializeField]
+    private UnityEvent m_pickedUpFindEvent;
 
     private int m_currentDisitionIndex = 0;
 
@@ -186,6 +190,8 @@ public class PlayerPickUpper : MonoBehaviour
         }
 
         m_canvas.gameObject.SetActive(true);
+
+        m_pickedUpFindEvent?.Invoke();
 
         m_triggerPickedUpObjects.Add(pickedUpObject);
 
