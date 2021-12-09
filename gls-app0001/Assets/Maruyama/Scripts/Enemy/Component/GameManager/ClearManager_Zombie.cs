@@ -16,10 +16,14 @@ public class ClearManager_Zombie : MonoBehaviour
     [Header("終了時にUpdateをoffにしたいビヘイビア"), SerializeField]
     List<Behaviour> m_enableOffBehaviour = new List<Behaviour>();
 
+    AnimatorManager_ZombieNormal m_animatorManager;
+
     private void Awake()
     {
         m_targetManager = GetComponent<TargetManager>();
         m_velocityManager = GetComponent<EnemyVelocityMgr>();
+
+        m_animatorManager = GetComponent<AnimatorManager_ZombieNormal>();
 
         enabled = false;
     }
@@ -37,6 +41,12 @@ public class ClearManager_Zombie : MonoBehaviour
 
         m_targetManager.SetNowTarget(GetType(), null);
         ChangeEnableBehabiours();
+
+        m_animatorManager.CrossFadeIdleAnimation();
+        m_animatorManager.CrossFadeIdleAnimation(m_animatorManager.UpperLayerIndex);
+        m_animatorManager.CrossFadeIdleAnimation(m_animatorManager.AllLayerIndex);
+
+        m_velocityManager.enabled = true;
     }
 
     void ChangeEnableBehabiours(bool enable = false)
