@@ -10,8 +10,10 @@ namespace MaruUtility
         //Randomにするためにstatic化
         static System.Random sm_random = new System.Random(System.DateTime.Now.Millisecond);
 
-        public static Vector3 CalcuVec(Vector3 maxRange)
+        public static Vector3 CalcuVec(Vector3 maxRangeBase)
         {
+            var maxRange = new Vector3(Mathf.Abs(maxRangeBase.x), Mathf.Abs(maxRangeBase.y), Mathf.Abs(maxRangeBase.z));
+
             Vector3 minVec = -maxRange;
             Vector3 maxVec = maxRange;
             Vector3 randomPosition = Vector3.zero;
