@@ -134,14 +134,15 @@ public class SmellManaer : MonoBehaviour
             Debug.Log("△PulldeCheck");
 
             enabled = false; //自分自身をoff
-            m_velocityManager.ResetAll(); //速度のリセット
-            m_velocityManager.enabled = false; //速度を計算しないようにする。
+            m_velocityManager.StartDeseleration(); //速度のリセット
+            //m_velocityManager.enabled = false; //速度を計算しないようにする。
 
             m_waitTimer.AddWaitTimer(GetType(), m_nearWaitTime, () => {
                 m_targetManager.AddExcludeNowTarget();  //ターゲット対象から外す。
                 enabled = true;
                 m_velocityManager.enabled = true;
                 m_velocityManager.ResetAll();
+                m_velocityManager.SetIsDeseleration(false);
             });
         }
     }

@@ -55,7 +55,7 @@ public class Task_Preliminary : TaskNodeBase<EnemyBase>
 
     public override bool OnUpdate()
     {
-        Debug.Log("△予備");
+        //Debug.Log("△予備");
 
         m_timer.UpdateTimer();
         Rotation();

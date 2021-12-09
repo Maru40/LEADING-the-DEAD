@@ -42,7 +42,7 @@ public class Task_ChaseTarget : TaskNodeBase<EnemyBase>
 
     public override bool OnUpdate()
     {
-        Debug.Log("△追いかける");
+        //Debug.Log("△追いかける");
 
         if (!m_targetManager.HasTarget()) { //ターゲットがnullなら
             return true;

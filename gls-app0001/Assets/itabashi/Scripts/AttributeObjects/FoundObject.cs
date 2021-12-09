@@ -43,11 +43,19 @@ public class FoundObject : MonoBehaviour
 
     private void Start()
     {
-        m_positionOffset = RandomPosition.CalcuVec(m_positionOffset);
+        //m_positionOffset = RandomPosition.CalcuVec(m_positionOffset);
     }
 
     public FoundData GetFoundData()
     {
-        return new FoundData(gameObject, m_priority, m_type, m_positionOffset);
+        var positionOffset = RandomPosition.CalcuVec(transform.rotation * m_positionOffset);
+
+        if (m_type == FoundType.Smell)
+        {
+            Debug.Log("△デフォ：" + transform.rotation * m_positionOffset);
+            Debug.Log("◆新規：" + positionOffset);
+        }
+
+        return new FoundData(gameObject, m_priority, m_type, positionOffset);
     }
 }

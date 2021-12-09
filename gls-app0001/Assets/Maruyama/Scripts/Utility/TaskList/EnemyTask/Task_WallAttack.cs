@@ -50,7 +50,7 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
 
     public override bool OnUpdate()
     {
-        Debug.Log("△WallAttack");
+        //Debug.Log("△WallAttack");
         m_timer.UpdateTimer();
 
         Move();

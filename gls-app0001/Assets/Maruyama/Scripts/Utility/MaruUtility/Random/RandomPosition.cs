@@ -10,17 +10,27 @@ namespace MaruUtility
         //Randomにするためにstatic化
         static System.Random sm_random = new System.Random(System.DateTime.Now.Millisecond);
 
-        public static Vector3 CalcuVec(Vector3 maxRange)
+        public static Vector3 CalcuVec(Vector3 maxRangeBase)
         {
+            var maxRange = new Vector3(Mathf.Abs(maxRangeBase.x), Mathf.Abs(maxRangeBase.y), Mathf.Abs(maxRangeBase.z));
+
             Vector3 minVec = -maxRange;
             Vector3 maxVec = maxRange;
+            //Vector3 minVec = -maxRange * Random.value;
+            //Vector3 maxVec = maxRange * Random.value;
             Vector3 randomPosition = Vector3.zero;
 
-            randomPosition.x = sm_random.Next((int)minVec.x, (int)maxVec.x);
-            randomPosition.y = sm_random.Next((int)minVec.y, (int)maxVec.y);
-            randomPosition.z = sm_random.Next((int)minVec.z, (int)maxVec.z);
+            //randomPosition.x = sm_random.Next((int)minVec.x, (int)maxVec.x);
+            //randomPosition.y = sm_random.Next((int)minVec.y, (int)maxVec.y);
+            //randomPosition.z = sm_random.Next((int)minVec.z, (int)maxVec.z);
+
+            randomPosition.x = Random.Range(minVec.x, maxVec.x);
+            randomPosition.y = Random.Range(minVec.y, maxVec.y);
+            randomPosition.z = Random.Range(minVec.z, maxVec.z);
 
             return randomPosition;
+
+            //return minVec + maxVec;
         }
 
         /// <summary>

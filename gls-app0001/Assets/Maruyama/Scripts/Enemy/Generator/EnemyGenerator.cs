@@ -118,7 +118,7 @@ public class EnemyGenerator : GeneratorBase
         UpdateClearServicesTimers();
         RemoveClearServices();
 
-        Debug.Log("〇" + GetNumAllClearServices());
+        //Debug.Log("〇" + GetNumAllClearServices());
     }
 
     //貢献した数を時間で管理する。

@@ -60,4 +60,15 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
 
         return count;
     }
+
+    public int GetAllDeashCount()
+    {
+        int count = 0;
+        foreach(var generator in m_generators)
+        {
+            count += generator.DeathCount;
+        }
+
+        return count;
+    }
 }
