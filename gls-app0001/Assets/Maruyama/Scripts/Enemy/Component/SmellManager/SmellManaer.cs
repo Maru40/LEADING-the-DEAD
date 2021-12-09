@@ -131,7 +131,7 @@ public class SmellManaer : MonoBehaviour
 
         if (IsTargetNear(m_nearRange))  //正体に気づく距離まで来たら。
         {
-            Debug.Log("△PulldeCheck");
+            //Debug.Log("△PulldeCheck");
 
             enabled = false; //自分自身をoff
             m_velocityManager.StartDeseleration(); //速度のリセット
