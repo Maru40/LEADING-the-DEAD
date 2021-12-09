@@ -12,6 +12,7 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
     {
         public float time;
         public float maxSpeed;
+        public AudioManager audioManager;
         public Action enterAnimation;
     }
 
@@ -35,6 +36,7 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
 
     public override void OnEnter()
     {
+        m_param.audioManager?.PlayOneShot();
         m_param.enterAnimation?.Invoke();
         m_timer.ResetTimer(m_param.time);
 
