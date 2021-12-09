@@ -31,7 +31,7 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
     }
 
     //ゲーム終了時に呼びたいイベント
-    public void GameEndEvent()
+    public void GameClearEvent()
     {
         foreach(var generator in m_generators)
         {
