@@ -8,4 +8,5 @@ public class StageData
     public SceneObject sceneObject;
     public Vector2 stagePoint;
     public string StageName;
+    public Sprite sprite;
 }
