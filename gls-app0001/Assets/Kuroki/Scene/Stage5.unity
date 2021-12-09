@@ -2997,8 +2997,32 @@ PrefabInstance:
       value: 10.74
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_outOfTargteDatas.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_outOfTargteDatas.Array.data[0].range
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_outOfTargteDatas.Array.data[0].target
+      value: 
+      objectReference: {fileID: 1791210195}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_createSetParam.chaseParametor.maxSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_createSetParam.eyeSarchRangeParam.degree
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_createSetParam.normalAttackParametor.moveSpeed
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_createSetParam.attackManagerParametor.startRange
+      value: 2.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
@@ -4939,11 +4963,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3036914389571509342, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.000000007251271
+      value: 0.000000014780001
       objectReference: {fileID: 0}
     - target: {fileID: 3036914389571509342, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0000000017117928
+      value: 0.000000003489085
       objectReference: {fileID: 0}
     - target: {fileID: 3036914389571509342, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_LocalRotation.y
@@ -4967,11 +4991,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3098392250675291944, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.0000003892161
+      value: -0.00000035742283
       objectReference: {fileID: 0}
     - target: {fileID: 3098392250675291944, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.00000016121855
+      value: -0.00000014804935
       objectReference: {fileID: 0}
     - target: {fileID: 3098392250675291944, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_LocalRotation.y
@@ -5327,6 +5351,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+--- !u!1 &1791210195 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3672481949353448505, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+  m_PrefabInstance: {fileID: 1791210194}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1798885446
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5464,6 +5493,18 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_gizmosColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_gizmosColor.g
+      value: 0.09838295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_gizmosColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_centerPosition.x
       value: -8.09
       objectReference: {fileID: 0}
@@ -5484,8 +5525,32 @@ PrefabInstance:
       value: 6.44
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_outOfTargteDatas.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_outOfTargteDatas.Array.data[0].range
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_outOfTargteDatas.Array.data[0].target
+      value: 
+      objectReference: {fileID: 1791210195}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_createSetParam.chaseParametor.maxSpeed
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_createSetParam.eyeSarchRangeParam.degree
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_createSetParam.normalAttackParametor.moveSpeed
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_createSetParam.attackManagerParametor.startRange
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
