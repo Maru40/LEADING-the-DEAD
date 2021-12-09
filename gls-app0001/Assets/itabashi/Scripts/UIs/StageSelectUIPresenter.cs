@@ -50,6 +50,7 @@ public class StageSelectUIPresenter : MonoBehaviour
             .Subscribe(_ =>
            {
                m_selectGroupAnimatorManager.SelectGroupAnimationPlay();
+               m_stagePointer.OnStageChanged();
            })
             .AddTo(this);
     }
