@@ -8,6 +8,7 @@ using StateMachine = EnemyMainStateMachine<EnemyBase, ZombieTankState, ZombieTan
 
 public enum ZombieTankState
 {
+    None,
     RandomPlowling,
     Chase,
     WaitSee,  //様子見ステート
@@ -43,6 +44,7 @@ public class Stator_ZombieTank : StatorBase
     {
         var zombie = GetComponent<ZombieTank>();
 
+        m_stateMachine.AddNode(StateType.None , new StateNode_ZombieTank_None(zombie));
         m_stateMachine.AddNode(StateType.RandomPlowling, new EnState_RandomPlowling(zombie));
         m_stateMachine.AddNode(StateType.Chase, new EnState_ChaseTarget(zombie));
         m_stateMachine.AddNode(StateType.WaitSee, new StateNode_ZombieTank_WaitSee(zombie));
@@ -51,6 +53,12 @@ public class Stator_ZombieTank : StatorBase
 
     void CreateEdge()
     {
+        //None
+        m_stateMachine.AddEdge(StateType.None, StateType.RandomPlowling, ToRandomPlowling);
+        m_stateMachine.AddEdge(StateType.None, StateType.Chase, ToChaseTrigger);
+        m_stateMachine.AddEdge(StateType.None, StateType.WaitSee, ToWaitSeeTrigger);
+        m_stateMachine.AddEdge(StateType.None, StateType.Attack, ToAttackTrigger);
+
         //ランダム徘徊
         m_stateMachine.AddEdge(StateType.RandomPlowling, StateType.Chase, ToChaseTrigger);
         m_stateMachine.AddEdge(StateType.RandomPlowling, StateType.WaitSee, ToWaitSeeTrigger);
