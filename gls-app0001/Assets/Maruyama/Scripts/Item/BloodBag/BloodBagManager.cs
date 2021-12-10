@@ -69,7 +69,7 @@ public class BloodBagManager : MonoBehaviour
     {
         int layerInt = 1 << other.gameObject.layer;
 
-        foreach (var str in m_layerStrings)
+        foreach (var str in m_layerStrings)  //Layerなら
         {
             if(layerInt == LayerMask.GetMask(str)) {
                 return true;
@@ -105,8 +105,9 @@ public class BloodBagManager : MonoBehaviour
             const float positionAdjustDistance = 0.05f;
 
             var puddle = Instantiate(m_breakBlood, contact.point, Quaternion.identity);
-            puddle.transform.forward = contact.normal;
-            puddle.transform.position += contact.normal.normalized * positionAdjustDistance;
+            var direct = contact.normal;
+            puddle.transform.forward = direct;
+            puddle.transform.position = contact.point + direct.normalized * positionAdjustDistance;
             puddle.transform.parent = other.transform;
 
             puddle.GetComponentInChildren<VerticesAlphaManager>().ChangeAlpha();
