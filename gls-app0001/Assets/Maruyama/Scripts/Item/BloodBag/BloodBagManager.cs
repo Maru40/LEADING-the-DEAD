@@ -6,6 +6,8 @@ using Es.InkPainter;
 
 public class BloodBagManager : MonoBehaviour
 {
+    const float PositionAdjustDistance = 0.05f;
+
     public enum StateEnum
     {
         Put,    //置く
@@ -56,6 +58,10 @@ public class BloodBagManager : MonoBehaviour
         if (IsCreateBloodPuddle(other)) {
             CreateBloodPuddleContacts(other);  //当たった場所に血だまりを増やす。
         }
+        else
+        {
+            CreateBloodPuddleGround();
+        }
 
         //CreateBloodInk(other, bloodPuddle);       //当たった場所の血だまり生成
         //CreateBloodInk(hitGround, bloodPuddle);   //地面に血だまり
@@ -102,12 +108,11 @@ public class BloodBagManager : MonoBehaviour
         foreach (var contact in other.contacts)
         {
             //そのままの位置だとオブジェクトに埋まるから、法線方向に少し位置をずらす。
-            const float positionAdjustDistance = 0.05f;
-
+            //const float PositionAdjustDistance = 0.05f;
             var puddle = Instantiate(m_breakBlood, contact.point, Quaternion.identity);
             var direct = contact.normal;
             puddle.transform.forward = direct;
-            puddle.transform.position = contact.point + direct.normalized * positionAdjustDistance;
+            puddle.transform.position = contact.point + direct.normalized * PositionAdjustDistance;
             puddle.transform.parent = other.transform;
 
             puddle.GetComponentInChildren<VerticesAlphaManager>().ChangeAlpha();
@@ -116,8 +121,12 @@ public class BloodBagManager : MonoBehaviour
 
     BloodPuddleManager CreateBloodPuddleGround()
     {
+        //後でCreateBloodPuddleをまとめる。
         var hitGround = CalcuRaycastHitGround();
-        var breakBlood = Instantiate(m_breakBlood, hitGround.point, Quaternion.identity);
+        var createPosition = hitGround.point + hitGround.normal * PositionAdjustDistance;
+        var breakBlood = Instantiate(m_breakBlood, createPosition, Quaternion.identity);
+        //breakBlood.transform.parent = hitGround.collider.gameObject.transform;
+        breakBlood.transform.forward = hitGround.normal;
         var bloodPuddle = breakBlood.GetComponent<BloodPuddleManager>();
         return bloodPuddle;
     }
