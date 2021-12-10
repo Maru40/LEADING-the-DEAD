@@ -17,6 +17,9 @@ public class SelectGroupAnimatorManager : MonoBehaviour
     [SerializeField]
     private StageSelectSceneEvent m_stageSelectEvent;
 
+    [SerializeField]
+    private SlideUIAnimatorManager m_slideUIAnimatorManager;
+
     private bool m_isFading = false;
 
     public bool isFading => m_isFading;
@@ -28,6 +31,7 @@ public class SelectGroupAnimatorManager : MonoBehaviour
             {
                 m_labelAnimatorManager.StageLabelChange();
                 m_directionAnimatorManager.ColorReset();
+                m_slideUIAnimatorManager.SlideUIUpdate();
             })
             .AddTo(this);
 
