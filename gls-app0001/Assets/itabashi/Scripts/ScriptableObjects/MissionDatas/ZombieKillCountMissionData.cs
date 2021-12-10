@@ -9,7 +9,7 @@ public class ZombieKillCountMissionData : MissionData
     [SerializeField, Min(0)]
     private int m_killCountBoader = 100;
 
-    public override bool IsMissionClear(PlayerStatusManager playerStatusManager, EnemyGenerator enemyGenerator)
+    public override bool IsMissionClear(PlayerStatusManager playerStatusManager, AllEnemyGeneratorManager enemyGenerator)
     {
         return false;
     }
