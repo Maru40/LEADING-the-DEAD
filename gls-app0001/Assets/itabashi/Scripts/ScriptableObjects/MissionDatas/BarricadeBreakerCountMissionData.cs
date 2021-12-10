@@ -1,4 +1,4 @@
-using Player;
+﻿using Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +9,7 @@ public class BarricadeBreakerCountMissionData : MissionData
     [SerializeField]
     private int m_breakerCountBoader = 0;
 
-    public override bool IsMissionClear(PlayerStatusManager playerStatusManager, EnemyGenerator enemyGenerator)
+    public override bool IsMissionClear(PlayerStatusManager playerStatusManager, AllEnemyGeneratorManager enemyGenerator)
     {
         return false;
     }

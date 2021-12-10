@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text.RegularExpressions;
@@ -15,7 +15,7 @@ public abstract class MissionData : ScriptableObject
 
     protected string regexText => m_regexText;
 
-    public abstract bool IsMissionClear(Player.PlayerStatusManager playerStatusManager, EnemyGenerator enemyGenerator);
+    public abstract bool IsMissionClear(Player.PlayerStatusManager playerStatusManager, AllEnemyGeneratorManager enemyGenerator);
 
     public abstract string GetExplanationText();
 }

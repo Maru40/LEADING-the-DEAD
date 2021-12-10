@@ -1,4 +1,4 @@
-using Player;
+﻿using Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +9,7 @@ public class RemainingHpRateMissionData : MissionData
     [SerializeField, Range(0.0f, 1.0f)]
     private float m_hpRateBoader;
 
-    public override bool IsMissionClear(PlayerStatusManager playerStatusManager, EnemyGenerator enemyGenerator)
+    public override bool IsMissionClear(PlayerStatusManager playerStatusManager, AllEnemyGeneratorManager enemyGenerator)
     {
         return playerStatusManager.hp / playerStatusManager.maxHp >= m_hpRateBoader;
     }
