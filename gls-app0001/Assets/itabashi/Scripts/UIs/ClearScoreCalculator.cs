@@ -18,14 +18,14 @@ public class ClearScoreCalculator : MonoBehaviour
     private Player.PlayerStatusManager m_playerStatusManager;
 
     [SerializeField]
-    private EnemyGenerator m_enemyGenerator;
+    private AllEnemyGeneratorManager m_allEnemyGeneratorManager;
 
     [SerializeField]
-    private MissionData m_mission1;
+    private ZombieBreakerMissionChecker m_mission1;
     [SerializeField]
-    private MissionData m_mission2;
+    private PlayerHPMissionChecker m_mission2;
     [SerializeField]
-    private MissionData m_mission3;
+    private ZombieDeathCountMissionChecker m_mission3;
 
     // Start is called before the first frame update
     void Start()
@@ -52,23 +52,21 @@ public class ClearScoreCalculator : MonoBehaviour
 
         int missionClearNum = 0;
 
-        bool isAchieve = m_mission1.IsMissionClear(m_playerStatusManager, m_enemyGenerator);
-        m_clearResult.SetMissionUI1(isAchieve, m_mission1.GetExplanationText());
+        bool isAchieve = m_mission1.IsMissionClear(m_allEnemyGeneratorManager);
+        m_clearResult.SetMissionUI1(isAchieve, m_mission1.GetDisctiptionText());
         if (isAchieve) { ++missionClearNum; }
 
-        isAchieve = m_mission2.IsMissionClear(m_playerStatusManager, m_enemyGenerator);
-        m_clearResult.SetMissionUI2(isAchieve, m_mission2.GetExplanationText());
+        isAchieve = m_mission2.IsMissionClear(m_playerStatusManager);
+        m_clearResult.SetMissionUI2(isAchieve, m_mission2.GetDisctiptionText());
         if (isAchieve) { ++missionClearNum; }
 
-        isAchieve = m_mission3.IsMissionClear(m_playerStatusManager, m_enemyGenerator);
-        m_clearResult.SetMissionUI3(isAchieve, m_mission3.GetExplanationText());
+        isAchieve = m_mission3.IsMissionClear(m_allEnemyGeneratorManager);
+        m_clearResult.SetMissionUI3(isAchieve, m_mission3.GetDisctiptionText());
         if (isAchieve) { ++missionClearNum; }
 
          m_clearResult.SetRank(GetScoreRank(missionClearNum));
       
         m_clearResult.UpdateFirstSelect();
-
-        m_popUpUI.PopUp();
 
     }
 
