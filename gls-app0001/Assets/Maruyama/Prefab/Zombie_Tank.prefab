@@ -583,6 +583,7 @@ GameObject:
   - component: {fileID: -3538298119593497930}
   - component: {fileID: 3116183869311014974}
   - component: {fileID: 1947119077}
+  - component: {fileID: 756554042465228958}
   m_Layer: 0
   m_Name: Zombie_Tank
   m_TagString: Untagged
@@ -986,6 +987,30 @@ MonoBehaviour:
     nearAvoidVec: 1
     endWaitTime: 0.1
   m_audioManager: {fileID: 0}
+--- !u!114 &756554042465228958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2293255808676022176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21988b6c073e5bd4b9d6c53f09d34d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_mapController: {fileID: 0}
+  m_markerData:
+    sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    color: {r: 1, g: 0.15566039, b: 0.15566039, a: 1}
+    size: 20
+  m_isForwardToUp: 0
+  m_drawOutOfRange: 0
+  m_outOfRangeMarkerData:
+    sprite: {fileID: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 10
+  m_isOutwardToUp: 0
 --- !u!1 &7049593270506000215
 GameObject:
   m_ObjectHideFlags: 0
@@ -1415,9 +1440,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24c4300f68c986241af51004b72b03f2, type: 3}
---- !u!4 &303781095 stripped
+--- !u!4 &303781097 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 400082, guid: 24c4300f68c986241af51004b72b03f2, type: 3}
+  m_CorrespondingSourceObject: {fileID: 400092, guid: 24c4300f68c986241af51004b72b03f2, type: 3}
   m_PrefabInstance: {fileID: 303910453}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &303781099 stripped
@@ -1425,8 +1450,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400094, guid: 24c4300f68c986241af51004b72b03f2, type: 3}
   m_PrefabInstance: {fileID: 303910453}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &303781097 stripped
+--- !u!4 &303781095 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 400092, guid: 24c4300f68c986241af51004b72b03f2, type: 3}
+  m_CorrespondingSourceObject: {fileID: 400082, guid: 24c4300f68c986241af51004b72b03f2, type: 3}
   m_PrefabInstance: {fileID: 303910453}
   m_PrefabAsset: {fileID: 0}

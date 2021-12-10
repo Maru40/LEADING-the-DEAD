@@ -93,6 +93,9 @@ public class SmellManaer : MonoBehaviour
     {
         //T_Wallでないなら
         var parent = m_targetManager.GetNowTarget().transform.parent;
+        if(parent == null) {
+            return false;
+        }
 
         foreach(var tag in m_attackTags) {
             //タグが一緒で、攻撃範囲なら

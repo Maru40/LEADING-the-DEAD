@@ -50,8 +50,12 @@ public class VerticesAlphaManager : MonoBehaviour
                 index++;
                 //vartices[i] = hit.point + (transform.forward * 0.1f);
             }
+            else
+            {
+                colors[i].a = 1.0f;
+            }
         }
-
+        
         m_board.Vertices = vartices;
         m_board.Colors = colors;
 
