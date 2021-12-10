@@ -423,7 +423,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2519966558701118227, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
       propertyPath: m_gameStartEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2519966558701118227, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
       propertyPath: m_gameClearEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -455,7 +455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2519966558701118227, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
       propertyPath: m_gameStartEvent.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2519966558701118227, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
       propertyPath: m_gameStartEvent.m_PersistentCalls.m_Calls.Array.data[5].m_Mode
@@ -500,7 +500,7 @@ PrefabInstance:
     - target: {fileID: 2519966558701118227, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
       propertyPath: m_gameStartEvent.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
-      objectReference: {fileID: 86635844213733450}
+      objectReference: {fileID: 49651197859730222}
     - target: {fileID: 2519966558701118227, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
       propertyPath: m_gameStartEvent.m_PersistentCalls.m_Calls.Array.data[5].m_Target
       value: 
@@ -575,7 +575,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2519966558701118227, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
       propertyPath: m_gameStartEvent.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
-      value: set_enabled
+      value: GameStartEvent
       objectReference: {fileID: 0}
     - target: {fileID: 2519966558701118227, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
       propertyPath: m_gameStartEvent.m_PersistentCalls.m_Calls.Array.data[5].m_MethodName
@@ -615,7 +615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2519966558701118227, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
       propertyPath: m_gameStartEvent.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
-      value: UnityEngine.Behaviour, UnityEngine
+      value: AllEnemyGeneratorManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2519966558701118227, guid: 449178d400d9c274b8a9dcea75e089db, type: 3}
       propertyPath: m_gameStartEvent.m_PersistentCalls.m_Calls.Array.data[5].m_TargetAssemblyTypeName
@@ -1620,6 +1620,34 @@ PrefabInstance:
       propertyPath: m_visibleChangeEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2557142107212186787}
+    - target: {fileID: 8419132738376911341, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419132738376911341, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419132738376911341, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 49651197859730222}
+    - target: {fileID: 8419132738376911341, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419132738376911341, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: AddClearServices
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419132738376911341, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: AllEnemyGeneratorManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419132738376911341, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
+      propertyPath: m_takeDamageEvent.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1799cc087b22fe4586f3f57e38440dd, type: 3}
 --- !u!4 &3672481949353019417 stripped
