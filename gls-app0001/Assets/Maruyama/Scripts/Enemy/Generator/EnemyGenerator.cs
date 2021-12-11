@@ -78,20 +78,14 @@ public class EnemyGenerator : GeneratorBase
     string[] m_obstacleLayerStrings = new string[] { "L_Obstacle" };
 
     //配布するデータの構造体
-    [Header("ドロップアイテムを配布するデータ群"), SerializeField]
-    List<DropDataDistributionParametor> m_distributionParams = new List<DropDataDistributionParametor>();
-    //データを配布する処理をまとめたクラス
-    RandomDropDataDistribution m_distribution;
+    //[Header("ドロップアイテムを配布するデータ群"), SerializeField]
+    //List<DropDataDistributionParametor> m_distributionParams = new List<DropDataDistributionParametor>();
+    ////データを配布する処理をまとめたクラス
+    //RandomDropDataDistribution m_distribution;
 
     //生成したゾンビを持つ
     protected List<ThrongData> m_datas = new List<ThrongData>();
     static List<ThrongData> sm_allDatas = new List<ThrongData>();
-
-    //[Header("クリアに貢献できる時間"), SerializeField]
-    //float m_clearServicesTime = 5.0f;
-    //HashSet<GameObject> m_clearServices = new HashSet<GameObject>();  //クリアに貢献したオブジェクト
-    //List<GameObject> m_removeClearServices = new List<GameObject>();  //削除申請の出されたクリア貢献オブジェクト
-    //Dictionary<GameObject, GameTimer> m_clearServicesTimerDictionary = new Dictionary<GameObject, GameTimer>();  //
 
     protected virtual void Awake()
     {
@@ -107,45 +101,11 @@ public class EnemyGenerator : GeneratorBase
             m_outOfTargteDatas.Add(new OutOfTargetData(barricade));
         }
 
-        m_distribution = new RandomDropDataDistribution(m_distributionParams);
+        //m_distribution = new RandomDropDataDistribution(m_distributionParams);
 
         CreateObjects();
-        DropDistribution();
+        //DropDistribution();
     }
-
-    private void Update()
-    {
-        //UpdateClearServicesTimers();
-        //RemoveClearServices();
-
-        //Debug.Log("〇" + GetNumAllClearServices());
-    }
-
-    //貢献した数を時間で管理する。
-    //void UpdateClearServicesTimers()
-    //{
-    //    System.Action removeAction = null;
-
-    //    foreach (var pairs in m_clearServicesTimerDictionary)
-    //    {
-    //        var timer = pairs.Value;
-    //        timer.UpdateTimer();
-    //        if (timer.IsTimeUp) {
-    //            removeAction += () => m_clearServicesTimerDictionary.Remove(pairs.Key);
-    //        }
-    //    }
-
-    //    removeAction?.Invoke();
-    //}
-
-    ////貢献した数の削除
-    //void RemoveClearServices()
-    //{        
-    //    foreach (var remove in m_removeClearServices)
-    //    {
-    //        m_clearServices.Remove(remove);
-    //    }
-    //}
 
     void CreateObjects()
     {
@@ -217,15 +177,15 @@ public class EnemyGenerator : GeneratorBase
     /// <summary>
     /// DropItem情報を配布をする処理
     /// </summary>
-    public void DropDistribution()
-    {
-        m_distribution.Distribution(m_datas);
-    }
+    //public void DropDistribution()
+    //{
+    //    m_distribution.Distribution(m_datas);
+    //}
 
-    public void DropDistribution(List<DropData> dropDatas)
-    {
-        m_distribution.Distribution(m_datas ,dropDatas);
-    }
+    //public void DropDistribution(List<DropData> dropDatas)
+    //{
+    //    m_distribution.Distribution(m_datas ,dropDatas);
+    //}
 
     /// <summary>
     /// ゲームクリア時に呼んで欲しい関数
@@ -293,64 +253,6 @@ public class EnemyGenerator : GeneratorBase
     {
         return m_centerPosition;
     }
-
-    //public void AddClearServices(AttributeObject.DamageData data)
-    //{
-    //    AddClearServices(data.obj);
-    //}
-
-    ///// <summary>
-    ///// クリアに貢献したオブジェクトの追加
-    ///// </summary>
-    ///// <param name="gameObj"></param>
-    //public void AddClearServices(GameObject gameObj)
-    //{
-    //    if (m_clearServices.Add(gameObj))  //追加されたら
-    //    {
-    //        //一定時間後に削除をする。
-    //        m_clearServicesTimerDictionary[gameObj] = new GameTimer(m_clearServicesTime, () => {
-    //            EndClearServices(gameObj);
-    //        });
-    //    }
-    //    else
-    //    {
-    //        //時間リセット
-    //        var timer = m_clearServicesTimerDictionary[gameObj];
-    //        timer.ResetTimer(m_clearServicesTime, () => {
-    //            EndClearServices(gameObj);
-    //        });
-    //    }
-    //}
-
-    ///// <summary>
-    ///// 貢献終了時
-    ///// </summary>
-    //void EndClearServices(GameObject gameObj)
-    //{
-    //    m_removeClearServices.Add(gameObj);
-    //}
-
-    /// <summary>
-    /// クリアに貢献したゾンビを全て取得
-    /// </summary>
-    /// <returns></returns>
-    //static public int GetNumAllClearServices()
-    //{
-    //    var generators = GameObject.FindObjectsOfType<EnemyGenerator>();
-
-    //    int count = 0;
-    //    foreach(var generator in generators)
-    //    {
-    //        count += generator.NumClearServices;
-    //    }
-
-    //    return count;
-    //}
-
-    ///// <summary>
-    ///// クリアに貢献した数。
-    ///// </summary>
-    //public int NumClearServices => m_clearServices.Count;
 
     //Gizmos-------------------------------------------------------------------------------------------
 
