@@ -127,7 +127,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
     void Stun(GameObject other)
     {
         //m_stun.StartStun();
-        m_dropManager.Drop(other);
+        //m_dropManager.Drop(other);
     }
 
 }
