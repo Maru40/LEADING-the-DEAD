@@ -22,6 +22,10 @@ public class SmellManaer : MonoBehaviour
     [Header("攻撃するタグ"), SerializeField]
     List<string> m_attackTags = new List<string>();
 
+    [Header("TriggerStayのインターバルタイム"), SerializeField]
+    float m_stayTriggerIntervalTime = 0.1f;
+    GameTimer m_timer = new GameTimer();
+
     private void Awake()
     {
         m_targetManager = GetComponent<TargetManager>();
@@ -38,8 +42,15 @@ public class SmellManaer : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        m_timer.ResetTimer(m_stayTriggerIntervalTime);
+    }
+
     private void Update()
     {
+        m_timer.UpdateTimer();
+
         if (!m_targetManager.HasTarget()) {
             return;
         }
@@ -157,7 +168,11 @@ public class SmellManaer : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        CheckSmellFind(other);
+        if (m_timer.IsTimeUp)
+        {
+            CheckSmellFind(other);
+            m_timer.ResetTimer(m_stayTriggerIntervalTime);
+        }
     }
 
     void CheckSmellFind(Collider other)
