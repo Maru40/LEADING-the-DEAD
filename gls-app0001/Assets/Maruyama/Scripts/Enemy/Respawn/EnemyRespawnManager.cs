@@ -42,8 +42,6 @@ public class EnemyRespawnManager : EnemyRespawnBase
 
     void Awake()
     {
-        //StartTargetNullCheck();
-        StartGeneratorNullCheck();
 
         m_statusManager = GetComponent<StatusManagerBase>();
         m_stator = GetComponent<StatorBase>();
@@ -90,16 +88,11 @@ public class EnemyRespawnManager : EnemyRespawnBase
 
     public void Respawn()
     {
-        //if(m_target == null || m_generator == null) {
-        if (m_generator == null) { 
-            //StartTargetNullCheck();
-            StartGeneratorNullCheck();
-        }
 
         RespawnPosition();  //ポジションのリスポン
 
         //DeathCount();  //死亡時カウント
-        DropDistribution();  //ドロップアイテム再配布
+        //DropDistribution();  //ドロップアイテム再配布
         m_statusUp?.Respawn();  //死亡時にステータスUP
         m_angerManager.SetIsAnger(false);  //怒りのoff
         m_statusManager.Respawn();
@@ -124,15 +117,15 @@ public class EnemyRespawnManager : EnemyRespawnBase
     /// <summary>
     /// ドロップアイテムの再配布
     /// </summary>
-    private void DropDistribution()
-    {
-        if (m_dropManager.GetNumData() != 0)  //ドロップデータが存在したら
-        {
-            var datas = m_dropManager.GetDatas();
-            m_generator.DropDistribution(datas);  //配布
-            m_dropManager.RemoveDatas(datas);
-        }
-    }
+    //private void DropDistribution()
+    //{
+    //    if (m_dropManager.GetNumData() != 0)  //ドロップデータが存在したら
+    //    {
+    //        var datas = m_dropManager.GetDatas();
+    //        //m_generator.DropDistribution(datas);  //配布
+    //        m_dropManager.RemoveDatas(datas);
+    //    }
+    //}
 
     /// <summary>
     /// 死亡数カウント
@@ -220,25 +213,5 @@ public class EnemyRespawnManager : EnemyRespawnBase
         //if(m_target == null) {
         //    m_target = GameObject.Find("Player");
         //}
-    }
-
-    private void StartGeneratorNullCheck()
-    {
-        return;
-
-        if(m_generator != null) { //null出ないなら処理をしない
-            return;
-        }
-
-        var generators = GameObject.FindObjectsOfType<EnemyGenerator>();
-
-        foreach (var generator in generators)
-        {
-            if(generator.IsEqualCreateObject(gameObject))
-            {
-                m_generator = generator;
-                return;
-            }
-        }
     }
 }
