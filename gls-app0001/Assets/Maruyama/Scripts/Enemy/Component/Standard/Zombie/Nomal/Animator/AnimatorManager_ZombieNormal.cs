@@ -227,6 +227,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 
     void SettingEat()
     {
+        var actionEvent = ZombieNormalTable.AllLayer.Eat.GetBehaviour<AnimationActionBehavior>(animator);
         var timeBehaviour = ZombieNormalTable.AllLayer.Eat.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
         var timeEvent = timeBehaviour.onTimeEvent;
 
@@ -237,11 +238,12 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 
         foreach(var time in times)
         {
-            timeEvent.ClampWhere(time)
-                .Subscribe(_ => {
-                    Eat();
-            })
-            .AddTo(this);
+            actionEvent.AddTimeAction(time, Eat);
+            //timeEvent.ClampWhere(time)
+            //    .Subscribe(_ => {
+            //        Eat();
+            //})
+            //.AddTo(this);
         }
 
         timeBehaviour.onStateEntered  //スタート時のEat状態にする。

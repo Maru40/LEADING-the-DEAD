@@ -143,12 +143,19 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         var timeEvent = tackle.onTimeEvent;
 
         //足音
-        timeEvent.ClampWhere(m_tackleParam.rightFootStepsSoundTime)
-            .Subscribe(_ => SEPlayOneShot(m_audioParam.tackleFootSteps))
-            .AddTo(this);
-        timeEvent.ClampWhere(m_tackleParam.leftFootStepsSoundTime)
-            .Subscribe(_ => SEPlayOneShot(m_audioParam.tackleFootSteps))
-            .AddTo(this);
+        actionBehaviour.AddTimeAction(m_tackleParam.rightFootStepsSoundTime,
+            () => { SEPlayOneShot(m_audioParam.tackleFootSteps); Debug.Log("△右足音"); }
+        );
+        actionBehaviour.AddTimeAction(m_tackleParam.leftFootStepsSoundTime,
+            () => { SEPlayOneShot(m_audioParam.tackleFootSteps); Debug.Log("△左足音"); }
+        );
+
+        //timeEvent.ClampWhere(m_tackleParam.rightFootStepsSoundTime)
+        //    .Subscribe(_ => SEPlayOneShot(m_audioParam.tackleFootSteps))
+        //    .AddTo(this);
+        //timeEvent.ClampWhere(m_tackleParam.leftFootStepsSoundTime)
+        //    .Subscribe(_ => SEPlayOneShot(m_audioParam.tackleFootSteps))
+        //    .AddTo(this);
     }
 
     void TackleStart(float speed)
