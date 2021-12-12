@@ -16,11 +16,6 @@ public class SelectSliderUI : MonoBehaviour
 
     private void Awake()
     {
-        m_button.OnClickAsObservable()
-            .Subscribe(_ =>
-            {
-                GameFocusManager.PushFocus(m_slider.gameObject);
-            })
-            .AddTo(this);
+
     }
 }
