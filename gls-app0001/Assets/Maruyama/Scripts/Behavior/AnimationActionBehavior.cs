@@ -108,10 +108,6 @@ public class AnimationActionBehavior : StateMachineBehaviour
 
         if (m_beforeTime > animeTime) //前フレームの方が小さかったら再生が最初に戻る。
         {
-            //Debug.Log(m_beforeTime);
-            //Debug.Log(animeTime);
-            //Debug.Log(stateInfo.normalizedTime);
-            //Debug.Break();
             ReturnAnimation();
         }
         //Debug.Log("Before: " + m_beforeTime);
