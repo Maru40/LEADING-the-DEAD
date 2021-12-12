@@ -22,6 +22,24 @@ namespace MaruUtility
 		}
 
 		/// <summary>
+		/// 当たった壁に対して反射ベクトルを求める。
+		/// </summary>
+		/// <param name="direct">現在の進行方向</param>
+		/// <param name="other">あたったコリジョン</param>
+		/// <returns>反射ベクトル</returns>
+		static public Vector3 Reflection(Vector3 moveDirect, Collision other)
+        {
+			var direct = moveDirect;
+			foreach(var contact in other.contacts)
+            {
+				var newDot = Mathf.Abs(Vector3.Dot(direct, contact.normal));
+				direct += 2.0f * (newDot * contact.normal);
+			}
+
+			return direct;
+        }
+
+		/// <summary>
 		/// 直線的に追いかけるためのベクトルを計算して返す関数
 		/// </summary>
 		/// <param name="velocity">現在の速度</param>
