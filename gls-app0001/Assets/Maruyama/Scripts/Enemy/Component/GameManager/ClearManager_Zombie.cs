@@ -12,11 +12,14 @@ public class ClearManager_Zombie : MonoBehaviour
 
     TargetManager m_targetManager;
     EnemyVelocityMgr m_velocityManager;
+    EnemyRotationCtrl m_rotationController;
 
     [Header("終了時にUpdateをoffにしたいビヘイビア"), SerializeField]
     List<Behaviour> m_enableOffBehaviour = new List<Behaviour>();
 
     AnimatorManager_ZombieNormal m_animatorManager;
+
+    Vector3 m_moveDirect = Vector3.zero;
 
     private void Awake()
     {
@@ -24,13 +27,15 @@ public class ClearManager_Zombie : MonoBehaviour
         m_velocityManager = GetComponent<EnemyVelocityMgr>();
 
         m_animatorManager = GetComponent<AnimatorManager_ZombieNormal>();
+        m_rotationController = GetComponent<EnemyRotationCtrl>();
 
         enabled = false;
     }
 
     void Update()
     {
-        m_velocityManager.velocity = transform.forward * m_moveSpeed;
+        m_velocityManager.velocity = m_moveDirect * m_moveSpeed;
+        m_rotationController.SetDirect(m_moveDirect);
 
         ChangeEnableBehabiours();
     }
@@ -46,6 +51,10 @@ public class ClearManager_Zombie : MonoBehaviour
         m_animatorManager.CrossFadeIdleAnimation(m_animatorManager.UpperLayerIndex);
         m_animatorManager.CrossFadeIdleAnimation(m_animatorManager.AllLayerIndex);
 
+        m_moveDirect = transform.forward;
+        m_rotationController.SetDirect(m_moveDirect);
+
+        m_rotationController.enabled = true;
         m_velocityManager.enabled = true;
     }
 
@@ -55,5 +64,22 @@ public class ClearManager_Zombie : MonoBehaviour
         {
             behaviour.enabled = enable;
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(enabled == false) {
+            return;
+        }
+
+        Reflection();  //反射ベクトルに直す。
+    }
+
+    //反射ベクトルに直す。
+    private void Reflection()
+    {
+        float newDot = Mathf.Abs(Vector3.Dot(m_moveDirect, transform.forward));
+        Vector3 moveDirect = m_moveDirect + 2.0f * transform.forward * newDot;
+        m_moveDirect = moveDirect;
     }
 }
