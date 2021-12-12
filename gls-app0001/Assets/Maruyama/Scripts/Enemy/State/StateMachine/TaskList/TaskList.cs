@@ -268,5 +268,5 @@ public class TaskList<EnumType>
     /// <summary>
     /// 現在のインデックスの取得
     /// </summary>
-    public int CurentIndex => m_currentIndex;
+    public int CurrentIndex => m_currentIndex;
 }
