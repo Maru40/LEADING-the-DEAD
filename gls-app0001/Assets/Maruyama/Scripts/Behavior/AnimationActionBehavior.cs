@@ -31,14 +31,13 @@ public class AnimationActionBehavior : StateMachineBehaviour
     Action m_exitAction;
 
     //遷移完了時に呼んで欲しいActionが呼ばれたかどうか
-    bool m_isFirstInTransition;
+    bool m_isFirstInTransition = true;
     //初めて遷移が完了したタイミングで呼んで欲しいエベント
     Action m_firstTransitionAciton = null;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        EnterReset();
-
+        //EnterReset();
         m_enterAction?.Invoke();
     }
 
@@ -46,7 +45,7 @@ public class AnimationActionBehavior : StateMachineBehaviour
     {
         FirstTransitionManager(animator, layerIndex);  //初期遷移時に呼び出したいイベント管理
 
-        UpdateTimeActionManager(stateInfo);  //TimeActionの管理
+        UpdateTimeActionManager(animator, stateInfo, layerIndex);  //TimeActionの管理
 
         m_updateAction?.Invoke();
     }
@@ -56,14 +55,17 @@ public class AnimationActionBehavior : StateMachineBehaviour
         base.OnStateExit(animator, stateInfo, layerIndex, controller);
 
         m_exitAction?.Invoke();
+
+        StateReset();
     }
 
     /// <summary>
     /// 初期化
     /// </summary>
-    private void EnterReset()
+    private void StateReset()
     {
         m_isFirstInTransition = true;
+        m_beforeTime = 0;
     }
 
     /// <summary>
@@ -76,6 +78,7 @@ public class AnimationActionBehavior : StateMachineBehaviour
         {
             if (m_isFirstInTransition)  //遷移完了が初めてだったら。
             {
+                Debug.Log("◆◆遷移初めて");
                 m_firstTransitionAciton?.Invoke();
                 m_isFirstInTransition = false;
             }
@@ -86,20 +89,35 @@ public class AnimationActionBehavior : StateMachineBehaviour
     /// タイムイベント管理
     /// </summary>
     /// <param name="stateInfo"></param>
-    private void UpdateTimeActionManager(AnimatorStateInfo stateInfo)
+    private void UpdateTimeActionManager(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (m_isFirstInTransition) {
-            return;  //遷移が完了していないなら処理を行わない
+        //遷移中で初めての遷移でない場合
+        if (animator.IsInTransition(layerIndex) && m_isFirstInTransition) {
+            return;
         }
 
-        var animeTime = stateInfo.normalizedTime % 1.0f * stateInfo.length;
+        var animeTime = stateInfo.normalizedTime % 1.0f * stateInfo.length * stateInfo.speed;
+        //Debug.Log("◆◆" + animeTime);
+
+        if (float.IsInfinity(animeTime)) {
+            m_beforeTime = 0;
+            return;
+        }
 
         PlayTimeActions(animeTime);
 
         if (m_beforeTime > animeTime) //前フレームの方が小さかったら再生が最初に戻る。
         {
+            //Debug.Log(m_beforeTime);
+            //Debug.Log(animeTime);
+            //Debug.Log(stateInfo.normalizedTime);
+            //Debug.Break();
             ReturnAnimation();
         }
+        //Debug.Log("Before: " + m_beforeTime);
+        //Debug.Log("Anime: " + animeTime);
+        //Debug.Log("Normal: " + stateInfo.normalizedTime);
+        //Debug.Break();
         m_beforeTime = animeTime;
     }
 
