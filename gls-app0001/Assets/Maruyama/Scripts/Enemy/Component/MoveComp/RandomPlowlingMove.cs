@@ -258,8 +258,11 @@ public class RandomPlowlingMove : MonoBehaviour
     {
         if (IsObstract(collision.gameObject))
         {
-            m_targetPosition = -m_targetPosition;
-            //SetRandomTargetPosition();
+            //m_targetPosition = -m_targetPosition;
+            var toVec = m_targetPosition - transform.position;
+            var reflectionVec = CalcuVelocity.Reflection(toVec, collision);
+
+            m_targetPosition = reflectionVec;
         }
     }
 
@@ -370,7 +373,4 @@ public class RandomPlowlingMove : MonoBehaviour
         m_param.maxWaitCalcuRouteTime += parametor.maxWaitCalcuRouteTime;
         m_param.inThrongRange += parametor.inThrongRange;
     }
-
-    
-
 }
