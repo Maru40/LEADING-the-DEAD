@@ -8,7 +8,7 @@ using UnityEngine.Animations;
 public class AnimationActionBehavior : StateMachineBehaviour
 {
     [Serializable]
-    class AnimatorTimerParametor
+    public class AnimatorTimerParametor
     {
         public float time;
         public Action action;
@@ -23,7 +23,7 @@ public class AnimationActionBehavior : StateMachineBehaviour
     }
 
     [SerializeField]
-    List<AnimatorTimerParametor> m_timerParam = new List<AnimatorTimerParametor>();
+    List<AnimatorTimerParametor> m_timerParams = new List<AnimatorTimerParametor>();
     float m_beforeTime = 0.0f;
 
     Action m_enterAction;
@@ -92,7 +92,7 @@ public class AnimationActionBehavior : StateMachineBehaviour
             return;  //遷移が完了していないなら処理を行わない
         }
 
-        var animeTime = stateInfo.normalizedTime % 1.0f;
+        var animeTime = stateInfo.normalizedTime % 1.0f * stateInfo.length;
 
         PlayTimeActions(animeTime);
 
@@ -109,7 +109,7 @@ public class AnimationActionBehavior : StateMachineBehaviour
     /// <param name="time">現在の再生時間</param>
     private void PlayTimeActions(float time)
     {
-        foreach (var param in m_timerParam)
+        foreach (var param in m_timerParams)
         {
             if (param.isEnd) {
                 continue;
@@ -128,7 +128,7 @@ public class AnimationActionBehavior : StateMachineBehaviour
     /// </summary>
     private void ReturnAnimation()
     {
-        foreach (var param in m_timerParam)
+        foreach (var param in m_timerParams)
         {
             param.isEnd = false;
         }
@@ -162,5 +162,15 @@ public class AnimationActionBehavior : StateMachineBehaviour
     public void AddFirstTransitionAction(Action action)
     {
         m_firstTransitionAciton += action;
+    }
+
+    /// <summary>
+    /// タイムイベントの追加
+    /// </summary>
+    /// <param name="time">時間</param>
+    /// <param name="action">イベント</param>
+    public void AddTimeAction(float time, Action action)
+    {
+        m_timerParams.Add(new AnimatorTimerParametor(time, action));
     }
 }
