@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using MaruUtility;
+
 /// <summary>
 /// クリア時のゾンビの挙動まとめ
 /// </summary>
@@ -71,15 +73,17 @@ public class ClearManager_Zombie : MonoBehaviour
         if(enabled == false) {
             return;
         }
-
-        Reflection();  //反射ベクトルに直す。
+        
+        Reflection(collision);  //反射ベクトルに直す。
     }
 
     //反射ベクトルに直す。
-    private void Reflection()
+    private void Reflection(Collision collision)
     {
-        float newDot = Mathf.Abs(Vector3.Dot(m_moveDirect, transform.forward));
-        Vector3 moveDirect = m_moveDirect + 2.0f * transform.forward * newDot;
-        m_moveDirect = moveDirect;
+        m_moveDirect = CalcuVelocity.Reflection(m_moveDirect, collision);
+
+        //float newDot = Mathf.Abs(Vector3.Dot(m_moveDirect, transform.forward));
+        //Vector3 moveDirect = m_moveDirect + 2.0f * transform.forward * newDot;
+        //m_moveDirect = moveDirect;
     }
 }
