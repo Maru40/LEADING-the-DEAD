@@ -61,6 +61,20 @@ public class EnemyGenerator : GeneratorBase
 
     [SerializeField]
     protected int m_numCreate = 30;
+    public int NumCreate => m_numCreate;
+    public int GetNumAliveZombie() //生存しているゾンビの総数
+    {
+        int count = 0;
+        foreach (var data in m_datas)
+        {
+            if (data.gameObject.activeSelf)
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
 
     [SerializeField]
     protected Vector3 m_centerPosition = new Vector3();  //生成するときの中心点
