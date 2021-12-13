@@ -173,8 +173,18 @@ public class TargetManager : MonoBehaviour
     private void FoundDataAdjust(Type type, FoundObject target)
     {
         if(target == null) {
+            GetComponent<FindMarker>()?.SetMarkerActive(false);
             return;
         }
+
+        var data = target.GetFoundData();
+        System.Action action = data.type switch
+        {
+            FoundType.Player => () => GetComponent<FindMarker>()?.SetMarkerActive(true),
+            _ => () => GetComponent<FindMarker>()?.SetMarkerActive(false)
+        };
+        Debug.Log("△ターゲット更新");
+        action?.Invoke();
     }
 
     public void AbsoluteSetNowTarget(Type type, FoundObject target)

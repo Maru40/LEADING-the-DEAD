@@ -78,7 +78,7 @@ public class AnimationActionBehavior : StateMachineBehaviour
         {
             if (m_isFirstInTransition)  //遷移完了が初めてだったら。
             {
-                Debug.Log("◆◆遷移初めて");
+                //Debug.Log("◆◆遷移初めて");
                 m_firstTransitionAciton?.Invoke();
                 m_isFirstInTransition = false;
             }
