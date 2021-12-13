@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGeneratorManager>
 {
-    List<EnemyGenerator> m_generators = new List<EnemyGenerator>();
-    List<ZombieTank> m_tanks = new List<ZombieTank>();
+    private List<EnemyGenerator> m_generators = new List<EnemyGenerator>();
+    private List<ZombieTank> m_tanks = new List<ZombieTank>();
 
     [Header("クリアに貢献できる時間"), SerializeField]
-    float m_clearServicesTime = 5.0f;
-    HashSet<GameObject> m_clearServices = new HashSet<GameObject>();  //クリアに貢献したオブジェクト
-    List<GameObject> m_removeClearServices = new List<GameObject>();  //削除申請の出されたクリア貢献オブジェクト
-    Dictionary<GameObject, GameTimer> m_clearServicesTimerDictionary = new Dictionary<GameObject, GameTimer>();
+    private float m_clearServicesTime = 5.0f;
+    private HashSet<GameObject> m_clearServices = new HashSet<GameObject>();  //クリアに貢献したオブジェクト
+    private List<GameObject> m_removeClearServices = new List<GameObject>();  //削除申請の出されたクリア貢献オブジェクト
+    private Dictionary<GameObject, GameTimer> m_clearServicesTimerDictionary = new Dictionary<GameObject, GameTimer>();
 
-    void Start()
+    private void Start()
     {
         m_generators = new List<EnemyGenerator>(FindObjectsOfType<EnemyGenerator>());
         m_tanks = new List<ZombieTank>(FindObjectsOfType<ZombieTank>());
@@ -24,11 +24,15 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
         UpdateClearServicesTimers();
         RemoveClearServices();
 
+        //Debug.Log("総数： " + GetNumAllZombie());
+        //Debug.Log("Alive総数： " + GetNumAllActiveZombie());
         //Debug.Log("〇" + GetNumAllClearServices());
     }
 
-    //貢献した数を時間で管理する。
-    void UpdateClearServicesTimers()
+    /// <summary>
+    /// 貢献した数を時間で管理する。
+    /// </summary>
+    private void UpdateClearServicesTimers()
     {
         System.Action removeAction = null;
 
@@ -45,8 +49,10 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
         removeAction?.Invoke();
     }
 
-    //貢献した数の削除
-    void RemoveClearServices()
+    /// <summary>
+    /// 貢献した数の削除
+    /// </summary>
+    private void RemoveClearServices()
     {
         foreach (var remove in m_removeClearServices)
         {
@@ -54,7 +60,9 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
         }
     }
 
-    //ゲームフェード時に
+    /// <summary>
+    /// ゲームフェード時に呼びたいイベント
+    /// </summary>
     public void FadeOutEvent()
     {
         foreach (var generator in m_generators)
@@ -64,14 +72,11 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
         }
     }
 
-    //ゲームスタート時に呼びたいイベント
+    /// <summary>
+    /// ゲームスタート時に呼びたいイベント
+    /// </summary>
     public void GameStartEvent()
     {
-        foreach (var generator in m_generators)
-        {
-            
-        }
-
         foreach(var tank in m_tanks)
         {
             tank.GameStartEvent();
@@ -94,21 +99,21 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
     public int GetNumAllClearServices()
     {
         return m_clearServices.Count;
-
-        //int count = 0;
-        //foreach (var generator in m_generators)
-        //{
-        //    count += generator.NumClearServices;  //クリアに貢献したゾンビの数を取得する。
-        //}
-
-        //return count;
     }
 
+    /// <summary>
+    /// クリアに貢献した敵の追加
+    /// </summary>
+    /// <param name="data"></param>
     public void AddClearServices(AttributeObject.DamageData data)
     {
         AddClearServices(data.obj);
     }
 
+    /// <summary>
+    /// クリアに貢献した敵の追加
+    /// </summary>
+    /// <param name="gameObj"></param>
     public void AddClearServices(GameObject gameObj) {
         if (m_clearServices.Add(gameObj))  //追加されたら
         {
@@ -130,17 +135,51 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
     /// <summary>
     /// 貢献終了時
     /// </summary>
-    void EndClearServices(GameObject gameObj)
+    private void EndClearServices(GameObject gameObj)
     {
         m_removeClearServices.Add(gameObj);
     }
 
+    /// <summary>
+    /// 死亡した数の取得
+    /// </summary>
+    /// <returns></returns>
     public int GetAllDeashCount()
     {
         int count = 0;
         foreach(var generator in m_generators)
         {
             count += generator.DeathCount;
+        }
+
+        return count;
+    }
+
+    /// <summary>
+    /// ゾンビの総数
+    /// </summary>
+    /// <returns></returns>
+    public int GetNumAllZombie()
+    {
+        int count = 0;
+        foreach(var generator in m_generators)
+        {
+            count += generator.NumCreate;
+        }
+
+        return count;
+    }
+
+    /// <summary>
+    /// 現在生きているゾンビの総数
+    /// </summary>
+    /// <returns></returns>
+    public int GetNumAllActiveZombie()
+    {
+        int count = 0;
+        foreach (var generator in m_generators)
+        {
+            count += generator.GetNumAliveZombie();
         }
 
         return count;
