@@ -16,9 +16,19 @@ public class FindMarker : MonoBehaviour
 
     private void Start()
     {
-        m_marker = Instantiate(m_createPrefab, CreatePosition, Quaternion.identity);
+        if (m_marker == null)
+        {
+            m_marker = Instantiate(m_createPrefab, CreatePosition, Quaternion.identity);
+        }
+        
         m_marker.transform.localScale = m_scale;
         m_marker.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("◆◆マーカーデストロイ");
+        Destroy(m_marker);
     }
 
     private void Update()
