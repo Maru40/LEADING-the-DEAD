@@ -16,6 +16,8 @@ public class ClearManager_Zombie : MonoBehaviour
     EnemyVelocityMgr m_velocityManager;
     EnemyRotationCtrl m_rotationController;
 
+    BarricadeDurability m_barricade = null;
+
     [Header("終了時にUpdateをoffにしたいビヘイビア"), SerializeField]
     List<Behaviour> m_enableOffBehaviour = new List<Behaviour>();
 
@@ -37,6 +39,8 @@ public class ClearManager_Zombie : MonoBehaviour
         m_animatorManager = GetComponent<AnimatorManager_ZombieNormal>();
         m_rotationController = GetComponent<EnemyRotationCtrl>();
         m_waitTimer = GetComponent<WaitTimer>();
+
+        m_barricade = FindObjectOfType<BarricadeDurability>();
 
         enabled = false;
     }
@@ -61,6 +65,10 @@ public class ClearManager_Zombie : MonoBehaviour
         m_animatorManager.CrossFadeIdleAnimation(m_animatorManager.AllLayerIndex);
 
         m_moveDirect = transform.forward;
+        if (m_barricade) {  //バリケードの方向に向かって走り出す。
+            m_moveDirect = m_barricade.transform.position - transform.position;
+        }
+        
         m_rotationController.SetDirect(m_moveDirect);
 
         m_rotationController.enabled = true;
