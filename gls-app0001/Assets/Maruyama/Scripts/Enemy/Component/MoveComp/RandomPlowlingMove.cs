@@ -256,6 +256,10 @@ public class RandomPlowlingMove : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if(enabled == false) {
+            return;
+        }
+
         if (IsObstract(collision.gameObject))
         {
             //m_targetPosition = -m_targetPosition;
