@@ -45,6 +45,7 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
     Stator_ZombieNormal m_stator;
     AnimatorManager_ZombieNormal m_animatorManager;
     EnemyVelocityMgr m_velocityManager;
+    TargetManager m_targetManager = null;
 
     TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
 
@@ -55,6 +56,7 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
         m_stator = owner.GetComponent<Stator_ZombieNormal>();
         m_animatorManager = owner.GetComponent<AnimatorManager_ZombieNormal>();
         m_velocityManager = owner.GetComponent<EnemyVelocityMgr>();
+        m_targetManager = owner.GetComponent<TargetManager>();
 
         //タイマーの初期化
         m_timerDictionary[TaskEnum.Fire] = new GameTimer(m_param.fireTime);
@@ -80,6 +82,7 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
 
         //上半身アニメーションレイヤーの削除
         m_animatorManager.Dying();
+        m_targetManager.SetNowTarget(GetType(), null);
 
         //タスクのセレクト
         SelectTask();
