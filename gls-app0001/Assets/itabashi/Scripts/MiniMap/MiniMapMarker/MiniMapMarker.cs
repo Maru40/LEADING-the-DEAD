@@ -64,6 +64,8 @@ namespace MiniMap
 
         private bool m_isActive = true;
 
+        private Camera m_camera = null;
+
         private void Reset()
         {
             m_mapController = FindObjectOfType<MiniMapController>();
@@ -89,6 +91,8 @@ namespace MiniMap
             m_markerTransform = m_markerObject.GetComponent<RectTransform>();
 
             m_mapController.AddMaker(this);
+
+            m_camera = Camera.main;
         }
 
         // Start is called before the first frame update
@@ -171,7 +175,16 @@ namespace MiniMap
             }
             else
             {
-                upVector = m_isForwardToUp ? new Vector3(transform.forward.x, transform.forward.z, 0.0f) : new Vector3();
+                if(m_isForwardToUp)
+                {
+                    upVector = new Vector3(transform.forward.x, transform.forward.z, 0).normalized;
+
+                    upVector = Quaternion.Euler(0,0, m_camera.transform.rotation.eulerAngles.y) * upVector;
+                }
+                else
+                {
+                    upVector = new Vector3();
+                }
             }
 
             m_markerTransform.up = upVector;
