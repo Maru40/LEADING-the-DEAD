@@ -5295,6 +5295,9 @@ MonoBehaviour:
   - {fileID: 1444888580945028646}
   - {fileID: 1922319841}
   m_audioManager: {fileID: 3537372825842702478}
+  m_audioPlayRange:
+    min: 0
+    max: 0.5
 --- !u!114 &-775554236576631193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5378,6 +5381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_createPositionObject: {fileID: 6152365424380167557}
   m_createPrefab: {fileID: 2952506020327742146, guid: 23d1e2f3c039394428785d411df7887b, type: 3}
+  m_scale: {x: 0.2, y: 0.2, z: 0.2}
 --- !u!1 &7585137866309258482
 GameObject:
   m_ObjectHideFlags: 0
