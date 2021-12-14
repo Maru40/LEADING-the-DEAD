@@ -40,6 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 75954198124480331}
   - component: {fileID: 75954198124480332}
+  - component: {fileID: -3195101685066311687}
   m_Layer: 0
   m_Name: Meat
   m_TagString: Untagged
@@ -77,6 +78,30 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-3195101685066311687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75954198124480330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21988b6c073e5bd4b9d6c53f09d34d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_mapController: {fileID: 0}
+  m_markerData:
+    sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    color: {r: 0, g: 1, b: 0, a: 1}
+    size: 10
+  m_isForwardToUp: 0
+  m_drawOutOfRange: 0
+  m_outOfRangeMarkerData:
+    sprite: {fileID: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 10
+  m_isOutwardToUp: 0
 --- !u!1 &138892127134538641
 GameObject:
   m_ObjectHideFlags: 0
