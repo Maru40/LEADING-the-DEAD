@@ -6,6 +6,11 @@ public class BillBoard : MonoBehaviour
 {
     private void LateUpdate()
     {
-        transform.rotation = Camera.main.transform.rotation;
+        var camera = Camera.main;
+        if (camera)
+        {
+            transform.rotation = camera.transform.rotation;
+        }
     }
+        
 }
