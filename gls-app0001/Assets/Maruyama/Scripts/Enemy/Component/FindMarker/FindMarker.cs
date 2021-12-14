@@ -10,11 +10,14 @@ public class FindMarker : MonoBehaviour
 
     [SerializeField]
     private GameObject m_createPrefab = null;
+    [SerializeField]
+    private Vector3 m_scale = Vector3.one;
     private GameObject m_marker;
 
     private void Start()
     {
         m_marker = Instantiate(m_createPrefab, CreatePosition, Quaternion.identity);
+        m_marker.transform.localScale = m_scale;
         m_marker.SetActive(false);
     }
 
