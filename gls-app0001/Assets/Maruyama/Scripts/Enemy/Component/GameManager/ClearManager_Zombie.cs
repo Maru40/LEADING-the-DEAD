@@ -19,7 +19,13 @@ public class ClearManager_Zombie : MonoBehaviour
     [Header("終了時にUpdateをoffにしたいビヘイビア"), SerializeField]
     List<Behaviour> m_enableOffBehaviour = new List<Behaviour>();
 
-    AnimatorManager_ZombieNormal m_animatorManager;
+    [Header("終了時に突っ込みながら出す音"), SerializeField]
+    AudioManager m_audioManager = null;
+    [Header("音をランダムなタイミングで出す"), SerializeField]
+    RandomRange m_audioPlayRange = new RandomRange(0.0f, 0.5f);
+
+    AnimatorManager_ZombieNormal m_animatorManager = null;
+    WaitTimer m_waitTimer = null;
 
     Vector3 m_moveDirect = Vector3.zero;
 
@@ -30,13 +36,14 @@ public class ClearManager_Zombie : MonoBehaviour
 
         m_animatorManager = GetComponent<AnimatorManager_ZombieNormal>();
         m_rotationController = GetComponent<EnemyRotationCtrl>();
+        m_waitTimer = GetComponent<WaitTimer>();
 
         enabled = false;
     }
 
     void Update()
     {
-        m_velocityManager.velocity = m_moveDirect * m_moveSpeed;
+        m_velocityManager.velocity = m_moveDirect.normalized * m_moveSpeed;
         m_rotationController.SetDirect(m_moveDirect);
 
         ChangeEnableBehabiours();
@@ -58,6 +65,10 @@ public class ClearManager_Zombie : MonoBehaviour
 
         m_rotationController.enabled = true;
         m_velocityManager.enabled = true;
+
+        var time = m_audioPlayRange.RandomValue;
+        m_waitTimer.AddWaitTimer(GetType(), time, () => m_audioManager?.PlayOneShot());
+        //m_audioManager?.PlayOneShot();
     }
 
     void ChangeEnableBehabiours(bool enable = false)
