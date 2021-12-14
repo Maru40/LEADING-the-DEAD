@@ -23,6 +23,6 @@ public class DrawNumZombie : MonoBehaviour
         var numZombie = m_allGeneratorManager.GetNumAllZombie();
         var numAliveZombie = m_allGeneratorManager.GetNumAllActiveZombie();
 
-        m_text.text = m_textString + numZombie.ToString() + "/" + numAliveZombie.ToString();
+        m_text.text = m_textString + numAliveZombie.ToString() + "/" + numZombie.ToString();
     }
 }
