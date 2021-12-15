@@ -49,6 +49,8 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
 
     public override void OnUpdate()
     {
+        Debug.Log("〇ChaseState");
+
         StateCheck();
 
         TargetCheck();
@@ -114,7 +116,7 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
 
         var target = GameObject.Find("Player");
         var foundObject = target.GetComponent<FoundObject>();
-        m_targetManager?.SetNowTarget(GetType(), null);
+        //m_targetManager?.SetNowTarget(GetType(), null);
 
         m_eyeTarget = foundObject;
     }
