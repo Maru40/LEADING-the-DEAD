@@ -10,9 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 478918}
   - component: {fileID: 9511322}
-  m_Layer: 0
+  - component: {fileID: 1382257650081624267}
+  - component: {fileID: 4924845001194630318}
+  m_Layer: 3
   m_Name: Large_gate
-  m_TagString: Untagged
+  m_TagString: T_Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24,9 +26,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 108024}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -5.25, y: 0, z: -103.22}
-  m_LocalScale: {x: 0.38284853, y: 0.3828486, z: 0.3828486}
+  m_LocalScale: {x: 0.38284847, y: 0.3828486, z: 0.3828485}
   m_Children:
   - {fileID: 410910}
   - {fileID: 452682}
@@ -34,7 +36,7 @@ Transform:
   - {fileID: 427628}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!95 &9511322
 Animator:
   serializedVersion: 3
@@ -54,6 +56,49 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1382257650081624267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2325594c6c050cf4fa56f37a6a7fdd7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_takeDamageTypes: 03000000
+  m_particles: []
+--- !u!114 &4924845001194630318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d638061b631635b41964733f8831a238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_animator: {fileID: 0}
+  m_isHitStopable: 1
+  m_takeDamageEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1382257650081624267}
+        m_TargetAssemblyTypeName: TypeDamageDestroy, Assembly-CSharp
+        m_MethodName: Damaged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &114676
 GameObject:
   m_ObjectHideFlags: 0
@@ -65,7 +110,7 @@ GameObject:
   - component: {fileID: 413326}
   - component: {fileID: 3370950}
   - component: {fileID: 2339502}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +189,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 410910}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +223,8 @@ GameObject:
   m_Component:
   - component: {fileID: 474652}
   - component: {fileID: 13726248}
-  m_Layer: 0
+  - component: {fileID: 2058272617}
+  m_Layer: 3
   m_Name: Object018
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,6 +300,19 @@ SkinnedMeshRenderer:
     m_Center: {x: -88.825775, y: 217.94714, z: 1.761684}
     m_Extent: {x: 114.63081, y: 219.87143, z: 7.761085}
   m_DirtyAABB: 0
+--- !u!65 &2058272617
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153782}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 229.26178, y: 15.522197, z: 462.61316}
+  m_Center: {x: 88.81035, y: -1.5511525, z: 116.05507}
 --- !u!1 &167160
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,7 +324,7 @@ GameObject:
   - component: {fileID: 494872}
   - component: {fileID: 3300934}
   - component: {fileID: 2390342}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Object022
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +405,7 @@ GameObject:
   - component: {fileID: 432000}
   - component: {fileID: 3389010}
   - component: {fileID: 2371288}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Object020
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,7 +486,7 @@ GameObject:
   - component: {fileID: 464666}
   - component: {fileID: 3379798}
   - component: {fileID: 2373308}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Object025
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +567,7 @@ GameObject:
   - component: {fileID: 415466}
   - component: {fileID: 3316594}
   - component: {fileID: 2383166}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Object024
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,7 +646,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 452682}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -619,7 +678,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 466900}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -652,7 +711,7 @@ GameObject:
   - component: {fileID: 427628}
   - component: {fileID: 3350856}
   - component: {fileID: 2375944}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Object019
   m_TagString: Untagged
   m_Icon: {fileID: 0}

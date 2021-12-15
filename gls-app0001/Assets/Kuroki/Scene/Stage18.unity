@@ -128,29 +128,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000010799792750, guid: efaf0e3818a9ab240983b51198f0a77a, type: 3}
   m_PrefabInstance: {fileID: 142726794}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &9351573 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1118244101624706, guid: cc48ba8be017e8f49a44de783e62a9bf, type: 3}
-  m_PrefabInstance: {fileID: 833892412}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9351574 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4361703912522800, guid: cc48ba8be017e8f49a44de783e62a9bf, type: 3}
   m_PrefabInstance: {fileID: 833892412}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &9351575
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9351573}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.0047326856, y: 0.002419986, z: 0.0026989465}
-  m_Center: {x: 0.0000032791868, y: 0.000014960649, z: 0.0013494733}
 --- !u!1001 &32765947
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -387,88 +369,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
---- !u!1 &69211989 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1118244101624706, guid: cc48ba8be017e8f49a44de783e62a9bf, type: 3}
-  m_PrefabInstance: {fileID: 1699881164}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &69211990 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4361703912522800, guid: cc48ba8be017e8f49a44de783e62a9bf, type: 3}
   m_PrefabInstance: {fileID: 1699881164}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &69211991
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69211989}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.0047326856, y: 0.002419986, z: 0.0026989465}
-  m_Center: {x: 0.0000032791868, y: 0.000014960649, z: 0.0013494733}
 --- !u!4 &81145740 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000010482363180, guid: 32c4edf4f02ad254092a6e1ba94f5b4e, type: 3}
   m_PrefabInstance: {fileID: 1005515025}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &87376008 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1000011585897626, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
-  m_PrefabInstance: {fileID: 1361187863}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &87376009 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012771108642, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
   m_PrefabInstance: {fileID: 1361187863}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &87376013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 87376008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57436ba9ae8f7f447a7538693a8d707d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_tags:
-  - ZombieTankTackle
-  m_particle: {fileID: 0}
---- !u!114 &87376014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 87376008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d638061b631635b41964733f8831a238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_animator: {fileID: 0}
-  m_isHitStopable: 1
-  m_takeDamageEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TagDamage, Assembly-CSharp
-        m_MethodName: Damaged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &89423723 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1000010944246702, guid: 96c565084cc73634bb2bb33e2d79d426, type: 3}
@@ -553,60 +468,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 64000010569802236, guid: efaf0e3818a9ab240983b51198f0a77a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: efaf0e3818a9ab240983b51198f0a77a, type: 3}
---- !u!1 &98849830 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1000011585897626, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
-  m_PrefabInstance: {fileID: 1464393825}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &98849831 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012771108642, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
   m_PrefabInstance: {fileID: 1464393825}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &98849835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 98849830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57436ba9ae8f7f447a7538693a8d707d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_tags:
-  - ZombieTankTackle
-  m_particle: {fileID: 0}
---- !u!114 &98849836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 98849830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d638061b631635b41964733f8831a238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_animator: {fileID: 0}
-  m_isHitStopable: 1
-  m_takeDamageEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TagDamage, Assembly-CSharp
-        m_MethodName: Damaged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1001 &103621151
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1619,11 +1485,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3036914389571509342, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.000000020453873
+      value: -5.6260474e-16
       objectReference: {fileID: 0}
     - target: {fileID: 3036914389571509342, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.000000010226936
+      value: 6.0687555e-16
       objectReference: {fileID: 0}
     - target: {fileID: 3036914389571509342, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_LocalRotation.y
@@ -1647,7 +1513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3098392250675291944, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.0000003574228
+      value: -0.00000035742283
       objectReference: {fileID: 0}
     - target: {fileID: 3098392250675291944, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1672,6 +1538,54 @@ PrefabInstance:
     - target: {fileID: 3672481949353019417, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_LocalPosition.z
       value: 25.14415
+      objectReference: {fileID: 0}
+    - target: {fileID: 4079773281944717425, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4079773281944717425, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4079773281944717425, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4079773281944717425, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4079773281944717425, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4079773281944717425, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004640056430698843, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004640056430698843, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004640056430698843, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004640056430698843, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004640056430698843, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004640056430698843, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6090664143881496853, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1967,11 +1881,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8790572344023143906, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000023831277
+      value: 0.000000022880096
       objectReference: {fileID: 0}
     - target: {fileID: 8790572344023143906, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000008628111
+      value: -0.000000008283737
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
@@ -2136,24 +2050,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000011394009582, guid: 9df406dc401707343b6396bd2ba69f93, type: 3}
   m_PrefabInstance: {fileID: 1250964412}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &340087854 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1000013871382564, guid: fe9a19d4f0d796c40bf4fc6b69dd7b81, type: 3}
-  m_PrefabInstance: {fileID: 1467120373}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &340087855
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340087854}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.2130542, y: 1.081816, z: 1.7726789}
-  m_Center: {x: -0.000000059604645, y: 0, z: 0}
 --- !u!4 &340087858 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000013978381734, guid: fe9a19d4f0d796c40bf4fc6b69dd7b81, type: 3}
@@ -2456,60 +2352,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58d97d456aead63499ac7d5316541f78, type: 3}
---- !u!1 &439258617 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1000011585897626, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
-  m_PrefabInstance: {fileID: 659427982}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &439258618 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012771108642, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
   m_PrefabInstance: {fileID: 659427982}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &439258622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 439258617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57436ba9ae8f7f447a7538693a8d707d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_tags:
-  - ZombieTankTackle
-  m_particle: {fileID: 0}
---- !u!114 &439258623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 439258617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d638061b631635b41964733f8831a238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_animator: {fileID: 0}
-  m_isHitStopable: 1
-  m_takeDamageEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TagDamage, Assembly-CSharp
-        m_MethodName: Damaged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!4 &440123762 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2293255808676022177, guid: 9c778371245f3a848b92600adf93b319, type: 3}
@@ -4417,42 +4264,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000011765245650, guid: 9732a241b7bd0fa4a8e59553d6d8a2b0, type: 3}
   m_PrefabInstance: {fileID: 253436816}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &741162995 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1000012001423700, guid: efaf0e3818a9ab240983b51198f0a77a, type: 3}
-  m_PrefabInstance: {fileID: 967667194}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &741162996
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741162995}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.3244789, y: 1.0893219, z: 1.305212}
-  m_Center: {x: -0.0008620024, y: 0, z: 0.00031378865}
---- !u!1 &746267822 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1000012001423700, guid: efaf0e3818a9ab240983b51198f0a77a, type: 3}
-  m_PrefabInstance: {fileID: 142726794}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &746267823
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 746267822}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.3244789, y: 1.0893219, z: 1.305212}
-  m_Center: {x: -0.0008620024, y: 0, z: 0.00031378865}
 --- !u!1001 &749593495
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4936,60 +4747,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000010110136030, guid: f0edaebc598e4d34b80cc4fcf3f6550b, type: 3}
   m_PrefabInstance: {fileID: 798597857}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &803423511 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1000011585897626, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
-  m_PrefabInstance: {fileID: 35296075}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &803423512 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012771108642, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
   m_PrefabInstance: {fileID: 35296075}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &803423516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 803423511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57436ba9ae8f7f447a7538693a8d707d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_tags:
-  - ZombieTankTackle
-  m_particle: {fileID: 0}
---- !u!114 &803423517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 803423511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d638061b631635b41964733f8831a238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_animator: {fileID: 0}
-  m_isHitStopable: 1
-  m_takeDamageEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TagDamage, Assembly-CSharp
-        m_MethodName: Damaged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1001 &807565371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5683,60 +5445,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2834631260142655915, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
   m_PrefabInstance: {fileID: 820491539}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &867912509 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1000011585897626, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
-  m_PrefabInstance: {fileID: 482391228}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &867912510 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012771108642, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
   m_PrefabInstance: {fileID: 482391228}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &867912514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 867912509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57436ba9ae8f7f447a7538693a8d707d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_tags:
-  - ZombieTankTackle
-  m_particle: {fileID: 0}
---- !u!114 &867912515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 867912509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d638061b631635b41964733f8831a238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_animator: {fileID: 0}
-  m_isHitStopable: 1
-  m_takeDamageEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TagDamage, Assembly-CSharp
-        m_MethodName: Damaged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!4 &871868201 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000010482363180, guid: 32c4edf4f02ad254092a6e1ba94f5b4e, type: 3}
@@ -6205,8 +5918,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 958986439}
-  m_LocalRotation: {x: 1e-45, y: 0.9486833, z: -0.31622776, w: 3e-45}
-  m_LocalPosition: {x: 0, y: 4.0908165, z: -10}
+  m_LocalRotation: {x: -0, y: 0.9486833, z: -0.31622776, w: -1e-45}
+  m_LocalPosition: {x: -10.43, y: 4.0908165, z: -5.4300003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 955428132}
@@ -6248,60 +5961,11 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 955428132}
---- !u!1 &962990761 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1000011585897626, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
-  m_PrefabInstance: {fileID: 998406313}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &962990762 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012771108642, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
   m_PrefabInstance: {fileID: 998406313}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &962990766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 962990761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57436ba9ae8f7f447a7538693a8d707d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_tags:
-  - ZombieTankTackle
-  m_particle: {fileID: 0}
---- !u!114 &962990767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 962990761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d638061b631635b41964733f8831a238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_animator: {fileID: 0}
-  m_isHitStopable: 1
-  m_takeDamageEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TagDamage, Assembly-CSharp
-        m_MethodName: Damaged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!4 &966160235 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 416134, guid: 8e680f175229ca447a8662e760e42fd4, type: 3}
@@ -6453,29 +6117,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000010482363180, guid: 32c4edf4f02ad254092a6e1ba94f5b4e, type: 3}
   m_PrefabInstance: {fileID: 794828589}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &998109730 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1118244101624706, guid: cc48ba8be017e8f49a44de783e62a9bf, type: 3}
-  m_PrefabInstance: {fileID: 1224938980}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &998109731 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4361703912522800, guid: cc48ba8be017e8f49a44de783e62a9bf, type: 3}
   m_PrefabInstance: {fileID: 1224938980}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &998109732
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 998109730}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.0047326856, y: 0.002419986, z: 0.0026989465}
-  m_Center: {x: 0.0000032791868, y: 0.000014960649, z: 0.0013494733}
 --- !u!1001 &998406313
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7163,14 +6809,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bags_on_pallet_v1_1 (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 1000012006241372, guid: 6d21e769def7d504ea22abcb06173633, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000012006241372, guid: 6d21e769def7d504ea22abcb06173633, type: 3}
-      propertyPath: m_TagString
-      value: T_Wall
-      objectReference: {fileID: 0}
     - target: {fileID: 4000012000326308, guid: 6d21e769def7d504ea22abcb06173633, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -7283,24 +6921,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 64902692739005546, guid: cc48ba8be017e8f49a44de783e62a9bf, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: cc48ba8be017e8f49a44de783e62a9bf, type: 3}
---- !u!1 &1176651884 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1000013871382564, guid: fe9a19d4f0d796c40bf4fc6b69dd7b81, type: 3}
-  m_PrefabInstance: {fileID: 1204875424}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1176651885
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1176651884}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.2130542, y: 1.081816, z: 1.7726789}
-  m_Center: {x: -0.000000059604645, y: 0, z: 0}
 --- !u!4 &1176651888 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000013978381734, guid: fe9a19d4f0d796c40bf4fc6b69dd7b81, type: 3}
@@ -7642,60 +7262,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000012999968834, guid: 46132fa6877a42947bf1f7f15c09f435, type: 3}
   m_PrefabInstance: {fileID: 1233756974}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1212787877 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1000011585897626, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
-  m_PrefabInstance: {fileID: 369894416}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1212787881 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012771108642, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
   m_PrefabInstance: {fileID: 369894416}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1212787882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1212787877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57436ba9ae8f7f447a7538693a8d707d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_tags:
-  - ZombieTankTackle
-  m_particle: {fileID: 0}
---- !u!114 &1212787883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1212787877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d638061b631635b41964733f8831a238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_animator: {fileID: 0}
-  m_isHitStopable: 1
-  m_takeDamageEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TagDamage, Assembly-CSharp
-        m_MethodName: Damaged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!4 &1216697096 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000010482363180, guid: 32c4edf4f02ad254092a6e1ba94f5b4e, type: 3}
@@ -8798,60 +8369,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 64000013717692274, guid: 36667f34d4b750c4695e409fb89b51f8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 36667f34d4b750c4695e409fb89b51f8, type: 3}
---- !u!1 &1415690342 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1000011585897626, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
-  m_PrefabInstance: {fileID: 455548512}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1415690343 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012771108642, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
   m_PrefabInstance: {fileID: 455548512}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1415690347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1415690342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57436ba9ae8f7f447a7538693a8d707d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_tags:
-  - ZombieTankTackle
-  m_particle: {fileID: 0}
---- !u!114 &1415690348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1415690342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d638061b631635b41964733f8831a238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_animator: {fileID: 0}
-  m_isHitStopable: 1
-  m_takeDamageEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TagDamage, Assembly-CSharp
-        m_MethodName: Damaged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1001 &1421320703
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11078,60 +10600,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000010507042020, guid: 39485138b2c1f4d41bdd3846e259ffea, type: 3}
   m_PrefabInstance: {fileID: 692697094}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1741778209 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1000011585897626, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
-  m_PrefabInstance: {fileID: 1672873515}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1741778210 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012771108642, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
   m_PrefabInstance: {fileID: 1672873515}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1741778214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1741778209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57436ba9ae8f7f447a7538693a8d707d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_tags:
-  - ZombieTankTackle
-  m_particle: {fileID: 0}
---- !u!114 &1741778215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1741778209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d638061b631635b41964733f8831a238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_animator: {fileID: 0}
-  m_isHitStopable: 1
-  m_takeDamageEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TagDamage, Assembly-CSharp
-        m_MethodName: Damaged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1001 &1753244711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11316,60 +10789,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000010507042020, guid: 39485138b2c1f4d41bdd3846e259ffea, type: 3}
   m_PrefabInstance: {fileID: 1153482393}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1806426265 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1000011585897626, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
-  m_PrefabInstance: {fileID: 1202802159}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1806426266 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012771108642, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
   m_PrefabInstance: {fileID: 1202802159}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1806426270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1806426265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57436ba9ae8f7f447a7538693a8d707d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_tags:
-  - ZombieTankTackle
-  m_particle: {fileID: 0}
---- !u!114 &1806426271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1806426265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d638061b631635b41964733f8831a238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_animator: {fileID: 0}
-  m_isHitStopable: 1
-  m_takeDamageEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TagDamage, Assembly-CSharp
-        m_MethodName: Damaged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!4 &1815745768 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2834631260142655915, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
@@ -11385,60 +10809,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000011955731940, guid: ee5ce8c8eaa133d43a291b519c442236, type: 3}
   m_PrefabInstance: {fileID: 978434431}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1836895834 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1000011585897626, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
-  m_PrefabInstance: {fileID: 57471200}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1836895835 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012771108642, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
   m_PrefabInstance: {fileID: 57471200}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1836895839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1836895834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57436ba9ae8f7f447a7538693a8d707d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_tags:
-  - ZombieTankTackle
-  m_particle: {fileID: 0}
---- !u!114 &1836895840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1836895834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d638061b631635b41964733f8831a238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_animator: {fileID: 0}
-  m_isHitStopable: 1
-  m_takeDamageEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TagDamage, Assembly-CSharp
-        m_MethodName: Damaged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1851130474
 GameObject:
   m_ObjectHideFlags: 0
@@ -11552,24 +10927,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000010482363180, guid: 32c4edf4f02ad254092a6e1ba94f5b4e, type: 3}
   m_PrefabInstance: {fileID: 796455340}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1876377968 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1000012001423700, guid: efaf0e3818a9ab240983b51198f0a77a, type: 3}
-  m_PrefabInstance: {fileID: 95805939}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1876377969
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1876377968}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.3244789, y: 1.0893219, z: 1.305212}
-  m_Center: {x: -0.0008620024, y: 0, z: 0.00031378865}
 --- !u!1 &1876968462
 GameObject:
   m_ObjectHideFlags: 0
@@ -11794,57 +11151,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2be9b4ffc291194c96942bd60bdc25c, type: 3}
---- !u!1 &1957778583 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1118244101624706, guid: cc48ba8be017e8f49a44de783e62a9bf, type: 3}
-  m_PrefabInstance: {fileID: 1635943616}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1957778584 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4361703912522800, guid: cc48ba8be017e8f49a44de783e62a9bf, type: 3}
   m_PrefabInstance: {fileID: 1635943616}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &1957778585
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1957778583}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.0047326856, y: 0.002419986, z: 0.0026989465}
-  m_Center: {x: 0.0000032791868, y: 0.000014960649, z: 0.0013494733}
 --- !u!4 &1960485418 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012000326308, guid: 6d21e769def7d504ea22abcb06173633, type: 3}
   m_PrefabInstance: {fileID: 1388788829}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1966777026 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1118244101624706, guid: cc48ba8be017e8f49a44de783e62a9bf, type: 3}
-  m_PrefabInstance: {fileID: 1171388260}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1966777027 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4361703912522800, guid: cc48ba8be017e8f49a44de783e62a9bf, type: 3}
   m_PrefabInstance: {fileID: 1171388260}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &1966777028
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1966777026}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.0047326856, y: 0.002419986, z: 0.0026989465}
-  m_Center: {x: 0.0000032791868, y: 0.000014960649, z: 0.0013494733}
 --- !u!1 &1982503569 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1000010479005280, guid: 8391a5c4218b2f243849f1998c1c41e2, type: 3}
@@ -12010,60 +11331,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.3482866, y: 1.072627, z: 0.89421904}
   m_Center: {x: 0, y: 0, z: 0.00000017881393}
---- !u!1 &2011758393 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1000011585897626, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
-  m_PrefabInstance: {fileID: 2017428228}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2011758394 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012771108642, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
   m_PrefabInstance: {fileID: 2017428228}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2011758398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2011758393}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57436ba9ae8f7f447a7538693a8d707d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_tags:
-  - ZombieTankTackle
-  m_particle: {fileID: 0}
---- !u!114 &2011758399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2011758393}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d638061b631635b41964733f8831a238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_animator: {fileID: 0}
-  m_isHitStopable: 1
-  m_takeDamageEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TagDamage, Assembly-CSharp
-        m_MethodName: Damaged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1001 &2017428228
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12129,29 +11401,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d1bb44d500a3ad489d3cb3a6900199f, type: 3}
---- !u!1 &2017457344 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1118244101624706, guid: cc48ba8be017e8f49a44de783e62a9bf, type: 3}
-  m_PrefabInstance: {fileID: 1499681371}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2017457345 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4361703912522800, guid: cc48ba8be017e8f49a44de783e62a9bf, type: 3}
   m_PrefabInstance: {fileID: 1499681371}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &2017457346
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2017457344}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.0047326856, y: 0.002419986, z: 0.0026989465}
-  m_Center: {x: 0.0000032791868, y: 0.000014960649, z: 0.0013494733}
 --- !u!1001 &2018220722
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12542,7 +11796,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2293255808676022177, guid: 9c778371245f3a848b92600adf93b319, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -10.43
       objectReference: {fileID: 0}
     - target: {fileID: 2293255808676022177, guid: 9c778371245f3a848b92600adf93b319, type: 3}
       propertyPath: m_LocalPosition.y
@@ -12550,7 +11804,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2293255808676022177, guid: 9c778371245f3a848b92600adf93b319, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14
+      value: -9.43
       objectReference: {fileID: 0}
     - target: {fileID: 2293255808676022177, guid: 9c778371245f3a848b92600adf93b319, type: 3}
       propertyPath: m_LocalRotation.w
