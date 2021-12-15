@@ -985,7 +985,9 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_ShowDebugText: 0
   m_Loop: 0
-  m_ChildCameras: []
+  m_ChildCameras:
+  - {fileID: 3456372970518808047}
+  - {fileID: 7171619877526984565}
   m_Instructions:
   - m_VirtualCamera: {fileID: 3456372970518808047}
     m_Hold: 3
@@ -1737,8 +1739,8 @@ MonoBehaviour:
   m_Strategy: 0
   m_MaximumEffort: 4
   m_SmoothingTime: 0
-  m_Damping: 0
-  m_DampingWhenOccluded: 0
+  m_Damping: 0.1
+  m_DampingWhenOccluded: 0.1
   m_OptimalTargetDistance: 0
 --- !u!114 &2944055418037073320
 MonoBehaviour:
