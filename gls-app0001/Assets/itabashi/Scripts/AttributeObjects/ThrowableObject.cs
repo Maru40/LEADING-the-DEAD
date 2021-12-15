@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public struct ThrowingData
 {
@@ -18,6 +19,9 @@ public class ThrowableObject : MonoBehaviour
 {
     [SerializeField]
     private Rigidbody m_rigidbody;
+
+    [SerializeField]
+    private UnityEvent m_takeingEvent;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +52,8 @@ public class ThrowableObject : MonoBehaviour
             m_rigidbody = GetComponent<Rigidbody>();
         }
         m_rigidbody.isKinematic = true;
+
+        m_takeingEvent?.Invoke();
     }
 
     public void Throwing(ThrowingData throwingData)
