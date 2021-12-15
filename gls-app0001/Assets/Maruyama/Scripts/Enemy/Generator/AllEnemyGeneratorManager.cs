@@ -86,9 +86,24 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
     //ゲーム終了時に呼びたいイベント
     public void GameClearEvent()
     {
-        foreach(var generator in m_generators)
+        if(m_generators.Count == 0) {
+            return;
+        }
+
+        var datas = new List<ThrongData>(m_generators[0].GetThrongDatas());
+
+        foreach(var obj in m_clearServices)
         {
-            generator.ClearProcess();  //ゾンビを全員突撃させる。
+            var clearManager = obj.GetComponentInParent<ClearManager_Zombie>();
+            clearManager?.ClearProcess();
+        }
+
+        foreach (var data in datas)
+        {
+            if(data.clearManager.enabled == false)
+            {
+                data.gameObject.SetActive(false);
+            }
         }
     }
 
