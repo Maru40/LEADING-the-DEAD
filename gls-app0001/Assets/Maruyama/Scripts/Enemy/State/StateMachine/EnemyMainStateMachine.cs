@@ -39,6 +39,9 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     //遷移候補群
     List<TransitionCanditdateParametor> m_transitionCandidates = new List<TransitionCanditdateParametor>();
 
+    //遷移状態のロック
+    private bool m_isTransitionLock = false;
+
     public EnemyMainStateMachine()
     {
         m_stateMachine = new GraphBase<NodeType, EnumType, TransitionType>();
@@ -224,15 +227,15 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     /// </summary>
     void Transition()
     {
-        //遷移先が一つも存在しないなら処理を飛ばす
-        if (m_transitionCandidates.Count == 0) {
+        //ロックされている また 遷移先が一つも存在しないなら、処理を飛ばす
+        if (m_isTransitionLock || m_transitionCandidates.Count == 0) {
             return;
         }
 
         //ソートして優先度が一番高いタイプに遷移する。
         var sorteds = m_transitionCandidates.OrderByDescending(param => param.priority);
 
-        int index = 0;
+        //int index = 0;
         foreach (var sorted in sorteds)
         {
             //Debug.Log(index + ":トランジション： " + sorted.type);
@@ -241,5 +244,8 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
         m_stateMachine.ChangeState(sorteds.ElementAt(0).type);  //一番優先度が高い先頭のステートに変更
     }
 
-
+    public void SetIsTransitionLock(bool isLock)
+    {
+        m_isTransitionLock = isLock;
+    }
 }
