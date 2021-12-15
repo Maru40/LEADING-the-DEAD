@@ -59,7 +59,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
 
     public override void OnUpdate()
     {
-        Debug.Log("FindState");
+        Debug.Log("〇FindState");
 
         m_taskList.UpdateTask();
 
@@ -71,6 +71,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
     public override void OnExit()
     {
         base.OnExit();
+        //Debug.Break();
     }
 
     void DefineTask()
@@ -105,7 +106,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
 
         GameTimer m_timer = new GameTimer();
 
-        EnemyRotationCtrl m_enemyRotationController;
+        EnemyRotationCtrl m_rotationController;
         TargetManager m_targetManager;
         EnemyVelocityMgr m_velocityManager;
 
@@ -114,7 +115,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
         {
             m_maxWatiTime = maxWaitTime;
 
-            m_enemyRotationController = owner.GetComponent<EnemyRotationCtrl>();
+            m_rotationController = owner.GetComponent<EnemyRotationCtrl>();
             m_targetManager = owner.GetComponent<TargetManager>();
             m_velocityManager = owner.GetComponent<EnemyVelocityMgr>();
         }
@@ -148,7 +149,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
             }
             var toTargetVector = (Vector3)positionCheck;
 
-            m_enemyRotationController.SetDirect(toTargetVector);
+            m_rotationController.SetDirect(toTargetVector);
         }
     }
 

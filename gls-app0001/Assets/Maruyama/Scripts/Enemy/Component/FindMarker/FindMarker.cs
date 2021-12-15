@@ -27,7 +27,7 @@ public class FindMarker : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.Log("◆◆マーカーデストロイ");
+        //Debug.Log("◆◆マーカーデストロイ");
         Destroy(m_marker);
     }
 
@@ -45,7 +45,6 @@ public class FindMarker : MonoBehaviour
     /// <param name="isActive"></param>
     public void SetMarkerActive(bool isActive)
     {
-        Debug.Log("△見つかった");
         m_marker?.SetActive(isActive);
     }
 

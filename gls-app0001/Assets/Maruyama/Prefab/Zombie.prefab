@@ -4505,7 +4505,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5085387087192473981
 Transform:
   m_ObjectHideFlags: 0
@@ -4641,7 +4641,7 @@ CapsuleCollider:
   m_Radius: 0.3
   m_Height: 1.8
   m_Direction: 1
-  m_Center: {x: 0, y: 0.85, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!114 &1444888580945028645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5381,7 +5381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_createPositionObject: {fileID: 6152365424380167557}
   m_createPrefab: {fileID: 2952506020327742146, guid: 23d1e2f3c039394428785d411df7887b, type: 3}
-  m_scale: {x: 0.2, y: 0.2, z: 0.2}
+  m_scale: {x: 0.1, y: 0.1, z: 0.1}
 --- !u!1 &7585137866309258482
 GameObject:
   m_ObjectHideFlags: 0
@@ -6404,7 +6404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1048627809523634, guid: 23fd4ab61aa8fe241b7350ac1abc89ff, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4419867804974540, guid: 23fd4ab61aa8fe241b7350ac1abc89ff, type: 3}
       propertyPath: m_RootOrder
