@@ -197,6 +197,11 @@ public class Stator_ZombieNormal : StatorBase
         return m_stateMachine.GetNowType();
     }
 
+    public void SetIsTransitionLock(bool isLock)
+    {
+        m_stateMachine.SetIsTransitionLock(isLock);
+    }
+
     public override void Reset()
     {
         m_stateMachine.Reset();
