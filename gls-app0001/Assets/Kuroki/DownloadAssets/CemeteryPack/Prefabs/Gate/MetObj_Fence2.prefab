@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 3306908}
   - component: {fileID: 2375426}
   - component: {fileID: 6575966}
-  m_Layer: 0
+  - component: {fileID: 7510475824245476299}
+  - component: {fileID: 77431999138754388}
+  m_Layer: 3
   m_Name: MetObj_Fence2
-  m_TagString: Untagged
+  m_TagString: T_Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 103032}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: 0.0272021, y: 0.36397266, z: -7.1588726}
-  m_LocalScale: {x: 150.13522, y: 150.13522, z: 150.13522}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!33 &3306908
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -95,3 +97,46 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.008639235, y: 0.08594814, z: 0.07753621}
   m_Center: {x: 0.00037894258, y: 0.00052287604, z: 0.0010838897}
+--- !u!114 &7510475824245476299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2325594c6c050cf4fa56f37a6a7fdd7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_takeDamageTypes: 03000000
+  m_particles: []
+--- !u!114 &77431999138754388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d638061b631635b41964733f8831a238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_animator: {fileID: 0}
+  m_isHitStopable: 1
+  m_takeDamageEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7510475824245476299}
+        m_TargetAssemblyTypeName: TypeDamageDestroy, Assembly-CSharp
+        m_MethodName: Damaged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

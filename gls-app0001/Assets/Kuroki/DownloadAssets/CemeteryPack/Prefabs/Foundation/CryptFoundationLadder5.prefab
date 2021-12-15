@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3329354}
   - component: {fileID: 2383894}
   - component: {fileID: 6548936}
+  - component: {fileID: 2576167181007674311}
+  - component: {fileID: 1258764929152237678}
   m_Layer: 0
   m_Name: CryptFoundationLadder5
   m_TagString: Untagged
@@ -95,3 +97,46 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.02972351, y: 0.011032479, z: 0.09495062}
   m_Center: {x: -0.014617614, y: 0.00535143, z: -0.0035674013}
+--- !u!114 &2576167181007674311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2325594c6c050cf4fa56f37a6a7fdd7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_takeDamageTypes: 03000000
+  m_particles: []
+--- !u!114 &1258764929152237678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d638061b631635b41964733f8831a238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_animator: {fileID: 0}
+  m_isHitStopable: 1
+  m_takeDamageEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2576167181007674311}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

@@ -11,9 +11,12 @@ GameObject:
   - component: {fileID: 478150}
   - component: {fileID: 3336374}
   - component: {fileID: 2391590}
-  m_Layer: 0
+  - component: {fileID: 1226937654}
+  - component: {fileID: 91548146629685071}
+  - component: {fileID: 4268216496468270329}
+  m_Layer: 3
   m_Name: Barrels(4)
-  m_TagString: Untagged
+  m_TagString: T_Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 179048}
-  m_LocalRotation: {x: -0.45414087, y: -0.54199266, z: -0.54199266, w: 0.45414093}
+  m_LocalRotation: {x: -0.4541412, y: -0.5419924, z: -0.5419924, w: 0.4541412}
   m_LocalPosition: {x: -5.471, y: 0, z: -48.863}
-  m_LocalScale: {x: 0.005007795, y: 0.0050077955, z: 0.0050077955}
+  m_LocalScale: {x: 0.005007796, y: 0.005007796, z: 0.0050077955}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -100.08}
 --- !u!33 &3336374
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -81,3 +84,47 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1226937654
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179048}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 112.88913, y: 110.058754, z: 160.00986}
+  m_Center: {x: 0.0000007662628, y: 0.0000009144928, z: 80.55574}
+--- !u!114 &91548146629685071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2325594c6c050cf4fa56f37a6a7fdd7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_takeDamageTypes: 
+  m_particles: []
+--- !u!114 &4268216496468270329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d638061b631635b41964733f8831a238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_animator: {fileID: 0}
+  m_isHitStopable: 1
+  m_takeDamageEvent:
+    m_PersistentCalls:
+      m_Calls: []
