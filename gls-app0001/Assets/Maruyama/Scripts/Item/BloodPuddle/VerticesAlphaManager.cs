@@ -9,6 +9,9 @@ public class VerticesAlphaManager : MonoBehaviour
     [Header("全て透明なら削除するかどうか"),SerializeField]
     bool m_isAllAlphaDelete = true;
 
+    [Header("壁があると判断する距離"), SerializeField]
+    float m_drawRange = 0.15f;
+
     private void Awake()
     {
         m_board = GetComponent<Board>();
@@ -35,7 +38,7 @@ public class VerticesAlphaManager : MonoBehaviour
             //Debug.Log("■バーテックス範囲" + transform.position + vartices[i]);
             var rayObstacleLayerStrings = new string[] { "L_Obstacle", "L_Ground" };
             var layerIndex = LayerMask.GetMask(rayObstacleLayerStrings);
-            const float maxRange = 0.1f;
+            //const float maxRange = 0.15f;
             const float SphereRange = 0.0f;
             //Rayがhitしてなかったら非表示
             var colliders = Physics.OverlapSphere(transform.position, SphereRange, layerIndex);
@@ -43,7 +46,7 @@ public class VerticesAlphaManager : MonoBehaviour
 
             var startPosition = transform.position + (transform.rotation * vartices[i]);
             //Debug.DrawRay(startPosition, transform.forward, new Color(1.0f, 0.0f, 0.0f, 1.0f));
-            if (!Physics.Raycast(startPosition, transform.forward, out hit, maxRange, layerIndex))
+            if (!Physics.Raycast(startPosition, transform.forward, out hit, m_drawRange, layerIndex))
                 //&& colliders.Length == 0)
             {
                 colors[i].a = 0.0f;

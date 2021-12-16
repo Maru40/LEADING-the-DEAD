@@ -6,7 +6,7 @@ using Es.InkPainter;
 
 public class BloodBagManager : MonoBehaviour
 {
-    const float PositionAdjustDistance = 0.05f;
+    const float PositionAdjustDistance = 0.1f;
 
     public enum StateEnum
     {
