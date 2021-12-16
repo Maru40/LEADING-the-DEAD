@@ -16,6 +16,7 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         //public float tackleStartTime; //タックルスタート
         public float chargeTime;
         public float deselerationStartTime; //減速スタート
+        public float attackEndTime;  //攻撃判定の終了する時間
         //足音を鳴らす時間
         public float rightFootStepsSoundTime;
         public float leftFootStepsSoundTime;
@@ -41,10 +42,10 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
     [SerializeField]
     AudioParametor m_audioParam = new AudioParametor();
 
-    NormalAttack m_normalAttackComp;
-    TankTackle m_tackleComp;
-    WaitTimer m_waitTimer;
-    AudioManager m_audioManager;
+    private NormalAttack m_normalAttackComp;
+    private TankTackle m_tackleComp;
+    private WaitTimer m_waitTimer;
+    private AudioManager m_audioManager;
 
     override protected void Awake()
     {
@@ -170,11 +171,15 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
     /// <summary>
     /// タックル終了攻撃
     /// </summary>
-    void SettingTackleLastAnimation()
+    private void SettingTackleLastAnimation()
     {
-        var tackle = ZombieTankTable.BaseLayer.TackleLast.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
+        var timeBehaviour = ZombieTankTable.BaseLayer.TackleLast.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
 
-        tackle.onStateExited.Subscribe(_ => m_tackleComp.EndAnimationEvent());
+        timeBehaviour.onTimeEvent.ClampWhere(m_tackleParam.attackEndTime)
+            .Subscribe(_ => m_tackleComp.IsAttack = false)
+            .AddTo(this);
+
+        timeBehaviour.onStateExited.Subscribe(_ => m_tackleComp.EndAnimationEvent());
     }
 
     /// <summary>
