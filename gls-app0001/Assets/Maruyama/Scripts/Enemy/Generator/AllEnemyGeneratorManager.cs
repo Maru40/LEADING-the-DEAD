@@ -6,6 +6,13 @@ using MaruUtility;
 
 public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGeneratorManager>
 {
+    [SerializeField]
+    Color m_gizmosColor;
+    [SerializeField]
+    GameObject m_barriade = null;
+    [SerializeField]
+    Vector3 m_gizmosCenter = Vector3.zero;
+
     private List<EnemyGenerator> m_generators = new List<EnemyGenerator>();
     private List<ZombieTank> m_tanks = new List<ZombieTank>();
 
@@ -22,6 +29,8 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
     {
         m_generators = new List<EnemyGenerator>(FindObjectsOfType<EnemyGenerator>());
         m_tanks = new List<ZombieTank>(FindObjectsOfType<ZombieTank>());
+
+        m_barriade = FindObjectOfType<BarricadeDurability>().gameObject;
     }
 
     private void Update()
@@ -97,17 +106,25 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
 
         var datas = new List<ThrongData>(m_generators[0].GetThrongDatas());
 
+        int count = 0;
         foreach(var data in datas)
         {
+            data.targetMgr.SetNowTarget(GetType(), null);
+
             if(Calculation.IsRange(gameObject, data.gameObject, m_clearMovieEntryRange))
             {
+                count++;
                 data.clearManager?.ClearProcess();
             }
             else
             {
-                data.gameObject.SetActive(false);
+                //data.gameObject.SetActive(false);
             }
         }
+
+        Debug.Log("〇" + count);
+        Debug.Log("〇" + m_clearServices.Count);
+        Debug.Break();
 
         //foreach(var obj in m_clearServices)
         //{
@@ -215,5 +232,27 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
         }
 
         return count;
+    }
+
+
+    //Gizmo------------------------------------------------------------------------------
+
+    private void OnDrawGizmos()
+    {
+        DrawGizmo();
+    }
+
+    private void DrawGizmo()
+    {
+        Gizmos.color = m_gizmosColor;
+        //var maxRandomRange = m_maxRandomRange * 2.0f;
+        if(m_barriade == null)
+        {
+            return;
+        }
+
+        Gizmos.DrawSphere(m_barriade.transform.position, m_clearMovieEntryRange);
+        //Gizmos.DrawCube(m_gizmosCenter, Vector3.one * 10.0f);
+        //Gizmos.DrawCube(m_centerPosition, maxRandomRange);
     }
 }
