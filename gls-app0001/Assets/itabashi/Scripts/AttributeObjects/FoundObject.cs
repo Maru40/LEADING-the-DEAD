@@ -52,8 +52,8 @@ public class FoundObject : MonoBehaviour
 
         if (m_type == FoundType.Smell)
         {
-            Debug.Log("△デフォ：" + transform.rotation * m_positionOffset);
-            Debug.Log("◆新規：" + positionOffset);
+            //Debug.Log("△デフォ：" + transform.rotation * m_positionOffset);
+            //Debug.Log("◆新規：" + positionOffset);
         }
 
         return new FoundData(gameObject, m_priority, m_type, positionOffset);
