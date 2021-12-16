@@ -256,10 +256,10 @@ public class ChaseTarget : MonoBehaviour
             return;
         }
 
-        if(collision.gameObject.tag == "T_Wall")
-        {
-            WallAttack();
-        }
+        //if(collision.gameObject.tag == "T_Wall")
+        //{
+        //    WallAttack();
+        //}
     }
 
     private void OnCollisionStay(Collision collision)
@@ -268,9 +268,9 @@ public class ChaseTarget : MonoBehaviour
             return;
         }
 
-        if (collision.gameObject.tag == "T_Wall")
-        {
-            WallAttack();
-        }
+        //if (collision.gameObject.tag == "T_Wall")
+        //{
+        //    WallAttack();
+        //}
     }
 }
