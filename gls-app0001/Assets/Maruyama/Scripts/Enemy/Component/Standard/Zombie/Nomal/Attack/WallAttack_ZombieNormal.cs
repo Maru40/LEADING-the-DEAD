@@ -83,9 +83,11 @@ public class WallAttack_ZombieNormal : AttackNodeBase
     public override bool IsAttackStartRange()
     {
         float range = GetBaseParam().startRange;
-        var position = m_targetManager.GetNowTargetPosition();
-        if (position != null) {
-            return m_eye.IsInEyeRange((Vector3)position, range);
+        var targetPosition = m_targetManager.GetNowTargetPosition();
+        if (targetPosition != null) {
+            var position = (Vector3)targetPosition;
+            position.y = transform.position.y;
+            return m_eye.IsInEyeRange(position, range);
         }
 
         return false;
