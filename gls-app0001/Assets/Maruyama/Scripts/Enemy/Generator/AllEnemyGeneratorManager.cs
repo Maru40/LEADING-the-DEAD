@@ -11,7 +11,7 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
     [SerializeField]
     GameObject m_barriade = null;
     [SerializeField]
-    Vector3 m_gizmosCenter = Vector3.zero;
+    GameObject m_player = null;
 
     private List<EnemyGenerator> m_generators = new List<EnemyGenerator>();
     private List<ZombieTank> m_tanks = new List<ZombieTank>();
@@ -103,6 +103,8 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
     //ゲーム終了時に呼びたいイベント
     public void GameClearEvent()
     {
+        m_player.GetComponent<FoundObject>().enabled = false;
+
         if(m_generators.Count == 0) {
             return;
         }
@@ -119,7 +121,7 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
             }
             else
             {
-                //data.gameObject.SetActive(false);
+                data.gameObject.SetActive(false);
             }
         }
 
