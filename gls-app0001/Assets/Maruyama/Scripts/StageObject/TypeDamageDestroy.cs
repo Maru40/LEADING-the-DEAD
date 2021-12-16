@@ -8,10 +8,11 @@ public class TypeDamageDestroy : MonoBehaviour
 {
 
     [SerializeField]
-    List<DamageType> m_takeDamageTypes = new List<DamageType>();
+    private List<DamageType> m_takeDamageTypes = new List<DamageType>();
+    public List<DamageType> GetTakeDamageTypes() => new List<DamageType>(m_takeDamageTypes);
 
     [SerializeField]
-    List<GameObject> m_particles = new List<GameObject>();
+    private List<GameObject> m_particles = new List<GameObject>();
 
     public void Damaged(DamageData data)
     {
@@ -25,7 +26,7 @@ public class TypeDamageDestroy : MonoBehaviour
         }
     }
 
-    void Damage(DamageData data)
+    private void Damage(DamageData data)
     {
         CreateParticles();
 
@@ -39,7 +40,7 @@ public class TypeDamageDestroy : MonoBehaviour
         //Apple = null;
     }
 
-    void CreateParticles()
+    private void CreateParticles()
     {
         foreach (var particle in m_particles)
         {
