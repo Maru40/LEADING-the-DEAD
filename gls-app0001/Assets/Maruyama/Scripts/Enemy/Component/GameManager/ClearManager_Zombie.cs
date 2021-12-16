@@ -134,7 +134,7 @@ public class ClearManager_Zombie : MonoBehaviour
             return;
         }
         
-        Reflection(collision);  //反射ベクトルに直す。
+        //Reflection(collision);  //反射ベクトルに直す。
     }
 
     //反射ベクトルに直す。

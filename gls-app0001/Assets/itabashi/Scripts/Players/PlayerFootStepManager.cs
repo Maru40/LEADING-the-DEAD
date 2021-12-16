@@ -41,7 +41,7 @@ namespace Player
                     .ClampWhere(dashStepSoundSecond)
                     .Subscribe(_ => {
                         m_footStepSounder.SoundPlay();
-                        Debug.Log($"before : {_.before}, after : {_.after}");
+                        //Debug.Log($"before : {_.before}, after : {_.after}");
                         })
                     .AddTo(this);
             }
