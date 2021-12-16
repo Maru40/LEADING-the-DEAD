@@ -95,6 +95,7 @@ public class SmellManaer : MonoBehaviour
             return false;
         }
         var toTargetVec = (Vector3)positionCheck;
+        toTargetVec.y = transform.position.y;
 
         //正体に気づく距離まで来たら。
         return toTargetVec.magnitude < nearRange ? true : false;  
