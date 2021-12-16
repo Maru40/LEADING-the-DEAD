@@ -30,7 +30,10 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
         m_generators = new List<EnemyGenerator>(FindObjectsOfType<EnemyGenerator>());
         m_tanks = new List<ZombieTank>(FindObjectsOfType<ZombieTank>());
 
-        m_barriade = FindObjectOfType<BarricadeDurability>().gameObject;
+        if (m_barriade == null)
+        {
+            m_barriade = FindObjectOfType<BarricadeDurability>().gameObject;
+        }
     }
 
     private void Update()
@@ -106,14 +109,12 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
 
         var datas = new List<ThrongData>(m_generators[0].GetThrongDatas());
 
-        int count = 0;
         foreach(var data in datas)
         {
             data.targetMgr.SetNowTarget(GetType(), null);
 
-            if(Calculation.IsRange(gameObject, data.gameObject, m_clearMovieEntryRange))
+            if(Calculation.IsRange(m_barriade, data.gameObject, m_clearMovieEntryRange))
             {
-                count++;
                 data.clearManager?.ClearProcess();
             }
             else
@@ -122,9 +123,10 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
             }
         }
 
-        Debug.Log("〇" + count);
-        Debug.Log("〇" + m_clearServices.Count);
+        Debug.Log("sss:" + datas.Count);
         Debug.Break();
+
+        //Debug.Break();
 
         //foreach(var obj in m_clearServices)
         //{
