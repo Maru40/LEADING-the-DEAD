@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using MaruUtility;
+
 public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGeneratorManager>
 {
     private List<EnemyGenerator> m_generators = new List<EnemyGenerator>();
@@ -12,6 +14,9 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
     private HashSet<GameObject> m_clearServices = new HashSet<GameObject>();  //クリアに貢献したオブジェクト
     private List<GameObject> m_removeClearServices = new List<GameObject>();  //削除申請の出されたクリア貢献オブジェクト
     private Dictionary<GameObject, GameTimer> m_clearServicesTimerDictionary = new Dictionary<GameObject, GameTimer>();
+
+    [Header("クリア演出に参加できるゾンビの距離"), SerializeField]
+    private float m_clearMovieEntryRange = 8.0f;
 
     private void Start()
     {
@@ -92,19 +97,31 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
 
         var datas = new List<ThrongData>(m_generators[0].GetThrongDatas());
 
-        foreach(var obj in m_clearServices)
+        foreach(var data in datas)
         {
-            var clearManager = obj.GetComponentInParent<ClearManager_Zombie>();
-            clearManager?.ClearProcess();
-        }
-
-        foreach (var data in datas)
-        {
-            if(data.clearManager.enabled == false)
+            if(Calculation.IsRange(gameObject, data.gameObject, m_clearMovieEntryRange))
+            {
+                data.clearManager?.ClearProcess();
+            }
+            else
             {
                 data.gameObject.SetActive(false);
             }
         }
+
+        //foreach(var obj in m_clearServices)
+        //{
+        //    var clearManager = obj.GetComponentInParent<ClearManager_Zombie>();
+        //    clearManager?.ClearProcess();
+        //}
+
+        //foreach (var data in datas)
+        //{
+        //    if(data.clearManager.enabled == false)
+        //    {
+        //        data.gameObject.SetActive(false);
+        //    }
+        //}
     }
 
     /// <summary>
