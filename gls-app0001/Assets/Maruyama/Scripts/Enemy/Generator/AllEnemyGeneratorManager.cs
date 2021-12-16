@@ -124,25 +124,6 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
                 data.gameObject.SetActive(false);
             }
         }
-
-        Debug.Log("sss:" + datas.Count);
-        Debug.Break();
-
-        //Debug.Break();
-
-        //foreach(var obj in m_clearServices)
-        //{
-        //    var clearManager = obj.GetComponentInParent<ClearManager_Zombie>();
-        //    clearManager?.ClearProcess();
-        //}
-
-        //foreach (var data in datas)
-        //{
-        //    if(data.clearManager.enabled == false)
-        //    {
-        //        data.gameObject.SetActive(false);
-        //    }
-        //}
     }
 
     /// <summary>
