@@ -6,6 +6,13 @@ using MaruUtility;
 
 public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGeneratorManager>
 {
+    [SerializeField]
+    Color m_gizmosColor;
+    [SerializeField]
+    GameObject m_barriade = null;
+    [SerializeField]
+    GameObject m_player = null;
+
     private List<EnemyGenerator> m_generators = new List<EnemyGenerator>();
     private List<ZombieTank> m_tanks = new List<ZombieTank>();
 
@@ -22,6 +29,11 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
     {
         m_generators = new List<EnemyGenerator>(FindObjectsOfType<EnemyGenerator>());
         m_tanks = new List<ZombieTank>(FindObjectsOfType<ZombieTank>());
+
+        if (m_barriade == null)
+        {
+            m_barriade = FindObjectOfType<BarricadeDurability>().gameObject;
+        }
     }
 
     private void Update()
@@ -91,6 +103,8 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
     //ゲーム終了時に呼びたいイベント
     public void GameClearEvent()
     {
+        m_player.GetComponent<FoundObject>().enabled = false;
+
         if(m_generators.Count == 0) {
             return;
         }
@@ -99,7 +113,9 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
 
         foreach(var data in datas)
         {
-            if(Calculation.IsRange(gameObject, data.gameObject, m_clearMovieEntryRange))
+            data.targetMgr.SetNowTarget(GetType(), null);
+
+            if(Calculation.IsRange(m_barriade, data.gameObject, m_clearMovieEntryRange))
             {
                 data.clearManager?.ClearProcess();
             }
@@ -108,20 +124,6 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
                 data.gameObject.SetActive(false);
             }
         }
-
-        //foreach(var obj in m_clearServices)
-        //{
-        //    var clearManager = obj.GetComponentInParent<ClearManager_Zombie>();
-        //    clearManager?.ClearProcess();
-        //}
-
-        //foreach (var data in datas)
-        //{
-        //    if(data.clearManager.enabled == false)
-        //    {
-        //        data.gameObject.SetActive(false);
-        //    }
-        //}
     }
 
     /// <summary>
@@ -215,5 +217,27 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
         }
 
         return count;
+    }
+
+
+    //Gizmo------------------------------------------------------------------------------
+
+    private void OnDrawGizmos()
+    {
+        DrawGizmo();
+    }
+
+    private void DrawGizmo()
+    {
+        Gizmos.color = m_gizmosColor;
+        //var maxRandomRange = m_maxRandomRange * 2.0f;
+        if(m_barriade == null)
+        {
+            return;
+        }
+
+        Gizmos.DrawSphere(m_barriade.transform.position, m_clearMovieEntryRange);
+        //Gizmos.DrawCube(m_gizmosCenter, Vector3.one * 10.0f);
+        //Gizmos.DrawCube(m_centerPosition, maxRandomRange);
     }
 }
