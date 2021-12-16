@@ -46,6 +46,11 @@ public class TankTackle : AttackNodeBase
     private string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
 
     private bool m_isAttack = false;
+    public bool IsAttack
+    {
+        get => m_isAttack;
+        set => m_isAttack = value;
+    }
 
     private ReactiveProperty<State> m_state = new ReactiveProperty<State>(State.None);
 
@@ -154,6 +159,7 @@ public class TankTackle : AttackNodeBase
 
     public  void TackleStart()
     {
+        m_isAttack = true;
         m_state.Value = State.Tackle;
     }
 
@@ -256,6 +262,7 @@ public class TankTackle : AttackNodeBase
         m_velocityManager.SetIsDeseleration(false);
         m_velocityManager.ResetAll();
         enabled = false;
+        m_isAttack = false;
 
         m_waitTimer.AddWaitTimer(GetType(), m_waitTime, () => m_stator.GetTransitionMember().chaseTrigger.Fire());
     }
@@ -298,6 +305,16 @@ public class TankTackle : AttackNodeBase
         return true;
     }
 
+    private void TakeDamage(Collision collision)
+    {
+        if (m_isAttack == false) {  //攻撃状態でないなら処理をしない。
+            return;
+        }
+
+        var damage = collision.gameObject.GetComponent<TakeDamageObject>();
+        damage?.TakeDamage(GetBaseParam().damageData);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if(IsTackleWallAvoid(collision)) {  //タックル状態で
@@ -306,8 +323,7 @@ public class TankTackle : AttackNodeBase
 
         //攻撃状態なら
         if (m_state.Value == State.Tackle || m_state.Value == State.TackleLast) {
-            var damage = collision.gameObject.GetComponent<TakeDamageObject>();
-            damage?.TakeDamage(GetBaseParam().damageData);
+            TakeDamage(collision);
         }
     }
 
