@@ -68,6 +68,10 @@ public class AttackManager_ZombieTank : AttackNodeManagerBase
 
     public override void AttackStart()
     {
+        if(m_stator.GetNowStateType() == ZombieTankState.Attack) {  //攻撃状態なら処理を飛ばす。
+            return;
+        }
+
         //確率で様子見
         if (MyRandom.RandomProbability(m_param.waitSeeProbability))
         {
