@@ -124,6 +124,11 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
                 data.gameObject.SetActive(false);
             }
         }
+
+        foreach (var tank in m_tanks)
+        {
+            tank.GetComponent<TargetManager>()?.SetNowTarget(GetType(), null);
+        }
     }
 
     /// <summary>
