@@ -62,6 +62,9 @@ public abstract class AnimatorManagerBase : MonoBehaviour
     /// <param name="data">ダメージデータ</param>
     public void HitStop(AttributeObject.DamageData data)
     {
+        if(gameObject.activeSelf == false) {
+            return;
+        }
         StartCoroutine(HitStopCoroutine(data.hitStopTime));
     }
 
