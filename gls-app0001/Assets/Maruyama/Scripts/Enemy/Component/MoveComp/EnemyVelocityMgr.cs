@@ -30,6 +30,10 @@ public class EnemyVelocityMgr : MonoBehaviour
         m_velocity += m_force * Time.deltaTime;
         m_velocity.y = m_rigid.velocity.y;
 
+        if (UtilityMath.IsNaN(m_velocity)) {  //速度がNaNなら処理をしない。
+            return;
+        }
+        
         m_rigid.velocity = m_velocity;
 
         ResetForce();
