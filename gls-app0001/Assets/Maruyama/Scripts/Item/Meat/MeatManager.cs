@@ -78,7 +78,7 @@ public class MeatManager : EatenBase
     /// </summary>
     public override void Eaten()
     {
-        ParticleManager.Instance.Play(ParticleManager.ParticleID.MeatParticle, transform.position);
+        ParticleManager.Instance?.Play(ParticleManager.ParticleID.MeatParticle, transform.position);
         m_param.elapsedEatCount++;
         StateCheck();
 
