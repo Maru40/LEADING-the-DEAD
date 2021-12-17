@@ -220,7 +220,7 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         {
             var param = m_attackParticleDictionary[type];
             timeEvent.ClampWhere(param.time)
-                .Subscribe(_ => ParticleManager.Instance.Play(param.value, owner.transform.position));
+                .Subscribe(_ => ParticleManager.Instance?.Play(param.value, owner.transform.position));
         }
     }
 
