@@ -105,7 +105,7 @@ public class EnemyAttackTriggerAction : TriggerAction
     {
         foreach (var id in m_hitParticleIDs)
         {
-            ParticleManager.Instance.Play(id, transform.position);
+            ParticleManager.Instance?.Play(id, transform.position);
         }
     }
 
