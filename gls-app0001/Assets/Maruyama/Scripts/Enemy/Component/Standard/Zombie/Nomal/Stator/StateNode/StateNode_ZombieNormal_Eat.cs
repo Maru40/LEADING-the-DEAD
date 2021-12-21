@@ -8,7 +8,7 @@ public class StateNode_ZombieNormal_Eat : EnemyStateNodeBase<EnemyBase>
     TargetManager m_targetManager;
     Stator_ZombieNormal m_stator;
     EnemyVelocityMgr m_velocityManager;
-    SmellManaer m_smellManager;
+    SmellManager m_smellManager;
 
     public StateNode_ZombieNormal_Eat(EnemyBase owner)
         :base(owner)
@@ -17,7 +17,7 @@ public class StateNode_ZombieNormal_Eat : EnemyStateNodeBase<EnemyBase>
         m_targetManager = owner.GetComponent<TargetManager>();
         m_stator = owner.GetComponent<Stator_ZombieNormal>();
         m_velocityManager = owner.GetComponent<EnemyVelocityMgr>();
-        m_smellManager = owner.GetComponent<SmellManaer>();
+        m_smellManager = owner.GetComponent<SmellManager>();
     }
 
     protected override void ReserveChangeComponents()
