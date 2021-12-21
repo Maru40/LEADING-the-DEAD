@@ -5,26 +5,26 @@ using UnityEngine;
 public class SmellManager : MonoBehaviour
 {
     [Header("正体に気づく距離"), SerializeField]
-    float m_nearRange = 0.5f;
+    private float m_nearRange = 0.5f;
 
     [Header("近くで待機する時間"),SerializeField]
-    float m_nearWaitTime = 1.0f;
+    private float m_nearWaitTime = 1.0f;
 
-    TargetManager m_targetManager;
-    I_Smell m_smell;
-    WaitTimer m_waitTimer;
-    EnemyVelocityMgr m_velocityManager;
-    I_Eat m_eat;
-    StatorBase m_stator;
-    AttackNodeManagerBase m_attackManager;
-    WallAttack_ZombieNormal m_wallAttack;
+    private TargetManager m_targetManager;
+    private I_Smell m_smell;
+    private WaitTimer m_waitTimer;
+    private EnemyVelocityMgr m_velocityManager;
+    private I_Eat m_eat;
+    private StatorBase m_stator;
+    private AttackNodeManagerBase m_attackManager;
+    private WallAttack_ZombieNormal m_wallAttack;
 
     [Header("攻撃するタグ"), SerializeField]
-    List<string> m_attackTags = new List<string>();
+    private List<string> m_attackTags = new List<string>();
 
     [Header("TriggerStayのインターバルタイム"), SerializeField]
-    float m_stayTriggerIntervalTime = 0.1f;
-    GameTimer m_timer = new GameTimer();
+    private float m_stayTriggerIntervalTime = 0.1f;
+    private GameTimer m_timer = new GameTimer();
 
     private void Awake()
     {
@@ -77,7 +77,7 @@ public class SmellManager : MonoBehaviour
     /// アップデート処理が必要かどうか
     /// </summary>
     /// <returns></returns>
-    bool IsUpdate()
+    private bool IsUpdate()
     {
         if (!m_targetManager.HasTarget()) { //ターゲットが無かったら処理をしない。
             return false; 
@@ -101,7 +101,7 @@ public class SmellManager : MonoBehaviour
         return toTargetVec.magnitude < nearRange ? true : false;  
     }
 
-    bool IsAttack()
+    private bool IsAttack()
     {
         //T_Wallでないなら
         var parent = m_targetManager.GetNowTarget().transform.parent;
@@ -123,7 +123,7 @@ public class SmellManager : MonoBehaviour
     /// <summary>
     /// 肉のチェック
     /// </summary>
-    void MeatCheck()
+    private void MeatCheck()
     {
         if(IsTargetNear(m_nearRange))
         {
@@ -135,7 +135,7 @@ public class SmellManager : MonoBehaviour
     /// <summary>
     /// 血の液体チェック
     /// </summary>
-    void BloodPuddleCheck(BloodPuddleManager blood)
+    private void BloodPuddleCheck(BloodPuddleManager blood)
     {
         if (IsAttack()) { //攻撃するなら
             //m_attackManager.AttackStart();
@@ -176,7 +176,7 @@ public class SmellManager : MonoBehaviour
         }
     }
 
-    void CheckSmellFind(Collider other)
+    private void CheckSmellFind(Collider other)
     {
         var foundObject = other.GetComponent<FoundObject>();
         if (foundObject)
