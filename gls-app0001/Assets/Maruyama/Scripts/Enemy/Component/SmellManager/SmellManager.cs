@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmellManaer : MonoBehaviour
+public class SmellManager : MonoBehaviour
 {
     [Header("正体に気づく距離"), SerializeField]
     float m_nearRange = 0.5f;
