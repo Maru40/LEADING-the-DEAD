@@ -54,7 +54,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     AttackManager_ZombieNormal m_attackManager;
     Stator_ZombieNormal m_stator;
     ThrongManager m_throngManager;
-    SmellManaer m_smellManager;
+    SmellManager m_smellManager;
 
     [SerializeField]
     AudioManager m_preliminaryNormalAttackVoice;
@@ -75,7 +75,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         m_attackManager = GetComponent<AttackManager_ZombieNormal>();
         m_stator = GetComponent<Stator_ZombieNormal>();
         m_throngManager = GetComponent<ThrongManager>();
-        m_smellManager = GetComponent<SmellManaer>();
+        m_smellManager = GetComponent<SmellManager>();
     }
 
     protected override void Start()

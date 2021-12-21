@@ -2,29 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmellManaer : MonoBehaviour
+using MaruUtility;
+
+public class SmellManager : MonoBehaviour
 {
     [Header("正体に気づく距離"), SerializeField]
-    float m_nearRange = 0.5f;
+    private float m_nearRange = 0.5f;
 
     [Header("近くで待機する時間"),SerializeField]
-    float m_nearWaitTime = 1.0f;
+    private float m_nearWaitTime = 1.0f;
 
-    TargetManager m_targetManager;
-    I_Smell m_smell;
-    WaitTimer m_waitTimer;
-    EnemyVelocityMgr m_velocityManager;
-    I_Eat m_eat;
-    StatorBase m_stator;
-    AttackNodeManagerBase m_attackManager;
-    WallAttack_ZombieNormal m_wallAttack;
+    private TargetManager m_targetManager;
+    private I_Smell m_smell;
+    private WaitTimer m_waitTimer;
+    private EnemyVelocityMgr m_velocityManager;
+    private I_Eat m_eat;
+    private Stator_ZombieNormal m_stator;
+    private AttackNodeManagerBase m_attackManager;
+    private WallAttack_ZombieNormal m_wallAttack;
 
     [Header("攻撃するタグ"), SerializeField]
-    List<string> m_attackTags = new List<string>();
+    private List<string> m_attackTags = new List<string>();
 
     [Header("TriggerStayのインターバルタイム"), SerializeField]
-    float m_stayTriggerIntervalTime = 0.1f;
-    GameTimer m_timer = new GameTimer();
+    private float m_stayTriggerIntervalTime = 0.1f;
+    private GameTimer m_timer = new GameTimer();
 
     private void Awake()
     {
@@ -33,7 +35,7 @@ public class SmellManaer : MonoBehaviour
         m_waitTimer = GetComponent<WaitTimer>();
         m_velocityManager = GetComponent<EnemyVelocityMgr>();
         m_eat = GetComponent<I_Eat>();
-        m_stator = GetComponent<StatorBase>();
+        m_stator = GetComponent<Stator_ZombieNormal>();
         m_attackManager = GetComponent<AttackNodeManagerBase>();
         m_wallAttack = GetComponent<WallAttack_ZombieNormal>();
 
@@ -77,7 +79,7 @@ public class SmellManaer : MonoBehaviour
     /// アップデート処理が必要かどうか
     /// </summary>
     /// <returns></returns>
-    bool IsUpdate()
+    private bool IsUpdate()
     {
         if (!m_targetManager.HasTarget()) { //ターゲットが無かったら処理をしない。
             return false; 
@@ -101,9 +103,12 @@ public class SmellManaer : MonoBehaviour
         return toTargetVec.magnitude < nearRange ? true : false;  
     }
 
-    bool IsAttack()
+    private bool IsAttack()
     {
-        //T_Wallでないなら
+        if (!m_targetManager.HasTarget()) {
+            return false;
+        }
+
         var parent = m_targetManager.GetNowTarget().transform.parent;
         if(parent == null) {
             return false;
@@ -123,7 +128,7 @@ public class SmellManaer : MonoBehaviour
     /// <summary>
     /// 肉のチェック
     /// </summary>
-    void MeatCheck()
+    private void MeatCheck()
     {
         if(IsTargetNear(m_nearRange))
         {
@@ -135,7 +140,7 @@ public class SmellManaer : MonoBehaviour
     /// <summary>
     /// 血の液体チェック
     /// </summary>
-    void BloodPuddleCheck(BloodPuddleManager blood)
+    private void BloodPuddleCheck(BloodPuddleManager blood)
     {
         if (IsAttack()) { //攻撃するなら
             //m_attackManager.AttackStart();
@@ -146,11 +151,8 @@ public class SmellManaer : MonoBehaviour
 
         if (IsTargetNear(m_nearRange))  //正体に気づく距離まで来たら。
         {
-            //Debug.Log("△PulldeCheck");
-
             enabled = false; //自分自身をoff
             m_velocityManager.StartDeseleration(); //速度のリセット
-            //m_velocityManager.enabled = false; //速度を計算しないようにする。
 
             m_waitTimer.AddWaitTimer(GetType(), m_nearWaitTime, () => {
                 m_targetManager.AddExcludeNowTarget();  //ターゲット対象から外す。
@@ -164,11 +166,19 @@ public class SmellManaer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (enabled == false) {
+            return;
+        }
+
         CheckSmellFind(other);
     }
 
     private void OnTriggerStay(Collider other)
     {
+        if (enabled == false) {
+            return;
+        }
+
         if (m_timer.IsTimeUp)
         {
             CheckSmellFind(other);
@@ -176,7 +186,23 @@ public class SmellManaer : MonoBehaviour
         }
     }
 
-    void CheckSmellFind(Collider other)
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(enabled == false || IsAttack() || !IsUpdate()) {
+            return;
+        }
+
+        if (m_stator?.GetNowStateType() == ZombieNormalState.Attack) {
+            return;
+        }
+
+        if (Obstacle.IsObstacle(collision.gameObject))
+        {
+            m_targetManager.AddExcludeNowTarget();  //ターゲット対象から外す。
+        }
+    }
+
+    private void CheckSmellFind(Collider other)
     {
         var foundObject = other.GetComponent<FoundObject>();
         if (foundObject)
