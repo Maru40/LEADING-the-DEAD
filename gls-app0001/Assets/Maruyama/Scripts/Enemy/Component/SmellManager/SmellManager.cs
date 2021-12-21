@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using MaruUtility;
+
 public class SmellManager : MonoBehaviour
 {
     [Header("正体に気づく距離"), SerializeField]
@@ -15,7 +17,7 @@ public class SmellManager : MonoBehaviour
     private WaitTimer m_waitTimer;
     private EnemyVelocityMgr m_velocityManager;
     private I_Eat m_eat;
-    private StatorBase m_stator;
+    private Stator_ZombieNormal m_stator;
     private AttackNodeManagerBase m_attackManager;
     private WallAttack_ZombieNormal m_wallAttack;
 
@@ -33,7 +35,7 @@ public class SmellManager : MonoBehaviour
         m_waitTimer = GetComponent<WaitTimer>();
         m_velocityManager = GetComponent<EnemyVelocityMgr>();
         m_eat = GetComponent<I_Eat>();
-        m_stator = GetComponent<StatorBase>();
+        m_stator = GetComponent<Stator_ZombieNormal>();
         m_attackManager = GetComponent<AttackNodeManagerBase>();
         m_wallAttack = GetComponent<WallAttack_ZombieNormal>();
 
@@ -103,7 +105,10 @@ public class SmellManager : MonoBehaviour
 
     private bool IsAttack()
     {
-        //T_Wallでないなら
+        if (!m_targetManager.HasTarget()) {
+            return false;
+        }
+
         var parent = m_targetManager.GetNowTarget().transform.parent;
         if(parent == null) {
             return false;
@@ -146,11 +151,8 @@ public class SmellManager : MonoBehaviour
 
         if (IsTargetNear(m_nearRange))  //正体に気づく距離まで来たら。
         {
-            //Debug.Log("△PulldeCheck");
-
             enabled = false; //自分自身をoff
             m_velocityManager.StartDeseleration(); //速度のリセット
-            //m_velocityManager.enabled = false; //速度を計算しないようにする。
 
             m_waitTimer.AddWaitTimer(GetType(), m_nearWaitTime, () => {
                 m_targetManager.AddExcludeNowTarget();  //ターゲット対象から外す。
@@ -164,15 +166,39 @@ public class SmellManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (enabled == false) {
+            return;
+        }
+
         CheckSmellFind(other);
     }
 
     private void OnTriggerStay(Collider other)
     {
+        if (enabled == false) {
+            return;
+        }
+
         if (m_timer.IsTimeUp)
         {
             CheckSmellFind(other);
             m_timer.ResetTimer(m_stayTriggerIntervalTime);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(enabled == false || IsAttack() || !IsUpdate()) {
+            return;
+        }
+
+        if (m_stator?.GetNowStateType() == ZombieNormalState.Attack) {
+            return;
+        }
+
+        if (Obstacle.IsObstacle(collision.gameObject))
+        {
+            m_targetManager.AddExcludeNowTarget();  //ターゲット対象から外す。
         }
     }
 
