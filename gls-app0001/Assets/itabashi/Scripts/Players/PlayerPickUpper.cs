@@ -14,6 +14,9 @@ public class PlayerPickUpper : MonoBehaviour
     [SerializeField]
     private Canvas m_canvas;
 
+    [SerializeField]
+    private GameStateManager m_gameStageManager;
+
     private const string PICKUP_OBJECTS_NAME = "PickUpObjects";
 
     Transform m_pickUpObjectsTransform;
@@ -200,6 +203,11 @@ public class PlayerPickUpper : MonoBehaviour
 
     private void Decision(PickedUpObject pickedUpObject)
     {
+        if(m_gameStageManager.gameState != GameState.Play)
+        {
+            return;
+        }
+
         m_triggerPickedUpObjects.Remove(pickedUpObject);
         PutAway(pickedUpObject);
         m_pickedUpDecision = true;
