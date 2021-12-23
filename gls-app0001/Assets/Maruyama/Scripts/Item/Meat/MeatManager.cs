@@ -76,10 +76,10 @@ public class MeatManager : EatenBase
     /// <summary>
     /// 食べられたときの反応
     /// </summary>
-    public override void Eaten()
+    public override void Eaten(float power)
     {
         ParticleManager.Instance?.Play(ParticleManager.ParticleID.MeatParticle, transform.position);
-        m_param.elapsedEatCount++;
+        m_param.elapsedEatCount += power;
         StateCheck();
 
         if (m_param.elapsedEatCount >= m_param.maxEatCount) //最大捕食回数が超えたら。
