@@ -43,6 +43,9 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 
     Dictionary<StateEnum, string> m_stateNameDictionary = new Dictionary<StateEnum, string>();
 
+    [SerializeField]
+    private EatParametor m_eatParam =　new EatParametor(1.0f);
+
     NormalAttack m_normalAttackComp;
 
     EnemyStunManager m_stunManager;
@@ -138,15 +141,15 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     {
         var actionBehaviour = ZombieNormalTable.UpperLayer.PreliminaryNormalAttack.GetBehaviour<AnimationActionBehavior>(m_animator);
 
-        actionBehaviour.AddEnterAction(() => { 
+        actionBehaviour.AddEnterAction(() => {
             m_rotationController.enabled = true; //ローテーションのenableをtrue
 
-        });  
+        });
 
         actionBehaviour.AddUpdateAction(() => {
             //予備動作中のアップデート
             var vectorCheck = m_targetManager.GetToNowTargetVector();
-            if(vectorCheck == null) {
+            if (vectorCheck == null) {
                 return;
             }
             var toTragetVec = (Vector3)vectorCheck;
@@ -155,7 +158,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
             //速度計算
             var moveSpeed = m_attackManager.PreliminaryParametorProperty.moveSpeed;
             var force = CalcuVelocity.CalucSeekVec(m_velocityManager.velocity, toTragetVec, moveSpeed);
-            m_velocityManager.AddForce(force); 
+            m_velocityManager.AddForce(force);
         });
 
         actionBehaviour.AddExitAction(() => m_preliminaryNormalAttackVoice?.FadeOutStart());
@@ -176,7 +179,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 
     void SettingDashAttackMove()
     {
-        
+
     }
 
     void SettingWallAttack()
@@ -202,22 +205,22 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         var timeBehaviour = ZombieNormalTable.UpperLayer.PutWallAttack.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
         var timeEvent = timeBehaviour.onTimeEvent;
 
-        foreach(var param in m_putWallParams)
+        foreach (var param in m_putWallParams)
         {
             timeEvent.ClampWhere(param.startTime)
-                .Subscribe(_ => param.trigger.AttackStart()) 
+                .Subscribe(_ => param.trigger.AttackStart())
                 .AddTo(this);
 
             timeEvent.ClampWhere(param.endTime)
-                .Subscribe(_ => param.trigger.AttackEnd())   
+                .Subscribe(_ => param.trigger.AttackEnd())
                 .AddTo(this);
         }
 
         timeBehaviour.onStateEntered  //集団行動Off
-            .Subscribe(_ => { 
+            .Subscribe(_ => {
                 m_throngManager.enabled = false;
                 m_velocityManager.ResetAll();
-            }) 
+            })
             .AddTo(this);
 
         timeBehaviour.onStateExited
@@ -236,7 +239,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         times.Add(3.0f);
         times.Add(11.0f);
 
-        foreach(var time in times)
+        foreach (var time in times)
         {
             actionEvent.AddTimeAction(time, Eat);
             //timeEvent.ClampWhere(time)
@@ -254,7 +257,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
             .AddTo(this);
 
         timeBehaviour.onStateExited
-            .Subscribe(_ => { 
+            .Subscribe(_ => {
                 m_animator.SetBool("isEat", false);
                 m_statusManager.IsEat = false;
             })
@@ -263,7 +266,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 
     void Eat()
     {
-        if (!m_targetManager.HasTarget())  {
+        if (!m_targetManager.HasTarget()) {
             return;
         }
 
@@ -274,7 +277,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         var eaten = m_targetManager.GetNowTarget().GetComponent<EatenBase>();
         if (eaten)
         {
-            eaten.Eaten();
+            eaten.Eaten(m_eatParam.power);
             Debug.Log("△食べたよ");
         }
     }
@@ -322,7 +325,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         var behavior = ZombieNormalTable.UpperLayer.KnockBack.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
 
         behavior.onStateExited.Where(_ => m_stunManager.IsStun)
-            .Subscribe(_ => { 
+            .Subscribe(_ => {
                 CrossFadeStunAnimation();
             })
             .AddTo(this);
@@ -438,5 +441,11 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         m_animator.SetLayerWeight(UpperLayerIndex, weight);
         CrossFadeIdleAnimation(UpperLayerIndex);
         CrossFadeIdleAnimation();
+    }
+
+    public EatParametor EatParam
+    {
+        get => m_eatParam;
+        set => m_eatParam = value;
     }
 }

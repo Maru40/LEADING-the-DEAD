@@ -39,6 +39,8 @@ public class CreateSetParametor_ZombieNormal
     public EyeSearchRangeParam eyeSarchRangeParam = new EyeSearchRangeParam(7.0f, 3.0f, 0.7f);
     [Header("群衆パラメータ")]
     public ThrongManagerParametor throngParam = new ThrongManagerParametor(1.0f, 1.0f, 3.0f);
+    [Header("食べる力")]
+    public EatParametor eatParam = new EatParametor(1.0f);
 
     public CreateSetParametor_ZombieNormal()
     { }
@@ -143,6 +145,8 @@ public class EnemyGenerator_ZombieNormal : EnemyGenerator
                 Debug.Log(data.Key + ": " + data.Value);
                 animatorManager.SetNormalAttackDamageData(data.Key, data.Value);
             }
+
+            animatorManager.EatParam = m_createSetParam.eatParam;
         }
 
         //怒りバフ
