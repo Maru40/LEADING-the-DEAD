@@ -9,7 +9,7 @@ using System;
 /// ターゲットの管理用のパラメータ
 /// </summary>
 [Serializable]
-class EyeTargetParam
+public class EyeTargetParam
 {
     public GameObject target;
     public bool isFind;  //見つけた状態かどうかを返す
@@ -59,19 +59,19 @@ public class EyeSearchRange : MonoBehaviour
 {
     //範囲に入っているかの対象になるオブジェクト
     [SerializeField]
-    List<EyeTargetParam> m_targetParams = new List<EyeTargetParam>();
+    private List<EyeTargetParam> m_targetParams = new List<EyeTargetParam>();
 
     [SerializeField]
-    GameObject m_centerObject = null;
+    private GameObject m_centerObject = null;
 
     [SerializeField]
-    EyeSearchRangeParam m_param = new EyeSearchRangeParam();
+    private EyeSearchRangeParam m_param = new EyeSearchRangeParam();
 
     /// <summary>
     /// Rayの障害物するLayerの配列
     /// </summary>
     [SerializeField]
-    string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
+    private string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
 
     private void Awake()
     {
@@ -97,21 +97,21 @@ public class EyeSearchRange : MonoBehaviour
         }
     }
 
-    bool IsRange(GameObject target) {
+    private bool IsRange(GameObject target) {
         return IsRange(target.transform.position);
 	}
 
-    bool IsRange(Vector3 targetPosition) {
+    private bool IsRange(Vector3 targetPosition) {
         var toVec = targetPosition - transform.position;
         //長さチェック
         return toVec.magnitude <= m_param.range ? true : false;
     }
 
-    bool IsHeight(GameObject target) {
+    private bool IsHeight(GameObject target) {
         return IsHeight(target.transform.position);
 	}
 
-    bool IsHeight(Vector3 targetPosition)
+    private bool IsHeight(Vector3 targetPosition)
     {
         var selfPos = transform.position;
 
@@ -120,11 +120,11 @@ public class EyeSearchRange : MonoBehaviour
         return Mathf.Abs(subHeight) <= m_param.height ? true : false;
     }
 
-    bool IsRad(GameObject target) {
+    private bool IsRad(GameObject target) {
         return IsRad(target.transform.position);
 	}
 
-    bool IsRad(Vector3 targetPosition)
+    private bool IsRad(Vector3 targetPosition)
     {
         var forward = transform.transform.forward;
         forward.y = 0.0f;
@@ -137,11 +137,11 @@ public class EyeSearchRange : MonoBehaviour
         return newRad <= m_param.rad ? true : false;
     }
 
-    bool IsRay(GameObject target){
+    private bool IsRay(GameObject target){
         return IsRay(target.transform.position);
 	}
 
-    bool IsRay(Vector3 targetPosition)
+    private bool IsRay(Vector3 targetPosition)
     {
         int obstacleLayer = LayerMask.GetMask(m_rayObstacleLayerStrings);
         var toVec = targetPosition - transform.position;
@@ -153,17 +153,11 @@ public class EyeSearchRange : MonoBehaviour
         {
             return true;
         }
-        //if (!Physics.Raycast(transform.position, toVec, toVec.magnitude, obstacleLayer) && colliders.Length == 0)
-        //{
-        //    return true;
-        //}
 
         return false;
-
-        //return !Physics.Raycast(transform.position, toVec, toVec.magnitude, obstacleLayer) ? true : false;
     }
 
-    void Hit(EyeTargetParam targetParam) {
+    private void Hit(EyeTargetParam targetParam) {
 		targetParam.isFind = true;
 	}
 
@@ -266,8 +260,8 @@ public class EyeSearchRange : MonoBehaviour
 		m_param = param;
 	}
 
-     public EyeSearchRangeParam GetParam() {
+    public EyeSearchRangeParam GetParam() {
 		return m_param;
-	 }
+	}
 
 }

@@ -11,7 +11,7 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
 {
 
     [Serializable]
-    struct TackleParametor
+    private struct TackleParametor
     {
         //public float tackleStartTime; //タックルスタート
         public float chargeTime;
@@ -23,31 +23,31 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
     }
 
     [Serializable]
-    struct AudioParametor
+    private struct AudioParametor
     {
         public AudioManager shout;
         public AudioManager tackleFootSteps;  //タックル時の足音
     }
 
     [SerializeField]
-    AnimationHitColliderParametor m_normalAttackParam = new AnimationHitColliderParametor();
+    private AnimationHitColliderParametor m_normalAttackParam = new AnimationHitColliderParametor();
 
     [SerializeField]
-    TackleParametor m_tackleParam = new TackleParametor();
+    private TackleParametor m_tackleParam = new TackleParametor();
 
     [SerializeField]
-    Ex_Dictionary<AttackManager_ZombieTank.AttackType, TimeParametor<ParticleManager.ParticleID>> m_attackParticleDictionary =
+    private Ex_Dictionary<AttackManager_ZombieTank.AttackType, TimeParametor<ParticleManager.ParticleID>> m_attackParticleDictionary =
         new Ex_Dictionary<AttackManager_ZombieTank.AttackType, TimeParametor<ParticleManager.ParticleID>>();
 
     [SerializeField]
-    AudioParametor m_audioParam = new AudioParametor();
+    private AudioParametor m_audioParam = new AudioParametor();
 
     private NormalAttack m_normalAttackComp;
     private TankTackle m_tackleComp;
     private WaitTimer m_waitTimer;
     private AudioManager m_audioManager;
 
-    override protected void Awake()
+    protected override void Awake()
     {
         base.Awake();
 
@@ -80,7 +80,7 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
     /// <summary>
     /// 通常攻撃
     /// </summary>
-    void SettingNormalAttackAnimation()
+    private void SettingNormalAttackAnimation()
     {
         var layerIndex = m_animator.GetLayerIndex("Base Layer");
 
@@ -109,7 +109,7 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
     /// <summary>
     /// シャウトアニメーション
     /// </summary>
-    void SettingShoutAnimation()
+    private void SettingShoutAnimation()
     {
         var timeEvent = ZombieTankTable.BaseLayer.Shout.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
 
@@ -122,7 +122,7 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
     /// <summary>
     /// タックル攻撃
     /// </summary>
-    void SettingTackleAnimation()
+    private void SettingTackleAnimation()
     {
         var baseIndex = m_animator.GetLayerIndex("Base Layer");
         var upperIndex = m_animator.GetLayerIndex("Upper Layer");
@@ -150,16 +150,9 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         actionBehaviour.AddTimeAction(m_tackleParam.leftFootStepsSoundTime,
             () => { SEPlayOneShot(m_audioParam.tackleFootSteps); Debug.Log("△左足音"); }
         );
-
-        //timeEvent.ClampWhere(m_tackleParam.rightFootStepsSoundTime)
-        //    .Subscribe(_ => SEPlayOneShot(m_audioParam.tackleFootSteps))
-        //    .AddTo(this);
-        //timeEvent.ClampWhere(m_tackleParam.leftFootStepsSoundTime)
-        //    .Subscribe(_ => SEPlayOneShot(m_audioParam.tackleFootSteps))
-        //    .AddTo(this);
     }
 
-    void TackleStart(float speed)
+    private void TackleStart(float speed)
     {
         m_animator.speed = speed;
         int upperIndex = m_animator.GetLayerIndex("Upper Layer");
@@ -185,7 +178,7 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
     /// <summary>
     /// ドラミング攻撃
     /// </summary>
-    void SettingDrumming()
+    private void SettingDrumming()
     {
         var baseIndex = m_animator.GetLayerIndex("Base Layer");
 
@@ -197,7 +190,7 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
     /// <summary>
     /// シャウト
     /// </summary>
-    void SettingShout()
+    private void SettingShout()
     {
         var baseIndex = m_animator.GetLayerIndex("Base Layer");
 
@@ -212,7 +205,7 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
     /// <param name="timeEvent">TimeEvent</param>
     /// <param name="type">攻撃タイプ</param>
     /// <param name="owner">パーティクルが発生する場所</param>
-    void SettingTimeEventParticle(IObservable<UniRxIObservableExtension.BeforeAfterData<float>> timeEvent,
+    private void SettingTimeEventParticle(IObservable<UniRxIObservableExtension.BeforeAfterData<float>> timeEvent,
         AttackManager_ZombieTank.AttackType type,
         GameObject owner)
     {
@@ -224,12 +217,12 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
         }
     }
 
-    void SEPlayOneShot(AudioManager manager)
+    private void SEPlayOneShot(AudioManager manager)
     {
         manager.PlayOneShot();
     }
 
-    void SEPlayOneShot(AudioClipParametor param)
+    private void SEPlayOneShot(AudioClipParametor param)
     {
         Manager.GameAudioManager.Instance.SEPlayOneShot(param.clip, param.volume);
     }

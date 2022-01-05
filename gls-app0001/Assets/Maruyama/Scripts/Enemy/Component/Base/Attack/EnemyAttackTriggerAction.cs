@@ -8,7 +8,7 @@ using AttributeObject;
 [RequireComponent(typeof(AudioManager))]
 public class EnemyAttackTriggerAction : TriggerAction
 {
-    enum HitType 
+    private enum HitType 
     {
         Enter,
         Stay,
@@ -18,25 +18,25 @@ public class EnemyAttackTriggerAction : TriggerAction
     private UnityEvent m_damageEvent = null;
 
     [SerializeField]
-    StatusManagerBase m_statusManager = null;
+    private StatusManagerBase m_statusManager = null;
 
     [SerializeField]
-    AnimatorManagerBase m_animatorManager = null;
+    private AnimatorManagerBase m_animatorManager = null;
 
     [SerializeField]
-    DamageData m_damageData = new DamageData();
+    private DamageData m_damageData = new DamageData();
 
     [SerializeField]
-    HitType m_hitType = HitType.Enter;
+    private HitType m_hitType = HitType.Enter;
     
     [SerializeField]
-    AudioManager m_audioManager;
+    private AudioManager m_audioManager;
 
     [Header("ヒット時のパーティクル"), SerializeField]
-    List<ParticleManager.ParticleID> m_hitParticleIDs = new List<ParticleManager.ParticleID>();
+    private List<ParticleManager.ParticleID> m_hitParticleIDs = new List<ParticleManager.ParticleID>();
     //ParticleManager.ParticleID m_hitParticleID;
-    
-    Collider m_hitCollider;
+
+    private Collider m_hitCollider;
 
     private void Awake()
     {
@@ -101,7 +101,7 @@ public class EnemyAttackTriggerAction : TriggerAction
         }
     }
 
-    void CreateParticles()
+    private void CreateParticles()
     {
         foreach (var id in m_hitParticleIDs)
         {
