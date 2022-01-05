@@ -25,9 +25,9 @@ public class ZombieTankTransitionMember
 
 public class Stator_ZombieTank : StatorBase
 {
-    StateMachine m_stateMachine;
+    private StateMachine m_stateMachine;
 
-    void Start()
+    private void Start()
     {
         m_stateMachine = new StateMachine();
 
@@ -35,12 +35,12 @@ public class Stator_ZombieTank : StatorBase
         CreateEdge();
     }
 
-    void Update()
+    private void Update()
     {
         m_stateMachine.OnUpdate();
     }
 
-    void CreateNode()
+    private void CreateNode()
     {
         var zombie = GetComponent<ZombieTank>();
 
@@ -51,7 +51,7 @@ public class Stator_ZombieTank : StatorBase
         m_stateMachine.AddNode(StateType.Attack, new StateNode_ZombieTank_Attack(zombie));
     }
 
-    void CreateEdge()
+    private void CreateEdge()
     {
         //None
         m_stateMachine.AddEdge(StateType.None, StateType.RandomPlowling, ToRandomPlowling);
@@ -79,22 +79,22 @@ public class Stator_ZombieTank : StatorBase
 
     //遷移条件系---------------------------------------------------------------
 
-    bool ToChaseTrigger(TransitionMember member)
+    private bool ToChaseTrigger(TransitionMember member)
     {
         return member.chaseTrigger.Get();
     }
 
-    bool ToRandomPlowling(TransitionMember member)
+    private bool ToRandomPlowling(TransitionMember member)
     {
         return member.rondomPlowlingTrigger.Get();
     }
 
-    bool ToWaitSeeTrigger(TransitionMember member)
+    private bool ToWaitSeeTrigger(TransitionMember member)
     {
         return member.waitSeeTrigger.Get();
     }
 
-    bool ToAttackTrigger(TransitionMember member)
+    private bool ToAttackTrigger(TransitionMember member)
     {
         return member.attackTrigger.Get();
     }
