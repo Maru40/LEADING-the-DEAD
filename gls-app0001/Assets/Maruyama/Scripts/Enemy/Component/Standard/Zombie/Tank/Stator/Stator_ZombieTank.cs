@@ -99,12 +99,12 @@ public class Stator_ZombieTank : StatorBase
         return member.attackTrigger.Get();
     }
 
-    public override void CrossFade<EnumType>(EnumType type, int priority = 0)
+    public override void ChangeState<EnumType>(EnumType type, int priority = 0)
     {
         if (type is StateType)
         {
             StateType? stateType = type as StateType?;
-            m_stateMachine.CrossFade((StateType)stateType, priority);
+            m_stateMachine.ChangeState((StateType)stateType, priority);
         }
     }
 

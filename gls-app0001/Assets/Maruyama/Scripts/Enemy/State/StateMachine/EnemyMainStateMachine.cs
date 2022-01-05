@@ -148,7 +148,7 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     /// </summary>
     /// <param name="type">遷移先のタイプ</param>
     /// <param name="priority">優先度</param>
-    public void CrossFade(EnumType type, int priority)
+    public void ChangeState(EnumType type, int priority)
     {
         m_transitionCandidates.Add(new TransitionCanditdateParametor(type, priority));
         //m_stateMachine.ChangeState(type);
