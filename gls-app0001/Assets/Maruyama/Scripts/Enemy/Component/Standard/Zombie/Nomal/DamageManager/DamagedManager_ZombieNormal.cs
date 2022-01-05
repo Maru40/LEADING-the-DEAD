@@ -66,7 +66,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
             CreateDamageEffect(data);
         }
 
-        m_stator.CrossFade(ZombieNormalState.KnockBack, (int)ZombieNormalState.KnockBack);
+        m_stator.ChangeState(ZombieNormalState.KnockBack, (int)ZombieNormalState.KnockBack);
         m_knockBack.KnockBack(data);  //ノックバック
         m_animatorManager.HitStop(data);  //ヒットストップ
         StartDamageInterval(ref status); //ダメージインターバルの開始
@@ -105,7 +105,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
             };
             m_statusManager.ChangeDyingMode(dyingMode);  //瀕死状態のTypeを変更
 
-            m_stator.CrossFade(ZombieNormalState.Dying, (int)ZombieNormalState.Dying);
+            m_stator.ChangeState(ZombieNormalState.Dying, (int)ZombieNormalState.Dying);
             //m_stator.GetTransitionMember().dyingTrigger.Fire();  //瀕死状態に変更
         }
     }

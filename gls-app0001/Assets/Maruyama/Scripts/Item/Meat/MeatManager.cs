@@ -6,7 +6,7 @@ using MaruUtility.UtilityDictionary;
 
 public class MeatManager : EatenBase
 {
-    enum MeatState
+    private enum MeatState
     {
         Normal,
         Half,
@@ -14,7 +14,7 @@ public class MeatManager : EatenBase
     }
 
     [System.Serializable]
-    struct Parametor
+    private struct Parametor
     {
         public MeatState state;
         public float maxEatCount;      //最大の食べられた回数。
@@ -22,17 +22,17 @@ public class MeatManager : EatenBase
     }
 
     [SerializeField]
-    Ex_Dictionary<MeatState, GameObject> m_modelDictionary = new Ex_Dictionary<MeatState, GameObject>();
+    private Ex_Dictionary<MeatState, GameObject> m_modelDictionary = new Ex_Dictionary<MeatState, GameObject>();
 
     [SerializeField]
-    Parametor m_param = new Parametor();
+    private Parametor m_param = new Parametor();
 
     private void Awake()
     {
         m_modelDictionary.InsertInspectorData();
     }
 
-    void Update()
+    private void Update()
     {
         //StateCheck(); //ステートのチェック
     }
@@ -40,7 +40,7 @@ public class MeatManager : EatenBase
     /// <summary>
     /// ステートの監視
     /// </summary>
-    void StateCheck()
+    private void StateCheck()
     {
         var rate = m_param.elapsedEatCount / m_param.maxEatCount;
 
@@ -55,14 +55,14 @@ public class MeatManager : EatenBase
     /// ステートの変更
     /// </summary>
     /// <param name="state"></param>
-    void ChangeState(MeatState state)
+    private void ChangeState(MeatState state)
     {
         ChangeModel(state);
 
         m_param.state = state;
     }
 
-    void ChangeModel(MeatState state)
+    private void ChangeModel(MeatState state)
     {
         //どちらのモデルも存在したら。
         if(m_modelDictionary.ContainsKey(m_param.state) &&
@@ -91,7 +91,7 @@ public class MeatManager : EatenBase
     /// <summary>
     /// 終了処理
     /// </summary>
-    void EndProcess()
+    private void EndProcess()
     {
         ParticleManager.Instance.Play(ParticleManager.ParticleID.MeatParticle, transform.position);
         m_param.state = MeatState.Destroy;
@@ -106,9 +106,4 @@ public class MeatManager : EatenBase
 
         Destroy(gameObject, time);
     }
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    Eaten();
-    //}
 }

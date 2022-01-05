@@ -35,32 +35,32 @@ public class ZombieNormalTransitionMember
 
 public class Stator_ZombieNormal : StatorBase
 {
-    StateMachine m_stateMachine;
+    private StateMachine m_stateMachine;
 
     //パラメータ
 
     [SerializeField]
-    StateNode_ZombieNormal_Find.Parametor m_findParametor = new StateNode_ZombieNormal_Find.Parametor(1.0f, 2.0f);
+    private StateNode_ZombieNormal_Find.Parametor m_findParametor = new StateNode_ZombieNormal_Find.Parametor(1.0f, 2.0f);
 
-    void Awake()
+    private void Awake()
     {
         m_stateMachine = new StateMachine();
 
         CreateStateMachine();
     }
 
-    void Update()
+    private void Update()
     {
         m_stateMachine.OnUpdate();
     }
 
-    void CreateStateMachine()
+    private void CreateStateMachine()
     {
         CreateNode();
         CreateEdge();
     }
 
-    void CreateNode()
+    private void CreateNode()
     {
         var zombie = GetComponent<ZombieNormal>();
 
@@ -76,7 +76,7 @@ public class Stator_ZombieNormal : StatorBase
         m_stateMachine.AddNode(StateType.Death,          new StateNode_ZombiNormal_Death(zombie));
     }
 
-    void CreateEdge()
+    private void CreateEdge()
     {
         //ランダム徘徊
         m_stateMachine.AddEdge(StateType.RandomPlowling, StateType.Find, ToFindTrigger);
@@ -130,34 +130,34 @@ public class Stator_ZombieNormal : StatorBase
 
     //遷移条件系---------------------------------------------------------------
 
-    bool ToFindTrigger(TransitionMember member)
+    private bool ToFindTrigger(TransitionMember member)
     {
         return member.findTrigger.Get();
     }
 
-    bool ToChaseTrigger(TransitionMember member) {
+    private bool ToChaseTrigger(TransitionMember member) {
         return member.chaseTrigger.Get();
     }
 
-    bool ToEatTrigger(TransitionMember member)
+    private bool ToEatTrigger(TransitionMember member)
     {
         return member.eatTrigger.Get();
     }
 
-    bool ToRandomPlowling(TransitionMember member) {
+    private bool ToRandomPlowling(TransitionMember member) {
         return member.rondomPlowlingTrigger.Get();
     }
 
-    bool ToAttackTrigger(TransitionMember member) {
+    private bool ToAttackTrigger(TransitionMember member) {
         return member.attackTrigger.Get();
     }
 
-    bool ToStunTrigger(TransitionMember member)
+    private bool ToStunTrigger(TransitionMember member)
     {
         return member.stunTrigger.Get();
     }
 
-    bool ToAngerTrigger(TransitionMember member)
+    private bool ToAngerTrigger(TransitionMember member)
     {
         return member.angerTirgger.Get();
     }
@@ -167,17 +167,17 @@ public class Stator_ZombieNormal : StatorBase
     //    return member.dyingTrigger.Get();
     //}
 
-    bool ToDeathTrigger(TransitionMember member)
+    private bool ToDeathTrigger(TransitionMember member)
     {
         return member.deathTrigger.Get();
     }
 
-        public override void CrossFade<EnumType>(EnumType type, int priority = 0)
+    public override void ChangeState<EnumType>(EnumType type, int priority = 0)
     {
         if (type is StateType)
         {
             StateType? stateType = type as StateType?;
-            m_stateMachine.CrossFade((StateType)stateType, priority);
+            m_stateMachine.ChangeState((StateType)stateType, priority);
         }
     }
 

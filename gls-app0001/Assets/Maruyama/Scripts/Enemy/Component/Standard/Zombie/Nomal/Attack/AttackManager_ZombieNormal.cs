@@ -13,18 +13,18 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
     }
 
     [Header("予備動作のパラメータ") ,SerializeField]
-    PreliminaryParametor m_preliminaryParam = new PreliminaryParametor(new RandomRange(1.0f,1.0f), 1.0f);
+    private PreliminaryParametor m_preliminaryParam = new PreliminaryParametor(new RandomRange(1.0f,1.0f), 1.0f);
 
     [SerializeField]
-    AudioManager m_audioManager = null;
+    private AudioManager m_audioManager = null;
 
-    Stator_ZombieNormal m_stator;
-    TargetManager m_targetMgr;
-    AnimatorManager_ZombieNormal m_animatorManager;
+    private Stator_ZombieNormal m_stator;
+    private TargetManager m_targetMgr;
+    private AnimatorManager_ZombieNormal m_animatorManager;
 
-    GameTimer m_gameTimer = new GameTimer();
+    private GameTimer m_gameTimer = new GameTimer();
 
-    void Awake()
+    private void Awake()
     {
         m_stator = GetComponent<Stator_ZombieNormal>();
         m_targetMgr = GetComponent<TargetManager>();
@@ -35,7 +35,7 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
     /// 攻撃を開始する距離かどうか
     /// </summary>
     /// <returns>開始するならtrue</returns>
-    override public bool IsAttackStartRange()
+    public override bool IsAttackStartRange()
     {
         float range = GetBaseParam().startRange;
         //FoundObject target = m_targetMgr.GetNowTarget();

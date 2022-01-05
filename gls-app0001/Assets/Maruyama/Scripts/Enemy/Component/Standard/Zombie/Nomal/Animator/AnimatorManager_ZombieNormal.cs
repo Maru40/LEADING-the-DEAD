@@ -10,14 +10,14 @@ using MaruUtility.UtilityDictionary;
 
 public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 {
-    enum LayerEnum
+    private enum LayerEnum
     {
         Base,
         Upper,
         Lower
     }
 
-    enum StateEnum
+    private enum StateEnum
     {
 
     }
@@ -29,38 +29,38 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     }
 
     [SerializeField]
-    Ex_Dictionary<NormalAttackHitColliderType, AnimationHitColliderParametor> m_normalAttackParam =
+    private Ex_Dictionary<NormalAttackHitColliderType, AnimationHitColliderParametor> m_normalAttackParam =
         new Ex_Dictionary<NormalAttackHitColliderType, AnimationHitColliderParametor>();
 
     [SerializeField]
-    AnimationHitColliderParametor m_dashAttackParam = new AnimationHitColliderParametor();
+    private AnimationHitColliderParametor m_dashAttackParam = new AnimationHitColliderParametor();
 
     [SerializeField]
-    AnimationHitColliderParametor m_wallAttackParam = new AnimationHitColliderParametor();
+    private AnimationHitColliderParametor m_wallAttackParam = new AnimationHitColliderParametor();
 
     [Header("壁攻撃ダメ―ジ与える時間"), SerializeField]
-    List<AnimationHitColliderParametor> m_putWallParams = new List<AnimationHitColliderParametor>();
+    private List<AnimationHitColliderParametor> m_putWallParams = new List<AnimationHitColliderParametor>();
 
-    Dictionary<StateEnum, string> m_stateNameDictionary = new Dictionary<StateEnum, string>();
+    private Dictionary<StateEnum, string> m_stateNameDictionary = new Dictionary<StateEnum, string>();
 
     [SerializeField]
     private EatParametor m_eatParam =　new EatParametor(1.0f);
 
-    NormalAttack m_normalAttackComp;
+    private NormalAttack m_normalAttackComp;
 
-    EnemyStunManager m_stunManager;
-    AngerManager m_angerManager;
-    KnockBackManager m_knockBackManager;
-    EnemyRotationCtrl m_rotationController;
-    TargetManager m_targetManager;
-    EnemyVelocityMgr m_velocityManager;
-    AttackManager_ZombieNormal m_attackManager;
-    Stator_ZombieNormal m_stator;
-    ThrongManager m_throngManager;
-    SmellManager m_smellManager;
+    private EnemyStunManager m_stunManager;
+    private AngerManager m_angerManager;
+    private KnockBackManager m_knockBackManager;
+    private EnemyRotationCtrl m_rotationController;
+    private TargetManager m_targetManager;
+    private EnemyVelocityMgr m_velocityManager;
+    private AttackManager_ZombieNormal m_attackManager;
+    private Stator_ZombieNormal m_stator;
+    private ThrongManager m_throngManager;
+    private SmellManager m_smellManager;
 
     [SerializeField]
-    AudioManager m_preliminaryNormalAttackVoice;
+    private AudioManager m_preliminaryNormalAttackVoice = null;
 
     override protected void Awake()
     {
@@ -89,7 +89,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         SettingPreliminaryNormalAttack();
 
         SettingDashAttack();
-        SettingDashAttackMove();
+        //SettingDashAttackMove();
 
         SettingWallAttack();
         SettingPutWallAttack();
@@ -104,7 +104,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         SettingDeath();
     }
 
-    void SettingNormalAttack()
+    private void SettingNormalAttack()
     {
         var behavior = ZombieNormalTable.UpperLayer.NormalAttack.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
 
@@ -137,7 +137,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     /// <summary>
     /// 通常攻撃の予備動作
     /// </summary>
-    void SettingPreliminaryNormalAttack()
+    private void SettingPreliminaryNormalAttack()
     {
         var actionBehaviour = ZombieNormalTable.UpperLayer.PreliminaryNormalAttack.GetBehaviour<AnimationActionBehavior>(m_animator);
 
@@ -164,7 +164,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         actionBehaviour.AddExitAction(() => m_preliminaryNormalAttackVoice?.FadeOutStart());
     }
 
-    void SettingDashAttack()
+    private void SettingDashAttack()
     {
         //攻撃判定の入れだし
         var timeBehaviour = ZombieNormalTable.UpperLayer.DashAttack.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
@@ -177,12 +177,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
             .AddTo(this);
     }
 
-    void SettingDashAttackMove()
-    {
-
-    }
-
-    void SettingWallAttack()
+    private void SettingWallAttack()
     {
         var timeBehaviour = ZombieNormalTable.UpperLayer.WallAttack.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
         var timeEvent = timeBehaviour.onTimeEvent;
@@ -200,7 +195,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
             .AddTo(this);
     }
 
-    void SettingPutWallAttack()
+    private void SettingPutWallAttack()
     {
         var timeBehaviour = ZombieNormalTable.UpperLayer.PutWallAttack.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
         var timeEvent = timeBehaviour.onTimeEvent;
@@ -228,7 +223,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
             .AddTo(this);
     }
 
-    void SettingEat()
+    private void SettingEat()
     {
         var actionEvent = ZombieNormalTable.AllLayer.Eat.GetBehaviour<AnimationActionBehavior>(animator);
         var timeBehaviour = ZombieNormalTable.AllLayer.Eat.GetBehaviour<TimeEventStateMachineBehaviour>(m_animator);
@@ -264,7 +259,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
             .AddTo(this);
     }
 
-    void Eat()
+    private void Eat()
     {
         if (!m_targetManager.HasTarget()) {
             return;
@@ -282,7 +277,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         }
     }
 
-    void SettingStun()
+    private void SettingStun()
     {
         const float stunTransitionTimes = 0.25f;
         m_stunManager.IsStunReactive.Where(isStun => isStun)
@@ -296,7 +291,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
             .AddTo(this);
     }
 
-    void SettingAnger()
+    private void SettingAnger()
     {
         m_angerManager.isAngerObservable.Where(isAnger => isAnger)
             .Subscribe(_ => ChangeAngerAnimation())
@@ -308,7 +303,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
             .AddTo(this);
     }
 
-    void SettingKnockBack()
+    private void SettingKnockBack()
     {
         m_knockBackManager.IsKnockBackReactive.Where(isKnockBack => isKnockBack)
             .Subscribe(_ =>
@@ -331,7 +326,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
             .AddTo(this);
     }
 
-    void SettingDeath()
+    private void SettingDeath()
     {
 
     }
@@ -351,13 +346,13 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         CrossFadeState("PreliminaryNormalAttack", UpperLayerIndex, transitionTime);
     }
 
-    void CrossFadeStunAnimation(float transitionTime = 0)
+    private void CrossFadeStunAnimation(float transitionTime = 0)
     {
         var layerIndex = m_animator.GetLayerIndex("Upper Layer");
         CrossFadeState("Stunned", layerIndex, transitionTime);
     }
 
-    void ChangeAngerAnimation()
+    private void ChangeAngerAnimation()
     {
         var layerIndex = m_animator.GetLayerIndex("Base Layer");
         CrossFadeState("Anger", layerIndex);
@@ -380,7 +375,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         CrossFadeState("Death", layerIndex);
     }
 
-    void CrossFadeKnockBackState()
+    private void CrossFadeKnockBackState()
     {
         var layerIndex = m_animator.GetLayerIndex("Upper Layer");
         CrossFadeState("KnockBack", layerIndex);

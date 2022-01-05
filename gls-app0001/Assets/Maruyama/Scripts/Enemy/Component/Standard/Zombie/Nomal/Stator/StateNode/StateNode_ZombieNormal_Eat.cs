@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class StateNode_ZombieNormal_Eat : EnemyStateNodeBase<EnemyBase>
 {
-    AnimatorManager_ZombieNormal m_animatorManager;
-    TargetManager m_targetManager;
-    Stator_ZombieNormal m_stator;
-    EnemyVelocityMgr m_velocityManager;
-    SmellManager m_smellManager;
-    Rigidbody m_rigid;
+    private AnimatorManager_ZombieNormal m_animatorManager;
+    private TargetManager m_targetManager;
+    private Stator_ZombieNormal m_stator;
+    private EnemyVelocityMgr m_velocityManager;
+    private SmellManager m_smellManager;
+    private Rigidbody m_rigid;
 
     public StateNode_ZombieNormal_Eat(EnemyBase owner)
         :base(owner)
