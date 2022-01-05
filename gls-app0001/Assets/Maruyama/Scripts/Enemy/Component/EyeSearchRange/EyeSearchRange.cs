@@ -207,12 +207,6 @@ public class EyeSearchRange : MonoBehaviour
     /// <returns>サーチ範囲ならtrue</returns>
     public bool IsInEyeRange(GameObject target, float range)
     {
-        //float beforeRange = m_param.range;
-        //m_param.range = range;
-
-        //bool isRange = IsInEyeRange(target);
-        //m_param.range = beforeRange;
-
         return IsInEyeRange(target.transform.position, range);
     }
 
