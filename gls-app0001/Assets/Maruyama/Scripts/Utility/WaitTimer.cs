@@ -40,12 +40,12 @@ public class WaitTimer : MonoBehaviour
     Dictionary<Type,WaitTimerParam> m_params = new Dictionary<Type, WaitTimerParam>();
     Dictionary<Type, WaitTimerParam> m_addParams = new Dictionary<Type, WaitTimerParam>();
 
-    void Awake()
+    private void Awake()
     {
         m_params = new Dictionary<Type,WaitTimerParam>();
     }
-    
-    void Update()
+
+    private void Update()
     {
         //パラメータのUpdate
         foreach (var keyValuePair in m_params)
@@ -67,7 +67,7 @@ public class WaitTimer : MonoBehaviour
         AddParams();
     }
 
-    void AddParams()
+    private void AddParams()
     {
         foreach(var param in m_addParams)
         {

@@ -14,7 +14,7 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     /// <summary>
     /// 遷移優先度系のパラメータ
     /// </summary>
-    struct TransitionCanditdateParametor
+    private struct TransitionCanditdateParametor
     {
         public EnumType type; //遷移先のタイプ
         public int priority;  //優先度
@@ -31,13 +31,13 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     }
 
     //ステートマシン
-    GraphBase<NodeType, EnumType, TransitionType> m_stateMachine;
+    private GraphBase<NodeType, EnumType, TransitionType> m_stateMachine;
 
     //遷移条件用のメンバー
-    TransitionType m_transitionStruct = new TransitionType();
+    private TransitionType m_transitionStruct = new TransitionType();
 
     //遷移候補群
-    List<TransitionCanditdateParametor> m_transitionCandidates = new List<TransitionCanditdateParametor>();
+    private List<TransitionCanditdateParametor> m_transitionCandidates = new List<TransitionCanditdateParametor>();
 
     //遷移状態のロック
     private bool m_isTransitionLock = false;
@@ -182,7 +182,7 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     /// <summary>
     /// 現在のノードのUpdate
     /// </summary>
-    void NodeUpdate()
+    private void NodeUpdate()
     {
         var nowNode = GetNowNode();
         nowNode?.OnUpdate();
@@ -191,7 +191,7 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     /// <summary>
     /// 遷移するかチェック
     /// </summary>
-    void TransitionCheck()
+    private void TransitionCheck()
     {
         var edges = m_stateMachine.GetNowNodeEdges();
         foreach (var edge in edges)
@@ -208,7 +208,7 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     /// <summary>
     /// トリガーのリセット
     /// </summary>
-    void TriggerReset()
+    private void TriggerReset()
     {
         var edgesDictionary = m_stateMachine.GetEdgesDictionary();
         foreach(var edges in edgesDictionary)
@@ -225,7 +225,7 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     /// <summary>
     /// 実際に遷移する
     /// </summary>
-    void Transition()
+    private void Transition()
     {
         //ロックされている また 遷移先が一つも存在しないなら、処理を飛ばす
         if (m_isTransitionLock || m_transitionCandidates.Count == 0) {
