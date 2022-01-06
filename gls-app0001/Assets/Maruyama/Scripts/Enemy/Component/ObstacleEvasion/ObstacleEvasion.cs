@@ -18,7 +18,7 @@ public class ObstacleEvasion : MonoBehaviour
     [SerializeField]
     float m_maxSpeed = 3.0f;
 
-    EnemyVelocityMgr m_velocityMgr;
+    EnemyVelocityManager m_velocityMgr;
 
     /// <summary>
     /// Rayの障害物するLayerの配列
@@ -28,7 +28,7 @@ public class ObstacleEvasion : MonoBehaviour
 
     void Awake()
     {
-        m_velocityMgr = GetComponent<EnemyVelocityMgr>();
+        m_velocityMgr = GetComponent<EnemyVelocityManager>();
     }
 
     private void Update()

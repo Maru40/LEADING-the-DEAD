@@ -5,12 +5,12 @@ using UnityEngine;
 public class AnimatorCtrl_ZombieTank : MonoBehaviour
 {
     Animator m_animator;
-    EnemyVelocityMgr m_velocityManager;
+    EnemyVelocityManager m_velocityManager;
     
     void Start()
     {
         m_animator = GetComponent<Animator>();
-        m_velocityManager = GetComponent<EnemyVelocityMgr>();
+        m_velocityManager = GetComponent<EnemyVelocityManager>();
     }
 
     void Update()

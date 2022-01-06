@@ -13,7 +13,7 @@ public class ClearManager_Zombie : MonoBehaviour
     private float m_moveSpeed = 5.0f;
 
     private TargetManager m_targetManager;
-    private EnemyVelocityMgr m_velocityManager;
+    private EnemyVelocityManager m_velocityManager;
     private EnemyRotationCtrl m_rotationController;
     private ThrongManager m_throngManager;
 
@@ -42,7 +42,7 @@ public class ClearManager_Zombie : MonoBehaviour
     private void Awake()
     {
         m_targetManager = GetComponent<TargetManager>();
-        m_velocityManager = GetComponent<EnemyVelocityMgr>();
+        m_velocityManager = GetComponent<EnemyVelocityManager>();
         m_throngManager = GetComponent<ThrongManager>();
 
         m_animatorManager = GetComponent<AnimatorManager_ZombieNormal>();

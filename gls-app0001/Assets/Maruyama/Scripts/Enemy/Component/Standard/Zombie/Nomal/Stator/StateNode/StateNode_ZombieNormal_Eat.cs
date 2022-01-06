@@ -7,7 +7,7 @@ public class StateNode_ZombieNormal_Eat : EnemyStateNodeBase<EnemyBase>
     private AnimatorManager_ZombieNormal m_animatorManager;
     private TargetManager m_targetManager;
     private Stator_ZombieNormal m_stator;
-    private EnemyVelocityMgr m_velocityManager;
+    private EnemyVelocityManager m_velocityManager;
     private SmellManager m_smellManager;
     private Rigidbody m_rigid;
 
@@ -17,7 +17,7 @@ public class StateNode_ZombieNormal_Eat : EnemyStateNodeBase<EnemyBase>
         m_animatorManager = owner.GetComponent<AnimatorManager_ZombieNormal>();
         m_targetManager = owner.GetComponent<TargetManager>();
         m_stator = owner.GetComponent<Stator_ZombieNormal>();
-        m_velocityManager = owner.GetComponent<EnemyVelocityMgr>();
+        m_velocityManager = owner.GetComponent<EnemyVelocityManager>();
         m_smellManager = owner.GetComponent<SmellManager>();
         m_rigid = owner.GetComponent<Rigidbody>();
     }

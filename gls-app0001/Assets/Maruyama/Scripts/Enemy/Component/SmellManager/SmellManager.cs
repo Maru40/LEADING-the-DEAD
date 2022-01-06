@@ -15,7 +15,7 @@ public class SmellManager : MonoBehaviour
     private TargetManager m_targetManager;
     private I_Smell m_smell;
     private WaitTimer m_waitTimer;
-    private EnemyVelocityMgr m_velocityManager;
+    private EnemyVelocityManager m_velocityManager;
     private I_Eat m_eat;
     private Stator_ZombieNormal m_stator;
     private AttackNodeManagerBase m_attackManager;
@@ -33,7 +33,7 @@ public class SmellManager : MonoBehaviour
         m_targetManager = GetComponent<TargetManager>();
         m_smell = GetComponent<I_Smell>();
         m_waitTimer = GetComponent<WaitTimer>();
-        m_velocityManager = GetComponent<EnemyVelocityMgr>();
+        m_velocityManager = GetComponent<EnemyVelocityManager>();
         m_eat = GetComponent<I_Eat>();
         m_stator = GetComponent<Stator_ZombieNormal>();
         m_attackManager = GetComponent<AttackNodeManagerBase>();

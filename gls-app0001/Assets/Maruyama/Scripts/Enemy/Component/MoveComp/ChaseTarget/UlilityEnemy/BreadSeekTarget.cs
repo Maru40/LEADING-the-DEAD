@@ -17,7 +17,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
     private ChaseTarget m_chaseTarget;
     private WaitTimer m_waitTimer;
     private Rigidbody m_rigid;
-    private EnemyVelocityMgr m_velocityMgr;
+    private EnemyVelocityManager m_velocityMgr;
     private TargetManager m_targetMgr;
     private BreadCrumb m_bread;
     private EnemyRotationCtrl m_rotationCtrl;
@@ -37,7 +37,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
         m_chaseTarget = owner.GetComponent<ChaseTarget>();
         m_waitTimer = owner.GetComponent<WaitTimer>();
         m_rigid = owner.GetComponent<Rigidbody>();
-        m_velocityMgr = owner.GetComponent<EnemyVelocityMgr>();
+        m_velocityMgr = owner.GetComponent<EnemyVelocityManager>();
         m_targetMgr = owner.GetComponent<TargetManager>();
     }
 

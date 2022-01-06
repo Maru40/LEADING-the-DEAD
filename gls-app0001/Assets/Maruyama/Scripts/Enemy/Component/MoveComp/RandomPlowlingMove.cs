@@ -69,7 +69,7 @@ public class RandomPlowlingMove : MonoBehaviour
 
     private Vector3 m_targetPosition;    //目的の場所
 
-    private EnemyVelocityMgr m_velocityMgr;
+    private EnemyVelocityManager m_velocityMgr;
     private WaitTimer m_waitTimer;
     private ThrongManager m_throngMgr;
     private EnemyRotationCtrl m_rotationCtrl;
@@ -82,7 +82,7 @@ public class RandomPlowlingMove : MonoBehaviour
     private void Awake()
     {
         //コンポーネントの取得
-        m_velocityMgr = GetComponent<EnemyVelocityMgr>();
+        m_velocityMgr = GetComponent<EnemyVelocityManager>();
         m_waitTimer = GetComponent<WaitTimer>();
         m_throngMgr = GetComponent<ThrongManager>();
         m_rotationCtrl = GetComponent<EnemyRotationCtrl>();

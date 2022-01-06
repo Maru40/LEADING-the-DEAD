@@ -135,7 +135,7 @@ public class EnemyGenerator : GeneratorBase
         var obj = Instantiate(m_createObject, createPosition, Quaternion.identity, transform);
         CreateObjectAdjust(obj);  //調整
 
-        var newData = new ThrongData(obj.GetComponent<EnemyVelocityMgr>(),
+        var newData = new ThrongData(obj.GetComponent<EnemyVelocityManager>(),
             obj.GetComponent<TargetManager>(),
             obj.GetComponent<ThrongManager>(),
             obj.GetComponent<RandomPlowlingMove>(),

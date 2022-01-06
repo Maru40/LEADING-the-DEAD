@@ -20,7 +20,7 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
 
     GameTimer m_timer = new GameTimer();
 
-    EnemyVelocityMgr m_velocityManager;
+    EnemyVelocityManager m_velocityManager;
     TargetManager m_targetManager;
     EnemyRotationCtrl m_rotationController;
 
@@ -29,7 +29,7 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
     {
         m_param = param;
 
-        m_velocityManager = owner.GetComponent<EnemyVelocityMgr>();
+        m_velocityManager = owner.GetComponent<EnemyVelocityManager>();
         m_targetManager = owner.GetComponent<TargetManager>();
         m_rotationController = owner.GetComponent<EnemyRotationCtrl>();
     }

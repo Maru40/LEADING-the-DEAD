@@ -29,7 +29,7 @@ public struct ThrongManagerParametor  //群衆Managerのパラメータ
 public struct ThrongData
 {
     public GameObject gameObject;
-    public EnemyVelocityMgr velocityMgr;
+    public EnemyVelocityManager velocityMgr;
     public TargetManager targetMgr;  //ターゲット管理
     public ThrongManager throngMgr;  //群衆管理
     public RandomPlowlingMove randomPlowlingMove; //ランダム徘徊
@@ -37,7 +37,7 @@ public struct ThrongData
     public ClearManager_Zombie clearManager;
     public EnemyRespawnManager respawn;  //リスポーン
 
-    public ThrongData(EnemyVelocityMgr velocityMgr, TargetManager targetMgr, ThrongManager throngMgr,
+    public ThrongData(EnemyVelocityManager velocityMgr, TargetManager targetMgr, ThrongManager throngMgr,
         RandomPlowlingMove randomPlowlingMove, DropObjecptManager dropManager, ClearManager_Zombie clearManager,
         EnemyRespawnManager respawn)
     {
@@ -75,12 +75,12 @@ public class ThrongManager : MonoBehaviour
     EnemyGenerator m_generator = null;
 
     EnemyRotationCtrl m_rotationCtrl;
-    EnemyVelocityMgr m_velocityManager;
+    EnemyVelocityManager m_velocityManager;
 
     private void Awake()
     {
         m_rotationCtrl = GetComponent<EnemyRotationCtrl>();
-        m_velocityManager = GetComponent<EnemyVelocityMgr>();
+        m_velocityManager = GetComponent<EnemyVelocityManager>();
     }
 
     void Start()
@@ -103,7 +103,7 @@ public class ThrongManager : MonoBehaviour
     /// <param name="moveDirect">そのオブジェクトが向かいたい方向</param>
     /// <param name="maxSpeed">最大スピード</param>
     /// <param name="truningPower">旋回パワー</param>
-    void AvoidNearThrong(EnemyVelocityMgr velocityMgr)
+    void AvoidNearThrong(EnemyVelocityManager velocityMgr)
     {
         var velocity = velocityMgr.velocity;
         velocity += m_velocityManager.GetForce() * Time.deltaTime;
@@ -122,7 +122,7 @@ public class ThrongManager : MonoBehaviour
     /// 集団移動をする処理(まだ未完成)
     /// </summary>
     /// <param name="selfRigid">自分自身のリジッドボディ</param>
-    public void ThrongMove(EnemyVelocityMgr velcoityMgr, Vector3 moveDirect, float maxSpeed)
+    public void ThrongMove(EnemyVelocityManager velcoityMgr, Vector3 moveDirect, float maxSpeed)
     {
         var throngVec = CalcuThrongVector();
         if (throngVec == Vector3.zero) {

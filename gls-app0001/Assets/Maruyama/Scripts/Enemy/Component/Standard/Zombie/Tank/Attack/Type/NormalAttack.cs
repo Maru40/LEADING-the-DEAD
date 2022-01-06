@@ -38,7 +38,7 @@ public class NormalAttack : AttackNodeBase
     //Stator_ZombieTank m_stator;
     AttackNodeManagerBase m_attackManager;
     TargetManager m_targetMgr;
-    EnemyVelocityMgr m_velocityMgr;
+    EnemyVelocityManager m_velocityMgr;
     EyeSearchRange m_eyeRange;
     StatusManagerBase m_statusManager;
     ThrongManager m_throngManager;
@@ -57,7 +57,7 @@ public class NormalAttack : AttackNodeBase
     {
         m_attackManager = GetComponent<AttackNodeManagerBase>();
         m_targetMgr = GetComponent<TargetManager>();
-        m_velocityMgr = GetComponent<EnemyVelocityMgr>();
+        m_velocityMgr = GetComponent<EnemyVelocityManager>();
         m_eyeRange = GetComponent<EyeSearchRange>();
         m_statusManager = GetComponent<StatusManagerBase>();
         m_throngManager = GetComponent<ThrongManager>();

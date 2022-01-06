@@ -23,7 +23,7 @@ public class KnockBackManager : MonoBehaviour
         }
     }
 
-    private EnemyVelocityMgr m_velocityManager;
+    private EnemyVelocityManager m_velocityManager;
 
     //吹き飛ばしの基礎値
     [SerializeField]
@@ -46,7 +46,7 @@ public class KnockBackManager : MonoBehaviour
 
     private void Awake()
     {
-        m_velocityManager = GetComponent<EnemyVelocityMgr>();
+        m_velocityManager = GetComponent<EnemyVelocityManager>();
     }
 
     private void Update()

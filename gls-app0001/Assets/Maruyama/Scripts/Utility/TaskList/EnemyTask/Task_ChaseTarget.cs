@@ -20,7 +20,7 @@ public class Task_ChaseTarget : TaskNodeBase<EnemyBase>
     Parametor m_param = new Parametor();
 
     TargetManager m_targetManager;
-    EnemyVelocityMgr m_velocityManager;
+    EnemyVelocityManager m_velocityManager;
     EnemyRotationCtrl m_rotationController;
     EyeSearchRange m_eye;
 
@@ -28,7 +28,7 @@ public class Task_ChaseTarget : TaskNodeBase<EnemyBase>
         :base(owner)
     {
         m_targetManager = owner.GetComponent<TargetManager>();
-        m_velocityManager = owner.GetComponent<EnemyVelocityMgr>();
+        m_velocityManager = owner.GetComponent<EnemyVelocityManager>();
         m_rotationController = owner.GetComponent<EnemyRotationCtrl>();
         m_eye = owner.GetComponent<EyeSearchRange>();
 

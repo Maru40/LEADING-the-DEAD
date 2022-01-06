@@ -109,7 +109,7 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
 
         //コンポーネント系----------------------------------------------
 
-        EnemyVelocityMgr m_velocityManager;
+        EnemyVelocityManager m_velocityManager;
         TargetManager m_targetManager;
 
         public Task_HorizontalMove(EnemyBase owner)
@@ -121,7 +121,7 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
         {
             m_param = param;
 
-            m_velocityManager = owner.GetComponent<EnemyVelocityMgr>();
+            m_velocityManager = owner.GetComponent<EnemyVelocityManager>();
             m_targetManager = owner.GetComponent<TargetManager>();
         }
 
@@ -229,7 +229,7 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
 
         //コンポ―ネント系-------------------------------------------------------------------
 
-        EnemyVelocityMgr m_velcoityManager;
+        EnemyVelocityManager m_velcoityManager;
         TargetManager m_targetManager;
 
         public Task_CircleMove(EnemyBase owner)
@@ -241,7 +241,7 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
         {
             m_param = param;
 
-            m_velcoityManager = owner.GetComponent<EnemyVelocityMgr>();
+            m_velcoityManager = owner.GetComponent<EnemyVelocityManager>();
             m_targetManager = owner.GetComponent<TargetManager>();
         }
 

@@ -39,7 +39,7 @@ public class DashAttack : AttackNodeBase
     EyeSearchRange m_eye;
     AttackNodeManagerBase m_attackManager;
     AnimatorManager_ZombieNormal m_animatorManager;
-    EnemyVelocityMgr m_velocityManager;
+    EnemyVelocityManager m_velocityManager;
     Stator_ZombieNormal m_stator;
 
     TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
@@ -51,7 +51,7 @@ public class DashAttack : AttackNodeBase
         m_eye = GetComponent<EyeSearchRange>();
         m_attackManager = GetComponent<AttackNodeManagerBase>();
         m_animatorManager = GetComponent<AnimatorManager_ZombieNormal>();
-        m_velocityManager = GetComponent<EnemyVelocityMgr>();
+        m_velocityManager = GetComponent<EnemyVelocityManager>();
         m_stator = GetComponent<Stator_ZombieNormal>();
     }
 

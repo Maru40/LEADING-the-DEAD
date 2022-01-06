@@ -39,7 +39,7 @@ public class AttackManager_ZombieTank : AttackNodeManagerBase
     TargetManager m_targetMgr;
     Stator_ZombieTank m_stator;
     AnimatorManager_ZombieTank m_animatorManager;
-    EnemyVelocityMgr m_velocityManager;
+    EnemyVelocityManager m_velocityManager;
     EyeSearchRange m_eye;
 
     AttackType m_type = AttackType.None;
@@ -50,7 +50,7 @@ public class AttackManager_ZombieTank : AttackNodeManagerBase
         m_stator = GetComponent<Stator_ZombieTank>();
         m_animatorManager = GetComponent<AnimatorManager_ZombieTank>();
         m_eye = GetComponent<EyeSearchRange>();
-        m_velocityManager = GetComponent<EnemyVelocityMgr>();
+        m_velocityManager = GetComponent<EnemyVelocityManager>();
     }
 
     public override bool IsAttackStartRange()

@@ -55,7 +55,7 @@ public class TankTackle : AttackNodeBase
     private ReactiveProperty<State> m_state = new ReactiveProperty<State>(State.None);
 
     private TargetManager m_targetManager;
-    private EnemyVelocityMgr m_velocityManager;
+    private EnemyVelocityManager m_velocityManager;
     private Stator_ZombieTank m_stator;
     private EyeSearchRange m_eye;
     private AnimatorManager_ZombieTank m_animatorManager;
@@ -66,7 +66,7 @@ public class TankTackle : AttackNodeBase
     private void Awake()
     {
         m_targetManager = GetComponent<TargetManager>();
-        m_velocityManager = GetComponent<EnemyVelocityMgr>();
+        m_velocityManager = GetComponent<EnemyVelocityManager>();
         m_stator = GetComponent<Stator_ZombieTank>();
         m_eye = GetComponent<EyeSearchRange>();
         m_animatorManager = GetComponent<AnimatorManager_ZombieTank>();

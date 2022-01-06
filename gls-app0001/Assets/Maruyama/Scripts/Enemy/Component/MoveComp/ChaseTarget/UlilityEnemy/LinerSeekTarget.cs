@@ -16,7 +16,7 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
 
     private ChaseTarget m_chaseTarget;
     private TargetManager m_targetManager;
-    private EnemyVelocityMgr m_velocityManager;
+    private EnemyVelocityManager m_velocityManager;
     private EnemyRotationCtrl m_rotationCtrl;
     private StatusManagerBase m_statusManager;
 
@@ -34,7 +34,7 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
         m_targetManager = owner.GetComponent<TargetManager>();
         m_rotationCtrl = owner.GetComponent<EnemyRotationCtrl>();
         m_statusManager = owner.GetComponent<StatusManagerBase>();
-        m_velocityManager = owner.GetComponent<EnemyVelocityMgr>();
+        m_velocityManager = owner.GetComponent<EnemyVelocityManager>();
     }
 
     public override void OnStart()

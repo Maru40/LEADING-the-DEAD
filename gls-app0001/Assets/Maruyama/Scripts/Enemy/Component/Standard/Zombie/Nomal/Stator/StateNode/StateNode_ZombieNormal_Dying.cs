@@ -44,7 +44,7 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
     StatusManager_ZombieNormal m_statusManager;
     Stator_ZombieNormal m_stator;
     AnimatorManager_ZombieNormal m_animatorManager;
-    EnemyVelocityMgr m_velocityManager;
+    EnemyVelocityManager m_velocityManager;
     TargetManager m_targetManager = null;
 
     TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
@@ -55,7 +55,7 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
         m_statusManager = owner.GetComponent<StatusManager_ZombieNormal>();
         m_stator = owner.GetComponent<Stator_ZombieNormal>();
         m_animatorManager = owner.GetComponent<AnimatorManager_ZombieNormal>();
-        m_velocityManager = owner.GetComponent<EnemyVelocityMgr>();
+        m_velocityManager = owner.GetComponent<EnemyVelocityManager>();
         m_targetManager = owner.GetComponent<TargetManager>();
 
         //タイマーの初期化

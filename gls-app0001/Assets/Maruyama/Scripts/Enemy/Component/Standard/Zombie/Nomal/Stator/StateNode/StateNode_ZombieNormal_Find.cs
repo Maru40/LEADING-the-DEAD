@@ -108,7 +108,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
 
         EnemyRotationCtrl m_rotationController;
         TargetManager m_targetManager;
-        EnemyVelocityMgr m_velocityManager;
+        EnemyVelocityManager m_velocityManager;
 
         public Task_SeeWait(EnemyBase owner, float maxWaitTime)
             :base(owner)
@@ -117,7 +117,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
 
             m_rotationController = owner.GetComponent<EnemyRotationCtrl>();
             m_targetManager = owner.GetComponent<TargetManager>();
-            m_velocityManager = owner.GetComponent<EnemyVelocityMgr>();
+            m_velocityManager = owner.GetComponent<EnemyVelocityManager>();
         }
 
         public override void OnEnter()
@@ -165,7 +165,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
 
         EnemyRotationCtrl m_rotationController;
         TargetManager m_targetManager;
-        EnemyVelocityMgr m_velocityManager;
+        EnemyVelocityManager m_velocityManager;
 
         public Task_LookTargetRotation(EnemyBase owner, float speed, float frontDotSize = 0.9f)
             :base(owner)
@@ -176,7 +176,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
 
             m_rotationController = owner.GetComponent<EnemyRotationCtrl>();
             m_targetManager = owner.GetComponent<TargetManager>();
-            m_velocityManager = owner.GetComponent<EnemyVelocityMgr>();
+            m_velocityManager = owner.GetComponent<EnemyVelocityManager>();
         }
 
         public override void OnEnter()

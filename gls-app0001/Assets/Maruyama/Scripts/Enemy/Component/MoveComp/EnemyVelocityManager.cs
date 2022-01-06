@@ -4,7 +4,7 @@ using UnityEngine;
 
 using MaruUtility;
 
-public class EnemyVelocityMgr : MonoBehaviour
+public class EnemyVelocityManager : MonoBehaviour
 {
     private Rigidbody m_rigid;
 
