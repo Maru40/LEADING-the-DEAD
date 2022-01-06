@@ -15,20 +15,20 @@ public class StatusManager_ZombieNormal : StatusManagerBase , I_Stun
         Cutting,
     }
 
-    Stator_ZombieNormal m_stator = null;
-    AngerManager m_angerManager;
+    private Stator_ZombieNormal m_stator = null;
+    private AngerManager m_angerManager;
 
-    DamagedManager_ZombieNormal m_damageManager;
-    DamageParticleManager m_damageParticleManager;
+    private DamagedManager_ZombieNormal m_damageManager;
+    private DamageParticleManager m_damageParticleManager;
 
     [SerializeField]
-    GameObject m_fireDamageParticle = null;  //炎ダメージ時のparticleのデータ管理
+    private GameObject m_fireDamageParticle = null;  //炎ダメージ時のparticleのデータ管理
     [SerializeField]
-    GameObject m_cuttingDamageParticle = null;  //切られた時のparticle
+    private GameObject m_cuttingDamageParticle = null;  //切られた時のparticle
 
-    DyingTypeEnum m_dyingType = DyingTypeEnum.None;  //瀕死状態
+    private DyingTypeEnum m_dyingType = DyingTypeEnum.None;  //瀕死状態
 
-    void Awake()
+    private void Awake()
     {
         m_stator = GetComponent<Stator_ZombieNormal>();
         m_angerManager = GetComponent<AngerManager>();

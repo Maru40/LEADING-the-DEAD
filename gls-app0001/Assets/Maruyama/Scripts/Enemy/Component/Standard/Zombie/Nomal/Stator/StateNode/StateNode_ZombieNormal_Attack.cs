@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class StateNode_ZombieNormal_Attack : EnState_AttackBase
 {
-    TargetManager m_targetManager;
-    Stator_ZombieNormal m_stator;
+    private TargetManager m_targetManager;
+    private Stator_ZombieNormal m_stator;
 
     public StateNode_ZombieNormal_Attack(EnemyBase owner)
         : base(owner)

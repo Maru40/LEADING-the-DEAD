@@ -6,7 +6,7 @@ using MaruUtility;
 
 public class DashAttack : AttackNodeBase
 {
-    enum TaskEnum {
+    private enum TaskEnum {
         Preliminary,
         Chase,
         Attack,
@@ -14,7 +14,7 @@ public class DashAttack : AttackNodeBase
     }
 
     [System.Serializable]
-    struct Parametor
+    private struct Parametor
     {
         [Header("予備動作パラメータ")]
         public PreliminaryParametor preliminaryParam;
@@ -33,17 +33,17 @@ public class DashAttack : AttackNodeBase
     }
 
     [SerializeField]
-    Parametor m_param = new Parametor();
+    private Parametor m_param = new Parametor();
 
-    TargetManager m_targetManager;
-    EyeSearchRange m_eye;
-    AttackNodeManagerBase m_attackManager;
-    AnimatorManager_ZombieNormal m_animatorManager;
-    EnemyVelocityManager m_velocityManager;
-    Stator_ZombieNormal m_stator;
+    private TargetManager m_targetManager;
+    private EyeSearchRange m_eye;
+    private AttackNodeManagerBase m_attackManager;
+    private AnimatorManager_ZombieNormal m_animatorManager;
+    private EnemyVelocityManager m_velocityManager;
+    private Stator_ZombieNormal m_stator;
 
-    TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
-    GameTimer m_timer = new GameTimer();
+    private TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
+    private GameTimer m_timer = new GameTimer();
 
     private void Awake()
     {
@@ -61,7 +61,7 @@ public class DashAttack : AttackNodeBase
         m_timer.ResetTimer(m_param.probabilityInterbalTime);
     }
 
-    void Update()
+    private void Update()
     {
         UpdateTask();
 
@@ -79,29 +79,32 @@ public class DashAttack : AttackNodeBase
     /// <summary>
     /// タスクの定義
     /// </summary>
-    void DefineTask()
+    private void DefineTask()
     {
         var enemy = GetComponent<EnemyBase>();
 
+        //予備動作
         m_param.preliminaryParam.enterAnimation = () => m_animatorManager.CrossFadePreliminaryNormalAttackAniamtion();
         m_taskList.DefineTask(TaskEnum.Preliminary, new Task_Preliminary(enemy, m_param.preliminaryParam));
 
+        //追従
         m_param.chaseParam.enterAnimation = () => m_animatorManager.CrossFadeDashAttackMove();
         m_taskList.DefineTask(TaskEnum.Chase, new Task_ChaseTarget(enemy, m_param.chaseParam));
 
+        //攻撃
         m_param.attackParam.enterAnimation = () => m_animatorManager.CrossFadeDashAttack();
         m_taskList.DefineTask(TaskEnum.Attack, new Task_WallAttack(enemy, m_param.attackParam));
 
+        //待機
         m_param.waitParam.enter = () => m_velocityManager.StartDeseleration();
         m_param.waitParam.exit = () => { 
             m_velocityManager.SetIsDeseleration(false);
             EndAnimationEvent();
         };
-        //m_param.waitParam.enter = () => m_animatorManager.CrossFadeIdleAnimation(m_animatorManager.UpperLayerIndex);
         m_taskList.DefineTask(TaskEnum.Wait, new Task_Wait(m_param.waitParam));
     }
 
-    void SelectTask()
+    private void SelectTask()
     {
         TaskEnum[] types = { 
             TaskEnum.Preliminary, //予備動作
@@ -116,7 +119,7 @@ public class DashAttack : AttackNodeBase
         }
     }
 
-    void UpdateTask()
+    private void UpdateTask()
     {
         m_taskList.UpdateTask();
 
@@ -148,17 +151,18 @@ public class DashAttack : AttackNodeBase
         m_attackManager.EndAnimationEvent();
     }
 
-    void ProbabilityAttack()
+    /// <summary>
+    /// 確率攻撃
+    /// </summary>
+    private void ProbabilityAttack()
     {
-        //Debug.Log("◆◆Probability");
-
         if (IsAttackStart())
         {
             AttackStart();
         }
     }
 
-    bool IsAttackStart()
+    private bool IsAttackStart()
     {
         if (!m_targetManager.HasTarget()) {
             return false;

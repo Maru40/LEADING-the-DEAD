@@ -6,20 +6,20 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_
 {
     //test用に表示したり、消したりする用。
     [SerializeField]
-    GameObject m_tempPrehab = null;
-    GameObject m_tempObject = null;
+    private GameObject m_tempPrehab = null;
+    private GameObject m_tempObject = null;
 
     //コンポーネント系
 
-    Stator_ZombieNormal m_stator;
-    AnimatorCtrl_ZombieNormal m_animator;
-    TargetManager m_targetMgr;
+    private Stator_ZombieNormal m_stator;
+    private AnimatorCtrl_ZombieNormal m_animator;
+    private TargetManager m_targetMgr;
 
-    RandomPlowlingMove m_randomPlowling;
-    ThrongManager m_throngMgr;
-    StatusManager_ZombieNormal m_statusManager;
+    private RandomPlowlingMove m_randomPlowling;
+    private ThrongManager m_throngMgr;
+    private StatusManager_ZombieNormal m_statusManager;
 
-    void Awake()
+    private void Awake()
     {
         m_stator = GetComponent<Stator_ZombieNormal>();
         m_animator = GetComponent<AnimatorCtrl_ZombieNormal>();
@@ -34,8 +34,6 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_
 
     void I_Chase.ChangeState(){
         m_stator.GetTransitionMember().findTrigger.Fire();
-        //var member = m_stator.GetTransitionMember();
-        //member.chaseTrigger.Fire();
     }
 
     void I_Chase.TargetLost()
@@ -53,8 +51,6 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_
 
     void I_BindedActiveArea.Bind(BindActivateArea bind)
     {
-        Debug.Log("Bind");
-
         m_randomPlowling.SetCenterObject(bind.GetAreaCenterObject());
         m_randomPlowling.SetRandomPositionRadius(bind.GetBindRange());
 
@@ -63,9 +59,6 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_
 
     void I_BindedActiveArea.BindRelease(BindActivateArea bind)
     {
-        Debug.Log("BindReset");
-
-        //m_targetMgr.SetNowTarget(GetType(), null);
         m_randomPlowling.ResetCenterObject();
     }
 
@@ -73,7 +66,6 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_
     {
         if(m_targetMgr.SetNowTarget(GetType(), foundObject))
         {
-            Debug.Log("におうぞ");
             m_stator.GetTransitionMember().findTrigger.Fire();
         }
     }
@@ -91,15 +83,12 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_
 
     public void InBind(BindPlowlingAreaManager manager)
     {
-        //Debug.Log("■バインドされた");
-
         m_randomPlowling.SetCenterObject(manager.CenterObject);
         m_randomPlowling.SetRandomPositionRadius(manager.BindRange);
     }
 
     public void OutBind(BindPlowlingAreaManager manager)
     {
-        //Debug.Log("■バインド解除");
         m_randomPlowling.ResetCenterObject();
     }
 }

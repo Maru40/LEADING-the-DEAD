@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class StateNode_ZombiNormal_Death : EnemyStateNodeBase<EnemyBase>
 {
-    EnemyRespawnManager m_respawnManager = null;
-    TargetManager m_targetManager = null;
+    private EnemyRespawnManager m_respawnManager = null;
+    private TargetManager m_targetManager = null;
 
     public StateNode_ZombiNormal_Death(EnemyBase owner)
         :base(owner)
