@@ -29,7 +29,7 @@ public struct BuffParametor
 
 public class BuffManager
 {
-    BuffParametor m_param = new BuffParametor();
+    private BuffParametor m_param = new BuffParametor();
 
     public BuffManager()
         :this(new BuffParametor(new AngerManager.RiseParametor(1.0f,1.0f, 1.0f)))
@@ -39,6 +39,8 @@ public class BuffManager
     {
         m_param = param;
     }
+
+    //アクセッサ------------------------------------------------------------------------------
 
     public void SetParametor(BuffParametor parametor)
     {

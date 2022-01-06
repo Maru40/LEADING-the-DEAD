@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class DamagedManagerBase
 {
-    GameObject m_owner = null;
+    private GameObject m_owner = null;
 
     public DamagedManagerBase(GameObject owner)
     {

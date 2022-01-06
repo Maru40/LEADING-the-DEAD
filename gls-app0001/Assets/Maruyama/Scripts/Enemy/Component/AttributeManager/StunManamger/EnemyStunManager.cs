@@ -6,7 +6,7 @@ using System;
 using UniRx;
 
 [Serializable]
-struct StunParametor
+public struct StunParametor
 {
     public float time;
 
@@ -19,17 +19,17 @@ struct StunParametor
 public class EnemyStunManager : MonoBehaviour
 {
     [SerializeField]
-    StunParametor m_param = new StunParametor(3.0f);
+    private StunParametor m_param = new StunParametor(3.0f);
 
     [SerializeField]
-    List<ChangeCompParam> m_changeCompParam = new List<ChangeCompParam>();
+    private List<ChangeCompParam> m_changeCompParam = new List<ChangeCompParam>();
 
-    readonly ReactiveProperty<bool> m_isStunRective = new ReactiveProperty<bool>();
+    private readonly ReactiveProperty<bool> m_isStunRective = new ReactiveProperty<bool>();
 
-    WaitTimer m_waitTimer;
-    I_Stun m_stun;
+    private WaitTimer m_waitTimer;
+    private I_Stun m_stun;
 
-    void Awake()
+    private void Awake()
     {
         m_waitTimer = GetComponent<WaitTimer>();
         m_stun = GetComponent<I_Stun>();
@@ -75,7 +75,7 @@ public class EnemyStunManager : MonoBehaviour
     /// <summary>
     /// 現在のコンポーネントのenable状態の記録
     /// </summary>
-    void SaveNowEnableComps()
+    private void SaveNowEnableComps()
     {
         foreach(var param in m_changeCompParam)
         {
@@ -86,7 +86,7 @@ public class EnemyStunManager : MonoBehaviour
         }
     }
 
-    void ChangeComps(bool isEnable)
+    private void ChangeComps(bool isEnable)
     {
         foreach(var param in m_changeCompParam)
         {
@@ -100,7 +100,7 @@ public class EnemyStunManager : MonoBehaviour
     /// <summary>
     /// コンポーネントを元の状態に戻す
     /// </summary>
-    void ReverseChangeComps()
+    private void ReverseChangeComps()
     {
         foreach(var param in m_changeCompParam)
         {
@@ -114,7 +114,7 @@ public class EnemyStunManager : MonoBehaviour
     /// <summary>
     /// Componentの指定がない場合のみ、デフォで指定。
     /// </summary>
-    void SetDefaultChangeComps()
+    private void SetDefaultChangeComps()
     {
 
     }

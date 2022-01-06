@@ -44,20 +44,20 @@ public class AngerManager : MonoBehaviour
     }
 
     [SerializeField]
-    RiseParametor m_riseParam = new RiseParametor(1.2f,1.2f, 1.2f);  //ステータス上昇のパラメータ
+    private RiseParametor m_riseParam = new RiseParametor(1.2f,1.2f, 1.2f);  //ステータス上昇のパラメータ
 
     [SerializeField]
-    float m_time = 99.0f;
+    private float m_time = 99.0f;
 
     [SerializeField]
-    bool m_isAngerTimer = false;  //怒り状態をタイマー性にするかどうか
+    private bool m_isAngerTimer = false;  //怒り状態をタイマー性にするかどうか
 
-    readonly ReactiveProperty<bool> m_isReactiveAnger = new ReactiveProperty<bool>(false);
+    private readonly ReactiveProperty<bool> m_isReactiveAnger = new ReactiveProperty<bool>(false);
 
-    WaitTimer m_waitTimer;
-    StatusManagerBase m_statusManager;
+    private WaitTimer m_waitTimer;
+    private StatusManagerBase m_statusManager;
 
-    void Awake()
+    private void Awake()
     {
         m_waitTimer = GetComponent<WaitTimer>();
         m_statusManager = GetComponent<StatusManagerBase>();
@@ -79,7 +79,7 @@ public class AngerManager : MonoBehaviour
         }
     }
 
-    void EndAnger()
+    private void EndAnger()
     {
         SetIsAnger(false);
     }
@@ -87,7 +87,7 @@ public class AngerManager : MonoBehaviour
     /// <summary>
     /// バフデータをStatusManagerに送る
     /// </summary>
-    void UpdateBuffParametor()
+    private void UpdateBuffParametor()
     {
         var param = m_statusManager.GetBuffParametor();
 
