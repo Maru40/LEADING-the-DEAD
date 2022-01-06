@@ -90,6 +90,11 @@ public class SmellManager : MonoBehaviour
         return type == FoundObject.FoundType.Smell ? true : false;
     }
 
+    /// <summary>
+    /// ターゲットが近くにいるかどうか
+    /// </summary>
+    /// <param name="nearRange">近くと判断する距離</param>
+    /// <returns></returns>
     public bool IsTargetNear(float nearRange)
     {
         var positionCheck = m_targetManager.GetToNowTargetVector();
@@ -103,6 +108,10 @@ public class SmellManager : MonoBehaviour
         return toTargetVec.magnitude < nearRange ? true : false;  
     }
 
+    /// <summary>
+    /// 攻撃するかどうか
+    /// </summary>
+    /// <returns></returns>
     private bool IsAttack()
     {
         if (!m_targetManager.HasTarget()) {

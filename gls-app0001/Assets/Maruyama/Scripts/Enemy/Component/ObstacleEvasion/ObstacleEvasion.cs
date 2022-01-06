@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using System;
 using MaruUtility;
 using System.Linq;
 
@@ -10,25 +9,25 @@ public class ObstacleEvasion : MonoBehaviour
 {
     //Rayの長さ
     [SerializeField]
-    float m_rayRange = 3.0f;
+    private float m_rayRange = 3.0f;
     //Rayの角度(配列の数だけ生成)
     [SerializeField]
-    float[] m_rayDegs = new float[] { +45.0f, -45.0f };
+    private float[] m_rayDegs = new float[] { +45.0f, -45.0f };
 
     [SerializeField]
-    float m_maxSpeed = 3.0f;
+    private float m_maxSpeed = 3.0f;
 
-    EnemyVelocityManager m_velocityMgr;
+    private EnemyVelocityManager m_velocityManager;
 
     /// <summary>
     /// Rayの障害物するLayerの配列
     /// </summary>
     [SerializeField]
-    string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
+    private string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
 
-    void Awake()
+    private void Awake()
     {
-        m_velocityMgr = GetComponent<EnemyVelocityManager>();
+        m_velocityManager = GetComponent<EnemyVelocityManager>();
     }
 
     private void Update()
@@ -36,9 +35,8 @@ public class ObstacleEvasion : MonoBehaviour
         EvasionUpdate();
     }
 
-    void EvasionUpdate()
+    private void EvasionUpdate()
     {
-        //var force = Vector3.zero;
         var forces = new List<Vector3>();
 
         foreach (var deg in m_rayDegs)
@@ -46,7 +44,7 @@ public class ObstacleEvasion : MonoBehaviour
             var forward = transform.forward;
             var direct = Quaternion.AngleAxis(deg, Vector3.up) * forward; //フォワードを回転
 
-            Debug.DrawRay(transform.position + Vector3.up, direct, new Color(1.0f, 0.0f, 0.0f, 1.0f));
+            //Debug.DrawRay(transform.position + Vector3.up, direct, new Color(1.0f, 0.0f, 0.0f, 1.0f));
 
             var hitPoint = CalcuRayHitPoint(direct);  //ヒットした場所の取得
             if (hitPoint == null) {
@@ -54,13 +52,7 @@ public class ObstacleEvasion : MonoBehaviour
             }
 
             var toSelfVec = transform.position - (Vector3)hitPoint;
-            //var power = m_maxSpeed - toSelfVec.magnitude;
-            //var moveVec = toSelfVec.normalized * power;
-            forces.Add(CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, toSelfVec, m_maxSpeed));
-
-            //force += moveVec;
-
-            //force = CalcuVelocity.CalucSeekVec(moveVec);
+            forces.Add(CalcuVelocity.CalucSeekVec(m_velocityManager.velocity, toSelfVec, m_maxSpeed));
         }
 
         if (forces.Count == 0) {
@@ -70,7 +62,7 @@ public class ObstacleEvasion : MonoBehaviour
         forces.Sort((a, b) => (int)(b.magnitude - a.magnitude));
         var force = forces[0];
 
-        m_velocityMgr.AddForce(force);
+        m_velocityManager.AddForce(force);
     }
 
     /// <summary>
