@@ -49,7 +49,7 @@ namespace MaruUtility
 
     public class MyRandom
     {
-        static System.Random sm_random = new System.Random(System.DateTime.Now.Millisecond);
+        private static System.Random sm_random = new System.Random(System.DateTime.Now.Millisecond);
 
         /// <summary>
         /// 何割の確率化変数で受け取る。

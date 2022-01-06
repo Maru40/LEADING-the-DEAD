@@ -28,6 +28,11 @@ namespace MaruUtility
             return rad <= frontRad ? true : false;
         }
 
+        /// <summary>
+        /// NaNかどうかの判断
+        /// </summary>
+        /// <param name="vector">判断したいVector</param>
+        /// <returns>NaNならture</returns>
         public static bool IsNaN(Vector3 vector)
         {
             if(float.IsNaN(vector.x) ||

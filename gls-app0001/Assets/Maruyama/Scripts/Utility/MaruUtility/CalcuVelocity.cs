@@ -225,7 +225,7 @@ namespace MaruUtility
 		static public Vector3 CalcuInTurningVector(Vector3 velocity, Vector3 toVec, float turningDegree, Vector3 axis)
         {
 			if(IsTurningVector(velocity, toVec, turningDegree)) {
-				Debug.Log("曲がれる");
+				//Debug.Log("曲がれる");
 				return toVec;
 			}
 
@@ -237,8 +237,8 @@ namespace MaruUtility
 			//var inverseQuat = Quaternion.Inverse(quat);
 
 			var newVec = quat * toVec;
-            Debug.Log("toVec:  " + toVec);
-            Debug.Log("newVec: " + newVec);
+            //Debug.Log("toVec:  " + toVec);
+            //Debug.Log("newVec: " + newVec);
 
 			return newVec;
         }

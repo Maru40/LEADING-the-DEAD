@@ -7,7 +7,7 @@ namespace MaruUtility
     namespace Sound
     {
         [System.Serializable]
-        struct AudioClipParametor
+        public struct AudioClipParametor
         {
             public AudioClip clip;
             public float volume;
