@@ -41,6 +41,17 @@ public class CreateSetParametor_ZombieNormal
     public ThrongManagerParametor throngParam = new ThrongManagerParametor(1.0f, 1.0f, 3.0f);
     [Header("食べる力")]
     public EatParametor eatParam = new EatParametor(1.0f);
+    [Header("ダッシュ攻撃のパラメータ")]
+    public DashAttack.Parametor dashAttackParam = new DashAttack.Parametor(
+        new PreliminaryParametor(new RandomRange(1.0f, 1.5f), 3.0f),
+        new Task_ChaseTarget.Parametor(9.0f, 0.5f, 2.5f, 5.0f, null),
+        new Task_WallAttack.Parametor(1.0f, 10.0f, null, null),
+        new Task_Wait.Parametor(2.0f),
+        25.0f, 30.0f, 10.0f);
+    [Header("壁攻撃パラメータ")]
+    public WallAttack_ZombieNormal.Parametor wallAttackParam = new WallAttack_ZombieNormal.Parametor(
+        new Task_WallAttack.Parametor(1.0f, 15.0f, null, null),
+        new Task_Wait.Parametor(1.0f));
 
     public CreateSetParametor_ZombieNormal()
     { }
@@ -182,6 +193,21 @@ public class EnemyGenerator_ZombieNormal : EnemyGenerator
         {
             throngManager.SetParametor(m_createSetParam.throngParam);
         }
+
+        //ダッシュ攻撃
+        var dashAttack = obj.GetComponent<DashAttack>();
+        if (dashAttack)
+        {
+            dashAttack.parametor = m_createSetParam.dashAttackParam;
+        }
+
+        //壁攻撃パラメータ
+        var wallAttack = obj.GetComponent<WallAttack_ZombieNormal>();
+        if (wallAttack)
+        {
+            wallAttack.parametor = m_createSetParam.wallAttackParam;
+        }
+
     }
 
     private void CreateSetRandomParametor()
