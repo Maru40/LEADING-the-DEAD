@@ -35,25 +35,24 @@ public class NormalAttack : AttackNodeBase
         }
     }
 
-    //Stator_ZombieTank m_stator;
-    AttackNodeManagerBase m_attackManager;
-    TargetManager m_targetMgr;
-    EnemyVelocityManager m_velocityMgr;
-    EyeSearchRange m_eyeRange;
-    StatusManagerBase m_statusManager;
-    ThrongManager m_throngManager;
-    EnemyRotationCtrl m_rotationController;
-    WaitTimer m_waitTimer;
+    private AttackNodeManagerBase m_attackManager;
+    private TargetManager m_targetMgr;
+    private EnemyVelocityManager m_velocityMgr;
+    private EyeSearchRange m_eyeRange;
+    private StatusManagerBase m_statusManager;
+    private ThrongManager m_throngManager;
+    private EnemyRotationCtrl m_rotationController;
+    private WaitTimer m_waitTimer;
 
     [SerializeField]
-    Parametor m_param = new Parametor(3.0f);
+    private Parametor m_param = new Parametor(3.0f);
 
     [SerializeField]
-    AudioManager m_audioManager = null;
+    private AudioManager m_audioManager = null;
 
-    bool m_isTargetChase = true;  //攻撃の途中まではターゲットを追うようにするため。
+    private bool m_isTargetChase = true;  //攻撃の途中まではターゲットを追うようにするため。
 
-    void Awake()
+    private void Awake()
     {
         m_attackManager = GetComponent<AttackNodeManagerBase>();
         m_targetMgr = GetComponent<TargetManager>();
@@ -65,7 +64,7 @@ public class NormalAttack : AttackNodeBase
         m_waitTimer = GetComponent<WaitTimer>();
     }
 
-    void Update()
+    private void Update()
     {
         if (m_isTargetChase)
         {
@@ -76,7 +75,7 @@ public class NormalAttack : AttackNodeBase
     /// <summary>
     /// 攻撃の途中までは敵を追従するため。
     /// </summary>
-    void TargetChase()
+    private void TargetChase()
     {
         var positionCheck = m_targetMgr.GetNowTargetPosition();
         if (positionCheck == null) {
@@ -102,7 +101,7 @@ public class NormalAttack : AttackNodeBase
     /// <summary>
     /// 集団ベクトル調整
     /// </summary>
-    void ThrongAdjust()
+    private void ThrongAdjust()
     {
         if(m_throngManager == null) {
             return;
@@ -119,22 +118,20 @@ public class NormalAttack : AttackNodeBase
 
     private void Move(Vector3 moveVec)
     {
-        //moveVec = CalcuVelocity.CalcuInTurningVector(m_velocityMgr.velocity, moveVec, 0.0f, Vector3.up); //回転方向を
         if (!CalcuVelocity.IsTurningVector(m_velocityMgr.velocity, moveVec, m_param.turningDegree)) {  //追従できる角度でないなら
             Debug.Log("曲がれない");
             moveVec = transform.forward; //直進する。
         }
 
         float moveSpeed = m_param.moveSpeed * m_statusManager.GetBuffParametor().angerParam.speed;
-        //var force = CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, moveVec, moveSpeed);
-        //m_velocityMgr.AddForce(force);
+
         m_velocityMgr.velocity = moveVec.normalized * moveSpeed;
     }
 
     /// <summary>
     /// ターゲットの方向を向く処理
     /// </summary>
-    void SetForwardTarget()
+    private void SetForwardTarget()
     {
         var position = m_targetMgr.GetNowTargetPosition();
         if (position != null)
@@ -145,10 +142,9 @@ public class NormalAttack : AttackNodeBase
         }
     }
 
-    void Rotation(Vector3 direct)
+    private void Rotation(Vector3 direct)
     {
         m_rotationController.SetDirect(direct);
-        //transform.forward = direct;
     }
 
     /// <summary>
@@ -158,7 +154,7 @@ public class NormalAttack : AttackNodeBase
     override public bool IsAttackStartRange()
     {
         float range = GetBaseParam().startRange;
-        //FoundObject target = m_targetMgr.GetNowTarget();
+
         var position = m_targetMgr.GetNowTargetPosition();
         if (position != null)
         {
@@ -179,7 +175,6 @@ public class NormalAttack : AttackNodeBase
         SetForwardTarget();
         m_rotationController.enabled = true;
         m_waitTimer.AbsoluteEndTimer(GetType(), false);
-        //m_velocityMgr.ResetAll();
 
         enabled = true;
     }
@@ -188,7 +183,6 @@ public class NormalAttack : AttackNodeBase
     {
         Debug.Log("終了タイマー" + m_param.endWaitTime);
         m_waitTimer.AddWaitTimer(GetType(),m_param.endWaitTime,() => { m_attackManager.EndAnimationEvent(); enabled = false; });
-        //m_attackManager.EndAnimationEvent();
 
         m_velocityMgr.SetIsDeseleration(false);
         m_velocityMgr.ResetForce();

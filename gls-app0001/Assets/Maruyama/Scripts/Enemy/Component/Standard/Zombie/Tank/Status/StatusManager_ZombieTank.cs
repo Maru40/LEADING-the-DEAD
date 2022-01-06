@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class StatusManager_ZombieTank : StatusManagerBase
 {
-    WaitTimer m_waitTimer;
+    private WaitTimer m_waitTimer;
 
-    void Awake()
+    private void Awake()
     {
         m_waitTimer = GetComponent<WaitTimer>();
     }

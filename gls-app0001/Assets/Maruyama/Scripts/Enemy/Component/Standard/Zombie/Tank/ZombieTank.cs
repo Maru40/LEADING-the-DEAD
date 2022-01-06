@@ -6,11 +6,11 @@ public class ZombieTank : EnemyBase, I_Chase, I_Listen
 {
     //コンポーネント系
 
-    Stator_ZombieTank m_stator;
-    AnimatorManager_ZombieTank m_animatorManager;
-    TargetManager m_targetMgr;
+    private Stator_ZombieTank m_stator;
+    private AnimatorManager_ZombieTank m_animatorManager;
+    private TargetManager m_targetMgr;
 
-    void Start()
+    private void Start()
     {
         m_stator = GetComponent<Stator_ZombieTank>();
         m_animatorManager = GetComponent<AnimatorManager_ZombieTank>();
@@ -19,7 +19,7 @@ public class ZombieTank : EnemyBase, I_Chase, I_Listen
         m_animatorManager.CrossFadeLoopShout();
     }
 
-    void Update()
+    private void Update()
     {
         
     }
