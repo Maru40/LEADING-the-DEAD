@@ -10,10 +10,20 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
     [Serializable]
     public struct Parametor
     {
+        [Header("攻撃時間")]
         public float time;
+        [Header("最大スピード")]
         public float maxSpeed;
         public AudioManager audioManager;
         public Action enterAnimation;
+
+        public Parametor(float time, float maxSpeed, AudioManager audioManager, Action action)
+        {
+            this.time = time;
+            this.maxSpeed = maxSpeed;
+            this.audioManager = audioManager;
+            this.enterAnimation = action;
+        }
     }
 
     private Parametor m_param = new Parametor();
