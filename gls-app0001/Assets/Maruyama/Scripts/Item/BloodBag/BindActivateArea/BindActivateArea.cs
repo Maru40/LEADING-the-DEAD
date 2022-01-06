@@ -8,10 +8,10 @@ using UnityEngine;
 public class BindActivateArea : MonoBehaviour
 {
     [SerializeField]
-    float m_bindRange = 10.0f;  //行動制限範囲
+    private float m_bindRange = 10.0f;  //行動制限範囲
 
     [SerializeField]
-    GameObject m_area = null;
+    private GameObject m_area = null;
 
     /// <summary>
     /// 行動制限する距離の取得

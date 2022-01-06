@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class VerticesAlphaManager : MonoBehaviour
 {
-    Board m_board;
+    private Board m_board;
 
     [Header("全て透明なら削除するかどうか"),SerializeField]
-    bool m_isAllAlphaDelete = true;
+    private bool m_isAllAlphaDelete = true;
 
     [Header("壁があると判断する距離"), SerializeField]
-    float m_drawRange = 0.15f;
+    private float m_drawRange = 0.15f;
 
     private void Awake()
     {
@@ -27,6 +27,10 @@ public class VerticesAlphaManager : MonoBehaviour
         ChangeAlpha();
     }
 
+    /// <summary>
+    /// 頂点の透明度を変える。
+    /// 正面に何も無ければ頂点を非表示にする。
+    /// </summary>
     public void ChangeAlpha()
     {
         var vartices = m_board.Vertices;

@@ -10,7 +10,7 @@ using Es.InkPainter;
 [RequireComponent(typeof(WaitTimer))]
 public class BloodPuddleManager : MonoBehaviour
 {
-    struct InkParametor
+    private struct InkParametor
     {
         public InkCanvas ink;
         public Brush brush;
@@ -25,19 +25,19 @@ public class BloodPuddleManager : MonoBehaviour
     }
 
     [SerializeField]
-    float m_time = 5.0f;
+    private float m_time = 5.0f;
 
     [Header("BloodPuddleの見た目を管理するRenderManager群"), SerializeField]
-    List<RenderFadeManager> m_bloodPuddleRenderManagers = new List<RenderFadeManager>();
+    private List<RenderFadeManager> m_bloodPuddleRenderManagers = new List<RenderFadeManager>();
 
     [SerializeField]
-    VerticesAlphaManager m_verticesAlphaMangaer;
+    private VerticesAlphaManager m_verticesAlphaMangaer;
 
-    WaitTimer m_waitTimer;
+    private WaitTimer m_waitTimer;
 
-    List<InkParametor> m_inkParams = new List<InkParametor>();
+    private List<InkParametor> m_inkParams = new List<InkParametor>();
 
-    void Awake()
+    private void Awake()
     {
         m_waitTimer = GetComponent<WaitTimer>();
     }
@@ -50,7 +50,7 @@ public class BloodPuddleManager : MonoBehaviour
         //m_verticesAlphaMangaer?.ChangeAlpha();
     }
 
-    void FadeStart()
+    private void FadeStart()
     {
         foreach(var manager in m_bloodPuddleRenderManagers)
         {
@@ -61,7 +61,7 @@ public class BloodPuddleManager : MonoBehaviour
     /// <summary>
     /// 終了関数。
     /// </summary>
-    void EndProcess()
+    private void EndProcess()
     {
         InkErase();  //インクの消去
 
@@ -71,7 +71,7 @@ public class BloodPuddleManager : MonoBehaviour
     /// <summary>
     /// インクの消去
     /// </summary>
-    void InkErase()
+    private void InkErase()
     {
         foreach (var param in m_inkParams)
         {

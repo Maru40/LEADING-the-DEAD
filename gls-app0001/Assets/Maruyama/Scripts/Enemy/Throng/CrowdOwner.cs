@@ -14,19 +14,19 @@ public struct CrowdOnwerParametor
 
 public class CrowdOwner : MonoBehaviour
 {
-    CrowdOnwerParametor m_param;
+    private CrowdOnwerParametor m_param;
 
-    List<CrowdChild> m_children = new List<CrowdChild>();
+    private List<CrowdChild> m_children = new List<CrowdChild>();
 
 
-    void Start()
+    private void Start()
     {
         var rigid = GetComponent<Rigidbody>();
 
         m_param = new CrowdOnwerParametor(rigid);
     }
 
-    void Update()
+    private void Update()
     {
         
     }

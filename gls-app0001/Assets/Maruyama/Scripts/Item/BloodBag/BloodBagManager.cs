@@ -6,7 +6,7 @@ using Es.InkPainter;
 
 public class BloodBagManager : MonoBehaviour
 {
-    const float PositionAdjustDistance = 0.1f;
+    private const float PositionAdjustDistance = 0.1f;
 
     public enum StateEnum
     {
@@ -15,24 +15,24 @@ public class BloodBagManager : MonoBehaviour
     }
 
     [Header("血だまりパーティクル"), SerializeField]
-    List<ParticleManager.ParticleID> m_particleIDs = new List<ParticleManager.ParticleID>();
+    private List<ParticleManager.ParticleID> m_particleIDs = new List<ParticleManager.ParticleID>();
 
     [Header("自分が消滅したときに出る血だまり"), SerializeField]
-    GameObject m_breakBlood = null;
+    private GameObject m_breakBlood = null;
 
     [Header("血だまりブラシ設定"), SerializeField]
-    Brush m_brush = null;
+    private Brush m_brush = null;
 
     [Header("障害物の対象"), SerializeField]
-    List<string> m_layerStrings = new List<string>();
+    private List<string> m_layerStrings = new List<string>();
 
-    StateEnum m_state = StateEnum.Put;
+    private StateEnum m_state = StateEnum.Put;
 
     [Header("割れた時の音"), SerializeField]
-    AudioClip m_breakSoundClip = null;
+    private AudioClip m_breakSoundClip = null;
 
     [Header("血だまり"), SerializeField]
-    GameObject m_pudBlood = null;
+    private GameObject m_pudBlood = null;
 
     private void Start()
     {
@@ -71,7 +71,12 @@ public class BloodBagManager : MonoBehaviour
         Destroy(gameObject);
     }
 
-    bool IsCreateBloodPuddle(Collision other)
+    /// <summary>
+    /// 血だまりを作るかどうか
+    /// </summary>
+    /// <param name="other"></param>
+    /// <returns></returns>
+    private bool IsCreateBloodPuddle(Collision other)
     {
         int layerInt = 1 << other.gameObject.layer;
 
@@ -89,7 +94,7 @@ public class BloodBagManager : MonoBehaviour
     /// 地面に例を飛ばして、血だまりを作る。
     /// </summary>
     /// <returns></returns>
-    RaycastHit CalcuRaycastHitGround()
+    private RaycastHit CalcuRaycastHitGround()
     {
         RaycastHit hit;
 
@@ -103,7 +108,7 @@ public class BloodBagManager : MonoBehaviour
     /// 接した場所の血だまりをくっつける
     /// </summary>
     /// <param name="other">当たったコライダー</param>
-    void CreateBloodPuddleContacts(Collision other)
+    private void CreateBloodPuddleContacts(Collision other)
     {
         foreach (var contact in other.contacts)
         {
@@ -119,7 +124,11 @@ public class BloodBagManager : MonoBehaviour
         }
     }
 
-    BloodPuddleManager CreateBloodPuddleGround()
+    /// <summary>
+    /// 地面に血だまりを作る
+    /// </summary>
+    /// <returns>作った血だまり</returns>
+    private BloodPuddleManager CreateBloodPuddleGround()
     {
         //後でCreateBloodPuddleをまとめる。
         var hitGround = CalcuRaycastHitGround();
@@ -134,7 +143,7 @@ public class BloodBagManager : MonoBehaviour
     /// <summary>
     /// 血の表示
     /// </summary>
-    void CreateBloodInk(Collision other, BloodPuddleManager bloodPuddle)
+    private void CreateBloodInk(Collision other, BloodPuddleManager bloodPuddle)
     {
         foreach (var contact in other.contacts)
         {
@@ -151,7 +160,7 @@ public class BloodBagManager : MonoBehaviour
     /// 血の表示
     /// </summary>
     /// <param name="other"></param>
-    void CreateBloodInk(RaycastHit hit, BloodPuddleManager bloodPuddle)
+    private void CreateBloodInk(RaycastHit hit, BloodPuddleManager bloodPuddle)
     {
         var ink = hit.collider.gameObject.GetComponent<InkCanvas>();
         if (ink)
@@ -164,7 +173,7 @@ public class BloodBagManager : MonoBehaviour
     /// <summary>
     /// パーティクルの生成
     /// </summary>
-    void CreateParticle()
+    private void CreateParticle()
     {
         foreach(var id in m_particleIDs)
         {
@@ -172,6 +181,9 @@ public class BloodBagManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 拾う
+    /// </summary>
     public void PickUp()
     {
         m_pudBlood?.SetActive(false);
