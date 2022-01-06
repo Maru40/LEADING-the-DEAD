@@ -55,31 +55,31 @@ public class RandomPlowlingMove : MonoBehaviour
     //member変数-------------------------------------------------------------------------------------------
 
     [SerializeField]
-    Parametor m_param = new Parametor(15.0f, 2.5f, 2.0f, 0.3f, 3.0f, 1.0f);
-    float m_firstRandomPositionRadius;
-    float m_firstInThrongRange;
+    private Parametor m_param = new Parametor(15.0f, 2.5f, 2.0f, 0.3f, 3.0f, 1.0f);
+    private float m_firstRandomPositionRadius;
+    //private float m_firstInThrongRange;
 
     /// <summary>
     /// Rayの障害物するLayerの配列
     /// </summary>
     [SerializeField]
-    string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
+    private string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
 
-    GameObject m_centerObject = null;
+    private GameObject m_centerObject = null;
 
-    Vector3 m_targetPosition;    //目的の場所
+    private Vector3 m_targetPosition;    //目的の場所
 
-    EnemyVelocityMgr m_velocityMgr;
-    WaitTimer m_waitTimer;
-    ThrongManager m_throngMgr;
-    EnemyRotationCtrl m_rotationCtrl;
-    StatusManagerBase m_statusManager;
+    private EnemyVelocityMgr m_velocityMgr;
+    private WaitTimer m_waitTimer;
+    private ThrongManager m_throngMgr;
+    private EnemyRotationCtrl m_rotationCtrl;
+    private StatusManagerBase m_statusManager;
 
     [SerializeField]
-    float m_collisionStayTime = 2.0f;
-    float m_collisionStayTimerElapsed = 0.0f;
+    private float m_collisionStayTime = 2.0f;
+    private float m_collisionStayTimerElapsed = 0.0f;
 
-    void Awake()
+    private void Awake()
     {
         //コンポーネントの取得
         m_velocityMgr = GetComponent<EnemyVelocityMgr>();
@@ -93,17 +93,17 @@ public class RandomPlowlingMove : MonoBehaviour
         Random.InitState(System.DateTime.Now.Millisecond);
 
         m_firstRandomPositionRadius = m_param.randomPositionRadius;
-        m_firstInThrongRange = m_param.inThrongRange;
+        //m_firstInThrongRange = m_param.inThrongRange;
 
         SetRandomTargetPosition();
     }
-    
-    void Update()
+
+    private void Update()
     {
         MoveProcess();
     }
 
-    void MoveProcess()
+    private void MoveProcess()
     {
         //待機状態なら処理をしない。
         if (m_waitTimer.IsWait(GetType())){
@@ -126,7 +126,7 @@ public class RandomPlowlingMove : MonoBehaviour
         Rotation();
     }
 
-    void Rotation()
+    private void Rotation()
     {
         if (m_waitTimer.IsWait(GetType())) {
             return;
@@ -141,7 +141,7 @@ public class RandomPlowlingMove : MonoBehaviour
     /// <summary>
     /// 集団行動の処理
     /// </summary>
-    void ThrongProcess()
+    private void ThrongProcess()
     {
         if (m_throngMgr) //もし集団行動するなら...
         {
@@ -162,7 +162,7 @@ public class RandomPlowlingMove : MonoBehaviour
     /// ルートの終了を判断。
     /// </summary>
     /// <returns>目的地についたらtrue</returns>
-    bool IsRouteEnd()
+    private bool IsRouteEnd()
     {
         var selfPosition = transform.position;
         selfPosition.y = 0.0f;
@@ -177,7 +177,7 @@ public class RandomPlowlingMove : MonoBehaviour
     /// <summary>
     /// 目的地にたどり着いた時に行う処理
     /// </summary>
-    void RouteEndProcess()
+    private void RouteEndProcess()
     {
         if (m_waitTimer.IsWait(GetType())){
             return;
@@ -194,7 +194,7 @@ public class RandomPlowlingMove : MonoBehaviour
     /// <summary>
     /// ランダムな目的地を設定
     /// </summary>
-    void SetRandomTargetPosition()
+    private void SetRandomTargetPosition()
     {
         int numLoop = 100; //無限ループを防ぐため100を限度にする。
         for(int i = 0; i < numLoop; i++)
@@ -213,7 +213,7 @@ public class RandomPlowlingMove : MonoBehaviour
     /// ランダムな方向を計算して返す。
     /// </summary>
     /// <returns>ランダムな方向</returns>
-    Vector3 CalucRandomTargetPosition()
+    private Vector3 CalucRandomTargetPosition()
     {
         if(m_centerObject == null) {
             ResetCenterObject();
@@ -236,7 +236,7 @@ public class RandomPlowlingMove : MonoBehaviour
     /// ランダムに1か-1にして返す。
     /// </summary>
     /// <returns>1,-1のどちらか</returns>
-    int CalucRandomDirect()
+    private int CalucRandomDirect()
     {
         float halfValue = 0.5f;
         float random = Random.value;
@@ -292,7 +292,7 @@ public class RandomPlowlingMove : MonoBehaviour
         }
     }
 
-    bool IsObstract(GameObject gameObj)
+    private bool IsObstract(GameObject gameObj)
     {
         foreach(var str in m_rayObstacleLayerStrings)
         {
@@ -310,7 +310,7 @@ public class RandomPlowlingMove : MonoBehaviour
     /// </summary>
     /// <param name="toVec">Rayを飛ばしたい方向</param>
     /// <returns>当たったらtrue</returns>
-    bool IsRayHitObstacle(Vector3 toVec)
+    private bool IsRayHitObstacle(Vector3 toVec)
     {
         //var toVec = m_targetPosition - transform.position;
         int obstacleLayer = LayerMask.GetMask(m_rayObstacleLayerStrings);

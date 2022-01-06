@@ -6,24 +6,21 @@ using MaruUtility;
 
 public class EnemyVelocityMgr : MonoBehaviour
 {
-    Rigidbody m_rigid;
+    private Rigidbody m_rigid;
 
-    Vector3 m_force = new Vector3();
-    Vector3 m_velocity = new Vector3();
+    private Vector3 m_force = new Vector3();
+    private Vector3 m_velocity = new Vector3();
 
-    bool m_isDeseleration = false;  //減速中かどうか
-    float m_deselerationPower = 1.0f;
+    private bool m_isDeseleration = false;  //減速中かどうか
+    private float m_deselerationPower = 1.0f;
 
-    void Awake()
+    private void Awake()
     {
         m_rigid = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    private void Update()
     {
-        //m_velocity = m_rigid.velocity;
-        //return;
-
         //減速処理
         Deseleration();
 
@@ -44,13 +41,11 @@ public class EnemyVelocityMgr : MonoBehaviour
     /// <summary>
     /// 減速処理
     /// </summary>
-    void Deseleration()
+    private void Deseleration()
     {
         if (!m_isDeseleration) {
             return;
         }
-
-        //Debug.Log("Deseleration");
 
         var force = CalcuVelocity.CalucSeekVec(velocity, -velocity, velocity.magnitude * m_deselerationPower);
         AddForce(force);
