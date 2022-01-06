@@ -7,11 +7,11 @@ using UnityEngine.AI;
 public class NavSeekTarget : NodeBase<EnemyBase>
 {
     //目的地にたどり着いたと判定する範囲
-    float m_nearRange = 3.0f;
-    Vector3 m_targetPosition = new Vector3();
+    private float m_nearRange = 3.0f;
+    private Vector3 m_targetPosition = new Vector3();
 
-    TargetManager m_targetMgr;
-    NavMeshAgent m_navMesh;
+    private TargetManager m_targetManager;
+    private NavMeshAgent m_navMesh;
 
     public NavSeekTarget(EnemyBase owner)
         :this(owner, 3.0f, 3.0f)
@@ -22,7 +22,7 @@ public class NavSeekTarget : NodeBase<EnemyBase>
     {
         m_nearRange = nearRange;
 
-        m_targetMgr = owner.GetComponent<TargetManager>();
+        m_targetManager = owner.GetComponent<TargetManager>();
         m_navMesh = owner.GetComponent<NavMeshAgent>();
         m_navMesh.speed = speed;
     }
@@ -42,7 +42,7 @@ public class NavSeekTarget : NodeBase<EnemyBase>
     }
 
     //目的地にたどり着いたかどうか
-    bool IsRouteEnd()
+    private bool IsRouteEnd()
     {
         var toVec = m_targetPosition - GetOwner().transform.localPosition;
         float nowRange = toVec.magnitude;
@@ -51,12 +51,12 @@ public class NavSeekTarget : NodeBase<EnemyBase>
     }
 
     //NavMeshを利用して目的地までのルートを計算
-    void SetNavMeshTargetPosition()
+    private void SetNavMeshTargetPosition()
     {
         //NavMeshの準備ができているなら。
         if (m_navMesh.pathStatus != NavMeshPathStatus.PathPartial)
         {
-            var target = m_targetMgr.GetNowTarget();
+            var target = m_targetManager.GetNowTarget();
 
             m_targetPosition = target.transform.localPosition;
             m_targetPosition.y = GetOwner().transform.position.y;  //高さの調整

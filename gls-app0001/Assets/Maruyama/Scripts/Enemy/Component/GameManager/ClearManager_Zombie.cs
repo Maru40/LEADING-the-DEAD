@@ -10,34 +10,34 @@ using MaruUtility;
 public class ClearManager_Zombie : MonoBehaviour
 {
     [SerializeField]
-    float m_moveSpeed = 5.0f;
+    private float m_moveSpeed = 5.0f;
 
-    TargetManager m_targetManager;
-    EnemyVelocityMgr m_velocityManager;
-    EnemyRotationCtrl m_rotationController;
-    ThrongManager m_throngManager;
+    private TargetManager m_targetManager;
+    private EnemyVelocityMgr m_velocityManager;
+    private EnemyRotationCtrl m_rotationController;
+    private ThrongManager m_throngManager;
 
-    BarricadeDurability m_barricade = null;
+    private BarricadeDurability m_barricade = null;
 
     [Header("終了時にUpdateをoffにしたいビヘイビア"), SerializeField]
-    List<Behaviour> m_enableOffBehaviour = new List<Behaviour>();
+    private List<Behaviour> m_enableOffBehaviour = new List<Behaviour>();
 
     [Header("終了時に突っ込みながら出す音"), SerializeField]
-    AudioManager m_audioManager = null;
+    private AudioManager m_audioManager = null;
     [Header("音をランダムなタイミングで出す"), SerializeField]
-    RandomRange m_audioPlayRange = new RandomRange(0.0f, 0.5f);
+    private RandomRange m_audioPlayRange = new RandomRange(0.0f, 0.5f);
 
     [Header("扉を開けた時にランダムに生成する位置"), SerializeField]
-    RandomRange m_positionRandomRange = new RandomRange(-1.0f, +1.0f);
+    private RandomRange m_positionRandomRange = new RandomRange(-1.0f, +1.0f);
     [Header(""), SerializeField]
-    RandomRange m_directRandomRange = new RandomRange(-30.0f, 30.0f);
+    private RandomRange m_directRandomRange = new RandomRange(-30.0f, 30.0f);
 
-    AnimatorManager_ZombieNormal m_animatorManager = null;
-    WaitTimer m_waitTimer = null;
+    private AnimatorManager_ZombieNormal m_animatorManager = null;
+    private WaitTimer m_waitTimer = null;
 
-    Vector3 m_moveDirect = Vector3.zero;
+    private Vector3 m_moveDirect = Vector3.zero;
 
-    Stator_ZombieNormal m_stator;
+    private Stator_ZombieNormal m_stator;
 
     private void Awake()
     {

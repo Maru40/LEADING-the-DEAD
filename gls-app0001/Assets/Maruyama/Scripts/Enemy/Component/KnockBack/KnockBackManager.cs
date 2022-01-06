@@ -9,7 +9,7 @@ using UniRx;
 public class KnockBackManager : MonoBehaviour
 {
     [Serializable]
-    struct Parametor
+    private struct Parametor
     {
         public float lenght;
         public float speed;
@@ -23,20 +23,20 @@ public class KnockBackManager : MonoBehaviour
         }
     }
 
-    EnemyVelocityMgr m_velocityManager;
+    private EnemyVelocityMgr m_velocityManager;
 
     //吹き飛ばしの基礎値
     [SerializeField]
-    Parametor m_baseParam = new Parametor();
-    Parametor m_param = new Parametor();
-    float m_elapsedLength = 0.0f;
+    private Parametor m_baseParam = new Parametor();
+    private Parametor m_param = new Parametor();
+    private float m_elapsedLength = 0.0f;
 
-    Vector3 m_direct = Vector3.zero;
+    private Vector3 m_direct = Vector3.zero;
 
     /// <summary>
     /// ノックバックしたかどうか
     /// </summary>
-    readonly ReactiveProperty<bool> m_isKnockBackReactive = new ReactiveProperty<bool>();
+    private readonly ReactiveProperty<bool> m_isKnockBackReactive = new ReactiveProperty<bool>();
     public IObservable<bool> IsKnockBackReactive => m_isKnockBackReactive;
     public bool IsKnockBack
     {
@@ -57,7 +57,7 @@ public class KnockBackManager : MonoBehaviour
         }
     }
 
-    void MoveProcess()
+    private void MoveProcess()
     {
         var direct = m_direct;
         direct.y = 0;

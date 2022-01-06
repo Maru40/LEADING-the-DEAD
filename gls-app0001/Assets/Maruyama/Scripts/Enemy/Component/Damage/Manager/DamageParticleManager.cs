@@ -8,20 +8,20 @@ using MaruUtility.UtilityDictionary;
 public class DamageParticleManager : MonoBehaviour
 {
     [SerializeField]
-    bool m_isParentChase = true;
+    private bool m_isParentChase = true;
 
     [SerializeField]
-    GameObject m_createParticle = null; //生成するparticle
-    GameObject m_particle = null;  //生成されたparticle
+    private GameObject m_createParticle = null; //生成するparticle
+    private GameObject m_particle = null;  //生成されたparticle
 
     [SerializeField]
-    GameObject m_createPositionObject = null;  //生成する場所を表すオブジェクト
+    private GameObject m_createPositionObject = null;  //生成する場所を表すオブジェクト
 
     [SerializeField]
-    float m_time = 2.0f;  //particle表示時間
+    private float m_time = 2.0f;  //particle表示時間
 
     [SerializeField]
-    Ex_Dictionary<DamageType, GameObject> m_createParticleDictionary = new Ex_Dictionary<DamageType, GameObject>();
+    private Ex_Dictionary<DamageType, GameObject> m_createParticleDictionary = new Ex_Dictionary<DamageType, GameObject>();
 
     private void Awake()
     {
@@ -39,7 +39,7 @@ public class DamageParticleManager : MonoBehaviour
         ParentChase();
     }
 
-    void ParentChase()
+    private void ParentChase()
     {
         //追う状態で、particleがnullでなければ
         if(m_isParentChase == false || m_particle == null) { 
@@ -50,7 +50,7 @@ public class DamageParticleManager : MonoBehaviour
         m_particle.transform.position = setPosition;
     }
 
-    void CreateParticle()
+    private void CreateParticle()
     {
         var createPosition = m_createPositionObject.transform.position;
 
@@ -118,7 +118,7 @@ public class DamageParticleManager : MonoBehaviour
 
     //NullCheck----------------------------------------------------------------
 
-    void NullCheck()
+    private void NullCheck()
     { 
         if (m_createPositionObject == null) {
             m_createPositionObject = gameObject;

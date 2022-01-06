@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class ListenSound : MonoBehaviour
 {
-    I_Listen m_listen;
-    TargetManager m_targetManager;
+    private I_Listen m_listen;
+    private TargetManager m_targetManager;
 
-    void Awake()
+    private void Awake()
     {
         m_listen = GetComponent<I_Listen>();
         m_targetManager = GetComponent<TargetManager>();
     }
 
-    void Update()
+    private void Update()
     {
         
     }
@@ -27,7 +27,7 @@ public class ListenSound : MonoBehaviour
         m_listen?.Listen(foundObject);
     }
 
-    void Lost(FoundObject other)
+    private void Lost(FoundObject other)
     {
         var target = m_targetManager.GetNowTarget();
         if (target)

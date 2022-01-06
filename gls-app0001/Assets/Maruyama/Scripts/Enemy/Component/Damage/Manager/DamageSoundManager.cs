@@ -9,7 +9,7 @@ using MaruUtility.Sound;
 public class DamageSoundManager : MonoBehaviour
 {
     [SerializeField]
-    Ex_Dictionary<DamageType, AudioClipParametor> m_audioParamDictionary = new Ex_Dictionary<DamageType, AudioClipParametor>();
+    private Ex_Dictionary<DamageType, AudioClipParametor> m_audioParamDictionary = new Ex_Dictionary<DamageType, AudioClipParametor>();
 
     private void Awake()
     {

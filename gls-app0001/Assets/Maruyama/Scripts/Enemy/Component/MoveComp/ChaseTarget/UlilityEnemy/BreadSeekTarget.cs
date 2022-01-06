@@ -5,25 +5,24 @@ using UnityEngine;
 using MaruUtility;
 
 public class BreadSeekTarget : NodeBase<EnemyBase>
-{ 
-    float m_nearRange = 3.0f;
-    float m_maxSpeed = 3.0f;
-    float m_turningPower = 1.0f; //旋回する力
-    float m_lostSeekTime = 10.0f;
-    Vector3 m_targetPosition = new Vector3();
+{
+    private float m_nearRange = 3.0f;
+    private float m_maxSpeed = 3.0f;
+    private float m_turningPower = 1.0f; //旋回する力
+    private float m_lostSeekTime = 10.0f;
+    private Vector3 m_targetPosition = new Vector3();
 
     //コンポ―ネント系----------------------------------
 
-    ChaseTarget m_chaseTarget;
-    WaitTimer m_waitTimer;
-    Rigidbody m_rigid;
-    EnemyVelocityMgr m_velocityMgr;
-    TargetManager m_targetMgr;
-    BreadCrumb m_bread;
-    ThrongManager m_throngMgr;
-    EnemyRotationCtrl m_rotationCtrl;
-    StatusManagerBase m_statusManager;
-    EyeSearchRange m_eye;
+    private ChaseTarget m_chaseTarget;
+    private WaitTimer m_waitTimer;
+    private Rigidbody m_rigid;
+    private EnemyVelocityMgr m_velocityMgr;
+    private TargetManager m_targetMgr;
+    private BreadCrumb m_bread;
+    private EnemyRotationCtrl m_rotationCtrl;
+    private StatusManagerBase m_statusManager;
+    private EyeSearchRange m_eye;
 
     public BreadSeekTarget(EnemyBase owner, float nearRange, float maxSpeed, float turningPower, float lostSeekTime)
         : base(owner)
@@ -55,26 +54,21 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
 
         if (m_bread){
             //初期ポジションのセット
-            //var position = m_bread.GetNewBackPosition(1); //最新の一個前を取得
             var position = CalcuTargetPosition(m_bread);
             if (position != null){
                 m_targetPosition = (Vector3)position;
-                //Debug.Log("Player" + target.transform.position);
-                //Debug.Log("Target" + m_targetPosition);
             }
             else{  //もしなかったら最新を取得
-                //Debug.Log("ターゲットがNull");
                 m_targetPosition = m_bread.GetNewPosition();
             }
         }
 
-        m_throngMgr = owner.GetComponent<ThrongManager>();
         m_rotationCtrl = owner.GetComponent<EnemyRotationCtrl>();
     }
 
     public override void OnUpdate()
     {
-        Debug.Log("BreadSeek");
+        //Debug.Log("BreadSeek");
         if (!m_bread){
             return;
         }
@@ -87,7 +81,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
         m_waitTimer.AbsoluteEndTimer(GetType(), false);
     }
 
-    void UpdateMove()
+    private void UpdateMove()
     {
         var toVec = m_targetPosition - GetOwner().transform.position;
         var maxSpeed = m_maxSpeed * m_statusManager.GetBuffParametor().SpeedBuffMultiply;
@@ -95,7 +89,6 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
         m_velocityMgr.AddForce(force * m_turningPower);
 
         m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
-        //m_throngMgr.AvoidNearThrong(m_velocityMgr, toVec, m_maxSpeed, m_turningPower);
 
         //目的地に到達したら
         if (Calculation.IsArrivalPosition(m_nearRange, GetOwner().transform.position, m_targetPosition, true)) {
@@ -103,13 +96,12 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
         }
     }
 
-    void NextRoute()
+    private void NextRoute()
     {
         var newPosition = m_bread.GetNextPosition(m_targetPosition);
 
         if(newPosition != null){
             m_targetPosition = (Vector3)newPosition;
-            //Debug.Log("NextPosition" + m_targetPosition);
         }
         else{
             m_targetPosition = m_bread.GetNewPosition();
@@ -117,7 +109,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
     }
 
     //Rayの及ばない場所の取得
-    Vector3? CalcuTargetPosition(BreadCrumb bread)
+    private Vector3? CalcuTargetPosition(BreadCrumb bread)
     {
         var positions = bread.GetCopyPositions();
 
