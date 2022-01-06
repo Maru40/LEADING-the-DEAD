@@ -12,7 +12,7 @@ public class AudioFade : MonoBehaviour
     }
 
     [System.Serializable]
-    struct Parametor 
+    private struct Parametor 
     {
         public float m_inTime;   //フェードインに掛ける時間
         public float m_outTime;  //フェードアウトに掛ける時間
@@ -21,13 +21,13 @@ public class AudioFade : MonoBehaviour
     }
 
     [SerializeField]
-    Parametor m_param = new Parametor();
+    private Parametor m_param = new Parametor();
 
-    AudioSource m_audioSource;
+    private AudioSource m_audioSource;
 
-    GameTimer m_timer = new GameTimer();
+    private GameTimer m_timer = new GameTimer();
 
-    System.Action m_updateAction = null;
+    private System.Action m_updateAction = null;
 
     private void Awake()
     {
@@ -41,18 +41,18 @@ public class AudioFade : MonoBehaviour
         m_param.m_initVolume = m_audioSource.volume;
     }
 
-    void Update()
+    private void Update()
     {
         m_timer.UpdateTimer();
         m_updateAction?.Invoke();
     }
 
-    void FadeInUpdate()
+    private void FadeInUpdate()
     {
 
     }
 
-    void FadeOutUpdate()
+    private void FadeOutUpdate()
     {
         m_timer.UpdateTimer();
 
@@ -70,7 +70,7 @@ public class AudioFade : MonoBehaviour
     /// フェード準備
     /// </summary>
     /// <param name="type">フェードタイプ</param>
-    void FadeInit(FadeType type)
+    private void FadeInit(FadeType type)
     {
         m_timer.AbsoluteEndTimer(true);
 
@@ -92,7 +92,7 @@ public class AudioFade : MonoBehaviour
     /// フェード終了
     /// </summary>
     /// <param name="type">フェードタイプ</param>
-    void FadeEnd(FadeType type)
+    private void FadeEnd(FadeType type)
     {
         switch (type)
         {

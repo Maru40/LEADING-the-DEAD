@@ -23,17 +23,17 @@ public class AnimationActionBehavior : StateMachineBehaviour
     }
 
     [SerializeField]
-    List<AnimatorTimerParametor> m_timerParams = new List<AnimatorTimerParametor>();
-    float m_beforeTime = 0.0f;
+    private List<AnimatorTimerParametor> m_timerParams = new List<AnimatorTimerParametor>();
+    private float m_beforeTime = 0.0f;
 
-    Action m_enterAction;
-    Action m_updateAction; //アップデート時に呼んで欲しいイベント
-    Action m_exitAction;
+    private Action m_enterAction;
+    private Action m_updateAction; //アップデート時に呼んで欲しいイベント
+    private Action m_exitAction;
 
     //遷移完了時に呼んで欲しいActionが呼ばれたかどうか
-    bool m_isFirstInTransition = true;
+    private bool m_isFirstInTransition = true;
     //初めて遷移が完了したタイミングで呼んで欲しいエベント
-    Action m_firstTransitionAciton = null;
+    private Action m_firstTransitionAciton = null;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
