@@ -31,21 +31,21 @@ public class DropData
 public class DropObjecptManager : MonoBehaviour
 {
     [SerializeField]
-    List<DropData> m_datas = new List<DropData>();
+    private List<DropData> m_datas = new List<DropData>();
 
-    Dictionary<DropData ,GameObject> m_particles = new Dictionary<DropData, GameObject>();
-
-    [SerializeField]
-    GameObject m_dropPositionObject = null;
+    private Dictionary<DropData ,GameObject> m_particles = new Dictionary<DropData, GameObject>();
 
     [SerializeField]
-    float m_dropPower = 100.0f;
+    private GameObject m_dropPositionObject = null;
+
     [SerializeField]
-    float m_dropUpPower = 50.0f;
+    private float m_dropPower = 100.0f;
+    [SerializeField]
+    private float m_dropUpPower = 50.0f;
 
     //test用、将来的に消す。
     [SerializeField]
-    GameObject m_tempNullParticle = null;  //particleがnullの時の仮particle
+    private GameObject m_tempNullParticle = null;  //particleがnullの時の仮particle
 
     [SerializeField]
     public bool m_isPickUp = true;  //アイテムを拾うかどうか
@@ -58,7 +58,11 @@ public class DropObjecptManager : MonoBehaviour
         }
     }
 
-    void InstatiateParticle(DropData data)
+    /// <summary>
+    /// パーティクルの生成
+    /// </summary>
+    /// <param name="data"></param>
+    private void InstatiateParticle(DropData data)
     {
         if (data.particle != null)
         {
@@ -124,7 +128,7 @@ public class DropObjecptManager : MonoBehaviour
         RemoveDatas(removeDatas);
     }
 
-    void ItemAddForce(GameObject obj, Vector3 force)
+    private void ItemAddForce(GameObject obj, Vector3 force)
     {
         if(force == Vector3.zero) {
             return;
@@ -188,7 +192,7 @@ public class DropObjecptManager : MonoBehaviour
     /// <summary>
     /// 拾う
     /// </summary>
-    void PickUp(GameObject other)
+    private void PickUp(GameObject other)
     {
         var picked = other.GetComponent<PickedUpObject>();
 

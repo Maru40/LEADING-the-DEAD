@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class EnState_Stun : EnemyStateNodeBase<EnemyBase>
 {
-    EnemyStunManager m_stunMgr;
-    EnemyVelocityMgr m_velocityMgr;
-    ThrongManager m_throngMgr;
+    private EnemyStunManager m_stunMgr;
+    private EnemyVelocityManager m_velocityMgr;
+    private ThrongManager m_throngMgr;
 
     public EnState_Stun(EnemyBase owner)
         : base(owner)
     {
         m_stunMgr = owner.GetComponent<EnemyStunManager>();
-        m_velocityMgr = owner.GetComponent<EnemyVelocityMgr>();
+        m_velocityMgr = owner.GetComponent<EnemyVelocityManager>();
         m_throngMgr = owner.GetComponent<ThrongManager>();
     }
 

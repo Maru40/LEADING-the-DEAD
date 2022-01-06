@@ -8,7 +8,7 @@ namespace MaruUtility
     public class RandomPosition
     {
         //Randomにするためにstatic化
-        static System.Random sm_random = new System.Random(System.DateTime.Now.Millisecond);
+        private static System.Random sm_random = new System.Random(System.DateTime.Now.Millisecond);
 
         public static Vector3 CalcuVec(Vector3 maxRangeBase)
         {
@@ -16,21 +16,14 @@ namespace MaruUtility
 
             Vector3 minVec = -maxRange;
             Vector3 maxVec = maxRange;
-            //Vector3 minVec = -maxRange * Random.value;
-            //Vector3 maxVec = maxRange * Random.value;
-            Vector3 randomPosition = Vector3.zero;
 
-            //randomPosition.x = sm_random.Next((int)minVec.x, (int)maxVec.x);
-            //randomPosition.y = sm_random.Next((int)minVec.y, (int)maxVec.y);
-            //randomPosition.z = sm_random.Next((int)minVec.z, (int)maxVec.z);
+            Vector3 randomPosition = Vector3.zero;
 
             randomPosition.x = Random.Range(minVec.x, maxVec.x);
             randomPosition.y = Random.Range(minVec.y, maxVec.y);
             randomPosition.z = Random.Range(minVec.z, maxVec.z);
 
             return randomPosition;
-
-            //return minVec + maxVec;
         }
 
         /// <summary>

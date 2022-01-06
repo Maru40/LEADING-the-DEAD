@@ -8,13 +8,13 @@ public class FlareGunManager : MonoBehaviour
     /// Rayの障害物するLayerの配列
     /// </summary>
     [SerializeField]
-    string[] m_rayObstacleLayerStrings = new string[] { "L_Ground" };
+    private string[] m_rayObstacleLayerStrings = new string[] { "L_Ground" };
 
     [SerializeField]
-    GameObject m_inflenceArea = null;   //光の範囲を示す範囲
+    private GameObject m_inflenceArea = null;   //光の範囲を示す範囲
 
     [SerializeField]
-    BindActivateArea m_bindArea = null; //縛る範囲
+    private BindActivateArea m_bindArea = null; //縛る範囲
 
     public void Bomb()
     {

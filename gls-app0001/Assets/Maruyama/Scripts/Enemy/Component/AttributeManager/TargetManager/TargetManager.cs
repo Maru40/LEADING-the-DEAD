@@ -11,7 +11,7 @@ using MaruUtility;
 public class TargetManager : MonoBehaviour
 {
     //ターゲットを見失ったときのデータ
-    class LostData
+    private class LostData
     {
         public bool isActive;
         public Vector3 position;
@@ -46,33 +46,33 @@ public class TargetManager : MonoBehaviour
     }
 
     [SerializeField]
-    BuffParametor m_buffParam = new BuffParametor(1.1f);
+    private BuffParametor m_buffParam = new BuffParametor(1.1f);
 
     [Header("音オブジェクトのポジションの乱数幅"), SerializeField]
-    Vector3 m_soundPositionRandomRange = new Vector3(2.0f, 0.0f, 2.0f);
+    private Vector3 m_soundPositionRandomRange = new Vector3(2.0f, 0.0f, 2.0f);
 
     [Header("見失ったポジションを保存する時間"), SerializeField]
-    float m_lostDataSaveTime = 10.0f;
+    private float m_lostDataSaveTime = 10.0f;
 
     //最後に参照されたターゲット
-    readonly ReactiveProperty<FoundObject> m_nowTargetReactive = new ReactiveProperty<FoundObject>();
-    FoundObject m_nowTarget
+    private readonly ReactiveProperty<FoundObject> m_nowTargetReactive = new ReactiveProperty<FoundObject>();
+    private FoundObject m_nowTarget
     {
         get => m_nowTargetReactive.Value;
         set => m_nowTargetReactive.Value = value;
     }
 
     //最後にターゲットを発見した場所を記録する。
-    LostData m_lostData = null;
+    private LostData m_lostData = null;
 
     //どのコンポーネントのターゲットかを確認する。
-    Dictionary<Type,FoundObject> m_targets = new Dictionary<Type, FoundObject>();
+    private Dictionary<Type,FoundObject> m_targets = new Dictionary<Type, FoundObject>();
 
     //対象外にしたいターゲット群 == exclude == 除外
-    List<FoundObject> m_excludeTargets = new List<FoundObject>();
+    private List<FoundObject> m_excludeTargets = new List<FoundObject>();
 
-    StatusManagerBase m_statusManager;
-    WaitTimer m_waitTimer;
+    private StatusManagerBase m_statusManager;
+    private WaitTimer m_waitTimer;
 
     private void Awake()
     {
@@ -105,17 +105,10 @@ public class TargetManager : MonoBehaviour
 
     private void Update()
     {
-        if(m_lostData == null) {
-            return;
-        }
 
-        if (m_nowTarget == null && !m_lostData.isActive)
-        {
-            //Debug.Log("null");
-        }
     }
 
-    bool IsBuff(FoundObject data)
+    private bool IsBuff(FoundObject data)
     {
         if(data == null) {
             return false;
@@ -132,7 +125,7 @@ public class TargetManager : MonoBehaviour
     /// ターゲットに対するバフの切替
     /// </summary>
     /// <param name="parametor">バフデータ</param>
-    void ChangeBuffParametor(BuffParametor parametor)
+    private void ChangeBuffParametor(BuffParametor parametor)
     {
         var buffParametor = m_statusManager.GetBuffParametor();
         buffParametor.targetParam = parametor;
@@ -199,7 +192,7 @@ public class TargetManager : MonoBehaviour
     /// </summary>
     /// <param name="target">ターゲット</param>
     /// <returns>更新が必要ならtrue</returns>
-    bool IsTargetUpdate(FoundObject target)
+    private bool IsTargetUpdate(FoundObject target)
     {
         if (target == null) {
             return true; //ターゲットがnullならtrueを返す。
@@ -243,7 +236,7 @@ public class TargetManager : MonoBehaviour
     /// </summary>
     /// <param name="newTarget"></param>
     /// <returns>対象外ならtrue</returns>
-    bool IsExcludeTarget(FoundObject newTarget)
+    private bool IsExcludeTarget(FoundObject newTarget)
     {
         foreach(var target in m_excludeTargets)
         {
@@ -261,7 +254,7 @@ public class TargetManager : MonoBehaviour
     /// </summary>
     /// <param name="target"></param>
     /// <returns>新しいターゲットが近いならtrue</returns>
-    bool IsNearNewTarget(FoundObject newTarget)
+    private bool IsNearNewTarget(FoundObject newTarget)
     {
         var nowTargetPosition = m_nowTarget.gameObject.transform.position;
         var newTargetPosition = newTarget.gameObject.transform.position;
@@ -319,13 +312,13 @@ public class TargetManager : MonoBehaviour
         return m_nowTarget ? CalcuFoundPosition() : GetLostPosition();
     }
 
-    Vector3 CalcuFoundPosition()
+    private Vector3 CalcuFoundPosition()
     {
         var data = m_nowTarget.GetFoundData();
         return data.position;
     }
 
-    void SetLostData()
+    private void SetLostData()
     {
         //見失ったから大まかな位置にする。
         var data = m_nowTarget.GetFoundData();

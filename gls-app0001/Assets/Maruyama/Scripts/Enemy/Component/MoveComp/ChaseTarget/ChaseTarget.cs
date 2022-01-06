@@ -59,22 +59,22 @@ public struct ChaseTargetParametor : I_Random<ChaseTargetParametor>
 public class ChaseTarget : MonoBehaviour
 {
     [SerializeField]
-    ChaseTargetParametor m_param = new ChaseTargetParametor(0.75f, 3.0f, 3.0f, 10.0f, 3.0f);
+    private ChaseTargetParametor m_param = new ChaseTargetParametor(0.75f, 3.0f, 3.0f, 10.0f, 3.0f);
 
     /// <summary>
     /// Rayの障害物するLayerの配列
     /// </summary>
     [SerializeField]
-    string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
+    private string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
 
-    StateMachine m_stateMachine;
+    private StateMachine m_stateMachine;
 
     //コンポーネント系------------------
 
-    TargetManager m_targetMgr;
-    I_Chase m_chase;
+    private TargetManager m_targetMgr;
+    private I_Chase m_chase;
 
-    void Awake()
+    private void Awake()
     {
         m_targetMgr = GetComponent<TargetManager>();
         m_chase = GetComponent<I_Chase>();
@@ -85,14 +85,14 @@ public class ChaseTarget : MonoBehaviour
         CreateEdge();
     }
 
-    void Update()
+    private void Update()
     {
         m_stateMachine.OnUpdate();
 
         StateCheck();  //ステートの管理
     }
 
-    void StateCheck()
+    private void StateCheck()
     {
         var target = m_targetMgr.GetNowTarget();
         var lostPosition = m_targetMgr.GetLostPosition();
@@ -127,7 +127,7 @@ public class ChaseTarget : MonoBehaviour
         }
     }
 
-    void CreateNode()
+    private void CreateNode()
     {
         var enemy = GetComponent<EnemyBase>();
 
@@ -140,7 +140,7 @@ public class ChaseTarget : MonoBehaviour
         m_stateMachine.AddNode(SeekType.Bread, new BreadSeekTarget(enemy, nearRange, maxSpeed, turningPower, lostSeekTime));
     }
 
-    void CreateEdge()
+    private void CreateEdge()
     {
         m_stateMachine.AddEdge(SeekType.Liner, SeekType.Bread, ToBreadTrigger);
 
@@ -149,11 +149,11 @@ public class ChaseTarget : MonoBehaviour
 
     //遷移条件------------------------------------------------------------
 
-    bool ToBreadTrigger(SeekTransitonMember member)
+    private bool ToBreadTrigger(SeekTransitonMember member)
     {
         return member.breadTrigger.Get();
     }
-    bool ToLinerTrigger(SeekTransitonMember member)
+    private bool ToLinerTrigger(SeekTransitonMember member)
     {
         return member.linerTrigger.Get();
     }
@@ -255,11 +255,6 @@ public class ChaseTarget : MonoBehaviour
         if(enabled == false) {
             return;
         }
-
-        //if(collision.gameObject.tag == "T_Wall")
-        //{
-        //    WallAttack();
-        //}
     }
 
     private void OnCollisionStay(Collision collision)
@@ -267,10 +262,5 @@ public class ChaseTarget : MonoBehaviour
         if (enabled == false) {
             return;
         }
-
-        //if (collision.gameObject.tag == "T_Wall")
-        //{
-        //    WallAttack();
-        //}
     }
 }

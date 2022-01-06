@@ -5,17 +5,17 @@ using UnityEngine;
 public class PointGenerator : GeneratorBase
 {
     [SerializeField]
-    GameObject m_createObject = null;
+    private GameObject m_createObject = null;
 
     [SerializeField]
-    List<GameObject> m_positionObjects = new List<GameObject>();
+    private List<GameObject> m_positionObjects = new List<GameObject>();
 
     private void Start()
     {
         CreateObjects();
     }
-    
-    void CreateObjects()
+
+    private void CreateObjects()
     {
         foreach(var obj in m_positionObjects)
         {

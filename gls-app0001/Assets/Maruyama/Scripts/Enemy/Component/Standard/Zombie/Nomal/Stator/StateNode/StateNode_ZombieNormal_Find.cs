@@ -10,7 +10,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
     [Serializable]
     public struct Parametor
     {
-        public float maxFindWaitTime;
+        public float maxFindWaitTime;//見つけた時の最大待機時間
         public float rotationSpeed;  //回転スピード
 
         public Parametor(float maxFindWaitTime, float rotationSpeed)
@@ -20,17 +20,17 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
         }
     }
 
-    enum TaskEnum
+    private enum TaskEnum
     {
         LookRotation,  //見たい方法を見る。
         SeeWait,
     }
 
-    TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
+    private TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
 
-    Parametor m_param = new Parametor();
+    private Parametor m_param = new Parametor();
 
-    Stator_ZombieNormal m_stator;
+    private Stator_ZombieNormal m_stator;
 
     public StateNode_ZombieNormal_Find(EnemyBase owner, Parametor param)
         :base(owner)
@@ -74,7 +74,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
         //Debug.Break();
     }
 
-    void DefineTask()
+    private void DefineTask()
     {
         var enemy = GetOwner().GetComponent<EnemyBase>();
 
@@ -82,13 +82,13 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
         m_taskList.DefineTask(TaskEnum.SeeWait, new Task_SeeWait(enemy, m_param.maxFindWaitTime));
     }
 
-    void SelectTask()
+    private void SelectTask()
     {
         m_taskList.AddTask(TaskEnum.LookRotation);
         m_taskList.AddTask(TaskEnum.SeeWait);
     }
 
-    void ChangeState()
+    private void ChangeState()
     {
         var owner = GetOwner();
 
@@ -100,15 +100,15 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
     /// <summary>
     /// ターゲットの方向を見ながら待機
     /// </summary>
-    class Task_SeeWait : TaskNodeBase<EnemyBase>
+    private class Task_SeeWait : TaskNodeBase<EnemyBase>
     {
-        float m_maxWatiTime;
+        private float m_maxWatiTime;
 
-        GameTimer m_timer = new GameTimer();
+        private GameTimer m_timer = new GameTimer();
 
-        EnemyRotationCtrl m_rotationController;
-        TargetManager m_targetManager;
-        EnemyVelocityMgr m_velocityManager;
+        private EnemyRotationCtrl m_rotationController;
+        private TargetManager m_targetManager;
+        private EnemyVelocityManager m_velocityManager;
 
         public Task_SeeWait(EnemyBase owner, float maxWaitTime)
             :base(owner)
@@ -117,7 +117,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
 
             m_rotationController = owner.GetComponent<EnemyRotationCtrl>();
             m_targetManager = owner.GetComponent<TargetManager>();
-            m_velocityManager = owner.GetComponent<EnemyVelocityMgr>();
+            m_velocityManager = owner.GetComponent<EnemyVelocityManager>();
         }
 
         public override void OnEnter()
@@ -141,7 +141,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
             m_velocityManager.SetIsDeseleration(false);
         }
 
-        void Rotation()
+        private void Rotation()
         {
             var positionCheck = m_targetManager.GetToNowTargetVector();
             if(positionCheck == null) {
@@ -155,17 +155,17 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
 
 
     //ターゲットの方向を向く処理
-    class Task_LookTargetRotation : TaskNodeBase<EnemyBase>
+    private class Task_LookTargetRotation : TaskNodeBase<EnemyBase>
     {
-        float m_speed = 2.0f;
-        float m_frontDotSize = 0.9f;  //真正面と判断する数値
+        private float m_speed = 2.0f;
+        private float m_frontDotSize = 0.9f;  //真正面と判断する数値
 
-        float m_saveRotationSpeed = 0.0f;       //ローテーションのスピードの保存
-        bool m_saveRotationCompEnable = false;  //ローテーションのEnable状態の保存
+        private float m_saveRotationSpeed = 0.0f;       //ローテーションのスピードの保存
+        private bool m_saveRotationCompEnable = false;  //ローテーションのEnable状態の保存
 
-        EnemyRotationCtrl m_rotationController;
-        TargetManager m_targetManager;
-        EnemyVelocityMgr m_velocityManager;
+        private EnemyRotationCtrl m_rotationController;
+        private TargetManager m_targetManager;
+        private EnemyVelocityManager m_velocityManager;
 
         public Task_LookTargetRotation(EnemyBase owner, float speed, float frontDotSize = 0.9f)
             :base(owner)
@@ -176,7 +176,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
 
             m_rotationController = owner.GetComponent<EnemyRotationCtrl>();
             m_targetManager = owner.GetComponent<TargetManager>();
-            m_velocityManager = owner.GetComponent<EnemyVelocityMgr>();
+            m_velocityManager = owner.GetComponent<EnemyVelocityManager>();
         }
 
         public override void OnEnter()
@@ -202,7 +202,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
             m_rotationController.enabled = m_saveRotationCompEnable;
         }
 
-        void Rotation()
+        private void Rotation()
         {
             var positionCheck = m_targetManager.GetToNowTargetVector();
             if(positionCheck == null) {
@@ -213,7 +213,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
             m_rotationController.SetDirect(toTargetVec);
         }
 
-        bool IsEnd()
+        private bool IsEnd()
         {
             //方向とフォワードの差が少なかったら。
             var positionCheck = m_targetManager.GetToNowTargetVector();

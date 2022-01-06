@@ -48,13 +48,13 @@ public class EnemyGenerator : GeneratorBase
     }
 
     [Header("セレクト時のみ範囲を表示するかどうか"),SerializeField]
-    bool m_isSelectDrawGizmos = false;
+    private bool m_isSelectDrawGizmos = false;
     [Header("生成範囲表示カラー"),SerializeField]
-    Color m_gizmosColor = new Color(1.0f, 0, 0, 0.3f);
+    private Color m_gizmosColor = new Color(1.0f, 0, 0, 0.3f);
 
     //近くに生成したくないオブジェクト群
     [Header("近くに生成したくないオブジェクト群"), SerializeField]
-    List<OutOfTargetData> m_outOfTargteDatas =  new List<OutOfTargetData>();
+    private List<OutOfTargetData> m_outOfTargteDatas =  new List<OutOfTargetData>();
 
     [SerializeField]
     protected GameObject m_createObject = null;
@@ -89,7 +89,7 @@ public class EnemyGenerator : GeneratorBase
     }
 
     [Header("障害物として扱う名前群"),SerializeField]
-    string[] m_obstacleLayerStrings = new string[] { "L_Obstacle" };
+    private string[] m_obstacleLayerStrings = new string[] { "L_Obstacle" };
 
     //配布するデータの構造体
     //[Header("ドロップアイテムを配布するデータ群"), SerializeField]
@@ -99,7 +99,7 @@ public class EnemyGenerator : GeneratorBase
 
     //生成したゾンビを持つ
     protected List<ThrongData> m_datas = new List<ThrongData>();
-    static List<ThrongData> sm_allDatas = new List<ThrongData>();
+    private static List<ThrongData> sm_allDatas = new List<ThrongData>();
 
     protected virtual void Awake()
     {
@@ -121,7 +121,7 @@ public class EnemyGenerator : GeneratorBase
         //DropDistribution();
     }
 
-    void CreateObjects()
+    private void CreateObjects()
     {
         for (int i = 0; i < m_numCreate; i++)
         {
@@ -130,12 +130,12 @@ public class EnemyGenerator : GeneratorBase
         }
     }
 
-    void CreateObject(Vector3 createPosition)
+    private void CreateObject(Vector3 createPosition)
     {
         var obj = Instantiate(m_createObject, createPosition, Quaternion.identity, transform);
         CreateObjectAdjust(obj);  //調整
 
-        var newData = new ThrongData(obj.GetComponent<EnemyVelocityMgr>(),
+        var newData = new ThrongData(obj.GetComponent<EnemyVelocityManager>(),
             obj.GetComponent<TargetManager>(),
             obj.GetComponent<ThrongManager>(),
             obj.GetComponent<RandomPlowlingMove>(),
@@ -291,7 +291,7 @@ public class EnemyGenerator : GeneratorBase
     /// <summary>
     /// 生成範囲表示用
     /// </summary>
-    void DrawGizmos()
+    private void DrawGizmos()
     {
         Gizmos.color = m_gizmosColor;
         var maxRandomRange = m_maxRandomRange * 2.0f;

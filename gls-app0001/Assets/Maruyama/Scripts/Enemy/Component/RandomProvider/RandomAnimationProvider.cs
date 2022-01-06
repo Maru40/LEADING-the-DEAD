@@ -34,7 +34,7 @@ public class RandomAnimationProviderParametor
 public class RandomAnimationProvider : MonoBehaviour
 {
     [SerializeField]
-    List<RandomAnimationProviderParametor> m_params;
+    private List<RandomAnimationProviderParametor> m_params;
 
     private AnimatorOverrideController m_overrideController;
     private Animator m_animator;
@@ -43,15 +43,16 @@ public class RandomAnimationProvider : MonoBehaviour
         get => m_animator;
         set => m_animator = value;
     }
-    AnimatorCtrl_ZombieNormal m_animatorController;
 
-    void Awake()
+    private AnimatorCtrl_ZombieNormal m_animatorController;
+
+    private void Awake()
     {
         //m_animator = GetComponent<Animator>();
         m_animatorController = GetComponent<AnimatorCtrl_ZombieNormal>();
     }
 
-    void Start()
+    private void Start()
     {
         if(m_animator == null) {
             m_animator = GetComponentInChildren<Animator>();
@@ -68,7 +69,7 @@ public class RandomAnimationProvider : MonoBehaviour
     /// </summary>
     /// <param name="param">データ</param>
     /// <returns>randomなアニメーションクリップ</returns>
-    AnimationClipParametor GetRandomAnimationClip(RandomAnimationProviderParametor param)
+    private AnimationClipParametor GetRandomAnimationClip(RandomAnimationProviderParametor param)
     {
         var clipParam = MyRandom.RandomList(param.animationClipParametors);
         return clipParam;
@@ -78,7 +79,7 @@ public class RandomAnimationProvider : MonoBehaviour
     /// 渡されたデータのみ、randomなアニメーションに変更する。
     /// </summary>
     /// <param name="param">randomに変更したいデータ</param>
-    void RandomChangeAnimationClip(RandomAnimationProviderParametor param)
+    private void RandomChangeAnimationClip(RandomAnimationProviderParametor param)
     {
         ChangeAnimationClip(param, GetRandomAnimationClip(param));
     }
@@ -86,7 +87,7 @@ public class RandomAnimationProvider : MonoBehaviour
     /// <summary>
     /// 全てのデータをrandomなアニメーションに変更する。
     /// </summary>
-    void RandomChangeAnimationClips()
+    private void RandomChangeAnimationClips()
     {
         foreach(var param in m_params)
         {
@@ -99,7 +100,7 @@ public class RandomAnimationProvider : MonoBehaviour
     /// </summary>
     /// <param name="param">変更を管理するデータ</param>
     /// <param name="clip">変更したいアニメーション</param>
-    void ChangeAnimationClip(RandomAnimationProviderParametor param ,AnimationClipParametor clipParam)
+    private void ChangeAnimationClip(RandomAnimationProviderParametor param ,AnimationClipParametor clipParam)
     {
         if(clipParam.animationClip == null) {
             Debug.Log("clipがnullです");

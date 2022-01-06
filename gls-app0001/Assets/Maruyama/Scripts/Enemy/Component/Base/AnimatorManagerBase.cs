@@ -8,7 +8,7 @@ using System;
 /// AnimationでHitColliderを管理するためのパラメータ
 /// </summary>
 [Serializable]
-struct AnimationHitColliderParametor
+public struct AnimationHitColliderParametor
 {
     public EnemyAttackTriggerAction trigger;
     public float startTime;

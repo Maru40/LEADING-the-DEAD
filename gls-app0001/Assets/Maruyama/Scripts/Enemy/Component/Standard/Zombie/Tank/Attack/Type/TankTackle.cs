@@ -55,7 +55,7 @@ public class TankTackle : AttackNodeBase
     private ReactiveProperty<State> m_state = new ReactiveProperty<State>(State.None);
 
     private TargetManager m_targetManager;
-    private EnemyVelocityMgr m_velocityManager;
+    private EnemyVelocityManager m_velocityManager;
     private Stator_ZombieTank m_stator;
     private EyeSearchRange m_eye;
     private AnimatorManager_ZombieTank m_animatorManager;
@@ -66,7 +66,7 @@ public class TankTackle : AttackNodeBase
     private void Awake()
     {
         m_targetManager = GetComponent<TargetManager>();
-        m_velocityManager = GetComponent<EnemyVelocityMgr>();
+        m_velocityManager = GetComponent<EnemyVelocityManager>();
         m_stator = GetComponent<Stator_ZombieTank>();
         m_eye = GetComponent<EyeSearchRange>();
         m_animatorManager = GetComponent<AnimatorManager_ZombieTank>();
@@ -235,15 +235,6 @@ public class TankTackle : AttackNodeBase
             return false;
         }
 
-        //const float eyeRange = 50.0f;  //タックル中の視界の広さ
-        //var eyeParam = m_eye.GetParam();
-        //eyeParam.rad = m_eyeRad;
-        //eyeParam.range = eyeRange;
-        //if (m_eye.IsInEyeRange(m_targetManager.GetNowTarget().gameObject, eyeParam))
-        //{
-        //    return true;
-        //}
-
         var toTargetVec = (Vector3)m_targetManager.GetToNowTargetVector();
         if (UtilityMath.IsFront(transform.forward , toTargetVec)){  //正面にいるなら
             return true;
@@ -254,9 +245,6 @@ public class TankTackle : AttackNodeBase
 
     public override void EndAnimationEvent()
     {
-        Debug.Log("EndAnimation");
-        //m_stator.GetTransitionMember().chaseTrigger.Fire();
-
         m_state.Value = State.None;
 
         m_velocityManager.SetIsDeseleration(false);
@@ -282,7 +270,11 @@ public class TankTackle : AttackNodeBase
         }
     }
 
-    //タックル中に壁に突っかかっているかどうか
+    /// <summary>
+    /// タックル中に壁に突っかかっているかどうか
+    /// </summary>
+    /// <param name="collision">当たったコリジョン</param>
+    /// <returns></returns>
     private bool IsTackleWallAvoid(Collision collision)
     {
         if(m_state.Value != State.Tackle) { //ステートがTackleでない場合は処理をしない。

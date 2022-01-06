@@ -10,16 +10,16 @@ public class GraphBase<NodeType, EnumType, TransitionType>
 	where TransitionType : class
 {
 	//最初のノード(リセット行為に使う)
-	EnumType m_firstType;
+	private EnumType m_firstType;
 
 	//現在のノード
-	EnumType m_nowNodeType;
+	private EnumType m_nowNodeType;
 
 	//ノードの連想配列
-	Dictionary<EnumType, NodeBase<NodeType>> m_nodes;
+	private Dictionary<EnumType, NodeBase<NodeType>> m_nodes;
 
 	//エッジの連想配列リスト
-	Dictionary<EnumType, List<EdgeBase<EnumType, TransitionType>>> m_edgesDictionary;
+	private Dictionary<EnumType, List<EdgeBase<EnumType, TransitionType>>> m_edgesDictionary;
 
     public GraphBase()
     {

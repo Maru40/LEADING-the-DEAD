@@ -7,17 +7,16 @@ using DyingTypeEnum = StatusManager_ZombieNormal.DyingTypeEnum;
 
 public class DamagedManager_ZombieNormal : DamagedManagerBase
 {
+    private StatusManager_ZombieNormal m_statusManager = null;
+    private AnimatorManager_ZombieNormal m_animatorManager = null;
+    private Stator_ZombieNormal m_stator = null;
+    private EnemyRespawnManager m_respawn = null;
+    private DropObjecptManager m_dropManager = null;
+    private DamageParticleManager m_particleManager = null;
+    private KnockBackManager m_knockBack = null;
+    private I_Stun m_stun = null;
 
-    StatusManager_ZombieNormal m_statusManager = null;
-    AnimatorManager_ZombieNormal m_animatorManager = null;
-    Stator_ZombieNormal m_stator = null;
-    EnemyRespawnManager m_respawn = null;
-    DropObjecptManager m_dropManager = null;
-    DamageParticleManager m_particleManager = null;
-    KnockBackManager m_knockBack = null;
-    I_Stun m_stun = null;
-
-    WaitTimer m_waitTimer = null;
+    private WaitTimer m_waitTimer = null;
 
     public DamagedManager_ZombieNormal(GameObject owner)
         :base(owner)
@@ -53,7 +52,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
     /// </summary>
     /// <param name="data">ダメージデータ</param>
     /// <param name="status">現在のステータスの参照</param>
-    void Damage(DamageData data, ref StatusManagerBase.Status status)
+    private void Damage(DamageData data, ref StatusManagerBase.Status status)
     {
         if (data.isStunAttack) { //スタン状態になる攻撃なら
             status.isStun = true;
@@ -72,7 +71,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
         StartDamageInterval(ref status); //ダメージインターバルの開始
     }
 
-    void CreateDamageEffect(DamageData data)
+    private void CreateDamageEffect(DamageData data)
     {
         m_particleManager.StartDamage(data.type);
     }
@@ -80,7 +79,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
     /// <summary>
     /// ダメージインターバルの開始
     /// </summary>
-    void StartDamageInterval(ref StatusManagerBase.Status status)
+    private void StartDamageInterval(ref StatusManagerBase.Status status)
     {
         float time = status.damageIntervalTime;
         m_waitTimer.AddWaitTimer(GetType(), time);
@@ -90,7 +89,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
     /// 死亡時の処理
     /// </summary>
     /// <param name="status">現在のステータスの参照</param>
-    void Death(DamageData data ,ref StatusManagerBase.Status status)
+    private void Death(DamageData data ,ref StatusManagerBase.Status status)
     {
         if (IsDeath(in status))
         {
@@ -115,7 +114,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
     /// </summary>
     /// <param name="status">現在のステータスの参照</param>
     /// <returns>死亡状態ならtrue</returns>
-    bool IsDeath(in StatusManagerBase.Status status)
+    private bool IsDeath(in StatusManagerBase.Status status)
     {
         return status.hp <= 0 ? true : false;
     }
@@ -124,7 +123,7 @@ public class DamagedManager_ZombieNormal : DamagedManagerBase
     /// スタン時の処理
     /// </summary>
     /// <param name="other">スタンを与えてきた相手</param>
-    void Stun(GameObject other)
+    private void Stun(GameObject other)
     {
         //m_stun.StartStun();
         //m_dropManager.Drop(other);

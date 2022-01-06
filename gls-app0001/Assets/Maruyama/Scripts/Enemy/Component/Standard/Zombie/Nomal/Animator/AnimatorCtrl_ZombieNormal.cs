@@ -5,27 +5,27 @@ using UnityEngine;
 
 public class AnimatorCtrl_ZombieNormal : MonoBehaviour
 {
-    float m_defaultAttackSpeed = 1.0f;
-    float m_baseMoveSpeed = 1.0f;
+    private float m_defaultAttackSpeed = 1.0f;
+    private float m_baseMoveSpeed = 1.0f;
     public float BaseMoveSpeed
     {
         get => m_baseMoveSpeed;
         set => m_baseMoveSpeed = value;
     }
 
-    Rigidbody m_rigid;
-    Animator m_animator;
+    private Rigidbody m_rigid;
+    private Animator m_animator;
     public Animator animator
     {
         get => m_animator;
         set => m_animator = value;
     }
 
-    AngerManager m_angerManager;
-    Stator_ZombieNormal m_stator;
-    StatusManager_ZombieNormal m_statusManager;
+    private AngerManager m_angerManager;
+    private Stator_ZombieNormal m_stator;
+    private StatusManager_ZombieNormal m_statusManager;
 
-    void Start()
+    private void Start()
     {
         m_rigid = GetComponentInChildren<Rigidbody>();
         m_animator = GetComponent<Animator>();
@@ -34,7 +34,7 @@ public class AnimatorCtrl_ZombieNormal : MonoBehaviour
         m_statusManager = GetComponent<StatusManager_ZombieNormal>();
     }
 
-    void Update()
+    private void Update()
     {
         if(m_animator == null)
         {

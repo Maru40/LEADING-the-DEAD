@@ -22,16 +22,16 @@ public class RandomModelProvider : MonoBehaviour
     }
 
     [SerializeField]
-    Animator m_animator;
+    private Animator m_animator;
 
     [SerializeField]
-    List<Parametor> m_params = new List<Parametor>();
+    private List<Parametor> m_params = new List<Parametor>();
 
-    Parametor m_nowParam;
+    private Parametor m_nowParam;
 
-    AnimatorCtrl_ZombieNormal m_animatorContoroller;
-    RandomAnimationProvider m_randomAimationProvider;
-    AnimatorManagerBase m_aniamtorManager;
+    private AnimatorCtrl_ZombieNormal m_animatorContoroller;
+    private RandomAnimationProvider m_randomAimationProvider;
+    private AnimatorManagerBase m_aniamtorManager;
 
     private void Awake()
     {
@@ -76,6 +76,10 @@ public class RandomModelProvider : MonoBehaviour
         m_aniamtorManager.animator = m_animator;
     }
 
+    /// <summary>
+    /// 攻撃などのヒット判定をセットする。
+    /// </summary>
+    /// <param name="param">セットするパラメータ</param>
     private void HitObjectProvider(Parametor param)
     {
         foreach (var hitParam in param.hitObjParams)
@@ -84,6 +88,9 @@ public class RandomModelProvider : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// いらないモデルの削除
+    /// </summary>
     private void RemoveModels()
     {
         foreach(var param in m_params)

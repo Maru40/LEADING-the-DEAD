@@ -7,11 +7,11 @@ using MaruUtility;
 public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGeneratorManager>
 {
     [SerializeField]
-    Color m_gizmosColor;
+    private Color m_gizmosColor;
     [SerializeField]
-    GameObject m_barriade = null;
+    private GameObject m_barriade = null;
     [SerializeField]
-    GameObject m_player = null;
+    private GameObject m_player = null;
 
     private List<EnemyGenerator> m_generators = new List<EnemyGenerator>();
     private List<ZombieTank> m_tanks = new List<ZombieTank>();

@@ -15,7 +15,7 @@ public class SmellManager : MonoBehaviour
     private TargetManager m_targetManager;
     private I_Smell m_smell;
     private WaitTimer m_waitTimer;
-    private EnemyVelocityMgr m_velocityManager;
+    private EnemyVelocityManager m_velocityManager;
     private I_Eat m_eat;
     private Stator_ZombieNormal m_stator;
     private AttackNodeManagerBase m_attackManager;
@@ -33,7 +33,7 @@ public class SmellManager : MonoBehaviour
         m_targetManager = GetComponent<TargetManager>();
         m_smell = GetComponent<I_Smell>();
         m_waitTimer = GetComponent<WaitTimer>();
-        m_velocityManager = GetComponent<EnemyVelocityMgr>();
+        m_velocityManager = GetComponent<EnemyVelocityManager>();
         m_eat = GetComponent<I_Eat>();
         m_stator = GetComponent<Stator_ZombieNormal>();
         m_attackManager = GetComponent<AttackNodeManagerBase>();
@@ -90,6 +90,11 @@ public class SmellManager : MonoBehaviour
         return type == FoundObject.FoundType.Smell ? true : false;
     }
 
+    /// <summary>
+    /// ターゲットが近くにいるかどうか
+    /// </summary>
+    /// <param name="nearRange">近くと判断する距離</param>
+    /// <returns></returns>
     public bool IsTargetNear(float nearRange)
     {
         var positionCheck = m_targetManager.GetToNowTargetVector();
@@ -103,6 +108,10 @@ public class SmellManager : MonoBehaviour
         return toTargetVec.magnitude < nearRange ? true : false;  
     }
 
+    /// <summary>
+    /// 攻撃するかどうか
+    /// </summary>
+    /// <returns></returns>
     private bool IsAttack()
     {
         if (!m_targetManager.HasTarget()) {

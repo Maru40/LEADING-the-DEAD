@@ -9,7 +9,6 @@ using MaruUtility.Sound;
 
 public class AnimatorManager_ZombieTank : AnimatorManagerBase
 {
-
     [Serializable]
     private struct TackleParametor
     {

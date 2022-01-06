@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class StateTableNode_FireDamage : StateTableNodeBase<EnemyBase>
 {
-    WaitTimer m_waitTimer;
+    private WaitTimer m_waitTimer;
 
-    GameObject m_createParticle;  //生成するparticle
-    DamageParticleManager m_particleManager; //particleマネージャ
+    private GameObject m_createParticle;  //生成するparticle
+    private DamageParticleManager m_particleManager; //particleマネージャ
 
-    float m_time = 0.0f;
+    private float m_time = 0.0f;
 
     public StateTableNode_FireDamage(EnemyBase owner, GameObject createParticle, float time = 3.0f)
         :base(owner)

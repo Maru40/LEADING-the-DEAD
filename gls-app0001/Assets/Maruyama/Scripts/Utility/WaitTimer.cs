@@ -37,8 +37,8 @@ class WaitTimerParam
 
 public class WaitTimer : MonoBehaviour
 {
-    Dictionary<Type,WaitTimerParam> m_params = new Dictionary<Type, WaitTimerParam>();
-    Dictionary<Type, WaitTimerParam> m_addParams = new Dictionary<Type, WaitTimerParam>();
+    private Dictionary<Type,WaitTimerParam> m_params = new Dictionary<Type, WaitTimerParam>();
+    private Dictionary<Type, WaitTimerParam> m_addParams = new Dictionary<Type, WaitTimerParam>();
 
     private void Awake()
     {

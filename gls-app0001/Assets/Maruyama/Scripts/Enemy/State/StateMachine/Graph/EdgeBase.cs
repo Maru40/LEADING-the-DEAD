@@ -8,11 +8,11 @@ public class EdgeBase<EnumType, TransitionType>
 	where EnumType : Enum
 	where TransitionType : class
 {
-	EnumType m_fromType;
-    EnumType m_toType;
+	private EnumType m_fromType;
+	private EnumType m_toType;
 
-	Func<TransitionType,bool> m_isTransitionFunc = null; //遷移する条件
-	int m_priority = 0;  //優先度
+	private Func<TransitionType,bool> m_isTransitionFunc = null; //遷移する条件
+	private int m_priority = 0;  //優先度
 
 	public EdgeBase(EnumType from, EnumType to,
 			Func<TransitionType,bool> isTransitionFunc,

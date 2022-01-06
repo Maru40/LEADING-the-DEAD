@@ -5,7 +5,7 @@ using UnityEngine;
 public class RespawnStatusUp_ZonbieNormal : EnemyRespawnStatusUpBase
 {
     [SerializeField]
-    CreateSetParametor_ZombieNormal m_param = new CreateSetParametor_ZombieNormal(0.0f);
+    private CreateSetParametor_ZombieNormal m_param = new CreateSetParametor_ZombieNormal(0.0f);
 
     protected override void StatusUp()
     {

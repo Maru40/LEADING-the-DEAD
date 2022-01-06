@@ -18,7 +18,7 @@ public struct DropDataDistributionParametor
 public class RandomDropDataDistribution
 {
     //配布するデータの構造体
-    List<DropDataDistributionParametor> m_params = new List<DropDataDistributionParametor>();
+    private List<DropDataDistributionParametor> m_params = new List<DropDataDistributionParametor>();
 
     public RandomDropDataDistribution(List<DropDataDistributionParametor> parametors)
     {

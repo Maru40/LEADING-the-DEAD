@@ -53,7 +53,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     private KnockBackManager m_knockBackManager;
     private EnemyRotationCtrl m_rotationController;
     private TargetManager m_targetManager;
-    private EnemyVelocityMgr m_velocityManager;
+    private EnemyVelocityManager m_velocityManager;
     private AttackManager_ZombieNormal m_attackManager;
     private Stator_ZombieNormal m_stator;
     private ThrongManager m_throngManager;
@@ -74,7 +74,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         m_knockBackManager = GetComponent<KnockBackManager>();
         m_rotationController = GetComponent<EnemyRotationCtrl>();
         m_targetManager = GetComponent<TargetManager>();
-        m_velocityManager = GetComponent<EnemyVelocityMgr>();
+        m_velocityManager = GetComponent<EnemyVelocityManager>();
         m_attackManager = GetComponent<AttackManager_ZombieNormal>();
         m_stator = GetComponent<Stator_ZombieNormal>();
         m_throngManager = GetComponent<ThrongManager>();

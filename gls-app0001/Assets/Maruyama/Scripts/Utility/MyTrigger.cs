@@ -4,7 +4,7 @@ using UnityEngine;
 
 public struct MyTrigger
 {
-    bool m_isTrigger;
+    private bool m_isTrigger;
 
     /// <summary>
     /// Triggerをtrueにする。

@@ -7,19 +7,19 @@ public class NavMeshCtrl : MonoBehaviour
 {
     //オブジェクトの参照
     [SerializeField]
-    GameObject m_target;
+    private GameObject m_target;
 
     //コンポーネントの参照
-    NavMeshAgent m_navMesh;
+    private NavMeshAgent m_navMesh;
 
     //現在木曜にしているポジション
-    Vector3 m_targetPosition;
+    private Vector3 m_targetPosition;
 
     //目的地についたと判断される距離
     [SerializeField]
-    float m_nearRange = 3.0f;
+    private float m_nearRange = 3.0f;
 
-    void Start()
+    private void Start()
     {
         if (m_target == null){
             m_target = GameObject.Find("Player");
@@ -31,7 +31,7 @@ public class NavMeshCtrl : MonoBehaviour
     }
 
 
-    void Update()
+    private void Update()
     {
         if (IsRouteEnd()) {
             SetNavMeshTargetPosition();
@@ -39,7 +39,7 @@ public class NavMeshCtrl : MonoBehaviour
     }
 
     //目的地にたどり着いたかどうか
-    bool IsRouteEnd()
+    private bool IsRouteEnd()
     { 
         var toVec = m_targetPosition - transform.localPosition;
         float nowRange = toVec.magnitude;
@@ -48,7 +48,7 @@ public class NavMeshCtrl : MonoBehaviour
     }
 
     //NavMeshを利用して目的地までのルートを計算
-    void SetNavMeshTargetPosition()
+    private void SetNavMeshTargetPosition()
     {
         //NavMeshの準備ができているなら。
         if(m_navMesh.pathStatus != NavMeshPathStatus.PathPartial)

@@ -32,9 +32,9 @@ public class Task_Wait : TaskNodeBase
         }
     }
 
-    GameTimer m_timer = new GameTimer();
+    private GameTimer m_timer = new GameTimer();
 
-    Parametor m_param = new Parametor();
+    private Parametor m_param = new Parametor();
 
     public Task_Wait(float time) 
     {
@@ -54,8 +54,6 @@ public class Task_Wait : TaskNodeBase
 
     public override bool OnUpdate()
     {
-        //Debug.Log("△待機");
-
         m_timer.UpdateTimer();
         m_param.update?.Invoke();
 

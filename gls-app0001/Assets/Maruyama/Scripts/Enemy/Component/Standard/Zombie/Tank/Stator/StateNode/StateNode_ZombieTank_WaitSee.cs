@@ -9,18 +9,18 @@ using MaruUtility;
 /// </summary>
 public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
 {
-    struct TaskParametor
+    private struct TaskParametor
     {
         public Task_HorizontalMove.Parametor horizontalMoveParam;   
     }
 
-    enum TaskEnum
+    private enum TaskEnum
     {
         HorizontalMove,
         CircleMove,
     }
 
-    TaskParametor m_taskParam = new TaskParametor()
+    private TaskParametor m_taskParam = new TaskParametor()
     {
         horizontalMoveParam = new Task_HorizontalMove.Parametor()
         {
@@ -28,9 +28,9 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
             speed = 1.0f,
         },
     };
-    TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
+    private TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
 
-    AttackNodeManagerBase m_attackManager;
+    private AttackNodeManagerBase m_attackManager;
     
     public StateNode_ZombieTank_WaitSee(EnemyBase owner)
         :base(owner)
@@ -68,7 +68,7 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
         }
     }
 
-    void DifineTask()
+    private void DifineTask()
     {
         m_taskList.DefineTask(TaskEnum.HorizontalMove,
             new Task_HorizontalMove(
@@ -77,7 +77,7 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
             ));
     }
 
-    void SelectTask()
+    private void SelectTask()
     {
         m_taskList.AddTask(TaskEnum.HorizontalMove);
     }
@@ -86,7 +86,7 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
 
     //HorizontalMove--------------------------
 
-    class Task_HorizontalMove : TaskNodeBase<EnemyBase>
+    private class Task_HorizontalMove : TaskNodeBase<EnemyBase>
     {
         public struct Parametor
         {
@@ -104,13 +104,13 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
             }
         }
 
-        Parametor m_param = new Parametor();
-        GameTimer m_timer = new GameTimer();
+        private Parametor m_param = new Parametor();
+        private GameTimer m_timer = new GameTimer();
 
         //コンポーネント系----------------------------------------------
 
-        EnemyVelocityMgr m_velocityManager;
-        TargetManager m_targetManager;
+        private EnemyVelocityManager m_velocityManager;
+        private TargetManager m_targetManager;
 
         public Task_HorizontalMove(EnemyBase owner)
             :this(owner, new Parametor())
@@ -121,7 +121,7 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
         {
             m_param = param;
 
-            m_velocityManager = owner.GetComponent<EnemyVelocityMgr>();
+            m_velocityManager = owner.GetComponent<EnemyVelocityManager>();
             m_targetManager = owner.GetComponent<TargetManager>();
         }
 
@@ -152,7 +152,7 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
             m_velocityManager.ResetAll();
         }
 
-        void MoveUpdate()
+        private void MoveUpdate()
         {
             var direct = Quaternion.AngleAxis(m_param.rotationDegree, Vector3.up) * CalcuToTargetVec();
             Vector3 moveVec = direct.normalized * m_param.speed;
@@ -160,7 +160,7 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
             m_velocityManager.velocity = moveVec;
         }
 
-        void RotationUpdate()
+        private void RotationUpdate()
         {
             var target = m_targetManager.GetNowTarget();
             if (target)
@@ -175,7 +175,7 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
         /// 移動方向を返す(右か左)
         /// </summary>
         /// <returns></returns>
-        float CalcuRotationDegree()
+        private float CalcuRotationDegree()
         {
             float[] directs = { +90.0f, -90.0f };
             int index = Random.Range(0, directs.Length);
@@ -186,7 +186,7 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
         /// ターゲット方向のベクトルを返す
         /// </summary>
         /// <returns></returns>
-        Vector3 CalcuToTargetVec()
+        private Vector3 CalcuToTargetVec()
         {
             var target = m_targetManager.GetNowTarget();
             if (target == null) {
@@ -202,7 +202,7 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
     //サークルMove----------------------------
 
     //使ってない
-    class Task_CircleMove : TaskNodeBase<EnemyBase>
+    private class Task_CircleMove : TaskNodeBase<EnemyBase>
     {
         public struct Parametor
         {
@@ -224,13 +224,13 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
             }
         }
 
-        Parametor m_param = new Parametor();
-        GameTimer m_timer = new GameTimer();
+        private Parametor m_param = new Parametor();
+        private GameTimer m_timer = new GameTimer();
 
         //コンポ―ネント系-------------------------------------------------------------------
 
-        EnemyVelocityMgr m_velcoityManager;
-        TargetManager m_targetManager;
+        private EnemyVelocityManager m_velcoityManager;
+        private TargetManager m_targetManager;
 
         public Task_CircleMove(EnemyBase owner)
             :this(owner, new Parametor())
@@ -241,7 +241,7 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
         {
             m_param = param;
 
-            m_velcoityManager = owner.GetComponent<EnemyVelocityMgr>();
+            m_velcoityManager = owner.GetComponent<EnemyVelocityManager>();
             m_targetManager = owner.GetComponent<TargetManager>();
         }
 
@@ -255,8 +255,6 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
 
         public override bool OnUpdate()
         {
-            Debug.Log("Task_WaitSee");
-
             m_timer.UpdateTimer();   //タイマーカウント
 
             MoveUpdate();  //移動
@@ -270,21 +268,21 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
             m_param.elapsedMove = 0.0f;
         }
 
-        void TimerReset()
+        private void TimerReset()
         {
             var timeRange = m_param.timeRange;
             float time = Random.Range(timeRange.min, timeRange.max);
             m_timer.ResetTimer(time);
         }
 
-        void MoveUpdate()
+        private void MoveUpdate()
         {
             var moveVec = CalcuMoveVec();
 
             m_velcoityManager.velocity = moveVec.normalized * m_param.speed;
         }
 
-        void RotationUpdate()
+        private void RotationUpdate()
         {
             var target = m_targetManager.GetNowTarget();
             if (target)
@@ -295,7 +293,7 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
             }
         }
 
-        Vector3 CalcuMoveVec()
+        private Vector3 CalcuMoveVec()
         {
             m_param.elapsedMove += Time.deltaTime * m_param.direct;
             var elapsed = m_param.elapsedMove;
@@ -309,7 +307,7 @@ public class StateNode_ZombieTank_WaitSee : EnemyStateNodeBase<EnemyBase>
         /// 移動方向を返す(右か左)
         /// </summary>
         /// <returns></returns>
-        int CalcuRandomMoveDirectInt()
+        private int CalcuRandomMoveDirectInt()
         {
             const int RIGHT = +1;
             const int LEFT  = -1;

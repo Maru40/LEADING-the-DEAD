@@ -7,10 +7,10 @@ using UniRx.Triggers;
 public class SignalGunCtrl : MonoBehaviour
 {
     [SerializeField]
-    Player.PlayerAnimatorManager m_animatorManager;
+    private Player.PlayerAnimatorManager m_animatorManager;
 
     [SerializeField]
-    Player.PlayerStatusManager m_statusManager;
+    private Player.PlayerStatusManager m_statusManager;
 
     [SerializeField]
     private Flaregun m_flareGun;

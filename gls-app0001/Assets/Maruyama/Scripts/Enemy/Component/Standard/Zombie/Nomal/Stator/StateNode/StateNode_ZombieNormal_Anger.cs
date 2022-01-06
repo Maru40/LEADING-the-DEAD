@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class StateNode_ZombieNormal_Anger : EnState_Anger
 {
-    AngerManager m_angerManager;
-    AnimatorCtrl_ZombieNormal m_animatorCtrl;
+    private AngerManager m_angerManager;
+    private AnimatorCtrl_ZombieNormal m_animatorCtrl;
 
     public StateNode_ZombieNormal_Anger(EnemyBase owner)
         : base(owner)

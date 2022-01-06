@@ -8,7 +8,7 @@ using System;
 public class MyAnimationBehavior : StateMachineBehaviour
 {
     [Serializable]
-    class AnimatorTimerParametor
+    private class AnimatorTimerParametor
     {
         public float time;
         public UnityEvent eventFunc;
@@ -23,14 +23,14 @@ public class MyAnimationBehavior : StateMachineBehaviour
     }
 
     [SerializeField]
-    List<AnimatorTimerParametor> m_timerParam = new List<AnimatorTimerParametor>();
-    float m_beforeTime = 0.0f;
+    private List<AnimatorTimerParametor> m_timerParam = new List<AnimatorTimerParametor>();
+    private float m_beforeTime = 0.0f;
 
     [SerializeField]
-    UnityEvent m_enterEvent = null;
+    private UnityEvent m_enterEvent = null;
 
     [SerializeField]
-    UnityEvent m_exitEvent = null;
+    private UnityEvent m_exitEvent = null;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -59,7 +59,7 @@ public class MyAnimationBehavior : StateMachineBehaviour
     /// アニメーションのイベント再生
     /// </summary>
     /// <param name="time">現在の再生時間</param>
-    void PlayAnimationEvent(float time)
+    private void PlayAnimationEvent(float time)
     {
         foreach(var param in m_timerParam)
         {
@@ -77,7 +77,7 @@ public class MyAnimationBehavior : StateMachineBehaviour
     /// <summary>
     /// アニメーションのループが入った時
     /// </summary>
-    void ReturnAnimation()
+    private void ReturnAnimation()
     {
         foreach(var param in m_timerParam)
         {

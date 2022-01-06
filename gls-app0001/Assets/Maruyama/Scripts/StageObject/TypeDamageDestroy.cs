@@ -6,7 +6,6 @@ using AttributeObject;
 
 public class TypeDamageDestroy : MonoBehaviour
 {
-
     [SerializeField]
     private List<DamageType> m_takeDamageTypes = new List<DamageType>();
     public List<DamageType> GetTakeDamageTypes() => new List<DamageType>(m_takeDamageTypes);

@@ -5,17 +5,17 @@ using UnityEngine;
 public class TimeLoopParticleManager : MonoBehaviour
 {
     [SerializeField]
-    float m_intervalTime = 1.0f;
+    private float m_intervalTime = 1.0f;
 
     [SerializeField]
-    ParticleManager.ParticleID m_particleID;
+    private ParticleManager.ParticleID m_particleID;
     [SerializeField]
-    Vector3 m_paticleSize = Vector3.one;
+    private Vector3 m_paticleSize = Vector3.one;
 
-    bool m_isActive = false;
-    GameTimer m_timer = new GameTimer();
+    private bool m_isActive = false;
+    private GameTimer m_timer = new GameTimer();
 
-    void Update()
+    private void Update()
     {
         if (m_isActive == false) {
             return;

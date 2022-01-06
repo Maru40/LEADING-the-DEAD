@@ -19,7 +19,7 @@ public class Board : MonoBehaviour
     }
 
     [System.Serializable]
-    struct Parametor
+    private struct Parametor
     {
         public float width;
         public float height;
@@ -31,7 +31,7 @@ public class Board : MonoBehaviour
     }
 
     [SerializeField]
-    Parametor m_param = new Parametor();
+    private Parametor m_param = new Parametor();
 
     [SerializeField]
     protected Material m_material;

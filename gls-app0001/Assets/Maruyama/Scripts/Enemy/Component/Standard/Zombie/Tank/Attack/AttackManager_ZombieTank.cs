@@ -8,7 +8,7 @@ using MaruUtility;
 public class AttackManager_ZombieTank : AttackNodeManagerBase
 {
     [Serializable]
-    struct Parametor {
+    private struct Parametor {
         public float nearRange;
 
         public float normalSpeed;
@@ -34,23 +34,23 @@ public class AttackManager_ZombieTank : AttackNodeManagerBase
     }
 
     [SerializeField]
-    Parametor m_param = new Parametor(2.0f, 10.0f, 1000.0f);
+    private Parametor m_param = new Parametor(2.0f, 10.0f, 1000.0f);
 
-    TargetManager m_targetMgr;
-    Stator_ZombieTank m_stator;
-    AnimatorManager_ZombieTank m_animatorManager;
-    EnemyVelocityMgr m_velocityManager;
-    EyeSearchRange m_eye;
+    private TargetManager m_targetMgr;
+    private Stator_ZombieTank m_stator;
+    private AnimatorManager_ZombieTank m_animatorManager;
+    private EnemyVelocityManager m_velocityManager;
+    private EyeSearchRange m_eye;
 
-    AttackType m_type = AttackType.None;
+    private AttackType m_type = AttackType.None;
 
-    void Awake()
+    private void Awake()
     {
         m_targetMgr = GetComponent<TargetManager>();
         m_stator = GetComponent<Stator_ZombieTank>();
         m_animatorManager = GetComponent<AnimatorManager_ZombieTank>();
         m_eye = GetComponent<EyeSearchRange>();
-        m_velocityManager = GetComponent<EnemyVelocityMgr>();
+        m_velocityManager = GetComponent<EnemyVelocityManager>();
     }
 
     public override bool IsAttackStartRange()
@@ -90,18 +90,15 @@ public class AttackManager_ZombieTank : AttackNodeManagerBase
         }
     }
 
-    void NearAttackStart()
+    private void NearAttackStart()
     {
         m_animatorManager.CrossFadeNormalAttack();
         m_type = AttackType.Near;
     }
 
-    void TackleAttackStart()
+    private void TackleAttackStart()
     {
         m_animatorManager.CrossFadeShout();
-        //m_animatorManager.CrossFadeDrumming();
-        //m_animatorManager.CrossFadeTackle();
-        //m_animatorManager.CrossFadeTackleCharge();
         m_velocityManager.ResetAll();
         m_type = AttackType.Tackle;
     }

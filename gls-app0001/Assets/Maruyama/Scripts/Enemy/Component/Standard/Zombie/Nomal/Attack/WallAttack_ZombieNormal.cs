@@ -5,30 +5,30 @@ using UnityEngine;
 public class WallAttack_ZombieNormal : AttackNodeBase
 {
     [System.Serializable]
-    struct Parametor 
+    private struct Parametor 
     {
         public Task_WallAttack.Parametor wallAttackParam;
         public Task_Wait.Parametor waitParam;
     }
 
-    enum TaskEnum { 
+    private enum TaskEnum { 
         Attack,
         Wait
     }
 
-    TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
+    private TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
 
     [SerializeField]
-    Parametor m_param = new Parametor();
+    private Parametor m_param = new Parametor();
 
-    AnimatorManager_ZombieNormal m_animatorManager;
-    TargetManager m_targetManager;
-    EyeSearchRange m_eye;
-    AttackNodeManagerBase m_attackManager;
-    Stator_ZombieNormal m_stator;
-    EnemyVelocityMgr m_velocityManager;
+    private AnimatorManager_ZombieNormal m_animatorManager;
+    private TargetManager m_targetManager;
+    private EyeSearchRange m_eye;
+    private AttackNodeManagerBase m_attackManager;
+    private Stator_ZombieNormal m_stator;
+    private EnemyVelocityManager m_velocityManager;
 
-    bool m_isPutAttack = false;
+    private bool m_isPutAttack = false; //壁などに噛みつき攻撃をするかどうか
 
     private void Awake()
     {
@@ -37,7 +37,7 @@ public class WallAttack_ZombieNormal : AttackNodeBase
         m_eye = GetComponent<EyeSearchRange>();
         m_attackManager = GetComponent<AttackNodeManagerBase>();
         m_stator = GetComponent<Stator_ZombieNormal>();
-        m_velocityManager = GetComponent<EnemyVelocityMgr>();
+        m_velocityManager = GetComponent<EnemyVelocityManager>();
     }
 
     private void Start()
@@ -50,13 +50,13 @@ public class WallAttack_ZombieNormal : AttackNodeBase
     {
         m_taskList.UpdateTask();
 
-        if (m_isPutAttack)
+        if (m_isPutAttack) //噛みつき攻撃をするかどうか
         {
-            PutAttackCheck();
+            PutAttack();
         }
     }
 
-    void DefineTask()
+    private void DefineTask()
     {
         var enemy = GetComponent<EnemyBase>();
 
@@ -67,7 +67,7 @@ public class WallAttack_ZombieNormal : AttackNodeBase
         m_taskList.DefineTask(TaskEnum.Wait, new Task_Wait(m_param.waitParam));
     }
 
-    void SelectTask()
+    private void SelectTask()
     {
         TaskEnum[] types = {
             TaskEnum.Attack,
@@ -127,7 +127,10 @@ public class WallAttack_ZombieNormal : AttackNodeBase
         }
     }
 
-    private void PutAttackCheck()
+    /// <summary>
+    /// 噛みつき攻撃
+    /// </summary>
+    private void PutAttack()
     {
         if (m_stator.GetNowStateType() != ZombieNormalState.Attack)
         {

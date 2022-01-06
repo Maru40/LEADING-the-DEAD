@@ -6,7 +6,7 @@ using DyingTypeEnum = StatusManager_ZombieNormal.DyingTypeEnum;
 
 public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
 {
-    enum TaskEnum
+    private enum TaskEnum
     {
         Fire,
         RenderFadeOut,
@@ -33,21 +33,21 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
         }
     }
 
-    Parametor m_param = new Parametor()
+    private Parametor m_param = new Parametor()
     {
         fireTime = 0.5f,
         deathAnimationTime = 1.5f,
-    };  
+    };
 
-    Dictionary<TaskEnum, GameTimer> m_timerDictionary = new Dictionary<TaskEnum, GameTimer>();
+    private Dictionary<TaskEnum, GameTimer> m_timerDictionary = new Dictionary<TaskEnum, GameTimer>();
 
-    StatusManager_ZombieNormal m_statusManager;
-    Stator_ZombieNormal m_stator;
-    AnimatorManager_ZombieNormal m_animatorManager;
-    EnemyVelocityMgr m_velocityManager;
-    TargetManager m_targetManager = null;
+    private StatusManager_ZombieNormal m_statusManager;
+    private Stator_ZombieNormal m_stator;
+    private AnimatorManager_ZombieNormal m_animatorManager;
+    private EnemyVelocityManager m_velocityManager;
+    private TargetManager m_targetManager = null;
 
-    TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
+    private TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
 
     public StateNode_ZombieNormal_Dying(EnemyBase owner, Parametor param = null)
         :base(owner)
@@ -55,7 +55,7 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
         m_statusManager = owner.GetComponent<StatusManager_ZombieNormal>();
         m_stator = owner.GetComponent<Stator_ZombieNormal>();
         m_animatorManager = owner.GetComponent<AnimatorManager_ZombieNormal>();
-        m_velocityManager = owner.GetComponent<EnemyVelocityMgr>();
+        m_velocityManager = owner.GetComponent<EnemyVelocityManager>();
         m_targetManager = owner.GetComponent<TargetManager>();
 
         //タイマーの初期化
@@ -110,7 +110,7 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
     /// <summary>
     /// タスク定義
     /// </summary>
-    void DefineTask()
+    private void DefineTask()
     {
         m_taskList.DefineTask(TaskEnum.Fire, OnTaskFireEnter, OnTaskFireUpdate, OnTaskFireExit);
         m_taskList.DefineTask(TaskEnum.RenderFadeOut, new Task_RenderFadeOut(GetOwner()));
@@ -122,7 +122,7 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
     /// <summary>
     /// タスクの選択
     /// </summary>
-    void SelectTask()
+    private void SelectTask()
     {
         var dyingType = m_statusManager.DyingType;
 
@@ -141,9 +141,9 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
 
     //フェードして消える-----------------------------------------------------------------------------------------
 
-    class Task_RenderFadeOut : TaskNodeBase<EnemyBase>
+    private class Task_RenderFadeOut : TaskNodeBase<EnemyBase>
     {
-        List<RenderFadeManager> m_fadeManagers = new List<RenderFadeManager>();
+        private List<RenderFadeManager> m_fadeManagers = new List<RenderFadeManager>();
 
         public Task_RenderFadeOut(EnemyBase owner)
             :base(owner)
@@ -163,8 +163,6 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
 
         public override bool OnUpdate()
         {
-            //Debug.Log("■■フェードアップデート");
-
             foreach (var fade in m_fadeManagers)
             {
                 if (fade.IsEnd)
@@ -184,14 +182,14 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
 
     //DeathAnimatinの再生-----------------------------------------------------------------------------------------
 
-    void OnTaskPlayDeathAnimationEnter()
+    private void OnTaskPlayDeathAnimationEnter()
     {
         m_animatorManager.CrossFadeDeathAnimatiron();
 
         m_timerDictionary[TaskEnum.PlayDeathAnimation].ResetTimer(m_param.deathAnimationTime);
     }
 
-    bool OnTaskPlayDeathAnimationUpdate()
+    private bool OnTaskPlayDeathAnimationUpdate()
     {
         var timer = m_timerDictionary[TaskEnum.PlayDeathAnimation];
         timer.UpdateTimer();
@@ -199,21 +197,21 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
         return timer.IsTimeUp;
     }
 
-    void OnTaskPlayDeathAnimationExit()
+    private void OnTaskPlayDeathAnimationExit()
     {
         //m_animatorManager.CrossFadeIdleAnimation();
     }
 
     //ファイアー--------------------------------------------------------------------------------------
 
-    void OnTaskFireEnter()
+    private void OnTaskFireEnter()
     {
         m_timerDictionary[TaskEnum.Fire].ResetTimer(m_param.fireTime);  //Timer初期化
 
         m_velocityManager.StartDeseleration();  //減速開始
     }
 
-    bool OnTaskFireUpdate()
+    private bool OnTaskFireUpdate()
     {
         GameTimer timer;
         bool exist = m_timerDictionary.TryGetValue(TaskEnum.Fire,out timer);
@@ -225,17 +223,17 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
         return timer.IsTimeUp;
     }
 
-    void OnTaskFireExit()
+    private void OnTaskFireExit()
     {
         m_velocityManager.SetIsDeseleration(false);  //減速終了
     }
 
     //Cutting----------------------------------------------------------------
 
-    class Task_CuttilingDeath : TaskNodeBase
+    private class Task_CuttilingDeath : TaskNodeBase
     {
-        float m_time = 0.1f;
-        GameTimer m_timer = new GameTimer();
+        private float m_time = 0.1f;
+        private GameTimer m_timer = new GameTimer();
 
         public Task_CuttilingDeath()
             :this(0.1f)

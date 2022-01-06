@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class StateTableNodeBase<EnemyType> : EnemyStateNodeBase<EnemyType>
     where EnemyType : class
 {
-    bool m_isEnd = false;
+    private bool m_isEnd = false;
 
     public StateTableNodeBase(EnemyType owner)
         : base(owner)

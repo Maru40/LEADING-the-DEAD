@@ -8,10 +8,10 @@ using UnityEngine;
 public class BindPlowlingAreaManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject m_centerObject = null;
+    private GameObject m_centerObject = null;
 
-    FoundObject m_foudObject;
-    SphereCollider m_collider;
+    private FoundObject m_foudObject;
+    private SphereCollider m_collider;
 
     private void Awake()
     {

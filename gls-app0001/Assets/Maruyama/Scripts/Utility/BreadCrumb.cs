@@ -10,19 +10,19 @@ using UnityEngine;
 public class BreadCrumb : MonoBehaviour
 {
     [SerializeField]
-    int m_numBread = 60;  //Breadの最大数
+    private int m_numBread = 60;  //Breadの最大数
 
     [SerializeField]
-    float m_addRange = 1.0f;  //追加する距離
+    private float m_addRange = 1.0f;  //追加する距離
 
-    List<Vector3> m_positions = new List<Vector3>();
+    private List<Vector3> m_positions = new List<Vector3>();
 
-    void Start()
+    private void Start()
     {
         AddPosition();
     }
 
-    void Update()
+    private void Update()
     {
         //前回分より一定距離はなれたら
         if (IsAddRange())
@@ -36,7 +36,7 @@ public class BreadCrumb : MonoBehaviour
         }
     }
 
-    bool IsAddRange()
+    private bool IsAddRange()
     {
         int index = m_positions.Count - 1;
         var beforePosition = m_positions[index];
@@ -46,12 +46,12 @@ public class BreadCrumb : MonoBehaviour
         return toVec.magnitude > m_addRange ? true : false;
     }
 
-    bool IsSizeOver()
+    private bool IsSizeOver()
     {
         return m_positions.Count > m_numBread ? true : false;
     }
 
-    void AddPosition()
+    private void AddPosition()
     {
         m_positions.Add(transform.position);
     }
@@ -59,7 +59,7 @@ public class BreadCrumb : MonoBehaviour
     /// <summary>
     /// 古いポジションの削除
     /// </summary>
-    void RemoveOldPosition()
+    private void RemoveOldPosition()
     {
         m_positions.Remove(m_positions[0]);
     }

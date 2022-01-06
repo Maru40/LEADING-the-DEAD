@@ -28,16 +28,16 @@ public struct SignalBombParametor
 public class SignalBombCtrl : MonoBehaviour
 {
     [SerializeField]
-    GameObject m_explosionBomb = null;  //爆発する場合のparticle。
+    private GameObject m_explosionBomb = null;  //爆発する場合のparticle。
 
     [SerializeField]
-    SignalBombParametor m_param = new SignalBombParametor(2.0f, Vector3.up, 3.0f);
+    private SignalBombParametor m_param = new SignalBombParametor(2.0f, Vector3.up, 3.0f);
 
     //コンポーネント
 
-    WaitTimer m_waitTimer;
-    
-    void Awake()
+    private WaitTimer m_waitTimer;
+
+    private void Awake()
     {
         m_waitTimer = GetComponent<WaitTimer>();
     }
@@ -47,12 +47,12 @@ public class SignalBombCtrl : MonoBehaviour
         m_waitTimer.AddWaitTimer(GetType(), m_param.explosionTime, Explosion);
     }
 
-    void Update()
+    private void Update()
     {
         MoveProcess();
     }
 
-    void MoveProcess()
+    private void MoveProcess()
     {
         var moveVec = m_param.moveVec.normalized * m_param.moveSpeed * Time.deltaTime;
 

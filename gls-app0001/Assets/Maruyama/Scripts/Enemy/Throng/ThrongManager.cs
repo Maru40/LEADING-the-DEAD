@@ -29,7 +29,7 @@ public struct ThrongManagerParametor  //群衆Managerのパラメータ
 public struct ThrongData
 {
     public GameObject gameObject;
-    public EnemyVelocityMgr velocityMgr;
+    public EnemyVelocityManager velocityMgr;
     public TargetManager targetMgr;  //ターゲット管理
     public ThrongManager throngMgr;  //群衆管理
     public RandomPlowlingMove randomPlowlingMove; //ランダム徘徊
@@ -37,7 +37,7 @@ public struct ThrongData
     public ClearManager_Zombie clearManager;
     public EnemyRespawnManager respawn;  //リスポーン
 
-    public ThrongData(EnemyVelocityMgr velocityMgr, TargetManager targetMgr, ThrongManager throngMgr,
+    public ThrongData(EnemyVelocityManager velocityMgr, TargetManager targetMgr, ThrongManager throngMgr,
         RandomPlowlingMove randomPlowlingMove, DropObjecptManager dropManager, ClearManager_Zombie clearManager,
         EnemyRespawnManager respawn)
     {
@@ -59,33 +59,33 @@ public struct ThrongData
 public class ThrongManager : MonoBehaviour
 {
     [SerializeField]
-    ThrongManagerParametor m_param = new ThrongManagerParametor();
+    private ThrongManagerParametor m_param = new ThrongManagerParametor();
 
     /// <summary>
     /// Rayの障害物するLayerの配列
     /// </summary>
     [SerializeField]
-    string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
+    private string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
 
     //List<ThrongData> m_throngDatas = new List<ThrongData>();  //グループのオブジェクト一覧
 
     //コンポーネント系-----------------
 
     [SerializeField]
-    EnemyGenerator m_generator = null;
+    private EnemyGenerator m_generator = null;
 
-    EnemyRotationCtrl m_rotationCtrl;
-    EnemyVelocityMgr m_velocityManager;
+    private EnemyRotationCtrl m_rotationCtrl;
+    private EnemyVelocityManager m_velocityManager;
 
     private void Awake()
     {
         m_rotationCtrl = GetComponent<EnemyRotationCtrl>();
-        m_velocityManager = GetComponent<EnemyVelocityMgr>();
+        m_velocityManager = GetComponent<EnemyVelocityManager>();
     }
 
-    void Start()
+    private void Start()
     {
-        SetSearchGenerator();
+        //SetSearchGenerator();
     }
 
     private void Update()
@@ -103,7 +103,7 @@ public class ThrongManager : MonoBehaviour
     /// <param name="moveDirect">そのオブジェクトが向かいたい方向</param>
     /// <param name="maxSpeed">最大スピード</param>
     /// <param name="truningPower">旋回パワー</param>
-    void AvoidNearThrong(EnemyVelocityMgr velocityMgr)
+    private void AvoidNearThrong(EnemyVelocityManager velocityMgr)
     {
         var velocity = velocityMgr.velocity;
         velocity += m_velocityManager.GetForce() * Time.deltaTime;
@@ -122,7 +122,7 @@ public class ThrongManager : MonoBehaviour
     /// 集団移動をする処理(まだ未完成)
     /// </summary>
     /// <param name="selfRigid">自分自身のリジッドボディ</param>
-    public void ThrongMove(EnemyVelocityMgr velcoityMgr, Vector3 moveDirect, float maxSpeed)
+    public void ThrongMove(EnemyVelocityManager velcoityMgr, Vector3 moveDirect, float maxSpeed)
     {
         var throngVec = CalcuThrongVector();
         if (throngVec == Vector3.zero) {
@@ -160,7 +160,7 @@ public class ThrongManager : MonoBehaviour
     /// </summary>
     /// <param name="data">集団データ</param>
     /// <returns>群衆の中心データ</returns>
-    Vector3 CalcuCenterVector(ThrongData data)
+    private Vector3 CalcuCenterVector(ThrongData data)
     {
         return data.gameObject.transform.position;
     }
@@ -170,7 +170,7 @@ public class ThrongManager : MonoBehaviour
     /// </summary>
     /// <param name="data">集団データ</param>
     /// <returns>dataの進行方向</returns>
-    Vector3 CalcuDirectVector(ThrongData data)
+    private Vector3 CalcuDirectVector(ThrongData data)
     {
         return data.velocityMgr.velocity;
     }
@@ -180,7 +180,7 @@ public class ThrongManager : MonoBehaviour
     /// </summary>
     /// <param name="data">集団データ</param>
     /// <returns>オブジェクト同士の回避ベクトル</returns>
-    Vector3 CalcuAvoidVector(ThrongData data)
+    private Vector3 CalcuAvoidVector(ThrongData data)
     {
         if(data.gameObject == gameObject) {  //自分自身なら処理をしない
             return Vector3.zero;
@@ -190,8 +190,6 @@ public class ThrongManager : MonoBehaviour
         var toSelfVec = transform.position - data.gameObject.transform.position;
 
         if(IsRange(data, m_param.nearObjectRange)) {  //隣人なら
-            //var desiredVec = toSelfVec.normalized * m_param.maxAvoidPower;
-            //var avoidVec = m_velocityManager.velocity - desiredVec;
             var power = m_param.maxAvoidPower - toSelfVec.magnitude;
             var avoidVec = toSelfVec.normalized * power;
 
@@ -240,10 +238,7 @@ public class ThrongManager : MonoBehaviour
 
         centerPosition /= throngSize;
         directVec /= throngSize;
-        //directVec = (directVec - transform.position) / 8;
 
-        //var reVec = (centerPosition + avoidVec) - transform.position;
-        //var reVec = (centerPosition + avoidVec + directVec) - transform.position;
         var reVec = (centerPosition + directVec + avoidVec) - transform.position;
 
         return reVec;
@@ -278,7 +273,7 @@ public class ThrongManager : MonoBehaviour
     /// 集団の平均スピードを計算して返す。
     /// </summary>
     /// <returns>平均スピード</returns>
-    float CalcuAverageSpeed()
+    private float CalcuAverageSpeed()
     {
         var throngDatas = m_generator.GetThrongDatas();
         float sumSpeed = 0.0f;
@@ -307,7 +302,7 @@ public class ThrongManager : MonoBehaviour
     /// <param name="data">対象のデータ</param>
     /// <param name="range">距離</param>
     /// <returns>短かったらtrue</returns>
-    bool IsRange(ThrongData data ,float range)
+    private bool IsRange(ThrongData data ,float range)
     {
         var toVec = data.gameObject.transform.position - transform.position;
 
@@ -319,7 +314,7 @@ public class ThrongManager : MonoBehaviour
     /// </summary>
     /// <param name="data">相手のデータ</param>
     /// <returns>ヒットしたらtrue</returns>
-    bool IsRayHit(ThrongData data)
+    private bool IsRayHit(ThrongData data)
     {
         int obstacleLayer = LayerMask.GetMask(m_rayObstacleLayerStrings);
         var toVec = data.gameObject.transform.position - transform.position;
@@ -371,7 +366,7 @@ public class ThrongManager : MonoBehaviour
 
     //null回避--------------------------
 
-    void SetSearchGenerator()
+    private void SetSearchGenerator()
     {
         return;
 

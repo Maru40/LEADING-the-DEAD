@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
 {
-    FoundObject m_target = null;
+    private FoundObject m_target = null;
 
-    EyeSearchRange m_eyeRange;
-    TargetManager m_targetMgr = null;
+    private EyeSearchRange m_eyeRange;
+    private TargetManager m_targetMgr = null;
 
     public EnState_RandomPlowling(EnemyBase owner)
         :base(owner)
@@ -35,11 +35,6 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
 
         //ターゲットの取得
         SearchTarget();
-        //m_target = owner.GetComponent<TargetManager>().GetNowTarget();
-        //if (m_target == null)
-        //{
-        //    SearchTarget();
-        //}
 
         //集団範囲の設定
         var throngMgr = owner.GetComponent<ThrongManager>();
@@ -48,8 +43,6 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
             float range = randomPlowling.GetInThrongRange();
             throngMgr.SetInThrongRange(range);
         }
-
-        
     }
 
     public override void OnUpdate()

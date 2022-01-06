@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class NodeBase<NodeType>
     where NodeType : class
 {
-    NodeType m_owner;
+    private NodeType m_owner;
 
     public NodeBase(NodeType owner)
     {

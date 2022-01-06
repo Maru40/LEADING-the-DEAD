@@ -74,13 +74,13 @@ public class CreateSetRandomParametor_ZombieNormal
 public class EnemyGenerator_ZombieNormal : EnemyGenerator
 {
     [Header("生成時にセットするパラメータ"),SerializeField]
-    CreateSetParametor_ZombieNormal m_createSetParam = new CreateSetParametor_ZombieNormal();
+    private CreateSetParametor_ZombieNormal m_createSetParam = new CreateSetParametor_ZombieNormal();
 
     [Header("リスポーン時にバフを掛けるパラメータ"), SerializeField]
-    CreateSetParametor_ZombieNormal m_respawnStatusUpParam= new CreateSetParametor_ZombieNormal(0.0f);
+    private CreateSetParametor_ZombieNormal m_respawnStatusUpParam = new CreateSetParametor_ZombieNormal(0.0f);
 
     [Header("ランダムに設定したいパラメータの設定"), SerializeField]
-    CreateSetRandomParametor_ZombieNormal m_randomSetParam = new CreateSetRandomParametor_ZombieNormal();
+    private CreateSetRandomParametor_ZombieNormal m_randomSetParam = new CreateSetRandomParametor_ZombieNormal();
 
     protected override void Start()
     {
@@ -96,7 +96,7 @@ public class EnemyGenerator_ZombieNormal : EnemyGenerator
         CreateSetParametor(obj);  //パラメータの生成時に設定
     }
 
-    void CreateSetParametor(GameObject obj)
+    private void CreateSetParametor(GameObject obj)
     {
         var respawn = obj.GetComponent<EnemyRespawnManager>();
         if (respawn)
@@ -184,7 +184,7 @@ public class EnemyGenerator_ZombieNormal : EnemyGenerator
         }
     }
 
-    void CreateSetRandomParametor()
+    private void CreateSetRandomParametor()
     {
         m_createSetParam.chaseParametor.Random(m_randomSetParam.cahseParametor);
         m_createSetParam.randomPlowlingParametor.Random(m_randomSetParam.randomPlowlingParametor);
