@@ -5,10 +5,18 @@ using UnityEngine;
 public class WallAttack_ZombieNormal : AttackNodeBase
 {
     [System.Serializable]
-    private struct Parametor 
+    public struct Parametor 
     {
+        [Header("壁攻撃パラメータ")]
         public Task_WallAttack.Parametor wallAttackParam;
+        [Header("待機パラメータ")]
         public Task_Wait.Parametor waitParam;
+
+        public Parametor(Task_WallAttack.Parametor wallAttackParam, Task_Wait.Parametor waitParam)
+        {
+            this.wallAttackParam = wallAttackParam;
+            this.waitParam = waitParam;
+        }
     }
 
     private enum TaskEnum { 
@@ -138,5 +146,13 @@ public class WallAttack_ZombieNormal : AttackNodeBase
             m_velocityManager.ResetAll();
             m_isPutAttack = false;
         }
+    }
+
+    //アクセッサ---------------------------------------------------------------------------------------
+
+    public Parametor parametor
+    {
+        get => m_param;
+        set => m_param = value;
     }
 }
