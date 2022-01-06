@@ -8,15 +8,15 @@ using UniRx;
 public class SignalGunPresenter : MonoBehaviour
 {
     [SerializeField]
-    SignalGunCtrl m_signalGunCtrl = null;
+    private SignalGunCtrl m_signalGunCtrl = null;
 
     [SerializeField]
-    UseItemUI m_useItemUI = null;
+    private UseItemUI m_useItemUI = null;
 
     [SerializeField]
-    Image m_additiveImage = null;
+    private Image m_additiveImage = null;
 
-    void Start()
+    private void Start()
     {
         NullCheck();
 
@@ -40,7 +40,7 @@ public class SignalGunPresenter : MonoBehaviour
             .AddTo(this);
     }
 
-    void NullCheck()
+    private void NullCheck()
     {
         if (m_signalGunCtrl == null)
         {

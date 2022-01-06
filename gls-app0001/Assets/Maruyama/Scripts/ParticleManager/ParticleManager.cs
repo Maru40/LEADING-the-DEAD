@@ -16,15 +16,19 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
     }
 
     [SerializeField]
-    Ex_Dictionary<ParticleID, GameObject> m_particleDictionary = new Ex_Dictionary<ParticleID, GameObject>();
+    private Ex_Dictionary<ParticleID, GameObject> m_particleDictionary = new Ex_Dictionary<ParticleID, GameObject>();
 
-    void Start()
+    private void Start()
     {
         m_particleDictionary.InsertInspectorData();
-
-        //Debug.Log(m_particleDictionary.Count);
     }
 
+    /// <summary>
+    /// パーティクルの生成
+    /// </summary>
+    /// <param name="id">パーティクルID</param>
+    /// <param name="position">生成ポジション</param>
+    /// <returns>生成したパーティクル</returns>
     public GameObject Play(ParticleID id, Vector3 position)
     {
         if(!m_particleDictionary.ContainsKey(id)) {  //particleが存在しないなら
@@ -44,6 +48,13 @@ public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
         return particle;
     }
 
+    /// <summary>
+    /// パーティクルの生成
+    /// </summary>
+    /// <param name="id">パーティクルのID</param>
+    /// <param name="position">生成ポジション</param>
+    /// <param name="scale">生成スケール</param>
+    /// <returns></returns>
     public GameObject Play(ParticleID id, Vector3 position, Vector3 scale)
     {
         if (!m_particleDictionary.ContainsKey(id))

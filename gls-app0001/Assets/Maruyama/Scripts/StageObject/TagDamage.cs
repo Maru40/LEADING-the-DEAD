@@ -5,10 +5,10 @@ using UnityEngine;
 public class TagDamage : MonoBehaviour
 {
     [SerializeField]
-    List<string> m_tags = new List<string>();
+    private List<string> m_tags = new List<string>();
 
     [SerializeField]
-    GameObject m_particle = null;
+    private GameObject m_particle = null;
 
     public void Damaged(AttributeObject.DamageData data)
     {
