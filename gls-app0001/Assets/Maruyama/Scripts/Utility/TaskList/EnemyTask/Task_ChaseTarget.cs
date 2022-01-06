@@ -17,12 +17,12 @@ public class Task_ChaseTarget : TaskNodeBase<EnemyBase>
         public System.Action enterAnimation;
     }
 
-    Parametor m_param = new Parametor();
+    private Parametor m_param = new Parametor();
 
-    TargetManager m_targetManager;
-    EnemyVelocityManager m_velocityManager;
-    EnemyRotationCtrl m_rotationController;
-    EyeSearchRange m_eye;
+    private TargetManager m_targetManager;
+    private EnemyVelocityManager m_velocityManager;
+    private EnemyRotationCtrl m_rotationController;
+    private EyeSearchRange m_eye;
 
     public Task_ChaseTarget(EnemyBase owner, Parametor param)
         :base(owner)
@@ -59,7 +59,7 @@ public class Task_ChaseTarget : TaskNodeBase<EnemyBase>
 
     }
 
-    void Move()
+    private void Move()
     {
         var owner = GetOwner();
 
@@ -67,11 +67,6 @@ public class Task_ChaseTarget : TaskNodeBase<EnemyBase>
         var toVec = (Vector3)m_targetManager.GetToNowTargetVector();
         //相手と自分のフォワードの差(dot)
         var relativeHeading = Vector3.Dot(owner.transform.forward, target.transform.forward);
-
-        //予測シークの条件を満たせば、予測シーク。そうでなければ通常追従
-        //var force = CalcuVelocity.CalcuConditionPursuitForce(m_velocityManager.velocity, toVec, m_param.maxSpeed,
-        //    owner.gameObject, m_velocityManager.GetComponent<Rigidbody>(),
-        //    relativeHeading, m_param.subPursuitTargetForward, m_param.turningPower);
 
         //前方にいて、かつ、自分と相手のフォワードの差が開いていなかったら、通常Seek
         //Dotは差が開いている程、値が小さくなる。
@@ -91,7 +86,7 @@ public class Task_ChaseTarget : TaskNodeBase<EnemyBase>
         m_velocityManager.AddForce(force);
     }
 
-    void Rotation()
+    private void Rotation()
     {
         if (!m_targetManager.HasTarget()) { //ターゲットがnullなら
             return;
@@ -101,7 +96,7 @@ public class Task_ChaseTarget : TaskNodeBase<EnemyBase>
         m_rotationController.SetDirect(direct.normalized);
     }
 
-    bool IsEnd
+    private bool IsEnd
     {
         get
         {
@@ -120,7 +115,7 @@ public class Task_ChaseTarget : TaskNodeBase<EnemyBase>
     /// </summary>
     /// <param name="toTargetVec">ターゲットの方向</param>
     /// <returns>正面ならtrue</returns>
-    bool IsFront(Vector3 toTargetVec)
+    private bool IsFront(Vector3 toTargetVec)
     {
         return Vector3.Dot(toTargetVec, GetOwner().transform.forward) > 0 ? true : false;
     }
@@ -130,20 +125,23 @@ public class Task_ChaseTarget : TaskNodeBase<EnemyBase>
     /// </summary>
     /// <param name="relativeHeading">自分と相手のフォワードのdot</param>
     /// <returns>差が開いていなかったらtrue</returns>
-    bool IsMinSubForward(float relativeHeading, float sub)
+    private bool IsMinSubForward(float relativeHeading, float sub)
     {
         return Mathf.Abs(relativeHeading) > sub ? true : false;
     }
 
-    bool IsNearRange()
+    private bool IsNearRange()
     {
         var toTargetVec = (Vector3)m_targetManager.GetToNowTargetVector();
         //ターゲットが近くにいたら。
         return toTargetVec.magnitude < m_param.nearRange ? true : false;
     }
 
-    //視界内かどうか
-    bool IsEyeRad()
+    /// <summary>
+    /// 視界内かどうか
+    /// </summary>
+    /// <returns></returns>
+    private bool IsEyeRad()
     {
         if (m_eye.IsInEyeRange(m_targetManager.GetNowTarget().gameObject))
         {

@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public abstract class UtilityEnemyBase
 {
-    GameObject m_owner = null;
+    private GameObject m_owner = null;
 
     public UtilityEnemyBase(GameObject owner)
     {

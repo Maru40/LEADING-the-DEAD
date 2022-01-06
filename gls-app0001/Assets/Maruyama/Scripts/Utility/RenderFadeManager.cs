@@ -15,7 +15,7 @@ public class RenderFadeManager : MonoBehaviour
         Transparent,
     }
 
-    struct InitParametor
+    private struct InitParametor
     {
         public BlendMode blendMode;
         public Color color;
@@ -27,17 +27,17 @@ public class RenderFadeManager : MonoBehaviour
         }
     }
 
-    InitParametor m_initParam = new InitParametor();
+    private InitParametor m_initParam = new InitParametor();
 
     [SerializeField]
-    float m_fadeTime = 1.0f;
+    private float m_fadeTime = 1.0f;
 
-    System.Action m_endAction = null;
+    private System.Action m_endAction = null;
 
-    bool m_isEnd = false;
+    private bool m_isEnd = false;
     public bool IsEnd => m_isEnd;
 
-    Renderer m_render;
+    private Renderer m_render;
 
     private void Awake()
     {
@@ -53,12 +53,12 @@ public class RenderFadeManager : MonoBehaviour
         m_initParam.color = material.color;
     }
 
-    void Start()
+    private  void Start()
     {
         
     }
 
-    void Update()
+    private void Update()
     {
         if(m_render == null) { 
             return;
@@ -67,7 +67,7 @@ public class RenderFadeManager : MonoBehaviour
         FadeUpdate();
     }
 
-    void FadeUpdate()
+    private void FadeUpdate()
     {
         var color = m_render.material.color;
         color.a -= Time.deltaTime / m_fadeTime;

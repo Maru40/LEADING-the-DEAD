@@ -16,13 +16,13 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
         public Action enterAnimation;
     }
 
-    Parametor m_param = new Parametor();
+    private Parametor m_param = new Parametor();
 
-    GameTimer m_timer = new GameTimer();
+    private GameTimer m_timer = new GameTimer();
 
-    EnemyVelocityManager m_velocityManager;
-    TargetManager m_targetManager;
-    EnemyRotationCtrl m_rotationController;
+    private EnemyVelocityManager m_velocityManager;
+    private TargetManager m_targetManager;
+    private EnemyRotationCtrl m_rotationController;
 
     public Task_WallAttack(EnemyBase owner, Parametor param)
         :base(owner)
@@ -50,7 +50,6 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
 
     public override bool OnUpdate()
     {
-        //Debug.Log("△WallAttack");
         m_timer.UpdateTimer();
 
         Move();
@@ -64,7 +63,7 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
 
     }
 
-    void Move()
+    private void Move()
     {
         if (!m_targetManager.HasTarget()) {
             return;
@@ -76,7 +75,7 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
         m_velocityManager.AddForce(force);
     }
 
-    void Rotation()
+    private void Rotation()
     {
         m_rotationController.SetDirect(m_velocityManager.velocity);
     }

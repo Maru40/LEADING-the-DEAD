@@ -27,12 +27,12 @@ public struct PreliminaryParametor
 /// </summary>
 public class Task_Preliminary : TaskNodeBase<EnemyBase>
 {
-    PreliminaryParametor m_param = new PreliminaryParametor();
+    private PreliminaryParametor m_param = new PreliminaryParametor();
 
-    GameTimer m_timer = new GameTimer();
+    private GameTimer m_timer = new GameTimer();
 
-    EnemyRotationCtrl m_rotationController;
-    TargetManager m_targetManager;
+    private EnemyRotationCtrl m_rotationController;
+    private TargetManager m_targetManager;
 
     public Task_Preliminary(EnemyBase owner, PreliminaryParametor param)
         :base(owner)
@@ -68,7 +68,7 @@ public class Task_Preliminary : TaskNodeBase<EnemyBase>
         
     }
 
-    void Rotation()
+    private void Rotation()
     {
         if (!m_targetManager.HasTarget()) { //ターゲットがnullなら
             return;
