@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class StateNode_KnockBack_EnemyBase : EnemyStateNodeBase<EnemyBase>
 {
-    enum TaskEnum
+    private enum TaskEnum
     {
         KnockBack,
         Stun,
     }
 
-    TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
+    private TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
 
     //コンポーネント系
 
-    StatusManagerBase m_status;
-    KnockBackManager m_knockBackManager;
-    I_Stun m_iStun;
-    StatorBase m_stator;
+    private StatusManagerBase m_status;
+    private KnockBackManager m_knockBackManager;
+    private I_Stun m_iStun;
+    private StatorBase m_stator;
 
     public StateNode_KnockBack_EnemyBase(EnemyBase owner)
         :base(owner)
@@ -52,13 +52,13 @@ public class StateNode_KnockBack_EnemyBase : EnemyStateNodeBase<EnemyBase>
     /// <summary>
     /// タスクの定義
     /// </summary>
-    void DifineTask()
+    private void DifineTask()
     {
         m_taskList.DefineTask(TaskEnum.KnockBack, new Task_KnockBack());
         m_taskList.DefineTask(TaskEnum.Stun, new Task_Stun(m_iStun));
     }
 
-    void SelectTask()
+    private void SelectTask()
     {
         m_taskList.AddTask(TaskEnum.KnockBack);
 
@@ -74,10 +74,10 @@ public class StateNode_KnockBack_EnemyBase : EnemyStateNodeBase<EnemyBase>
 
     //タスク-----------------------------------------------
 
-    class Task_KnockBack : TaskNodeBase
+    private class Task_KnockBack : TaskNodeBase
     {
-        GameTimer m_timer = new GameTimer();
-        float m_time = 0.5f;
+        private GameTimer m_timer = new GameTimer();
+        private float m_time = 0.5f;
 
         public override void OnEnter()
         {
@@ -99,9 +99,9 @@ public class StateNode_KnockBack_EnemyBase : EnemyStateNodeBase<EnemyBase>
     }
 
 
-    class Task_Stun : TaskNodeBase
+    private class Task_Stun : TaskNodeBase
     {
-        I_Stun m_iStun;
+        private I_Stun m_iStun;
 
         public Task_Stun(I_Stun stun)
         {

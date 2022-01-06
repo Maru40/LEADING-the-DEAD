@@ -32,7 +32,7 @@ public abstract class EnemyStateNodeBase<EnemyType> : NodeBase<EnemyType>
 		Exit,
 	}
 
-	List<ChangeCompParam> m_changeParams;
+	private List<ChangeCompParam> m_changeParams;
 
 
 	public EnemyStateNodeBase(EnemyType enemy)

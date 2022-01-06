@@ -8,11 +8,11 @@ using FoundType = FoundObject.FoundType;
 
 public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
 {
-    AttackNodeManagerBase m_attackComp;
-    TargetManager m_targetManager;
-    EyeSearchRange m_eye;
+    private AttackNodeManagerBase m_attackComp;
+    private TargetManager m_targetManager;
+    private EyeSearchRange m_eye;
 
-    FoundObject m_eyeTarget = null;
+    private FoundObject m_eyeTarget = null;
 
     public EnState_ChaseTarget(EnemyBase owner)
         : base(owner)
@@ -64,7 +64,7 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
     /// <summary>
     /// ステートの遷移管理
     /// </summary>
-    void StateCheck()
+    private void StateCheck()
     {
         if(!m_targetManager.HasTarget()) {  //ターゲットがnullだったら
             return; //処理をしない
@@ -82,7 +82,7 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
         action?.Invoke();
     }
 
-    void PlayerCheck()
+    private void PlayerCheck()
     {
         if (m_attackComp.IsAttackStartRange())
         {
@@ -90,7 +90,7 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
         }
     }
 
-    void SmellCheck()
+    private void SmellCheck()
     {
 
     }
@@ -98,7 +98,7 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
     /// <summary>
     /// ターゲットのチェック
     /// </summary>
-    void TargetCheck()
+    private void TargetCheck()
     {
         //ターゲットが視界に入ったら切り替える。
         if(m_eyeTarget == null) {

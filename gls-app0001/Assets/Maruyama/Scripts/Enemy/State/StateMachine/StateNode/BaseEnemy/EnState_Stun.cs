@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EnState_Stun : EnemyStateNodeBase<EnemyBase>
 {
-    EnemyStunManager m_stunMgr;
-    EnemyVelocityManager m_velocityMgr;
-    ThrongManager m_throngMgr;
+    private EnemyStunManager m_stunMgr;
+    private EnemyVelocityManager m_velocityMgr;
+    private ThrongManager m_throngMgr;
 
     public EnState_Stun(EnemyBase owner)
         : base(owner)
