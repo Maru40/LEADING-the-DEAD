@@ -26,23 +26,22 @@ public struct RespawnManagerParametor
 public class EnemyRespawnManager : EnemyRespawnBase
 {
     [SerializeField]
-    RespawnManagerParametor m_param = new RespawnManagerParametor(true, 0.0f);
+    private RespawnManagerParametor m_param = new RespawnManagerParametor(true, 0.0f);
 
     [SerializeField]
-    EnemyGenerator m_generator = null;
+    private EnemyGenerator m_generator = null;
 
-    StatusManagerBase m_statusManager;
-    StatorBase m_stator;
-    WaitTimer m_waitTimer;
-    EnemyRespawnStatusUpBase m_statusUp;
-    DropObjecptManager m_dropManager;
-    TargetManager m_targetManger;
-    AngerManager m_angerManager;
-    GameStateManager m_gameStateManager;
+    private StatusManagerBase m_statusManager;
+    private StatorBase m_stator;
+    private WaitTimer m_waitTimer;
+    private EnemyRespawnStatusUpBase m_statusUp;
+    private DropObjecptManager m_dropManager;
+    private TargetManager m_targetManger;
+    private AngerManager m_angerManager;
+    private GameStateManager m_gameStateManager;
 
-    void Awake()
+    private void Awake()
     {
-
         m_statusManager = GetComponent<StatusManagerBase>();
         m_stator = GetComponent<StatorBase>();
         m_waitTimer = GetComponent<WaitTimer>();
