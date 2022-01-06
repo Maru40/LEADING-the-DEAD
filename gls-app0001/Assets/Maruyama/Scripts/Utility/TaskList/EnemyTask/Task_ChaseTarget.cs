@@ -15,6 +15,16 @@ public class Task_ChaseTarget : TaskNodeBase<EnemyBase>
         public float nearRange;  //対象に追いついたと思う距離
         public float turningPower;  //曲がる力
         public System.Action enterAnimation;
+
+        public Parametor(float maxSpeed, float subPursuitTargetForward,
+            float nearRange, float turningPower, System.Action action)
+        {
+            this.maxSpeed = maxSpeed;
+            this.subPursuitTargetForward = subPursuitTargetForward;
+            this.nearRange = nearRange;
+            this.turningPower = turningPower;
+            this.enterAnimation = action;
+        }
     }
 
     private Parametor m_param = new Parametor();
