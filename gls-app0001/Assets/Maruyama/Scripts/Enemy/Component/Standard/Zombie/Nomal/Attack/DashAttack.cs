@@ -14,7 +14,7 @@ public class DashAttack : AttackNodeBase
     }
 
     [System.Serializable]
-    private struct Parametor
+    public struct Parametor
     {
         [Header("予備動作パラメータ")]
         public PreliminaryParametor preliminaryParam;
@@ -30,6 +30,19 @@ public class DashAttack : AttackNodeBase
         public float startRange;
         [Header("確率計算インターバル")]
         public float probabilityInterbalTime;
+
+        public Parametor(PreliminaryParametor preliminaryParam, Task_ChaseTarget.Parametor chaseParam,
+            Task_WallAttack.Parametor attackParam, Task_Wait.Parametor waitParam,
+            float probability, float startRange, float probabilityIntervalTime)
+        {
+            this.preliminaryParam = preliminaryParam;
+            this.chaseParam = chaseParam;
+            this.attackParam = attackParam;
+            this.waitParam = waitParam;
+            this.probability = probability;
+            this.startRange = startRange;
+            this.probabilityInterbalTime = probabilityIntervalTime;
+        }
     }
 
     [SerializeField]
@@ -183,4 +196,13 @@ public class DashAttack : AttackNodeBase
 
         return false;
     }
+
+    //アクセッサ----------------------------------------------------------------------------------------
+
+    public Parametor parametor
+    {
+        get => m_param;
+        set => m_param = value;
+    }
+
 }

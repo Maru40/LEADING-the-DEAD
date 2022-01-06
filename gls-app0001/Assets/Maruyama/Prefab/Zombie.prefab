@@ -5009,6 +5009,35 @@ MonoBehaviour:
       inThrongRange: 1
       nearObjectRange: 1
       maxAvoidPower: 3
+    eatParam:
+      power: 1
+    dashAttackParam:
+      preliminaryParam:
+        timeRandomRange:
+          min: 1
+          max: 1.5
+        moveSpeed: 3
+      chaseParam:
+        maxSpeed: 9
+        subPursuitTargetForward: 0.5
+        nearRange: 2.5
+        turningPower: 5
+      attackParam:
+        time: 1
+        maxSpeed: 10
+        audioManager: {fileID: 0}
+      waitParam:
+        time: 2
+      probability: 25
+      startRange: 30
+      probabilityInterbalTime: 10
+    wallAttackParam:
+      wallAttackParam:
+        time: 1
+        maxSpeed: 15
+        audioManager: {fileID: 0}
+      waitParam:
+        time: 1
 --- !u!114 &7956893243637624007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5175,6 +5204,8 @@ MonoBehaviour:
   - trigger: {fileID: 3506211217939163041}
     startTime: 1.25
     endTime: 1.27
+  m_eatParam:
+    power: 1
   m_preliminaryNormalAttackVoice: {fileID: 2555745591758116981}
 --- !u!114 &-6998184374044003836
 MonoBehaviour:
@@ -5368,7 +5399,7 @@ MonoBehaviour:
     startRange: 4
   m_param:
     wallAttackParam:
-      time: 1
+      time: 3
       maxSpeed: 15
       audioManager: {fileID: 0}
     waitParam:
