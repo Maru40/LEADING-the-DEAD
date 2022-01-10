@@ -91,12 +91,6 @@ public class EnemyGenerator : GeneratorBase
     [Header("障害物として扱う名前群"),SerializeField]
     private string[] m_obstacleLayerStrings = new string[] { "L_Obstacle" };
 
-    //配布するデータの構造体
-    //[Header("ドロップアイテムを配布するデータ群"), SerializeField]
-    //List<DropDataDistributionParametor> m_distributionParams = new List<DropDataDistributionParametor>();
-    ////データを配布する処理をまとめたクラス
-    //RandomDropDataDistribution m_distribution;
-
     //生成したゾンビを持つ
     protected List<ThrongData> m_datas = new List<ThrongData>();
     private static List<ThrongData> sm_allDatas = new List<ThrongData>();
@@ -115,10 +109,7 @@ public class EnemyGenerator : GeneratorBase
             m_outOfTargteDatas.Add(new OutOfTargetData(barricade));
         }
 
-        //m_distribution = new RandomDropDataDistribution(m_distributionParams);
-
         CreateObjects();
-        //DropDistribution();
     }
 
     private void CreateObjects()
@@ -187,19 +178,6 @@ public class EnemyGenerator : GeneratorBase
                Camera.main, m_maxRandomRange, m_centerPosition, m_obstacleLayerStrings);
         }
     }
-
-    /// <summary>
-    /// DropItem情報を配布をする処理
-    /// </summary>
-    //public void DropDistribution()
-    //{
-    //    m_distribution.Distribution(m_datas);
-    //}
-
-    //public void DropDistribution(List<DropData> dropDatas)
-    //{
-    //    m_distribution.Distribution(m_datas ,dropDatas);
-    //}
 
     /// <summary>
     /// ゲームクリア時に呼んで欲しい関数
