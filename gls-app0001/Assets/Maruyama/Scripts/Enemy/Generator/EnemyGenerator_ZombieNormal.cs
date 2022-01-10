@@ -52,6 +52,7 @@ public class CreateSetParametor_ZombieNormal
     public WallAttack_ZombieNormal.Parametor wallAttackParam = new WallAttack_ZombieNormal.Parametor(
         new Task_WallAttack.Parametor(1.0f, 15.0f, null, null),
         new Task_Wait.Parametor(1.0f));
+    //[Header("オーラパラメータ")]
 
     public CreateSetParametor_ZombieNormal()
     { }
