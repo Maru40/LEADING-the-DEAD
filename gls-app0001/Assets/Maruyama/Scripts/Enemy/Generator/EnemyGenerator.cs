@@ -103,7 +103,7 @@ public class EnemyGenerator : GeneratorBase
     protected virtual void Start()
     {
         //nullCheck
-        if(m_outOfTargteDatas.Count == 0)
+        if (m_outOfTargteDatas.Count == 0)
         {
             var barricade = GameObject.Find("Barricade");
             m_outOfTargteDatas.Add(new OutOfTargetData(barricade));
