@@ -17,8 +17,12 @@ public class WallRising : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    //障害物に触れた時の処理
+    public void CollsiionEnterAction(Collision collision)
     {
-        
+        if(collision.gameObject.tag == "T_Wall")
+        {
+
+        }
     }
 }
