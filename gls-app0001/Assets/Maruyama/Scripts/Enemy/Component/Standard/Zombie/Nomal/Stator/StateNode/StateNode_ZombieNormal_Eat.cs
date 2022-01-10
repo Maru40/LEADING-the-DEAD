@@ -27,6 +27,7 @@ public class StateNode_ZombieNormal_Eat : EnemyStateNodeBase<EnemyBase>
         var owner = GetOwner();
 
         AddChangeComp(owner.GetComponent<ThrongManager>(), false, true);
+        AddChangeComp(owner.GetComponent<ObstacleEvasion>(), false, true);
     }
 
     public override void OnStart()
