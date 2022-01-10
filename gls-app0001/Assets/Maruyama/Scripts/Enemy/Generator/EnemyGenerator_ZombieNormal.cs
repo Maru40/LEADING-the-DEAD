@@ -52,7 +52,8 @@ public class CreateSetParametor_ZombieNormal
     public WallAttack_ZombieNormal.Parametor wallAttackParam = new WallAttack_ZombieNormal.Parametor(
         new Task_WallAttack.Parametor(1.0f, 15.0f, null, null),
         new Task_Wait.Parametor(1.0f));
-    //[Header("オーラパラメータ")]
+    [Header("オーラパラメータ")]
+    public AuraManager.Parametor auraParam = new AuraManager.Parametor();
 
     public CreateSetParametor_ZombieNormal()
     { }
@@ -209,6 +210,12 @@ public class EnemyGenerator_ZombieNormal : EnemyGenerator
             wallAttack.parametor = m_createSetParam.wallAttackParam;
         }
 
+        //オーラ設定
+        var auraManager = obj.GetComponent<AuraManager>();
+        if (auraManager)
+        {
+            auraManager.parametor = m_createSetParam.auraParam;
+        }
     }
 
     private void CreateSetRandomParametor()
