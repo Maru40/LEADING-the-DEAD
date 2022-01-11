@@ -24,8 +24,9 @@ public class EnemyVelocityManager : MonoBehaviour
         //減速処理
         Deseleration();
 
+        m_velocity.y += m_rigid.velocity.y - m_velocity.y;
+        //m_force.y += m_rigid.velocity.y;
         m_velocity += m_force * Time.deltaTime;
-        m_velocity.y = m_rigid.velocity.y;
 
         if (UtilityMath.IsNaN(m_velocity)) {  //速度がNaNなら処理をしない。
             return;
@@ -35,7 +36,7 @@ public class EnemyVelocityManager : MonoBehaviour
 
         ResetForce();
 
-        m_velocity.y = 0.0f;
+        //m_velocity.y = 0.0f;
     }
 
     /// <summary>
