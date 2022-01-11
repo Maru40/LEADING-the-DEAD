@@ -81,6 +81,7 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
 
         var toVec = (Vector3)m_targetManager.GetToNowTargetVector();
         var force = CalcuVelocity.CalucSeekVec(m_velocityManager.velocity, toVec, m_param.maxSpeed);
+        force.y = 0.0f;
 
         m_velocityManager.AddForce(force);
     }
