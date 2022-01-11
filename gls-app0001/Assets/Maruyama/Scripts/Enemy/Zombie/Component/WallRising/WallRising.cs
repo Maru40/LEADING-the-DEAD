@@ -7,9 +7,11 @@ using UnityEngine;
 /// </summary>
 public class WallRising : MonoBehaviour
 {
-    private void Start()
+    Stator_ZombieNormal m_stator;
+
+    private void Awake()
     {
-        
+        m_stator = GetComponent<Stator_ZombieNormal>();
     }
 
     private void Update()
@@ -22,7 +24,7 @@ public class WallRising : MonoBehaviour
     {
         if(collision.gameObject.tag == "T_Wall")
         {
-
+            m_stator.GetTransitionMember().wallRising.Fire();
         }
     }
 }
