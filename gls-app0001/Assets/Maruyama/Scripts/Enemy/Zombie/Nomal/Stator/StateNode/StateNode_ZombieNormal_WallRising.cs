@@ -4,10 +4,26 @@ using UnityEngine;
 
 public class StateNode_ZombieNormal_WallRising : EnemyStateNodeBase<EnemyBase>
 {
-    public StateNode_ZombieNormal_WallRising(EnemyBase owner)
-        :base(owner)
+    enum TaskEnum
     {
+           
+    }
 
+    public struct Parametor
+    {
+        public float speed;
+    }
+
+    private Parametor m_param = new Parametor();
+
+    public StateNode_ZombieNormal_WallRising(EnemyBase owner)
+        :this(owner,new Parametor())
+    { }
+
+    public StateNode_ZombieNormal_WallRising(EnemyBase owner, Parametor parametor)
+        : base(owner)
+    {
+        m_param = parametor;
     }
 
     protected override void ReserveChangeComponents()
