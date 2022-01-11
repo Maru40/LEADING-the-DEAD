@@ -98,6 +98,7 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
             _ => CalcuVelocity.CalucSeekVec(m_velocityManager.velocity, toVec, maxSpeed),
         };
 
+        force.y = 0.0f;
         m_velocityManager.AddForce(force * m_turningPower);
 
         m_rotationCtrl.SetDirect(m_velocityManager.velocity);
