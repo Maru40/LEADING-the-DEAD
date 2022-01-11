@@ -224,6 +224,24 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
         return count;
     }
 
+    //プレイヤーを発見しているゾンビの数
+    public int GetNumFindPlayerZombie()
+    {
+        int count = 0;
+        foreach(var generator in m_generators)
+        {
+            var datas = generator.GetThrongDatas();
+            foreach(var data in datas)
+            {
+                if(data.targetMgr.GetNowTargetType() == FoundObject.FoundType.Player)
+                {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
 
     //Gizmo------------------------------------------------------------------------------
 
