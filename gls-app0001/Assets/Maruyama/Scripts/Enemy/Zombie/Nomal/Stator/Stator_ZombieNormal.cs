@@ -13,6 +13,7 @@ public enum ZombieNormalState
     Eat,   //食べる。
     Attack,
     Find,  //見つけた
+    WallRising,  //壁のぼり
     Stun,
     Anger,
     KnockBack,  //ノックバック
@@ -27,6 +28,7 @@ public class ZombieNormalTransitionMember
     public MyTrigger eatTrigger = new MyTrigger();
     public MyTrigger chaseTrigger = new MyTrigger();
     public MyTrigger attackTrigger = new MyTrigger();
+    public MyTrigger wallRising = new MyTrigger();
     public MyTrigger stunTrigger = new MyTrigger();
     public MyTrigger angerTirgger = new MyTrigger();
     //public MyTrigger dyingTrigger = new MyTrigger();
@@ -69,6 +71,7 @@ public class Stator_ZombieNormal : StatorBase
         m_stateMachine.AddNode(StateType.Chase,          new EnState_ChaseTarget(zombie));
         m_stateMachine.AddNode(StateType.Eat,            new StateNode_ZombieNormal_Eat(zombie));
         m_stateMachine.AddNode(StateType.Attack,         new StateNode_ZombieNormal_Attack(zombie));
+        m_stateMachine.AddNode(StateType.WallRising,     new StateNode_ZombieNormal_WallRising(zombie));
         m_stateMachine.AddNode(StateType.Stun,           new EnState_Stun(zombie));
         m_stateMachine.AddNode(StateType.Anger,          new StateNode_ZombieNormal_Anger(zombie));
         m_stateMachine.AddNode(StateType.KnockBack,      new StateNode_KnockBack_EnemyBase(zombie));
@@ -93,6 +96,7 @@ public class Stator_ZombieNormal : StatorBase
         m_stateMachine.AddEdge(StateType.Chase, StateType.RandomPlowling, ToRandomPlowling);
         m_stateMachine.AddEdge(StateType.Chase, StateType.Attack, ToAttackTrigger);
         m_stateMachine.AddEdge(StateType.Chase, StateType.Eat, ToEatTrigger);
+        m_stateMachine.AddEdge(StateType.Chase, StateType.WallRising, ToWallRisingTrigger);
 
         //食べているときの処理
         m_stateMachine.AddEdge(StateType.Eat, StateType.RandomPlowling, ToRandomPlowling);
@@ -103,6 +107,10 @@ public class Stator_ZombieNormal : StatorBase
         m_stateMachine.AddEdge(StateType.Attack, StateType.Anger, ToAngerTrigger);
         m_stateMachine.AddEdge(StateType.Attack, StateType.Chase, ToChaseTrigger);
         m_stateMachine.AddEdge(StateType.Attack, StateType.RandomPlowling, ToRandomPlowling);
+
+        //壁のぼり時
+        m_stateMachine.AddEdge(StateType.WallRising, StateType.Chase, ToChaseTrigger);
+        m_stateMachine.AddEdge(StateType.WallRising, StateType.RandomPlowling, ToRandomPlowling);
 
         //スタン時
         m_stateMachine.AddEdge(StateType.Stun, StateType.Anger, ToAngerTrigger);
@@ -143,6 +151,10 @@ public class Stator_ZombieNormal : StatorBase
 
     private bool ToAttackTrigger(TransitionMember member) {
         return member.attackTrigger.Get();
+    }
+
+    private bool ToWallRisingTrigger(TransitionMember member) {
+        return member.wallRising.Get();
     }
 
     private bool ToStunTrigger(TransitionMember member)
