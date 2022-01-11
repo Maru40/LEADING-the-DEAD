@@ -9,19 +9,34 @@ using MaruUtility.Sound;
 public class DamageSoundManager : MonoBehaviour
 {
     [SerializeField]
-    private Ex_Dictionary<DamageType, AudioClipParametor> m_audioParamDictionary = new Ex_Dictionary<DamageType, AudioClipParametor>();
+    private Ex_Dictionary<DamageType, List<AudioClipParametor>> m_audioParamsDictionary = 
+        new Ex_Dictionary<DamageType, List<AudioClipParametor>>();
 
     private void Awake()
     {
-        m_audioParamDictionary.InsertInspectorData();
+        m_audioParamsDictionary.InsertInspectorData();
+    }
+
+    private void Update()
+    {
+        foreach(var pair in m_audioParamsDictionary)
+        {
+            foreach(var param in pair.Value)
+            {
+                param.TimerUpdate();
+            }
+        }
     }
 
     public void Damaged(DamageData data)
     {
-        if(m_audioParamDictionary.ContainsKey(data.type))
+        if(m_audioParamsDictionary.ContainsKey(data.type))
         {
-            var param = m_audioParamDictionary[data.type];
-            Manager.GameAudioManager.Instance.SEPlayOneShot(param.clip, param.volume);
+            var audioParams = m_audioParamsDictionary[data.type];
+            foreach (var param in audioParams)
+            {
+                param.SEPlayOneShot();
+            }
         }
     }
 }

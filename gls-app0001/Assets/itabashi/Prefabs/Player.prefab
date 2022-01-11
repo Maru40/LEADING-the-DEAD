@@ -1322,6 +1322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_canvas: {fileID: 0}
+  m_gameStageManager: {fileID: 0}
   m_pickedUpFindEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -1386,12 +1387,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a45b6c1ac5ca2a949bfd3cc95b69e3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_audioParamDictionary:
+  m_audioParamsDictionary:
     m_typeDraws:
     - key: 0
       value:
-        clip: {fileID: 8300000, guid: cf92e3ff38015ff4f98b2c3e64979ac8, type: 3}
+      - clip: {fileID: 8300000, guid: 908d866a3c79ea14583b008b2f46d2f9, type: 3}
         volume: 0.3
+        intervalTime: 0
+        isInterval: 0
+      - clip: {fileID: 8300000, guid: b562cbba0bb545e498f3b474c6e37b16, type: 3}
+        volume: 0.8
+        intervalTime: 1
+        isInterval: 0
 --- !u!114 &2307582928476659035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86290,6 +86297,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 334209744}
     m_Modifications:
+    - target: {fileID: -1285786587850378432, guid: fb72d0fee14fa6747b644edfddc0491c, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6819a7b15eca0cb438983468624c5314, type: 3}
+    - target: {fileID: 528188199, guid: fb72d0fee14fa6747b644edfddc0491c, type: 3}
+      propertyPath: m_throwingSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 6819a7b15eca0cb438983468624c5314, type: 3}
     - target: {fileID: 528188199, guid: fb72d0fee14fa6747b644edfddc0491c, type: 3}
       propertyPath: m_pickUpItemName
       value: BloodBag
