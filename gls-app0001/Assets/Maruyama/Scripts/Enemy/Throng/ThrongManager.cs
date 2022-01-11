@@ -92,7 +92,7 @@ public class ThrongManager : MonoBehaviour
     {
         if(m_generator != null)
         {
-            AvoidNearThrong(m_velocityManager);
+            ThrongMoveUpdate(m_velocityManager);
         }
     }
 
@@ -103,34 +103,23 @@ public class ThrongManager : MonoBehaviour
     /// <param name="moveDirect">そのオブジェクトが向かいたい方向</param>
     /// <param name="maxSpeed">最大スピード</param>
     /// <param name="truningPower">旋回パワー</param>
-    private void AvoidNearThrong(EnemyVelocityManager velocityMgr)
+    private void ThrongMoveUpdate(EnemyVelocityManager velocityMgr)
     {
         var velocity = velocityMgr.velocity;
         velocity += m_velocityManager.GetForce() * Time.deltaTime;
 
         var throngForce = CalcuVelocity.CalucSeekVec(velocity, CalcuThrongVector(), CalcuAverageSpeed());
-        throngForce.y = 0;
+        //throngForce.y = 0;
+
+        if(IsUpperVector()) //将来的に必要かも？
+        {
+            //var upperForce = CalcuVelocity.CalucSeekVec(velocity, CalcuSumUpperVector(), CalcuAverageSpeed());
+            //throngForce += upperForce;
+            //throngForce.y += CalcuSumUpperVector().y * 10.0f;
+            //Debug.Log("◆◆" + throngForce);
+        }
 
         velocityMgr.AddForce(throngForce);
-
-        if (m_velocityManager.velocity != Vector3.zero) {
-            //m_rotationCtrl.SetDirect(velocityMgr.velocity);
-        }
-    }
-
-    /// <summary>
-    /// 集団移動をする処理(まだ未完成)
-    /// </summary>
-    /// <param name="selfRigid">自分自身のリジッドボディ</param>
-    public void ThrongMove(EnemyVelocityManager velcoityMgr, Vector3 moveDirect, float maxSpeed)
-    {
-        var throngVec = CalcuThrongVector();
-        if (throngVec == Vector3.zero) {
-            return;
-        }
-
-        var force = CalcuVelocity.CalucSeekVec(velcoityMgr.velocity, throngVec, CalcuAverageSpeed());
-        velcoityMgr.AddForce(force);
     }
 
     /// <summary>
@@ -200,6 +189,36 @@ public class ThrongManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 上昇するベクトル
+    /// </summary>
+    /// <returns></returns>
+    private Vector3 CalcuUpperVector(ThrongData data)
+    {
+        const float nearRange = 1.0f;
+        Vector3 upperVector = Vector3.up;  //将来的にはインスペクタからUpperベクトルを制御できるようにする。
+        
+        if(data.gameObject == gameObject) {
+            return Vector3.zero;
+        }
+
+        if (data.gameObject.transform.position.y >= transform.position.y) //自分より上にいたら
+        {
+            return Vector3.zero;
+        }
+
+        if (IsRange(data, nearRange)) //近くにいる場合
+        {
+            var toTargetVector = data.gameObject.transform.position - transform.position;
+            if (UtilityMath.IsFront(transform.forward, toTargetVector)) //正面にいる場合
+            {
+                return upperVector;
+            }
+        }
+
+        return Vector3.zero;
+    }
+
+    /// <summary>
     /// 群衆行動ベクトルの計算(まだ未完成)
     /// </summary>
     /// <returns></returns>
@@ -225,6 +244,7 @@ public class ThrongManager : MonoBehaviour
                 centerPosition += CalcuCenterVector(data);
                 directVec += CalcuDirectVector(data); //群衆の平均方向
                 avoidVec += CalcuAvoidVector(data);
+
                 sumSpeed += data.velocityMgr.velocity.magnitude;
                 
                 throngSize++;
@@ -242,6 +262,22 @@ public class ThrongManager : MonoBehaviour
         var reVec = (centerPosition + directVec + avoidVec) - transform.position;
 
         return reVec;
+    }
+
+    private Vector3 CalcuSumUpperVector()
+    {
+        Vector3 sumUpperVec = Vector3.zero;
+        
+        foreach(var data in m_generator.GetThrongDatas())
+        {
+            if(data.gameObject == gameObject) {
+                continue;
+            }
+
+            sumUpperVec += CalcuUpperVector(data);
+        }
+
+        return sumUpperVec;
     }
 
     /// <summary>
@@ -319,6 +355,27 @@ public class ThrongManager : MonoBehaviour
         int obstacleLayer = LayerMask.GetMask(m_rayObstacleLayerStrings);
         var toVec = data.gameObject.transform.position - transform.position;
         return Physics.Raycast(transform.position, toVec, toVec.magnitude, obstacleLayer);
+    }
+
+    /// <summary>
+    /// 上昇ベクトルが必要かどうか
+    /// </summary>
+    /// <returns></returns>
+    private bool IsUpperVector()
+    {
+        foreach (var data in m_generator.GetThrongDatas())
+        {
+            if (data.gameObject == gameObject) {
+                continue;
+            }
+
+            var upperVec = CalcuUpperVector(data);
+            if(upperVec != Vector3.zero) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     //アクセッサ-----------------------------------------------
