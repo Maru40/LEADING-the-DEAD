@@ -17,6 +17,17 @@ public class DamageSoundManager : MonoBehaviour
         m_audioParamsDictionary.InsertInspectorData();
     }
 
+    private void Update()
+    {
+        foreach(var pair in m_audioParamsDictionary)
+        {
+            foreach(var param in pair.Value)
+            {
+                param.TimerUpdate();
+            }
+        }
+    }
+
     public void Damaged(DamageData data)
     {
         if(m_audioParamsDictionary.ContainsKey(data.type))
@@ -24,7 +35,7 @@ public class DamageSoundManager : MonoBehaviour
             var audioParams = m_audioParamsDictionary[data.type];
             foreach (var param in audioParams)
             {
-                Manager.GameAudioManager.Instance.SEPlayOneShot(param.clip, param.volume);
+                param.SEPlayOneShot();
             }
         }
     }
