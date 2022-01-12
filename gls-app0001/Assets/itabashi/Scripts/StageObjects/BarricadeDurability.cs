@@ -30,6 +30,9 @@ public class BarricadeDurability : MonoBehaviour
     private Gauge m_gauge;
 
     [SerializeField]
+    private AudioClip m_breakSound;
+
+    [SerializeField]
     private UnityEvent m_breakEvent;
 
     [SerializeField]
@@ -50,6 +53,7 @@ public class BarricadeDurability : MonoBehaviour
                 m_breakEvent?.Invoke();
                 Debug.Log("破壊されました");
                 //Destroy(gameObject);
+                Manager.GameAudioManager.Instance.SEPlayOneShot(m_breakSound);
                 m_isBreak = true;
             })
             .AddTo(this);
