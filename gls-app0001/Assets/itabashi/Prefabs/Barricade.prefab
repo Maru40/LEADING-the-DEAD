@@ -509,6 +509,7 @@ MonoBehaviour:
     value: 100
   m_maxDurability: 100
   m_gauge: {fileID: 0}
+  m_breakSound: {fileID: 8300000, guid: 6af032cbd73d68e4088e92affec803c8, type: 3}
   m_breakEvent:
     m_PersistentCalls:
       m_Calls:
@@ -641,12 +642,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a45b6c1ac5ca2a949bfd3cc95b69e3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_audioParamDictionary:
-    m_typeDraws:
-    - key: 0
-      value:
-        clip: {fileID: 8300000, guid: b534b812591ffb5428fe37f61367c73c, type: 3}
-        volume: 1
+  m_audioParamsDictionary:
+    m_typeDraws: []
 --- !u!1 &1182914468150856145
 GameObject:
   m_ObjectHideFlags: 0
