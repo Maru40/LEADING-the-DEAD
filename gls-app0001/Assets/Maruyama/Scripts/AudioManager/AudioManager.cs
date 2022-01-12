@@ -15,10 +15,12 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private bool m_isActive = true;
     public bool IsActive => m_isActive;
-
     [SerializeField]
     private bool m_isRandom = true;
     public bool IsRandom => m_isRandom;
+    [SerializeField]
+    private bool m_isFadeOut = false;
+    public bool IsFadeOut => m_isFadeOut;
 
     [Header("ボリュームのランダム幅"), SerializeField]
     private RandomRange m_volumeRandomRange = new RandomRange(0.5f, 1.0f);
@@ -58,6 +60,11 @@ public class AudioManager : MonoBehaviour
         }
         
         m_audioSource?.PlayOneShot(param.clip);
+
+        if (IsFadeOut)  //フェード処理を入れるなら
+        {
+            FadeOutStart();
+        }
     }
 
     public void Stop()

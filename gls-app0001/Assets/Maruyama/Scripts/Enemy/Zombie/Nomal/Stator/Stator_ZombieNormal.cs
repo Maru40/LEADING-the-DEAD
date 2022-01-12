@@ -43,6 +43,9 @@ public class Stator_ZombieNormal : StatorBase
 
     [SerializeField]
     private StateNode_ZombieNormal_Find.Parametor m_findParametor = new StateNode_ZombieNormal_Find.Parametor(1.0f, 2.0f);
+    [SerializeField]
+    private StateNode_ZombieNormal_Dying.Parametor m_dyingParametor = 
+        new StateNode_ZombieNormal_Dying.Parametor(0.5f, 1.5f);
 
     private void Awake()
     {
@@ -75,7 +78,7 @@ public class Stator_ZombieNormal : StatorBase
         m_stateMachine.AddNode(StateType.Stun,           new EnState_Stun(zombie));
         m_stateMachine.AddNode(StateType.Anger,          new StateNode_ZombieNormal_Anger(zombie));
         m_stateMachine.AddNode(StateType.KnockBack,      new StateNode_KnockBack_EnemyBase(zombie));
-        m_stateMachine.AddNode(StateType.Dying,          new StateNode_ZombieNormal_Dying(zombie));
+        m_stateMachine.AddNode(StateType.Dying,          new StateNode_ZombieNormal_Dying(zombie, m_dyingParametor));
         m_stateMachine.AddNode(StateType.Death,          new StateNode_ZombiNormal_Death(zombie));
     }
 

@@ -27,8 +27,11 @@ public class MeatManager : EatenBase
     [SerializeField]
     private Parametor m_param = new Parametor();
 
+    private AudioManager m_audioManager;
+
     private void Awake()
     {
+        m_audioManager = GetComponent<AudioManager>();
         m_modelDictionary.InsertInspectorData();
     }
 
@@ -80,6 +83,7 @@ public class MeatManager : EatenBase
     {
         ParticleManager.Instance?.Play(ParticleManager.ParticleID.MeatParticle, transform.position);
         m_param.elapsedEatCount += power;
+        m_audioManager?.PlayOneShot();
         StateCheck();
 
         if (m_param.elapsedEatCount >= m_param.maxEatCount) //最大捕食回数が超えたら。

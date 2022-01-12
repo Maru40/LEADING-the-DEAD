@@ -28,6 +28,19 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         Right
     }
 
+    [Serializable]
+    public struct AnimationEatParametor
+    {
+        public EatParametor eatParametor;
+        public List<float> eatTimes;
+
+        public AnimationEatParametor(EatParametor eatParametor, List<float> eatTimes)
+        {
+            this.eatParametor = eatParametor;
+            this.eatTimes = eatTimes;
+        }
+    }
+
     [SerializeField]
     private Ex_Dictionary<NormalAttackHitColliderType, AnimationHitColliderParametor> m_normalAttackParam =
         new Ex_Dictionary<NormalAttackHitColliderType, AnimationHitColliderParametor>();
@@ -44,7 +57,8 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     private Dictionary<StateEnum, string> m_stateNameDictionary = new Dictionary<StateEnum, string>();
 
     [SerializeField]
-    private EatParametor m_eatParam =　new EatParametor(1.0f);
+    private AnimationEatParametor m_eatParam =　
+        new AnimationEatParametor(new EatParametor(1.0f), new List<float>() {3.0f, 11.0f});
 
     private NormalAttack m_normalAttackComp;
 
@@ -230,11 +244,11 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         var timeEvent = timeBehaviour.onTimeEvent;
 
         //const float time = 3.0f; //将来的にインスぺクタから変更
-        List<float> times = new List<float>();
-        times.Add(3.0f);
-        times.Add(11.0f);
+        //List<float> times = new List<float>();
+        //times.Add(3.0f);
+        //times.Add(11.0f);
 
-        foreach (var time in times)
+        foreach (var time in m_eatParam.eatTimes)
         {
             actionEvent.AddTimeAction(time, Eat);
             //timeEvent.ClampWhere(time)
@@ -272,7 +286,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         var eaten = m_targetManager.GetNowTarget().GetComponent<EatenBase>();
         if (eaten)
         {
-            eaten.Eaten(m_eatParam.power);
+            eaten.Eaten(m_eatParam.eatParametor.power);
             Debug.Log("△食べたよ");
         }
     }
@@ -440,7 +454,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 
     public EatParametor EatParam
     {
-        get => m_eatParam;
-        set => m_eatParam = value;
+        get => m_eatParam.eatParametor;
+        set => m_eatParam.eatParametor = value;
     }
 }

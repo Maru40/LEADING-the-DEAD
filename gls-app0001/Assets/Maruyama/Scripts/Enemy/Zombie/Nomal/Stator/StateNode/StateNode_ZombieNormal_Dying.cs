@@ -14,17 +14,24 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
         PlayDeathAnimation,
     }
 
+    [System.Serializable]
     public class Parametor
     {
-        public float fireTime = 0.0f;  //炎に包まれながら動く時間
-        public float deathAnimationTime;  //死亡アニメーション終了時間
+        public float fireTime = 0.5f;  //炎に包まれながら動く時間
+        public float deathAnimationTime = 1.5f;  //死亡アニメーション終了時間
+        public AudioManager audioManager = null; //死亡時の声を上げるパラメータ
 
         public Parametor()
         { }
 
         public Parametor(float fireTime)
+            :this(fireTime, 1.5f)
+        { }
+
+        public Parametor(float fireTime, float deathAnimationTime)
         {
             this.fireTime = fireTime;
+            this.deathAnimationTime = deathAnimationTime;
         }
 
         public Parametor(Parametor param)
@@ -86,6 +93,8 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
 
         //タスクのセレクト
         SelectTask();
+
+        m_param.audioManager?.PlayOneShot();  //声の再生。
     }
 
     public override void OnUpdate()
