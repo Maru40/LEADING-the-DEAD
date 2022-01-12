@@ -12,11 +12,13 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
     {
         public float maxFindWaitTime;//見つけた時の最大待機時間
         public float rotationSpeed;  //回転スピード
+        public AudioManager audioManager;
 
         public Parametor(float maxFindWaitTime, float rotationSpeed)
         {
             this.maxFindWaitTime = maxFindWaitTime;
             this.rotationSpeed = rotationSpeed;
+            this.audioManager = null;
         }
     }
 
@@ -55,6 +57,8 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
         base.OnStart();
 
         SelectTask();
+
+        m_param.audioManager?.PlayOneShot();
     }
 
     public override void OnUpdate()
