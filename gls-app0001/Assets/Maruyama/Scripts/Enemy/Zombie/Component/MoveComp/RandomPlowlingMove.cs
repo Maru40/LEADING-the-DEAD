@@ -69,9 +69,9 @@ public class RandomPlowlingMove : MonoBehaviour
 
     private Vector3 m_targetPosition;    //目的の場所
 
-    private EnemyVelocityManager m_velocityMgr;
+    private EnemyVelocityManager m_velocityManager;
     private WaitTimer m_waitTimer;
-    private ThrongManager m_throngMgr;
+    private ThrongManager m_throngManager;
     private EnemyRotationCtrl m_rotationCtrl;
     private StatusManagerBase m_statusManager;
 
@@ -82,9 +82,9 @@ public class RandomPlowlingMove : MonoBehaviour
     private void Awake()
     {
         //コンポーネントの取得
-        m_velocityMgr = GetComponent<EnemyVelocityManager>();
+        m_velocityManager = GetComponent<EnemyVelocityManager>();
         m_waitTimer = GetComponent<WaitTimer>();
-        m_throngMgr = GetComponent<ThrongManager>();
+        m_throngManager = GetComponent<ThrongManager>();
         m_rotationCtrl = GetComponent<EnemyRotationCtrl>();
         m_statusManager = GetComponent<StatusManagerBase>();
         m_centerObject = gameObject;
@@ -93,7 +93,6 @@ public class RandomPlowlingMove : MonoBehaviour
         Random.InitState(System.DateTime.Now.Millisecond);
 
         m_firstRandomPositionRadius = m_param.randomPositionRadius;
-        //m_firstInThrongRange = m_param.inThrongRange;
 
         SetRandomTargetPosition();
     }
@@ -113,8 +112,8 @@ public class RandomPlowlingMove : MonoBehaviour
         //加える力の計算
         var toVec = m_targetPosition - transform.position;
         var maxSpeed = m_param.maxSpeed * m_statusManager.GetBuffParametor().SpeedBuffMultiply;
-        Vector3 force = CalcuVelocity.CalucSeekVec(m_velocityMgr.velocity, toVec, maxSpeed);
-        m_velocityMgr.AddForce(force * m_param.turningPower);
+        Vector3 force = CalcuVelocity.CalucSeekVec(m_velocityManager.velocity, toVec, maxSpeed);
+        m_velocityManager.AddForce(force * m_param.turningPower);
 
         ThrongProcess();  //集団行動系
 
@@ -132,9 +131,9 @@ public class RandomPlowlingMove : MonoBehaviour
             return;
         }
 
-        if (m_velocityMgr.velocity != Vector3.zero)
+        if (m_velocityManager.velocity != Vector3.zero)
         {
-            m_rotationCtrl.SetDirect(m_velocityMgr.velocity);
+            m_rotationCtrl.SetDirect(m_velocityManager.velocity);
         }
     }
 
@@ -143,11 +142,11 @@ public class RandomPlowlingMove : MonoBehaviour
     /// </summary>
     private void ThrongProcess()
     {
-        if (m_throngMgr) //もし集団行動するなら...
+        if (m_throngManager) //もし集団行動するなら...
         {
-            if (m_throngMgr.enabled)
+            if (m_throngManager.enabled)
             {
-                var newTargetPosition = m_throngMgr.CalcuRandomPlowlingMovePositonIntegrated(this);  //ランダムな方向を集団に合わせる。
+                var newTargetPosition = m_throngManager.CalcuRandomPlowlingMovePositonIntegrated(this);  //ランダムな方向を集団に合わせる。
                 var toVec = newTargetPosition - transform.position;
 
                 if (!IsRayHitObstacle(toVec))  //障害物が無かったら。
@@ -184,7 +183,7 @@ public class RandomPlowlingMove : MonoBehaviour
         }
 
         SetRandomTargetPosition();
-        m_velocityMgr.ResetVelocity();  //速度のリセット
+        m_velocityManager.ResetVelocity();  //速度のリセット
 
         //待機状態の設定
         var waitTime = UnityEngine.Random.value * m_param.maxWaitCalcuRouteTime;
@@ -248,7 +247,7 @@ public class RandomPlowlingMove : MonoBehaviour
     {
         m_centerObject = this.gameObject;
         m_param.randomPositionRadius = m_firstRandomPositionRadius;
-        m_throngMgr.enabled = true;
+        m_throngManager.enabled = true;
 
         SetRandomTargetPosition();
         //m_param.inThrongRange = m_firstInThrongRange;
