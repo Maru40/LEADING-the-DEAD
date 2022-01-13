@@ -4,12 +4,22 @@ using UnityEngine;
 
 public class DangerAreaManager : MonoBehaviour
 {
-    private void Update()
+    protected virtual void Awake()
+    {
+
+    }
+
+    protected virtual void Start()
+    {
+
+    }
+
+    protected virtual void Update()
     {
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if(enabled == false) {
             return;
