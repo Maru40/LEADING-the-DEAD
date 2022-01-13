@@ -1,12 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 using System;
 using UniRx;
 
 using FoundType = FoundObject.FoundType;
 using MaruUtility;
+using MaruUtility.UtilityDictionary;
+
+[System.Serializable]
+public class Ex_UnityEvent<T> 
+{
+    public T m_arugment;  //引数
+    public UnityEvent<T> m_event;
+
+    public void AddListener(UnityAction<T> call)
+    {
+        m_event.AddListener(call);
+    }
+
+    public void Invoke()
+    {
+        m_event?.Invoke(m_arugment);
+    }
+}
 
 public class TargetManager : MonoBehaviour
 {
@@ -74,12 +93,19 @@ public class TargetManager : MonoBehaviour
     private StatusManagerBase m_statusManager;
     private WaitTimer m_waitTimer;
 
+    //targetが切り替わった時に呼び出したい関数
+    [SerializeField]
+    private Ex_Dictionary<FoundType, UnityEvent> m_changeTypeEventDictionary =
+        new Ex_Dictionary<FoundType, UnityEvent>();
+
     private void Awake()
     {
         m_statusManager = GetComponent<StatusManagerBase>();
         m_waitTimer = GetComponent<WaitTimer>();
 
         m_excludeTargets.Clear();
+
+        m_changeTypeEventDictionary.InsertInspectorData();
     }
 
     private void Start()
@@ -156,10 +182,32 @@ public class TargetManager : MonoBehaviour
 
         //更新
         FoundDataAdjust(type, target);
-        m_nowTarget = target;
-        m_targets[type] = target;
+        ChangeTarget(type, target);
 
         return true;
+    }
+
+    private void ChangeTarget(Type type ,FoundObject target)
+    {
+        PlayChangeTypeEvent(target);
+
+        m_nowTarget = target;
+        m_targets[type] = target;
+    }
+
+    //ターゲットのタイプが変更した時に呼び出すイベント
+    private void PlayChangeTypeEvent(FoundObject target)
+    {
+        var type = FoundType.None;
+        if (target) //ターゲットがnullでなかったら
+        {
+            type = target.GetFoundData().type;
+        }
+
+        if (m_changeTypeEventDictionary.ContainsKey(type)) //Keyが存在したら
+        {  
+            m_changeTypeEventDictionary[type]?.Invoke();
+        }
     }
 
     //ターゲットの更新を確定
@@ -423,5 +471,16 @@ public class TargetManager : MonoBehaviour
     {
         get => m_buffParam;
         set => m_buffParam = value;
+    }
+
+    //ターゲットが切り替わった時に呼ばれるイベントの追加
+    public void AddChangeTargetEvent(FoundType type, UnityAction action)
+    {
+        if (!m_changeTypeEventDictionary.ContainsKey(type))  //キーが無かったら
+        {
+            m_changeTypeEventDictionary[type] = new UnityEvent();
+        }
+
+        m_changeTypeEventDictionary[type].AddListener(action);
     }
 }
