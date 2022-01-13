@@ -24,6 +24,7 @@ public class AnimatorCtrl_ZombieNormal : MonoBehaviour
     private AngerManager m_angerManager;
     private Stator_ZombieNormal m_stator;
     private StatusManager_ZombieNormal m_statusManager;
+    private EnemyRotationCtrl m_rotationController;
 
     private void Start()
     {
@@ -32,6 +33,7 @@ public class AnimatorCtrl_ZombieNormal : MonoBehaviour
         m_angerManager = GetComponent<AngerManager>();
         m_stator = GetComponent<Stator_ZombieNormal>();
         m_statusManager = GetComponent<StatusManager_ZombieNormal>();
+        m_rotationController = GetComponent<EnemyRotationCtrl>();
     }
 
     private void Update()
@@ -41,8 +43,24 @@ public class AnimatorCtrl_ZombieNormal : MonoBehaviour
             m_animator = GetComponentInChildren<Animator>();
         }
 
-        //仮歩き同期
+        //歩き同期
         moveSpeed = m_rigid.velocity.magnitude * BaseMoveSpeed;
+
+        RotationUpdate();
+    }
+
+    private void RotationUpdate()
+    {
+        const float stoppingSpeed = 0.1f; //停止と判断するスピード
+        //歩いていないかつ、ローテーション中なら
+        if (moveSpeed <= stoppingSpeed && m_rotationController.IsRotation)
+        {
+            rotationSpeed = BaseMoveSpeed;
+        }
+        else
+        {
+            rotationSpeed = 0.0f;
+        }
     }
 
     //アクセッサ---------------------------------------------------
@@ -51,6 +69,12 @@ public class AnimatorCtrl_ZombieNormal : MonoBehaviour
     {
         set { m_animator.SetFloat("moveSpeed", value); }
         get { return m_animator.GetFloat("moveSpeed"); }
+    }
+
+    public float rotationSpeed
+    {
+        set { m_animator.SetFloat("rotationSpeed", value); }
+        get { return m_animator.GetFloat("rotationSpeed"); }
     }
 
     public void AttackTriggerFire()
