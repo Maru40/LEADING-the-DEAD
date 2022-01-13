@@ -31,9 +31,6 @@ public class SoundObjectManager : MonoBehaviour
 
     private GameTimer m_timer = new GameTimer();
 
-    [SerializeField]
-    private UnityEvent m_event = new UnityEvent();
-
     private void Awake()
     {
         m_collider = GetComponent<SphereCollider>();
@@ -84,11 +81,6 @@ public class SoundObjectManager : MonoBehaviour
         {
             m_foundObject = GetComponentInParent<FoundObject>();
         }
-    }
-
-    public void ChangeState(ZombieNormalState ss)
-    {
-
     }
 
     //アクセッサ----------------------------------------------------------------------------------
