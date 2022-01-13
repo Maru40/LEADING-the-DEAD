@@ -13,6 +13,7 @@ public class StateNode_ZombieTank_None : EnemyStateNodeBase<EnemyBase>
         var owner = GetOwner();
 
         AddChangeComp(owner.GetComponent<RandomPlowlingMove>(), false, true);
+        AddChangeComp(owner.GetComponent<ObstacleEvasion>(), false, true);
     }
 
     public override void OnUpdate()
