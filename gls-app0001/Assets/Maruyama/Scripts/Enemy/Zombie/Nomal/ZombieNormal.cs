@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using FoundType = FoundObject.FoundType;
+
 public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_Smell, I_Eat, I_BindPlowlingArea
 {
     //test用に表示したり、消したりする用。
@@ -13,21 +15,31 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_
 
     private Stator_ZombieNormal m_stator;
     private AnimatorCtrl_ZombieNormal m_animator;
-    private TargetManager m_targetMgr;
+    private TargetManager m_targetManager;
 
     private RandomPlowlingMove m_randomPlowling;
-    private ThrongManager m_throngMgr;
+    private ThrongManager m_throngManager;
     private StatusManager_ZombieNormal m_statusManager;
 
     private void Awake()
     {
         m_stator = GetComponent<Stator_ZombieNormal>();
         m_animator = GetComponent<AnimatorCtrl_ZombieNormal>();
-        m_targetMgr = GetComponent<TargetManager>();
+        m_targetManager = GetComponent<TargetManager>();
 
         m_randomPlowling = GetComponent<RandomPlowlingMove>();
-        m_throngMgr = GetComponent<ThrongManager>();
+        m_throngManager = GetComponent<ThrongManager>();
         m_statusManager = GetComponent<StatusManager_ZombieNormal>();
+    }
+
+    private void Start()
+    {
+        SettingChangeTargetEvent();
+    }
+
+    private void SettingChangeTargetEvent()
+    {
+        m_targetManager.AddChangeTargetEvent(FoundType.Player, () => m_stator.GetTransitionMember().findTrigger.Fire());
     }
 
     //インターフェースの実装-------------------------------------------------
@@ -43,7 +55,7 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_
 
     void I_Listen.Listen(FoundObject foundObject) {
         //ターゲットの切替
-        m_targetMgr.SetNowTarget(GetType() ,foundObject);
+        m_targetManager.SetNowTarget(GetType() ,foundObject);
 
         var member = m_stator.GetTransitionMember();
         member.findTrigger.Fire();
@@ -64,7 +76,7 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_
 
     void I_Smell.SmellFind(FoundObject foundObject)
     {
-        if(m_targetMgr.SetNowTarget(GetType(), foundObject))
+        if(m_targetManager.SetNowTarget(GetType(), foundObject))
         {
             m_stator.GetTransitionMember().findTrigger.Fire();
         }
