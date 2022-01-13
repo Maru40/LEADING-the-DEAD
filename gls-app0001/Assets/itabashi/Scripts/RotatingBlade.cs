@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotatingBlade : MonoBehaviour
+public class RotatingBlade : DangerObjectBase
 {
     /// <summary>
     /// 接触ダメージ
