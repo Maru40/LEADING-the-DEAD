@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlameThrower : MonoBehaviour
+public class FlameThrower : DangerObjectBase
 {
     [SerializeField]
     private bool m_isShoot = false;
