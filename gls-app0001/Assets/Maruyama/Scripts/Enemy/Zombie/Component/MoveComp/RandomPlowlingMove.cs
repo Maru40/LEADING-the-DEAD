@@ -10,7 +10,7 @@ using System;
 /// <summary>
 /// Randomに徘徊するコンポーネント
 /// </summary>
-public class RandomPlowlingMove : MonoBehaviour
+public class RandomPlowlingMove : MonoBehaviour, I_DangerEvasion
 {
     [Serializable]
     public struct Parametor : I_Random<Parametor>
@@ -250,7 +250,6 @@ public class RandomPlowlingMove : MonoBehaviour
         m_throngManager.enabled = true;
 
         SetRandomTargetPosition();
-        //m_param.inThrongRange = m_firstInThrongRange;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -261,11 +260,7 @@ public class RandomPlowlingMove : MonoBehaviour
 
         if (IsObstract(collision.gameObject))
         {
-            //m_targetPosition = -m_targetPosition;
-            var toVec = m_targetPosition - transform.position;
-            var reflectionVec = CalcuVelocity.Reflection(toVec, collision);
-
-            m_targetPosition = reflectionVec;
+            Reflection(collision);
         }
     }
 
@@ -289,6 +284,14 @@ public class RandomPlowlingMove : MonoBehaviour
         {
             m_collisionStayTimerElapsed = 0.0f;
         }
+    }
+
+    private void Reflection(Collision collision)
+    {
+        var toVec = m_targetPosition - transform.position;
+        var reflectionVec = CalcuVelocity.Reflection(toVec, collision);
+
+        m_targetPosition = reflectionVec;
     }
 
     private bool IsObstract(GameObject gameObj)
@@ -323,7 +326,15 @@ public class RandomPlowlingMove : MonoBehaviour
         }
     }
 
-    //アクセッサ-----------------------------------------------------
+    //インターフェースの実装---------------------------------------------------------------------------------------------
+
+    public void Evasion(GameObject gameObject)
+    {
+        SetRandomTargetPosition();
+        //m_targetPosition = -m_targetPosition;
+    }
+
+    //アクセッサ---------------------------------------------------------------------------------------------------------
 
     public void SetTargetPositon(Vector3 position)
     {
