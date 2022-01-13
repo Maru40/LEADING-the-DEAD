@@ -12,11 +12,6 @@ public class EnemyRotationCtrl : MonoBehaviour
 
     private Vector3 m_direct = new Vector3();
 
-    private void Start()
-    {
-
-    }
-
     private void Update()
     {
         var direct = m_direct;
@@ -48,5 +43,21 @@ public class EnemyRotationCtrl : MonoBehaviour
     public float GetSpeed()
     {
         return m_rotationSpeed;
+    }
+
+    public bool IsRotation
+    {
+        get
+        {
+            const float nanRange = 0.1f; //誤差と判断する距離
+            var subDirect = m_direct - transform.forward;
+
+            if(subDirect.magnitude <= nanRange)
+            {
+                return false;
+            }
+            
+            return true;
+        }
     }
 }
