@@ -421,6 +421,11 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         CrossFadeState("PutWallAttack", UpperLayerIndex, transitionTime);
     }
 
+    public void CrossFadeDeath(int layerIndex, float transitionTime = 0.0f)
+    {
+        CrossFadeState("Death", layerIndex, transitionTime);
+    }
+
     //アクセッサ・プロパティ---------------------------------------------------------------------------------
 
     /// <summary>
@@ -435,20 +440,40 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 
     public int BaseLayerIndex => m_animator.GetLayerIndex("Base Layer");
     public int UpperLayerIndex => m_animator.GetLayerIndex("Upper Layer");
+    public int LowerLayerIndex => m_animator.GetLayerIndex("Lower Layer");
     public int AllLayerIndex => m_animator.GetLayerIndex("All Layer");
 
     public void Dying()
     {
         const float weight = 0.0f;
-        m_animator.SetLayerWeight(UpperLayerIndex, weight);
-        CrossFadeIdleAnimation(UpperLayerIndex);
+        int[] layerIndices = {
+            UpperLayerIndex,
+            LowerLayerIndex,
+            AllLayerIndex
+        };
+
+        foreach (var index in layerIndices)
+        {
+            m_animator.SetLayerWeight(index, weight);
+            CrossFadeIdleAnimation(index);
+        }
     }
 
     public void Respawn()
     {
         const float weight = 1.0f;
-        m_animator.SetLayerWeight(UpperLayerIndex, weight);
-        CrossFadeIdleAnimation(UpperLayerIndex);
+        int[] layerIndices = {
+            UpperLayerIndex,
+            LowerLayerIndex,
+            AllLayerIndex
+        };
+
+        foreach (var index in layerIndices)
+        {
+            m_animator.SetLayerWeight(index, weight);
+            CrossFadeIdleAnimation(index);
+        }
+
         CrossFadeIdleAnimation();
     }
 
