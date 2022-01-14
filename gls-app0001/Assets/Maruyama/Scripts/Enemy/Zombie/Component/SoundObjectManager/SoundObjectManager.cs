@@ -56,7 +56,7 @@ public class SoundObjectManager : MonoBehaviour
     /// </summary>
     public void PlayOneShot()
     {
-        m_audioManager.PlayOneShot();
+        m_audioManager.PlayRandomClipOneShot();
 
         m_collider.enabled = true;  //音検知用のコライダーをOn
         m_timer.ResetTimer(m_param.time, () => m_collider.enabled = false); //指定時間後に音検知用のコライダーをoff

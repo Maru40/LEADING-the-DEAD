@@ -218,7 +218,7 @@ public class AnimatorManager_ZombieTank : AnimatorManagerBase
 
     private void SEPlayOneShot(AudioManager manager)
     {
-        manager.PlayOneShot();
+        manager.PlayRandomClipOneShot();
     }
 
     private void SEPlayOneShot(AudioClipParametor param)

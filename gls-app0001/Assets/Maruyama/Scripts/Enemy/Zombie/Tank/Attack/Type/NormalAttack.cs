@@ -169,7 +169,7 @@ public class NormalAttack : AttackNodeBase
 
     public override void AttackStart()
     {
-        m_audioManager?.PlayOneShot();
+        m_audioManager?.PlayRandomClipOneShot();
 
         m_isTargetChase = true;
         SetForwardTarget();

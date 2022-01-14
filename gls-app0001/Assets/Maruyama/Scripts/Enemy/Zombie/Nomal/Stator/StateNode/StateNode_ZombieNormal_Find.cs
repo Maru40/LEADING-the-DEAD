@@ -58,7 +58,7 @@ public class StateNode_ZombieNormal_Find : EnemyStateNodeBase<EnemyBase>
 
         SelectTask();
 
-        m_param.audioManager?.PlayOneShot();
+        m_param.audioManager?.PlayRandomClipOneShot();
     }
 
     public override void OnUpdate()

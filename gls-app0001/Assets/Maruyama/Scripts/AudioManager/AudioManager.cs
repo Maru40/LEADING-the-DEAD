@@ -36,15 +36,36 @@ public class AudioManager : MonoBehaviour
         m_fade = GetComponent<AudioFade>();
     }
 
-    /// <summary>
-    /// 音を一度だけ鳴らす。
-    /// </summary>
-    public void PlayOneShot()
+    public void PlayOneShot(AudioClipParametor param, bool isUseGameAudioManager = false)
     {
         if (IsActive == false) {
             return;
         }
 
+        //GameAudioManagerを利用するかどうか
+        if (isUseGameAudioManager)
+        {
+            Manager.GameAudioManager.Instance.SEPlayOneShot(param.clip, CalcuRandomVolume(param));
+        }
+        else
+        {
+            //randomにvolumeとpitchを決める
+            SettingRandom(param);
+
+            m_audioSource?.PlayOneShot(param.clip);
+
+            if (IsFadeOut)  //フェード処理を入れるなら
+            {
+                FadeOutStart();
+            }
+        }
+    }
+
+    /// <summary>
+    /// 音を一度だけ鳴らす。
+    /// </summary>
+    public void PlayRandomClipOneShot(bool isUseGameAudioManager = false)
+    {
         if(m_audioClipParams.Count == 0) {
             return;
         }
@@ -52,18 +73,14 @@ public class AudioManager : MonoBehaviour
         var index = MyRandom.RandomValue(0, m_audioClipParams.Count);
         var param = m_audioClipParams[index];
 
-        //randomにvolumeとpitchを決める
-        if (IsRandom)
-        {
-            m_audioSource.volume = param.volume * Random.Range(m_volumeRandomRange.min, m_volumeRandomRange.max);
-            m_audioSource.pitch = Random.Range(m_pitchRandomRange.min, m_pitchRandomRange.max);
-        }
-        
-        m_audioSource?.PlayOneShot(param.clip);
+        PlayOneShot(param, isUseGameAudioManager);
+    }
 
-        if (IsFadeOut)  //フェード処理を入れるなら
+    public void PlayAllOneShot(bool isUseGameAudioManager = false)
+    {
+        foreach (var param in m_audioClipParams)
         {
-            FadeOutStart();
+            PlayOneShot(param, isUseGameAudioManager);
         }
     }
 
@@ -75,5 +92,27 @@ public class AudioManager : MonoBehaviour
     public void FadeOutStart()
     {
         m_fade.FadeStart(AudioFade.FadeType.Out);
+    }
+
+    /// <summary>
+    /// randomにvolumeとpitchを決める
+    /// </summary>
+    private void SettingRandom(AudioClipParametor param)
+    {
+        if (IsRandom)
+        {
+            m_audioSource.volume = CalcuRandomVolume(param);
+            m_audioSource.pitch = CalcuRandomPitch(param);
+        }
+    }
+
+    private float CalcuRandomVolume(AudioClipParametor param)
+    {
+        return param.volume* Random.Range(m_volumeRandomRange.min, m_volumeRandomRange.max);
+    }
+
+    private float CalcuRandomPitch(AudioClipParametor param)
+    {
+        return Random.Range(m_pitchRandomRange.min, m_pitchRandomRange.max);
     }
 }

@@ -4,14 +4,22 @@ using UnityEngine;
 
 using AttributeObject;
 
+[RequireComponent(typeof(AudioManager))]
 public class TypeDamageDestroy : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField, Header("ダメージタイプ一覧")]
     private List<DamageType> m_takeDamageTypes = new List<DamageType>();
     public List<DamageType> GetTakeDamageTypes() => new List<DamageType>(m_takeDamageTypes);
 
-    [SerializeField]
+    [SerializeField, Header("生成するパーティクル一覧")]
     private List<GameObject> m_particles = new List<GameObject>();
+
+    private AudioManager m_audioManager = null;
+
+    private void Awake()
+    {
+        m_audioManager = GetComponent<AudioManager>();
+    }
 
     public void Damaged(DamageData data)
     {
@@ -27,6 +35,7 @@ public class TypeDamageDestroy : MonoBehaviour
 
     private void Damage(DamageData data)
     {
+        m_audioManager.PlayRandomClipOneShot(true);
         CreateParticles();
 
         Destroy(this.gameObject);
