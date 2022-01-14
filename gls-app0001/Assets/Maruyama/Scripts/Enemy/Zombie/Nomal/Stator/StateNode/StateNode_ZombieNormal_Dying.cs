@@ -94,7 +94,7 @@ public class StateNode_ZombieNormal_Dying : EnemyStateNodeBase<EnemyBase>
         //タスクのセレクト
         SelectTask();
 
-        m_param.audioManager?.PlayOneShot();  //声の再生。
+        m_param.audioManager?.PlayRandomClipOneShot();  //声の再生。
     }
 
     public override void OnUpdate()

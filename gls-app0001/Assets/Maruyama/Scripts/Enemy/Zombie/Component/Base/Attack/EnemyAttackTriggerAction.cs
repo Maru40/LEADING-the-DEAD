@@ -93,7 +93,7 @@ public class EnemyAttackTriggerAction : TriggerAction
 
             //m_audio.PlayOneShot(m_audio.clip);  //音再生
             CreateParticles();
-            m_audioManager?.PlayOneShot();
+            m_audioManager?.PlayRandomClipOneShot();
             m_animatorManager?.HitStop(damageData);
             damage.TakeDamage(damageData);
 

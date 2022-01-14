@@ -65,7 +65,7 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
             return;
         }
 
-        m_audioManager?.PlayOneShot();  //声を出す。
+        m_audioManager?.PlayRandomClipOneShot();  //声を出す。
 
         m_stator.GetTransitionMember().attackTrigger.Fire();  //攻撃状態に遷移
 

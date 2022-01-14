@@ -125,7 +125,7 @@ public class ClearManager_Zombie : MonoBehaviour
     private void PlayShoutSE()
     {
         var time = m_audioPlayRange.RandomValue;
-        m_waitTimer.AddWaitTimer(GetType(), time, () => m_audioManager?.PlayOneShot());
+        m_waitTimer.AddWaitTimer(GetType(), time, () => m_audioManager?.PlayRandomClipOneShot());
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -46,7 +46,7 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
 
     public override void OnEnter()
     {
-        m_param.audioManager?.PlayOneShot();
+        m_param.audioManager?.PlayRandomClipOneShot();
         m_param.enterAnimation?.Invoke();
         m_timer.ResetTimer(m_param.time);
 
