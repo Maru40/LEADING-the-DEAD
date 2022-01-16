@@ -82,7 +82,7 @@ public class DashAttack : AttackNodeBase
             return;
         }
 
-        if (m_timer.UpdateTimer())
+        if (m_timer.UpdateTimer()) //一定間隔で攻撃を始めるか決める
         {
             m_timer.ResetTimer(m_param.probabilityInterbalTime);
             ProbabilityAttack();
