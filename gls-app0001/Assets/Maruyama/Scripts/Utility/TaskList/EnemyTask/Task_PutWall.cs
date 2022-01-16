@@ -11,7 +11,6 @@ public class Task_PutWall : TaskNodeBase<EnemyBase>
 
     private Parametor m_param = new Parametor();
 
-    private GameTimer m_timer = new GameTimer();
     private TargetManager m_targetManager;
     private EnemyVelocityManager m_velocityManager;
 
@@ -26,7 +25,6 @@ public class Task_PutWall : TaskNodeBase<EnemyBase>
 
     public override void OnEnter()
     {
-        //m_timer.ResetTimer(m_param.time);
         m_velocityManager.ResetAll();
     }
 
@@ -47,6 +45,6 @@ public class Task_PutWall : TaskNodeBase<EnemyBase>
 
     public override void OnExit()
     {
-
+        Debug.Log("PutWall終了");
     }
 }
