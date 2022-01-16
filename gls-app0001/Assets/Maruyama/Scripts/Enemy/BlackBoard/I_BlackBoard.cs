@@ -5,7 +5,7 @@ using UnityEngine;
 public interface I_BlackBoard<StructType>
     where StructType : struct
 {
-    public StructType Struct { get; set; }
+    public ref StructType Struct { get; }
 
     public StructType GetStruct();
 }
