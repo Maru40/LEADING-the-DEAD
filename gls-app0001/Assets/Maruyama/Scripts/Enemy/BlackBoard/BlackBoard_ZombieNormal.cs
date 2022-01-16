@@ -10,7 +10,7 @@ public class BlackBoard_ZombieNormal : MonoBehaviour, I_BlackBoard<Parametor>
     public struct Parametor
     {
         public TargetManager targetManager;
-        public StateNode_ZombieNormal_Attack.AttackType attackType;
+        public StateNode_ZombieNormal_Attack.BlackBoardParametor attackParam;
     }
 
     [SerializeField]
@@ -24,10 +24,9 @@ public class BlackBoard_ZombieNormal : MonoBehaviour, I_BlackBoard<Parametor>
         }
     }
 
-    public Parametor Struct
+    public ref Parametor Struct
     {
-        get => m_param;
-        set => m_param = value;
+        get => ref m_param;
     }
 
     public Parametor GetStruct()
