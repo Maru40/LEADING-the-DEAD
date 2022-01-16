@@ -43,7 +43,7 @@ public abstract class TaskNodeBase_Ex<OwnerType> : TaskNodeBase<OwnerType>
         public Action exit;
     }
 
-    Parametor m_actionParam = new Parametor();
+    private Parametor m_actionParam = new Parametor();
 
     public TaskNodeBase_Ex(OwnerType owner, Parametor param = new Parametor())
         :base(owner)
@@ -67,7 +67,6 @@ public abstract class TaskNodeBase_Ex<OwnerType> : TaskNodeBase<OwnerType>
         m_actionParam.exit?.Invoke();
     }
 }
-
 
 public class TaskList<EnumType>
 {
@@ -98,20 +97,20 @@ public class TaskList<EnumType>
     /// <summary>
     /// 定義されたタスク
     /// </summary>
-    Dictionary<EnumType, Task> m_defineTaskDictionary = new Dictionary<EnumType, Task>();
+    private Dictionary<EnumType, Task> m_defineTaskDictionary = new Dictionary<EnumType, Task>();
 
     /// <summary>
     /// 現在積まれているタスク
     /// </summary>
-    List<Task> m_currentTasks = new List<Task>();
+    private List<Task> m_currentTasks = new List<Task>();
     /// <summary>
     /// 現在動作しているタスク
     /// </summary>
-    Task m_currentTask = null;
+    private Task m_currentTask = null;
     /// <summary>
     /// 現在動作しているタスクのIndex
     /// </summary>
-    int m_currentIndex = 0;
+    private int m_currentIndex = 0;
 
     /// <summary>
     /// 毎フレーム呼ぶ処理(外部でUpdate管理)
@@ -140,7 +139,7 @@ public class TaskList<EnumType>
     /// <summary>
     /// 一つのタスクの終了時
     /// </summary>
-    void EndOneTask()
+    private void EndOneTask()
     {
         m_currentTask.exit?.Invoke();  //現在のタスクのExit
 
