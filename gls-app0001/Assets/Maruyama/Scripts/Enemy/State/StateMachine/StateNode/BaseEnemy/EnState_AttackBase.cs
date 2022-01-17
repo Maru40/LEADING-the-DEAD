@@ -11,7 +11,7 @@ public abstract class EnState_AttackBase : EnemyStateNodeBase<EnemyBase>
     /// <summary>
     /// 攻撃するアニメーションの再生
     /// </summary>
-    protected abstract void PlayStartAnimation();
+    protected virtual void PlayStartAnimation() { }
 
     /// <summary>
     /// 切り替えるコンポーネントの準備
