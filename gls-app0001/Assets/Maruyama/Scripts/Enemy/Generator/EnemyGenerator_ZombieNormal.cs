@@ -44,7 +44,7 @@ public class CreateSetParametor_ZombieNormal
     [Header("ダッシュ攻撃のパラメータ")]
     public DashAttack.Parametor dashAttackParam = new DashAttack.Parametor(
         new PreliminaryParametor(new RandomRange(1.0f, 1.5f), 3.0f),
-        new Task_ChaseTarget.Parametor(9.0f, 0.5f, 2.5f, 5.0f, null),
+        new Task_ChaseTarget.Parametor(9.0f, 0.5f, 2.5f, 5.0f, 30.0f,null),
         new Task_WallAttack.Parametor(1.0f, 10.0f, null, null),
         new Task_Wait.Parametor(2.0f),
         25.0f, 30.0f, 10.0f);
