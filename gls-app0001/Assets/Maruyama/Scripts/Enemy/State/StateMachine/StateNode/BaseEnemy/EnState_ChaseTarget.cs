@@ -11,6 +11,8 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
     private AttackNodeManagerBase m_attackComp;
     private TargetManager m_targetManager;
     private EyeSearchRange m_eye;
+    private ChaseTarget m_chaseTarget;
+    private ThrongManager m_throngManager;
 
     private FoundObject m_eyeTarget = null;
 
@@ -19,6 +21,9 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
     {
         m_targetManager = owner.GetComponent<TargetManager>();
         m_eye = owner.GetComponent<EyeSearchRange>();
+        m_attackComp = owner.GetComponent<AttackNodeManagerBase>();
+        m_chaseTarget = owner.GetComponent<ChaseTarget>();
+        m_throngManager = owner.GetComponent<ThrongManager>();
     }
 
     protected override void ReserveChangeComponents()
@@ -34,16 +39,14 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
 
         var owner = GetOwner();
 
-        m_attackComp = owner.GetComponent<AttackNodeManagerBase>();
-
-        var chaseTarget = owner.GetComponent<ChaseTarget>();
+        //var chaseTarget = owner.GetComponent<ChaseTarget>();
 
         //集団行動設定
-        var throngManager = owner.GetComponent<ThrongManager>();
-        if (chaseTarget && throngManager)
+        //var throngManager = owner.GetComponent<ThrongManager>();
+        if (m_chaseTarget && m_throngManager)
         {
-            float range = chaseTarget.GetInThrongRange();
-            throngManager.SetInThrongRange(range);
+            float range = m_chaseTarget.GetInThrongRange();
+            m_throngManager.SetInThrongRange(range);
         }
     }
 
@@ -84,6 +87,10 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
 
     private void PlayerCheck()
     {
+        if(m_attackComp == null) {
+            return;
+        }
+
         if (m_attackComp.IsAttackStartRange())
         {
             m_attackComp.AttackStart();
