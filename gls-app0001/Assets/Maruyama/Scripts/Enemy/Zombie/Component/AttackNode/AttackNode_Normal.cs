@@ -83,7 +83,6 @@ public class AttackNode_Normal : TaskNodeBase<EnemyBase>
         m_taskList.DefineTask(TaskEnum.Preliminary, new Task_Preliminary(enemy, m_param.preliminaryParam));
 
         //攻撃
-        //m_param.attackParam.enterAnimation = m_animatorManager.CrossFadeNormalAttackAnimation;
         m_taskList.DefineTask(TaskEnum.Chase, 
             new Task_AttackChase(enemy, m_param.attackParam,
                 new TaskBaseParametor(() => m_animatorManager.CrossFadeNormalAttackAnimation(), null, null)));
