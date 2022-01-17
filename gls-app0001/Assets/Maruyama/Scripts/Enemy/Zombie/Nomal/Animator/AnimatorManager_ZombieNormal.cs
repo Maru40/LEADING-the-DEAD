@@ -44,6 +44,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     [SerializeField]
     private Ex_Dictionary<NormalAttackHitColliderType, AnimationHitColliderParametor> m_normalAttackParam =
         new Ex_Dictionary<NormalAttackHitColliderType, AnimationHitColliderParametor>();
+    public Dictionary<NormalAttackHitColliderType, AnimationHitColliderParametor> NormalAttackParametor => m_normalAttackParam;
 
     [SerializeField]
     private AnimationHitColliderParametor m_dashAttackParam = new AnimationHitColliderParametor();
@@ -129,7 +130,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         //左腕もコライダーのOn、Off
         timeEvent.ClampWhere(leftTimeParam.startTime)
             .Subscribe(_ => { leftTimeParam.trigger.AttackStart();
-                m_normalAttackComp.ChaseEnd();
+                //m_normalAttackComp.ChaseEnd();
             }).AddTo(this);
         timeEvent.ClampWhere(leftTimeParam.endTime)
             .Subscribe(_ => leftTimeParam.trigger.AttackEnd())
@@ -143,9 +144,9 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
             .Subscribe(_ => rightTimeParam.trigger.AttackEnd())
             .AddTo(this);
 
-        behavior.onStateEntered.Subscribe(_ => m_normalAttackComp.AttackStart()).AddTo(this);
+        //behavior.onStateEntered.Subscribe(_ => m_normalAttackComp.AttackStart()).AddTo(this);
 
-        behavior.onStateExited.Subscribe(_ => m_normalAttackComp.EndAnimationEvent()).AddTo(this);
+        //behavior.onStateExited.Subscribe(_ => m_normalAttackComp.EndAnimationEvent()).AddTo(this);
     }
 
     /// <summary>
