@@ -47,6 +47,12 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
         m_stateMachine = new GraphBase<NodeType, EnumType, TransitionType>();
     }
 
+    public EnemyMainStateMachine(TransitionType transitionStruct)
+    {
+        m_transitionStruct = transitionStruct;
+        m_stateMachine = new GraphBase<NodeType, EnumType, TransitionType>();
+    }
+
     /// <summary>
     /// 現在使うノードのタイプの取得
     /// </summary>
