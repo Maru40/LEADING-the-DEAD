@@ -133,6 +133,10 @@ MonoBehaviour:
     statorParametor:
       transitionMember:
         normalAttackRange: 2
+        dashAttackTransitionParam:
+          probability: 25
+          startRange: 30
+          probabilityInterbalTime: 10
       attackParam:
         normalParam:
           preliminaryParam:
@@ -376,6 +380,10 @@ MonoBehaviour:
     statorParametor:
       transitionMember:
         normalAttackRange: 0
+        dashAttackTransitionParam:
+          probability: 0
+          startRange: 0
+          probabilityInterbalTime: 0
       attackParam:
         normalParam:
           preliminaryParam:
