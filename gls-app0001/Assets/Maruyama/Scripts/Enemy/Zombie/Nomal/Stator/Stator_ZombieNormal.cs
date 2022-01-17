@@ -36,7 +36,10 @@ public class ZombieNormalTransitionMember
     public MyTrigger angerTirgger = new MyTrigger();
     //public MyTrigger dyingTrigger = new MyTrigger();
     public MyTrigger deathTrigger = new MyTrigger();
+    [Header("通常攻撃に遷移する距離")]
     public float normalAttackRange = 0.0f;
+    [Header("ダッシュ攻撃に遷移する条件パラメータ")]
+    public DashAttackTransitionManager.Parametor dashAttackTransitionParam = new DashAttackTransitionManager.Parametor();
 }
 
 public class Stator_ZombieNormal : StatorBase
@@ -51,6 +54,7 @@ public class Stator_ZombieNormal : StatorBase
     }
 
     private StateMachine m_stateMachine;
+    private DashAttackTransitionManager m_dashAttackTransitionManager; //DashAttackの遷移を管理する
 
     private EyeSearchRange m_eye;
     private BlackBoard_ZombieNormal m_blackBoard;
@@ -84,6 +88,7 @@ public class Stator_ZombieNormal : StatorBase
     private void Start()
     {
         m_stateMachine = new StateMachine(m_param.transitionMember);
+
         CreateStateMachine();
     }
 
@@ -94,8 +99,21 @@ public class Stator_ZombieNormal : StatorBase
 
     private void CreateStateMachine()
     {
+        CreateReserve();
         CreateNode();
         CreateEdge();
+    }
+
+    /// <summary>
+    /// 生成準備(必要なマネージャクラスの生成など)
+    /// </summary>
+    private void CreateReserve()
+    {
+        var enemy = GetComponent<EnemyBase>();
+
+        m_dashAttackTransitionManager = new DashAttackTransitionManager(enemy,
+            () => m_blackBoard.Struct.attackParam.startType = StateNode_ZombieNormal_Attack.StateType.Dash, //ダッシュ状態に遷移
+            m_param.transitionMember.dashAttackTransitionParam);
     }
 
     private void CreateNode()
@@ -132,6 +150,7 @@ public class Stator_ZombieNormal : StatorBase
         m_stateMachine.AddEdge(StateType.Chase, StateType.RandomPlowling, ToRandomPlowling);
         m_stateMachine.AddEdge(StateType.Chase, StateType.Attack, ToAttackTrigger);
         m_stateMachine.AddEdge(StateType.Chase, StateType.Attack, IsNormalAttack);
+        m_stateMachine.AddEdge(StateType.Chase, StateType.Attack, IsDashAttack);
         m_stateMachine.AddEdge(StateType.Chase, StateType.Eat, ToEatTrigger);
         m_stateMachine.AddEdge(StateType.Chase, StateType.WallRising, ToWallRisingTrigger);
 
@@ -234,6 +253,11 @@ public class Stator_ZombieNormal : StatorBase
         }
 
         return false;
+    }
+
+    private bool IsDashAttack(TransitionMember member)
+    {
+        return m_dashAttackTransitionManager.IsTransition(member.dashAttackTransitionParam);
     }
 
     public override void ChangeState<EnumType>(EnumType type, int priority = 0)
