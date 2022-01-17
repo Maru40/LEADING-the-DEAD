@@ -54,6 +54,7 @@ public class DashAttack : AttackNodeBase
     private AnimatorManager_ZombieNormal m_animatorManager;
     private EnemyVelocityManager m_velocityManager;
     private Stator_ZombieNormal m_stator;
+    private BlackBoard_ZombieNormal m_backBoard;
 
     private TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
     private GameTimer m_timer = new GameTimer();
@@ -66,6 +67,7 @@ public class DashAttack : AttackNodeBase
         m_animatorManager = GetComponent<AnimatorManager_ZombieNormal>();
         m_velocityManager = GetComponent<EnemyVelocityManager>();
         m_stator = GetComponent<Stator_ZombieNormal>();
+        m_backBoard = GetComponent<BlackBoard_ZombieNormal>();
     }
 
     private void Start()
@@ -154,7 +156,8 @@ public class DashAttack : AttackNodeBase
 
     public override void AttackStart()
     {
-        SelectTask();
+        //SelectTask();
+        m_backBoard.Struct.attackParam.startType = StateNode_ZombieNormal_Attack.StateType.Dash;
         m_stator.GetTransitionMember().attackTrigger.Fire();
     }
 
@@ -177,6 +180,10 @@ public class DashAttack : AttackNodeBase
 
     private bool IsAttackStart()
     {
+        if(m_stator.GetNowStateType() == ZombieNormalState.Attack) {
+            return false;
+        }
+
         if (!m_targetManager.HasTarget()) {
             return false;
         }
