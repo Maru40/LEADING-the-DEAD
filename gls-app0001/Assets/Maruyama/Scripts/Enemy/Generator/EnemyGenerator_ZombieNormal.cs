@@ -22,8 +22,8 @@ public class CreateSetParametor_ZombieNormal
     public RandomPlowlingMove.Parametor randomPlowlingParametor = new RandomPlowlingMove.Parametor(15.0f, 2.5f, 2.0f, 0.3f, 3.0f, 1.0f);
     [Header("ステータス")]
     public StatusManager_ZombieNormal.Status status = new StatusManager_ZombieNormal.Status(1.0f, 3.0f);
-    [Header("攻撃開始距離")]
-    public AttackParametorBase attackManagerParametor = new AttackParametorBase(new AttributeObject.DamageData(2.0f), 2.5f);
+    //[Header("攻撃開始距離")]
+    //public AttackParametorBase attackManagerParametor = new AttackParametorBase(new AttributeObject.DamageData(2.0f), 2.5f);
     //[Header("通常攻撃のパラメータ")]
     //public NormalAttack.Parametor normalAttackParametor = new NormalAttack.Parametor(3.0f);
     [Header("通常攻撃の攻撃力パラメータ")]
@@ -61,7 +61,7 @@ public class CreateSetParametor_ZombieNormal
         chaseParametor = new ChaseTargetParametor(allInit, allInit, allInit, allInit, allInit);
         randomPlowlingParametor = new RandomPlowlingMove.Parametor(allInit, allInit, allInit, allInit, allInit, allInit);
         status = new StatusManager_ZombieNormal.Status(allInit, allInit);
-        attackManagerParametor = new AttackParametorBase(new AttributeObject.DamageData(allInit), allInit);
+        //attackManagerParametor = new AttackParametorBase(new AttributeObject.DamageData(allInit), allInit);
     }
 }
 
@@ -132,12 +132,12 @@ public class EnemyGenerator_ZombieNormal : EnemyGenerator
             statusMgr.SetStatus(m_createSetParam.status);
         }
 
-        var attackManager = obj.GetComponent<AttackManager_ZombieNormal>();
-        if (attackManager)
-        {
-            attackManager.SetBaseParam(m_createSetParam.attackManagerParametor);
-            attackManager.PreliminaryParametorProperty = m_createSetParam.preliminaryParam;
-        }
+        //var attackManager = obj.GetComponent<AttackManager_ZombieNormal>();
+        //if (attackManager)
+        //{
+        //    attackManager.SetBaseParam(m_createSetParam.attackManagerParametor);
+        //    attackManager.PreliminaryParametorProperty = m_createSetParam.preliminaryParam;
+        //}
 
         //var normalAttack = obj.GetComponent<NormalAttack>();
         //if (normalAttack)
@@ -226,7 +226,7 @@ public class EnemyGenerator_ZombieNormal : EnemyGenerator
     {
         m_createSetParam.chaseParametor.Random(m_randomSetParam.cahseParametor);
         m_createSetParam.randomPlowlingParametor.Random(m_randomSetParam.randomPlowlingParametor);
-        m_createSetParam.attackManagerParametor.Random(m_randomSetParam.attackManagerParametor);
+        //m_createSetParam.attackManagerParametor.Random(m_randomSetParam.attackManagerParametor);
         //m_createSetParam.normalAttackParametor.Random(m_randomSetParam.normalAttackParametor);
     }
 }
