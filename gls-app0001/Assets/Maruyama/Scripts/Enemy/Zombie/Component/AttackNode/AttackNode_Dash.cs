@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using TaskBaseParametor = TaskNodeBase_Ex<EnemyBase>.BaseParametor;
+
 public class AttackNode_Dash : TaskNodeBase<EnemyBase>
 {
     private enum TaskEnum
@@ -116,16 +118,19 @@ public class AttackNode_Dash : TaskNodeBase<EnemyBase>
         var enemy = GetOwner();
 
         //予備動作
-        m_param.preliminaryParam.enterAnimation = () => m_animatorManager.CrossFadePreliminaryNormalAttackAniamtion();
-        m_taskList.DefineTask(TaskEnum.Preliminary, new Task_Preliminary(enemy, m_param.preliminaryParam));
+        m_taskList.DefineTask(TaskEnum.Preliminary, 
+            new Task_Preliminary(enemy, m_param.preliminaryParam, 
+                new TaskBaseParametor(() => m_animatorManager.CrossFadePreliminaryNormalAttackAniamtion(), null, null)));
 
         //追従
-        m_param.chaseParam.enterAnimation = () => m_animatorManager.CrossFadeDashAttackMove();
-        m_taskList.DefineTask(TaskEnum.Chase, new Task_ChaseTarget(enemy, m_param.chaseParam));
+        m_taskList.DefineTask(TaskEnum.Chase, 
+            new Task_ChaseTarget(enemy, m_param.chaseParam,
+                new TaskBaseParametor(() => m_animatorManager.CrossFadeDashAttackMove(), null, null)));
 
         //攻撃
-        m_param.attackParam.enterAnimation = () => m_animatorManager.CrossFadeDashAttack();
-        m_taskList.DefineTask(TaskEnum.Attack, new Task_WallAttack(enemy, m_param.attackParam));
+        m_taskList.DefineTask(TaskEnum.Attack, 
+            new Task_WallAttack(enemy, m_param.attackParam,
+                new TaskBaseParametor(() => m_animatorManager.CrossFadeDashAttack(), null, null)));
 
         //待機
         m_param.waitParam.enter = () => { 

@@ -5,7 +5,7 @@ using UnityEngine;
 using System;
 using MaruUtility;
 
-public class Task_WallAttack : TaskNodeBase<EnemyBase>
+public class Task_WallAttack : TaskNodeBase_Ex<EnemyBase>
 {
     [Serializable]
     public struct Parametor
@@ -14,15 +14,15 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
         public float time;
         [Header("最大スピード")]
         public float maxSpeed;
-        public AudioManager audioManager;
-        public Action enterAnimation;
+        public List<AudioManager_Ex.Parametor> audioParams;
+        //public Action enterAnimation;
 
-        public Parametor(float time, float maxSpeed, AudioManager audioManager, Action action)
+        public Parametor(float time, float maxSpeed, List<AudioManager_Ex.Parametor> audioParams)
         {
             this.time = time;
             this.maxSpeed = maxSpeed;
-            this.audioManager = audioManager;
-            this.enterAnimation = action;
+            this.audioParams = audioParams;
+            //this.enterAnimation = action;
         }
     }
 
@@ -33,21 +33,29 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
     private EnemyVelocityManager m_velocityManager;
     private TargetManager m_targetManager;
     private EnemyRotationCtrl m_rotationController;
+    private AudioManager_Ex m_audioManager;
 
     public Task_WallAttack(EnemyBase owner, Parametor param)
-        :base(owner)
+        :this(owner, param, new BaseParametor())
+    { }
+
+    public Task_WallAttack(EnemyBase owner, Parametor param, BaseParametor baseParametor)
+         : base(owner, baseParametor)
     {
         m_param = param;
 
         m_velocityManager = owner.GetComponent<EnemyVelocityManager>();
         m_targetManager = owner.GetComponent<TargetManager>();
         m_rotationController = owner.GetComponent<EnemyRotationCtrl>();
+        m_audioManager = owner.GetComponent<AudioManager_Ex>();
     }
 
     public override void OnEnter()
     {
-        m_param.audioManager?.PlayRandomClipOneShot();
-        m_param.enterAnimation?.Invoke();
+        base.OnEnter();
+
+        m_audioManager?.PlayRandomClipOneShot(m_param.audioParams);
+        //m_param.enterAnimation?.Invoke();
         m_timer.ResetTimer(m_param.time);
 
         if (m_targetManager.HasTarget())
@@ -60,6 +68,8 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
 
     public override bool OnUpdate()
     {
+        base.OnUpdate();
+
         m_timer.UpdateTimer();
 
         Move();
@@ -70,7 +80,7 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
 
     public override void OnExit()
     {
-
+        base.OnExit();
     }
 
     private void Move()

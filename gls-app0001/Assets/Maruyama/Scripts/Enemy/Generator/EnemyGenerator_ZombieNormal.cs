@@ -50,7 +50,7 @@ public class CreateSetParametor_ZombieNormal
         25.0f, 30.0f, 10.0f);
     [Header("壁攻撃パラメータ")]
     public WallAttack_ZombieNormal.Parametor wallAttackParam = new WallAttack_ZombieNormal.Parametor(
-        new Task_WallAttack.Parametor(1.0f, 15.0f, null, null),
+        new Task_WallAttack.Parametor(1.0f, 15.0f, null),
         new Task_Wait.Parametor(1.0f));
     [Header("オーラパラメータ")]
     public AuraManager.Parametor auraParam = new AuraManager.Parametor();

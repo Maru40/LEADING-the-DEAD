@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using TaskBaseParametor = TaskNodeBase_Ex<EnemyBase>.BaseParametor;
+
 public class WallAttack_ZombieNormal : AttackNodeBase
 {
     [System.Serializable]
@@ -68,8 +70,10 @@ public class WallAttack_ZombieNormal : AttackNodeBase
     {
         var enemy = GetComponent<EnemyBase>();
 
-        m_param.wallAttackParam.enterAnimation = () => m_animatorManager.CrossFadeWallAttack();
-        m_taskList.DefineTask(TaskEnum.Attack, new Task_WallAttack(enemy, m_param.wallAttackParam));
+        //m_param.wallAttackParam.enterAnimation = () => m_animatorManager.CrossFadeWallAttack();
+        m_taskList.DefineTask(TaskEnum.Attack, 
+            new Task_WallAttack(enemy, m_param.wallAttackParam,
+                new TaskBaseParametor(() => m_animatorManager.CrossFadeWallAttack(), null, null)));
 
         m_param.waitParam.exit = () => EndAnimationEvent();
         m_taskList.DefineTask(TaskEnum.Wait, new Task_Wait(m_param.waitParam));

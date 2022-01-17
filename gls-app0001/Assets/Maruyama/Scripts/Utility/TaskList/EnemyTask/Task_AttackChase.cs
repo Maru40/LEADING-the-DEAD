@@ -7,7 +7,7 @@ using MaruUtility;
 /// <summary>
 /// 攻撃時の追従軸合わせ
 /// </summary>
-public class Task_AttackChase : TaskNodeBase<EnemyBase>
+public class Task_AttackChase : TaskNodeBase_Ex<EnemyBase>
 {
     [System.Serializable]
     public struct Parametor : I_Random<Parametor>
@@ -20,10 +20,10 @@ public class Task_AttackChase : TaskNodeBase<EnemyBase>
         [Header("追従する時間")]
         public float chaseTime;
         public bool isTimer;
-        [Header("攻撃時に鳴らしたい音")]
-        public AudioManager audioManager;
+        [Header("音のパラメータ")]
+        public List<AudioManager_Ex.Parametor> audioParams;
 
-        public System.Action enterAnimation;
+        //public System.Action enterAnimation;
 
         public Parametor(float moveSpeed)
         {
@@ -33,8 +33,8 @@ public class Task_AttackChase : TaskNodeBase<EnemyBase>
             this.chaseTime = 1.0f;
             this.isTimer = false;
             //this.endWaitTime = 0.1f;
-            this.enterAnimation = null;
-            this.audioManager = null;
+            //this.enterAnimation = null;
+            this.audioParams = new List<AudioManager_Ex.Parametor>();
         }
 
         public void Random(RandomRange<Parametor> range)
@@ -59,11 +59,16 @@ public class Task_AttackChase : TaskNodeBase<EnemyBase>
     private StatusManagerBase m_statusManager;
     private ThrongManager m_throngManager;
     private EnemyRotationCtrl m_rotationController;
+    private AudioManager_Ex m_audioManager;
 
     private GameTimer m_timer = new GameTimer();
 
     public Task_AttackChase(EnemyBase owner, Parametor parametor)
-        :base(owner)
+        : this(owner, parametor, new BaseParametor())
+    { }
+
+    public Task_AttackChase(EnemyBase owner, Parametor parametor, BaseParametor baseParametor)
+        : base(owner, baseParametor)
     {
         m_param = parametor;
 
@@ -73,20 +78,26 @@ public class Task_AttackChase : TaskNodeBase<EnemyBase>
         m_statusManager = owner.GetComponent<StatusManagerBase>();
         m_throngManager = owner.GetComponent<ThrongManager>();
         m_rotationController = owner.GetComponent<EnemyRotationCtrl>();
+        m_audioManager = owner.GetComponent<AudioManager_Ex>();
     }
 
     public override void OnEnter()
     {
+        base.OnEnter();
+
         SetForwardTarget();
         m_rotationController.enabled = true;
 
-        m_param.enterAnimation?.Invoke();
+        //m_param.enterAnimation?.Invoke();
         m_timer.ResetTimer(m_param.chaseTime);
-        m_param.audioManager?.PlayRandomClipOneShot();
+        //m_param.audioManager?.PlayRandomClipOneShot();
+        m_audioManager?.PlayRandomClipOneShot(m_param.audioParams);
     }
 
     public override bool OnUpdate()
     {
+        base.OnUpdate();
+
         TargetChase();
 
         m_timer.UpdateTimer();
@@ -96,7 +107,7 @@ public class Task_AttackChase : TaskNodeBase<EnemyBase>
 
     public override void OnExit()
     {
-
+        base.OnExit();
     }
 
     /// <summary>

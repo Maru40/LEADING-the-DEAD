@@ -4,7 +4,7 @@ using UnityEngine;
 
 using MaruUtility;
 
-public class Task_ChaseTarget : TaskNodeBase<EnemyBase>
+public class Task_ChaseTarget : TaskNodeBase_Ex<EnemyBase>
 {
     [System.Serializable]
     public struct Parametor 
@@ -15,11 +15,11 @@ public class Task_ChaseTarget : TaskNodeBase<EnemyBase>
         public float nearRange;  //対象に追いついたと思う距離
         public float turningPower;  //曲がる力
         public float chaseRange; //追いかける距離
-        public System.Action enterAnimation;
+        //public System.Action enterAnimation;
 
         public Parametor(float maxSpeed, float subPursuitTargetForward,
-            float nearRange, float turningPower, float chaseRange,
-            System.Action action
+            float nearRange, float turningPower, float chaseRange
+            //System.Action action
             )
         {
             this.maxSpeed = maxSpeed;
@@ -27,7 +27,7 @@ public class Task_ChaseTarget : TaskNodeBase<EnemyBase>
             this.nearRange = nearRange;
             this.turningPower = turningPower;
             this.chaseRange = chaseRange;
-            this.enterAnimation = action;
+            //this.enterAnimation = action;
         }
     }
 
@@ -39,23 +39,31 @@ public class Task_ChaseTarget : TaskNodeBase<EnemyBase>
     private EyeSearchRange m_eye;
 
     public Task_ChaseTarget(EnemyBase owner, Parametor param)
-        :base(owner)
+        :this(owner, param, new BaseParametor())
+    { }
+
+    public Task_ChaseTarget(EnemyBase owner, Parametor param, BaseParametor baseParametor)
+        : base(owner, baseParametor)
     {
+        m_param = param;
+
         m_targetManager = owner.GetComponent<TargetManager>();
         m_velocityManager = owner.GetComponent<EnemyVelocityManager>();
         m_rotationController = owner.GetComponent<EnemyRotationCtrl>();
         m_eye = owner.GetComponent<EyeSearchRange>();
-
-        m_param = param;
     }
 
     public override void OnEnter()
     {
-        m_param.enterAnimation?.Invoke();
+        base.OnEnter();
+
+        //m_param.enterAnimation?.Invoke();
     }
 
     public override bool OnUpdate()
     {
+        base.OnUpdate();
+
         if (!m_targetManager.HasTarget()) { //ターゲットがnullなら
             return true;
         }
@@ -68,7 +76,7 @@ public class Task_ChaseTarget : TaskNodeBase<EnemyBase>
 
     public override void OnExit()
     {
-
+        base.OnExit();
     }
 
     private void Move()

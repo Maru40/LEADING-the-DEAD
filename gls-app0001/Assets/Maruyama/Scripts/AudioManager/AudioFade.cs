@@ -12,7 +12,7 @@ public class AudioFade : MonoBehaviour
     }
 
     [System.Serializable]
-    private struct Parametor 
+    public struct Parametor 
     {
         public float m_inTime;   //フェードインに掛ける時間
         public float m_outTime;  //フェードアウトに掛ける時間
@@ -61,6 +61,13 @@ public class AudioFade : MonoBehaviour
 
     public void FadeStart(FadeType type)
     {
+        FadeStart(type, m_param);
+    }
+
+    public void FadeStart(FadeType type, Parametor parametor)
+    {
+        m_param = parametor;
+
         enabled = true;
 
         FadeInit(type);
@@ -106,5 +113,11 @@ public class AudioFade : MonoBehaviour
                 m_updateAction = null;
                 break;
         }
+    }
+
+    public void Stop()
+    {
+        m_timer.ResetTimer();
+        m_updateAction = null;
     }
 }

@@ -85,8 +85,9 @@ public class AttackNode_WallDash : TaskNodeBase<EnemyBase>
 
         m_taskList.DefineTask(TaskEnum.Chase, new Task_ChaseTarget(enemy, m_param.chaseParam));
 
-        m_param.wallAttackParam.enterAnimation = () => m_animatorManager.CrossFadeWallAttack();
-        m_taskList.DefineTask(TaskEnum.Attack, new Task_WallAttack(enemy, m_param.wallAttackParam));
+        var wallBaseParametor = new TaskNodeBase_Ex<EnemyBase>.BaseParametor();
+        wallBaseParametor.enter = () => m_animatorManager.CrossFadeWallAttack();
+        m_taskList.DefineTask(TaskEnum.Attack, new Task_WallAttack(enemy, m_param.wallAttackParam, wallBaseParametor));
 
         //m_param.waitParam.exit = () => m_attackManager.EndAnimationEvent();
         m_taskList.DefineTask(TaskEnum.Wait, new Task_Wait(m_param.waitParam));
