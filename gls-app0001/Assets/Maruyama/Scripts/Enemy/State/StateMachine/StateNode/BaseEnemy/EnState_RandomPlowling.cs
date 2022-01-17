@@ -21,6 +21,8 @@ public class EnState_RandomPlowling : EnemyStateNodeBase<EnemyBase>
         var owner = GetOwner();
 
         AddChangeComp(owner.GetComponent<RandomPlowlingMove>(), true, false);
+        AddChangeComp(owner.GetComponent<EnemyRotationCtrl>(), true, true);
+        AddChangeComp(owner.GetComponent<ObstacleEvasion>(), true, true);
     }
 
     public override void OnStart()

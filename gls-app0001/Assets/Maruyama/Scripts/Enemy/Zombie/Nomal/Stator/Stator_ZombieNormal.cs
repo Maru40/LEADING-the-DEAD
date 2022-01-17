@@ -37,6 +37,13 @@ public class ZombieNormalTransitionMember
 
 public class Stator_ZombieNormal : StatorBase
 {
+    [System.Serializable]
+    public struct Parametor
+    {
+        [Header("攻撃パラメータ")]
+        public StateNode_ZombieNormal_Attack.Parametor attackParam;
+    }
+
     private StateMachine m_stateMachine;
 
     //パラメータ
@@ -47,10 +54,18 @@ public class Stator_ZombieNormal : StatorBase
     private StateNode_ZombieNormal_Dying.Parametor m_dyingParametor = 
         new StateNode_ZombieNormal_Dying.Parametor(0.5f, 1.5f);
 
+    [SerializeField]
+    private Parametor m_param = new Parametor();
+
     private void Awake()
     {
         m_stateMachine = new StateMachine();
 
+        //CreateStateMachine();
+    }
+
+    private void Start()
+    {
         CreateStateMachine();
     }
 
@@ -73,7 +88,7 @@ public class Stator_ZombieNormal : StatorBase
         m_stateMachine.AddNode(StateType.Find,           new StateNode_ZombieNormal_Find(zombie, m_findParametor));
         m_stateMachine.AddNode(StateType.Chase,          new EnState_ChaseTarget(zombie));
         m_stateMachine.AddNode(StateType.Eat,            new StateNode_ZombieNormal_Eat(zombie));
-        m_stateMachine.AddNode(StateType.Attack,         new StateNode_ZombieNormal_Attack(zombie));
+        m_stateMachine.AddNode(StateType.Attack,         new StateNode_ZombieNormal_Attack(zombie, m_param.attackParam));
         m_stateMachine.AddNode(StateType.WallRising,     new StateNode_ZombieNormal_WallRising(zombie));
         m_stateMachine.AddNode(StateType.Stun,           new EnState_Stun(zombie));
         m_stateMachine.AddNode(StateType.Anger,          new StateNode_ZombieNormal_Anger(zombie));

@@ -14,15 +14,19 @@ public class Task_ChaseTarget : TaskNodeBase<EnemyBase>
         public float subPursuitTargetForward;
         public float nearRange;  //対象に追いついたと思う距離
         public float turningPower;  //曲がる力
+        public float chaseRange; //追いかける距離
         public System.Action enterAnimation;
 
         public Parametor(float maxSpeed, float subPursuitTargetForward,
-            float nearRange, float turningPower, System.Action action)
+            float nearRange, float turningPower, float chaseRange,
+            System.Action action
+            )
         {
             this.maxSpeed = maxSpeed;
             this.subPursuitTargetForward = subPursuitTargetForward;
             this.nearRange = nearRange;
             this.turningPower = turningPower;
+            this.chaseRange = chaseRange;
             this.enterAnimation = action;
         }
     }
@@ -52,8 +56,6 @@ public class Task_ChaseTarget : TaskNodeBase<EnemyBase>
 
     public override bool OnUpdate()
     {
-        //Debug.Log("△追いかける");
-
         if (!m_targetManager.HasTarget()) { //ターゲットがnullなら
             return true;
         }
@@ -153,7 +155,7 @@ public class Task_ChaseTarget : TaskNodeBase<EnemyBase>
     /// <returns></returns>
     private bool IsEyeRad()
     {
-        if (m_eye.IsInEyeRange(m_targetManager.GetNowTarget().gameObject))
+        if (m_eye.IsInEyeRange(m_targetManager.GetNowTarget().gameObject, m_param.chaseRange))
         {
             return true;
         }

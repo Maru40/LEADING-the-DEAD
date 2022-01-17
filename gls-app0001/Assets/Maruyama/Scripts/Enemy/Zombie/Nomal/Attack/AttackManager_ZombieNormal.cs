@@ -21,6 +21,7 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
     private Stator_ZombieNormal m_stator;
     private TargetManager m_targetMgr;
     private AnimatorManager_ZombieNormal m_animatorManager;
+    private BlackBoard_ZombieNormal m_blackBoard;
 
     private GameTimer m_gameTimer = new GameTimer();
 
@@ -29,6 +30,7 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
         m_stator = GetComponent<Stator_ZombieNormal>();
         m_targetMgr = GetComponent<TargetManager>();
         m_animatorManager = GetComponent<AnimatorManager_ZombieNormal>();
+        m_blackBoard = GetComponent<BlackBoard_ZombieNormal>();
     }
 
     /// <summary>
@@ -65,14 +67,17 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
             return;
         }
 
-        m_audioManager?.PlayRandomClipOneShot();  //声を出す。
+        m_blackBoard.Struct.attackParam.startType = StateNode_ZombieNormal_Attack.StateType.Normal;
+        m_stator.GetTransitionMember().attackTrigger.Fire();
 
-        m_stator.GetTransitionMember().attackTrigger.Fire();  //攻撃状態に遷移
+        //m_audioManager?.PlayRandomClipOneShot();  //声を出す。
 
-        m_animatorManager.CrossFadePreliminaryNormalAttackAniamtion();  //予備動作に変更
+        //m_stator.GetTransitionMember().attackTrigger.Fire();  //攻撃状態に遷移
 
-        var time = m_preliminaryParam.timeRandomRange.RandomValue;
-        m_gameTimer.ResetTimer(time, () => m_animatorManager.CrossFadeNormalAttackAnimation());
+        //m_animatorManager.CrossFadePreliminaryNormalAttackAniamtion();  //予備動作に変更
+
+        //var time = m_preliminaryParam.timeRandomRange.RandomValue; //予備動作の時間をランダムで決める
+        //m_gameTimer.ResetTimer(time, () => m_animatorManager.CrossFadeNormalAttackAnimation());
     }
 
     public override void EndAnimationEvent()

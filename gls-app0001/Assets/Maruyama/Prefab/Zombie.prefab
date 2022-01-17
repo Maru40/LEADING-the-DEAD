@@ -4923,7 +4923,6 @@ GameObject:
   - component: {fileID: 6932570756744996945}
   - component: {fileID: 95905029097332403}
   - component: {fileID: -9033992289825026406}
-  - component: {fileID: 8806759177434941914}
   - component: {fileID: -3509147400467223985}
   - component: {fileID: -6998184374044003836}
   - component: {fileID: 437899209864115181}
@@ -4932,10 +4931,11 @@ GameObject:
   - component: {fileID: -1360444936329894128}
   - component: {fileID: -7045518753148058587}
   - component: {fileID: -775554236576631193}
-  - component: {fileID: 8155819917801042600}
   - component: {fileID: 6950668274573766561}
   - component: {fileID: 5193771528758120441}
   - component: {fileID: -1647923362550143649}
+  - component: {fileID: -2931727863338850683}
+  - component: {fileID: 5667310560471658648}
   m_Layer: 6
   m_Name: Zombie
   m_TagString: Untagged
@@ -5026,6 +5026,56 @@ MonoBehaviour:
     fireTime: 0.5
     deathAnimationTime: 1.5
     audioManager: {fileID: 6637184704922195203}
+  m_param:
+    attackParam:
+      normalParam:
+        preliminaryParam:
+          timeRandomRange:
+            min: 0.3
+            max: 0.8
+          moveSpeed: 0.1
+          audioManager: {fileID: 2555745591758116981}
+        attackParam:
+          moveSpeed: 3.5
+          turningDegree: 0
+          nearAvoidVec: 3
+          chaseTime: 1
+          isTimer: 0
+          audioManager: {fileID: 3537372825842702478}
+        waitParam:
+          time: 1
+      dashParam:
+        preliminaryParam:
+          timeRandomRange:
+            min: 0.5
+            max: 1
+          moveSpeed: 3
+          audioManager: {fileID: 2555745591758116981}
+        chaseParam:
+          maxSpeed: 9
+          subPursuitTargetForward: 0.5
+          nearRange: 2
+          turningPower: 5
+          chaseRange: 30
+        attackParam:
+          time: 1
+          maxSpeed: 10
+          audioManager: {fileID: 3537372825842702478}
+        waitParam:
+          time: 3
+      wallAttackParam:
+        chaseParam:
+          maxSpeed: 10
+          subPursuitTargetForward: 0
+          nearRange: 2
+          turningPower: 5
+          chaseRange: 30
+        wallAttackParam:
+          time: 1.5
+          maxSpeed: 10
+          audioManager: {fileID: 3537372825842702478}
+        waitParam:
+          time: 1
 --- !u!114 &1444888580945028647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5353,6 +5403,7 @@ MonoBehaviour:
         min: 1
         max: 1
       moveSpeed: 1
+      audioManager: {fileID: 0}
     angerBuffParametor:
       attackPower: 1.05
       speed: 1.02
@@ -5370,22 +5421,6 @@ MonoBehaviour:
     eatParam:
       power: 1
     dashAttackParam:
-      preliminaryParam:
-        timeRandomRange:
-          min: 1
-          max: 1.5
-        moveSpeed: 3
-      chaseParam:
-        maxSpeed: 9
-        subPursuitTargetForward: 0.5
-        nearRange: 2.5
-        turningPower: 5
-      attackParam:
-        time: 1
-        maxSpeed: 10
-        audioManager: {fileID: 0}
-      waitParam:
-        time: 2
       probability: 25
       startRange: 30
       probabilityInterbalTime: 10
@@ -5495,33 +5530,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c6bb21b93087e489d540ded587b961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8806759177434941914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7434505739018704334}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd760d1eb34c86b48ad19c06d6301407, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_baseParam:
-    damageData:
-      obj: {fileID: 0}
-      damageValue: 1
-      isStunAttack: 0
-      hitStopTime: 0
-      type: 0
-      damageTags: []
-    startRange: 1.5
-  m_param:
-    moveSpeed: 3
-    turningDegree: 0
-    nearAvoidVec: 1
-    endWaitTime: 1
-  m_audioManager: {fileID: 3537372825842702478}
 --- !u!114 &-3509147400467223985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5638,6 +5646,7 @@ MonoBehaviour:
       min: 0.1
       max: 1
     moveSpeed: 2
+    audioManager: {fileID: 0}
   m_audioManager: {fileID: 2555745591758116981}
 --- !u!114 &-350905166790925542
 MonoBehaviour:
@@ -5721,53 +5730,9 @@ MonoBehaviour:
       damageTags: []
     startRange: 1.5
   m_param:
-    preliminaryParam:
-      timeRandomRange:
-        min: 1
-        max: 1.5
-      moveSpeed: 3
-    chaseParam:
-      maxSpeed: 9
-      subPursuitTargetForward: 0.5
-      nearRange: 2.5
-      turningPower: 5
-    attackParam:
-      time: 1
-      maxSpeed: 10
-      audioManager: {fileID: 3537372825842702478}
-    waitParam:
-      time: 2
     probability: 25
     startRange: 30
     probabilityInterbalTime: 10
---- !u!114 &8155819917801042600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7434505739018704334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89ca2213caa4fb74ca46131510176eaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_baseParam:
-    damageData:
-      obj: {fileID: 0}
-      damageValue: 1
-      isStunAttack: 0
-      hitStopTime: 0
-      type: 0
-      damageTags: []
-    startRange: 4
-  m_param:
-    wallAttackParam:
-      time: 3
-      maxSpeed: 15
-      audioManager: {fileID: 0}
-    waitParam:
-      time: 1
 --- !u!114 &6950668274573766561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5809,6 +5774,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b84eef2ddfffa46b0aeac1771687ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2931727863338850683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434505739018704334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e72cafc0ccdea54aa98ae48464182ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_enterAction:
+    m_PersistentCalls:
+      m_Calls: []
+  m_stayAction:
+    m_PersistentCalls:
+      m_Calls: []
+  m_exitAction:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &5667310560471658648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434505739018704334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5554c59dca241784e802f198ea448dfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_param:
+    targetManager: {fileID: 0}
 --- !u!1 &7585137866309258482
 GameObject:
   m_ObjectHideFlags: 0
@@ -6001,7 +6001,19 @@ MonoBehaviour:
       m_Calls: []
   m_damageEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1576444826696364879}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayRandomClipOneShot
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_statusManager: {fileID: 5470352065345593249}
   m_animatorManager: {fileID: -3509147400467223985}
   m_damageData:
@@ -6211,7 +6223,7 @@ MonoBehaviour:
   m_enterAction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8155819917801042600}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: WallAttack_ZombieNormal, Assembly-CSharp
         m_MethodName: HitAction
         m_Mode: 0

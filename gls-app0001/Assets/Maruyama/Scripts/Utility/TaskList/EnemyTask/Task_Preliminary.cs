@@ -13,12 +13,15 @@ public struct PreliminaryParametor
     public float moveSpeed;
     [Header("最初に再生するアニメーション")]
     public System.Action enterAnimation;
+    [Header("予備動作中に出す音")]
+    public AudioManager audioManager;
 
     public PreliminaryParametor(RandomRange timeRandomRange, float moveSpeed)
     {
         this.timeRandomRange = timeRandomRange;
         this.moveSpeed = moveSpeed;
         this.enterAnimation = null;
+        this.audioManager = null;
     }
 }
 
@@ -51,6 +54,8 @@ public class Task_Preliminary : TaskNodeBase<EnemyBase>
 
         m_rotationController.enabled = true;
         m_param.enterAnimation?.Invoke();
+
+        m_param.audioManager?.PlayRandomClipOneShot();  //声を出す。
     }
 
     public override bool OnUpdate()
@@ -65,7 +70,7 @@ public class Task_Preliminary : TaskNodeBase<EnemyBase>
 
     public override void OnExit()
     {
-        
+        m_param.audioManager?.FadeOutStart();
     }
 
     private void Rotation()
