@@ -5,6 +5,7 @@ using UnityEngine;
 using UniRx;
 
 using NormalAttackHitColliderType = AnimatorManager_ZombieNormal.NormalAttackHitColliderType;
+using TaskBaseParametor = TaskNodeBase_Ex<EnemyBase>.BaseParametor;
 
 public class AttackNode_Normal : TaskNodeBase<EnemyBase>
 {
@@ -82,8 +83,10 @@ public class AttackNode_Normal : TaskNodeBase<EnemyBase>
         m_taskList.DefineTask(TaskEnum.Preliminary, new Task_Preliminary(enemy, m_param.preliminaryParam));
 
         //攻撃
-        m_param.attackParam.enterAnimation = m_animatorManager.CrossFadeNormalAttackAnimation;
-        m_taskList.DefineTask(TaskEnum.Chase, new Task_AttackChase(enemy, m_param.attackParam));
+        //m_param.attackParam.enterAnimation = m_animatorManager.CrossFadeNormalAttackAnimation;
+        m_taskList.DefineTask(TaskEnum.Chase, 
+            new Task_AttackChase(enemy, m_param.attackParam,
+                new TaskBaseParametor(() => m_animatorManager.CrossFadeNormalAttackAnimation(), null, null)));
 
         //減速
         m_taskList.DefineTask(TaskEnum.Deseleration, 
