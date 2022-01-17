@@ -148,7 +148,7 @@ public class TaskList<EnumType>
     /// </summary>
     private void EndOneTask()
     {
-        m_currentTask.exit?.Invoke();  //現在のタスクのExit
+        m_currentTask?.exit?.Invoke();  //現在のタスクのExit
 
         m_currentIndex++; //Indexの更新
 
