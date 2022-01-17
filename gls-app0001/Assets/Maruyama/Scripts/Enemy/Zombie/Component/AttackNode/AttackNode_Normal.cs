@@ -39,6 +39,7 @@ public class AttackNode_Normal : TaskNodeBase<EnemyBase>
     private EnemyVelocityManager m_velocityManager;
     private AnimatorManager_ZombieNormal m_animatorManager;
     private EnemyRotationCtrl m_rotationController;
+    private ObstacleEvasion m_evasion;
 
     public AttackNode_Normal(EnemyBase owner, Parametor parametor)
         :base(owner)
@@ -48,6 +49,7 @@ public class AttackNode_Normal : TaskNodeBase<EnemyBase>
         m_velocityManager = owner.GetComponent<EnemyVelocityManager>();
         m_animatorManager = owner.GetComponent<AnimatorManager_ZombieNormal>();
         m_rotationController = owner.GetComponent<EnemyRotationCtrl>();
+        m_evasion = owner.GetComponent<ObstacleEvasion>();
 
         DefineTask();
         SettingAnimation();
@@ -95,8 +97,12 @@ public class AttackNode_Normal : TaskNodeBase<EnemyBase>
             m_velocityManager.ResetForce();
             m_velocityManager.ResetVelocity();
             m_rotationController.enabled = false;
+            m_evasion.enabled = false;
         };
-        m_param.waitParam.exit = () => m_rotationController.enabled = true;
+        m_param.waitParam.exit = () => { 
+            m_rotationController.enabled = true;
+            m_evasion.enabled = true;
+        };
         m_taskList.DefineTask(TaskEnum.Wait, new Task_Wait(m_param.waitParam));
     }
 
