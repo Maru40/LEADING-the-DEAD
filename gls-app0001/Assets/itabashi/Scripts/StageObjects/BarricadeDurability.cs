@@ -33,6 +33,9 @@ public class BarricadeDurability : MonoBehaviour
     private AudioClip m_breakSound;
 
     [SerializeField]
+    private GameStateManager m_gameStateManager;
+
+    [SerializeField]
     private UnityEvent m_breakEvent;
 
     [SerializeField]
@@ -71,7 +74,7 @@ public class BarricadeDurability : MonoBehaviour
 
     public void TakeDamage(AttributeObject.DamageData damageData)
     {
-        if (!m_isBreak)
+        if (!m_isBreak && m_gameStateManager.gameState == GameState.Play)
         {
             durability -= damageData.damageValue;
         }
