@@ -18,7 +18,7 @@ public class Task_ChaseTarget : TaskNodeBase_Ex<EnemyBase>
         //public System.Action enterAnimation;
 
         public Parametor(float maxSpeed, float subPursuitTargetForward,
-            float nearRange, float turningPower, float chaseRange,
+            float nearRange, float turningPower, float chaseRange
             //System.Action action
             )
         {
