@@ -19,8 +19,9 @@ public class SmellManager : MonoBehaviour
     private I_Eat m_eat;
     private Stator_ZombieNormal m_stator;
     private AttackNodeManagerBase m_attackManager;
-    private WallAttack_ZombieNormal m_wallAttack;
+    //private WallAttack_ZombieNormal m_wallAttack;
     private BlackBoard_ZombieNormal m_blackBoard;
+    private EyeSearchRange m_eye;
 
     [Header("攻撃するタグ"), SerializeField]
     private List<string> m_attackTags = new List<string>();
@@ -38,8 +39,9 @@ public class SmellManager : MonoBehaviour
         m_eat = GetComponent<I_Eat>();
         m_stator = GetComponent<Stator_ZombieNormal>();
         m_attackManager = GetComponent<AttackNodeManagerBase>();
-        m_wallAttack = GetComponent<WallAttack_ZombieNormal>();
+        //m_wallAttack = GetComponent<WallAttack_ZombieNormal>();
         m_blackBoard = GetComponent<BlackBoard_ZombieNormal>();
+        m_eye = GetComponent<EyeSearchRange>();
 
         if(m_attackTags.Count == 0) { 
             m_attackTags.Add("T_Wall"); 
@@ -127,7 +129,8 @@ public class SmellManager : MonoBehaviour
 
         foreach(var tag in m_attackTags) {
             //タグが一緒で、攻撃範囲なら
-            if(parent.tag == tag && m_wallAttack.IsAttackStartRange())
+            //if(parent.tag == tag && m_wallAttack.IsAttackStartRange())
+            if (parent.tag == tag && IsAttackStartRange())
             {
                 return true;
             }
@@ -175,6 +178,19 @@ public class SmellManager : MonoBehaviour
                 m_velocityManager.SetIsDeseleration(false);
             });
         }
+    }
+
+    private bool IsAttackStartRange()
+    {
+        var targetPosition = m_targetManager.GetNowTargetPosition();
+        if (targetPosition != null)
+        {
+            var position = (Vector3)targetPosition;
+            position.y = transform.position.y;
+            return m_eye.IsInEyeRange(position);
+        }
+
+        return false;
     }
 
     private void OnTriggerEnter(Collider other)
