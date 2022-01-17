@@ -20,6 +20,8 @@ public class Task_AttackChase : TaskNodeBase<EnemyBase>
         [Header("追従する時間")]
         public float chaseTime;
         public bool isTimer;
+        [Header("攻撃時に鳴らしたい音")]
+        public AudioManager audioManager;
 
         public System.Action enterAnimation;
 
@@ -32,6 +34,7 @@ public class Task_AttackChase : TaskNodeBase<EnemyBase>
             this.isTimer = false;
             //this.endWaitTime = 0.1f;
             this.enterAnimation = null;
+            this.audioManager = null;
         }
 
         public void Random(RandomRange<Parametor> range)
@@ -79,6 +82,7 @@ public class Task_AttackChase : TaskNodeBase<EnemyBase>
 
         m_param.enterAnimation?.Invoke();
         m_timer.ResetTimer(m_param.chaseTime);
+        m_param.audioManager?.PlayRandomClipOneShot();
     }
 
     public override bool OnUpdate()
