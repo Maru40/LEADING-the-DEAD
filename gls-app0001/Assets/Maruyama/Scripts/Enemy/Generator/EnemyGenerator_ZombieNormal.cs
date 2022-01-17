@@ -24,8 +24,8 @@ public class CreateSetParametor_ZombieNormal
     public StatusManager_ZombieNormal.Status status = new StatusManager_ZombieNormal.Status(1.0f, 3.0f);
     [Header("攻撃開始距離")]
     public AttackParametorBase attackManagerParametor = new AttackParametorBase(new AttributeObject.DamageData(2.0f), 2.5f);
-    [Header("通常攻撃のパラメータ")]
-    public NormalAttack.Parametor normalAttackParametor = new NormalAttack.Parametor(3.0f);
+    //[Header("通常攻撃のパラメータ")]
+    //public NormalAttack.Parametor normalAttackParametor = new NormalAttack.Parametor(3.0f);
     [Header("通常攻撃の攻撃力パラメータ")]
     public Ex_Dictionary<AnimatorManager_ZombieNormal.NormalAttackHitColliderType, DamageData> normalAttackHitBoxDictionary = 
         new Ex_Dictionary<AnimatorManager_ZombieNormal.NormalAttackHitColliderType, DamageData>();
@@ -42,16 +42,13 @@ public class CreateSetParametor_ZombieNormal
     [Header("食べる力")]
     public EatParametor eatParam = new EatParametor(1.0f);
     [Header("ダッシュ攻撃のパラメータ")]
-    public DashAttack.Parametor dashAttackParam = new DashAttack.Parametor(
-        //new PreliminaryParametor(new RandomRange(1.0f, 1.5f), 3.0f),
-        //new Task_ChaseTarget.Parametor(9.0f, 0.5f, 2.5f, 5.0f, 30.0f,null),
-        //new Task_WallAttack.Parametor(1.0f, 10.0f, null, null),
-        //new Task_Wait.Parametor(2.0f),
-        25.0f, 30.0f, 10.0f);
-    [Header("壁攻撃パラメータ")]
-    public WallAttack_ZombieNormal.Parametor wallAttackParam = new WallAttack_ZombieNormal.Parametor(
-        new Task_WallAttack.Parametor(1.0f, 15.0f, null),
-        new Task_Wait.Parametor(1.0f));
+    public DashAttack.Parametor dashAttackParam = new DashAttack.Parametor(25.0f, 30.0f, 10.0f);
+    //[Header("壁攻撃パラメータ")]
+    //public WallAttack_ZombieNormal.Parametor wallAttackParam = new WallAttack_ZombieNormal.Parametor(
+    //    new Task_WallAttack.Parametor(1.0f, 15.0f, null),
+    //    new Task_Wait.Parametor(1.0f));
+    [Header("それぞれのステートのパラメータ")]
+    public Stator_ZombieNormal.Parametor statorParametor = new Stator_ZombieNormal.Parametor();
     [Header("オーラパラメータ")]
     public AuraManager.Parametor auraParam = new AuraManager.Parametor();
 
@@ -142,11 +139,11 @@ public class EnemyGenerator_ZombieNormal : EnemyGenerator
             attackManager.PreliminaryParametorProperty = m_createSetParam.preliminaryParam;
         }
 
-        var normalAttack = obj.GetComponent<NormalAttack>();
-        if (normalAttack)
-        {
-            normalAttack.parametor = m_createSetParam.normalAttackParametor;
-        }
+        //var normalAttack = obj.GetComponent<NormalAttack>();
+        //if (normalAttack)
+        //{
+        //    normalAttack.parametor = m_createSetParam.normalAttackParametor;
+        //}
 
         //通常攻撃力
         var animatorManager = obj.GetComponent<AnimatorManager_ZombieNormal>();
@@ -204,10 +201,17 @@ public class EnemyGenerator_ZombieNormal : EnemyGenerator
         }
 
         //壁攻撃パラメータ
-        var wallAttack = obj.GetComponent<WallAttack_ZombieNormal>();
-        if (wallAttack)
+        //var wallAttack = obj.GetComponent<WallAttack_ZombieNormal>();
+        //if (wallAttack)
+        //{
+        //    wallAttack.parametor = m_createSetParam.wallAttackParam;
+        //}
+
+        //ステートの設定
+        var stator = obj.GetComponent<Stator_ZombieNormal>();
+        if (stator)
         {
-            wallAttack.parametor = m_createSetParam.wallAttackParam;
+            stator.parametor = m_createSetParam.statorParametor;
         }
 
         //オーラ設定
@@ -223,6 +227,6 @@ public class EnemyGenerator_ZombieNormal : EnemyGenerator
         m_createSetParam.chaseParametor.Random(m_randomSetParam.cahseParametor);
         m_createSetParam.randomPlowlingParametor.Random(m_randomSetParam.randomPlowlingParametor);
         m_createSetParam.attackManagerParametor.Random(m_randomSetParam.attackManagerParametor);
-        m_createSetParam.normalAttackParametor.Random(m_randomSetParam.normalAttackParametor);
+        //m_createSetParam.normalAttackParametor.Random(m_randomSetParam.normalAttackParametor);
     }
 }
