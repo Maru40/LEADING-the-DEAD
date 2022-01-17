@@ -8,7 +8,7 @@ public class AttackNode_WallDash : TaskNodeBase<EnemyBase>
     public struct Parametor
     {
         [Header("追いかけるパラメータ")]
-        public Task_ChaseTarget.Parametor m_chaseParam;
+        public Task_ChaseTarget.Parametor chaseParam;
         [Header("壁攻撃パラメータ")]
         public Task_WallAttack.Parametor wallAttackParam;
         [Header("待機パラメータ")]
@@ -21,7 +21,7 @@ public class AttackNode_WallDash : TaskNodeBase<EnemyBase>
             Task_Wait.Parametor waitParam,
             Task_PutWall.Parametor putWallParam)
         {
-            this.m_chaseParam = chaseParam;
+            this.chaseParam = chaseParam;
             this.wallAttackParam = wallAttackParam;
             this.waitParam = waitParam;
             this.putWallParam = putWallParam;
@@ -41,10 +41,6 @@ public class AttackNode_WallDash : TaskNodeBase<EnemyBase>
     private TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
 
     private AnimatorManager_ZombieNormal m_animatorManager;
-    private TargetManager m_targetManager;
-    private EyeSearchRange m_eye;
-    private AttackNodeManagerBase m_attackManager;
-    private EnemyVelocityManager m_velocityManager;
     private CollisionAction m_collisionAction;
 
     public AttackNode_WallDash(EnemyBase owner, Parametor parametor)
@@ -53,10 +49,6 @@ public class AttackNode_WallDash : TaskNodeBase<EnemyBase>
         m_param = parametor;
 
         m_animatorManager = owner.GetComponent<AnimatorManager_ZombieNormal>();
-        m_targetManager = owner.GetComponent<TargetManager>();
-        m_eye = owner.GetComponent<EyeSearchRange>();
-        m_attackManager = owner.GetComponent<AttackNodeManagerBase>();
-        m_velocityManager = owner.GetComponent<EnemyVelocityManager>();
         m_collisionAction = owner.GetComponent<CollisionAction>();
 
         m_collisionAction.AddEnterAction(HitWall);
@@ -83,14 +75,15 @@ public class AttackNode_WallDash : TaskNodeBase<EnemyBase>
         //base.OnExit();
 
         m_taskList.AbsoluteReset();
-        m_attackManager.EndAnimationEvent();
+        m_animatorManager.CrossFadeIdleAnimation(m_animatorManager.UpperLayerIndex);
+        //m_attackManager.EndAnimationEvent();
     }
 
     private void DefineTask()
     {
         var enemy = GetOwner();
 
-        m_taskList.DefineTask(TaskEnum.Chase, new Task_ChaseTarget(enemy, m_param.m_chaseParam));
+        m_taskList.DefineTask(TaskEnum.Chase, new Task_ChaseTarget(enemy, m_param.chaseParam));
 
         m_param.wallAttackParam.enterAnimation = () => m_animatorManager.CrossFadeWallAttack();
         m_taskList.DefineTask(TaskEnum.Attack, new Task_WallAttack(enemy, m_param.wallAttackParam));
