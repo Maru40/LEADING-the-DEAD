@@ -41,6 +41,13 @@ public abstract class TaskNodeBase_Ex<OwnerType> : TaskNodeBase<OwnerType>
         public Action enter;
         public Action update;
         public Action exit;
+
+        public BaseParametor(Action enter, Action update, Action exit)
+        {
+            this.enter = enter;
+            this.update = update;
+            this.exit = exit;
+        }
     }
 
     private BaseParametor m_actionParam = new BaseParametor();
