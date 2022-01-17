@@ -36,16 +36,16 @@ public abstract class TaskNodeBase<OwnerType> : TaskNodeBase
 public abstract class TaskNodeBase_Ex<OwnerType> : TaskNodeBase<OwnerType>
     where OwnerType : class
 {
-    public struct Parametor
+    public struct BaseParametor
     {
         public Action enter;
         public Action update;
         public Action exit;
     }
 
-    private Parametor m_actionParam = new Parametor();
+    private BaseParametor m_actionParam = new BaseParametor();
 
-    public TaskNodeBase_Ex(OwnerType owner, Parametor param = new Parametor())
+    public TaskNodeBase_Ex(OwnerType owner, BaseParametor param = new BaseParametor())
         :base(owner)
     {
         m_actionParam = param;
