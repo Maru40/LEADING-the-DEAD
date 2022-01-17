@@ -14,14 +14,14 @@ public struct PreliminaryParametor
     [Header("最初に再生するアニメーション")]
     public System.Action enterAnimation;
     [Header("予備動作中に出す音")]
-    public AudioManager audioManager;
+    public List<AudioManager_Ex.Parametor> audioParams;
 
     public PreliminaryParametor(RandomRange timeRandomRange, float moveSpeed)
     {
         this.timeRandomRange = timeRandomRange;
         this.moveSpeed = moveSpeed;
         this.enterAnimation = null;
-        this.audioManager = null;
+        this.audioParams = null;
     }
 }
 
@@ -36,6 +36,7 @@ public class Task_Preliminary : TaskNodeBase<EnemyBase>
 
     private EnemyRotationCtrl m_rotationController;
     private TargetManager m_targetManager;
+    private AudioManager_Ex m_audioManager;
 
     public Task_Preliminary(EnemyBase owner, PreliminaryParametor param)
         :base(owner)
@@ -44,6 +45,7 @@ public class Task_Preliminary : TaskNodeBase<EnemyBase>
 
         m_rotationController = owner.GetComponent<EnemyRotationCtrl>();
         m_targetManager = owner.GetComponent<TargetManager>();
+        m_audioManager = owner.GetComponent<AudioManager_Ex>();
     }
 
     public override void OnEnter()
@@ -55,7 +57,7 @@ public class Task_Preliminary : TaskNodeBase<EnemyBase>
         m_rotationController.enabled = true;
         m_param.enterAnimation?.Invoke();
 
-        m_param.audioManager?.PlayRandomClipOneShot();  //声を出す。
+        m_audioManager?.PlayRandomClipOneShot(m_param.audioParams);  //声を出す。
     }
 
     public override bool OnUpdate()
@@ -70,7 +72,7 @@ public class Task_Preliminary : TaskNodeBase<EnemyBase>
 
     public override void OnExit()
     {
-        m_param.audioManager?.FadeOutStart();
+        m_audioManager?.FadeOutStart();
     }
 
     private void Rotation()

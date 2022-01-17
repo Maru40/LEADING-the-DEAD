@@ -14,14 +14,14 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
         public float time;
         [Header("最大スピード")]
         public float maxSpeed;
-        public AudioManager audioManager;
+        public List<AudioManager_Ex.Parametor> audioParams;
         public Action enterAnimation;
 
-        public Parametor(float time, float maxSpeed, AudioManager audioManager, Action action)
+        public Parametor(float time, float maxSpeed, List<AudioManager_Ex.Parametor> audioParams, Action action)
         {
             this.time = time;
             this.maxSpeed = maxSpeed;
-            this.audioManager = audioManager;
+            this.audioParams = audioParams;
             this.enterAnimation = action;
         }
     }
@@ -33,6 +33,7 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
     private EnemyVelocityManager m_velocityManager;
     private TargetManager m_targetManager;
     private EnemyRotationCtrl m_rotationController;
+    private AudioManager_Ex m_audioManager;
 
     public Task_WallAttack(EnemyBase owner, Parametor param)
         :base(owner)
@@ -42,11 +43,12 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
         m_velocityManager = owner.GetComponent<EnemyVelocityManager>();
         m_targetManager = owner.GetComponent<TargetManager>();
         m_rotationController = owner.GetComponent<EnemyRotationCtrl>();
+        m_audioManager = owner.GetComponent<AudioManager_Ex>();
     }
 
     public override void OnEnter()
     {
-        m_param.audioManager?.PlayRandomClipOneShot();
+        m_audioManager?.PlayRandomClipOneShot(m_param.audioParams);
         m_param.enterAnimation?.Invoke();
         m_timer.ResetTimer(m_param.time);
 
