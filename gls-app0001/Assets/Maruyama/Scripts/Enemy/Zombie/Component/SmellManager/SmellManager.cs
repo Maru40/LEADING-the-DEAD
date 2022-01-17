@@ -20,6 +20,7 @@ public class SmellManager : MonoBehaviour
     private Stator_ZombieNormal m_stator;
     private AttackNodeManagerBase m_attackManager;
     private WallAttack_ZombieNormal m_wallAttack;
+    private BlackBoard_ZombieNormal m_blackBoard;
 
     [Header("攻撃するタグ"), SerializeField]
     private List<string> m_attackTags = new List<string>();
@@ -38,6 +39,7 @@ public class SmellManager : MonoBehaviour
         m_stator = GetComponent<Stator_ZombieNormal>();
         m_attackManager = GetComponent<AttackNodeManagerBase>();
         m_wallAttack = GetComponent<WallAttack_ZombieNormal>();
+        m_blackBoard = GetComponent<BlackBoard_ZombieNormal>();
 
         if(m_attackTags.Count == 0) { 
             m_attackTags.Add("T_Wall"); 
@@ -153,7 +155,9 @@ public class SmellManager : MonoBehaviour
     {
         if (IsAttack()) { //攻撃するなら
             //m_attackManager.AttackStart();
-            m_wallAttack.AttackStart();
+            //m_wallAttack.AttackStart();
+            m_blackBoard.Struct.attackParam.startType = StateNode_ZombieNormal_Attack.StateType.WallAttack;
+            m_stator.GetTransitionMember().attackTrigger.Fire();
             
             return;
         }
