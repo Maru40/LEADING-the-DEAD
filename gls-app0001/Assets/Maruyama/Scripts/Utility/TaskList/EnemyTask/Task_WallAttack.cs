@@ -5,7 +5,7 @@ using UnityEngine;
 using System;
 using MaruUtility;
 
-public class Task_WallAttack : TaskNodeBase<EnemyBase>
+public class Task_WallAttack : TaskNodeBase_Ex<EnemyBase>
 {
     [Serializable]
     public struct Parametor
@@ -15,14 +15,14 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
         [Header("最大スピード")]
         public float maxSpeed;
         public List<AudioManager_Ex.Parametor> audioParams;
-        public Action enterAnimation;
+        //public Action enterAnimation;
 
-        public Parametor(float time, float maxSpeed, List<AudioManager_Ex.Parametor> audioParams, Action action)
+        public Parametor(float time, float maxSpeed, List<AudioManager_Ex.Parametor> audioParams)
         {
             this.time = time;
             this.maxSpeed = maxSpeed;
             this.audioParams = audioParams;
-            this.enterAnimation = action;
+            //this.enterAnimation = action;
         }
     }
 
@@ -36,7 +36,11 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
     private AudioManager_Ex m_audioManager;
 
     public Task_WallAttack(EnemyBase owner, Parametor param)
-        :base(owner)
+        :this(owner, param, new BaseParametor())
+    { }
+
+    public Task_WallAttack(EnemyBase owner, Parametor param, BaseParametor baseParametor)
+         : base(owner, baseParametor)
     {
         m_param = param;
 
@@ -48,8 +52,10 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
 
     public override void OnEnter()
     {
+        base.OnEnter();
+
         m_audioManager?.PlayRandomClipOneShot(m_param.audioParams);
-        m_param.enterAnimation?.Invoke();
+        //m_param.enterAnimation?.Invoke();
         m_timer.ResetTimer(m_param.time);
 
         if (m_targetManager.HasTarget())
@@ -62,6 +68,8 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
 
     public override bool OnUpdate()
     {
+        base.OnUpdate();
+
         m_timer.UpdateTimer();
 
         Move();
@@ -72,7 +80,7 @@ public class Task_WallAttack : TaskNodeBase<EnemyBase>
 
     public override void OnExit()
     {
-
+        base.OnExit();
     }
 
     private void Move()

@@ -7,7 +7,7 @@ using MaruUtility;
 /// <summary>
 /// 攻撃時の追従軸合わせ
 /// </summary>
-public class Task_AttackChase : TaskNodeBase<EnemyBase>
+public class Task_AttackChase : TaskNodeBase_Ex<EnemyBase>
 {
     [System.Serializable]
     public struct Parametor : I_Random<Parametor>
@@ -23,7 +23,7 @@ public class Task_AttackChase : TaskNodeBase<EnemyBase>
         [Header("音のパラメータ")]
         public List<AudioManager_Ex.Parametor> audioParams;
 
-        public System.Action enterAnimation;
+        //public System.Action enterAnimation;
 
         public Parametor(float moveSpeed)
         {
@@ -33,7 +33,7 @@ public class Task_AttackChase : TaskNodeBase<EnemyBase>
             this.chaseTime = 1.0f;
             this.isTimer = false;
             //this.endWaitTime = 0.1f;
-            this.enterAnimation = null;
+            //this.enterAnimation = null;
             this.audioParams = new List<AudioManager_Ex.Parametor>();
         }
 
@@ -64,7 +64,11 @@ public class Task_AttackChase : TaskNodeBase<EnemyBase>
     private GameTimer m_timer = new GameTimer();
 
     public Task_AttackChase(EnemyBase owner, Parametor parametor)
-        :base(owner)
+        : this(owner, parametor, new BaseParametor())
+    { }
+
+    public Task_AttackChase(EnemyBase owner, Parametor parametor, BaseParametor baseParametor)
+        : base(owner, baseParametor)
     {
         m_param = parametor;
 
@@ -79,10 +83,12 @@ public class Task_AttackChase : TaskNodeBase<EnemyBase>
 
     public override void OnEnter()
     {
+        base.OnEnter();
+
         SetForwardTarget();
         m_rotationController.enabled = true;
 
-        m_param.enterAnimation?.Invoke();
+        //m_param.enterAnimation?.Invoke();
         m_timer.ResetTimer(m_param.chaseTime);
         //m_param.audioManager?.PlayRandomClipOneShot();
         m_audioManager?.PlayRandomClipOneShot(m_param.audioParams);
@@ -90,6 +96,8 @@ public class Task_AttackChase : TaskNodeBase<EnemyBase>
 
     public override bool OnUpdate()
     {
+        base.OnUpdate();
+
         TargetChase();
 
         m_timer.UpdateTimer();
@@ -99,7 +107,7 @@ public class Task_AttackChase : TaskNodeBase<EnemyBase>
 
     public override void OnExit()
     {
-
+        base.OnExit();
     }
 
     /// <summary>
