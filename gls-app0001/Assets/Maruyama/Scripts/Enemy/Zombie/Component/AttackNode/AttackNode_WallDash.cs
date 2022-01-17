@@ -64,11 +64,6 @@ public class AttackNode_WallDash : TaskNodeBase<EnemyBase>
         DefineTask();
     }
 
-    //protected override void ReserveChangeComponents()
-    //{
-
-    //}
-
     public override void OnEnter()
     {
         //base.OnStart();
@@ -132,7 +127,6 @@ public class AttackNode_WallDash : TaskNodeBase<EnemyBase>
 
         if (collision.gameObject.tag == "T_Wall")
         {
-            //m_isPutAttack = true;
             m_taskList.AbsoluteReset();
             m_taskList.AddTask(TaskEnum.PutWall);
 
