@@ -16,14 +16,14 @@ public class DashAttack : AttackNodeBase
     [System.Serializable]
     public struct Parametor
     {
-        [Header("予備動作パラメータ")]
-        public PreliminaryParametor preliminaryParam;
-        [Header("追うパラメータ")]
-        public Task_ChaseTarget.Parametor chaseParam;
-        [Header("攻撃パラメータ")]
-        public Task_WallAttack.Parametor attackParam;
-        [Header("待機状態パラメータ")]
-        public Task_Wait.Parametor waitParam;
+        //[Header("予備動作パラメータ")]
+        //public PreliminaryParametor preliminaryParam;
+        //[Header("追うパラメータ")]
+        //public Task_ChaseTarget.Parametor chaseParam;
+        //[Header("攻撃パラメータ")]
+        //public Task_WallAttack.Parametor attackParam;
+        //[Header("待機状態パラメータ")]
+        //public Task_Wait.Parametor waitParam;
         [Header("行動確率")]
         public float probability;
         [Header("行動始める距離")]
@@ -31,14 +31,14 @@ public class DashAttack : AttackNodeBase
         [Header("確率計算インターバル")]
         public float probabilityInterbalTime;
 
-        public Parametor(PreliminaryParametor preliminaryParam, Task_ChaseTarget.Parametor chaseParam,
-            Task_WallAttack.Parametor attackParam, Task_Wait.Parametor waitParam,
+        public Parametor(//PreliminaryParametor preliminaryParam, Task_ChaseTarget.Parametor chaseParam,
+            //Task_WallAttack.Parametor attackParam, Task_Wait.Parametor waitParam,
             float probability, float startRange, float probabilityIntervalTime)
         {
-            this.preliminaryParam = preliminaryParam;
-            this.chaseParam = chaseParam;
-            this.attackParam = attackParam;
-            this.waitParam = waitParam;
+            //this.preliminaryParam = preliminaryParam;
+            //this.chaseParam = chaseParam;
+            //this.attackParam = attackParam;
+            //this.waitParam = waitParam;
             this.probability = probability;
             this.startRange = startRange;
             this.probabilityInterbalTime = probabilityIntervalTime;
@@ -72,7 +72,7 @@ public class DashAttack : AttackNodeBase
 
     private void Start()
     {
-        DefineTask();
+        //DefineTask();
         m_timer.ResetTimer(m_param.probabilityInterbalTime);
     }
 
@@ -94,53 +94,53 @@ public class DashAttack : AttackNodeBase
     /// <summary>
     /// タスクの定義
     /// </summary>
-    private void DefineTask()
-    {
-        var enemy = GetComponent<EnemyBase>();
+    //private void DefineTask()
+    //{
+    //    var enemy = GetComponent<EnemyBase>();
 
-        //予備動作
-        m_param.preliminaryParam.enterAnimation = () => m_animatorManager.CrossFadePreliminaryNormalAttackAniamtion();
-        m_taskList.DefineTask(TaskEnum.Preliminary, new Task_Preliminary(enemy, m_param.preliminaryParam));
+    //    //予備動作
+    //    m_param.preliminaryParam.enterAnimation = () => m_animatorManager.CrossFadePreliminaryNormalAttackAniamtion();
+    //    m_taskList.DefineTask(TaskEnum.Preliminary, new Task_Preliminary(enemy, m_param.preliminaryParam));
 
-        //追従
-        m_param.chaseParam.enterAnimation = () => m_animatorManager.CrossFadeDashAttackMove();
-        m_taskList.DefineTask(TaskEnum.Chase, new Task_ChaseTarget(enemy, m_param.chaseParam));
+    //    //追従
+    //    m_param.chaseParam.enterAnimation = () => m_animatorManager.CrossFadeDashAttackMove();
+    //    m_taskList.DefineTask(TaskEnum.Chase, new Task_ChaseTarget(enemy, m_param.chaseParam));
 
-        //攻撃
-        m_param.attackParam.enterAnimation = () => m_animatorManager.CrossFadeDashAttack();
-        m_taskList.DefineTask(TaskEnum.Attack, new Task_WallAttack(enemy, m_param.attackParam));
+    //    //攻撃
+    //    m_param.attackParam.enterAnimation = () => m_animatorManager.CrossFadeDashAttack();
+    //    m_taskList.DefineTask(TaskEnum.Attack, new Task_WallAttack(enemy, m_param.attackParam));
 
-        //待機
-        m_param.waitParam.enter = () => m_velocityManager.StartDeseleration();
-        m_param.waitParam.exit = () => { 
-            m_velocityManager.SetIsDeseleration(false);
-            EndAnimationEvent();
-        };
-        m_taskList.DefineTask(TaskEnum.Wait, new Task_Wait(m_param.waitParam));
-    }
+    //    //待機
+    //    m_param.waitParam.enter = () => m_velocityManager.StartDeseleration();
+    //    m_param.waitParam.exit = () => { 
+    //        m_velocityManager.SetIsDeseleration(false);
+    //        EndAnimationEvent();
+    //    };
+    //    m_taskList.DefineTask(TaskEnum.Wait, new Task_Wait(m_param.waitParam));
+    //}
 
-    private void SelectTask()
-    {
-        TaskEnum[] types = { 
-            TaskEnum.Preliminary, //予備動作
-            TaskEnum.Chase,  //追いかける
-            TaskEnum.Attack, //攻撃
-            TaskEnum.Wait,   //待機
-        }; 
+    //private void SelectTask()
+    //{
+    //    TaskEnum[] types = { 
+    //        TaskEnum.Preliminary, //予備動作
+    //        TaskEnum.Chase,  //追いかける
+    //        TaskEnum.Attack, //攻撃
+    //        TaskEnum.Wait,   //待機
+    //    }; 
 
-        foreach(var type in types)
-        {
-            m_taskList.AddTask(type);
-        }
-    }
+    //    foreach(var type in types)
+    //    {
+    //        m_taskList.AddTask(type);
+    //    }
+    //}
 
     private void UpdateTask()
     {
-        m_taskList.UpdateTask();
+        //m_taskList.UpdateTask();
 
-        if (!m_taskList.IsMoveTask) {  //タスクが動いていないなら動かさない。
-            return;
-        }
+        //if (!m_taskList.IsMoveTask) {  //タスクが動いていないなら動かさない。
+        //    return;
+        //}
     }
 
     public override bool IsAttackStartRange()
