@@ -44,6 +44,8 @@ public class HPGauge : Gauge
 
             m_isDamaging = true;
 
+            m_redGaugeImage.gameObject.SetActive(true);
+
             m_countTime = 0.0f;
         }
 
@@ -75,6 +77,7 @@ public class HPGauge : Gauge
         if(nowLeapTime == m_leapTime)
         {
             m_isDamaging = false;
+            m_redGaugeImage.gameObject.SetActive(false);
         }
     }
 }
