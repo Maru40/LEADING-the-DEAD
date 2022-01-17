@@ -56,6 +56,11 @@ public class Stator_ZombieNormal : StatorBase
 
     [SerializeField]
     private Parametor m_param = new Parametor();
+    public Parametor parametor
+    {
+        get => m_param;
+        set => m_param = value;
+    }
 
     private void Awake()
     {
