@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using MaruUtility;
+
 using StateType = ZombieNormalState;
 using TransitionMember = ZombieNormalTransitionMember;
 using StateMachine = EnemyMainStateMachine<EnemyBase, ZombieNormalState, ZombieNormalTransitionMember>;
@@ -21,6 +23,7 @@ public enum ZombieNormalState
     Death,  //死亡状態
 }
 
+[System.Serializable]
 public class ZombieNormalTransitionMember
 {
     public MyTrigger rondomPlowlingTrigger = new MyTrigger();
@@ -33,6 +36,7 @@ public class ZombieNormalTransitionMember
     public MyTrigger angerTirgger = new MyTrigger();
     //public MyTrigger dyingTrigger = new MyTrigger();
     public MyTrigger deathTrigger = new MyTrigger();
+    public float normalAttackRange = 0.0f;
 }
 
 public class Stator_ZombieNormal : StatorBase
@@ -40,18 +44,24 @@ public class Stator_ZombieNormal : StatorBase
     [System.Serializable]
     public struct Parametor
     {
+        [Header("遷移用のパラメータ")]
+        public TransitionMember transitionMember;
         [Header("攻撃パラメータ")]
         public StateNode_ZombieNormal_Attack.Parametor attackParam;
     }
 
     private StateMachine m_stateMachine;
 
-    //パラメータ
+    private EyeSearchRange m_eye;
+    private BlackBoard_ZombieNormal m_blackBoard;
+    private TargetManager m_targetManager;
+
+    //パラメータ----------------------------
 
     [SerializeField]
     private StateNode_ZombieNormal_Find.Parametor m_findParametor = new StateNode_ZombieNormal_Find.Parametor(1.0f, 2.0f);
     [SerializeField]
-    private StateNode_ZombieNormal_Dying.Parametor m_dyingParametor = 
+    private StateNode_ZombieNormal_Dying.Parametor m_dyingParametor =
         new StateNode_ZombieNormal_Dying.Parametor(0.5f, 1.5f);
 
     [SerializeField]
@@ -64,13 +74,16 @@ public class Stator_ZombieNormal : StatorBase
 
     private void Awake()
     {
-        m_stateMachine = new StateMachine();
+        m_eye = GetComponent<EyeSearchRange>();
+        m_blackBoard = GetComponent<BlackBoard_ZombieNormal>();
+        m_targetManager = GetComponent<TargetManager>();
 
         //CreateStateMachine();
     }
 
     private void Start()
     {
+        m_stateMachine = new StateMachine(m_param.transitionMember);
         CreateStateMachine();
     }
 
@@ -90,16 +103,16 @@ public class Stator_ZombieNormal : StatorBase
         var zombie = GetComponent<ZombieNormal>();
 
         m_stateMachine.AddNode(StateType.RandomPlowling, new EnState_RandomPlowling(zombie));
-        m_stateMachine.AddNode(StateType.Find,           new StateNode_ZombieNormal_Find(zombie, m_findParametor));
-        m_stateMachine.AddNode(StateType.Chase,          new EnState_ChaseTarget(zombie));
-        m_stateMachine.AddNode(StateType.Eat,            new StateNode_ZombieNormal_Eat(zombie));
-        m_stateMachine.AddNode(StateType.Attack,         new StateNode_ZombieNormal_Attack(zombie, m_param.attackParam));
-        m_stateMachine.AddNode(StateType.WallRising,     new StateNode_ZombieNormal_WallRising(zombie));
-        m_stateMachine.AddNode(StateType.Stun,           new EnState_Stun(zombie));
-        m_stateMachine.AddNode(StateType.Anger,          new StateNode_ZombieNormal_Anger(zombie));
-        m_stateMachine.AddNode(StateType.KnockBack,      new StateNode_KnockBack_EnemyBase(zombie));
-        m_stateMachine.AddNode(StateType.Dying,          new StateNode_ZombieNormal_Dying(zombie, m_dyingParametor));
-        m_stateMachine.AddNode(StateType.Death,          new StateNode_ZombiNormal_Death(zombie));
+        m_stateMachine.AddNode(StateType.Find, new StateNode_ZombieNormal_Find(zombie, m_findParametor));
+        m_stateMachine.AddNode(StateType.Chase, new EnState_ChaseTarget(zombie));
+        m_stateMachine.AddNode(StateType.Eat, new StateNode_ZombieNormal_Eat(zombie));
+        m_stateMachine.AddNode(StateType.Attack, new StateNode_ZombieNormal_Attack(zombie, m_param.attackParam));
+        m_stateMachine.AddNode(StateType.WallRising, new StateNode_ZombieNormal_WallRising(zombie));
+        m_stateMachine.AddNode(StateType.Stun, new EnState_Stun(zombie));
+        m_stateMachine.AddNode(StateType.Anger, new StateNode_ZombieNormal_Anger(zombie));
+        m_stateMachine.AddNode(StateType.KnockBack, new StateNode_KnockBack_EnemyBase(zombie));
+        m_stateMachine.AddNode(StateType.Dying, new StateNode_ZombieNormal_Dying(zombie, m_dyingParametor));
+        m_stateMachine.AddNode(StateType.Death, new StateNode_ZombiNormal_Death(zombie));
     }
 
     private void CreateEdge()
@@ -118,6 +131,7 @@ public class Stator_ZombieNormal : StatorBase
         m_stateMachine.AddEdge(StateType.Chase, StateType.Anger, ToAngerTrigger);
         m_stateMachine.AddEdge(StateType.Chase, StateType.RandomPlowling, ToRandomPlowling);
         m_stateMachine.AddEdge(StateType.Chase, StateType.Attack, ToAttackTrigger);
+        m_stateMachine.AddEdge(StateType.Chase, StateType.Attack, IsNormalAttack);
         m_stateMachine.AddEdge(StateType.Chase, StateType.Eat, ToEatTrigger);
         m_stateMachine.AddEdge(StateType.Chase, StateType.WallRising, ToWallRisingTrigger);
 
@@ -159,7 +173,8 @@ public class Stator_ZombieNormal : StatorBase
         return member.findTrigger.Get();
     }
 
-    private bool ToChaseTrigger(TransitionMember member) {
+    private bool ToChaseTrigger(TransitionMember member)
+    {
         return member.chaseTrigger.Get();
     }
 
@@ -168,15 +183,18 @@ public class Stator_ZombieNormal : StatorBase
         return member.eatTrigger.Get();
     }
 
-    private bool ToRandomPlowling(TransitionMember member) {
+    private bool ToRandomPlowling(TransitionMember member)
+    {
         return member.rondomPlowlingTrigger.Get();
     }
 
-    private bool ToAttackTrigger(TransitionMember member) {
+    private bool ToAttackTrigger(TransitionMember member)
+    {
         return member.attackTrigger.Get();
     }
 
-    private bool ToWallRisingTrigger(TransitionMember member) {
+    private bool ToWallRisingTrigger(TransitionMember member)
+    {
         return member.wallRising.Get();
     }
 
@@ -195,6 +213,28 @@ public class Stator_ZombieNormal : StatorBase
         return member.deathTrigger.Get();
     }
 
+    private bool IsNormalAttack(TransitionMember member)
+    {
+        if (!m_targetManager.HasTarget()) {
+            return false;
+        }
+
+        //ターゲットがプレイヤーで無かったら
+        if(m_targetManager.GetNowTargetType() != FoundObject.FoundType.Player) {
+            return false;
+        }
+
+        var range = member.normalAttackRange;
+        var position = (Vector3)m_targetManager.GetNowTargetPosition();
+
+        if (m_eye.IsInEyeRange(position, range))
+        {
+            m_blackBoard.Struct.attackParam.startType = StateNode_ZombieNormal_Attack.StateType.Normal;
+            return true;
+        }
+
+        return false;
+    }
 
     public override void ChangeState<EnumType>(EnumType type, int priority = 0)
     {
