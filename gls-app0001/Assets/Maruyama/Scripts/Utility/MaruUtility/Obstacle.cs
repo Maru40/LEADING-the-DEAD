@@ -32,11 +32,24 @@ namespace MaruUtility
             return false;
         }
 
+        /// <summary>
+        /// 障害物があるかどうか
+        /// </summary>
+        /// <param name="startPosition"></param>
+        /// <param name="endPosition"></param>
+        /// <returns>障害物があるならtrue</returns>
         public static bool IsLineCastObstacle(Vector3 startPosition, Vector3 endPosition)
         {
             return IsLineCastObstacle(startPosition, endPosition, DEFAULT_OBSTACLE_STRING);
         }
 
+        /// <summary>
+        /// 障害物があるかどうか
+        /// </summary>
+        /// <param name="startPosition"></param>
+        /// <param name="endPosition"></param>
+        /// <param name="layerNames"></param>
+        /// <returns>障害物があるならtrue</returns>
         public static bool IsLineCastObstacle(Vector3 startPosition, Vector3 endPosition, params string[] layerNames)
         {
             int obstacleLayer = LayerMask.GetMask(layerNames);
