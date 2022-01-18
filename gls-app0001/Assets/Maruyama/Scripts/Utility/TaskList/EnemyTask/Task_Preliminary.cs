@@ -11,8 +11,6 @@ public struct PreliminaryParametor
     public RandomRange timeRandomRange;
     [Header("予備動作の移動スピード")]
     public float moveSpeed;
-    //[Header("最初に再生するアニメーション")]
-    //public System.Action enterAnimation;
     [Header("予備動作中に出す音")]
     public List<AudioManager_Ex.Parametor> audioParams;
 
@@ -20,7 +18,6 @@ public struct PreliminaryParametor
     {
         this.timeRandomRange = timeRandomRange;
         this.moveSpeed = moveSpeed;
-        //this.enterAnimation = null;
         this.audioParams = null;
     }
 }
@@ -37,6 +34,7 @@ public class Task_Preliminary : TaskNodeBase_Ex<EnemyBase>
     private EnemyRotationCtrl m_rotationController;
     private TargetManager m_targetManager;
     private AudioManager_Ex m_audioManager;
+    private EnemyVelocityManager m_velocityManager;
 
     public Task_Preliminary(EnemyBase owner, PreliminaryParametor param)
         : this(owner, param, new BaseParametor())
@@ -50,6 +48,7 @@ public class Task_Preliminary : TaskNodeBase_Ex<EnemyBase>
         m_rotationController = owner.GetComponent<EnemyRotationCtrl>();
         m_targetManager = owner.GetComponent<TargetManager>();
         m_audioManager = owner.GetComponent<AudioManager_Ex>();
+        m_velocityManager = owner.GetComponent<EnemyVelocityManager>();
     }
 
     public override void OnEnter()
@@ -61,7 +60,6 @@ public class Task_Preliminary : TaskNodeBase_Ex<EnemyBase>
         m_timer.ResetTimer(time);
 
         m_rotationController.enabled = true;
-        //m_param.enterAnimation?.Invoke();
 
         m_audioManager?.PlayRandomClipOneShot(m_param.audioParams);  //声を出す。
     }
@@ -70,9 +68,8 @@ public class Task_Preliminary : TaskNodeBase_Ex<EnemyBase>
     {
         base.OnUpdate();
 
-        //Debug.Log("△予備");
-
         m_timer.UpdateTimer();
+        Move();
         Rotation();
 
         return m_timer.IsTimeUp;
@@ -83,6 +80,19 @@ public class Task_Preliminary : TaskNodeBase_Ex<EnemyBase>
         base.OnExit();
 
         m_audioManager?.FadeOutStart();
+    }
+
+    private void Move()
+    {
+        if (!m_targetManager.HasTarget()) { //ターゲットがnullなら
+            return;
+        }
+
+        var toTargetVec = (Vector3)m_targetManager.GetToNowTargetVector();
+
+        var moveSpeed = m_param.moveSpeed;
+        var force = CalcuVelocity.CalucSeekVec(m_velocityManager.velocity, toTargetVec, moveSpeed);
+        m_velocityManager.AddForce(force);
     }
 
     private void Rotation()
