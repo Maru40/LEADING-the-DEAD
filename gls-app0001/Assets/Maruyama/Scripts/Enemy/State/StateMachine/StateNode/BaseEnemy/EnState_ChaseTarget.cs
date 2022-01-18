@@ -31,6 +31,8 @@ public class EnState_ChaseTarget : EnemyStateNodeBase<EnemyBase>
         var owner = GetOwner();
 
         AddChangeComp(owner.GetComponent<ChaseTarget>(), true, false);
+        AddChangeComp(owner.GetComponent<EnemyVelocityManager>(), true, true);
+        AddChangeComp(owner.GetComponent<EnemyRotationCtrl>(), true, true);
     }
 
     public override void OnStart()
