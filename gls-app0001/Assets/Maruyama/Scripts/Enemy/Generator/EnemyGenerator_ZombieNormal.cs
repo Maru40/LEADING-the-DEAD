@@ -29,8 +29,8 @@ public class CreateSetParametor_ZombieNormal
     [Header("通常攻撃の攻撃力パラメータ")]
     public Ex_Dictionary<AnimatorManager_ZombieNormal.NormalAttackHitColliderType, DamageData> normalAttackHitBoxDictionary = 
         new Ex_Dictionary<AnimatorManager_ZombieNormal.NormalAttackHitColliderType, DamageData>();
-    [Header("予備動作のパラメータ")]
-    public PreliminaryParametor preliminaryParam = new PreliminaryParametor(new RandomRange(1.0f, 1.0f), 1.0f);
+    //[Header("予備動作のパラメータ")]
+    //public PreliminaryParametor preliminaryParam = new PreliminaryParametor(new RandomRange(1.0f, 1.0f), 1.0f);
     [Header("怒り状態のバフパラメータ")]
     public AngerManager.RiseParametor angerBuffParametor = new AngerManager.RiseParametor(1.05f, 1.02f, 1.5f);
     [Header("ターゲットのバフパラメータ")]
@@ -41,8 +41,8 @@ public class CreateSetParametor_ZombieNormal
     public ThrongManagerParametor throngParam = new ThrongManagerParametor(1.0f, 1.0f, 3.0f);
     [Header("食べる力")]
     public EatParametor eatParam = new EatParametor(1.0f);
-    [Header("ダッシュ攻撃のパラメータ")]
-    public DashAttack.Parametor dashAttackParam = new DashAttack.Parametor(25.0f, 30.0f, 10.0f);
+    //[Header("ダッシュ攻撃のパラメータ")]
+    //public DashAttack.Parametor dashAttackParam = new DashAttack.Parametor(25.0f, 30.0f, 10.0f);
     //[Header("壁攻撃パラメータ")]
     //public WallAttack_ZombieNormal.Parametor wallAttackParam = new WallAttack_ZombieNormal.Parametor(
     //    new Task_WallAttack.Parametor(1.0f, 15.0f, null),
@@ -194,11 +194,11 @@ public class EnemyGenerator_ZombieNormal : EnemyGenerator
         }
 
         //ダッシュ攻撃
-        var dashAttack = obj.GetComponent<DashAttack>();
-        if (dashAttack)
-        {
-            dashAttack.parametor = m_createSetParam.dashAttackParam;
-        }
+        //var dashAttack = obj.GetComponent<DashAttack>();
+        //if (dashAttack)
+        //{
+        //    dashAttack.parametor = m_createSetParam.dashAttackParam;
+        //}
 
         //壁攻撃パラメータ
         //var wallAttack = obj.GetComponent<WallAttack_ZombieNormal>();
