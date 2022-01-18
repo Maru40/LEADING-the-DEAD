@@ -18,18 +18,73 @@ public abstract class TaskNodeBase
 public abstract class TaskNodeBase<OwnerType> : TaskNodeBase
     where OwnerType : class
 {
+    private enum EnableChangeType
+    {
+        Start,
+        Exit,
+    }
+
+    private List<ChangeCompParam> m_changeParams = new List<ChangeCompParam>();
+
     protected OwnerType m_owner;
+    protected OwnerType Owner => m_owner;
+    protected OwnerType GetOwner() => m_owner;
 
     public TaskNodeBase(OwnerType owner)
     {
         m_owner = owner;
     }
 
-    protected OwnerType Owner => m_owner;
-
-    protected OwnerType GetOwner()
+    public override void OnEnter()
     {
-        return m_owner;
+        ReserveChangeComponents();
+
+        ChangeComps(EnableChangeType.Start);
+    }
+
+    public override void OnExit()
+    {
+        ChangeComps(EnableChangeType.Exit);
+    }
+
+    /// <summary>
+    /// 切り替えるコンポーネントの準備
+    /// </summary>
+    protected virtual void ReserveChangeComponents() { }
+
+    /// <summary>
+    /// 開始と終了時に切り替えるコンポーネントの追加
+    /// </summary>
+    /// <param name="behaviour">切り替えるコンポーネントのポインタ</param>
+    /// <param name="isStart">スタート時にどっちに切り替える</param>
+    /// <param name="isExit">終了時にどっちに切り替えるか</param>
+    protected void AddChangeComp(Behaviour behaviour, bool isStart, bool isExit)
+    {
+        if (behaviour == null) {  //nullptrなら追加しない
+            return;
+        }
+
+        var param = new ChangeCompParam(behaviour, isStart, isExit);
+        m_changeParams.Add(param);
+    }
+
+    /// <summary>
+    /// 登録されたコンポーネントの切り替えを行う
+    /// </summary>
+    /// <param name="type">StartかExitの切替タイプ</param>
+    private void ChangeComps(EnableChangeType type)
+    {
+        foreach (var param in m_changeParams)
+        {
+            bool isEnable = type switch
+            {
+                EnableChangeType.Start => param.isStart,
+                EnableChangeType.Exit => param.isExit,
+                _ => false
+            };
+
+            param.behaviour.enabled = isEnable;
+        }
     }
 }
 
@@ -60,6 +115,8 @@ public abstract class TaskNodeBase_Ex<OwnerType> : TaskNodeBase<OwnerType>
 
     public override void OnEnter()
     {
+        base.OnEnter();
+
         m_actionParam.enter?.Invoke();
     }
 
@@ -71,6 +128,8 @@ public abstract class TaskNodeBase_Ex<OwnerType> : TaskNodeBase<OwnerType>
 
     public override void OnExit()
     {
+        base.OnExit();
+
         m_actionParam.exit?.Invoke();
     }
 }
