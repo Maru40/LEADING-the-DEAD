@@ -13,14 +13,6 @@ public class StateNode_ZombieNormal_Attack : EnState_AttackBase
         Max
     }
 
-    //public class TransitionMember
-    //{
-    //    public MyTrigger normalTrigger;
-    //    public MyTrigger dashTrigger;
-    //    public MyTrigger wallDashTrigger;
-    //    public MyTrigger wallPutTrigger;
-    //}
-
     public struct BlackBoardParametor
     {
         public StateType startType;

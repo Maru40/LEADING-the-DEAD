@@ -22,6 +22,8 @@ public class CreateSetParametor_ZombieNormal
     public RandomPlowlingMove.Parametor randomPlowlingParametor = new RandomPlowlingMove.Parametor(15.0f, 2.5f, 2.0f, 0.3f, 3.0f, 1.0f);
     [Header("ステータス")]
     public StatusManager_ZombieNormal.Status status = new StatusManager_ZombieNormal.Status(1.0f, 3.0f);
+    [Header("それぞれのステートのパラメータ")]
+    public Stator_ZombieNormal.Parametor statorParametor = new Stator_ZombieNormal.Parametor();
     [Header("通常攻撃の攻撃力パラメータ")]
     public Ex_Dictionary<AnimatorManager_ZombieNormal.NormalAttackHitColliderType, DamageData> normalAttackHitBoxDictionary = 
         new Ex_Dictionary<AnimatorManager_ZombieNormal.NormalAttackHitColliderType, DamageData>();
@@ -35,8 +37,6 @@ public class CreateSetParametor_ZombieNormal
     public ThrongManagerParametor throngParam = new ThrongManagerParametor(1.0f, 1.0f, 3.0f);
     [Header("食べる力")]
     public EatParametor eatParam = new EatParametor(1.0f);
-    [Header("それぞれのステートのパラメータ")]
-    public Stator_ZombieNormal.Parametor statorParametor = new Stator_ZombieNormal.Parametor();
     [Header("オーラパラメータ")]
     public AuraManager.Parametor auraParam = new AuraManager.Parametor();
 

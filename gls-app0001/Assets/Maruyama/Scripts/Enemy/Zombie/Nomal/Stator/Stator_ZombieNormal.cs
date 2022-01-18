@@ -244,9 +244,12 @@ public class Stator_ZombieNormal : StatorBase
         }
 
         var range = member.normalAttackRange;
-        var position = (Vector3)m_targetManager.GetNowTargetPosition();
+        var targetPosition = (Vector3)m_targetManager.GetNowTargetPosition();
 
-        if (m_eye.IsInEyeRange(position, range))
+        //if (m_eye.IsInEyeRange(position, range))
+        //範囲内かつ、障害物がない時
+        if (Calculation.IsRange(transform.position, targetPosition, range) && 
+            !Obstacle.IsLineCastObstacle(transform.position, targetPosition))
         {
             m_blackBoard.Struct.attackParam.startType = StateNode_ZombieNormal_Attack.StateType.Normal;
             return true;
