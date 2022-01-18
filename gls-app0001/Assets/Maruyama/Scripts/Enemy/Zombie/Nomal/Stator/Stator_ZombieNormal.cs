@@ -24,22 +24,22 @@ public enum ZombieNormalState
 }
 
 [System.Serializable]
-public class ZombieNormalTransitionMember
+public struct ZombieNormalTransitionMember
 {
-    public MyTrigger rondomPlowlingTrigger = new MyTrigger();
-    public MyTrigger findTrigger = new MyTrigger();
-    public MyTrigger eatTrigger = new MyTrigger();
-    public MyTrigger chaseTrigger = new MyTrigger();
-    public MyTrigger attackTrigger = new MyTrigger();
-    public MyTrigger wallRising = new MyTrigger();
-    public MyTrigger stunTrigger = new MyTrigger();
-    public MyTrigger angerTirgger = new MyTrigger();
+    public MyTrigger rondomPlowlingTrigger;
+    public MyTrigger findTrigger;
+    public MyTrigger eatTrigger;
+    public MyTrigger chaseTrigger;
+    public MyTrigger attackTrigger;
+    public MyTrigger wallRising;
+    public MyTrigger stunTrigger;
+    public MyTrigger angerTirgger;
     //public MyTrigger dyingTrigger = new MyTrigger();
-    public MyTrigger deathTrigger = new MyTrigger();
+    public MyTrigger deathTrigger;
     [Header("通常攻撃に遷移する距離")]
-    public float normalAttackRange = 0.0f;
+    public float normalAttackRange;
     [Header("ダッシュ攻撃に遷移する条件パラメータ")]
-    public DashAttackTransitionManager.Parametor dashAttackTransitionParam = new DashAttackTransitionManager.Parametor();
+    public DashAttackTransitionManager.Parametor dashAttackTransitionParam;
 }
 
 public class Stator_ZombieNormal : StatorBase
@@ -187,52 +187,52 @@ public class Stator_ZombieNormal : StatorBase
 
     //遷移条件系---------------------------------------------------------------
 
-    private bool ToFindTrigger(TransitionMember member)
+    private bool ToFindTrigger(ref TransitionMember member)
     {
         return member.findTrigger.Get();
     }
 
-    private bool ToChaseTrigger(TransitionMember member)
+    private bool ToChaseTrigger(ref TransitionMember member)
     {
         return member.chaseTrigger.Get();
     }
 
-    private bool ToEatTrigger(TransitionMember member)
+    private bool ToEatTrigger(ref TransitionMember member)
     {
         return member.eatTrigger.Get();
     }
 
-    private bool ToRandomPlowling(TransitionMember member)
+    private bool ToRandomPlowling(ref TransitionMember member)
     {
         return member.rondomPlowlingTrigger.Get();
     }
 
-    private bool ToAttackTrigger(TransitionMember member)
+    private bool ToAttackTrigger(ref TransitionMember member)
     {
         return member.attackTrigger.Get();
     }
 
-    private bool ToWallRisingTrigger(TransitionMember member)
+    private bool ToWallRisingTrigger(ref TransitionMember member)
     {
         return member.wallRising.Get();
     }
 
-    private bool ToStunTrigger(TransitionMember member)
+    private bool ToStunTrigger(ref TransitionMember member)
     {
         return member.stunTrigger.Get();
     }
 
-    private bool ToAngerTrigger(TransitionMember member)
+    private bool ToAngerTrigger(ref TransitionMember member)
     {
         return member.angerTirgger.Get();
     }
 
-    private bool ToDeathTrigger(TransitionMember member)
+    private bool ToDeathTrigger(ref TransitionMember member)
     {
         return member.deathTrigger.Get();
     }
 
-    private bool IsNormalAttack(TransitionMember member)
+    private bool IsNormalAttack(ref TransitionMember member)
     {
         if (!m_targetManager.HasTarget()) {
             return false;
@@ -255,7 +255,7 @@ public class Stator_ZombieNormal : StatorBase
         return false;
     }
 
-    private bool IsDashAttack(TransitionMember member)
+    private bool IsDashAttack(ref TransitionMember member)
     {
         return m_dashAttackTransitionManager.IsTransition(member.dashAttackTransitionParam);
     }
@@ -275,9 +275,9 @@ public class Stator_ZombieNormal : StatorBase
     /// 遷移に利用するメンバーの取得
     /// </summary>
     /// <returns>遷移条件メンバー</returns>
-    public TransitionMember GetTransitionMember()
+    public ref TransitionMember GetTransitionMember()
     {
-        return m_stateMachine.GetTransitionStructMember();
+        return ref m_stateMachine.GetTransitionStructMember();
     }
 
     public StateType GetNowStateType()

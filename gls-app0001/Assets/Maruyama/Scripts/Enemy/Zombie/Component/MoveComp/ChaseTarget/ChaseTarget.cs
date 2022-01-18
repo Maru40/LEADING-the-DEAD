@@ -13,7 +13,7 @@ public enum SeekType {
     Bread
 }
 
-public class SeekTransitonMember 
+public struct SeekTransitonMember 
 {
     public MyTrigger linerTrigger;
     public MyTrigger breadTrigger;
@@ -149,11 +149,11 @@ public class ChaseTarget : MonoBehaviour
 
     //遷移条件------------------------------------------------------------
 
-    private bool ToBreadTrigger(SeekTransitonMember member)
+    private bool ToBreadTrigger(ref SeekTransitonMember member)
     {
         return member.breadTrigger.Get();
     }
-    private bool ToLinerTrigger(SeekTransitonMember member)
+    private bool ToLinerTrigger(ref SeekTransitonMember member)
     {
         return member.linerTrigger.Get();
     }

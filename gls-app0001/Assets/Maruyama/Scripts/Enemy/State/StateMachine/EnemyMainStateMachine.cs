@@ -8,7 +8,7 @@ using System.Linq;
 public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     where NodeType : class
     where EnumType : Enum  
-    where TransitionType : class, new()
+    where TransitionType : struct
 {
 
     /// <summary>
@@ -119,7 +119,7 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     /// <param name="to">遷移先のタイプ</param>
     /// <param name="isTransitionFunc">遷移条件</param>
     /// <param name="priority">優先度(Default: 0)</param>
-    public void AddEdge(EnumType from, EnumType to, Func<TransitionType, bool> isTransitionFunc, int priority = 0)
+    public void AddEdge(EnumType from, EnumType to, EdgeBase<EnumType, TransitionType>.IsTransitionFunc isTransitionFunc, int priority = 0)
     {
         m_stateMachine.AddEdge(from, to, isTransitionFunc, priority);
     }
@@ -144,9 +144,9 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
     /// 遷移に利用する構造体を取得する。
     /// </summary>
     /// <returns>構造体の参照を渡す</returns>
-    public TransitionType GetTransitionStructMember()
+    public ref TransitionType GetTransitionStructMember()
     {
-        return m_transitionStruct;
+        return ref m_transitionStruct;
     }
 
     /// <summary>
@@ -202,7 +202,7 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
         var edges = m_stateMachine.GetNowNodeEdges();
         foreach (var edge in edges)
         {
-            if (edge.IsTransition(m_transitionStruct))
+            if (edge.IsTransition(ref m_transitionStruct))
             {
                 m_transitionCandidates.Add(new TransitionCanditdateParametor(edge.GetToType(), edge.Priority));
                 //m_stateMachine.ChangeState(edge.GetToType());
@@ -221,7 +221,7 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
         {
             foreach(var edge in edges.Value)
             {
-                edge.IsTransition(m_transitionStruct);
+                edge.IsTransition(ref m_transitionStruct);
                 //edge.IsTransition(m_transitionStruct);
                 break;
             }
@@ -241,10 +241,10 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
         //ソートして優先度が一番高いタイプに遷移する。
         var sorteds = m_transitionCandidates.OrderByDescending(param => param.priority);
 
-        //int index = 0;
+        int index = 0;
         foreach (var sorted in sorteds)
         {
-            //Debug.Log(index + ":トランジション： " + sorted.type);
+            Debug.Log(index + ":トランジション： " + sorted.type);
         }
 
         m_stateMachine.ChangeState(sorteds.ElementAt(0).type);  //一番優先度が高い先頭のステートに変更

@@ -15,12 +15,12 @@ public enum ZombieTankState
     Attack,
 }
 
-public class ZombieTankTransitionMember
+public struct ZombieTankTransitionMember
 {
-    public MyTrigger rondomPlowlingTrigger = new MyTrigger();
-    public MyTrigger chaseTrigger = new MyTrigger();
-    public MyTrigger waitSeeTrigger = new MyTrigger();
-    public MyTrigger attackTrigger = new MyTrigger();
+    public MyTrigger rondomPlowlingTrigger;
+    public MyTrigger chaseTrigger;
+    public MyTrigger waitSeeTrigger;
+    public MyTrigger attackTrigger;
 }
 
 public class Stator_ZombieTank : StatorBase
@@ -79,22 +79,22 @@ public class Stator_ZombieTank : StatorBase
 
     //遷移条件系---------------------------------------------------------------
 
-    private bool ToChaseTrigger(TransitionMember member)
+    private bool ToChaseTrigger(ref TransitionMember member)
     {
         return member.chaseTrigger.Get();
     }
 
-    private bool ToRandomPlowling(TransitionMember member)
+    private bool ToRandomPlowling(ref TransitionMember member)
     {
         return member.rondomPlowlingTrigger.Get();
     }
 
-    private bool ToWaitSeeTrigger(TransitionMember member)
+    private bool ToWaitSeeTrigger(ref TransitionMember member)
     {
         return member.waitSeeTrigger.Get();
     }
 
-    private bool ToAttackTrigger(TransitionMember member)
+    private bool ToAttackTrigger(ref TransitionMember member)
     {
         return member.attackTrigger.Get();
     }
@@ -114,9 +114,9 @@ public class Stator_ZombieTank : StatorBase
     /// 遷移に利用するメンバーの取得
     /// </summary>
     /// <returns>遷移条件メンバー</returns>
-    public TransitionMember GetTransitionMember()
+    public ref TransitionMember GetTransitionMember()
     {
-        return m_stateMachine.GetTransitionStructMember();
+        return ref m_stateMachine.GetTransitionStructMember();
     }
 
     public StateType GetNowStateType()

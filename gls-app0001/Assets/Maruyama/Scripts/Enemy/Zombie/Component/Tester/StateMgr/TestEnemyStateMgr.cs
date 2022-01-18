@@ -10,7 +10,7 @@ public enum TestEnemyState
     To,
 }
 
-public class TestEnemyTransitionMember 
+public struct TestEnemyTransitionMember 
 {
     public MyTrigger fromTrigger;
     public MyTrigger toTrigger;
@@ -64,7 +64,7 @@ public class TestEnemyStateMgr : MonoBehaviour
         m_stateMachine.AddEdge(TestEnemyState.From, TestEnemyState.To , ToTransitionTrigger);
 
         //ラムダを使用する場合
-        m_stateMachine.AddEdge(TestEnemyState.To, TestEnemyState.From,  (TestEnemyTransitionMember member) => { return member.fromTrigger.Get(); });
+        m_stateMachine.AddEdge(TestEnemyState.To, TestEnemyState.From,  (ref TestEnemyTransitionMember member) => { return member.fromTrigger.Get(); });
     }
 
     //アクセッサ-----------------------------------------------------------------------------
@@ -83,12 +83,12 @@ public class TestEnemyStateMgr : MonoBehaviour
     /// </summary>
     /// <param name="member">遷移条件のメンバ</param>
     /// <returns>TriggerがOnならtrue</returns>
-    bool ToTransitionTrigger(TestEnemyTransitionMember member) { return member.toTrigger.Get(); }
+    bool ToTransitionTrigger(ref TestEnemyTransitionMember member) { return member.toTrigger.Get(); }
 
     /// <summary>
     /// Fromに遷移する条件
     /// </summary>
     /// <param name="member">遷移条件のメンバ</param>
     /// <returns>TriggerがOnならtrue</returns>
-    bool FromTransitionTrigger(TestEnemyTransitionMember member) { return member.fromTrigger.Get(); }
+    bool FromTransitionTrigger(ref TestEnemyTransitionMember member) { return member.fromTrigger.Get(); }
 }
