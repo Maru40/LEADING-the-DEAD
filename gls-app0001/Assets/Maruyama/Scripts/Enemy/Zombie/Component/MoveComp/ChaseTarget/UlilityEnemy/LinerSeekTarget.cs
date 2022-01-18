@@ -64,28 +64,29 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
         }
         else
         {
-            m_chaseTarget.TargetLost();
+
+            m_chaseTarget.TargetLost("LinerSeek");
         }
     }
 
     //ターゲットを追従する処理
-    private void LinerTarget(FoundObject target)
-    {
-        Move(target.transform.position);
-    }
+    //private void LinerTarget(FoundObject target)
+    //{
+    //    Move(target.transform.position);
+    //}
 
-    //見失った場所を探す。
-    private void LinerLostPosition()
-    {
-        var lostPosition = m_targetManager.GetLostPosition();
-        if (lostPosition == null)
-        {
-            m_chaseTarget.TargetLost();
-            return;
-        }
+    ////見失った場所を探す。
+    //private void LinerLostPosition()
+    //{
+    //    var lostPosition = m_targetManager.GetLostPosition();
+    //    if (lostPosition == null)
+    //    {
+    //        m_chaseTarget.TargetLost();
+    //        return;
+    //    }
 
-        Move((Vector3)lostPosition);
-    }
+    //    Move((Vector3)lostPosition);
+    //}
 
     private void Move(Vector3 targetPosition)
     {

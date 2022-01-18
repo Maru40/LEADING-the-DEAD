@@ -100,7 +100,7 @@ public class ChaseTarget : MonoBehaviour
         {
             if(lostPosition == null)
             {
-                TargetLost();
+                TargetLost("ChaseTarget");
             }
             else
             {
@@ -164,10 +164,10 @@ public class ChaseTarget : MonoBehaviour
     /// <summary>
     /// ターゲットを見失ったとき
     /// </summary>
-    public void TargetLost()
+    public void TargetLost(string lostString)
     {
-        Debug.Log("対象のロスト");
-        m_chase.TargetLost();   
+        Debug.Log(lostString + "対象のロスト");
+        m_chase.TargetLost();
     }
 
     public void SetMaxSpeed(float speed){
