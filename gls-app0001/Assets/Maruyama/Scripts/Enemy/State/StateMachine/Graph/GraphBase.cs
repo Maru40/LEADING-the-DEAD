@@ -7,7 +7,7 @@ using System;
 public class GraphBase<NodeType, EnumType, TransitionType>
 	where NodeType : class
 	where EnumType : Enum
-	where TransitionType : class
+	where TransitionType : struct
 {
 	//最初のノード(リセット行為に使う)
 	private EnumType m_firstType;
@@ -160,7 +160,7 @@ public class GraphBase<NodeType, EnumType, TransitionType>
 	/// <param name="to">遷移先のタイプ</param>
 	/// <param name="isTransitionFunc">遷移条件</param>
 	/// <param name="priority">優先度</param>
-	public void AddEdge(EnumType from, EnumType to, Func<TransitionType, bool> isTransitionFunc, int priority)
+	public void AddEdge(EnumType from, EnumType to, EdgeBase<EnumType, TransitionType>.IsTransitionFunc isTransitionFunc, int priority)
 	{
 		var newEdge = new EdgeBase<EnumType, TransitionType>(from, to, isTransitionFunc, priority);
 		AddEdge(newEdge);

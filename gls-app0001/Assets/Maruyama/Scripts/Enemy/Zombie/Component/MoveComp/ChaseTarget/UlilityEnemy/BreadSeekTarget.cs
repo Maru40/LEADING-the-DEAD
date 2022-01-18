@@ -46,7 +46,7 @@ public class BreadSeekTarget : NodeBase<EnemyBase>
         var owner = GetOwner();
 
         //WaitTimerで一定時間見失ったら待機状態に移行することにする。
-        m_waitTimer.AddWaitTimer(GetType(), m_lostSeekTime, m_chaseTarget.TargetLost);
+        m_waitTimer.AddWaitTimer(GetType(), m_lostSeekTime, () => m_chaseTarget.TargetLost("BreadSeek"));
 
         var target = m_targetMgr.GetNowTarget();
 

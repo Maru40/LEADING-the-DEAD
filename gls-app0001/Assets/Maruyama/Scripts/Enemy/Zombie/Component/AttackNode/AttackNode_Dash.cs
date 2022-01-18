@@ -133,17 +133,17 @@ public class AttackNode_Dash : TaskNodeBase<EnemyBase>
                 new TaskBaseParametor(() => m_animatorManager.CrossFadeDashAttack(), null, null)));
 
         //待機
-        m_param.waitParam.enter = () => { 
-            m_velocityManager.StartDeseleration();
-            m_rotationController.enabled = false;
-            m_evasion.enabled = false;
-        };
-        m_param.waitParam.exit = () => {
-            m_velocityManager.SetIsDeseleration(false);
-            m_rotationController.enabled = true;
-            m_evasion.enabled = true;
-            //EndAnimationEvent();
-        };
-        m_taskList.DefineTask(TaskEnum.Wait, new Task_Wait(m_param.waitParam));
+        //m_param.waitParam.enter = () => { 
+        //    m_velocityManager.StartDeseleration();
+        //    m_rotationController.enabled = false;
+        //    m_evasion.enabled = false;
+        //};
+        //m_param.waitParam.exit = () => {
+        //    m_velocityManager.SetIsDeseleration(false);
+        //    m_rotationController.enabled = true;
+        //    m_evasion.enabled = true;
+        //    //EndAnimationEvent();
+        //};
+        m_taskList.DefineTask(TaskEnum.Wait, new Task_EnemyWait(enemy));
     }
 }

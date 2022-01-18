@@ -94,18 +94,18 @@ public class AttackNode_Normal : TaskNodeBase<EnemyBase>
             () => { m_velocityManager.SetIsDeseleration(false); });
 
         //待機状態
-        m_param.waitParam.enter = () => {
-            m_velocityManager.SetIsDeseleration(false);
-            m_velocityManager.ResetForce();
-            m_velocityManager.ResetVelocity();
-            m_rotationController.enabled = false;
-            m_evasion.enabled = false;
-        };
-        m_param.waitParam.exit = () => { 
-            m_rotationController.enabled = true;
-            m_evasion.enabled = true;
-        };
-        m_taskList.DefineTask(TaskEnum.Wait, new Task_Wait(m_param.waitParam));
+        //m_param.waitParam.enter = () => {
+        //    m_velocityManager.SetIsDeseleration(false);
+        //    m_velocityManager.ResetForce();
+        //    m_velocityManager.ResetVelocity();
+        //    m_rotationController.enabled = false;
+        //    m_evasion.enabled = false;
+        //};
+        //m_param.waitParam.exit = () => { 
+        //    m_rotationController.enabled = true;
+        //    m_evasion.enabled = true;
+        //};
+        m_taskList.DefineTask(TaskEnum.Wait, new Task_EnemyWait(enemy));
     }
 
     private void SelectTask()

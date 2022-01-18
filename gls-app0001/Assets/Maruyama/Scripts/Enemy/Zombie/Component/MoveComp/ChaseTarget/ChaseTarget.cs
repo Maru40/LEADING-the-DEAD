@@ -13,7 +13,7 @@ public enum SeekType {
     Bread
 }
 
-public class SeekTransitonMember 
+public struct SeekTransitonMember 
 {
     public MyTrigger linerTrigger;
     public MyTrigger breadTrigger;
@@ -100,7 +100,7 @@ public class ChaseTarget : MonoBehaviour
         {
             if(lostPosition == null)
             {
-                TargetLost();
+                TargetLost("ChaseTarget");
             }
             else
             {
@@ -149,11 +149,11 @@ public class ChaseTarget : MonoBehaviour
 
     //遷移条件------------------------------------------------------------
 
-    private bool ToBreadTrigger(SeekTransitonMember member)
+    private bool ToBreadTrigger(ref SeekTransitonMember member)
     {
         return member.breadTrigger.Get();
     }
-    private bool ToLinerTrigger(SeekTransitonMember member)
+    private bool ToLinerTrigger(ref SeekTransitonMember member)
     {
         return member.linerTrigger.Get();
     }
@@ -164,10 +164,10 @@ public class ChaseTarget : MonoBehaviour
     /// <summary>
     /// ターゲットを見失ったとき
     /// </summary>
-    public void TargetLost()
+    public void TargetLost(string lostString)
     {
-        Debug.Log("対象のロスト");
-        m_chase.TargetLost();   
+        Debug.Log(lostString + "対象のロスト");
+        m_chase.TargetLost();
     }
 
     public void SetMaxSpeed(float speed){

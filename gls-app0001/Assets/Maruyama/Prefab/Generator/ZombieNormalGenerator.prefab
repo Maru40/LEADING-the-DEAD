@@ -53,15 +53,6 @@ MonoBehaviour:
   m_isInCameraCreate: 0
   m_obstacleLayerStrings:
   - L_Obstacle
-  m_distributionParams:
-  - dropData:
-      obj: {fileID: 6520215467471573455, guid: f89aa22a9f0e87b4f92420ffc278b8a3, type: 3}
-      prefabPath: 
-      probability: 100
-      particle: {fileID: 6492296973775632991, guid: 91837f35aa527df4199f8784a19b20ec, type: 3}
-      isRemove: 0
-    numDistribution: 0
-  m_clearServicesTime: 5
   m_createSetParam:
     respawnParametor:
       isAbsoluteRespawn: 0
@@ -95,11 +86,6 @@ MonoBehaviour:
         type: 0
         damageTags: []
       startRange: 2
-    normalAttackParametor:
-      moveSpeed: 2.5
-      turningDegree: 0
-      nearAvoidVec: 3
-      endWaitTime: 1
     normalAttackHitBoxDictionary:
       m_typeDraws:
       - key: 0
@@ -123,6 +109,7 @@ MonoBehaviour:
         min: 0.1
         max: 1
       moveSpeed: 1
+      audioParams: []
     angerBuffParametor:
       attackPower: 1.05
       speed: 1.05
@@ -137,6 +124,198 @@ MonoBehaviour:
       inThrongRange: 1
       nearObjectRange: 1
       maxAvoidPower: 12
+    eatParam:
+      power: 1
+    dashAttackParam:
+      probability: 25
+      startRange: 30
+      probabilityInterbalTime: 10
+    statorParametor:
+      transitionMember:
+        normalAttackRange: 2
+        dashAttackTransitionParam:
+          probability: 25
+          startRange: 30
+          probabilityInterbalTime: 10
+      attackParam:
+        normalParam:
+          preliminaryParam:
+            timeRandomRange:
+              min: 0.3
+              max: 0.8
+            moveSpeed: 3
+            audioParams:
+            - clip: {fileID: 8300000, guid: 428c90bf4b64ad842a365773a1443347, type: 3}
+              volume: 1
+              isInterval: 0
+              intervalTime: 0
+              isRandom: 1
+              volumeRandomRange:
+                min: 0.3
+                max: 0.4
+              pitchRandomRange:
+                min: 1
+                max: 1
+              isFadeOut: 0
+              fadeParam:
+                m_inTime: 0
+                m_outTime: 2.5
+                m_initVolume: 0
+          attackParam:
+            moveSpeed: 3.5
+            turningDegree: 0
+            nearAvoidVec: 3
+            chaseTime: 1
+            isTimer: 0
+            audioParams:
+            - clip: {fileID: 8300000, guid: e091ec09dc4e92041a808eedc46dccd8, type: 3}
+              volume: 1
+              isInterval: 0
+              intervalTime: 0
+              isRandom: 1
+              volumeRandomRange:
+                min: 0.1
+                max: 0.3
+              pitchRandomRange:
+                min: 1
+                max: 1
+              isFadeOut: 0
+              fadeParam:
+                m_inTime: 0
+                m_outTime: 3
+                m_initVolume: 0
+            - clip: {fileID: 8300000, guid: 071d33d6382debc44ae002b5df050bce, type: 3}
+              volume: 1
+              isInterval: 0
+              intervalTime: 0
+              isRandom: 1
+              volumeRandomRange:
+                min: 0.1
+                max: 0.3
+              pitchRandomRange:
+                min: 1
+                max: 1
+              isFadeOut: 0
+              fadeParam:
+                m_inTime: 0
+                m_outTime: 3
+                m_initVolume: 0
+          waitParam:
+            time: 1
+        dashParam:
+          preliminaryParam:
+            timeRandomRange:
+              min: 0.5
+              max: 1
+            moveSpeed: 3
+            audioParams:
+            - clip: {fileID: 8300000, guid: 428c90bf4b64ad842a365773a1443347, type: 3}
+              volume: 1
+              isInterval: 0
+              intervalTime: 0
+              isRandom: 1
+              volumeRandomRange:
+                min: 0.3
+                max: 0.3
+              pitchRandomRange:
+                min: 1
+                max: 1
+              isFadeOut: 0
+              fadeParam:
+                m_inTime: 0
+                m_outTime: 2.5
+                m_initVolume: 0
+          chaseParam:
+            maxSpeed: 9
+            subPursuitTargetForward: 0.5
+            nearRange: 2
+            turningPower: 5
+            chaseRange: 30
+          attackParam:
+            time: 1
+            maxSpeed: 10
+            audioParams:
+            - clip: {fileID: 8300000, guid: e091ec09dc4e92041a808eedc46dccd8, type: 3}
+              volume: 1
+              isInterval: 0
+              intervalTime: 0
+              isRandom: 1
+              volumeRandomRange:
+                min: 0.1
+                max: 0.3
+              pitchRandomRange:
+                min: 1
+                max: 1
+              isFadeOut: 0
+              fadeParam:
+                m_inTime: 0
+                m_outTime: 3
+                m_initVolume: 0
+            - clip: {fileID: 8300000, guid: 071d33d6382debc44ae002b5df050bce, type: 3}
+              volume: 1
+              isInterval: 0
+              intervalTime: 0
+              isRandom: 1
+              volumeRandomRange:
+                min: 0.1
+                max: 0.3
+              pitchRandomRange:
+                min: 1
+                max: 1
+              isFadeOut: 0
+              fadeParam:
+                m_inTime: 0
+                m_outTime: 3
+                m_initVolume: 0
+          waitParam:
+            time: 3
+        wallAttackParam:
+          chaseParam:
+            maxSpeed: 9
+            subPursuitTargetForward: 0.5
+            nearRange: 2
+            turningPower: 5
+            chaseRange: 30
+          wallAttackParam:
+            time: 1.5
+            maxSpeed: 10
+            audioParams:
+            - clip: {fileID: 8300000, guid: e091ec09dc4e92041a808eedc46dccd8, type: 3}
+              volume: 1
+              isInterval: 0
+              intervalTime: 0
+              isRandom: 1
+              volumeRandomRange:
+                min: 0.1
+                max: 0.3
+              pitchRandomRange:
+                min: 1
+                max: 1
+              isFadeOut: 0
+              fadeParam:
+                m_inTime: 0
+                m_outTime: 3
+                m_initVolume: 0
+            - clip: {fileID: 8300000, guid: e091ec09dc4e92041a808eedc46dccd8, type: 3}
+              volume: 1
+              isInterval: 0
+              intervalTime: 0
+              isRandom: 1
+              volumeRandomRange:
+                min: 0.1
+                max: 0.3
+              pitchRandomRange:
+                min: 1
+                max: 1
+              isFadeOut: 0
+              fadeParam:
+                m_inTime: 0
+                m_outTime: 3
+                m_initVolume: 0
+          waitParam:
+            time: 1.5
+    auraParam:
+      auraParametors: []
   m_respawnStatusUpParam:
     respawnParametor:
       isAbsoluteRespawn: 0
@@ -170,11 +349,6 @@ MonoBehaviour:
         type: 0
         damageTags: []
       startRange: 0
-    normalAttackParametor:
-      moveSpeed: 3
-      turningDegree: 0
-      nearAvoidVec: 1
-      endWaitTime: 0.1
     normalAttackHitBoxDictionary:
       m_typeDraws: []
     preliminaryParam:
@@ -182,6 +356,7 @@ MonoBehaviour:
         min: 1
         max: 1
       moveSpeed: 1
+      audioParams: []
     angerBuffParametor:
       attackPower: 1.05
       speed: 1.02
@@ -196,6 +371,70 @@ MonoBehaviour:
       inThrongRange: 1
       nearObjectRange: 1
       maxAvoidPower: 3
+    eatParam:
+      power: 1
+    dashAttackParam:
+      probability: 25
+      startRange: 30
+      probabilityInterbalTime: 10
+    statorParametor:
+      transitionMember:
+        normalAttackRange: 0
+        dashAttackTransitionParam:
+          probability: 0
+          startRange: 0
+          probabilityInterbalTime: 0
+      attackParam:
+        normalParam:
+          preliminaryParam:
+            timeRandomRange:
+              min: 0
+              max: 0
+            moveSpeed: 0
+            audioParams: []
+          attackParam:
+            moveSpeed: 0
+            turningDegree: 0
+            nearAvoidVec: 0
+            chaseTime: 0
+            isTimer: 0
+            audioParams: []
+          waitParam:
+            time: 0
+        dashParam:
+          preliminaryParam:
+            timeRandomRange:
+              min: 0
+              max: 0
+            moveSpeed: 0
+            audioParams: []
+          chaseParam:
+            maxSpeed: 0
+            subPursuitTargetForward: 0
+            nearRange: 0
+            turningPower: 0
+            chaseRange: 0
+          attackParam:
+            time: 0
+            maxSpeed: 0
+            audioParams: []
+          waitParam:
+            time: 0
+        wallAttackParam:
+          chaseParam:
+            maxSpeed: 0
+            subPursuitTargetForward: 0
+            nearRange: 0
+            turningPower: 0
+            chaseRange: 0
+          wallAttackParam:
+            time: 0
+            maxSpeed: 0
+            audioParams: []
+          waitParam:
+            time: 0
+    auraParam:
+      auraParametors: []
   m_randomSetParam:
     cahseParametor:
       isActive: 0

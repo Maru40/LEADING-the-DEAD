@@ -120,7 +120,7 @@ public class StateNode_ZombieNormal_Attack : EnState_AttackBase
             _ => new StateType[] { }
         };
 
-        foreach(var task in tasks)
+        foreach (var task in tasks)
         {
             m_taskList.AddTask(task);
         }

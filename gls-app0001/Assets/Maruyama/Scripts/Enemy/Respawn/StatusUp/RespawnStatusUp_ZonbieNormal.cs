@@ -33,11 +33,11 @@ public class RespawnStatusUp_ZonbieNormal : EnemyRespawnStatusUpBase
             statusMgr.AddStatus(m_param.status);
         }
 
-        var attack = GetComponent<AttackManager_ZombieNormal>();
-        if (attack)
-        {
-            attack.AddBaseParam(m_param.attackManagerParametor);
-        }
+        //var attack = GetComponent<AttackManager_ZombieNormal>();
+        //if (attack)
+        //{
+        //    attack.AddBaseParam(m_param.attackManagerParametor);
+        //}
     }
 
     public override void Respawn()

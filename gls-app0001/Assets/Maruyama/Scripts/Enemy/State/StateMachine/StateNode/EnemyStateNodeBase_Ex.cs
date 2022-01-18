@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class EnemyStateNodeBase_Ex<EnemyType, EnumType, TransitionType> : EnemyStateNodeBase<EnemyType>
     where EnemyType : class
     where EnumType : System.Enum
-    where TransitionType : class, new()
+    where TransitionType : struct
 {
     private EnemyMainStateMachine<EnemyType, EnumType, TransitionType> m_stateMachine;
 

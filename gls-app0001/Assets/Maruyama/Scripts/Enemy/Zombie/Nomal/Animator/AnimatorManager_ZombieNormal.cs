@@ -69,7 +69,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
     private EnemyRotationCtrl m_rotationController;
     private TargetManager m_targetManager;
     private EnemyVelocityManager m_velocityManager;
-    private AttackManager_ZombieNormal m_attackManager;
+    //private AttackManager_ZombieNormal m_attackManager;
     private Stator_ZombieNormal m_stator;
     private ThrongManager m_throngManager;
     private SmellManager m_smellManager;
@@ -90,7 +90,7 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
         m_rotationController = GetComponent<EnemyRotationCtrl>();
         m_targetManager = GetComponent<TargetManager>();
         m_velocityManager = GetComponent<EnemyVelocityManager>();
-        m_attackManager = GetComponent<AttackManager_ZombieNormal>();
+        //m_attackManager = GetComponent<AttackManager_ZombieNormal>();
         m_stator = GetComponent<Stator_ZombieNormal>();
         m_throngManager = GetComponent<ThrongManager>();
         m_smellManager = GetComponent<SmellManager>();
@@ -163,17 +163,17 @@ public class AnimatorManager_ZombieNormal : AnimatorManagerBase
 
         actionBehaviour.AddUpdateAction(() => {
             //予備動作中のアップデート
-            var vectorCheck = m_targetManager.GetToNowTargetVector();
-            if (vectorCheck == null) {
-                return;
-            }
-            var toTragetVec = (Vector3)vectorCheck;
+            //var vectorCheck = m_targetManager.GetToNowTargetVector();
+            //if (vectorCheck == null) {
+            //    return;
+            //}
+            //var toTragetVec = (Vector3)vectorCheck;
 
-            m_rotationController.SetDirect(toTragetVec);  //回転計算
+            //m_rotationController.SetDirect(toTragetVec);  //回転計算
             //速度計算
-            var moveSpeed = m_attackManager.PreliminaryParametorProperty.moveSpeed;
-            var force = CalcuVelocity.CalucSeekVec(m_velocityManager.velocity, toTragetVec, moveSpeed);
-            m_velocityManager.AddForce(force);
+            //var moveSpeed = m_attackManager.PreliminaryParametorProperty.moveSpeed;
+            //var force = CalcuVelocity.CalucSeekVec(m_velocityManager.velocity, toTragetVec, moveSpeed);
+            //m_velocityManager.AddForce(force);
         });
 
         actionBehaviour.AddExitAction(() => m_preliminaryNormalAttackVoice?.FadeOutStart());

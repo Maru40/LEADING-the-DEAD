@@ -63,6 +63,8 @@ public class AttackManager_ZombieNormal : AttackNodeManagerBase
 
     public override void AttackStart()
     {
+        return;
+
         if(m_stator.GetNowStateType() == ZombieNormalState.Attack) {
             return;
         }
