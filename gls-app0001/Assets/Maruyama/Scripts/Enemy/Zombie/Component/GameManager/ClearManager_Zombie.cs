@@ -88,7 +88,10 @@ public class ClearManager_Zombie : MonoBehaviour
     {
         foreach(var behaviour in m_enableOffBehaviour)
         {
-            behaviour.enabled = enable;
+            if (behaviour)
+            {
+                behaviour.enabled = enable;
+            }
         }
     }
 
