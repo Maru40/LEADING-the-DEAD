@@ -12,6 +12,7 @@ public class EnemyVelocityManager : MonoBehaviour
     private Vector3 m_velocity = new Vector3();
 
     private bool m_isDeseleration = false;  //減速中かどうか
+    public bool IsDeseleration => m_isDeseleration;
     private float m_deselerationPower = 1.0f;
 
     private void Awake()
