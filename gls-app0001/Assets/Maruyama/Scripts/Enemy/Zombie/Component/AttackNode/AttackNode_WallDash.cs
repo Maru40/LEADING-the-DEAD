@@ -90,7 +90,7 @@ public class AttackNode_WallDash : TaskNodeBase<EnemyBase>
         m_taskList.DefineTask(TaskEnum.Attack, new Task_WallAttack(enemy, m_param.wallAttackParam, wallBaseParametor));
 
         //m_param.waitParam.exit = () => m_attackManager.EndAnimationEvent();
-        m_taskList.DefineTask(TaskEnum.Wait, new Task_Wait(m_param.waitParam));
+        m_taskList.DefineTask(TaskEnum.Wait, new Task_EnemyWait(enemy));
 
         m_taskList.DefineTask(TaskEnum.PutWall, new Task_PutWall(enemy, m_param.putWallParam));
     }
