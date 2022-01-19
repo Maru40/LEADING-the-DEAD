@@ -423,7 +423,7 @@ PrefabInstance:
     - target: {fileID: 5402623612787628000, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
-      objectReference: {fileID: 757876592}
+      objectReference: {fileID: 2117051743}
     - target: {fileID: 5402623612787628000, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -557,6 +557,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &797375057 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2732488740895358141, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+  m_PrefabInstance: {fileID: 1707280876}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &797375058 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2732488740895358140, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+  m_PrefabInstance: {fileID: 1707280876}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &797375059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797375057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e8e2f9f939a7348806dccfaa3ee241, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstSelectObject: {fileID: 0}
+  m_directorType: 0
+  m_director: {fileID: 0}
+  m_animateDirector: {fileID: 0}
 --- !u!1001 &973671209
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -803,174 +829,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3a51170478b2fd4394da59044e0ece4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1184152081
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1184152082}
-  - component: {fileID: 1184152086}
-  - component: {fileID: 1184152085}
-  - component: {fileID: 1184152084}
-  - component: {fileID: 1184152083}
-  - component: {fileID: 1184152088}
-  - component: {fileID: 1184152087}
-  m_Layer: 5
-  m_Name: CreditText
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1184152082
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1184152081}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1768791449}
-  m_Father: {fileID: 2117855058}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1600, y: 1080}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1184152083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1184152081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowMaskGraphic: 1
---- !u!114 &1184152084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1184152081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Content: {fileID: 1768791449}
-  m_Horizontal: 0
-  m_Vertical: 1
-  m_MovementType: 1
-  m_Elasticity: 0.1
-  m_Inertia: 1
-  m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
-  m_Viewport: {fileID: 0}
-  m_HorizontalScrollbar: {fileID: 0}
-  m_VerticalScrollbar: {fileID: 0}
-  m_HorizontalScrollbarVisibility: 0
-  m_VerticalScrollbarVisibility: 0
-  m_HorizontalScrollbarSpacing: 0
-  m_VerticalScrollbarSpacing: 0
-  m_OnValueChanged:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1184152085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1184152081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.5411765}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1184152086
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1184152081}
-  m_CullTransparentMesh: 1
---- !u!114 &1184152087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1184152081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e8e2f9f939a7348806dccfaa3ee241, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firstSelectObject: {fileID: 0}
-  m_directorType: 0
-  m_director: {fileID: 0}
-  m_animateDirector: {fileID: 0}
---- !u!114 &1184152088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1184152081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 16
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1184152087}
-          m_TargetAssemblyTypeName: PopUpUI, Assembly-CSharp
-          m_MethodName: Close
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &1271293229
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,7 +926,7 @@ PrefabInstance:
     - target: {fileID: 5402623612787628000, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1184152087}
+      objectReference: {fileID: 797375059}
     - target: {fileID: 5402623612787628000, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1103,7 +961,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5402623612787628001, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5402623612787628001, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
       propertyPath: m_AnchorMin.x
@@ -1111,7 +969,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5402623612787628001, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5402623612787628001, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1151,11 +1009,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5402623612787628001, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 500
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5402623612787628001, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -203.125
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5402623612787628001, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1172,10 +1030,6 @@ PrefabInstance:
     - target: {fileID: 5402623612787628014, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
       propertyPath: m_Name
       value: CreditButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 5402623612787628014, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5402623613104071994, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
       propertyPath: m_Text
@@ -1463,7 +1317,7 @@ PrefabInstance:
     - target: {fileID: 5402623612787628000, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
       propertyPath: m_Navigation.m_SelectOnUp
       value: 
-      objectReference: {fileID: 220421963}
+      objectReference: {fileID: 2117051743}
     - target: {fileID: 5402623612787628000, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -1588,139 +1442,166 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
---- !u!1 &1768791448
-GameObject:
+--- !u!1001 &1707280876
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1768791449}
-  - component: {fileID: 1768791452}
-  - component: {fileID: 1768791451}
-  - component: {fileID: 1768791450}
-  m_Layer: 5
-  m_Name: Text
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1768791449
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1768791448}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1184152082}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 229}
-  m_Pivot: {x: 0, y: 1}
---- !u!114 &1768791450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1768791448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
-  m_VerticalFit: 2
---- !u!114 &1768791451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1768791448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 60
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: "\u3010\u4F7F\u7528\u3055\u305B\u3066\u3044\u305F\u3060\u3044\u305F\u30A2\u30BB\u30C3\u30C8\u30FBSE\u30FBBGM\u30FB\u30D1\u30FC\u30C6\u30A3\u30AF\u30EB\u4E00\u89A7\u3011\r\n\u25B6\u25B7\u30A2\u30BB\u30C3\u30C8\r\n\u30CE\u30FC\u30DE\u30EB\u30BE\u30F3\u30D3
-    \u5B87\u5B99\u98DB\u884C\u58EB\u3000\u300CZombie Slaughter\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/characters/zombie-slaughter-119817#publisher\r\n\r\n\u30CE\u30FC\u30DE\u30EB\u30BE\u30F3\u30D3\u306E\u30E2\u30FC\u30B7\u30E7\u30F3\u3000PROTOFACTOR,
-    INC\u3000\u300CANIMSET: ZOMBIE\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/animations/animset-zombie-198706\r\n\r\n\u30BF\u30F3\u30AF\u30BE\u30F3\u30D3\u3000Maksim
-    Bugrimov\u3000\u300CCreature\u3000Titan\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/characters/creatures/creature-titan-79302\r\n\r\n\u8840\u888B\u3000Vergis\u3000\u300CLowPoly
-    Fantasy Bags\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/props/lowpoly-fantasy-bags-156997\r\n\r\n\u8089\u3000Neo
-    Star Studios\u3000\u300CLow Poly Rigged Body Parts\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/props/low-poly-rigged-body-parts-188066#publisher\r\n\r\n\u706B\u708E\u653E\u5C04\u5668\u3000Piflik\u3000\u300CWCE
-    - Turret\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/props/weapons/wce-turret-5737#publisher\r\n\r\n\u79FB\u52D5\u5F0F\u56DE\u8EE2\u5203\r\n\u80F4\u4F53\u90E8\u5206\u306E\u30C6\u30AF\u30B9\u30C1\u30E3\u3000Maksim
-    Bugrimov\u3000\u300CAdventure Character\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/characters/humanoids/humans/adventure-character-201384\r\n\u5203\u90E8\u5206\u3000Edgard
-    Escarate\u3000\u300CFantasy Swords (PBR)\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/props/weapons/fantasy-swords-pbr-108392\r\n\r\n\u5EFA\u7269\u30FB\u690D\u7269\r\n(\uFF11)Aquarius
-    Max\u3000\u300CThe Wasteland LITE\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/environments/industrial/the-wasteland-lite-73054\r\n(2)Dmitrii
-    Kutsenko\u3000\u300CRPG/FPS Game Assets for PC/Mobile (Industrial Set v1.0)\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/environments/industrial/rpg-fps-game-assets-for-pc-mobile-industrial-set-v1-0-87024\r\n(3)Dmitrii
-    Kutsenko\u3000\u300CRPG/FPS Game Assets for PC/Mobile (Industrial Set v2.0)\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/environments/industrial/rpg-fps-game-assets-for-pc-mobile-industrial-set-v2-0-86679#publisher\r\n(4)Osmann\u3000\u300CIndustrial
-    Props PBR\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/props/industrial/industrial-props-pbr-130438\r\n(5)Indie_G\u3000\u300CLow
-    Poly Props Pack\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/props/industrial/low-poly-props-pack-53751\r\n(6)Bretwalda
-    Games\u3000\u300CSan Francisco House\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/environments/urban/san-francisco-house-16640\r\n(7)Broken
-    Vector\u3000\u300CLow Poly Brick Houses\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/props/exterior/low-poly-brick-houses-131899\r\n(8)rik4000\u3000\u300CUK
-    Terraced Houses Pack FREE\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/environments/urban/uk-terraced-houses-pack-free-63481\r\n(9)Nikolay
-    Fedorov\u3000\u300CSurvival village props(Free)\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/props/exterior/survival-village-props-free-59280\r\n(\uFF110)False
-    Wisp Studios\u3000\u300CCartoon Farm Crops\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/vegetation/plants/cartoon-farm-crops-79777\r\n(11)Thunderent\u3000\u300CFountain
-    Prop\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/fountain-prop-75912\r\n(12)Rokay3D\u3000\u300CFarm
-    Machinery: Low Poly Tractor and Planter\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/vehicles/land/farm-machinery-low-poly-tractor-and-planter-94533\r\n(13)Pixel
-    Games\u3000\u300CRealistic Tree 9 [Rainbow Tree]\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/vegetation/trees/realistic-tree-9-rainbow-tree-54622\r\n(14)weissegames\u3000\u300CWater
-    Tower\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/water-tower-36577\r\n(15)Nobiax
-    / Yughues\u3000\u300CYughues Free Bushes\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/vegetation/plants/yughues-free-bushes-13168\r\n(16)Valentine
-    Kurakin\u3000\u300CStylized Cemetery Pack\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/environments/stylized-cemetery-pack-56402\r\n(17)LemmoLab\u3000\u300CUrban
-    building\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/props/exterior/urban-building-130318#content\r\n(18)Joel
-    Barmettler\u3000\u300COld Farmhouse\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/environments/historic/old-farmhouse-34831\r\n(19)Maksim
-    Bugrimov\u3000\u300CApocalypse Pack\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/environments/industrial/apocalypse-pack-58281\r\n\r\n\u8857\u8DEF\u6A39\u3000\r\n(1)Pixel
-    Games\u3000\u300CRealistic Tree 9 [Rainbow Tree]\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/vegetation/trees/realistic-tree-9-rainbow-tree-54622\r\n(2)Nobiax
-    / Yughues\u3000\u300CYughues Free Bushes\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/vegetation/plants/yughues-free-bushes-13168\r\n\r\n\u5E8A\u30FB\u5730\u9762\r\n(1)Nobiax
-    / Yughues\u3000\u300CYughues Free Ground Materials\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/2d/textures-materials/floors/yughues-free-ground-materials-13001\r\n(2)Nobiax
-    / Yughues\u3000\u300CYughues Free Architectural Materials\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/2d/textures-materials/yughues-free-architectural-materials-13234#content\r\n\r\n\u30D0\u30EA\u30B1\u30FC\u30C9\u3000ALP8310\u3000\u300CMetal
-    gates of the USSR\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/props/industrial/metal-gates-of-the-ussr-123905\r\n\r\n(\u203B\u5168\u3066UnityAssetStore\u304B\u3089\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9\u3057\u307E\u3057\u305F)\r\n\r\n\u25B6\u25B7SE\r\n\u9078\u629E\u97F3\u3000\u52B9\u679C\u97F3\u30E9\u30DC
-    \u300C\u30AB\u30FC\u30BD\u30EB\u79FB\u52D53\u300D\r\n\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u52B9\u679C\u97F3\u30E9\u30DC
-    \u300C\u6C7A\u5B9A\u3001\u30DC\u30BF\u30F3\u62BC\u4E0B\uFF13\uFF12\u300D\r\n\u6C7A\u5B9A\u97F3\u3000\u52B9\u679C\u97F3\u30E9\u30DC
-    \u300C\u6C7A\u5B9A\u3001\u30DC\u30BF\u30F3\u62BC\u4E0B\uFF12\uFF13\u300D\r\n\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u52B9\u679C\u97F3\u30E9\u30DC
-    \u300C\u6C7A\u5B9A\u3001\u30DC\u30BF\u30F3\u62BC\u4E0B\uFF13\uFF18\u300D\r\n\u30AD\u30E3\u30F3\u30BB\u30EB\u97F3\u3000\u52B9\u679C\u97F3\u30E9\u30DC\u3000\u300C\u30AD\u30E3\u30F3\u30BB\u30EB\u97F3\uFF11\u300D\r\n\u30BE\u30F3\u30D3\u304C\u30D0\u30EA\u30B1\u30FC\u30C9\u306B\u653B\u6483\u3059\u308B\u97F3\u3000\u9B54\u738B\u9B42\u300C\u30C9\u30E9\u30E02\u2010\u30D0\u30B9\u30C9\u30E9\u30E0\u300D\r\n\u30BE\u30F3\u30D3\u304C\u30D7\u30EC\u30A4\u30E4\u30FC\u306B\u653B\u6483\u3059\u308B\u97F3\u3000\u52B9\u679C\u97F3\u30E9\u30DC\u3000\u30BE\u30F3\u30D3\u306B\u4F53\u3092\u3048\u3050\u3089\u308C\u308B\r\n\u30BE\u30F3\u30D3\u306E\u5538\u308A\u58F0\u3000\u52B9\u679C\u97F3\u30E9\u30DC\u3000\u300C\u30BE\u30F3\u30D3\u306E\u58F01\u300D\r\n                    
-    \u3000\u52B9\u679C\u97F3\u30E9\u30DC\u3000\u300C\u30BE\u30F3\u30D3\u306E\u58F02\u300D\r\n                    
-    \u3000\u52B9\u679C\u97F3\u30E9\u30DC\u3000\u300C\u30BE\u30F3\u30D3\u306E\u606F\u9063\u3044\u300D\r\n\u30BF\u30F3\u30AF\u30BE\u30F3\u30D3\u306E\u5538\u308A\u58F0\u3000\u52B9\u679C\u97F3\u30E9\u30DC\u3000\u300C\u30BE\u30F3\u30D3\u306E\u58F0\uFF13\u300D\r\n\u30BF\u30F3\u30AF\u30BE\u30F3\u30D3\u306E\u8DB3\u97F3\u3000\u7121\u6599\u52B9\u679C\u97F3\u3067\u904A\u307C\u3046\uFF01\u3000\u300C\u5DE8\u4EBA\u306E\u8DB3\u97F3\u25B6footsteps_of_a_giant\u300D\r\n\u8840\u888B\u3092\u7F6E\u3044\u305F\u3068\u304D\u306E\u97F3\u3000\u7121\u6599\u52B9\u679C\u97F3\u3067\u904A\u307C\u3046\uFF01\u3000\u300C\u30AB\u30D0\u30F3\u3092\u4E71\u66B4\u306B\u7F6E\u304F\u25B6putting_a_large_bag2\u300D\r\n\r\n\u25B6\u25B7BGM\r\n\u30BF\u30A4\u30C8\u30EB\u2026\u7518\u8336\u306E\u97F3\u697D\u5DE5\u623F\u3000\u300C\u30D7\u30E9\u30CD\u30C3\u30C8\u30FB\u30CA\u30A4\u30F3\u300D\r\n\u30B9\u30C6\u30FC\u30B8\u30BB\u30EC\u30AF\u30C8\u2026\u9B54\u738B\u9B42\u3000\u300C\u30AA\u30FC\u30B1\u30B9\u30C8\u30E925\u300D\r\n\u30B2\u30FC\u30E0\u5185\u2026\u7518\u8336\u306E\u97F3\u697D\u5DE5\u623F\u3000\u300C\u30DC\u30B9\u732B\u306E\u624B\u4E0B\u300D\r\n\u30EA\u30B6\u30EB\u30C8\u753B\u9762\u2026\u7518\u8336\u306E\u97F3\u697D\u5DE5\u623F\u3000\u300C\u30B9\u30D5\u30A3\u30F3\u30AF\u30B9\u300D\r\n\r\n\u25B6\u25B7\u30D1\u30FC\u30C6\u30A3\u30AF\u30EB\r\n\u6D41\u8840\u3000RRFreelance
-    / PiXelBurner\u3000\u300CBlood Gush\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/vfx/particles/blood-gush-73426?aid=1011lGbg&utm_campaign=unity_affiliate&utm_medium=affiliate&utm_source=partnerize-linkmaker\r\n\r\n\u3010\u4F7F\u7528\u3055\u305B\u3066\u3044\u305F\u3060\u3044\u305F\u30B5\u30A4\u30C8\u3011\r\n\u7518\u8336\u306E\u97F3\u697D\u5DE5\u623F\u25B6https://amachamusic.chagasi.com/genre_orchestra.html\r\n\u52B9\u679C\u97F3\u30E9\u30DC\u25B6https://soundeffect-lab.info/\r\n\u9B54\u738B\u9B42\u25B6https://maou.audio/\r\n\u7121\u6599\u52B9\u679C\u97F3\u3067\u904A\u307C\u3046\uFF01\u25B6https://taira-komori.jpn.org/index.html\r\n\u3053\u3048\u3084\u3055\u3093\u25B6https://www.koeyasan.com/\r\n"
---- !u!222 &1768791452
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1768791448}
-  m_CullTransparentMesh: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2117855058}
+    m_Modifications:
+    - target: {fileID: 2732488739882493469, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 4045
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488739882493471, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_Text
+      value: "\u3010\u4F7F\u7528\u3055\u305B\u3066\u3044\u305F\u3060\u3044\u305F\u30A2\u30BB\u30C3\u30C8\u30FBSE\u30FBBGM\u30FB\u30D1\u30FC\u30C6\u30A3\u30AF\u30EB\u4E00\u89A7\u3011\r\n\u25B6\u25B7\u30A2\u30BB\u30C3\u30C8\r\n\u30CE\u30FC\u30DE\u30EB\u30BE\u30F3\u30D3
+        \u5B87\u5B99\u98DB\u884C\u58EB\u3000\u300CZombie Slaughter\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/characters/zombie-slaughter-119817#publisher\r\n\r\n\u30CE\u30FC\u30DE\u30EB\u30BE\u30F3\u30D3\u306E\u30E2\u30FC\u30B7\u30E7\u30F3\u3000PROTOFACTOR,
+        INC\u3000\u300CANIMSET: ZOMBIE\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/animations/animset-zombie-198706\r\n\r\n\u30BF\u30F3\u30AF\u30BE\u30F3\u30D3\u3000Maksim
+        Bugrimov\u3000\u300CCreature\u3000Titan\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/characters/creatures/creature-titan-79302\r\n\r\n\u8840\u888B\u3000Vergis\u3000\u300CLowPoly
+        Fantasy Bags\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/props/lowpoly-fantasy-bags-156997\r\n\r\n\u8089\u3000Neo
+        Star Studios\u3000\u300CLow Poly Rigged Body Parts\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/props/low-poly-rigged-body-parts-188066#publisher\r\n\r\n\u706B\u708E\u653E\u5C04\u5668\u3000Piflik\u3000\u300CWCE
+        - Turret\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/props/weapons/wce-turret-5737#publisher\r\n\r\n\u79FB\u52D5\u5F0F\u56DE\u8EE2\u5203\r\n\u80F4\u4F53\u90E8\u5206\u306E\u30C6\u30AF\u30B9\u30C1\u30E3\u3000Maksim
+        Bugrimov\u3000\u300CAdventure Character\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/characters/humanoids/humans/adventure-character-201384\r\n\u5203\u90E8\u5206\u3000Edgard
+        Escarate\u3000\u300CFantasy Swords (PBR)\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/props/weapons/fantasy-swords-pbr-108392\r\n\r\n\u5EFA\u7269\u30FB\u690D\u7269\r\n(\uFF11)Aquarius
+        Max\u3000\u300CThe Wasteland LITE\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/environments/industrial/the-wasteland-lite-73054\r\n(2)Dmitrii
+        Kutsenko\u3000\u300CRPG/FPS Game Assets for PC/Mobile (Industrial Set v1.0)\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/environments/industrial/rpg-fps-game-assets-for-pc-mobile-industrial-set-v1-0-87024\r\n(3)Dmitrii
+        Kutsenko\u3000\u300CRPG/FPS Game Assets for PC/Mobile (Industrial Set v2.0)\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/environments/industrial/rpg-fps-game-assets-for-pc-mobile-industrial-set-v2-0-86679#publisher\r\n(4)Osmann\u3000\u300CIndustrial
+        Props PBR\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/props/industrial/industrial-props-pbr-130438\r\n(5)Indie_G\u3000\u300CLow
+        Poly Props Pack\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/props/industrial/low-poly-props-pack-53751\r\n(6)Bretwalda
+        Games\u3000\u300CSan Francisco House\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/environments/urban/san-francisco-house-16640\r\n(7)Broken
+        Vector\u3000\u300CLow Poly Brick Houses\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/props/exterior/low-poly-brick-houses-131899\r\n(8)rik4000\u3000\u300CUK
+        Terraced Houses Pack FREE\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/environments/urban/uk-terraced-houses-pack-free-63481\r\n(9)Nikolay
+        Fedorov\u3000\u300CSurvival village props(Free)\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/props/exterior/survival-village-props-free-59280\r\n(\uFF110)False
+        Wisp Studios\u3000\u300CCartoon Farm Crops\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/vegetation/plants/cartoon-farm-crops-79777\r\n(11)Thunderent\u3000\u300CFountain
+        Prop\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/fountain-prop-75912\r\n(12)Rokay3D\u3000\u300CFarm
+        Machinery: Low Poly Tractor and Planter\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/vehicles/land/farm-machinery-low-poly-tractor-and-planter-94533\r\n(13)Pixel
+        Games\u3000\u300CRealistic Tree 9 [Rainbow Tree]\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/vegetation/trees/realistic-tree-9-rainbow-tree-54622\r\n(14)weissegames\u3000\u300CWater
+        Tower\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/water-tower-36577\r\n(15)Nobiax
+        / Yughues\u3000\u300CYughues Free Bushes\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/vegetation/plants/yughues-free-bushes-13168\r\n(16)Valentine
+        Kurakin\u3000\u300CStylized Cemetery Pack\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/environments/stylized-cemetery-pack-56402\r\n(17)LemmoLab\u3000\u300CUrban
+        building\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/props/exterior/urban-building-130318#content\r\n(18)Joel
+        Barmettler\u3000\u300COld Farmhouse\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/environments/historic/old-farmhouse-34831\r\n(19)Maksim
+        Bugrimov\u3000\u300CApocalypse Pack\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/environments/industrial/apocalypse-pack-58281\r\n\r\n\u8857\u8DEF\u6A39\u3000\r\n(1)Pixel
+        Games\u3000\u300CRealistic Tree 9 [Rainbow Tree]\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/vegetation/trees/realistic-tree-9-rainbow-tree-54622\r\n(2)Nobiax
+        / Yughues\u3000\u300CYughues Free Bushes\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/vegetation/plants/yughues-free-bushes-13168\r\n\r\n\u5E8A\u30FB\u5730\u9762\r\n(1)Nobiax
+        / Yughues\u3000\u300CYughues Free Ground Materials\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/2d/textures-materials/floors/yughues-free-ground-materials-13001\r\n(2)Nobiax
+        / Yughues\u3000\u300CYughues Free Architectural Materials\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/2d/textures-materials/yughues-free-architectural-materials-13234#content\r\n\r\n\u30D0\u30EA\u30B1\u30FC\u30C9\u3000ALP8310\u3000\u300CMetal
+        gates of the USSR\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/3d/props/industrial/metal-gates-of-the-ussr-123905\r\n\r\n(\u203B\u5168\u3066UnityAssetStore\u304B\u3089\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9\u3057\u307E\u3057\u305F)\r\n\r\n\u25B6\u25B7SE\r\n\u9078\u629E\u97F3\u3000\u52B9\u679C\u97F3\u30E9\u30DC
+        \u300C\u30AB\u30FC\u30BD\u30EB\u79FB\u52D53\u300D\r\n\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u52B9\u679C\u97F3\u30E9\u30DC
+        \u300C\u6C7A\u5B9A\u3001\u30DC\u30BF\u30F3\u62BC\u4E0B\uFF13\uFF12\u300D\r\n\u6C7A\u5B9A\u97F3\u3000\u52B9\u679C\u97F3\u30E9\u30DC
+        \u300C\u6C7A\u5B9A\u3001\u30DC\u30BF\u30F3\u62BC\u4E0B\uFF12\uFF13\u300D\r\n\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u52B9\u679C\u97F3\u30E9\u30DC
+        \u300C\u6C7A\u5B9A\u3001\u30DC\u30BF\u30F3\u62BC\u4E0B\uFF13\uFF18\u300D\r\n\u30AD\u30E3\u30F3\u30BB\u30EB\u97F3\u3000\u52B9\u679C\u97F3\u30E9\u30DC\u3000\u300C\u30AD\u30E3\u30F3\u30BB\u30EB\u97F3\uFF11\u300D\r\n\u30BE\u30F3\u30D3\u304C\u30D0\u30EA\u30B1\u30FC\u30C9\u306B\u653B\u6483\u3059\u308B\u97F3\u3000\u9B54\u738B\u9B42\u300C\u30C9\u30E9\u30E02\u2010\u30D0\u30B9\u30C9\u30E9\u30E0\u300D\r\n\u30BE\u30F3\u30D3\u304C\u30D7\u30EC\u30A4\u30E4\u30FC\u306B\u653B\u6483\u3059\u308B\u97F3\u3000\u52B9\u679C\u97F3\u30E9\u30DC\u3000\u30BE\u30F3\u30D3\u306B\u4F53\u3092\u3048\u3050\u3089\u308C\u308B\r\n\u30BE\u30F3\u30D3\u306E\u5538\u308A\u58F0\u3000\u52B9\u679C\u97F3\u30E9\u30DC\u3000\u300C\u30BE\u30F3\u30D3\u306E\u58F01\u300D\r\n                    
+        \u3000\u52B9\u679C\u97F3\u30E9\u30DC\u3000\u300C\u30BE\u30F3\u30D3\u306E\u58F02\u300D\r\n                    
+        \u3000\u52B9\u679C\u97F3\u30E9\u30DC\u3000\u300C\u30BE\u30F3\u30D3\u306E\u606F\u9063\u3044\u300D\r\n\u30BF\u30F3\u30AF\u30BE\u30F3\u30D3\u306E\u5538\u308A\u58F0\u3000\u52B9\u679C\u97F3\u30E9\u30DC\u3000\u300C\u30BE\u30F3\u30D3\u306E\u58F0\uFF13\u300D\r\n\u30BF\u30F3\u30AF\u30BE\u30F3\u30D3\u306E\u8DB3\u97F3\u3000\u7121\u6599\u52B9\u679C\u97F3\u3067\u904A\u307C\u3046\uFF01\u3000\u300C\u5DE8\u4EBA\u306E\u8DB3\u97F3\u25B6footsteps_of_a_giant\u300D\r\n\u8840\u888B\u3092\u7F6E\u3044\u305F\u3068\u304D\u306E\u97F3\u3000\u7121\u6599\u52B9\u679C\u97F3\u3067\u904A\u307C\u3046\uFF01\u3000\u300C\u30AB\u30D0\u30F3\u3092\u4E71\u66B4\u306B\u7F6E\u304F\u25B6putting_a_large_bag2\u300D\r\n\r\n\u25B6\u25B7BGM\r\n\u30BF\u30A4\u30C8\u30EB\u2026\u7518\u8336\u306E\u97F3\u697D\u5DE5\u623F\u3000\u300C\u30D7\u30E9\u30CD\u30C3\u30C8\u30FB\u30CA\u30A4\u30F3\u300D\r\n\u30B9\u30C6\u30FC\u30B8\u30BB\u30EC\u30AF\u30C8\u2026\u9B54\u738B\u9B42\u3000\u300C\u30AA\u30FC\u30B1\u30B9\u30C8\u30E925\u300D\r\n\u30B2\u30FC\u30E0\u5185\u2026\u7518\u8336\u306E\u97F3\u697D\u5DE5\u623F\u3000\u300C\u30DC\u30B9\u732B\u306E\u624B\u4E0B\u300D\r\n\u30EA\u30B6\u30EB\u30C8\u753B\u9762\u2026\u7518\u8336\u306E\u97F3\u697D\u5DE5\u623F\u3000\u300C\u30B9\u30D5\u30A3\u30F3\u30AF\u30B9\u300D\r\n\r\n\u25B6\u25B7\u30D1\u30FC\u30C6\u30A3\u30AF\u30EB\r\n\u6D41\u8840\u3000RRFreelance
+        / PiXelBurner\u3000\u300CBlood Gush\u300D\r\nURL\u25B7\u25B6https://assetstore.unity.com/packages/vfx/particles/blood-gush-73426?aid=1011lGbg&utm_campaign=unity_affiliate&utm_medium=affiliate&utm_source=partnerize-linkmaker\r\n\r\n\u3010\u4F7F\u7528\u3055\u305B\u3066\u3044\u305F\u3060\u3044\u305F\u30B5\u30A4\u30C8\u3011\r\n\u7518\u8336\u306E\u97F3\u697D\u5DE5\u623F\u25B6https://amachamusic.chagasi.com/genre_orchestra.html\r\n\u52B9\u679C\u97F3\u30E9\u30DC\u25B6https://soundeffect-lab.info/\r\n\u9B54\u738B\u9B42\u25B6https://maou.audio/\r\n\u7121\u6599\u52B9\u679C\u97F3\u3067\u904A\u307C\u3046\uFF01\u25B6https://taira-komori.jpn.org/index.html\r\n\u3053\u3048\u3084\u3055\u3093\u25B6https://www.koeyasan.com/\r\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358140, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358140, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358140, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358140, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358140, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358140, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358140, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358140, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1600
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358140, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358140, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358140, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358140, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358140, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358140, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358140, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358140, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358140, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358140, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358140, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358140, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358140, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358141, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_Name
+      value: ScrollCredit
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488740895358141, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488741103222306, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488741103222306, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732488741103222306, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.7330037
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 17606bf5aa2f1e847a94211feb2b5770, type: 3}
 --- !u!224 &1783525096 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5402623612787628001, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
@@ -1918,6 +1799,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2069400279}
   m_CullTransparentMesh: 1
+--- !u!114 &2117051743 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5402623612787628000, guid: 2b5b60bc85d76c346a55fc76ed2bdcc4, type: 3}
+  m_PrefabInstance: {fileID: 1341636330}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2117855054
 GameObject:
   m_ObjectHideFlags: 0
@@ -2014,7 +1906,7 @@ RectTransform:
   - {fileID: 429259904}
   - {fileID: 138337372}
   - {fileID: 703645029}
-  - {fileID: 1184152082}
+  - {fileID: 797375058}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
