@@ -34,8 +34,7 @@ public class ZombieTank : EnemyBase, I_Chase, I_Listen
 
     void I_Chase.ChangeState()
     {
-        var member = m_stator.GetTransitionMember();
-        member.chaseTrigger.Fire();
+        m_stator.GetTransitionMember().chaseTrigger.Fire();
     }
 
     void I_Chase.TargetLost()
