@@ -70,7 +70,7 @@ public class @UIControls : IInputActionCollection, IDisposable
                     ""name"": ""LeftClick"",
                     ""type"": ""PassThrough"",
                     ""id"": ""3780fe0a-0be2-4f9e-b290-e4b9400fb651"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -78,7 +78,7 @@ public class @UIControls : IInputActionCollection, IDisposable
                     ""name"": ""RightClick"",
                     ""type"": ""PassThrough"",
                     ""id"": ""9865accb-0110-4fc0-8449-57edca334d36"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -86,7 +86,7 @@ public class @UIControls : IInputActionCollection, IDisposable
                     ""name"": ""MiddleClick"",
                     ""type"": ""PassThrough"",
                     ""id"": ""c9672961-4e79-453e-8184-024beb186f03"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -103,6 +103,14 @@ public class @UIControls : IInputActionCollection, IDisposable
                     ""type"": ""Button"",
                     ""id"": ""caa8f8e3-05bd-44db-9990-e014d8dac27b"",
                     ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Stick"",
+                    ""type"": ""Value"",
+                    ""id"": ""9eab6aaa-7053-40bf-835d-2b6d96f39121"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -331,7 +339,7 @@ public class @UIControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""4149f49f-d310-43b2-8249-ab02b1626606"",
-                    ""path"": """",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -342,7 +350,7 @@ public class @UIControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b3bcf5f2-3612-4027-a8a5-50ec3b4602fe"",
-                    ""path"": """",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -353,7 +361,7 @@ public class @UIControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""94c06324-4f65-41ff-8ccc-dda5dfdd220c"",
-                    ""path"": """",
+                    ""path"": ""<Mouse>/middleButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -393,6 +401,72 @@ public class @UIControls : IInputActionCollection, IDisposable
                     ""action"": ""ChangeTutorial"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f88aa10b-29aa-4790-905a-1d3bf24c2e7f"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""Stick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""16709a56-00e9-45c7-aa35-4926de314d74"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Stick"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""4d2855be-04a0-43b2-9f11-5f0816455b14"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Stick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""b9881cfa-997b-44b1-92fe-7475e5651504"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Stick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""1debe04a-6dac-4e63-af91-09d522dcdf2d"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Stick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""0ff55d1e-6a6c-4166-8ab5-317f18d3e365"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Stick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -435,6 +509,7 @@ public class @UIControls : IInputActionCollection, IDisposable
         m_UI_MiddleClick = m_UI.FindAction("MiddleClick", throwIfNotFound: true);
         m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
         m_UI_ChangeTutorial = m_UI.FindAction("ChangeTutorial", throwIfNotFound: true);
+        m_UI_Stick = m_UI.FindAction("Stick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -495,6 +570,7 @@ public class @UIControls : IInputActionCollection, IDisposable
     private readonly InputAction m_UI_MiddleClick;
     private readonly InputAction m_UI_ScrollWheel;
     private readonly InputAction m_UI_ChangeTutorial;
+    private readonly InputAction m_UI_Stick;
     public struct UIActions
     {
         private @UIControls m_Wrapper;
@@ -510,6 +586,7 @@ public class @UIControls : IInputActionCollection, IDisposable
         public InputAction @MiddleClick => m_Wrapper.m_UI_MiddleClick;
         public InputAction @ScrollWheel => m_Wrapper.m_UI_ScrollWheel;
         public InputAction @ChangeTutorial => m_Wrapper.m_UI_ChangeTutorial;
+        public InputAction @Stick => m_Wrapper.m_UI_Stick;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -552,6 +629,9 @@ public class @UIControls : IInputActionCollection, IDisposable
                 @ChangeTutorial.started -= m_Wrapper.m_UIActionsCallbackInterface.OnChangeTutorial;
                 @ChangeTutorial.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnChangeTutorial;
                 @ChangeTutorial.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnChangeTutorial;
+                @Stick.started -= m_Wrapper.m_UIActionsCallbackInterface.OnStick;
+                @Stick.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnStick;
+                @Stick.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnStick;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -589,6 +669,9 @@ public class @UIControls : IInputActionCollection, IDisposable
                 @ChangeTutorial.started += instance.OnChangeTutorial;
                 @ChangeTutorial.performed += instance.OnChangeTutorial;
                 @ChangeTutorial.canceled += instance.OnChangeTutorial;
+                @Stick.started += instance.OnStick;
+                @Stick.performed += instance.OnStick;
+                @Stick.canceled += instance.OnStick;
             }
         }
     }
@@ -624,5 +707,6 @@ public class @UIControls : IInputActionCollection, IDisposable
         void OnMiddleClick(InputAction.CallbackContext context);
         void OnScrollWheel(InputAction.CallbackContext context);
         void OnChangeTutorial(InputAction.CallbackContext context);
+        void OnStick(InputAction.CallbackContext context);
     }
 }
