@@ -25,24 +25,14 @@ public class AttackNode_Dash : TaskNodeBase<EnemyBase>
         public Task_WallAttack.Parametor attackParam;
         [Header("待機状態パラメータ")]
         public Task_Wait.Parametor waitParam;
-        //[Header("行動確率")]
-        //public float probability;
-        //[Header("行動始める距離")]
-        //public float startRange;
-        //[Header("確率計算インターバル")]
-        //public float probabilityInterbalTime;
 
         public Parametor(PreliminaryParametor preliminaryParam, Task_ChaseTarget.Parametor chaseParam,
             Task_WallAttack.Parametor attackParam, Task_Wait.Parametor waitParam)
-            //float probability, float startRange, float probabilityIntervalTime)
         {
             this.preliminaryParam = preliminaryParam;
             this.chaseParam = chaseParam;
             this.attackParam = attackParam;
             this.waitParam = waitParam;
-            //this.probability = probability;
-            //this.startRange = startRange;
-            //this.probabilityInterbalTime = probabilityIntervalTime;
         }
     }
 
@@ -132,18 +122,6 @@ public class AttackNode_Dash : TaskNodeBase<EnemyBase>
             new Task_WallAttack(enemy, m_param.attackParam,
                 new TaskBaseParametor(() => m_animatorManager.CrossFadeDashAttack(), null, null)));
 
-        //待機
-        //m_param.waitParam.enter = () => { 
-        //    m_velocityManager.StartDeseleration();
-        //    m_rotationController.enabled = false;
-        //    m_evasion.enabled = false;
-        //};
-        //m_param.waitParam.exit = () => {
-        //    m_velocityManager.SetIsDeseleration(false);
-        //    m_rotationController.enabled = true;
-        //    m_evasion.enabled = true;
-        //    //EndAnimationEvent();
-        //};
         m_taskList.DefineTask(TaskEnum.Wait, new Task_EnemyWait(enemy));
     }
 }

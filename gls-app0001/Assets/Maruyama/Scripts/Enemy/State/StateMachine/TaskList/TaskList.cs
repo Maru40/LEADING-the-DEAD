@@ -136,7 +136,7 @@ public abstract class TaskNodeBase_Ex<OwnerType> : TaskNodeBase<OwnerType>
 
 public class TaskList<EnumType>
 {
-    class Task
+    private class Task
     {
         public EnumType type;
         public Action enter;
