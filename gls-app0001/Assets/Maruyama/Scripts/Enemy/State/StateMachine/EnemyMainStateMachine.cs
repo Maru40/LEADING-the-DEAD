@@ -241,11 +241,11 @@ public class EnemyMainStateMachine<NodeType, EnumType, TransitionType>
         //ソートして優先度が一番高いタイプに遷移する。
         var sorteds = m_transitionCandidates.OrderByDescending(param => param.priority);
 
-        int index = 0;
-        foreach (var sorted in sorteds)
-        {
-            Debug.Log(index + ":トランジション： " + sorted.type);
-        }
+        //int index = 0;
+        //foreach (var sorted in sorteds)
+        //{
+        //    Debug.Log(index + ":トランジション： " + sorted.type);
+        //}
 
         m_stateMachine.ChangeState(sorteds.ElementAt(0).type);  //一番優先度が高い先頭のステートに変更
     }
