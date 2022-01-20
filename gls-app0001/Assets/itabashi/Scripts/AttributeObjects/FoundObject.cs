@@ -13,6 +13,7 @@ public class FoundObject : MonoBehaviour
         SoundObject,
         BindObject,
         Smell,  //匂い
+        ChildZombie, //子供ゾンビ
     }
 
     public struct FoundData
