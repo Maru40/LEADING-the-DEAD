@@ -91,13 +91,13 @@ public abstract class TaskNodeBase<OwnerType> : TaskNodeBase
 public abstract class TaskNodeBase_Ex<OwnerType> : TaskNodeBase<OwnerType>
     where OwnerType : class
 {
-    public struct BaseParametor
+    public struct ActionParametor
     {
         public Action enter;
         public Action update;
         public Action exit;
 
-        public BaseParametor(Action enter, Action update, Action exit)
+        public ActionParametor(Action enter, Action update, Action exit)
         {
             this.enter = enter;
             this.update = update;
@@ -105,9 +105,9 @@ public abstract class TaskNodeBase_Ex<OwnerType> : TaskNodeBase<OwnerType>
         }
     }
 
-    private BaseParametor m_actionParam = new BaseParametor();
+    private ActionParametor m_actionParam = new ActionParametor();
 
-    public TaskNodeBase_Ex(OwnerType owner, BaseParametor param = new BaseParametor())
+    public TaskNodeBase_Ex(OwnerType owner, ActionParametor param = new ActionParametor())
         :base(owner)
     {
         m_actionParam = param;
@@ -136,7 +136,7 @@ public abstract class TaskNodeBase_Ex<OwnerType> : TaskNodeBase<OwnerType>
 
 public class TaskList<EnumType>
 {
-    class Task
+    private class Task
     {
         public EnumType type;
         public Action enter;

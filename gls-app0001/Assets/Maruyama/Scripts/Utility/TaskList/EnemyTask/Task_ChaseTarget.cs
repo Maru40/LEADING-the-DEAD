@@ -10,7 +10,7 @@ public class Task_ChaseTarget : TaskNodeBase_Ex<EnemyBase>
     public struct Parametor 
     {
         public float maxSpeed;
-        [Header("ターゲットとのフォワードの差がこの数字よりより小さければ、予測タックルにする。")]
+        [Header("ターゲットとのフォワードの差がこの数字より小さければ、予測タックルにする。")]
         public float subPursuitTargetForward;
         public float nearRange;  //対象に追いついたと思う距離
         public float turningPower;  //曲がる力
@@ -39,10 +39,10 @@ public class Task_ChaseTarget : TaskNodeBase_Ex<EnemyBase>
     private EyeSearchRange m_eye;
 
     public Task_ChaseTarget(EnemyBase owner, Parametor param)
-        :this(owner, param, new BaseParametor())
+        :this(owner, param, new ActionParametor())
     { }
 
-    public Task_ChaseTarget(EnemyBase owner, Parametor param, BaseParametor baseParametor)
+    public Task_ChaseTarget(EnemyBase owner, Parametor param, ActionParametor baseParametor)
         : base(owner, baseParametor)
     {
         m_param = param;

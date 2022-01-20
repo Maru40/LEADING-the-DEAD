@@ -246,7 +246,6 @@ public class Stator_ZombieNormal : StatorBase
         var range = member.normalAttackRange;
         var targetPosition = (Vector3)m_targetManager.GetNowTargetPosition();
 
-        //if (m_eye.IsInEyeRange(position, range))
         //範囲内かつ、障害物がない時
         if (Calculation.IsRange(transform.position, targetPosition, range) && 
             !Obstacle.IsLineCastObstacle(transform.position, targetPosition))
@@ -293,7 +292,7 @@ public class Stator_ZombieNormal : StatorBase
         m_stateMachine.SetIsTransitionLock(isLock);
     }
 
-    public override void Reset()
+    public override void StateReset()
     {
         m_stateMachine.Reset();
     }

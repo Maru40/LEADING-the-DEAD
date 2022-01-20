@@ -95,7 +95,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
         m_statusUp?.Respawn();  //死亡時にステータスUP
         m_angerManager.SetIsAnger(false);  //怒りのoff
         m_statusManager.Respawn();
-        m_stator.Reset();  //ステートのリセット
+        m_stator.StateReset();  //ステートのリセット
         //レンダーのリセット
         var fadeManagers = GetComponentsInChildren<RenderFadeManager>();
         foreach (var fade in fadeManagers)

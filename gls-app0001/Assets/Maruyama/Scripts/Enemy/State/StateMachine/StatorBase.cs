@@ -9,7 +9,7 @@ using System;
 /// </summary>
 public abstract class StatorBase : MonoBehaviour
 {
-    public abstract void Reset();
+    public abstract void StateReset();
 
     public abstract void ChangeState<EnumType>(EnumType type, int priority = 0) where EnumType : System.Enum;
 }

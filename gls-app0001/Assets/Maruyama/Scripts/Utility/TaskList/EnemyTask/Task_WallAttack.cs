@@ -36,10 +36,10 @@ public class Task_WallAttack : TaskNodeBase_Ex<EnemyBase>
     private AudioManager_Ex m_audioManager;
 
     public Task_WallAttack(EnemyBase owner, Parametor param)
-        :this(owner, param, new BaseParametor())
+        :this(owner, param, new ActionParametor())
     { }
 
-    public Task_WallAttack(EnemyBase owner, Parametor param, BaseParametor baseParametor)
+    public Task_WallAttack(EnemyBase owner, Parametor param, ActionParametor baseParametor)
          : base(owner, baseParametor)
     {
         m_param = param;

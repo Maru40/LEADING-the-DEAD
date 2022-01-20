@@ -14,18 +14,18 @@ public class Task_EnemyWait : TaskNodeBase_Ex<EnemyBase>
     private EnemyVelocityManager m_velocityManager;
 
     public Task_EnemyWait(EnemyBase owner)
-        : this(owner, new Parametor(), new BaseParametor())
+        : this(owner, new Parametor(), new ActionParametor())
     { }
 
     public Task_EnemyWait(EnemyBase owner, Parametor parametor)
-        : this(owner, parametor, new BaseParametor())
+        : this(owner, parametor, new ActionParametor())
     { }
 
-    public Task_EnemyWait(EnemyBase owner, BaseParametor baseParametor)
+    public Task_EnemyWait(EnemyBase owner, ActionParametor baseParametor)
         : this(owner, new Parametor(), baseParametor)
     { }
 
-    public Task_EnemyWait(EnemyBase owner, Parametor parametor, BaseParametor baseParametor)
+    public Task_EnemyWait(EnemyBase owner, Parametor parametor, ActionParametor baseParametor)
         : base(owner, baseParametor)
     {
         m_param = parametor;

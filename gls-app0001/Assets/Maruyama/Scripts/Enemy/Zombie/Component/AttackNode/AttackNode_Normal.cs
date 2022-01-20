@@ -5,7 +5,7 @@ using UnityEngine;
 using UniRx;
 
 using NormalAttackHitColliderType = AnimatorManager_ZombieNormal.NormalAttackHitColliderType;
-using TaskBaseParametor = TaskNodeBase_Ex<EnemyBase>.BaseParametor;
+using TaskActionParametor = TaskNodeBase_Ex<EnemyBase>.ActionParametor;
 
 public class AttackNode_Normal : TaskNodeBase<EnemyBase>
 {
@@ -75,6 +75,9 @@ public class AttackNode_Normal : TaskNodeBase<EnemyBase>
         m_taskList.AbsoluteReset();
     }
 
+    /// <summary>
+    /// タスクの定義
+    /// </summary>
     private void DefineTask()
     {
         var enemy = GetOwner();
@@ -85,7 +88,7 @@ public class AttackNode_Normal : TaskNodeBase<EnemyBase>
         //攻撃
         m_taskList.DefineTask(TaskEnum.Chase, 
             new Task_AttackChase(enemy, m_param.attackParam,
-                new TaskBaseParametor(() => m_animatorManager.CrossFadeNormalAttackAnimation(), null, null)));
+                new TaskActionParametor(() => m_animatorManager.CrossFadeNormalAttackAnimation(), null, null)));
 
         //減速
         m_taskList.DefineTask(TaskEnum.Deseleration, 
@@ -93,18 +96,7 @@ public class AttackNode_Normal : TaskNodeBase<EnemyBase>
             () => { return false; }, 
             () => { m_velocityManager.SetIsDeseleration(false); });
 
-        //待機状態
-        //m_param.waitParam.enter = () => {
-        //    m_velocityManager.SetIsDeseleration(false);
-        //    m_velocityManager.ResetForce();
-        //    m_velocityManager.ResetVelocity();
-        //    m_rotationController.enabled = false;
-        //    m_evasion.enabled = false;
-        //};
-        //m_param.waitParam.exit = () => { 
-        //    m_rotationController.enabled = true;
-        //    m_evasion.enabled = true;
-        //};
+        //待機
         m_taskList.DefineTask(TaskEnum.Wait, new Task_EnemyWait(enemy));
     }
 
