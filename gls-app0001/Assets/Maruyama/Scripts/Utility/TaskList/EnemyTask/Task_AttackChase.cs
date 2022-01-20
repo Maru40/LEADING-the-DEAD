@@ -64,10 +64,10 @@ public class Task_AttackChase : TaskNodeBase_Ex<EnemyBase>
     private GameTimer m_timer = new GameTimer();
 
     public Task_AttackChase(EnemyBase owner, Parametor parametor)
-        : this(owner, parametor, new BaseParametor())
+        : this(owner, parametor, new ActionParametor())
     { }
 
-    public Task_AttackChase(EnemyBase owner, Parametor parametor, BaseParametor baseParametor)
+    public Task_AttackChase(EnemyBase owner, Parametor parametor, ActionParametor baseParametor)
         : base(owner, baseParametor)
     {
         m_param = parametor;

@@ -49,7 +49,6 @@ public class CreateSetParametor_ZombieNormal
         chaseParametor = new ChaseTargetParametor(allInit, allInit, allInit, allInit, allInit);
         randomPlowlingParametor = new RandomPlowlingMove.Parametor(allInit, allInit, allInit, allInit, allInit, allInit);
         status = new StatusManager_ZombieNormal.Status(allInit, allInit);
-        //attackManagerParametor = new AttackParametorBase(new AttributeObject.DamageData(allInit), allInit);
     }
 }
 
@@ -187,7 +186,5 @@ public class EnemyGenerator_ZombieNormal : EnemyGenerator
     {
         m_createSetParam.chaseParametor.Random(m_randomSetParam.cahseParametor);
         m_createSetParam.randomPlowlingParametor.Random(m_randomSetParam.randomPlowlingParametor);
-        //m_createSetParam.attackManagerParametor.Random(m_randomSetParam.attackManagerParametor);
-        //m_createSetParam.normalAttackParametor.Random(m_randomSetParam.normalAttackParametor);
     }
 }

@@ -37,10 +37,10 @@ public class Task_Preliminary : TaskNodeBase_Ex<EnemyBase>
     private EnemyVelocityManager m_velocityManager;
 
     public Task_Preliminary(EnemyBase owner, PreliminaryParametor param)
-        : this(owner, param, new BaseParametor())
+        : this(owner, param, new ActionParametor())
     { }
 
-    public Task_Preliminary(EnemyBase owner, PreliminaryParametor param, BaseParametor baseParametor)
+    public Task_Preliminary(EnemyBase owner, PreliminaryParametor param, ActionParametor baseParametor)
         : base(owner, baseParametor)
     {
         m_param = param;
