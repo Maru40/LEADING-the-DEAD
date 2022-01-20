@@ -124,7 +124,7 @@ public class Stator_ZombieTank : StatorBase
         return m_stateMachine.GetNowType();
     }
 
-    public override void Reset()
+    public override void StateReset()
     {
         m_stateMachine.Reset();
     }

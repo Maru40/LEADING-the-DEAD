@@ -292,7 +292,7 @@ public class Stator_ZombieNormal : StatorBase
         m_stateMachine.SetIsTransitionLock(isLock);
     }
 
-    public override void Reset()
+    public override void StateReset()
     {
         m_stateMachine.Reset();
     }
