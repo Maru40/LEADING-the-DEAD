@@ -10,7 +10,7 @@ public class Task_ChaseTarget : TaskNodeBase_Ex<EnemyBase>
     public struct Parametor 
     {
         public float maxSpeed;
-        [Header("ターゲットとのフォワードの差がこの数字よりより小さければ、予測タックルにする。")]
+        [Header("ターゲットとのフォワードの差がこの数字より小さければ、予測タックルにする。")]
         public float subPursuitTargetForward;
         public float nearRange;  //対象に追いついたと思う距離
         public float turningPower;  //曲がる力
