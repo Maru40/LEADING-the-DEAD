@@ -46,16 +46,19 @@ public class Task_Escape : TaskNodeBase<EnemyBase>
 
     public override bool OnUpdate()
     {
-        if (m_timer.IsTimeUp)
-        {
-            Move();
-            Rotation();
-        }
-        else
-        {
-            m_timer.UpdateTimer();
-            ReflectionMove();
-        }
+        Move();
+        Rotation();
+        //if (m_timer.IsTimeUp)
+        //{
+        //    Move();
+        //    Rotation();
+        //}
+        //else
+        //{
+        //    m_timer.UpdateTimer();
+        //    Rotation();
+        //    ReflectionMove();
+        //}
 
         return IsEnd();
     }
@@ -94,6 +97,7 @@ public class Task_Escape : TaskNodeBase<EnemyBase>
 
     private void CollisionHit(Collision other)
     {
+        return;
         if (m_timer.IsTimeUp)
         {
             m_reflectionVec = CalcuVelocity.Reflection(m_velocityManager.velocity, other);
