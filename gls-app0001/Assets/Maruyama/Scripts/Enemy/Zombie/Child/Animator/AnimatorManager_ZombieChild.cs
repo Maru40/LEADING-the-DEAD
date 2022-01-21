@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimatorManager_ZombieChild : MonoBehaviour
+public class AnimatorManager_ZombieChild : AnimatorManagerBase
 {
-    [SerializeField]
-    private Animator m_animator;
-
     private Rigidbody m_rigid;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         m_rigid = GetComponent<Rigidbody>();
     }
 
@@ -30,4 +29,11 @@ public class AnimatorManager_ZombieChild : MonoBehaviour
         set { m_animator.SetFloat("moveSpeed", value); }
         get { return m_animator.GetFloat("moveSpeed"); }
     }
+
+    public void CrossFadeCry(int layerIndex, float transitionTime = 0.25f)
+    {
+        CrossFadeState("Cry", layerIndex, transitionTime);
+    }
+
+    public int BaseLayerIndex => m_animator.GetLayerIndex("Base Layer");
 }
