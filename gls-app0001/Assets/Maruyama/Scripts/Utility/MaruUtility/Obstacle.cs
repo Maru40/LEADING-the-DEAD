@@ -56,5 +56,22 @@ namespace MaruUtility
 
             return Physics.Linecast(startPosition, endPosition, obstacleLayer) ? true : false;
         }
+
+        //障害物のヒットした場所
+        public static RaycastHit CalcuRayCastHit(Vector3 startPosition, Vector3 endPosition)
+        {
+            return CalcuRayCastHit(startPosition, endPosition, DEFAULT_OBSTACLE_STRING);
+        }
+
+        //障害物のヒットした場所
+        public static RaycastHit CalcuRayCastHit(Vector3 startPosition, Vector3 endPosition, params string[] layerNames)
+        {
+            int obstacleLayer = LayerMask.GetMask(layerNames);
+
+            RaycastHit hit = new RaycastHit();
+            Physics.Raycast(startPosition, endPosition, out hit, obstacleLayer);
+
+            return hit;
+        }
     }
 }

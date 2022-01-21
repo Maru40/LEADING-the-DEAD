@@ -21,6 +21,7 @@ public class StateNode_ZombieChild_Cry : EnemyStateNodeBase<EnemyBase>
     private TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
 
     private Stator_ZombieChild m_stator;
+    private AnimatorManager_ZombieChild m_animatorManager;
 
     public StateNode_ZombieChild_Cry(EnemyBase owner, Parametor parametor)
         :base(owner)
@@ -28,6 +29,7 @@ public class StateNode_ZombieChild_Cry : EnemyStateNodeBase<EnemyBase>
         m_param = parametor;
 
         m_stator = owner.GetComponent<Stator_ZombieChild>();
+        m_animatorManager = owner.GetComponent<AnimatorManager_ZombieChild>();
 
         DefineTask();
     }
@@ -44,6 +46,7 @@ public class StateNode_ZombieChild_Cry : EnemyStateNodeBase<EnemyBase>
         m_taskList.AbsoluteReset();
 
         SelectTask();
+        m_animatorManager.CrossFadeCry(m_animatorManager.BaseLayerIndex);
     }
 
     public override void OnUpdate()

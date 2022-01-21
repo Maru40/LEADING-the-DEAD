@@ -474,8 +474,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_statusManager: {fileID: 332221534649489498, guid: e43cc8296d6ae48439906699a19b5e26, type: 3}
-  m_animatorManager: {fileID: 16836313912274356, guid: e43cc8296d6ae48439906699a19b5e26, type: 3}
+  m_statusManager: {fileID: 0}
+  m_animatorManager: {fileID: 0}
   m_damageData:
     obj: {fileID: 2753110261580778249}
     damageValue: 1
@@ -540,7 +540,7 @@ GameObject:
   - component: {fileID: 5095719353440970895}
   - component: {fileID: 5095719353440970896}
   - component: {fileID: 5095719353440970897}
-  - component: {fileID: 5095719353440970898}
+  - component: {fileID: 825257070}
   m_Layer: 6
   m_Name: ChildZombie
   m_TagString: Untagged
@@ -1196,8 +1196,17 @@ MonoBehaviour:
         collider: {fileID: 1641230721}
         audioParams: []
     escapeParam:
-      escapeRange: 5
-      escapeLoopTime: 3
+      transitionMember:
+        escapeRange: 10
+      escapeParam:
+        escapeParam:
+          maxSpeed: 4
+          wallEvasionTime: 2
+      guardParam:
+        time: 5
+        escapeParam:
+          maxSpeed: 4
+          wallEvasionTime: 0
 --- !u!114 &5095719353440970897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1213,7 +1222,7 @@ MonoBehaviour:
   m_priority: 5
   m_type: 4
   m_positionOffset: {x: 0, y: 0, z: 0}
---- !u!114 &5095719353440970898
+--- !u!114 &825257070
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1222,14 +1231,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2907770742893122101}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2811a88a1e11c784aa6e7221195d55a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 58263a92cdc761647bea123cb19060bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_moveSpeedPerSecond: 5
-  m_isPositionLoop: 0
-  m_transforms:
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &3135129254368097418
 GameObject:
   m_ObjectHideFlags: 0
@@ -4846,8 +4850,8 @@ MonoBehaviour:
   m_damageEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_statusManager: {fileID: 332221534649489498, guid: e43cc8296d6ae48439906699a19b5e26, type: 3}
-  m_animatorManager: {fileID: 16836313912274356, guid: e43cc8296d6ae48439906699a19b5e26, type: 3}
+  m_statusManager: {fileID: 0}
+  m_animatorManager: {fileID: 0}
   m_damageData:
     obj: {fileID: 3943697598244305360}
     damageValue: 0
@@ -5259,8 +5263,8 @@ MonoBehaviour:
   m_damageEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_statusManager: {fileID: 332221534649489498, guid: e43cc8296d6ae48439906699a19b5e26, type: 3}
-  m_animatorManager: {fileID: 16836313912274356, guid: e43cc8296d6ae48439906699a19b5e26, type: 3}
+  m_statusManager: {fileID: 0}
+  m_animatorManager: {fileID: 0}
   m_damageData:
     obj: {fileID: 5725994330611319296}
     damageValue: 1
@@ -5477,8 +5481,8 @@ MonoBehaviour:
   m_damageEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_statusManager: {fileID: 332221534649489498, guid: e43cc8296d6ae48439906699a19b5e26, type: 3}
-  m_animatorManager: {fileID: 16836313912274356, guid: e43cc8296d6ae48439906699a19b5e26, type: 3}
+  m_statusManager: {fileID: 0}
+  m_animatorManager: {fileID: 0}
   m_damageData:
     obj: {fileID: 5725994331958465411}
     damageValue: 1
@@ -6301,7 +6305,7 @@ PrefabInstance:
     - target: {fileID: 95484139032098964, guid: 23fd4ab61aa8fe241b7350ac1abc89ff, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: cc5af99ef96f6b4439d76eb12cabbedc, type: 2}
+      objectReference: {fileID: 9100000, guid: 0e5624023bdd48146a13c0287995b554, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23fd4ab61aa8fe241b7350ac1abc89ff, type: 3}
 --- !u!1 &3828974643771741318 stripped
