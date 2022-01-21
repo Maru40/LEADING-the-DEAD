@@ -133,7 +133,8 @@ public class StateNode_ZombieChild_Escape : EnemyStateNodeBase<EnemyBase>
         public struct Parametor
         {
             [Header("逃げるパラメータ")]
-            public Task_NavMeshEscape.Parametor escapeParam;
+            public Task_Escape.Parametor escapeParam;
+            //public Task_NavMeshEscape.Parametor escapeParam;
         }
 
         public enum TaskEnum
@@ -174,7 +175,7 @@ public class StateNode_ZombieChild_Escape : EnemyStateNodeBase<EnemyBase>
         {
             var enemy = GetOwner();
 
-            m_taskList.DefineTask(TaskEnum.Escape, new Task_NavMeshEscape(enemy, m_param.escapeParam));
+            m_taskList.DefineTask(TaskEnum.Escape, new Task_Escape(enemy, m_param.escapeParam));
         }
 
         private void SelectTask()
@@ -201,7 +202,8 @@ public class StateNode_ZombieChild_Escape : EnemyStateNodeBase<EnemyBase>
             [Header("逃げ切ってから警戒する時間")]
             public float time;
             [Header("逃げるパラメータ")]
-            public Task_NavMeshEscape.Parametor escapeParam;
+            public Task_Escape.Parametor escapeParam;
+            //public Task_NavMeshEscape.Parametor escapeParam;
         }
 
         public enum TaskEnum
@@ -253,7 +255,7 @@ public class StateNode_ZombieChild_Escape : EnemyStateNodeBase<EnemyBase>
         {
             var enemy = GetOwner();
 
-            m_taskList.DefineTask(TaskEnum.Escape, new Task_NavMeshEscape(enemy, m_param.escapeParam));
+            m_taskList.DefineTask(TaskEnum.Escape, new Task_Escape(enemy, m_param.escapeParam));
         }
 
         private void SelectTask()
