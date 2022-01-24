@@ -62,6 +62,9 @@ public class StateNode_ZombieChild_Cry : EnemyStateNodeBase<EnemyBase>
     public override void OnExit()
     {
         base.OnExit();
+
+        const float transitionTime = 0.1f;
+        m_animatorManager.CrossFadeState("Idle", m_animatorManager.BaseLayerIndex, transitionTime);
     }
 
     private void DefineTask()
