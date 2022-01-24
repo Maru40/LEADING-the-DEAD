@@ -541,6 +541,7 @@ GameObject:
   - component: {fileID: 5095719353440970896}
   - component: {fileID: 5095719353440970897}
   - component: {fileID: 825257070}
+  - component: {fileID: 1674135944}
   m_Layer: 6
   m_Name: Zombie_Child
   m_TagString: Untagged
@@ -1196,7 +1197,23 @@ MonoBehaviour:
         cryWaitTime: 1
         range: 10
         collider: {fileID: 1641230721}
-        audioParams: []
+        audioParams:
+        - clip: {fileID: 8300000, guid: 3617c918403d9dd4fa00958ad1d6fe06, type: 3}
+          volume: 1
+          isInterval: 0
+          intervalTime: 0
+          isRandom: 1
+          volumeRandomRange:
+            min: 0.7
+            max: 0.9
+          pitchRandomRange:
+            min: 1
+            max: 1
+          isFadeOut: 0
+          fadeParam:
+            m_inTime: 0
+            m_outTime: 0
+            m_initVolume: 0
     escapeParam:
       transitionMember:
         escapeRange: 10
@@ -1236,6 +1253,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58263a92cdc761647bea123cb19060bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1674135944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2907770742893122101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2811a88a1e11c784aa6e7221195d55a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_moveType: 1
+  m_moveSpeedPerSecond: 2
+  m_isPositionLoop: 0
+  m_transforms: []
 --- !u!1 &3135129254368097418
 GameObject:
   m_ObjectHideFlags: 0
