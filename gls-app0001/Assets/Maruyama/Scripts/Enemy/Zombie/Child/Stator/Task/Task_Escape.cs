@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using MaruUtility;
+using System.Linq;
 
 public class Task_Escape : TaskNodeBase<EnemyBase>
 {
@@ -22,7 +23,7 @@ public class Task_Escape : TaskNodeBase<EnemyBase>
     private CollisionAction m_collisionAction;
 
     private GameTimer m_timer = new GameTimer();
-    private Vector3 m_reflectionVec = new Vector3();
+    private Vector3 m_evasionVec = new Vector3();
 
     public Task_Escape(EnemyBase owner, Parametor parametor)
         :base(owner)
@@ -46,19 +47,19 @@ public class Task_Escape : TaskNodeBase<EnemyBase>
 
     public override bool OnUpdate()
     {
-        Move();
-        Rotation();
-        //if (m_timer.IsTimeUp)
-        //{
-        //    Move();
-        //    Rotation();
-        //}
-        //else
-        //{
-        //    m_timer.UpdateTimer();
-        //    Rotation();
-        //    ReflectionMove();
-        //}
+        //Move();
+        //Rotation();
+        if (m_timer.IsTimeUp)
+        {
+            Move();
+            Rotation();
+        }
+        else
+        {
+            m_timer.UpdateTimer();
+            Rotation();
+            EvasionMove();
+        }
 
         return IsEnd();
     }
@@ -82,10 +83,10 @@ public class Task_Escape : TaskNodeBase<EnemyBase>
         m_velocityManager.AddForce(force);
     }
 
-    private void ReflectionMove()
+    private void EvasionMove()
     {
         var velocity = m_velocityManager.velocity;
-        var force = CalcuVelocity.CalucSeekVec(velocity, m_reflectionVec, m_param.maxSpeed);
+        var force = CalcuVelocity.CalucSeekVec(velocity, m_evasionVec, m_param.maxSpeed);
 
         m_velocityManager.AddForce(force);
     }
@@ -95,12 +96,50 @@ public class Task_Escape : TaskNodeBase<EnemyBase>
         m_rotationController.SetDirect(m_velocityManager.velocity);
     }
 
+    //壁回避ベクトルの取得
+    private Vector3 CalcuObstacleEvasionVec()
+    {
+        var owner = GetOwner();
+
+        var hits = new List<RaycastHit>()
+        {
+            Obstacle.CalcuRayCastHit(owner.transform.position, owner.transform.right), //右方向
+            Obstacle.CalcuRayCastHit(owner.transform.position, -owner.transform.right) //左方向
+        };
+
+        //const float Sides = 360.0f;
+        //for(int i = 0; i < Sides; i++)
+        //{
+        //    float angle = (Sides / 360.0f) * i;
+        //    var rotQuat = Quaternion.AngleAxis(angle, Vector3.up);
+
+        //    var direct = rotQuat * owner.transform.forward;
+        //    hits.Add(Obstacle.CalcuRayCastHit(owner.transform.position, direct));
+        //}
+
+        var directs = new List<Vector3>();
+        foreach (var hit in hits)
+        {
+            directs.Add(owner.transform.position - hit.point);
+        }
+
+        var sortDirects = directs.OrderByDescending(direct => direct.magnitude).ToList(); //降順整理
+
+        GameObject.CreatePrimitive(PrimitiveType.Cube).transform.position = sortDirects[0] + owner.transform.position;
+        Debug.Break();
+        return sortDirects[0];
+    }
+
     private void CollisionHit(Collision other)
     {
-        return;
+        if (!Obstacle.IsObstacle(other.gameObject)) {
+            return;
+        }
+
         if (m_timer.IsTimeUp)
         {
-            m_reflectionVec = CalcuVelocity.Reflection(m_velocityManager.velocity, other);
+            //m_evasionVec = CalcuObstacleEvasionVec();
+            m_evasionVec = CalcuVelocity.Reflection(m_velocityManager.velocity, other);
             m_timer.ResetTimer(m_param.wallEvasionTime);
         }
     }
