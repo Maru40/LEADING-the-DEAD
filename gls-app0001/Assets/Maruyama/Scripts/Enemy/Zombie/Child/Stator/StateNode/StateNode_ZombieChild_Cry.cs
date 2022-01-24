@@ -22,6 +22,7 @@ public class StateNode_ZombieChild_Cry : EnemyStateNodeBase<EnemyBase>
 
     private Stator_ZombieChild m_stator;
     private AnimatorManager_ZombieChild m_animatorManager;
+    private EnemyVelocityManager m_velocityManager;
 
     public StateNode_ZombieChild_Cry(EnemyBase owner, Parametor parametor)
         :base(owner)
@@ -30,6 +31,7 @@ public class StateNode_ZombieChild_Cry : EnemyStateNodeBase<EnemyBase>
 
         m_stator = owner.GetComponent<Stator_ZombieChild>();
         m_animatorManager = owner.GetComponent<AnimatorManager_ZombieChild>();
+        m_velocityManager = owner.GetComponent<EnemyVelocityManager>();
 
         DefineTask();
     }
@@ -47,6 +49,7 @@ public class StateNode_ZombieChild_Cry : EnemyStateNodeBase<EnemyBase>
 
         SelectTask();
         m_animatorManager.CrossFadeCry(m_animatorManager.BaseLayerIndex);
+        m_velocityManager.ResetAll();
     }
 
     public override void OnUpdate()
