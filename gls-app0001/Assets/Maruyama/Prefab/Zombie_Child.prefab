@@ -763,9 +763,11 @@ MonoBehaviour:
   m_rayDegs:
   - 45
   - -45
-  m_maxSpeed: 10
+  - 0
+  m_maxSpeed: 5
   m_rayObstacleLayerStrings:
   - L_Obstacle
+  - L_Player
 --- !u!114 &5227716147363963434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1201,12 +1203,12 @@ MonoBehaviour:
       escapeParam:
         escapeParam:
           maxSpeed: 4
-          wallEvasionTime: 2
+          wallEvasionTime: 1
       guardParam:
         time: 5
         escapeParam:
           maxSpeed: 4
-          wallEvasionTime: 0
+          wallEvasionTime: 1
 --- !u!114 &5095719353440970897
 MonoBehaviour:
   m_ObjectHideFlags: 0
