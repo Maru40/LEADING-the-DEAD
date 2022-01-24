@@ -238,6 +238,8 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
                     count++;
                 }
             }
+
+            break;
         }
 
         return count;
