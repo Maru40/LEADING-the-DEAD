@@ -2,8 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using MaruUtility;
+
 public class AutoMover : MonoBehaviour
 {
+    enum MoveType
+    {
+        Transform,
+        Velocity,
+    }
+
+    [SerializeField]
+    MoveType m_moveType = MoveType.Transform;
+
     [SerializeField]
     private float m_moveSpeedPerSecond = 1.0f;
 
@@ -19,6 +30,13 @@ public class AutoMover : MonoBehaviour
 
     private bool m_isBack = false;
 
+    private EnemyVelocityManager m_velocityManager;
+
+    private void Awake()
+    {
+        m_velocityManager = GetComponent<EnemyVelocityManager>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +51,28 @@ public class AutoMover : MonoBehaviour
 
     private void FixedUpdate()
     {
+        System.Action action = m_moveType switch {
+            MoveType.Transform => TransformMove,
+            MoveType.Velocity => VelocityMove,
+            _ => null
+        };
+
+        action?.Invoke();
+    }
+
+    private void TransformMove()
+    {
         transform.position = CalculatePosition();
+    }
+
+    private void VelocityMove()
+    {
+        var targetPosition = CalculatePosition();
+
+        var toTargetVec = targetPosition - transform.position;
+
+        var force = CalcuVelocity.CalucArriveVec(m_velocityManager.velocity, toTargetVec, m_moveSpeedPerSecond);
+        m_velocityManager.AddForce(force);
     }
 
     private Vector3 CalculatePosition()
