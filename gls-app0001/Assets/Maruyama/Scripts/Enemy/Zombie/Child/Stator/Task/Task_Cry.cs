@@ -22,6 +22,7 @@ public class Task_Cry : TaskNodeBase<EnemyBase>
     private TriggerAction m_triggerAction = null;
     private FoundObject m_foundObject = null;
     private AudioManager_Ex m_audioManager = null;
+    private TargetManager m_targetManager = null;
 
     private GameTimer m_timer = new GameTimer();
 
@@ -35,6 +36,18 @@ public class Task_Cry : TaskNodeBase<EnemyBase>
 
         m_triggerAction = m_param.collider.GetComponent<TriggerAction>();
         m_triggerAction.AddEnterAction(CrySoundHit);
+
+        m_targetManager = owner.GetComponent<TargetManager>();
+        m_targetManager.AddChangeTargetEvent(FoundObject.FoundType.None, () => m_param.collider.enabled = false);
+    }
+
+    protected override void ReserveChangeComponents()
+    {
+        base.ReserveChangeComponents();
+
+        var owner = GetOwner();
+
+        AddChangeComp(owner.GetComponent<FoundObject>(), true, true);
     }
 
     public override void OnEnter()
