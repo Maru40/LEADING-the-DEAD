@@ -131,7 +131,14 @@ public class TargetManager : MonoBehaviour
 
     private void Update()
     {
+        if (!HasTarget()) {
+            return;
+        }
 
+        if(m_nowTarget.enabled == false)
+        {
+            SetNowTarget(GetType(), null);
+        }
     }
 
     private bool IsBuff(FoundObject data)
