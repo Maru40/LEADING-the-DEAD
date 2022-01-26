@@ -75,25 +75,6 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
         }
     }
 
-    //ターゲットを追従する処理
-    //private void LinerTarget(FoundObject target)
-    //{
-    //    Move(target.transform.position);
-    //}
-
-    ////見失った場所を探す。
-    //private void LinerLostPosition()
-    //{
-    //    var lostPosition = m_targetManager.GetLostPosition();
-    //    if (lostPosition == null)
-    //    {
-    //        m_chaseTarget.TargetLost();
-    //        return;
-    //    }
-
-    //    Move((Vector3)lostPosition);
-    //}
-
     private void Move(Vector3 targetPosition)
     {
         Vector3 toVec = targetPosition - GetOwner().transform.position;
