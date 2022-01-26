@@ -13,7 +13,7 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
     [SerializeField]
     private GameObject m_player = null;
 
-    private List<EnemyGenerator> m_generators = new List<EnemyGenerator>();
+    private List<ThrongGeneratorBase> m_generators = new List<ThrongGeneratorBase>();
     private List<ZombieTank> m_tanks = new List<ZombieTank>();
 
     [Header("クリアに貢献できる時間"), SerializeField]
@@ -27,7 +27,7 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
 
     private void Start()
     {
-        m_generators = new List<EnemyGenerator>(FindObjectsOfType<EnemyGenerator>());
+        m_generators = new List<ThrongGeneratorBase>(FindObjectsOfType<ThrongGeneratorBase>());
         m_tanks = new List<ZombieTank>(FindObjectsOfType<ZombieTank>());
 
         if (m_barriade == null)
@@ -40,10 +40,6 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
     {
         UpdateClearServicesTimers();
         RemoveClearServices();
-
-        //Debug.Log("総数： " + GetNumAllZombie());
-        //Debug.Log("Alive総数： " + GetNumAllActiveZombie());
-        //Debug.Log("〇" + GetNumAllClearServices());
     }
 
     /// <summary>
@@ -109,19 +105,22 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
             return;
         }
 
-        var datas = new List<ThrongData>(m_generators[0].GetThrongDatas());
-
-        foreach(var data in datas)
+        foreach(var generator in m_generators)
         {
-            data.targetMgr.SetNowTarget(GetType(), null);
+            var datas = generator.ThrongDatas;
+            
+            foreach(var data in datas)
+            {
+                data.targetMgr.SetNowTarget(GetType(), null);
 
-            if(Calculation.IsRange(m_barriade, data.gameObject, m_clearMovieEntryRange))
-            {
-                data.clearManager?.ClearProcess();
-            }
-            else
-            {
-                data.gameObject.SetActive(false);
+                if (Calculation.IsRange(m_barriade, data.gameObject, m_clearMovieEntryRange))
+                {
+                    data.clearManager?.ClearProcess();
+                }
+                else
+                {
+                    data.gameObject.SetActive(false);
+                }
             }
         }
 
@@ -218,7 +217,7 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
         int count = 0;
         foreach (var generator in m_generators)
         {
-            count += generator.GetNumAliveZombie();
+            count += generator.GetNumAlive();
         }
 
         return count;
@@ -230,7 +229,7 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
         int count = 0;
         foreach(var generator in m_generators)
         {
-            var datas = generator.GetThrongDatas();
+            var datas = generator.ThrongDatas;
             foreach(var data in datas)
             {
                 if(data.targetMgr.GetNowTargetType() == FoundObject.FoundType.Player)
@@ -238,8 +237,6 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
                     count++;
                 }
             }
-
-            break;
         }
 
         return count;
