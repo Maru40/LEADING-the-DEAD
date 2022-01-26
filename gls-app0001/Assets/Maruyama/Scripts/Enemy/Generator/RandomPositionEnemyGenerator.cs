@@ -26,7 +26,7 @@ public struct OutOfTargetData
 }
 
 
-public class EnemyGenerator : GeneratorBase
+public class RandomPositionEnemyGenerator : ThrongGeneratorBase
 {
     [Serializable]
     public struct Parameotor
@@ -61,8 +61,8 @@ public class EnemyGenerator : GeneratorBase
 
     [SerializeField]
     protected int m_numCreate = 30;
-    public int NumCreate => m_numCreate;
-    public int GetNumAliveZombie() //生存しているゾンビの総数
+    public override int NumCreate => m_numCreate;
+    public override int GetNumAlive() //生存しているゾンビの総数
     {
         int count = 0;
         foreach (var data in m_datas)
@@ -83,7 +83,7 @@ public class EnemyGenerator : GeneratorBase
 
     [SerializeField]
     protected bool m_isInCameraCreate = false;  //カメラの範囲内に生成するかどうか
-    public bool IsInCameraCreate {  //カメラの範囲内に生成するかどうかのアクセッサ
+    public override bool IsInCameraCreate {  //カメラの範囲内に生成するかどうかのアクセッサ
         get => m_isInCameraCreate;
         set => m_isInCameraCreate = value;
     }
@@ -93,11 +93,11 @@ public class EnemyGenerator : GeneratorBase
 
     //生成したゾンビを持つ
     protected List<ThrongData> m_datas = new List<ThrongData>();
-    private static List<ThrongData> sm_allDatas = new List<ThrongData>();
+    public override List<ThrongData> ThrongDatas => m_datas;
 
     protected virtual void Awake()
     {
-        sm_allDatas.Clear();
+
     }
 
     protected virtual void Start()
@@ -136,7 +136,6 @@ public class EnemyGenerator : GeneratorBase
         );
 
         m_datas.Add(newData);
-        sm_allDatas.Add(newData);
     }
 
     /// <summary>
@@ -193,7 +192,7 @@ public class EnemyGenerator : GeneratorBase
     /// <summary>
     /// 全部リスポーン
     /// </summary>
-    public void RepawnPositoinAll()
+    public override void RepawnPositoinAll()
     {
         foreach(var data in m_datas)
         {
@@ -204,14 +203,6 @@ public class EnemyGenerator : GeneratorBase
 
     //アクセッサ---------------------------------------------------------------------------
 
-    static public void AllDestroy()
-    {
-        foreach(var data in sm_allDatas)
-        {
-            Destroy(data.gameObject);
-        }
-    }
-
     /// <summary>
     /// 生成するオブジェクトと渡されたオブジェクトが同じprefabなら
     /// </summary>
@@ -220,11 +211,6 @@ public class EnemyGenerator : GeneratorBase
     public bool IsEqualCreateObject(GameObject gameObj)
     {
         return m_createObject.GetType() == gameObj.GetType() ? true : false;
-    }
-
-    public List<ThrongData> GetThrongDatas()
-    {
-        return sm_allDatas;
     }
 
     public GameObject GetCreateObject()
