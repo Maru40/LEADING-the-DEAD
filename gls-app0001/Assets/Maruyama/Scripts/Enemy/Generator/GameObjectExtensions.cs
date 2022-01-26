@@ -9,7 +9,7 @@ namespace MaruUtility
         /// <summary>
         /// 指定されたインターフェイスを実装したコンポーネントを持つオブジェクトを検索する。
         /// </summary>
-        public static List<T> FindObjectsOfInterface<T>() where T : class
+        public static List<T> FindObjectsOfInterface<T>(this GameObject gameObject) where T : class
         {
             var list = new List<T>();
 
