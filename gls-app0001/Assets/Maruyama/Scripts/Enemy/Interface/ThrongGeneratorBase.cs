@@ -10,4 +10,5 @@ public abstract class ThrongGeneratorBase : GeneratorBase
     public abstract int GetNumAlive();
     public abstract bool IsInCameraCreate { get; set; }
     public abstract void RepawnPositoinAll();
+    public abstract Vector3 CalcuRandomPosition();
 }
