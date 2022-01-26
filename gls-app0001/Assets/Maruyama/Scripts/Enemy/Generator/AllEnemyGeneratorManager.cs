@@ -45,7 +45,17 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
         RemoveClearServices();
     }
 
-    public List<ThrongData> GetAllThrongDatas() => m_allThrongDatas;
+    public List<ThrongData> GetAllThrongDatas()
+    {
+        if (m_allThrongDatas.Count == 0)
+        {
+            SettingThrongDatas();
+        }
+
+        return m_allThrongDatas; 
+    }
+    
+
 
     private List<ThrongData> SettingThrongDatas()
     {
