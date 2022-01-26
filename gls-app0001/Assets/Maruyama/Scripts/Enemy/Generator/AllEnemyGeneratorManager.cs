@@ -14,6 +14,7 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
     private GameObject m_player = null;
 
     private List<ThrongGeneratorBase> m_generators = new List<ThrongGeneratorBase>();
+    private List<ThrongData> m_allThrongDatas = new List<ThrongData>();
     private List<ZombieTank> m_tanks = new List<ZombieTank>();
 
     [Header("クリアに貢献できる時間"), SerializeField]
@@ -34,12 +35,29 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
         {
             m_barriade = FindObjectOfType<BarricadeDurability>().gameObject;
         }
+
+        SettingThrongDatas();
     }
 
     private void Update()
     {
         UpdateClearServicesTimers();
         RemoveClearServices();
+    }
+
+    public List<ThrongData> GetAllThrongDatas() => m_allThrongDatas;
+
+    private List<ThrongData> SettingThrongDatas()
+    {
+        foreach (var generator in m_generators)
+        {
+            foreach(var data in generator.ThrongDatas)
+            {
+                m_allThrongDatas.Add(data);
+            }
+        }
+
+        return m_allThrongDatas;
     }
 
     /// <summary>
