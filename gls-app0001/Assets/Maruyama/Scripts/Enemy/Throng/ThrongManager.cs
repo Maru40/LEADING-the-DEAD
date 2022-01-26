@@ -67,8 +67,6 @@ public class ThrongManager : MonoBehaviour
     [SerializeField]
     private string[] m_rayObstacleLayerStrings = new string[] { "L_Obstacle" };
 
-    //List<ThrongData> m_throngDatas = new List<ThrongData>();  //グループのオブジェクト一覧
-
     //コンポーネント系-----------------
 
     [SerializeField]
