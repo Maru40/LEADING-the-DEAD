@@ -29,7 +29,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
     private RespawnManagerParametor m_param = new RespawnManagerParametor(true, 0.0f);
 
     [SerializeField]
-    private EnemyGenerator m_generator = null;
+    private ThrongGeneratorBase m_generator = null;
 
     private StatusManagerBase m_statusManager;
     private StatorBase m_stator;
@@ -200,7 +200,7 @@ public class EnemyRespawnManager : EnemyRespawnBase
         m_param.time += parametor.time;
     }
 
-    public void SetGenerator(EnemyGenerator generator)
+    public void SetGenerator(ThrongGeneratorBase generator)
     {
         m_generator = generator;
     }
