@@ -68,7 +68,7 @@ public class CreateSetRandomParametor_ZombieNormal
     public RandomRange<NormalAttack.Parametor> normalAttackParametor = new RandomRange<NormalAttack.Parametor>(); 
 }
 
-public class EnemyGenerator_ZombieNormal : EnemyGenerator
+public class EnemyGenerator_ZombieNormal : RandomPositionEnemyGenerator
 {
     [Header("生成時にセットするパラメータ"),SerializeField]
     private CreateSetParametor_ZombieNormal m_createSetParam = new CreateSetParametor_ZombieNormal();
