@@ -542,6 +542,7 @@ GameObject:
   - component: {fileID: 5095719353440970897}
   - component: {fileID: 825257070}
   - component: {fileID: 1674135944}
+  - component: {fileID: -5101305439053859850}
   m_Layer: 6
   m_Name: Zombie_Child
   m_TagString: Untagged
@@ -1269,6 +1270,28 @@ MonoBehaviour:
   m_moveSpeedPerSecond: 2
   m_isPositionLoop: 0
   m_transforms: []
+--- !u!114 &-5101305439053859850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2907770742893122101}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e4dfe2378a3b8443ba09efb79c7a24e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_param:
+    randomPositionRadius: 15
+    maxSpeed: 2.5
+    turningPower: 2
+    targetNearRange: 0.3
+    maxWaitCalcuRouteTime: 3
+    inThrongRange: 1
+  m_rayObstacleLayerStrings:
+  - L_Obstacle
+  m_collisionStayTime: 2
 --- !u!1 &3135129254368097418
 GameObject:
   m_ObjectHideFlags: 0
