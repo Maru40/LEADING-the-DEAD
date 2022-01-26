@@ -97,11 +97,6 @@ public class RandomPositionEnemyGenerator : ThrongGeneratorBase
 
     protected virtual void Awake()
     {
-
-    }
-
-    protected virtual void Start()
-    {
         //nullCheck
         if (m_outOfTargteDatas.Count == 0)
         {
@@ -110,6 +105,11 @@ public class RandomPositionEnemyGenerator : ThrongGeneratorBase
         }
 
         CreateObjects();
+    }
+
+    protected virtual void Start()
+    {
+
     }
 
     private void CreateObjects()
