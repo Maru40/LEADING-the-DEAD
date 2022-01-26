@@ -11,8 +11,15 @@ using FoundType = FoundObject.FoundType;
 /// </summary>
 public class LinerSeekTarget : NodeBase<EnemyBase>
 {
+    public enum MoveType
+    {
+        Seek,    //追従行動
+        Arrive,  //到着行動
+    }
+
     private float m_maxSpeed = 3.0f;
     private float m_turningPower = 1.0f; //旋回する力
+    private MoveType m_moveType = MoveType.Seek;
 
     private ChaseTarget m_chaseTarget;
     private TargetManager m_targetManager;
@@ -64,7 +71,6 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
         }
         else
         {
-
             m_chaseTarget.TargetLost("LinerSeek");
         }
     }
@@ -96,6 +102,7 @@ public class LinerSeekTarget : NodeBase<EnemyBase>
         var type = (FoundType)m_targetManager.GetNowTargetType();
         var force = type switch {
             FoundType.Smell => CalcuVelocity.CalucArriveVec(m_velocityManager.velocity, toVec, maxSpeed),
+            FoundType.ChildZombie => CalcuVelocity.CalucArriveVec(m_velocityManager.velocity, toVec, maxSpeed),
             _ => CalcuVelocity.CalucSeekVec(m_velocityManager.velocity, toVec, maxSpeed),
         };
 
