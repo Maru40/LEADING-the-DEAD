@@ -72,7 +72,7 @@ public class ThrongManager : MonoBehaviour
     //コンポーネント系-----------------
 
     [SerializeField]
-    private EnemyGenerator m_generator = null;
+    private ThrongGeneratorBase m_generator = null;
 
     private EnemyRotationCtrl m_rotationCtrl;
     private EnemyVelocityManager m_velocityManager;
@@ -128,7 +128,7 @@ public class ThrongManager : MonoBehaviour
     /// <param name="plowlingMove">コンポ―ネントそのもの</param>
     public Vector3 CalcuRandomPlowlingMovePositonIntegrated(RandomPlowlingMove plowlingMove)
     {
-        var throngDatas = m_generator.GetThrongDatas();
+        var throngDatas = m_generator.ThrongDatas;
 
         int throngSize = 0;
         Vector3 sumPosition = Vector3.zero;
@@ -224,7 +224,7 @@ public class ThrongManager : MonoBehaviour
     /// <returns></returns>
     public Vector3 CalcuThrongVector()
     {
-        var throngDatas = m_generator.GetThrongDatas();
+        var throngDatas = m_generator.ThrongDatas;
 
         Vector3 centerPosition = Vector3.zero;
         Vector3 avoidVec = Vector3.zero;
@@ -268,7 +268,7 @@ public class ThrongManager : MonoBehaviour
     {
         Vector3 sumUpperVec = Vector3.zero;
         
-        foreach(var data in m_generator.GetThrongDatas())
+        foreach(var data in m_generator.ThrongDatas)
         {
             if(data.gameObject == gameObject) {
                 continue;
@@ -286,11 +286,7 @@ public class ThrongManager : MonoBehaviour
     /// <returns>避けるベクトルの合計</returns>
     public Vector3 CalcuSumAvoidVector()
     {
-        if(m_generator == null) {
-            SetSearchGenerator();
-        }
-
-        var throngDatas = m_generator.GetThrongDatas();
+        var throngDatas = m_generator.ThrongDatas;
         Vector3 avoidVector = Vector3.zero;
 
         foreach (var data in throngDatas)
@@ -311,7 +307,7 @@ public class ThrongManager : MonoBehaviour
     /// <returns>平均スピード</returns>
     private float CalcuAverageSpeed()
     {
-        var throngDatas = m_generator.GetThrongDatas();
+        var throngDatas = m_generator.ThrongDatas;
         float sumSpeed = 0.0f;
         int throngSize = 0;
 
@@ -363,7 +359,7 @@ public class ThrongManager : MonoBehaviour
     /// <returns></returns>
     private bool IsUpperVector()
     {
-        foreach (var data in m_generator.GetThrongDatas())
+        foreach (var data in m_generator.ThrongDatas)
         {
             if (data.gameObject == gameObject) {
                 continue;
@@ -386,7 +382,7 @@ public class ThrongManager : MonoBehaviour
     /// <returns>群衆データリスト</returns>
     public List<ThrongData> GetThrongDatas()
     {
-        return m_generator.GetThrongDatas();
+        return m_generator.ThrongDatas;
     }
 
     public void SetInThrongRange(float range)
@@ -416,32 +412,8 @@ public class ThrongManager : MonoBehaviour
         return m_param;
     }
     
-    public void SetGenerator(EnemyGenerator generator)
+    public void SetGenerator(ThrongGeneratorBase generator)
     {
         m_generator = generator;
-    }
-
-    //null回避--------------------------
-
-    private void SetSearchGenerator()
-    {
-        return;
-
-        if(m_generator != null) {  //null出なかったら処理をしない。
-            return;
-        }
-
-        var generators = FindObjectsOfType<EnemyGenerator>();
-
-        foreach (var generator in generators)
-        {
-            var createObj = generator.GetCreateObject();
-            //生成するオブジェクトがこのオブジェクトと同じなら
-            if (createObj.GetType() == gameObject.GetType())
-            {
-                m_generator = generator;
-                break;
-            }
-        }
     }
 }
