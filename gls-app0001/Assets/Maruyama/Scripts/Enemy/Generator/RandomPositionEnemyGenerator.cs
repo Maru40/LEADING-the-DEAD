@@ -162,7 +162,7 @@ public class RandomPositionEnemyGenerator : ThrongGeneratorBase
     /// </summary>
     /// <param name="target">ターゲット</param>
     /// <returns>ランダムな位置</returns>
-    public Vector3 CalcuRandomPosition()
+    public override Vector3 CalcuRandomPosition()
     {
         if(m_isInCameraCreate)
         {
