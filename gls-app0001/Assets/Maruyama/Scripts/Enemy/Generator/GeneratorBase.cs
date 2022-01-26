@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GeneratorBase : MonoBehaviour
+public abstract class GeneratorBase : MonoBehaviour
 {
     private uint m_deathCount = 0;
 
