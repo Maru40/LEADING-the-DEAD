@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class AnimatorManager_ZombieChild : AnimatorManagerBase
 {
+    public enum BaseStateType
+    {
+        Idle,     //待機
+        Realize,  //気づいたとき
+        Find,     //見つけた時
+        Cry,      //泣く
+    }
+
     private Rigidbody m_rigid;
 
     protected override void Awake()
