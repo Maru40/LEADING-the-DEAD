@@ -13,6 +13,7 @@ public class Stator_ZombieChild : StatorBase
     public enum StateType
     {
         Plowling, //徘徊
+        Find,     //見つける
         Chase,    //追いかける
         Escape,   //逃げる
         Cry,      //泣く
@@ -31,6 +32,8 @@ public class Stator_ZombieChild : StatorBase
     {
         [Header("発見時に泣く対象")]
         public List<FoundType> cryTargets;
+        [Header("発見ステート")]
+        public StateNode_ZombieChild_Find.Parametor findParam;
         [Header("泣くパラメータ")]
         public StateNode_ZombieChild_Cry.Parametor cryParam;
         [Header("逃げるパラメータ")]
@@ -82,6 +85,7 @@ public class Stator_ZombieChild : StatorBase
 
         m_stateMachine.AddNode(StateType.Plowling, new StateNode_ZombieChild_Plowling(enemy));
         m_stateMachine.AddNode(StateType.Escape, new StateNode_ZombieChild_Escape(enemy, m_param.escapeParam));
+        m_stateMachine.AddNode(StateType.Find, new StateNode_ZombieChild_Find(enemy, m_param.findParam));
         m_stateMachine.AddNode(StateType.Cry, new StateNode_ZombieChild_Cry(enemy, m_param.cryParam));
     }
 
@@ -89,14 +93,18 @@ public class Stator_ZombieChild : StatorBase
     {
         //徘徊
         m_stateMachine.AddEdge(StateType.Plowling, StateType.Cry, IsCryTrigger);
-        m_stateMachine.AddEdge(StateType.Plowling, StateType.Cry, IsFindCryTarget);
+        m_stateMachine.AddEdge(StateType.Plowling, StateType.Find, IsFindCryTarget);
+        //m_stateMachine.AddEdge(StateType.Plowling, StateType.Cry, IsFindCryTarget);
 
         //逃げる
         m_stateMachine.AddEdge(StateType.Escape, StateType.Plowling, IsPlowlingTrigger);
 
+        //見つける
+        m_stateMachine.AddEdge(StateType.Find, StateType.Cry, IsCryTrigger);
+        m_stateMachine.AddEdge(StateType.Find, StateType.Plowling, IsFindTargetLost);
+
         //泣く
         m_stateMachine.AddEdge(StateType.Cry, StateType.Escape, IsEscapeTrigger);
-
     }
 
     //遷移条件系---------------------------------------------------------------
@@ -128,6 +136,30 @@ public class Stator_ZombieChild : StatorBase
 
         if (IsTargetType(m_param.cryTargets.ToArray())) { //泣く対象だったら
             return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// 発見時にターゲットをロストする。
+    /// </summary>
+    /// <param name="member"></param>
+    /// <returns></returns>
+    private bool IsFindTargetLost(ref TransitionMember member)
+    {
+        if (!m_targetManager.HasTarget()) {
+            return true;
+        }
+
+        const float eyeDegree = 90.0f;
+        var param = m_eye.GetParam();
+        param.degree = eyeDegree;
+        //ターゲットが視界内にいないから
+        if (!m_eye.IsInEyeRange(m_targetManager.GetNowTarget().gameObject, param))
+        {
+            m_targetManager.SetNowTarget(GetType(), null);
+            return true;  //遷移する。
         }
 
         return false;
