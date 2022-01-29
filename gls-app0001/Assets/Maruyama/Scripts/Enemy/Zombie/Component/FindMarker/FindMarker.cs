@@ -18,7 +18,7 @@ public class FindMarker : MonoBehaviour
     {
         if (m_marker == null)
         {
-            m_marker = Instantiate(m_createPrefab, CreatePosition, Quaternion.identity);
+            m_marker = CreateMarker(m_createPrefab);
         }
         
         m_marker.transform.localScale = m_scale;
@@ -39,6 +39,13 @@ public class FindMarker : MonoBehaviour
         }
     }
 
+    private GameObject CreateMarker(GameObject prefab)
+    {
+        var maker = Instantiate(prefab, CreatePosition, Quaternion.identity);
+
+        return maker;
+    }
+
     /// <summary>
     /// マーカーの状態を設定
     /// </summary>
@@ -48,4 +55,11 @@ public class FindMarker : MonoBehaviour
         m_marker?.SetActive(isActive);
     }
 
+    public void ChangeMaker(GameObject prefab, bool isActive = true)
+    {
+        Destroy(m_marker);
+
+        m_marker = CreateMarker(prefab);
+        SetMarkerActive(isActive);
+    }
 }
