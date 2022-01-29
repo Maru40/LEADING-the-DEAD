@@ -87,7 +87,7 @@ public class StateNode_ZombieNormal_Attack : EnState_AttackBase
     {
         base.OnExit();
 
-        m_taskList.AbsoluteReset();
+        m_taskList.ForceReset();
         m_blackBoard.Struct.attackParam.startType = StateType.None;
     }
 

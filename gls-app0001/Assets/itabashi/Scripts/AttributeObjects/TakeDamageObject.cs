@@ -66,6 +66,19 @@ namespace AttributeObject
 
             return false;
         }
+
+        public bool IsType(params DamageType[] types)
+        {
+            foreach(var type in types)
+            {
+                if(this.type == type)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 
     /// <summary>

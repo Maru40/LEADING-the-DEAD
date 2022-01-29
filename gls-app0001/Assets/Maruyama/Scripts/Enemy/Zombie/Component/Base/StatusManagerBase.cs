@@ -33,6 +33,11 @@ public abstract class StatusManagerBase : MonoBehaviour
             hp = maxHp;
             isStun = false;
         }
+
+        public bool IsDeath()
+        {
+            return hp <= 0 ? true : false;
+        }
     }
 
     private BuffManager m_buffManager = new BuffManager();

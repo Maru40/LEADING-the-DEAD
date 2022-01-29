@@ -2,37 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateNode_ZombieChild_Cry : EnemyStateNodeBase<EnemyBase>
+public class StateNode_ZombieChild_Dyning : EnemyStateNodeBase<EnemyBase>
 {
+    public enum DyningType
+    {
+        Fire,
+    }
+
     public enum TaskEnum
     {
-        Cry,
+        Fire,
+    }
+
+    [System.Serializable]
+    public struct BlackBoardParametor
+    {
+        public DyningType type;
     }
 
     [System.Serializable]
     public struct Parametor
     {
-        [Header("泣くパラメータ")]
-        public Task_Cry.Parametor cryParam;
+        [Header("炎による死亡")]
+        public Task_FireDining.Parametor fireParam;
     }
 
     private Parametor m_param = new Parametor();
-
     private TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
 
+    private BlackBoard_ZombieChild m_blackBoard;
     private Stator_ZombieChild m_stator;
-    private AnimatorManager_ZombieChild m_animatorManager;
-    private EnemyVelocityManager m_velocityManager;
 
-    public StateNode_ZombieChild_Cry(EnemyBase owner, Parametor parametor)
+    public StateNode_ZombieChild_Dyning(EnemyBase owner, Parametor parametor)
         :base(owner)
     {
         m_param = parametor;
 
+        m_blackBoard = owner.GetComponent<BlackBoard_ZombieChild>();
         m_stator = owner.GetComponent<Stator_ZombieChild>();
-        m_animatorManager = owner.GetComponent<AnimatorManager_ZombieChild>();
-        m_velocityManager = owner.GetComponent<EnemyVelocityManager>();
-
         DefineTask();
     }
 
@@ -46,41 +53,37 @@ public class StateNode_ZombieChild_Cry : EnemyStateNodeBase<EnemyBase>
         base.OnStart();
 
         m_taskList.ForceReset();
-
         SelectTask();
-        m_animatorManager.CrossFadeCry(m_animatorManager.BaseLayerIndex);
-        m_velocityManager.ResetAll();
     }
 
     public override void OnUpdate()
     {
-        m_taskList.UpdateTask();
+        Debug.Log("Dyning");
 
+        m_taskList.UpdateTask();
         if (m_taskList.IsEnd)
         {
-            m_stator.GetTransitionMember().escapeTrigger.Fire();
+            m_stator.GetTransitionMember().deathTrigger.Fire();
         }
     }
 
     public override void OnExit()
     {
         base.OnExit();
-
-        const float transitionTime = 0.1f;
-        m_animatorManager.CrossFadeState("Idle", m_animatorManager.BaseLayerIndex, transitionTime);
     }
 
     private void DefineTask()
     {
         var enemy = GetOwner();
 
-        m_taskList.DefineTask(TaskEnum.Cry, new Task_Cry(enemy, m_param.cryParam));
+        m_taskList.DefineTask(TaskEnum.Fire, new Task_FireDining(enemy, m_param.fireParam));
     }
 
     private void SelectTask()
     {
-        TaskEnum[] tasks = {
-            TaskEnum.Cry
+        TaskEnum[] tasks = m_blackBoard.GetStruct().dyningType switch {
+            DyningType.Fire => new TaskEnum[]{ TaskEnum.Fire },
+            _ => new TaskEnum[] { },
         };
 
         foreach(var task in tasks)

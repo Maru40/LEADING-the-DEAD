@@ -36,6 +36,10 @@ public class FindMarker : MonoBehaviour
         if (m_marker)
         {
             m_marker.transform.position = CreatePosition;
+            if (!gameObject.activeSelf)  //ゲームオブジェクトが非表示なら
+            {
+                SetMarkerActive(false);
+            }
         }
     }
 

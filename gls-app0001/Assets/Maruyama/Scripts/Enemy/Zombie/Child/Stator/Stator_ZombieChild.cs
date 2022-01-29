@@ -17,6 +17,8 @@ public class Stator_ZombieChild : StatorBase
         Chase,    //追いかける
         Escape,   //逃げる
         Cry,      //泣く
+        Dying,    //瀕死状態
+        Death,    //死亡状態
         Max
     }
 
@@ -25,6 +27,7 @@ public class Stator_ZombieChild : StatorBase
         public MyTrigger plowlingTrigger;
         public MyTrigger escapeTrigger;
         public MyTrigger cryTrigger;
+        public MyTrigger deathTrigger;
     }
 
     [System.Serializable]
@@ -38,6 +41,10 @@ public class Stator_ZombieChild : StatorBase
         public StateNode_ZombieChild_Cry.Parametor cryParam;
         [Header("逃げるパラメータ")]
         public StateNode_ZombieChild_Escape.Parametor escapeParam;
+        [Header("死亡(瀕死)時パラメータ")]
+        public StateNode_ZombieChild_Dyning.Parametor dyningParam;
+        [Header("完全死亡時パラメータ")]
+        public StateNode_ZombieChild_Death.Parametor deathParam;
     }
 
     [SerializeField]
@@ -87,6 +94,8 @@ public class Stator_ZombieChild : StatorBase
         m_stateMachine.AddNode(StateType.Escape, new StateNode_ZombieChild_Escape(enemy, m_param.escapeParam));
         m_stateMachine.AddNode(StateType.Find, new StateNode_ZombieChild_Find(enemy, m_param.findParam));
         m_stateMachine.AddNode(StateType.Cry, new StateNode_ZombieChild_Cry(enemy, m_param.cryParam));
+        m_stateMachine.AddNode(StateType.Dying, new StateNode_ZombieChild_Dyning(enemy, m_param.dyningParam));
+        m_stateMachine.AddNode(StateType.Death, new StateNode_ZombieChild_Death(enemy, m_param.deathParam));
     }
 
     private void CreateEdge()
@@ -105,6 +114,11 @@ public class Stator_ZombieChild : StatorBase
 
         //泣く
         m_stateMachine.AddEdge(StateType.Cry, StateType.Escape, IsEscapeTrigger);
+
+        //瀕死
+        m_stateMachine.AddEdge(StateType.Dying, StateType.Death, IsDeathTrigger);
+
+        //死亡
     }
 
     //遷移条件系---------------------------------------------------------------
@@ -122,6 +136,11 @@ public class Stator_ZombieChild : StatorBase
     private bool IsCryTrigger(ref TransitionMember member)
     {
         return member.cryTrigger.Get();
+    }
+
+    private bool IsDeathTrigger(ref TransitionMember member)
+    {
+        return member.deathTrigger.Get();
     }
 
     /// <summary>
@@ -199,6 +218,25 @@ public class Stator_ZombieChild : StatorBase
 
     public override void ChangeState<EnumType>(EnumType type, int priority = 0)
     {
+        if (type is StateType)
+        {
+            StateType? stateType = type as StateType?;
+            m_stateMachine.ChangeState((StateType)stateType, priority);
+        }
+    }
 
+    /// <summary>
+    /// ステート変更
+    /// </summary>
+    /// <param name="type">ステートタイプ</param>
+    /// <param name="priority">優先度</param>
+    public void ChangeState(StateType type, int priority)
+    {
+        m_stateMachine.ChangeState(type, priority);
+    }
+
+    public StateType GetNowState()
+    {
+        return m_stateMachine.GetNowType();
     }
 }

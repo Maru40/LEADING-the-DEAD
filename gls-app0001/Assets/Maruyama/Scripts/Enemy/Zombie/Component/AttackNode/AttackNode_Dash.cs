@@ -65,7 +65,7 @@ public class AttackNode_Dash : TaskNodeBase<EnemyBase>
 
     public override void OnEnter()
     {
-        m_taskList.AbsoluteReset();
+        m_taskList.ForceReset();
 
         SelectTask();
     }
