@@ -234,4 +234,9 @@ public class Stator_ZombieChild : StatorBase
     {
         m_stateMachine.ChangeState(type, priority);
     }
+
+    public StateType GetNowState()
+    {
+        return m_stateMachine.GetNowType();
+    }
 }
