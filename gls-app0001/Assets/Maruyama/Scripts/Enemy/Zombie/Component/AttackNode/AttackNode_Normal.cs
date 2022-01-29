@@ -58,7 +58,7 @@ public class AttackNode_Normal : TaskNodeBase<EnemyBase>
 
     public override void OnEnter()
     {
-        m_taskList.AbsoluteReset();
+        m_taskList.ForceReset();
 
         SelectTask();
     }
@@ -72,7 +72,7 @@ public class AttackNode_Normal : TaskNodeBase<EnemyBase>
 
     public override void OnExit()
     {
-        m_taskList.AbsoluteReset();
+        m_taskList.ForceReset();
     }
 
     /// <summary>
@@ -124,7 +124,7 @@ public class AttackNode_Normal : TaskNodeBase<EnemyBase>
         var timeEvent = behavior.onTimeEvent;
         //左腕の攻撃に合わせて次のタスクにする
         timeEvent.ClampWhere(leftTimeParam.startTime)
-            .Subscribe(_ => m_taskList.AbsoluteNextTask())
+            .Subscribe(_ => m_taskList.ForceNextTask())
             .AddTo(GetOwner());
 
         behavior.onStateExited.Subscribe(_ => EndAnimation()).AddTo(GetOwner());
@@ -132,7 +132,7 @@ public class AttackNode_Normal : TaskNodeBase<EnemyBase>
 
     private void EndAnimation()
     {
-        m_taskList.AbsoluteReset();
+        m_taskList.ForceReset();
         m_taskList.AddTask(TaskEnum.Wait);
     }
 }

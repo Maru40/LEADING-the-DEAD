@@ -74,7 +74,7 @@ public class AttackNode_WallDash : TaskNodeBase<EnemyBase>
     {
         //base.OnExit();
 
-        m_taskList.AbsoluteReset();
+        m_taskList.ForceReset();
         m_animatorManager.CrossFadeIdleAnimation(m_animatorManager.UpperLayerIndex);
         //m_attackManager.EndAnimationEvent();
     }
@@ -121,7 +121,7 @@ public class AttackNode_WallDash : TaskNodeBase<EnemyBase>
 
         if (collision.gameObject.tag == "T_Wall")
         {
-            m_taskList.AbsoluteReset();
+            m_taskList.ForceReset();
             m_taskList.AddTask(TaskEnum.PutWall);
 
             //アニメーションの遷移

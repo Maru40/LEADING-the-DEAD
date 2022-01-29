@@ -45,7 +45,7 @@ public class StateNode_ZombieChild_Cry : EnemyStateNodeBase<EnemyBase>
     {
         base.OnStart();
 
-        m_taskList.AbsoluteReset();
+        m_taskList.ForceReset();
 
         SelectTask();
         m_animatorManager.CrossFadeCry(m_animatorManager.BaseLayerIndex);

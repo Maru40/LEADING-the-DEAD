@@ -275,7 +275,7 @@ public class TaskList<EnumType>
     /// <summary>
     /// 強制終了
     /// </summary>
-    public void AbsoluteStop()
+    public void ForceStop()
     {
         if(m_currentTask != null)
         {
@@ -289,7 +289,7 @@ public class TaskList<EnumType>
     /// <summary>
     /// 強制的に次のタスクに変更する。
     /// </summary>
-    public void AbsoluteNextTask()
+    public void ForceNextTask()
     {
         EndOneTask();
     }
@@ -297,7 +297,7 @@ public class TaskList<EnumType>
     /// <summary>
     /// 終了処理を呼ばない強制終了
     /// </summary>
-    public void AbsoluteReset()
+    public void ForceReset()
     {
         m_currentTask = null;
         m_currentTasks.Clear();

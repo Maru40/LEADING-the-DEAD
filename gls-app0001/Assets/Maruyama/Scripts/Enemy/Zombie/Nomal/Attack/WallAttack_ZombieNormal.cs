@@ -132,7 +132,7 @@ public class WallAttack_ZombieNormal : AttackNodeBase
         if(other.gameObject.tag == "T_Wall")
         {
             m_isPutAttack = true;
-            m_taskList.AbsoluteReset();
+            m_taskList.ForceReset();
 
             //アニメーションの遷移
             m_animatorManager.CrossFadePutWallAttack();

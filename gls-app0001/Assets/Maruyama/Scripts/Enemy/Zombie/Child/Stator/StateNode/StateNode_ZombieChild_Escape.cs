@@ -160,7 +160,7 @@ public class StateNode_ZombieChild_Escape : EnemyStateNodeBase<EnemyBase>
 
         public override void OnStart()
         {
-            m_taskList.AbsoluteReset();
+            m_taskList.ForceReset();
 
             SelectTask();
         }
@@ -172,7 +172,7 @@ public class StateNode_ZombieChild_Escape : EnemyStateNodeBase<EnemyBase>
 
         public override void OnExit()
         {
-            m_taskList.AbsoluteStop();
+            m_taskList.ForceStop();
         }
 
         private void DefineTask()
@@ -252,7 +252,7 @@ public class StateNode_ZombieChild_Escape : EnemyStateNodeBase<EnemyBase>
 
         public override void OnExit()
         {
-            m_taskList.AbsoluteStop();
+            m_taskList.ForceStop();
         }
 
         private void DefineTask()
