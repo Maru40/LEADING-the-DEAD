@@ -33,6 +33,10 @@ public class DamageManager_ZombieChild : DamagedManagerBase
 
     private void Dyning()
     {
+        if(m_stator.GetNowState() == StateType.Dying) {
+            return;
+        }
+
         m_stator.ChangeState(StateType.Dying, (int)StateType.Dying);
     }
 }
