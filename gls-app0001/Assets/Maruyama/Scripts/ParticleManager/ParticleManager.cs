@@ -7,12 +7,23 @@ using MaruUtility.UtilityDictionary;
 
 public class ParticleManager : SingletonMonoBehaviour<ParticleManager>
 {
+    [System.Serializable]
+    public struct ParticleData
+    {
+        public ParticleID id;
+        [SerializeField]
+        private GameObject createPositionObject;
+        public Vector3 CreatePosition => createPositionObject.transform.position;
+    }
+
+    [System.Serializable]
     public enum ParticleID
     {
         None = -1,
         HitAttack_Normal,
         CloudDust,  //土煙
         MeatParticle,  //肉が弾ける。
+        Fire,  //炎
     }
 
     [SerializeField]
