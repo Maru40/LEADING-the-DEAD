@@ -27,6 +27,8 @@ public class StateNode_ZombieChild_Death : EnemyStateNodeBase<EnemyBase>
     public override void OnStart()
     {
         base.OnStart();
+
+        GetOwner().gameObject.SetActive(false);
     }
 
     public override void OnUpdate()
