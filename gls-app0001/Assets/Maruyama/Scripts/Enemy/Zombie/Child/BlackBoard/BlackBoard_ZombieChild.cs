@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackBoard_ZombieChild : I_BlackBoard<BlackBoard_ZombieChild.Parametor>
+public class BlackBoard_ZombieChild : MonoBehaviour, I_BlackBoard<BlackBoard_ZombieChild.Parametor>
 {
     [System.Serializable]
     public struct Parametor
