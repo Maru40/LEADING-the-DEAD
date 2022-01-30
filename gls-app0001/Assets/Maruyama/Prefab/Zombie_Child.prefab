@@ -544,6 +544,7 @@ GameObject:
   - component: {fileID: 1674135944}
   - component: {fileID: -5101305439053859850}
   - component: {fileID: 195228882785167381}
+  - component: {fileID: 152239322262068748}
   m_Layer: 6
   m_Name: Zombie_Child
   m_TagString: Untagged
@@ -1198,10 +1199,10 @@ MonoBehaviour:
     cryTargets: 00000000
     findParam:
       realizeParam:
-        time: 2
+        time: 0.5
         findMarker: {fileID: 7717914849459584620, guid: fd4684b53f606a643b3b9c340ecf787a, type: 3}
       findParam:
-        time: 2
+        time: 0.5
         findMarker: {fileID: 7717914849459584620, guid: fd4684b53f606a643b3b9c340ecf787a, type: 3}
     cryParam:
       cryParam:
@@ -1259,6 +1260,8 @@ MonoBehaviour:
   m_priority: 5
   m_type: 4
   m_positionOffset: {x: 0, y: 0, z: 0}
+  m_isSamePriolityActiveRange: 0
+  m_samePriolityActiveRange: 2
 --- !u!114 &825257070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1323,6 +1326,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_param:
     dyningType: 0
+--- !u!114 &152239322262068748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2907770742893122101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab9090a7c1f88614493b109daea28608, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_param:
+    maxSpeed: 3
+    nearRange: 2
+    range: 1
+    sides: 180
+    throngParam:
+      inThrongRange: 3
+      nearObjectRange: 2
+      maxAvoidPower: 10
+  m_triggerAction: {fileID: 1641230722}
 --- !u!1 &3135129254368097418
 GameObject:
   m_ObjectHideFlags: 0
