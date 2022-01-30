@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Image))]
 
@@ -28,6 +29,9 @@ public class FadeImageObject : FadeObject
     private bool m_isFading = false;
 
     private bool m_isFinish = false;
+
+    [SerializeField]
+    private UnityEvent m_finishEvent;
 
     public override void FadeStart()
     {
@@ -68,6 +72,8 @@ public class FadeImageObject : FadeObject
         m_isFinish = true;
 
         m_isFading = false;
+
+        m_finishEvent.Invoke();
     }
 
     private Color ChangeAlpha(in Color color,float alpha)
