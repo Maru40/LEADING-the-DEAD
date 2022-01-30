@@ -36,10 +36,11 @@ public struct ThrongData
     public DropObjecptManager dropManager;
     public ClearManager_Zombie clearManager;
     public EnemyRespawnManager respawn;  //リスポーン
+    public EnemyRotationCtrl rotationController;
 
     public ThrongData(EnemyVelocityManager velocityMgr, TargetManager targetMgr, ThrongManager throngMgr,
         RandomPlowlingMove randomPlowlingMove, DropObjecptManager dropManager, ClearManager_Zombie clearManager,
-        EnemyRespawnManager respawn)
+        EnemyRespawnManager respawn, EnemyRotationCtrl rotationController)
     {
         this.gameObject = targetMgr.gameObject;
         this.velocityMgr = velocityMgr;
@@ -49,6 +50,7 @@ public struct ThrongData
         this.dropManager = dropManager;
         this.clearManager = clearManager;
         this.respawn = respawn;
+        this.rotationController = rotationController;
     }
 }
 

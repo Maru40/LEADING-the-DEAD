@@ -132,7 +132,8 @@ public class RandomPositionEnemyGenerator : ThrongGeneratorBase
             obj.GetComponent<RandomPlowlingMove>(),
             obj.GetComponent<DropObjecptManager>(),
             obj.GetComponent<ClearManager_Zombie>(),
-            obj.GetComponent<EnemyRespawnManager>()
+            obj.GetComponent<EnemyRespawnManager>(),
+            obj.GetComponent<EnemyRotationCtrl>()
         );
 
         m_datas.Add(newData);

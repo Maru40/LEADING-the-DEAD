@@ -38,6 +38,7 @@ public class StateNode_ZombieChild_Escape : EnemyStateNodeBase<EnemyBase>
     private StateMachine m_stateMachine;
 
     private TargetManager m_targetManager = null;
+    private ParentThrongManager m_parentThrongManager = null;
     //private AllEnemyGeneratorManager m_enemyGenerator = null;
 
     public StateNode_ZombieChild_Escape(EnemyBase owner, Parametor parametor)
@@ -46,6 +47,7 @@ public class StateNode_ZombieChild_Escape : EnemyStateNodeBase<EnemyBase>
         m_param = parametor;
 
         m_targetManager = owner.GetComponent<TargetManager>();
+        m_parentThrongManager = owner.GetComponent<ParentThrongManager>();
         //m_enemyGenerator = GameObject.FindObjectOfType<AllEnemyGeneratorManager>();
 
         m_stateMachine = new StateMachine(m_param.transitionMember);
@@ -76,6 +78,7 @@ public class StateNode_ZombieChild_Escape : EnemyStateNodeBase<EnemyBase>
     {
         base.OnExit();
 
+        m_parentThrongManager.EndProcess();
         m_targetManager.SetNowTarget(GetType(), null);
     }
 

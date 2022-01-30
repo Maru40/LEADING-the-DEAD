@@ -20,7 +20,8 @@ public abstract class ThrongGeneratorBase : GeneratorBase
             obj.GetComponent<RandomPlowlingMove>(),
             obj.GetComponent<DropObjecptManager>(),
             obj.GetComponent<ClearManager_Zombie>(),
-            obj.GetComponent<EnemyRespawnManager>()
+            obj.GetComponent<EnemyRespawnManager>(),
+            obj.GetComponent<EnemyRotationCtrl>()
         );
 
         return newData;
