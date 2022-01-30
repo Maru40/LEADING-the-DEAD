@@ -317,6 +317,13 @@ public class TargetManager : MonoBehaviour
         var toNowTarget = nowTargetPosition - transform.position;
         var toNewTarget = newTargetPosition - transform.position;
 
+        var data = newTarget.GetFoundData();
+        //同じ優先度時に有効範囲の設定があり、アクティブ範囲にターゲットがあるなら
+        if(data.isSamePriolityActiveRange && data.samePriolityActiveRange >= toNewTarget.magnitude)
+        {
+            return true;
+        }
+
         //現在の方が近いならfalse
         return (toNowTarget.magnitude < toNewTarget.magnitude) ? false : true;
     }

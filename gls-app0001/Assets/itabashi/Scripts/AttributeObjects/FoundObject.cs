@@ -23,13 +23,19 @@ public class FoundObject : MonoBehaviour
         public FoundType type;
         public Vector3 positionOffset;  //音などのポジションに乱数を持たせたい場合
         public Vector3 position => gameObject.transform.position + positionOffset;
+        public bool isSamePriolityActiveRange;
+        [Header("同じ優先度の場合有効となる長さ")]
+        public float samePriolityActiveRange;
 
-        public FoundData(GameObject gameObject, int priority, FoundType type, Vector3 positionOffset)
+        public FoundData(GameObject gameObject, int priority, FoundType type, Vector3 positionOffset, 
+            bool isSamePriolityActiveRange, float samePriolityActiveRange)
         {
             this.gameObject = gameObject;
             this.priority = priority;
             this.type = type;
             this.positionOffset = positionOffset;
+            this.isSamePriolityActiveRange = isSamePriolityActiveRange;
+            this.samePriolityActiveRange = samePriolityActiveRange;
         }
     }
 
@@ -41,6 +47,12 @@ public class FoundObject : MonoBehaviour
 
     [SerializeField]
     private Vector3 m_positionOffset = new Vector3();
+
+    [SerializeField]
+    private bool m_isSamePriolityActiveRange = false;
+
+    [SerializeField, Header("同じ優先度の場合有効となる長さ")]
+    public float m_samePriolityActiveRange = 2.0f;
 
     private void Start()
     {
@@ -57,6 +69,7 @@ public class FoundObject : MonoBehaviour
             //Debug.Log("◆新規：" + positionOffset);
         }
 
-        return new FoundData(gameObject, m_priority, m_type, positionOffset);
+        return new FoundData(gameObject, m_priority, m_type, positionOffset,
+            m_isSamePriolityActiveRange, m_samePriolityActiveRange);
     }
 }
