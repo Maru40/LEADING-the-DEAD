@@ -34,6 +34,7 @@ public class ClearManager_Zombie : MonoBehaviour
 
     private AnimatorManager_ZombieNormal m_animatorManager = null;
     private WaitTimer m_waitTimer = null;
+    private Rigidbody m_rigid = null;
 
     private Vector3 m_moveDirect = Vector3.zero;
 
@@ -44,6 +45,7 @@ public class ClearManager_Zombie : MonoBehaviour
         m_targetManager = GetComponent<TargetManager>();
         m_velocityManager = GetComponent<EnemyVelocityManager>();
         m_throngManager = GetComponent<ThrongManager>();
+        m_rigid = GetComponent<Rigidbody>();
 
         m_animatorManager = GetComponent<AnimatorManager_ZombieNormal>();
         m_rotationController = GetComponent<EnemyRotationCtrl>();
@@ -80,6 +82,7 @@ public class ClearManager_Zombie : MonoBehaviour
         m_rotationController.enabled = true;
         m_velocityManager.enabled = true;
         m_throngManager.enabled = true;
+        m_rigid.isKinematic = false;
 
         PlayShoutSE(); //声の再生
     }
