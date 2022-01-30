@@ -30,10 +30,12 @@ public class ParentThrongManager : MonoBehaviour
 
     [SerializeField]
     private TriggerAction m_triggerAction;
+    private FoundObject m_foundObject;
     //private EnemyVelocityManager m_velocityManager;
 
     private void Awake()
     {
+        m_foundObject = GetComponent<FoundObject>();
         //m_velocityManager = GetComponent<EnemyVelocityManager>();
     }
 
@@ -60,15 +62,20 @@ public class ParentThrongManager : MonoBehaviour
     {
         foreach(var data in m_throngDatas)
         {
+            data.gameObject.GetComponent<ChaseTarget>().enabled = false;
+
             var velocityManager = data.velocityMgr;
 
             var velocity = velocityManager.velocity;
-            var destinationPosition = transform.position + CalcuDestinationVector(data);
-            var toTargetVector = destinationPosition - transform.position;
+            //var destinationPosition = transform.position + CalcuDestinationVector(data);
+            var destinationPosition = m_foundObject.GetFoundData().position;
+            var toTargetVector = destinationPosition - data.gameObject.transform.position;
             var force = CalcuVelocity.CalucNearArriveFarSeek(velocity, toTargetVector, m_param.maxSpeed, m_param.nearRange);
             velocityManager.AddForce(force);
 
-            ThrongMoveUpdate(velocityManager);
+            Rotation(data);
+
+            //ThrongMoveUpdate(velocityManager);
         }
     }
 
@@ -245,12 +252,18 @@ public class ParentThrongManager : MonoBehaviour
     {
         foreach(var data in m_throngDatas)
         {
-            data.throngMgr.enabled = true;
+            //data.throngMgr.enabled = true;
             data.gameObject.GetComponent<ChaseTarget>().enabled = true;
             //data.gameObject.GetComponent<StatorBase>().enabled = true;
         }
 
         m_throngDatas.Clear();
+    }
+
+    private void Rotation(ThrongData data)
+    {
+        var velocity = data.velocityMgr.velocity;
+        data.rotationController.SetDirect(velocity);
     }
 
     private void TriggerEnter(Collider other)
@@ -267,7 +280,7 @@ public class ParentThrongManager : MonoBehaviour
 
             //other.GetComponent<StatorBase>().enabled = false;
             data.gameObject.GetComponent<ChaseTarget>().enabled = false;
-            data.throngMgr.enabled = false;
+            //data.throngMgr.enabled = false;
         }
     }
 
@@ -302,7 +315,8 @@ public class ParentThrongManager : MonoBehaviour
             obj.GetComponent<RandomPlowlingMove>(),
             obj.GetComponent<DropObjecptManager>(),
             obj.GetComponent<ClearManager_Zombie>(),
-            obj.GetComponent<EnemyRespawnManager>()
+            obj.GetComponent<EnemyRespawnManager>(),
+            obj.GetComponent<EnemyRotationCtrl>()
         );
 
         return newData;
