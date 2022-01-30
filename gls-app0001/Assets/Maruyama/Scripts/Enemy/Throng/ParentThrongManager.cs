@@ -39,6 +39,10 @@ public class ParentThrongManager : MonoBehaviour
 
     private void Start()
     {
+        if(enabled == false) { 
+            return;
+        }
+
         m_triggerAction.AddEnterAction(TriggerEnter);
 
         CreateDestinationPosition();
