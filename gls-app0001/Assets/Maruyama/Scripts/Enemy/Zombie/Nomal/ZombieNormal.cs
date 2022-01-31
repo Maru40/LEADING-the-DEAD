@@ -41,6 +41,7 @@ public class ZombieNormal : EnemyBase, I_Chase, I_Listen, I_BindedActiveArea, I_
     {
         m_targetManager.AddChangeTargetEvent(FoundType.Player, () => m_stator.GetTransitionMember().findTrigger.Fire());
         m_targetManager.AddChangeTargetEvent(FoundType.ChildZombie, () => m_stator.GetTransitionMember().findTrigger.Fire());
+        m_targetManager.AddChangeTargetEvent(FoundType.None, () => m_stator.GetTransitionMember().rondomPlowlingTrigger.Fire());
     }
 
     //インターフェースの実装-------------------------------------------------
