@@ -34,6 +34,13 @@ public class BloodBagManager : MonoBehaviour
     [Header("血だまり"), SerializeField]
     private GameObject m_pudBlood = null;
 
+    private NumBloodManager m_numBloodManager = null;
+
+    private void Awake()
+    {
+        m_numBloodManager = FindObjectOfType<NumBloodManager>();
+    }
+
     private void Start()
     {
         if(m_layerStrings.Count == 0) {
@@ -68,6 +75,7 @@ public class BloodBagManager : MonoBehaviour
 
         //割れた音を出す。
         Manager.GameAudioManager.Instance.SEPlayOneShot(m_breakSoundClip);
+        m_numBloodManager.RemoveBloodBag(this);
         Destroy(gameObject);
     }
 
