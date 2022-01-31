@@ -55,6 +55,7 @@ public class ParentThrongManager : MonoBehaviour
         if(m_throngDatas.Count != 0)
         {
             ThrongUpdate();
+            RemoveManager();
         }
     }
 
@@ -250,12 +251,12 @@ public class ParentThrongManager : MonoBehaviour
     //終了
     public void EndProcess()
     {
+        System.Action actions = null;
         foreach(var data in m_throngDatas)
         {
-            //data.throngMgr.enabled = true;
-            data.gameObject.GetComponent<ChaseTarget>().enabled = true;
-            //data.gameObject.GetComponent<StatorBase>().enabled = true;
+            actions = () => RemoveData(data);
         }
+        actions?.Invoke();
 
         m_throngDatas.Clear();
     }
@@ -305,6 +306,28 @@ public class ParentThrongManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void RemoveData(ThrongData data)
+    {
+        data.gameObject.GetComponent<ChaseTarget>().enabled = true;
+
+        m_throngDatas.Remove(data);
+    }
+
+    private void RemoveManager()
+    {
+        System.Action actions = null;
+
+        foreach(var data in m_throngDatas)
+        {
+            if(data.targetMgr.GetNowTargetType() != FoundObject.FoundType.ChildZombie)
+            {
+                actions += () => RemoveData(data);
+            }
+        }
+
+        actions?.Invoke();
     }
 
     protected ThrongData CalcuThrongData(GameObject obj)

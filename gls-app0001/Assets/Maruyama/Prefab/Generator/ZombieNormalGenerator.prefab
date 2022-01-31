@@ -77,66 +77,13 @@ MonoBehaviour:
       damageIntervalTime: 3
       isStun: 0
       isEat: 0
-    attackManagerParametor:
-      damageData:
-        obj: {fileID: 0}
-        damageValue: 2
-        isStunAttack: 0
-        hitStopTime: 0
-        type: 0
-        damageTags: []
-      startRange: 2
-    normalAttackHitBoxDictionary:
-      m_typeDraws:
-      - key: 0
-        value:
-          obj: {fileID: 0}
-          damageValue: 1
-          isStunAttack: 0
-          hitStopTime: 0
-          type: 0
-          damageTags: []
-      - key: 1
-        value:
-          obj: {fileID: 0}
-          damageValue: 1
-          isStunAttack: 0
-          hitStopTime: 0
-          type: 0
-          damageTags: []
-    preliminaryParam:
-      timeRandomRange:
-        min: 0.1
-        max: 1
-      moveSpeed: 1
-      audioParams: []
-    angerBuffParametor:
-      attackPower: 1.05
-      speed: 1.05
-      attackAnimeSpeed: 1.5
-    targetBuffParametor:
-      speed: 3
-    eyeSarchRangeParam:
-      range: 5
-      height: 3
-      degree: 15
-    throngParam:
-      inThrongRange: 1
-      nearObjectRange: 1
-      maxAvoidPower: 12
-    eatParam:
-      power: 1
-    dashAttackParam:
-      probability: 25
-      startRange: 30
-      probabilityInterbalTime: 10
     statorParametor:
       transitionMember:
         normalAttackRange: 2
         dashAttackTransitionParam:
-          probability: 25
+          probability: 10
           startRange: 30
-          probabilityInterbalTime: 10
+          probabilityInterbalTime: 6
       attackParam:
         normalParam:
           preliminaryParam:
@@ -314,6 +261,40 @@ MonoBehaviour:
                 m_initVolume: 0
           waitParam:
             time: 1.5
+    normalAttackHitBoxDictionary:
+      m_typeDraws:
+      - key: 0
+        value:
+          obj: {fileID: 0}
+          damageValue: 1
+          isStunAttack: 0
+          hitStopTime: 0
+          type: 0
+          damageTags: []
+      - key: 1
+        value:
+          obj: {fileID: 0}
+          damageValue: 1
+          isStunAttack: 0
+          hitStopTime: 0
+          type: 0
+          damageTags: []
+    angerBuffParametor:
+      attackPower: 1.05
+      speed: 1.05
+      attackAnimeSpeed: 1.5
+    targetBuffParametor:
+      speed: 3
+    eyeSarchRangeParam:
+      range: 5
+      height: 3
+      degree: 15
+    throngParam:
+      inThrongRange: 1
+      nearObjectRange: 1
+      maxAvoidPower: 12
+    eatParam:
+      power: 1
     auraParam:
       auraParametors: []
   m_respawnStatusUpParam:
@@ -340,43 +321,6 @@ MonoBehaviour:
       damageIntervalTime: 0
       isStun: 0
       isEat: 0
-    attackManagerParametor:
-      damageData:
-        obj: {fileID: 0}
-        damageValue: 0
-        isStunAttack: 0
-        hitStopTime: 0
-        type: 0
-        damageTags: []
-      startRange: 0
-    normalAttackHitBoxDictionary:
-      m_typeDraws: []
-    preliminaryParam:
-      timeRandomRange:
-        min: 1
-        max: 1
-      moveSpeed: 1
-      audioParams: []
-    angerBuffParametor:
-      attackPower: 1.05
-      speed: 1.02
-      attackAnimeSpeed: 1.5
-    targetBuffParametor:
-      speed: 3
-    eyeSarchRangeParam:
-      range: 20
-      height: 3
-      degree: 0.7
-    throngParam:
-      inThrongRange: 1
-      nearObjectRange: 1
-      maxAvoidPower: 3
-    eatParam:
-      power: 1
-    dashAttackParam:
-      probability: 25
-      startRange: 30
-      probabilityInterbalTime: 10
     statorParametor:
       transitionMember:
         normalAttackRange: 0
@@ -433,6 +377,24 @@ MonoBehaviour:
             audioParams: []
           waitParam:
             time: 0
+    normalAttackHitBoxDictionary:
+      m_typeDraws: []
+    angerBuffParametor:
+      attackPower: 1.05
+      speed: 1.02
+      attackAnimeSpeed: 1.5
+    targetBuffParametor:
+      speed: 3
+    eyeSarchRangeParam:
+      range: 20
+      height: 3
+      degree: 0.7
+    throngParam:
+      inThrongRange: 1
+      nearObjectRange: 1
+      maxAvoidPower: 3
+    eatParam:
+      power: 1
     auraParam:
       auraParametors: []
   m_randomSetParam:
