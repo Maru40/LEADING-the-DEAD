@@ -277,10 +277,6 @@ PrefabInstance:
       propertyPath: m_TargetCamera
       value: 
       objectReference: {fileID: 350610114}
-    - target: {fileID: 1222083819589413713, guid: 8f4f3b83cae48de4283b83f832d8b295, type: 3}
-      propertyPath: m_DirectAudioVolumes.Array.data[0]
-      value: 0.4
-      objectReference: {fileID: 0}
     - target: {fileID: 1222083819589413726, guid: 8f4f3b83cae48de4283b83f832d8b295, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -642,7 +638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6787979520542814181, guid: ab31c9dd3b2c8d744a4487ce231528a9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 9.69696
+      value: 9.6970215
       objectReference: {fileID: 0}
     - target: {fileID: 6787979520542814181, guid: ab31c9dd3b2c8d744a4487ce231528a9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1729,6 +1725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e72818dabaa13f4e977961a282c3d5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_defaultMovieBGMVolume: 0.4
   m_eventVideoPlayer: {fileID: 1569293922}
   m_finishEvent:
     m_PersistentCalls:
