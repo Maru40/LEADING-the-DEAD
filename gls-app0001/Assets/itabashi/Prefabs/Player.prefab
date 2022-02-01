@@ -1150,8 +1150,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_animatorManager: {fileID: 1106717144}
   m_playerStatusManager: {fileID: 1106717132}
-  m_moveSpeed: 3.7
-  m_dashSpeedScale: 1.3
+  m_moveSpeed: 3.4
+  m_dashSpeedScale: 1.4
   m_dashStaminaToOneSecond: 1
   m_moveSpeedDeadZone: 0.01
 --- !u!114 &1106717132
@@ -1170,14 +1170,14 @@ MonoBehaviour:
   m_stunStar: {fileID: 183810221}
   m_hpGauge: {fileID: 0}
   m_hp:
-    value: 10
+    value: 15
   m_maxHp: 15
   m_isStun:
     value: 0
   m_stunSecond: 1
   m_staminaGauge: {fileID: 0}
-  m_stamina: 10
-  m_maxStamina: 10
+  m_stamina: 3
+  m_maxStamina: 3
   m_staminaRecoveryPerSeconds: 1
   m_animatorManager: {fileID: 1106717144}
   m_isInvincible: 0
