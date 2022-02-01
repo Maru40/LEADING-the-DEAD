@@ -8,6 +8,9 @@ using Manager;
 public class AudioOptionUIPresenter : MonoBehaviour
 {
     [SerializeField]
+    private AudioClip m_seTestClip;
+
+    [SerializeField]
     private Slider m_bgmSlider = null;
 
     [SerializeField]
@@ -18,12 +21,24 @@ public class AudioOptionUIPresenter : MonoBehaviour
 
     private void Awake()
     {
+        m_bgmSlider.value = GameAudioManager.Instance.BGMVolume;
+
+        m_seSlider.value = GameAudioManager.Instance.SEVolume;
+
         m_bgmSlider.onValueChanged.AsObservable()
-            .Subscribe(value => GameAudioManager.Instance.BGMVolume = value / m_bgmSlider.maxValue)
+            .Subscribe(value =>
+            {
+                GameAudioManager.Instance.BGMVolume = value / m_bgmSlider.maxValue;
+                GameAudioManager.Instance.SEPlayOneShot(m_seTestClip);
+            })
             .AddTo(this);
 
         m_seSlider.onValueChanged.AsObservable()
-            .Subscribe(value => GameAudioManager.Instance.SEVolume = value / m_seSlider.maxValue)
+            .Subscribe(value =>
+            {
+                GameAudioManager.Instance.SEVolume = value / m_seSlider.maxValue;
+                GameAudioManager.Instance.SEPlayOneShot(m_seTestClip);
+            })
             .AddTo(this);
 
         m_backButton.onClick.AsObservable()
