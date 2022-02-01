@@ -17,18 +17,22 @@ public class NumBloodManager : MonoBehaviour
     private System.Action m_updateAction = null;
     private GameTimer m_timer = new GameTimer();
 
-    private Text m_text = null;
+    //private Text m_text = null;
+    [SerializeField, Header("数字を管理するためのNumberImage")]
+    private NumberImage m_numberImage = null;
 
     private void Awake()
     {
-        m_text = GetComponent<Text>();
+        //m_text = GetComponent<Text>();
+        //m_numberImage = GetComponent<NumberImage>();
         m_bloodBags = new List<BloodBagManager>(FindObjectsOfType<BloodBagManager>());
     }
 
     private void Start()
     {
         m_timer.ResetTimer(m_endTime);
-        m_text.text = NumBloodBag.ToString();
+        ChangeNumber();
+        //m_text.text = NumBloodBag.ToString();
     }
 
     private void Update()
@@ -46,7 +50,8 @@ public class NumBloodManager : MonoBehaviour
     public void RemoveBloodBag(BloodBagManager bloodBag)
     {
         m_bloodBags.Remove(bloodBag);
-        m_text.text = NumBloodBag.ToString();
+        ChangeNumber();
+        //m_text.text = NumBloodBag.ToString();
 
         if (NumBloodBag == 0)
         {
@@ -90,5 +95,10 @@ public class NumBloodManager : MonoBehaviour
     private void GameOver()
     {
         Debug.Log("GameOver");
+    }
+
+    private void ChangeNumber()
+    {
+        m_numberImage.value = NumBloodBag;
     }
 }
