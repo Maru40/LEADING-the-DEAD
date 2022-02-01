@@ -42,6 +42,9 @@ public class PlayerPickUpper : MonoBehaviour
 
     private int m_currentDisitionIndex = 0;
 
+    [SerializeField]
+    private NumberImage m_bloodBagNumberImage = null;
+
     private void Reset()
     {
         m_pickUpObjectsTransform = transform.Find(PICKUP_OBJECTS_NAME);
@@ -154,6 +157,10 @@ public class PlayerPickUpper : MonoBehaviour
         }
 
         var bloodBagManager = pickedUpObject.GetComponent<BloodBagManager>();
+        if (bloodBagManager)
+        {
+            m_bloodBagNumberImage.value++;
+        }
         bloodBagManager?.PickUp();
 
         m_stackObjects.Add(pickedUpObject);
@@ -174,6 +181,12 @@ public class PlayerPickUpper : MonoBehaviour
 
         var popObject = hitObjects[0];
         m_stackObjects.Remove(popObject);
+
+        var bloodBagManager = popObject.GetComponent<BloodBagManager>();
+        if (bloodBagManager)
+        {
+            m_bloodBagNumberImage.value--;
+        }
 
         return popObject;
     }
