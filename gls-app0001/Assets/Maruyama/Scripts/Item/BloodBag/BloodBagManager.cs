@@ -59,6 +59,10 @@ public class BloodBagManager : MonoBehaviour
     /// </summary>
     void BreakBlood(Collision other)
     {
+        if (m_numBloodManager == null) {
+            m_numBloodManager = FindObjectOfType<NumBloodManager>();
+        }
+
         CreateParticle();
 
         //var bloodPuddleGround = CreateBloodPuddleGround();
