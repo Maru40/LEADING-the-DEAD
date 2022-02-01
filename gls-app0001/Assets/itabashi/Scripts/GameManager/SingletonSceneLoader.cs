@@ -10,6 +10,11 @@ namespace Manager
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void SingletonSceneLoad()
         {
+#if !UNITY_EDITOR
+            Cursor.visible = false;
+            Cursor.lockState=CursorLockMode.Locked;
+#endif
+
             SceneManager.LoadScene(m_loadSceneName, LoadSceneMode.Additive);
         }
     }
