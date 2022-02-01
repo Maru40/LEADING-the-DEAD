@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -121,7 +121,7 @@ namespace Manager
 
         public float BGMVolume
         {
-            set => m_audioMixer.SetFloat(BGM_VOLUME_KEY, Mathf.Clamp(LeapToDB(value), DB_DEFAULT_MIN, DB_DEFAULT_MAX));
+            set => m_audioMixer.SetFloat(BGM_VOLUME_KEY, LeapToDB(value));
             get
             {
                 m_audioMixer.GetFloat(BGM_VOLUME_KEY, out float value);
@@ -131,7 +131,7 @@ namespace Manager
 
         public float SEVolume
         {
-            set => m_audioMixer.SetFloat(SE_VOLUME_KEY, Mathf.Clamp(LeapToDB(value), DB_DEFAULT_MIN, DB_DEFAULT_MAX));
+            set => m_audioMixer.SetFloat(SE_VOLUME_KEY, LeapToDB(value));
             get
             {
                 m_audioMixer.GetFloat(SE_VOLUME_KEY, out float value);
@@ -141,8 +141,7 @@ namespace Manager
 
         static private float LeapToDB(float value)
         {
-            Debug.Log(DB_DEFAULT_MIN - DB_DEFAULT_MIN * value);
-            return DB_DEFAULT_MIN - DB_DEFAULT_MIN * value;
+            return Mathf.Clamp(Mathf.Log10(Mathf.Clamp(value, 0f, 1f)) * 20f, DB_DEFAULT_MIN, DB_DEFAULT_MAX);
         }
 
         static private float DBToLeap(float dB)

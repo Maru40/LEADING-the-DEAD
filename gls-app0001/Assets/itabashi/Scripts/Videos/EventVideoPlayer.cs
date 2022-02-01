@@ -16,13 +16,8 @@ public class EventVideoPlayer : MonoBehaviour
     void Start()
     {
         m_videoPlayer.loopPointReached += videoPlayer =>
-        { m_finishEvent.Invoke(); Debug.Log("ムービーが終わりました"); };   
+        { m_finishEvent.Invoke(); Debug.Log("ムービーが終わりました"); };
     }
 
     public bool IsPlaying => m_videoPlayer.isPlaying;
-
-    public void SetVolume(float volume)
-    {
-        m_videoPlayer.SetDirectAudioVolume(0, volume);
-    }
 }
