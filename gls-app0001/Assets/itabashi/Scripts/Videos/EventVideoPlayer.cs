@@ -20,4 +20,9 @@ public class EventVideoPlayer : MonoBehaviour
     }
 
     public bool IsPlaying => m_videoPlayer.isPlaying;
+
+    public void SetVolume(float volume)
+    {
+        m_videoPlayer.SetDirectAudioVolume(0, volume);
+    }
 }
