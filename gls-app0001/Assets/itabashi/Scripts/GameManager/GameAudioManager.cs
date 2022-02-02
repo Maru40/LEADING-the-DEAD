@@ -28,7 +28,7 @@ namespace Manager
         [SerializeField]
         private AudioSource m_seSource;
 
-        private float m_bgmVolume = 1.0f;
+        private float m_bgmVolume;
 
         public static GameAudioManager Instance { private set; get; }
 
@@ -78,14 +78,14 @@ namespace Manager
 
         private IEnumerator SoundFadeOut(float fadeTime)
         {
-            m_bgmVolume = m_bgmSource.volume;
+            float bgmVolume = m_bgmSource.volume;
 
             float countTime = 0.0f;
 
             while(countTime < fadeTime)
             {
                 countTime += Time.unscaledDeltaTime;
-                m_bgmSource.volume = m_bgmVolume * (1 - countTime / fadeTime);
+                m_bgmSource.volume = bgmVolume * (1 - countTime / fadeTime);
                 yield return null;
             }
 
@@ -105,8 +105,6 @@ namespace Manager
                 m_bgmSource.volume = m_bgmVolume * countTime / fadeTime;
                 yield return null;
             }
-
-            m_bgmSource.volume = m_bgmVolume;
         }
 
         public float MasterVolume
