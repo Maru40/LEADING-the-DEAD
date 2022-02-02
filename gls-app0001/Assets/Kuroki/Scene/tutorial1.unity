@@ -884,7 +884,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2494370294448507900, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2494370294448507900, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1036,11 +1036,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2811416633327804851, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_maxDurability
-      value: 25
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2811416633327804851, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_durability.value
-      value: 25
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2903729569238431402, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_Follow
@@ -1084,11 +1084,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3036914389571509342, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.000000002148128
+      value: 0.0000000021481275
       objectReference: {fileID: 0}
     - target: {fileID: 3036914389571509342, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -1.071392e-10
+      value: 1.0713917e-10
       objectReference: {fileID: 0}
     - target: {fileID: 3098392250675291944, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1233,6 +1233,10 @@ PrefabInstance:
     - target: {fileID: 4453129012665981401, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5197118259781757890, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
+      propertyPath: m_ChildCameras.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5780210649981398161, guid: 47315046776012e4fbc39be0a39a0665, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2500,7 +2504,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4994611356889195576, guid: 2b0bfd7816e24d44ebaa7fd2b4de10b8, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4994611356889195576, guid: 2b0bfd7816e24d44ebaa7fd2b4de10b8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2742,7 +2746,7 @@ PrefabInstance:
       objectReference: {fileID: 1869049496}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_createSetParam.chaseParametor.maxSpeed
-      value: 2.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_createSetParam.angerBuffParametor.speed
@@ -2807,6 +2811,10 @@ PrefabInstance:
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_createSetParam.attackManagerParametor.damageData.hitStopTime
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_createSetParam.statorParametor.attackParam.dashParam.chaseParam.maxSpeed
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_createSetParam.statorParametor.transitionMember.dashAttackTransitionParam.probability
@@ -3022,7 +3030,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655915, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655915, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3114,7 +3122,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_createSetParam.chaseParametor.maxSpeed
-      value: 2.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_createSetParam.angerBuffParametor.speed
@@ -3179,6 +3187,10 @@ PrefabInstance:
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_createSetParam.attackManagerParametor.damageData.hitStopTime
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
+      propertyPath: m_createSetParam.statorParametor.attackParam.dashParam.chaseParam.maxSpeed
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2834631260142655917, guid: 13472f8a697627644b6a241b08d48db5, type: 3}
       propertyPath: m_createSetParam.statorParametor.transitionMember.dashAttackTransitionParam.probability
@@ -3322,7 +3334,7 @@ Transform:
   - {fileID: 1856743445}
   - {fileID: 1611855887}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1510063199
 PrefabInstance:
@@ -3690,7 +3702,7 @@ Transform:
   - {fileID: 1930701382}
   - {fileID: 300509320}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1761488240
 PrefabInstance:
@@ -4093,7 +4105,7 @@ Transform:
   m_LocalScale: {x: 15, y: 1, z: 15}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2034518107
 PrefabInstance:
@@ -4285,7 +4297,7 @@ Transform:
   - {fileID: 2141475217}
   - {fileID: 1669088615}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2116417466 stripped
 Transform:
