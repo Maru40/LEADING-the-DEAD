@@ -144,7 +144,7 @@ namespace Manager
 
         static private float DBToLeap(float dB)
         {
-            return (-DB_DEFAULT_MIN + dB) / -DB_DEFAULT_MIN;
+            return Mathf.Pow(10, dB / 20.0f);
         }
 
     }
