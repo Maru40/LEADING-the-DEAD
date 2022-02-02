@@ -129,9 +129,9 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
     {
         m_player.GetComponent<FoundObject>().enabled = false;
 
-        if(m_generators.Count == 0) {
-            return;
-        }
+        //if(m_generators.Count == 0) {
+        //    return;
+        //}
 
         foreach(var generator in m_generators)
         {
@@ -155,6 +155,7 @@ public class AllEnemyGeneratorManager : SingletonMonoBehaviour<AllEnemyGenerator
         foreach (var tank in m_tanks)
         {
             tank.GetComponent<TargetManager>()?.SetNowTarget(GetType(), null);
+            //tank.GameClearEvent();
         }
     }
 
