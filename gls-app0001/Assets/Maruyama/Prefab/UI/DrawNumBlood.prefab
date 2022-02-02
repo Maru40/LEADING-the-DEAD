@@ -33,10 +33,10 @@ RectTransform:
   m_Father: {fileID: 1447097351755264852}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 45, y: -45}
-  m_SizeDelta: {x: 0, y: 90}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5771528394941088452
 CanvasRenderer:
@@ -177,8 +177,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d661cfc6f8450574db52f763957fb3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_endTime: 3
+  m_endTime: 1.5
   m_numberImage: {fileID: 6712908861157915348}
+  m_playerStatusManager: {fileID: 0}
+  m_drawBloodLostText: {fileID: 0}
 --- !u!1 &7063148990379091262
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,6 +429,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_endTime: 3
   m_numberImage: {fileID: 0}
+  m_playerStatusManager: {fileID: 0}
+  m_drawBloodLostText: {fileID: 0}
 --- !u!1 &7374666643933014567
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,10 +502,10 @@ RectTransform:
   m_Father: {fileID: 6712908861157915349}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 45, y: -45}
-  m_SizeDelta: {x: 0, y: 90}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8274405010382614829
 CanvasRenderer:
