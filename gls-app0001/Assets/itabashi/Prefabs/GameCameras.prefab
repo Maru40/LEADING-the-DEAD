@@ -1586,6 +1586,7 @@ GameObject:
   - component: {fileID: 7641363987092764877}
   - component: {fileID: 5908145260133298128}
   - component: {fileID: 2944055418037073320}
+  - component: {fileID: 7858923890681311774}
   m_Layer: 0
   m_Name: PlayerTargetVirtualCamera
   m_TagString: Untagged
@@ -1757,6 +1758,20 @@ MonoBehaviour:
   PlayerIndex: -1
   XYAxis: {fileID: 6238659658996499341, guid: e20b940a15b0f3a42b152d1815264b14, type: 3}
   ZAxis: {fileID: 0}
+--- !u!114 &7858923890681311774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6641332719952932133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3725a4f4536090f43a321b507dc830dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_gameStateManager: {fileID: 0}
+  m_virtualCamera: {fileID: 7641363987092764877}
 --- !u!1 &7031430889087295379
 GameObject:
   m_ObjectHideFlags: 3
