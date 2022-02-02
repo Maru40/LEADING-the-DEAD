@@ -21,6 +21,12 @@ public class NumBloodManager : MonoBehaviour
     [SerializeField, Header("数字を管理するためのNumberImage")]
     private NumberImage m_numberImage = null;
 
+    [SerializeField]
+    private Player.PlayerStatusManager m_playerStatusManager = null;
+
+    [SerializeField]
+    private GameObject m_drawBloodLostText = null;
+
     private void Awake()
     {
         //m_text = GetComponent<Text>();
@@ -88,12 +94,20 @@ public class NumBloodManager : MonoBehaviour
         if(m_timer.IsTimeUp)
         {
             GameOver();
+            m_updateAction = null;
         }
     }
 
     //ゲームオーバー処理
     private void GameOver()
     {
+        //ゲームオーバー処理
+        m_playerStatusManager.DeadStartEvent?.Invoke();
+        m_playerStatusManager.DeadEndEvent.AddListener(() => m_drawBloodLostText.SetActive(false));
+
+        //血袋がなくなりましたの表示
+        m_drawBloodLostText.SetActive(true);
+
         Debug.Log("GameOver");
     }
 

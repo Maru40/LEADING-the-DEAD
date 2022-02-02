@@ -97,9 +97,11 @@ namespace Player
 
         [SerializeField]
         private UnityEvent m_deadStartEvent;
+        public UnityEvent DeadStartEvent => m_deadStartEvent;
 
         [SerializeField]
         private UnityEvent m_deadEndEvent;
+        public UnityEvent DeadEndEvent => m_deadEndEvent;
 
         readonly private Subject<Unit> m_endStunSubject = new Subject<Unit>();
 
